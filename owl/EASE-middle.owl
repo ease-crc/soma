@@ -1,0 +1,1537 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.ease.org/ont/EASE-middle.owl#"
+     xml:base="http://www.ease.org/ont/EASE-middle.owl"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:knowrob="http://knowrob.org/kb/knowrob.owl#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:EASE="http://www.ease.org/ont/EASE.owl#">
+    <owl:Ontology rdf:about="http://www.ease.org/ont/EASE-middle.owl">
+        <owl:imports rdf:resource="http://www.ease.org/ont/EASE.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Actuating -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Actuating">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#NonCompositeAction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#duringI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#EffectorContact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#equalI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#DirectedMotion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#DirectedMotion"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#duringI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#EffectorContact"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#EffectorContact"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#containsI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#DirectedMotion"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#involvesEffector"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#PhysicalEffector"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#EffectorPositioning"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Navigation"/>
+        <rdfs:comment>todo: think about use of tools. force events are generated between artifacts then. also not only the tool would be the &apos;salient artifact&apos; here.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Aperature -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Aperature">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAttribute"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Approaching -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Approaching">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Navigation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Avoiding"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Arm -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Arm">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Limb"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#ArtifactContact -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#ArtifactContact">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#Contact"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Contact"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Artifact contact</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Avoiding -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Avoiding">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Navigation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Boiling -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Boiling">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Vaporizing"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">In each instance of this collection some liquid matter is raised to its boilingPoint and is thereby changed from being in the Liquid-StateOfMatter to being in the Gaseous-StateOfMatter.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Building -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Building">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#RoomInABuilding"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Catching -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Catching">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Grasping"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#afterI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#SupportingContact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#SupportingContact"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#beforeI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#GraspingMotion"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#PickingUp"/>
+        <rdfs:comment>todo: would be nice to have &apos;Falling&apos; as force dynamics process.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#CeilingOfARoom -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#CeilingOfARoom">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#SurfaceOfARoom"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#ClosedRegion -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#ClosedRegion">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#OpeningAngleRegion"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#ClosedState -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#ClosedState">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#OpeningState"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasState"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#ClosedRegion"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#OpeningState"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasState"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#ClosedRegion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#OpenedState"/>
+        <rdfs:label>Closed state</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Closing -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Closing">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Actuating"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#ClosedState"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#afterI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#OpenedState"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlappedByI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#DirectedMotion"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#OpenedState"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#beforeI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#ClosedState"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlapsI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#DirectedMotion"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlappedByI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#OpenedState"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlapsI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#ClosedState"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Lifting"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Opening"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Squeezing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Driving -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Driving">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Locomotion"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Flying"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Swimming"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Walking"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Dropping -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Dropping">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#ReleasingGrasp"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#SupportingContact"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#afterI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#EffectorContact"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#meetsI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#SupportingContact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#startedByI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#ReleasingMotion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ease.org/ont/EASE.owl#LimbMotion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Placing"/>
+        <rdfs:comment>The dropped object falls mainly under the influence of gravity. However, an agent may also drop something during navigation. The difference to &apos;Throwing&apos; is that there is no &apos;Limb motion&apos; which is a constitiuent of the action.
+
+&apos;Dropping&apos; is intentional. Dropping by accident may not has a phase to release the grasp. It could be that the grasp was not strong enough and the objects &quot;slips&quot; away.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#EffectorContact -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#EffectorContact">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#Contact"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#PhysicalEffector"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Contact"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#PhysicalEffector"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Effector contact</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#EffectorPositioning -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#EffectorPositioning">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#NonCompositeAction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#equalI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#LimbMotion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#LimbMotion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#involvesPlace"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Place"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#involvesEffector"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ease.org/ont/EASE.owl#PhysicalEffector"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Navigation"/>
+        <rdfs:label>Effector positioning</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#FloorOfARoom -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#FloorOfARoom">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#SurfaceOfARoom"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Flying -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Flying">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Locomotion"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Swimming"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Walking"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Furniture -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Furniture">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Gaseous -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Gaseous">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#StateOfMatter"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#GraspLift -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#GraspLift">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#CompositeAction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#finishedByI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#Lifting"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasAction"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#Lifting"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#afterI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#PickingUp"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasAction"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#PickingUp"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#beforeI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#Lifting"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#startedByI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#PickingUp"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Grasping -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Grasping">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#NonCompositeAction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#equalI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#GraspingMotion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#EffectorContact"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlappedByI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#GraspingMotion"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#GraspingMotion"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlapsI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#EffectorContact"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#involvesEffector"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#PhysicalEffector"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlapsI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#EffectorContact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#ReleasingGrasp"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#GraspingMotion -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#GraspingMotion">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#IntermediateGrasp"/>
+                    <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#PowerGrasp"/>
+                    <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#PrecisionGrasp"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#PrehensileMotion"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#ReleasingMotion"/>
+        <rdfs:label>Grasping motion</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Gripper -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Gripper">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#PrehensileEffector"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Hand -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Hand">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#PrehensileEffector"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#IntermediateGrasp -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#IntermediateGrasp">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#GraspingMotion"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#PowerGrasp"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#PrecisionGrasp"/>
+        <rdfs:label>Intermediate grasp</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Leg -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Leg">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Limb"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Lifting -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Lifting">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Actuating"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#SupportingContact"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlapsI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#EffectorContact"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#metByI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#SupportingContact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Opening"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Pushing"/>
+        <rdfs:comment>todo: how to distinguish from e.g. &apos;pushing from the table&apos;</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Limb -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Limb">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#PhysicalEffector"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#LimbMotion -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#LimbMotion">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#DirectedMotion"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#Limb"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Locomotion"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#PrehensileMotion"/>
+        <rdfs:label>Limb motion</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Liquid -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Liquid">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#StateOfMatter"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Locomotion -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Locomotion">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#DirectedMotion"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#PrehensileMotion"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#LookingAt -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#LookingAt">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#NonCompositeAction"/>
+        <rdfs:comment>better: Gazing</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Navigation -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Navigation">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#NonCompositeAction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#equalI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#Locomotion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#Locomotion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#involvesPlace"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Place"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#OpenedRegion -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#OpenedRegion">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#OpeningAngleRegion"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#OpenedState -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#OpenedState">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#OpeningState"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasState"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#OpenedRegion"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#OpeningState"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasState"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#OpenedRegion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Openend state</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Opening -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Opening">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Actuating"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#ClosedState"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#beforeI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#OpenedState"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlapsI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#DirectedMotion"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#OpenedState"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#afterI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#ClosedState"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlappedByI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#DirectedMotion"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlappedByI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#ClosedState"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlapsI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#OpenedState"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Squeezing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#OpeningAngleRegion -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#OpeningAngleRegion">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAttribute"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#OpeningWidth"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#OpeningState -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#OpeningState">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#PhysicalState"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasState"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#OpeningAngleRegion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Opening state</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#OpeningWidth -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#OpeningWidth">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#OpeningAngleRegion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Permeability -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Permeability">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#PhysicalPart -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#PhysicalPart">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPartOf"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Physical part</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#PickDrop -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#PickDrop">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#CompositeAction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#finishedByI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#Dropping"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasAction"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#Dropping"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#afterI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#GraspLift"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasAction"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#GraspLift"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#beforeI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#Dropping"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#startedByI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#GraspLift"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#PickPlace -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#PickPlace">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#CompositeAction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#finishedByI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#Placing"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasAction"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#GraspLift"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#beforeI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#Placing"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasAction"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#Placing"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#afterI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#GraspLift"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#startedByI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#GraspLift"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#PickingUp -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#PickingUp">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Grasping"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#duringI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#SupportingContact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#SupportingContact"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#containsI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#GraspingMotion"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Placing -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Placing">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#ReleasingGrasp"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#finishedByI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#ReleasingMotion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#SupportingContact"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#containsI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#ReleasingMotion"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlappedByI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#EffectorContact"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#startsI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#SupportingContact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>todo: add subclass &apos;Stacking&apos;? But how could this be defined? Does it depend on object types, or rather their roles?</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#PowerGrasp -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#PowerGrasp">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#GraspingMotion"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#PrecisionGrasp"/>
+        <rdfs:label>Power grasp</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#PrecisionGrasp -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#PrecisionGrasp">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#GraspingMotion"/>
+        <rdfs:label>Precision grasp</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#PrehensileEffector -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#PrehensileEffector">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#PhysicalEffector"/>
+        <rdfs:label>Prehensile effector</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#PrehensileMotion -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#PrehensileMotion">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#GraspingMotion"/>
+                    <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#ReleasingMotion"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#DirectedMotion"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#PrehensileEffector"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Prehensile motion</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Pushing -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Pushing">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Actuating"/>
+        <rdfs:comment>todo: define subclass &apos;PushingOver&apos;? Would we expect two distinct contacts with the same surface then?</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#PushingAway -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#PushingAway">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Pushing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#duringI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#SupportingContact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#SupportingContact"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#containsI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#DirectedMotion"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#containsI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#EffectorContact"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#PushingDown"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#PushingDown -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#PushingDown">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Pushing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#SupportingContact"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlapsI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#DirectedMotion"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlapsI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#EffectorContact"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlappedByI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#SupportingContact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Reaching -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Reaching">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#EffectorPositioning"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Retracting"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#ReleasingGrasp -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#ReleasingGrasp">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#NonCompositeAction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#equalI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#ReleasingMotion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#EffectorContact"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlapsI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#ReleasingMotion"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#ReleasingMotion"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlappedByI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#EffectorContact"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#involvesEffector"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#PhysicalEffector"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlappedByI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#EffectorContact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Releasing grasp</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#ReleasingMotion -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#ReleasingMotion">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#PrehensileMotion"/>
+        <rdfs:label>Releasing motion</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Retracting -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Retracting">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#EffectorPositioning"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#RoomInABuilding -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#RoomInABuilding">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#CeilingOfARoom"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#FloorOfARoom"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPartOf"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#Building"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">4</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ease.org/ont/EASE.owl#WallOfARoom"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Solid -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Solid">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#StateOfMatter"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Squeezing -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Squeezing">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Actuating"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#containsI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#Deformation"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#Deformation"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#duringI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#DirectedMotion"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#duringI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#EffectorContact"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#StateOfMatter -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#StateOfMatter">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#PhysicalState"/>
+        <rdfs:label>State of matter</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#SupportingContact -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#SupportingContact">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Contact"/>
+        <rdfs:label>Supporting contact</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#SurfaceOfARoom -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#SurfaceOfARoom">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#PhysicalPart"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPartOf"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#RoomInABuilding"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Swimming -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Swimming">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Locomotion"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#Walking"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Table -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Table">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Furniture"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#ThrowCatch -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#ThrowCatch">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#CompositeAction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#finishedByI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#Catching"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasAction"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#Catching"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#afterI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#Throwing"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasAction"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#Throwing"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#beforeI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#Catching"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#startedByI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#Throwing"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Throwing -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Throwing">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#ReleasingGrasp"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#containsI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#ReleasingMotion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#hasPhase"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#LimbMotion"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#overlappedByI"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#EffectorContact"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease.org/ont/EASE.owl#startedByI"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#LimbMotion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Vaporizing -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Vaporizing"/>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#Walking -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Walking">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Locomotion"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#WallOfARoom -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#WallOfARoom">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#SurfaceOfARoom"/>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+
