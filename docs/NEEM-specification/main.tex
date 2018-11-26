@@ -1,0 +1,112 @@
+\documentclass{svmult}
+
+\usepackage{mathptmx}       % selects Times Roman as basic font
+\usepackage{helvet}         % selects Helvetica as sans-serif font
+\usepackage{courier}        % selects Courier as typewriter font
+\usepackage{type1cm}        % activate if the above 3 fonts are
+                            % not available on your system
+\usepackage[numbers]{natbib}
+%
+\usepackage{makeidx}         % allows index generation
+\usepackage{graphicx}        % standard LaTeX graphics tool
+                             % when including figure files
+\usepackage{multicol}        % used for the two-column index
+\usepackage[bottom]{footmisc}% places footnotes at page bottom
+\usepackage{listings}
+\usepackage{color}
+\usepackage{tikz}
+\usepackage{amsmath}
+
+\usepackage{footmisc}
+\usepackage{import}
+
+\usepackage{capt-of}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{watermark} % titlepage image
+\usepackage{booktabs}
+
+\usetikzlibrary{shapes.misc, arrows, positioning, calc, decorations.markings}
+\tikzset{
+  query/.style={draw=blue!10,thick,fill=blue!2,inner sep=.15cm},
+  answer/.style={rectangle,draw=black!10,fill=gray!4},
+  icon/.style={circle,thick,fill=blue!20,draw=blue!30,inner sep=.05cm,font=\bfseries}
+}
+\pgfdeclarelayer{back}
+\pgfdeclarelayer{front}
+\pgfsetlayers{back,main,front}
+
+\lstdefinelanguage[OWL]{XML} {morekeywords={Individual,ObjectProperty,Types,Facts,Class,SubClassOf,Domain,Range,SubPropertyOf,EquivalentTo}}
+\lstdefinestyle{OWL}    {language=[OWL]XML,    lineskip=0.2ex, fontadjust=true, basicstyle={\scriptsize \nopagebreak[4]}}
+\lstdefinestyle{Prolog} {language=Prolog, lineskip=0.2ex, fontadjust=true, basicstyle={\scriptsize \nopagebreak[4]}, commentstyle=\scriptsize,
+    morekeywords={entity, occurs, holds, show, append, forall, findall, member}}
+
+\graphicspath{{../../../img/}}
+
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{TODO}: #1}}
+%\lstdefinelanguage[OWL]{XML} {morekeywords={Individual,ObjectProperty,Types,Facts,Class,SubClassOf,Domain,Range,SubPropertyOf,EquivalentTo}}
+%\lstdefinestyle{OWL}    {language=[OWL]XML,    lineskip=0.2ex, fontadjust=true, basicstyle={\scriptsize \nopagebreak[4]}}
+%\lstdefinestyle{Prolog} {language=Prolog, lineskip=0.2ex, fontadjust=true, basicstyle={\scriptsize \nopagebreak[4]}, commentstyle=\scriptsize,
+%    morekeywords={entity, occurs, holds, show, append, forall, findall, member}}
+
+\title*{NEEM Specification}
+\author{The EASE Researchers}
+\institute{CRC Everyday Activity Science and Engineering (EASE)
+       \at University Bremen, Am Fallturm 1, 28359 Bremen, \email{ai-office@cs.uni-bremen.de}}
+\thiswatermark{
+  \centering
+  \put(-50,-450){\includegraphics[width=14cm]{img/NarrativesStory.png}}
+  \put(340,-10){\includegraphics[width=4.0cm]{logos/projects/ease-logo.pdf}}
+}
+
+\newcommand{\neemversion}{0.1~}
+\newcommand{\neemexp}{NEEM-experience~}
+\newcommand{\neemexps}{NEEM-experiences~}
+\newcommand{\neemnar}{NEEM-narrative~}
+\newcommand{\neem}{NEEM~}
+\newcommand{\neems}{NEEMs~}
+\newcommand{\tf}{tf~}
+\newcommand{\openease}{openEASE~}
+\newcommand{\ease}{EASE~}
+\newcommand{\mongodb}{MongoDB~}
+\newcommand{\cram}{CRAM~}
+\newcommand{\knowrob}{KnowRob~}
+\newcommand{\owl}{OWL~}
+\newcommand{\pr}{PR2~}
+\newcommand{\qudt}{Qudt~}
+\newcommand{\boxy}{Boxy~}
+\newcommand{\eg}{e.g.~}
+\newcommand{\ros}{ROS~}
+\newcommand{\owlClass}[1]{\textit{#1}}
+\newcommand{\owlPredicate}[1]{\textit{#1}}
+
+\renewcommand\tabularxcolumn[1]{m{#1}}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+
+\begin{document}
+\maketitle
+
+\input{content/intro/intro}
+
+%\input{content/requirements/requirements}
+
+%\subimport{../17-information-storage/}{contribution}
+
+\input{content/neem-experience/neem-experience}
+
+\input{content/neem-narrative/neem-narrative}
+
+\input{content/example/example.tex}
+
+%\input{content/upload/upload.tex}
+
+%\input{content/knowledge-bases/knowledge-bases.tex}
+
+%\input{content/future-work/future-work}
+
+\bibliography{neem}{}
+\bibliographystyle{plain}
+\end{document}
+
+\end{document}

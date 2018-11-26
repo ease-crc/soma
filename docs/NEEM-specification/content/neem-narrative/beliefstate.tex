@@ -1,0 +1,165 @@
+
+In EASE, we investigate everyday manipulation activities.
+These involve the interaction with physical objects such as
+grasping an object and putting it somewhere,
+or taking a tool and applying it on an object to achieve a certain effect.
+To tell a comprehensive story about its activity,
+an agent needs to memorize the relation of action to
+physical objects that are salient during the action.
+
+One requirement for this is that beliefs of the agent about the existence
+of physical objects must be maintained by the system.
+In some cases, when the existence is known in advance,
+it is sufficient to supply this knowledge to the agent through
+a static ontology holding facts about existence of physical objects
+in the environment of the agent.
+This is, for example, useful to supply knowledge about a static
+environment such as a kitchen with fixed set of appliances.
+In more dynamic set-ups, however, the beliefs about the existence
+of physical objects must be formed through specialized perception
+methods, or through logical reasoning.
+This is, for example, the case when the particular set of objects
+contained in a drawer are unknown in advance.
+We consider this type of information as part of the NEEM narrative
+to keep these beliefs persistent, and to allow referring to
+the perceived objects in action descriptions.
+
+Episodic memories capture information about temporal situations
+during which the beliefs of the agent evolve according to
+perception, action, and logical inference.
+NEEMs capture this evolution of beliefs.
+As such, revised or false beliefs are not deleted but kept
+persistently as part of the NEEM narrative.
+This is to allow for deeper analysis of the agent performance,
+and to provide richer input for learning algorithms.
+This is realized through a 4D ontology that we describe at
+the end of this section.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Tangible Objects}
+To refer to objects in action descriptions only the name of the 
+object must be known to the NEEM acquisition system.
+\knowrob comes with a rather comprehensive object type system,
+with about XXX different object classes~\cite{knowrob-ontology}.
+The type system is represented as part of the TBOX of the knowledge base.
+Perceived objects are represented as instance of one of the object types
+provided by the \knowrob system.
+This type of information is part of the ABOX of the knowledge base.
+The name of an object is usually the name of the class followed
+by a underscore character and a 8-digit hash,
+but could potentially be any unique name string.
+
+\todo{introduce base class of objects, give some details about taxonomy}
+
+In systems relying on sensor information and statistical models one has to deal
+with the uncertainty coming from the use of these information sources.
+This also affects beliefs about the identity of objects.
+The problem of identity resolution can trivially be approached
+by computing euclidean distance to known objects.
+If the distance is below a certain threshold, it can often be assumed that it is the same object.
+Background knowledge can be used to find better estimates for object identity:
+An object is inside the gripper as long as it is grasped,
+pulled down by gravity to the plane below when the grasp is released again,
+and so forth.
+Also, the identity of objects is often not so important for decision making,
+but rather the properties of the object.
+For successfully preparing a slice of bread, for example, any butter will do.
+But if there are two butter packages and one is not yet opened one would rather
+use the opened one to avoid it getting rancid.
+When acquiring NEEMs one has to deal with this identity resolution problem
+to allow for referring to objects in the narrative part of the episodic memory.
+
+In the remainder of this section we describe the fundamental binary predicates to
+describe physical objects in the belief state.
+
+\begin{description}
+\item[\textbf{rdf:type}] 
+The most fundamental assertion about an object next to its name is its type.
+Types are asserted through the \emph{rdf:type}
+property with one of the object types as value.
+Ontologies are subsumption hierarchies that derive 
+knowledge about more specific concepts from more general concepts.
+This allows, for example, to describe the relation between object and action
+on a general level that applies to a larger class of objects and actions.
+It is further possible to assert multiple types from different branches
+of the type hierarchy for a single object.
+For example, some mobile phone may also be used as projector while other mobile phones,
+without the projector hardware, should not be classified as projector.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[\textbf{physicalParts}]
+$Whole\ \emph{physicalParts}\ Part$ means
+that $Part$ is tangible and one of the distinct parts of the
+more complex tangible object $Whole$.
+Manipulation is often about putting together parts to form a bigger whole.
+During table setting, for example, objects are arranged such that they form
+place settings for the different participants.
+The objects are placed intentionally such that humans can easily reach them from their seat,
+see which objects belong to which place setting, and infer what objects belong to whom.
+Another example are assembly tasks during which an agent tries
+to put together some mechanical parts using screwing connections, snap-in connection,
+and so on to create an assembled product from scattered pieces available.
+NEEMs can also represent this partonomy information through dedicated predicates
+linking parts to the bigger whole.
+In particular, the \ease ontology defines the following sub-properties of \emph{physicalParts}:
+\emph{dangerousParts} (e.g., the blade of a knife),
+\emph{electricalParts} (i.e., parts that need electrical current to work),
+\emph{mealComponents} (i.e., the ingredients of a meal).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[\textbf{frameName}] \dots
+\end{description}
+
+\todo{some other relevant predicates? shape, color, mesh, pose?}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Kinematic Objects}
+\begin{enumerate}
+ \item \todo{object parts can be connected through joints}
+ \item \todo{what types of joints exist?}
+ \item \todo{what predicates can be used to describe them?}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Environment Maps}
+Semantic maps are detailed representations of the environment of some agent.
+These include geometrical and visual information about objects and appliances,
+their functional decomposition, and their state.
+Modern game engines reach an impressive level of detail, with individual
+leaves falling down trees, etc.
+In EASE, we try to reach this level of detail in our semantic map representations.
+We do this to provide very comprehensive information about situated experiences
+from which general knowledge can be learned.
+We believe that this high level of detail will allow us to learn more robust
+models and with less training data then would be possible with
+a more abstracted representation of environments.
+
+The \emph{SemanticMap} itself could be a \emph{Room}, a \emph{Building}, or some other type of connected
+region in which some agent can do navigation and manipulation.
+The ontology defines some more specific room classes including
+\emph{Kitchen}, \emph{LivingRoom} and \emph{StoreRoom}.
+This is useful, for example, to correlate objects with their likely storage room,
+or to relate the rooms with common activities performed in them.
+
+\begin{description}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item[\textbf{describedInMap}]
+$Object\ \emph{describedInMap}\ Map$ means \dots
+\end{description}
+
+\todo{also describe how rooms relate to buildings, etc.?}
+\todo{something about the state?}
+
+
+\subsection{Temporal Representation}
+\dots
