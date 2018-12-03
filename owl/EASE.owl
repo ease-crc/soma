@@ -88,10 +88,11 @@
     <!-- http://www.ease.org/ont/EASE.owl#coOccurs -->
 
     <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#coOccurs">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic relation between any entities that also implies that one entity is temporally contained in the other.
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic relation between any events that also implies that one event is temporally contained in the other.
 
 Sub-properties are used to distinct between different cases of event endpoint relations that hold for different types of co-occurance.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">co occurs</rdfs:label>
@@ -107,8 +108,11 @@ Sub-properties are used to distinct between different cases of event endpoint re
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">di</symbol>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A contains B` means that A strictly starts before, and ends after B, i.e. B is wholly contained in A.</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">todo(DB): `contains` also applies to spatial domain, not only events</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -120,6 +124,8 @@ Sub-properties are used to distinct between different cases of event endpoint re
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">d</symbol>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A during B` means that B strictly starts before, and ends after A, i.e. A is wholly contained in B.</rdfs:comment>
     </owl:ObjectProperty>
@@ -137,6 +143,7 @@ Sub-properties are used to distinct between different cases of event endpoint re
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">todo(DB): remove this in favor of &apos;simultaneous&apos;?</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -149,6 +156,8 @@ Sub-properties are used to distinct between different cases of event endpoint re
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fi</symbol>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A finishes B` means that A ends exactly where B ends, and that B strictly starts before A.  As in &quot;I finish my day by taking a shower&quot;.</rdfs:comment>
     </owl:ObjectProperty>
@@ -161,6 +170,8 @@ Sub-properties are used to distinct between different cases of event endpoint re
         <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#coOccurs"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">f</symbol>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A finishes B` means that A ends exactly where B ends, and that B strictly starts before A.  As in &quot;I finish my day by taking a shower&quot;.</rdfs:comment>
     </owl:ObjectProperty>
@@ -344,14 +355,14 @@ Sub-properties are used to distinct between different cases of event endpoint re
     <!-- http://www.ease.org/ont/EASE.owl#overlappedBy -->
 
     <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#overlappedBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
         <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#overlappedOn"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">oi</symbol>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic relation between any entities that also implies ordering, e.g. &quot;she has worked into the night&quot;.
-
-Note that this is not a sub-property of &apos;overlaps&apos; because the implied ordering is not symmetric. However, `A &apos;overlapped on&apos; B` always implies that also `A overlaps B` holds.</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic relation between any entities that also implies ordering, e.g. &quot;she has worked into the night&quot;.</rdfs:comment>
         <rdfs:label>overlapped by</rdfs:label>
     </owl:ObjectProperty>
     
@@ -360,13 +371,13 @@ Note that this is not a sub-property of &apos;overlaps&apos; because the implied
     <!-- http://www.ease.org/ont/EASE.owl#overlappedOn -->
 
     <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#overlappedOn">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">o</symbol>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic relation between any entities that also implies ordering, e.g. &quot;she has worked into the night&quot;.
-
-Note that this is not a sub-property of &apos;overlaps&apos; because the implied ordering is not symmetric. However, `A &apos;overlapped on&apos; B` always implies that also `A overlaps B` holds.</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic relation between any entities that also implies ordering, e.g. &quot;she has worked into the night&quot;.</rdfs:comment>
         <rdfs:label>overlapped on</rdfs:label>
     </owl:ObjectProperty>
     
@@ -383,6 +394,20 @@ Note that this is not a sub-property of &apos;overlaps&apos; because the implied
     
 
 
+    <!-- http://www.ease.org/ont/EASE.owl#simultaneous -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#simultaneous">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#coOccurs"/>
+        <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#simultaneous"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A simultaneous B` means that A strictly starts and ends at the same time instant as B, i.e. their temporal extend is equal.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease.org/ont/EASE.owl#startedBy -->
 
     <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#startedBy">
@@ -391,6 +416,8 @@ Note that this is not a sub-property of &apos;overlaps&apos; because the implied
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">si</symbol>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A starts B` means that A starts exactly where B starts, and that A strictly ends before B. As in &quot;I start my day with a coffee&quot;.</rdfs:comment>
     </owl:ObjectProperty>
@@ -404,6 +431,8 @@ Note that this is not a sub-property of &apos;overlaps&apos; because the implied
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">s</symbol>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A starts B` means that A starts exactly where B starts, and that A strictly ends before B. As in &quot;I start my day with a coffee&quot;.</rdfs:comment>
     </owl:ObjectProperty>
