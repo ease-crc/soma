@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="http://www.ease.org/ont/EASE.owl#"
      xml:base="http://www.ease.org/ont/EASE.owl"
-     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:ease="http://www.ease.org/ont/EASE.owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:ease="http://www.ease.org/ont/EASE.owl#"
+     xmlns:knowrob="http://knowrob.org/kb/knowrob.owl#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:swrla="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#"
-     xmlns:knowrob="http://knowrob.org/kb/knowrob.owl#">
+     xmlns:swrla="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#">
     <owl:Ontology rdf:about="http://www.ease.org/ont/EASE.owl">
         <owl:imports rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
     </owl:Ontology>
@@ -45,15 +45,18 @@
     
 
 
-    <!-- http://www.ease.org/ont/EASE.owl#afterI -->
+    <!-- http://www.ease.org/ont/EASE.owl#after -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#afterI">
-        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#temporallyRelatedWith"/>
-        <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#beforeI"/>
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#after">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#follows"/>
+        <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#before"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&gt;</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between entities, expressing a &apos;sequence&apos; schema where one of the entities strictly ends before the other one.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -67,75 +70,99 @@
     
 
 
-    <!-- http://www.ease.org/ont/EASE.owl#beforeI -->
+    <!-- http://www.ease.org/ont/EASE.owl#before -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#beforeI">
-        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#temporallyRelatedWith"/>
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#before">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between entities, expressing a &apos;sequence&apos; schema where one of the entities strictly ends before the other one.</rdfs:comment>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.ease.org/ont/EASE.owl#containsI -->
+    <!-- http://www.ease.org/ont/EASE.owl#coOccurs -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#containsI">
-        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#temporallyRelatedWith"/>
-        <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#duringI"/>
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#coOccurs">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic relation between any entities that also implies that one entity is temporally contained in the other.
+
+Sub-properties are used to distinct between different cases of event endpoint relations that hold for different types of co-occurance.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">co occurs</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#contains -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#contains">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#coOccurs"/>
+        <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#during"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">di</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A contains B` means that A strictly starts before, and ends after B, i.e. B is wholly contained in A.</rdfs:comment>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.ease.org/ont/EASE.owl#duringI -->
+    <!-- http://www.ease.org/ont/EASE.owl#during -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#duringI">
-        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#temporallyRelatedWith"/>
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#during">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#coOccurs"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">d</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A during B` means that B strictly starts before, and ends after A, i.e. A is wholly contained in B.</rdfs:comment>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.ease.org/ont/EASE.owl#equalI -->
+    <!-- http://www.ease.org/ont/EASE.owl#equal -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#equalI">
-        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#temporallyRelatedWith"/>
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#equal">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
+        <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#equal"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ReflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</symbol>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.ease.org/ont/EASE.owl#finishedByI -->
+    <!-- http://www.ease.org/ont/EASE.owl#finishedBy -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#finishedByI">
-        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#temporallyRelatedWith"/>
-        <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#finishesI"/>
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#finishedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#coOccurs"/>
+        <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#finishes"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fi</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A finishes B` means that A ends exactly where B ends, and that B strictly starts before A.  As in &quot;I finish my day by taking a shower&quot;.</rdfs:comment>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.ease.org/ont/EASE.owl#finishesI -->
+    <!-- http://www.ease.org/ont/EASE.owl#finishes -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#finishesI">
-        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#temporallyRelatedWith"/>
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#finishes">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#coOccurs"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">f</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A finishes B` means that A ends exactly where B ends, and that B strictly starts before A.  As in &quot;I finish my day by taking a shower&quot;.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -285,46 +312,62 @@
     
 
 
-    <!-- http://www.ease.org/ont/EASE.owl#meetsI -->
+    <!-- http://www.ease.org/ont/EASE.owl#meets -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#meetsI">
-        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#temporallyRelatedWith"/>
-        <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#metByI"/>
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#meets">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#directlyPrecedes"/>
+        <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#metBy"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">m</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between entities, expressing a &apos;sequence&apos; schema where one of the entities exactly ends where the other entity starts.</rdfs:comment>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.ease.org/ont/EASE.owl#metByI -->
+    <!-- http://www.ease.org/ont/EASE.owl#metBy -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#metByI">
-        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#temporallyRelatedWith"/>
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#metBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#directlyFollows"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">mi</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between entities, expressing a &apos;sequence&apos; schema where one of the entities exactly ends where the other entity starts.</rdfs:comment>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.ease.org/ont/EASE.owl#overlappedByI -->
+    <!-- http://www.ease.org/ont/EASE.owl#overlappedBy -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#overlappedByI">
-        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#temporallyRelatedWith"/>
-        <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#overlapsI"/>
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#overlappedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+        <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#overlappedOn"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">oi</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic relation between any entities that also implies ordering, e.g. &quot;she has worked into the night&quot;.
+
+Note that this is not a sub-property of &apos;overlaps&apos; because the implied ordering is not symmetric. However, `A &apos;overlapped on&apos; B` always implies that also `A overlaps B` holds.</rdfs:comment>
+        <rdfs:label>overlapped by</rdfs:label>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.ease.org/ont/EASE.owl#overlapsI -->
+    <!-- http://www.ease.org/ont/EASE.owl#overlappedOn -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#overlapsI">
-        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#temporallyRelatedWith"/>
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#overlappedOn">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">o</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic relation between any entities that also implies ordering, e.g. &quot;she has worked into the night&quot;.
+
+Note that this is not a sub-property of &apos;overlaps&apos; because the implied ordering is not symmetric. However, `A &apos;overlapped on&apos; B` always implies that also `A overlaps B` holds.</rdfs:comment>
+        <rdfs:label>overlapped on</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -340,37 +383,29 @@
     
 
 
-    <!-- http://www.ease.org/ont/EASE.owl#startedByI -->
+    <!-- http://www.ease.org/ont/EASE.owl#startedBy -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#startedByI">
-        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#temporallyRelatedWith"/>
-        <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#startsI"/>
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#startedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#coOccurs"/>
+        <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#starts"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">si</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A starts B` means that A starts exactly where B starts, and that A strictly ends before B. As in &quot;I start my day with a coffee&quot;.</rdfs:comment>
     </owl:ObjectProperty>
     
 
 
-    <!-- http://www.ease.org/ont/EASE.owl#startsI -->
+    <!-- http://www.ease.org/ont/EASE.owl#starts -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#startsI">
-        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#temporallyRelatedWith"/>
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#starts">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#coOccurs"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">s</symbol>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.ease.org/ont/EASE.owl#temporallyRelatedWith -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#temporallyRelatedWith">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A starts B` means that A starts exactly where B starts, and that A strictly ends before B. As in &quot;I start my day with a coffee&quot;.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -1076,5 +1111,5 @@ The second issue relates to what is &quot;outside&quot;. The state is a configur
 
 
 
-<!-- Generated by the OWL API (version 4.5.6.2018-09-06T00:27:41Z) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
 
