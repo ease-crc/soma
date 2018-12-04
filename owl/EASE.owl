@@ -132,22 +132,6 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
-    <!-- http://www.ease.org/ont/EASE.owl#equal -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#equal">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
-        <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#equal"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ReflexiveProperty"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</symbol>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">todo(DB): remove this in favor of &apos;simultaneous&apos;?</rdfs:comment>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.ease.org/ont/EASE.owl#finishedBy -->
 
     <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#finishedBy">
@@ -400,8 +384,10 @@ Sub-properties are used to distinct between different cases of event endpoint re
         <rdfs:subPropertyOf rdf:resource="http://www.ease.org/ont/EASE.owl#coOccurs"/>
         <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#simultaneous"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ReflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</symbol>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A simultaneous B` means that A strictly starts and ends at the same time instant as B, i.e. their temporal extend is equal.</rdfs:comment>
     </owl:ObjectProperty>
