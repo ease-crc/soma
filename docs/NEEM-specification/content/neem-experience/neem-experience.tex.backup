@@ -1,0 +1,63 @@
+\chapter{NEEM-Experience}
+
+\neemexp captures low-level information about experienced activities.
+These are data streams with no or unfeasible lossless representation
+as facts in a knowledge base.
+As such they cannot directly be used in logic-based reasoning.
+But computational methods may be employed for symbol abstraction.
+
+
+This is often performed ad hoc if efficient procedures exist that
+can compute the symbolic abstraction.
+This way we avoid the often unsolvable problem of finding a good level
+of abstraction in advance.
+
+The data is stored in a NoSQL database using JSON documents.
+Each individual type of data is stored in a separate collection
+named according to the type of data stored in the collection.
+When imported, the knowledge system stores the data in a
+\mongodb\footnote{https://www.mongodb.com/} server, for which
+the knowledge system implements a client for querying the data
+during question answering.
+The query cursor concept employed in \mongodb integrates
+nicely with backtracking based search employed in the knowledge system.
+It further scales well to large amount of data and can be distributed amongst
+clusters through built-in automatic sharding.
+
+The data in \neemexp is represented as time series
+and indexed in time order.
+Data structures need to define a dedicated
+time key over which \mongodb can compute the index for fast
+searching.
+
+% the \neemexp consists only of \tf data \cite{tf}.
+% When executing an experiment in projection, we are collecting \tf data from the map, objects and the robot.
+% In real world experiments we log only the \tf data from the map and the robotic agent.
+% We are storing the \tf data in a \mongodb\footnote{https://www.mongodb.com/}.
+% In the next iteration of the document we will provide links where you can download the required tools for log \tf data for NEEMs.
+
+The experience data in \neems has individual characteristics regarding
+the format, compressed representation, and what symbols the 
+knowledge system can abstract from the data.
+In this chapter, we describe these aspects for the experience data types covered 
+in \neem version \neemversion.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pose Data}
+\input{content/neem-experience/pose-data}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{Image Data}
+% \input{content/neem-experience/image-data}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{Gaze Data}
+% \input{content/neem-experience/gaze-data}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{EEG Data}
+% \input{content/neem-experience/eeg-data}

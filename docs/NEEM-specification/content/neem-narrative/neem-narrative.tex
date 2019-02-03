@@ -1,0 +1,245 @@
+\chapter{NEEM-Narrative}
+\label{ch:narrative}
+In version \neemversion the \neemnar consists the belief state and action task hierarchy. 
+In the following sections we will describe how the belief state and action task hierarchy are represented.
+An concrete example for a logged \neemnar will be given in Chapter \ref{ch:example}.
+
+\section{Belief State}
+\input{content/neem-narrative/beliefstate}
+
+\section{Action Hierarchy}
+\label{ch:narrative,sec:actionHierarchy}
+In this section, we will describe how an action task hierarchy is represented in the \neemnar. 
+Since we are using \cram on our robots our plans do not necessary generate a sequence of actions, instead they will generate rather an hierarchy of actions.
+During the plan execution we are logging all executed actions with its parameters and represent the hierarchy in \owl.
+The general idea of the model is that an action will be represented as an individual of the class \owlClass{knowrob:'Action'}.
+This individual can be a direct instance of the class \owlClass{knowrob:'Action'} or its subclass.
+\todo{Add all supported action sub classes}
+With the predicates \owlPredicate{subAction}, \owlPredicate{previousAction} and \owlPredicate{nextAction}, which all have as subject and object the type \owlClass{knowrob:'Action'}, we are able to represent the action hierarchy.
+In our understanding an logged action hierarchy in an \owl represents all actions which were executed during an experiment.
+Meaning, if we would extracted all actions from the \owl file and recreated the action tree, we would be able to analyze and reasoning about all executed actions during one specific experiment.
+
+In the next subsections we will describe the predicates and classes which we currently defined in the version \neemversion to log the actions which were executed by the robot during an experiment. 
+
+\subsection{Action Predicates}
+Every individual of the class \owlClass{knowrob:'Action'} class or its subclass which will be logged in the \owl file can be asserted with the following predicates (see Table \ref{table:action_task_predicates}).
+Some predicates in the table are marked as required.
+This means that if you are intending to upload your \owl file to \openease, every \owlClass{knowrob:'Action'} individual has to have the required properties asserted.
+%Otherwise the \owl file will be revoked from the server.\todo{We have to implement such checking in \openease.}
+The \openease server checks also if the objects of the predicates are associated with the correct class.
+
+\begin{table}[H]
+	\begin{tabular}{| c | c | c | c |}
+		\hline			
+		\textbf{Subject} & \textbf{Predicate} & \textbf{Object}  & \textbf{Required} \\
+		\hline
+		Action & taskSuccess & xsd:boolean & Yes \\
+		\hline
+		Action & startTime & Timepoint & Yes \\
+		\hline
+		Action & endTime & Timepoint  & Yes \\
+		\hline
+		Action & subAction & Action & No \\
+		\hline
+		Action & nextAction & Action & No \\
+		\hline
+		Action & previousAction & Action & No \\
+		\hline
+	\end{tabular}
+	\caption{Action Predicates}
+	\label{table:action_task_predicates}
+\end{table}
+
+\begin{description}
+	\item[\textbf{taskSuccess}] 
+		This predicates points to data type \owlClass{xsd:boolean}.
+		The value \textbf{true} represents that the action was executed successfully.
+		If any errors occurred during the action execution, the data type will be set to \textbf{false}.
+		\footnote{In the NEEM version \neemversion we do not log the exact error which happened during action.}
+	\item[\textbf{startTime}]
+		The \owlPredicate{startTime} represents when the action started.
+		Instead of representing the startTime as a data point, we are creating an instance of the class \owlClass{Timepoint}.
+		The implemenation is done in that way because it made writing prolog queries much more convenient. 
+		The name of the individual is representing the exact time when the action started e.g.\ \textit{timepoint\_1523878415038090} which can be understood that the action started 1523878415038090 microseconds after 00:00:00 UTC, Thursday, 1 January 1970.
+		We are using the Unix time to represent a time point \cite{matthew2011beginning}.
+		However, we are considering to measure the time in microseconds.
+		The reason for this decision is that we also want to create NEEMs in simulation.
+		However, tasks in simulation can be executed so fast that logging in microseconds allowed to measure the performance of the task executions.
+		Also the measurement in microseconds allowed to differentiate the running time between tasks.
+	\item[\textbf{endTime}] 
+		This predicate represents when the action ended.
+		More information about how we log time points is described in the predicate description \owlPredicate{startTime}.
+	\item[\textbf{subAction}]
+		The predicate \owlPredicate{subAction} allows to create parent-child relation between two tasks. In the context of this predicate, the subject is the parent action and the object is the child action.
+		It is possible that an \owlClass{Action} instance can have multiple \owlPredicate{subAction} predicates which point each to a single child action.
+	\item[\textbf{nextAction}]
+		To be able to create an sequential order of actions which where executed on the same hierarchy level, we defined the \owlPredicate{nextAction} predicate.
+		The subject represents the action which was started first and points to the next sibling actions.
+		\footnote{In the NEEM version \neemversion we are not differentiate if actions were executed in sequence or in parallel.}
+	\item[\textbf{previousAction}]
+		Like in \owlPredicate{previousAction} this predicate is created to create an sequential order between siblings tasks.
+		However in this case, \owlPredicate{previousAction} connects an \owlClass{Action} instance with the sibling action which was performed previously.
+\end{description}
+
+
+\subsection{Action Parameter Predicates}
+	\label{sec:actionParameterPredicactes}
+	In general, actions have to have parameters which have to be asserted.
+	Based on those assertions \cram is able to infer how to perform the task.
+	For instance, a grasping task will be executed differently when the target object is a spoon compared to when the target object is a bottle.
+	To understand the logged behavior of the robot better, we are logging to each action the corresponding parameters.
+	For \cram we are using for our actions a set of predefined parameters.
+	For example, when an action requires an object every \cram action has parameter name \textit{object} asserted.
+	During the logging process, we are creating based on the parameter's value an instance of the class \owlClass{Object} and connect this instance with the \owlPredicate{objectActedOn}.
+	\todo{Ref to belief state when object description is done}
+	This implementation allows us to use the logger for new actions without the need to extend the logger.
+	As long the \cram actions will use the predefined parameter names all parameters will be logged without the need to extend the logger.
+	All predefined parameters are represented by a separated predicates which point to the parameter value which is an individual of the corresponding \owl class.
+	Table \ref{table:action_parameter_predicates} shows the current parameter predicates which are supported by our NEEM representation.
+	The design of the action parameter predicates is based on the work with our \pr.
+	Therefore in the NEEM \neemversion it might be possible that the action parameters cannot be used by everyone in this state.
+	 
+\begin{table}[H]
+\begin{tabular}{| c | c | c |}
+	\hline			
+	\textbf{Subject} & \textbf{Predicate} & \textbf{Object} \\
+	\hline			
+	Action & effort & qudt\#NewtonMeter \\
+	\hline
+    Action & position & Float \\
+    \hline
+	Action & arm & Pr2\#Pr2RightArm \\
+	\hline
+	Action & bodyPartsUsed & Pr2\#Pr2RightGripper \\
+	\hline
+	Action & goalLocation & Pose or Connected Space Region \\
+	\hline
+    Action & objectActedOn & Object \\
+	\hline
+	Action & objectType & Object \\
+	\hline
+\end{tabular}
+	\caption{Action Parameter Predicates}
+	\label{table:action_parameter_predicates}
+\end{table}
+
+\begin{description}
+	\item[\textbf{effort}] 
+		Effort is the grasping force in newton-meters.
+		To model this we are using the \qudt ontology \footnote{http://qudt.org/}.
+	\item[\textbf{position}]
+		We are using this predicate to log the the goal position for the gripper of the \pr.
+		The \pr accepts a joint angle in RAD to position its gripper.
+		We decided to use a float data type to model the position to be able to represent more different types of position.
+		For instance, our \boxy robot uses centimeters to position the gripper.
+		Therefore with a float representation we are able to log from both robots the position parameter.
+	\item[\textbf{arm}]
+		With this predicate we want to log which arm was used to by the robot.
+		The predicate points to an instance of the specific robot arm class.
+		For instance, to model that the \pr used a right arm to grasp a bottle we are asserting the \owlPredicate{arm} predicate to an individual of the class \owlClass{Pr2RightArm}\footnote{http://knowrob.org/kb/PR2.owl}.
+	\item[\textbf{bodyPartsUsed}]
+		The \owlPredicate{bodyPartsUsed} predicate should represent which body part from the robot was used to perform the task.
+		This predicate can be used \eg to represent that a gripper was used to perform the task.
+		Like in \dots we also want to represent the body part as instance of the class which represents the body part.
+	\item[\textbf{goalLocation}]
+		This predicate can be used to represent the target or location parameter of an action.
+		This predicate is suitable to represent \eg the target location of an \textit{Going} action.
+		We are considering to different object types to log the goal location.
+		Since our robots are build on \ros our robots can work with \textit{Poses} \footnote{http://docs.ros.org/api/geometry\_msgs/html/msg/Pose.html}.
+		How we represent this \owl class is stated out in section \ref{sec:pose}.
+		
+		Since we are also using \cram, our robots can also encounter \textit{location designator} as goal locations\cite{beetz2010cram}.
+		That means \cram can handle tasks like "Go to the kitchen counter".
+		Since locations designators are more abstract we use the \owl class \owlClass{Connected Space Region} to log them.
+		A more detailed description is given in section \ref{sec:connectedSpaceRegion}.
+		
+	\item[\textbf{objectActedOn}]
+		With the predicate \owlClass{objectActedOn} we want to log which objects are given as parameter to the action.
+		For instance, we can log which objects the robots looked for during a perception task and what objects he tried to grab.
+	\item[\textbf{objectType}]
+		The difference of \owlPredicate{objectType} compared to \owlPredicate{objectActedOn} is that \owlPredicate{objectType} define not a specific object but rather an object in general.
+		For instance, if the robotic agent will get a task such as "grab the milk from the fridge".
+		Given the task, the agent knows only that it has to grab a object of the type of milk from the fridge.
+		So at this moment the robot does not know if the a milk box is actually in the fridge.
+		Thereofre it has to recognize the milk first.
+		If this was sucessfull then the robot will assoicated the following task the milk ID with the predicate \owlPredicate{objectActedOn} which the object will be the link to the speicifc object in the belieft state.
+\end{description}
+
+\subsection{Action Parameter Classes}
+As shown in section \ref{sec:actionParameterPredicactes} we are not only using data types to log the action parameter.
+In this section we are describing the \owl classes which we introduced to be able to log all parameters which we required to log during our experiments.
+
+\subsubsection{Pose}
+	\label{sec:pose}
+	This class is used to log coordinates given as parameter.
+	Since our robots are using \ros we are logging poses.
+	A pose consists from a Quaternion and a 3D vector.
+	Since both together can only describe a Pose, both entities are required to be logged.
+	\begin{table}[H]
+		\begin{tabular}{| c | c | c | c |}
+			\hline			
+			\textbf{Subject} & \textbf{Predicate} & \textbf{Object} & \textbf{Required}\\
+			\hline
+			Pose & quaternion & String & Yes \\
+			\hline
+			Pose & translation & String & Yes \\			
+			\hline
+		\end{tabular}
+		\caption{Pose Predicates}
+		\label{table:pose_predicates}
+	\end{table}
+	
+	\begin{description}
+		\item[Quaternion] 
+			%Quaternions are used to describe rotations in a three dimensionally space. \todo{Set reference to a Quaternions description}
+			In the NEEM version \neemversion we are representing quaternions as a string.
+			For instance, the quaternion $0.5 + 0.35i + 1j +0k$ will be represented as "0.5 0.35 1 0".
+		\item[Translation]
+			The \owlClass{Translation} class represents the 3D vector part of the pose.
+			In the NEEM version \neemversion we are representing vectors as a string.
+			For instance, the vector $\begin{bmatrix} -0.759, 1.19, 0.932 \end{bmatrix}^T$ will be represented as "-0.759 1.19 0.932".
+			
+			
+
+
+
+	\end{description}
+	
+	
+	
+\subsubsection{Connected Space Region}
+	\label{sec:connectedSpaceRegion}
+	Since we are using \cram our robots are allowed to use location designators to describe location parameters which will be resolved to pose \cite{beetz2010cram}
+	The resolving process is divided in three stages:
+		\begin{enumerate}
+			\item Define a abstract location or general location. For instance, "Grab the milk from the fridge.".
+			\item \cram will try out to resolve "fridge" to an entity of the semantic map.
+			\item The last step is to resolve the entity from the semantic map into a pose with which the robot can actually work with.
+		\end{enumerate}
+	
+	\begin{table}[H]
+		\begin{tabular}{| c | c | c | c |}
+			\hline			
+			\textbf{Subject} & \textbf{Predicate} & \textbf{Object} & \textbf{Required}\\
+			\hline
+			Connected Space Region & onPhysical & iai-kitchen & No \\
+			\hline
+		\end{tabular}
+		\caption{Connected Space Region Predicates}
+		\label{table:connected_space_region_predicates}
+	\end{table}
+	
+	\begin{description}
+		\item[onPhysical] 
+			To be able to represent the resolution to an entity of the semantic map we defined the \owlPredicate{onPhysical} predicate.
+			This predicate points to an instance of semantic map.
+			For instance, to grasp an object from the kitchen counter in our kitchen we link the \owlClass{ConnectedSpaceRegion} instance to an individual of our semantic mal in this case \textit{knowrob:iai\_kitchen\_sink\_area\_counter\_top}.
+	\end{description}
+
+\subsubsection{Timepoint}
+	In the NEEM version \neemversion the \owlClass{Timepoint} does not have any predicates.
+	An instance of the \owlClass{Timepoint} class defines a moment in time which is represented in microseconds.
+	The exact timestamp in microseconds is represent in the name of the instance.
+	For example, the individual with the name "timepoint\_1523878419.243441" represents a timepoint which is 1523878419243441 microseconds after 00:00:00 UTC, Thursday, 1 January 1970.
+	We are using the Unix time to represent a time point\cite{matthew2011beginning}.
+	This Timepoint represenation makes the prolog quering much more easier.
