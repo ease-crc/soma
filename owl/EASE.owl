@@ -45,6 +45,51 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE.owl#hasResult -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#hasResult">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+        <rdfs:label>has result</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#hasSoftwareAgent -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#hasSoftwareAgent">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
+        <rdfs:label>has software agent</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#hasStatus -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#hasStatus">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
+        <rdfs:label>has status</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#isAnsweredBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#isAnsweredBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
+        <rdfs:label>is answered by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#isAskedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#isAskedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
+        <rdfs:label>is asked by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease.org/ont/EASE.owl#after -->
 
     <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#after">
@@ -571,6 +616,98 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE.owl#ActionStatus -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#ActionStatus">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#StatusRegion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#Querying -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Querying">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Reasoning"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#isAskedBy"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Receiving"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Transmitting"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#isAnsweredBy"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#isAskedBy"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasStatus"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ActionStatus"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#Receiving -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Receiving">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+        <rdfs:comment>The act of receiving data from some origin.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#SoftwareAgent -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#SoftwareAgent">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#Transmitting -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Transmitting">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+        <rdfs:comment>The act of transmitting data to some destination.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease.org/ont/EASE.owl#AbductiveReasoning -->
 
     <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#AbductiveReasoning">
@@ -958,15 +1095,6 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
     
 
 
-    <!-- http://www.ease.org/ont/EASE.owl#Querying -->
-
-    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Querying">
-        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#Reasoning"/>
-        <rdfs:comment>todo: (Mihai:) consider moving this somewhere else. This is either a social interaction between a querier and queryee, or otherwise too vague. If we restrict ourselves to the Agent querying itself, some of those queries will end up as Deductions, some as Inductions etc.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease.org/ont/EASE.owl#Reasoning -->
 
     <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#Reasoning">
@@ -1049,6 +1177,46 @@ The second issue relates to what is &quot;outside&quot;. The state is a configur
     
 
 
+    <!-- http://www.ease.org/ont/EASE.owl#StatusFailure -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#StatusFailure">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#StatusRegion"/>
+        <owl:disjointWith rdf:resource="http://www.ease.org/ont/EASE.owl#StatusOk"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#StatusOk -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#StatusOk">
+        <rdfs:subClassOf rdf:resource="http://www.ease.org/ont/EASE.owl#StatusRegion"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#StatusRegion -->
+
+    <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#StatusRegion">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#StatusFailure"/>
+                    <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#StatusOk"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ActionStatus"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A region containing labels that describe how the actual evolution/completion of an action compares to its intended, designed, or normal one.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease.org/ont/EASE.owl#UndirectedMotion -->
 
     <owl:Class rdf:about="http://www.ease.org/ont/EASE.owl#UndirectedMotion">
@@ -1122,6 +1290,12 @@ The second issue relates to what is &quot;outside&quot;. The state is a configur
     <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#TimeInterval -->
 
     <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#TimeInterval"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource -->
+
+    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource"/>
 </rdf:RDF>
 
 
