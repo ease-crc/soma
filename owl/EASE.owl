@@ -236,6 +236,30 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
+    <!-- http://www.ease.org/ont/EASE.owl#hasInputParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#hasInputParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameter"/>
+        <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#isInputParameterFor"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+        <rdfs:label>has input parameter</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#hasOutputParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#hasOutputParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameter"/>
+        <owl:inverseOf rdf:resource="http://www.ease.org/ont/EASE.owl#isOutputParameterFor"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+        <rdfs:label>has output parameter</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease.org/ont/EASE.owl#hasPhase -->
 
     <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#hasPhase">
@@ -339,6 +363,28 @@ Sub-properties are used to distinct between different cases of event endpoint re
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Effector participation.</rdfs:comment>
         <rdfs:label>is effector involved in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#isInputParameterFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#isInputParameterFor">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParameterFor"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+        <rdfs:label>is input parameter for</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease.org/ont/EASE.owl#isOutputParameterFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease.org/ont/EASE.owl#isOutputParameterFor">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParameterFor"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+        <rdfs:label>is output parameter for</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -636,6 +682,22 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE.owl#ComputationalAgent -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#ComputationalAgent">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/ROS.owl#DigitalObject"/>
+                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:label>Computational agent</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE.owl#Querying -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Querying">
@@ -690,11 +752,24 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#SoftwareAgent -->
+    <!-- http://www.ease-crc.org/ont/EASE.owl#Status -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#SoftwareAgent">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Status">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#StatusRegion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#Threshold -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Threshold">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
     </owl:Class>
     
 
@@ -708,18 +783,12 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
-    <!-- http://www.ease-crc.org/ont/ROS.owl#Input -->
+    <!-- http://www.ease-crc.org/ont/ROS.owl#DigitalObject -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/ROS.owl#Input">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/ROS.owl#Output -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/ROS.owl#Output">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/ROS.owl#DigitalObject">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalBody"/>
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource"/>
+        <rdfs:label>Digital object</rdfs:label>
     </owl:Class>
     
 
@@ -732,10 +801,46 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
-    <!-- http://www.ease-crc.org/ont/geom.owl#Status -->
+    <!-- http://www.ease-crc.org/ont/geom.owl#ReasoningTask -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/geom.owl#Status">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/geom.owl#ReasoningTask">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExecutedIn"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Querying"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExecutedIn"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease.org/ont/EASE.owl#Reasoning"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExecutedIn"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#Querying"/>
+                            <rdf:Description rdf:about="http://www.ease.org/ont/EASE.owl#Reasoning"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A reasoning task can either be executed by asking some oracle or by formal itegration of reasoning formalisms.</rdfs:comment>
     </owl:Class>
     
 
