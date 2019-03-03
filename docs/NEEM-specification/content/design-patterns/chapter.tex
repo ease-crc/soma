@@ -1,0 +1,136 @@
+
+% % % % % % % % % % % % % % % % % % % % % % % %
+% % % Prelude
+% % % % % % % % % % % % % % % % % % % % % % % %
+\newcommand{\givenODPNAME}{}
+\newcommand{\givenODPINTENT}{}
+\newcommand{\givenODPDEFINEDIN}{}
+\newcommand{\givenODPDESCRIPTION}{}
+\newcommand{\givenODPGRAPHIC}{}
+\newcommand{\givenODPDOMAIN}{}
+\newcommand{\givenODPQUESTION}{}
+\newcommand{\ODPINTENT}[1]     {\renewcommand{\givenODPINTENT}{#1}}
+\newcommand{\ODPDEFINEDIN}[1]  {\renewcommand{\givenODPDEFINEDIN}{#1}}
+\newcommand{\ODPDESCRIPTION}[1]{\renewcommand{\givenODPDESCRIPTION}{#1}}
+\newcommand{\ODPGRAPHIC}[1]    {\renewcommand{\givenODPGRAPHIC}{#1}}
+\newcommand{\ODPDOMAIN}[1]     {\renewcommand{\givenODPDOMAIN}{#1}}
+\newcommand{\ODPQUESTION}[1]   {\renewcommand{\givenODPQUESTION}{#1}}
+\newcommand{\OPDinit}{
+  \renewcommand{\givenODPINTENT}{REQUIRED!}
+  \renewcommand{\givenODPDEFINEDIN}{REQUIRED!}
+  \renewcommand{\givenODPDESCRIPTION}{REQUIRED!}
+  \renewcommand{\givenODPGRAPHIC}{REQUIRED!}
+  \renewcommand{\givenODPQUESTION}{}
+  \renewcommand{\givenODPDOMAIN}{}
+  \renewcommand{\labelitemi}{$\mathbf{\sqsubseteq}$}
+}
+
+\newenvironment{owlclass}[2][,] {
+  \begin{minipage}{4.0cm}
+  \begin{center}
+  \texttt{\bf#2} \\[-0.2cm]
+  \par\noindent\rule{\textwidth}{0.4pt}
+  \vspace{-0.6cm}
+  \begin{itemize}[#1]
+  \raggedright} {
+  % % % % % %
+  \end{itemize}
+  \end{center}
+  \end{minipage}
+}
+
+\newenvironment{ODP}[1]{
+\OPDinit
+\renewcommand{\givenODPNAME}{#1}
+}{
+\givenODPDESCRIPTION
+\begin{figure}[htb]
+\begin{minipage}{0.45\textwidth}
+\begin{tabular}{ p{1.8cm} p{3.2cm} }
+\toprule
+% {\it\bf Name}                 & \emph{\givenODPNAME} \\
+{\it\bf Intent}               & \givenODPINTENT \\
+{\it\bf Domains}              & \givenODPDOMAIN \\
+{\it\bf Competency Questions} & \givenODPQUESTION \\
+{\it\bf Defined in}           & \givenODPDEFINEDIN \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\begin{minipage}{0.55\textwidth}
+\begin{center}
+\givenODPGRAPHIC
+\end{center}
+\end{minipage}
+\caption{The \emph{\givenODPNAME} ODP.}
+\end{figure}
+}
+
+\tikzset{owlclass/.style={draw=blue!40,fill=blue!20,rounded corners}}
+
+% % % % % % % % % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % % % % % % % % %
+\chapter{Ontology Design Patterns (ODPs)}
+
+% % % % % % % % % % % % % % % % % % % % % % % %
+% \section{Object Roles}
+
+% % % % % % % % % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % % % % % % % % %
+% \section{Quality and Quality Regions}
+
+% % % % % % % % % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % % % % % % % % %
+% \section{Designed Artifacts}
+
+% % % % % % % % % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % % % % % % % % %
+\section{Task Execution ODP}
+\begin{ODP}{Task Execution}
+\ODPDESCRIPTION{
+This ODP allows to make assertions on roles played by agents
+without involving the agents that play that roles, and vice versa.
+It allows to express neither the context type in which tasks are defined,
+not the particular context in which the action is carried out.
+Moreover, it does not allow to express the time at which
+the task is executed through the action
+(for actions that do not solely execute that certain task).}
+\ODPINTENT{To represent actions through which tasks are executed. }
+\ODPDOMAIN{
+  \texttt{Organization},
+  \texttt{Management},
+  \texttt{Scheduling},
+  \texttt{Workflow}}
+\ODPDEFINEDIN{DUL.owl}
+\ODPQUESTION{
+  \emph{Which task is executed through this action?}
+  \emph{What actions can execute that task?}}
+\ODPGRAPHIC{
+\begin{tikzpicture}
+ \node[owlclass] (ACTION) {
+ \begin{owlclass}{Action}
+  \item $(\geq 1\ \emph{executesTask}.\texttt{Task})$
+ \end{owlclass}
+ };
+ \node[owlclass,below=0.6cm of ACTION] (TASK) {
+ \begin{owlclass}{Task}
+  \item $(\forall \emph{isExecutedIn}.\texttt{Action})$
+ \end{owlclass}
+ };
+ \draw (ACTION) edge[thick,-,dashed,blue!60] (TASK);
+\end{tikzpicture}
+}
+\end{ODP}
+
+% % % % % % % % % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % % % % % % % % %
+% \section{Workflows}
+
+% % % % % % % % % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % % % % % % % % %
+% \section{Action Phases}
+
+% % % % % % % % % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % % % % % % % % %
+% \section{Transients}
+
