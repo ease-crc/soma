@@ -26,7 +26,7 @@
 }
 
 \newenvironment{owlclass}[2][,] {
-  \begin{minipage}{4.0cm}
+  \begin{minipage}{5.0cm}
   \begin{center}
   \texttt{\bf#2} \\[-0.2cm]
   \par\noindent\rule{\textwidth}{0.4pt}
@@ -118,6 +118,132 @@ the task is executed through the action
  \end{owlclass}
  };
  \draw (ACTION) edge[thick,-,dashed,blue!60] (TASK);
+\end{tikzpicture}
+}
+\end{ODP}
+
+\newpage
+\section{Quality -- Region ODP}
+\begin{ODP}{Quality -- Region}
+\ODPDESCRIPTION{This ODP allows structuring information about the properties of an Entity. It distinguishes between dependent aspects of the Entity (things that cannot exist without the Entity itself existing), and the values that may be ascribed to those aspects. These values may be points in some Region. Note that a Region may be a finite set of discrete labels, allowing for ``qualitative'' descriptions, but more often a Region is some dimensional space allowing ``quantitative'' descriptions. A Region may contain a single point, in cases where the value of a Quality is known precisely.}
+\ODPINTENT{To distinguish between an aspect of an Entity and a particular numerical description of it.}
+\ODPDOMAIN{
+  \texttt{Measurement},
+  \texttt{Object representation},
+  \texttt{Environment representation},
+  \texttt{Execution status}}
+\ODPDEFINEDIN{DUL.owl}
+\ODPQUESTION{
+  \emph{What qualities does an entity have?}
+  \emph{What are possible values for a quality?}
+  \emph{What is the actual value of a quality for a particular entity (at a particular time)?}}
+\ODPGRAPHIC{
+\begin{tikzpicture}
+ \node[owlclass] (QUALITY) {
+ \begin{owlclass}{Quality}
+  \item $(\exists \emph{isQualityOf}.\texttt{Entity})$
+  \item $(\exists \emph{hasRegion}.\texttt{Region})$
+ \end{owlclass}
+ };
+ \node[owlclass,below=0.6cm of QUALITY] (REGION) {
+ \begin{owlclass}{Region}
+  \item $(\exists \emph{isRegionFor}.\texttt{Quality})$
+ \end{owlclass}
+ };
+ \draw (QUALITY) edge[thick,-,dashed,blue!60] (REGION);
+\end{tikzpicture}
+}
+\end{ODP}
+
+\newpage
+\section{Process vs. Action ODP}
+\begin{ODP}{Process vs. Action}
+\ODPDESCRIPTION{An Action is an Event with at least one Agent participant, such that this Agent has a Task, often defined by a Plan or Workflow, which it executes through the Action. A Process is an Event for which no such commitments have been made. In DUL, these classes are not disjoint, allowing a particular event individual to be classified as either, depending on whether we care to record an agent and its goals or not. In EASE, we use Process as a top-level class for events with no agentive participant.}
+\ODPINTENT{To represent the intentional and agentive structure-- or lack thereof-- behind Events.}
+\ODPDOMAIN{
+  \texttt{Event classification},
+  \texttt{Event narratives}}
+\ODPDEFINEDIN{DUL.owl}
+\ODPQUESTION{
+  \emph{Is there anyone responsible for the event?}
+  \emph{What are they trying to do?}
+  \emph{How did an event unfold?}}
+\ODPGRAPHIC{
+\begin{tikzpicture}
+ \node[owlclass] (Action) {
+ \begin{owlclass}{Action}
+  \item \texttt{Event}
+  \item $(\exists \emph{hasParticipant}.\texttt{Agent})$
+ \end{owlclass}
+ };
+ \node[owlclass,below=0.6cm of ACTION] (PROCESS) {
+ \begin{owlclass}{Process}
+  \item \texttt{Event}
+ \end{owlclass}
+ };
+\end{tikzpicture}
+}
+\end{ODP}
+
+\newpage
+\section{Designed Artifact ODP}
+\begin{ODP}{Designed Artifact}
+\ODPDESCRIPTION{A DesignedArtifact is a physical object described by a Design. In EASE, Designs refer to the form, but also the function of an object. This allows us to say that an object is ``for'' a particular purpose, even though it might be used for something else instead. For example, a cup is a BeverageContainer but can be used as a Flowerpot. Designs form a hierarchy of specificity, for example $DesignMilkContainer \sqsubseteq DesignBeverageContainer \sqsubseteq DesginContainer \sqsubseteq Design$. The justification for this pattern is that the type of an object is rigid, but the roles it plays in events change. A naive taxonomy, without a notion similar to Design, cannot tackle the fact that objects are usable in several ways beyond the obvious; a hammer isn't always a hammer, sometimes it's a paperweight. On the other hand, a usable ontology of objects must take into account how human users refer to objects by their default use.}
+\ODPINTENT{To explicate the intuitive classification human users would have of objects, based on their default uses.}
+\ODPDOMAIN{
+  \texttt{Object classification},
+  \texttt{Event narratives}}
+\ODPDEFINEDIN{DUL.owl, EASE.owl, EASE-middle.owl}
+\ODPQUESTION{
+  \emph{What sort of object is this?}
+  \emph{What is the intended use of the object?}
+  \emph{How did an event unfold?}}
+\ODPGRAPHIC{
+\begin{tikzpicture}
+ \node[owlclass] (DESIGNEDARTIFACT) {
+ \begin{owlclass}{DesignedArtifact}
+  \item \texttt{PhysicalArtifact}
+  \item $(\exists\emph{isDescribedBy}.\texttt{Design})$
+ \end{owlclass}
+ };
+ \node[owlclass,below=0.6cm of DESIGNEDARTIFACT] (DESIGN) {
+ \begin{owlclass}{Design}
+  \item \texttt{Description}
+ \end{owlclass}
+ };
+ \draw (DESIGNEDARTIFACT) edge[thick,-,dashed,blue!60] (DESIGN);
+\end{tikzpicture}
+}
+\end{ODP}
+
+\newpage
+\section{Transient ODP}
+\begin{ODP}{Transient}
+\ODPDESCRIPTION{This pattern addresses the fact that objects change by undergoing/taking part in Processes. For example, the PancakeMix becomes, through Baking, a Pancake. However, the ontological status of the object while the process takes place is unclear: the object placed on the frying pan is not a Pancake until Baking finishes, but it's not PancakeMix either once it begins to coagulate. In the EASE approach, the object in-between such characterizations is a Transient. A Transient transitionsFrom an Object, and possibly transitionsTo an Object. It may also be the case that a Transient transitionsBack to an Object, to indicate that once the process completes, the same Object is restored; this would be the case for example for catalysts in chemistry, or a loaf of bread after slicing, if there is enough bread left.}
+\ODPINTENT{Ontological classification for objects undergoing type changes.}
+\ODPDOMAIN{
+  \texttt{Object classification},
+  \texttt{Event narratives}}
+\ODPDEFINEDIN{EASE.owl, EASE-middle.owl}
+\ODPQUESTION{
+  \emph{What sort of object is this?}
+  \emph{What objects ``went'' in the making of another?}
+  \emph{Does an object preserve or restore its identity after change?}}
+\ODPGRAPHIC{
+\begin{tikzpicture}
+ \node[owlclass] (TRANSIENT) {
+ \begin{owlclass}{Transient}
+  \item \texttt{Object}
+  \item $(\exists\emph{transitionsFrom}.\texttt{Object})$
+  \item $(\forall\emph{transitionsTo}.\texttt{Object})$
+ \end{owlclass}
+ };
+ \node[owlclass,below=0.6cm of TRANSIENT] (TRANSITIONSBACK) {
+ \begin{owlclass}{transitionsBack}
+  \item \texttt{transitionsFrom}
+  \item \texttt{transitionsTo}
+ \end{owlclass}
+ };
 \end{tikzpicture}
 }
 \end{ODP}
