@@ -731,6 +731,27 @@ Such an event does NOT fall under the definition of Accident here. An example of
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE.owl#ActionExecutionPlan -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#ActionExecutionPlan">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask"/>
+                <owl:allValuesFrom>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameter"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Status"/>
+                    </owl:Restriction>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>idea: steps in workflows assert that they are defined by action execution plans.</rdfs:comment>
+        <rdfs:comment>links role and parameter fillers to e.g. slots in a data structure</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE.owl#ActionStatus -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#ActionStatus">
