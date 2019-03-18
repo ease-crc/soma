@@ -118,6 +118,28 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE.owl#describesObject -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#describesObject">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+        <rdfs:label>describes object</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#describesSubject -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#describesSubject">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+        <rdfs:label>describes subject</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE.owl#during -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#during">
@@ -582,6 +604,17 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE.owl#describesProperty -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#describesProperty">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+        <rdfs:label>describes property</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE.owl#hasEventBegin -->
 
     <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#hasEventBegin">
@@ -636,6 +669,17 @@ Sub-properties are used to distinct between different cases of event endpoint re
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#TimeInterval"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
         <rdfs:label>has interval time</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#hasNameString -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#hasNameString">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>has name string</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -727,6 +771,14 @@ In some sense any process that results in entities being created or destroyed mi
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE.owl#ClassAffiliation -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#ClassAffiliation">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Relation"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE.owl#CompositeAction -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#CompositeAction">
@@ -752,7 +804,7 @@ todo: (Mihai:) not touching this. We need a stronger idea of what makes a compos
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/ROS.owl#DigitalObject"/>
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#DigitalObject"/>
                     <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
                 </owl:intersectionOf>
             </owl:Class>
@@ -808,6 +860,16 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
 Note, changes of shape may be self-caused; for example, a gas will naturally disperse. This however would be a different type of process (Dispersion).
 
 A soft slab of clay deforming under its own weight on Earth would still count as deformation: it is the gravity of the Earth (so, a factor outside the slab of clay) which makes the slab change shape.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#DigitalObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DigitalObject">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalBody"/>
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource"/>
+        <rdfs:label>Digital object</rdfs:label>
     </owl:Class>
     
 
@@ -1178,6 +1240,58 @@ Note, this classification has nothing to do with reasoning domain (e.g. SpatialR
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE.owl#ReifiedClass -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#ReifiedClass">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A description that *describes* a class. This is a reification of formal classes to allow having them as fillers for object properties.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#ReifiedRelation -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#ReifiedRelation">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Relation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#describesObject"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#describesSubject"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#describesProperty"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The reification of a formal relation.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE.owl#Remembering -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Remembering">
@@ -1321,16 +1435,6 @@ The second issue relates to what is &quot;outside&quot;. The state is a configur
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Motion"/>
         <rdfs:comment>A Motion of a physical Entity for which a destination or path are unknown and/or considered irrelevant; the important aspect about this Motion is simply that it occurs, rather than where it is headed or how it proceeds towards it.</rdfs:comment>
         <rdfs:label>Undirected motion</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/ROS.owl#DigitalObject -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/ROS.owl#DigitalObject">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalBody"/>
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource"/>
-        <rdfs:label>Digital object</rdfs:label>
     </owl:Class>
     
 
