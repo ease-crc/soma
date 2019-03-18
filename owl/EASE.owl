@@ -118,28 +118,6 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#describesObject -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#describesObject">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
-        <rdfs:label>describes object</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#describesSubject -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#describesSubject">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
-        <rdfs:label>describes subject</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE.owl#during -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#during">
@@ -604,13 +582,24 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#describesProperty -->
+    <!-- http://www.ease-crc.org/ont/EASE.owl#describesFormalClass -->
 
-    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#describesProperty">
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#describesFormalClass">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
-        <rdfs:label>describes property</rdfs:label>
+        <rdfs:label>describes formal class</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#describesFormalProperty -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#describesFormalProperty">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+        <rdfs:label>describes formal property</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -788,14 +777,6 @@ Such an event does NOT fall under the definition of Accident here. An example of
 
 In some sense any process that results in entities being created or destroyed might trivially fit here, however this concept is intended specifically for Events where the occuring chemical reactions are of importance.</rdfs:comment>
         <rdfs:label>Chemical process</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#ClassAffiliation -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#ClassAffiliation">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Relation"/>
     </owl:Class>
     
 
@@ -1267,15 +1248,9 @@ Note, this classification has nothing to do with reasoning domain (e.g. SpatialR
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
-                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#describesFormalClass"/>
                 <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>A description that *describes* a class. This is a reification of formal classes to allow having them as fillers for object properties.</rdfs:comment>
@@ -1289,26 +1264,12 @@ Note, this classification has nothing to do with reasoning domain (e.g. SpatialR
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Relation"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#describesObject"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#describesSubject"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#describesProperty"/>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#describesFormalProperty"/>
                 <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
                 <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>The reification of a formal relation.</rdfs:comment>
+        <rdfs:comment>The reification of a formal relation. Note that individuals of ReifiedRelation do not represent the relation between two entities, but rather an objectification of the relation such that it can fill roles in tasks etc.</rdfs:comment>
     </owl:Class>
     
 
@@ -1589,6 +1550,26 @@ The second issue relates to what is &quot;outside&quot;. The state is a configur
     <!-- http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource -->
 
     <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#RDFType -->
+
+    <owl:NamedIndividual rdf:about="http://www.ease-crc.org/ont/EASE.owl#RDFType">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ReifiedRelation"/>
+        <describesFormalProperty rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://www.w3.org/2001/XMLSchema#type</describesFormalProperty>
+    </owl:NamedIndividual>
 </rdf:RDF>
 
 
