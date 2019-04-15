@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.ease-crc.org/ont/EASE-PROC.owl#"
+     xml:base="http://www.ease-crc.org/ont/EASE-PROC.owl"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:knowrob="http://knowrob.org/kb/knowrob.owl#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:EASE="http://www.ease-crc.org/ont/EASE.owl#">
+    <owl:Ontology rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl">
+        <owl:imports rdf:resource="package://ease_ontologies/owl/EASE.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Baking -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Baking">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Solidifying"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#ChemicalProcess -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ChemicalProcess">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ProcessType"/>
+        <rdfs:comment>A process by which the chemical constituency of an Entity or set of Entities changes.
+
+In some sense any process that results in entities being created or destroyed might trivially fit here, however this concept is intended specifically for Events where the occuring chemical reactions are of importance.</rdfs:comment>
+        <rdfs:label>Chemical process</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#ChemicalTransition -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ChemicalTransition">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ChemicalProcess"/>
+        <rdfs:label>Chemical transition</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Contact -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceDynamicsProcess"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Deformation"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#FluidFlow"/>
+        <rdfs:comment>An event in which two physical Entities approach each other to the point that their boundaries touch.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Deformation -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Deformation">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceDynamicsProcess"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#FluidFlow"/>
+        <rdfs:comment>A process by which a physical Entity changes its shape under the influence of some factors outside of the Entity.
+
+Note, changes of shape may be self-caused; for example, a gas will naturally disperse. This however would be a different type of process (Dispersion).
+
+A soft slab of clay deforming under its own weight on Earth would still count as deformation: it is the gravity of the Earth (so, a factor outside the slab of clay) which makes the slab change shape.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#UndirectedMotion"/>
+        <rdfs:comment>A Motion that is considered to be toward a location or along a path. It is not important that the final location or path be the intention of some Agent, but it is considered that the important feature of this Motion is that it has a path and/or destination.</rdfs:comment>
+        <rdfs:label>Directed motion</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#FluidFlow -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#FluidFlow">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceDynamicsProcess"/>
+        <rdfs:comment>A process by which a fluid moves or is moved from a location to another, but such that it maintains its constitution. A fluid is an Entity made of many smaller Entities, loosely bound to each other.
+
+An issue to highlight here is the maintenance of constitution. Fluids-- gases in particular-- are prone to disperse. Such a process is not flow however, because the loose bounds between the constituents become even looser, to the point of the original Entity becoming entirely discombobulated. </rdfs:comment>
+        <rdfs:label>Fluid flow</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#ForceDynamicsProcess -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceDynamicsProcess">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicsProcess"/>
+        <rdfs:comment>A process by which, under the influence of some Force, an Entity or some of its constituent parts change their state of motion.</rdfs:comment>
+        <rdfs:label>Force dynamic process</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Motion -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicsProcess"/>
+        <rdfs:comment>A process by which a physical Entity changes its spatial relations to other physical Entities in the world. </rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Partitioning -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Partitioning">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicalTransition"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicalCreation -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicalCreation">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicsProcess"/>
+        <rdfs:comment>A process by which an Entity is created in the physical world.
+
+Note, most of the physical Entities we will be considering here are in fact arrangements of many other, smaller physical Entities. Therefore another way to look at this is, a &apos;Physical creation&apos; is the process by which a set of physical Entities is arranged in a certain way, and the arrangement is then itself considered a physical Entity.</rdfs:comment>
+        <rdfs:label>Physical creation</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicalDestruction -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicalDestruction">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicsProcess"/>
+        <rdfs:comment>A process by which a physical Entity is destroyed.
+
+Note, most of the physical Entities we are concerned with are actually arrangements of many smaller physical Entities, so another way to look at this is that a &apos;Physical destruction&apos; is a process by which an arrangement of physical Entities, which was previously itself considered a physical Entity, is changed to such an extent that it is no longer recognized as continuing to exist.</rdfs:comment>
+        <rdfs:label>Physical destruction</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicalTransition -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicalTransition">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicsProcess"/>
+        <rdfs:label>Physical transition</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicsProcess -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicsProcess">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ProcessType"/>
+        <rdfs:label>Physical process</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Solidifying -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Solidifying">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ChemicalTransition"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#UndirectedMotion -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#UndirectedMotion">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion"/>
+        <rdfs:comment>A Motion of a physical Entity for which a destination or path are unknown and/or considered irrelevant; the important aspect about this Motion is simply that it occurs, rather than where it is headed or how it proceeds towards it.</rdfs:comment>
+        <rdfs:label>Undirected motion</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#ProcessType -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#ProcessType"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+
