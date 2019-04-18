@@ -83,6 +83,14 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Capacity -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Capacity">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#CuttingTool -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#CuttingTool">
@@ -176,6 +184,15 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Recipe -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Recipe">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
+        <rdfs:comment>A description of the ingredients and amounts needed to produce a particular Dish.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Sharpness -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Sharpness">
@@ -220,55 +237,110 @@
 
     <!-- http://www.ease-crc.org/ont/EASE.owl#DesignedBlade -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DesignedBlade"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DesignedBlade">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Sharpness"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>An item designed to provide at least one sharp edge.</rdfs:comment>
+    </owl:Class>
     
 
 
     <!-- http://www.ease-crc.org/ont/EASE.owl#DesignedContainer -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DesignedContainer"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DesignedContainer">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+        <rdfs:comment>An item designed to be able to hold some other items, preventing their free movement and/or protecting them from outside influence. Containers may be used for storage, or to obtain control over items that are otherwise hard to manipulate directly (e.g. liquids).</rdfs:comment>
+    </owl:Class>
     
 
 
     <!-- http://www.ease-crc.org/ont/EASE.owl#DesignedHandle -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DesignedHandle"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DesignedHandle">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+        <rdfs:comment>An item designed to fit well within a grasping hand, often attached to another item to enhance its manipulability.</rdfs:comment>
+    </owl:Class>
     
 
 
     <!-- http://www.ease-crc.org/ont/EASE.owl#DesignedSpade -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DesignedSpade"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DesignedSpade">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DesignedTool"/>
+    </owl:Class>
     
 
 
     <!-- http://www.ease-crc.org/ont/EASE.owl#DesignedTool -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DesignedTool"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DesignedTool">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+        <rdfs:comment>An item designed to enable some action, in which it will play an instrumental role.</rdfs:comment>
+    </owl:Class>
     
 
 
     <!-- http://www.ease-crc.org/ont/EASE.owl#Dish -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Dish"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Dish">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Recipe"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Some object prepared with the intention that it will be eaten. Its preparation often follows a particular kind of Design, called Recipe.</rdfs:comment>
+        <rdfs:seeAlso>It is sometimes usual to refer to the procedure of preparing a Dish as a recipe. We argue there should be a distinction between a recipe as such, listing ingredients and amounts, vs. a preparation workflow that describes the necessary steps to create a Dish.</rdfs:seeAlso>
+    </owl:Class>
     
 
 
     <!-- http://www.ease-crc.org/ont/EASE.owl#FlippingDesign -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#FlippingDesign"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#FlippingDesign">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
+    </owl:Class>
     
 
 
     <!-- http://www.ease-crc.org/ont/EASE.owl#FluidContainment -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#FluidContainment"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#FluidContainment">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
+    </owl:Class>
     
 
 
     <!-- http://www.ease-crc.org/ont/EASE.owl#Severance -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Severance"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Severance">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design -->
+
+    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact -->
+
+    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Capacity"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
     
 
 
