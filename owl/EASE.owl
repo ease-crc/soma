@@ -163,17 +163,6 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#hasAction -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#hasAction">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
-        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE.owl#CompositeAction"/>
-        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicalAction"/>
-        <rdfs:label>has action</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE.owl#hasCreated -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#hasCreated">
@@ -745,21 +734,6 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Motion -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#AbductiveReasoning -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#AbductiveReasoning">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Reasoning"/>
-        <rdfs:comment>An action in which the Agent proceeds from some set of statements about a world, and attempts to obtain an explanation for these statements. This explanation is often an inferred cause, such as a final cause or intention. Further, it is often required that there be some guarantees that the explanation produced by AbductiveReasoning have some desirable property, such as being the simplest or most likely given the set of statements to explain. </rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE.owl#Accident -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Accident">
@@ -824,135 +798,10 @@ Such an event does NOT fall under the definition of Accident here. An example of
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#CompositeAction -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#CompositeAction">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicalAction"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasAction"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#NonCompositeAction"/>
-        <rdfs:comment>Any action that is named or conceptualized as an activity that consists of more than one non composite action, e.g. a sequence of non composite actions.
-
-todo: (Mihai:) not touching this. We need a stronger idea of what makes a composite action, since just about any action is in some sense composite.</rdfs:comment>
-        <rdfs:label>Composite action</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#DeductiveReasoning -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DeductiveReasoning">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Reasoning"/>
-        <rdfs:comment>An action in which the Agent, using general logical principles that it considers logically valid, applied to premises that it considers logically true, arrives at conclusions that it considers logically certain.
-
-Deduction is often explained as starting from the &quot;general&quot; (some property X is known about all members of a set S), applying it to the &quot;specific&quot; (some Entity Y is known to belong to set S), to arrive at a specialization of the general property (X applies to Y).</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Dreaming -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Dreaming">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#MentalAction"/>
-        <rdfs:comment>Any form of re-processing episodic memories for long-term memory by natural or aritifical agents.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE.owl#Fluid -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Fluid">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Imagining -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Imagining">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#MentalAction"/>
-        <rdfs:comment>A Mental action in which the Agent constructs a mental representation of a possible world. An Agent performing an Imagining activity does not aim to construct a representation that aspires to be faithful to some past, present, or future state of affairs of the actual world it is embodied in.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#InductiveReasoning -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#InductiveReasoning">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Reasoning"/>
-        <rdfs:comment>An action by which the Agent endeavors to accumulate confidence in some general statement about the world, by gathering instances in which this general statement appears to apply. Note that perfect confidence can never be guaranteed by induction.
-
-Induction is often described as a move from many &quot;specifics&quot; (swan A is white, swan B is white, swan C is white, ...) to the &quot;general&quot; (all swans are white).</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#MentalAction -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#MentalAction">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicalAction"/>
-        <rdfs:comment>An Event construed as the Agent participant affecting Entities that are representations of actual or potential Entities or Events in the physical world in which the Agent is embodied. These representations are maintained by the Agent participant in the &apos;Mental action&apos; event.
-
-One could argue Mental actions are all Physical actions, because anything the Agent may use to maintain such representations will be physical things, However, we make this distinction because for Mental actions it is less important to consider the physical support of the representation and how it changes, and more important to track how the information content of the representation changes.</rdfs:comment>
-        <rdfs:label>Mental action</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#NonCompositeAction -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#NonCompositeAction">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicalAction"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasPhase"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicsProcess"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasPhase"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>Any action that is named or conceptualized as an atomic activity by itself.
-
-todo: (Mihai:) Not touching this, since we need a better idea of what it means. Very few actions can be said to be truly non-composite, so clearly this depends on the level of abstraction we consider. It is however not trivial what a good choice for that level of abstraction is.</rdfs:comment>
-        <rdfs:label>Non composite action</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#PhysicalAction -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#PhysicalAction">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#CompositeAction"/>
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#NonCompositeAction"/>
-                </owl:unionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#performedBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>An Event construed as the Agent participant affecting Entities in the physical world in which the Agent is embodied.
-
-This often-- but NOT always-- will be a manipulation action in which the Agent affects Entities that do not belong to the set of Entities constituting the Agent&apos;s body. 
-
-Events in which the Agent affects Entities that constitute its own body may qualify as &apos;Physical action&apos; as long as the affected Entities are construed merely as things in the physical world, rather than representations the Agent maintains about the physical world. An example of a self-affecting Physical action is self locomotion.</rdfs:comment>
-        <rdfs:label>Physical action</rdfs:label>
     </owl:Class>
     
 
@@ -1001,119 +850,10 @@ Events in which the Agent affects Entities that constitute its own body may qual
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#PhysicsProcess -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#PhysicsProcess"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Planning -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Planning">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Prospecting"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A Mental action by which the Agent endeavours to create a sequence of actions for itself which, if followed, will bring about a particular state of affairs in the world. This particular state of affairs is known to the agent and is often called the goal state of the planning action. Planning commits itself to feasibility: the Agent attempts to find a sequence of actions that it believes it will actually be able to perform.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Prediction -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Prediction">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Prospecting"/>
-        <rdfs:comment>A Mental action by which the Agent endeavours to construct a representation of a future state of the world. Prediction commits itself to some degree of accuracy: the Agent believes that eventually something similar to the predicted state will come to pass.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Prospecting -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Prospecting">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#MentalAction"/>
-        <rdfs:comment>A Mental action by which an Agent endeavours to construct a representation of a future state of affairs of the world it is embodied in.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Querying -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Querying">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Reasoning"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#isAskedBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Receiving"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Transmitting"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#isAnsweredBy"/>
-                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#isAskedBy"/>
-                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasStatus"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ActionStatus"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE.owl#Question -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Question">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Reasoning -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Reasoning">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#MentalAction"/>
-        <rdfs:comment>A Mental action by which an Agent endeavours to obtain new knowledge from knowledge it already possesses.</rdfs:comment>
-        <rdfs:comment>todo: a taxonomy of reasoning is not trivial. Classical theory distinguishes Deductive, Inductive, and with a stretch Abductive reasoning. However, modern practice distinguishes other categories that overlap with these, e.g. Probabilistic and Non-monotonic.
-
-Both Abductive and Inductive inference may, and often do, use Probabilistic methods. Probabilistic inference is, by its nature, most opposed to Deductive inference which, classically, requires logical certainty.
-
-Any of the Abductive/Deductive/Inductive triad can be further affected by the Monotone/Non-monotone distinction. There are preferences (Inductive and Abductive reasoning is probably most often non-monotonic; most of Deductive reasoning is probably done in monotonic formalisms), but it is certainly the case that, e.g., non-monotone Deduction is possible.
-
-Note, this classification has nothing to do with reasoning domain (e.g. SpatialReasoning, TemporalReasoning, ...) and merely with techniques/logical-mathematical underpinnings.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Receiving -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Receiving">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-        <rdfs:comment>The act of receiving data from some origin.</rdfs:comment>
     </owl:Class>
     
 
@@ -1146,38 +886,6 @@ Note, this classification has nothing to do with reasoning domain (e.g. SpatialR
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>The reification of a formal relation. Note that individuals of ReifiedRelation do not represent the relation between two entities, but rather an objectification of the relation such that it can fill roles in tasks etc.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Remembering -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Remembering">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Retrospecting"/>
-        <rdfs:comment>A Mental action by which the Agent endeavours to recall a record of a previous state of affairs in the world. The Agent must have witnessed this state of affairs in order to record it. Remembering commits itself to accuracy: the Agent attempts to reconstruct as accurate a record as it can. Note, this does not mean the Agent will communicate the recollection accurately.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Retrospecting -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Retrospecting">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#MentalAction"/>
-        <rdfs:comment>A Mental action by which an Agent endeavors to construct a representation of a past state of affairs of the world it is embodied in.</rdfs:comment>
-        <rdfs:comment>Done by analogy with Prospecting. Currently mono-subcategory, but perhaps we might find more.
-
-As an example, a kind of Abductive reasoning would fit here: reconstruction, in which the agent attempts to create a representation of a past state of affairs which the agent has not actually observed, based on traces and clues surviving to the present.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Simulating -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Simulating">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Prospecting"/>
-        <rdfs:comment>A Mental action by which the Agent endeavours to create representations of a sequence of states of affairs in the world. Simulation commits itself to some degree of transition accuracy: supposing the actual state of the world was the initial state of the simulation, the world state and simulation state should evolve to some degree similarly.
-
-Simulation does not commit itself to state accuracy: the initial state of the simulation is not constrained to be faithful to the actual state of the world in which the Agent is embodied. Counterfactual simulation (&quot;what would happen if--?&quot;) is possible.</rdfs:comment>
     </owl:Class>
     
 
@@ -1271,63 +979,10 @@ The second issue relates to what is &quot;outside&quot;. The state is a configur
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Transmitting -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Transmitting">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-        <rdfs:comment>The act of transmitting data to some destination.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/geom.owl#Explanation -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/geom.owl#Explanation">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/geom.owl#ReasoningTask -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/geom.owl#ReasoningTask">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExecutedIn"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Querying"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExecutedIn"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Reasoning"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExecutedIn"/>
-                <owl:allValuesFrom>
-                    <owl:Class>
-                        <owl:unionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#Querying"/>
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#Reasoning"/>
-                        </owl:unionOf>
-                    </owl:Class>
-                </owl:allValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A reasoning task can either be executed by asking some oracle or by formal itegration of reasoning formalisms.</rdfs:comment>
     </owl:Class>
     
 
