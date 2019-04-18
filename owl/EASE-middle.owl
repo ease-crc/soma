@@ -10,6 +10,7 @@
      xmlns:EASE="http://www.ease-crc.org/ont/EASE.owl#">
     <owl:Ontology rdf:about="http://www.ease-crc.org/ont/EASE-middle.owl">
         <owl:imports rdf:resource="package://ease_ontology/owl/EASE.owl"/>
+        <owl:imports rdf:resource="package://ease_ontology/owl/EASE-PROC.owl"/>
     </owl:Ontology>
     
 
@@ -175,7 +176,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#during"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#EffectorContact"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -184,10 +185,10 @@
                 <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#DirectedMotion"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#during"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#EffectorContact"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -200,10 +201,10 @@
                 <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#EffectorContact"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#contains"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DirectedMotion"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -219,7 +220,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#simultaneous"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DirectedMotion"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#EffectorPositioning"/>
@@ -261,32 +262,6 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#ArtifactContact -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#ArtifactContact">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#Contact"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Contact"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:label>Artifact contact</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE.owl#Avoiding -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Avoiding">
@@ -323,7 +298,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#after"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#SupportingContact"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -332,10 +307,10 @@
                 <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#SupportingContact"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#before"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#GraspingMotion"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#GraspingMotion"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -408,7 +383,7 @@
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#overlappedBy"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DirectedMotion"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -428,7 +403,7 @@
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#overlappedOn"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DirectedMotion"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -460,35 +435,6 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Contact -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Contact"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Deformation -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Deformation"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#DirectedMotion -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DirectedMotion"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Driving -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Driving">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Locomotion"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Flying"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Swimming"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Walking"/>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE.owl#Dropping -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Dropping">
@@ -499,10 +445,10 @@
                 <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#SupportingContact"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#after"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#EffectorContact"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -512,52 +458,26 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#meets"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#SupportingContact"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#startedBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ReleasingMotion"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ReleasingMotion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasPhase"/>
                 <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/EASE.owl#LimbMotion"/>
+                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#LimbMotion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Placing"/>
         <rdfs:comment>The dropped object falls mainly under the influence of gravity. However, an agent may also drop something during navigation. The difference to &apos;Throwing&apos; is that there is no &apos;Limb motion&apos; which is a constitiuent of the action.
 
 &apos;Dropping&apos; is intentional. Dropping by accident may not has a phase to release the grasp. It could be that the grasp was not strong enough and the objects &quot;slips&quot; away.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#EffectorContact -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#EffectorContact">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#Contact"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicalEffector"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Contact"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicalEffector"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:label>Effector contact</rdfs:label>
     </owl:Class>
     
 
@@ -569,7 +489,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasPhase"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#LimbMotion"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#LimbMotion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -581,7 +501,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#simultaneous"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#LimbMotion"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#LimbMotion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -601,16 +521,6 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#FloorOfARoom">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#SurfaceOfARoom"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Flying -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Flying">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Locomotion"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Swimming"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Walking"/>
     </owl:Class>
     
 
@@ -693,10 +603,10 @@
                 <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#EffectorContact"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#overlappedBy"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#GraspingMotion"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#GraspingMotion"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -709,10 +619,10 @@
                 <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#GraspingMotion"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#GraspingMotion"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#overlappedOn"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#EffectorContact"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -728,35 +638,16 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#overlappedOn"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#EffectorContact"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#simultaneous"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#GraspingMotion"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#GraspingMotion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ReleasingGrasp"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#GraspingMotion -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#GraspingMotion">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#IntermediateGrasp"/>
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#PowerGrasp"/>
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#PrecisionGrasp"/>
-                </owl:unionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PrehensileMotion"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ReleasingMotion"/>
-        <rdfs:label>Grasping motion</rdfs:label>
     </owl:Class>
     
 
@@ -773,17 +664,6 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Hand">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PrehensileEffector"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#IntermediateGrasp -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#IntermediateGrasp">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#GraspingMotion"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PowerGrasp"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PrecisionGrasp"/>
-        <rdfs:label>Intermediate grasp</rdfs:label>
     </owl:Class>
     
 
@@ -806,10 +686,10 @@
                 <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#SupportingContact"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#overlappedOn"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#EffectorContact"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -819,7 +699,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#metBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#SupportingContact"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Opening"/>
@@ -837,36 +717,10 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#LimbMotion -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#LimbMotion">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DirectedMotion"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Limb"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Locomotion"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PrehensileMotion"/>
-        <rdfs:label>Limb motion</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE.owl#Liquid -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Liquid">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#StateOfMatter"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Locomotion -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Locomotion">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DirectedMotion"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PrehensileMotion"/>
     </owl:Class>
     
 
@@ -887,7 +741,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasPhase"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Locomotion"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Locomotion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -899,7 +753,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#simultaneous"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Locomotion"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Locomotion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -963,7 +817,7 @@
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#overlappedOn"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DirectedMotion"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -983,7 +837,7 @@
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#overlappedBy"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DirectedMotion"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -1196,7 +1050,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#during"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#SupportingContact"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -1205,10 +1059,10 @@
                 <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#SupportingContact"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#contains"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#GraspingMotion"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#GraspingMotion"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -1226,7 +1080,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#finishedBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ReleasingMotion"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ReleasingMotion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -1235,14 +1089,14 @@
                 <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#SupportingContact"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#contains"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ReleasingMotion"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ReleasingMotion"/>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#overlappedBy"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#EffectorContact"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -1252,29 +1106,10 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#starts"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#SupportingContact"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>todo: add subclass &apos;Stacking&apos;? But how could this be defined? Does it depend on object types, or rather their roles?</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#PowerGrasp -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#PowerGrasp">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#GraspingMotion"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PrecisionGrasp"/>
-        <rdfs:label>Power grasp</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#PrecisionGrasp -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#PrecisionGrasp">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#GraspingMotion"/>
-        <rdfs:label>Precision grasp</rdfs:label>
     </owl:Class>
     
 
@@ -1284,29 +1119,6 @@
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#PrehensileEffector">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicalEffector"/>
         <rdfs:label>Prehensile effector</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#PrehensileMotion -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#PrehensileMotion">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#GraspingMotion"/>
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#ReleasingMotion"/>
-                </owl:unionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DirectedMotion"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PrehensileEffector"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:label>Prehensile motion</rdfs:label>
     </owl:Class>
     
 
@@ -1327,7 +1139,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#during"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#SupportingContact"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -1336,14 +1148,14 @@
                 <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#SupportingContact"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#contains"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DirectedMotion"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion"/>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#contains"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#EffectorContact"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -1365,14 +1177,14 @@
                 <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#SupportingContact"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#overlappedOn"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DirectedMotion"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion"/>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#overlappedOn"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#EffectorContact"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -1382,7 +1194,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#overlappedBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#SupportingContact"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -1408,10 +1220,10 @@
                 <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#EffectorContact"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#overlappedOn"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ReleasingMotion"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ReleasingMotion"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -1424,10 +1236,10 @@
                 <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#ReleasingMotion"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ReleasingMotion"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#overlappedBy"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#EffectorContact"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -1443,25 +1255,16 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#overlappedBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#EffectorContact"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#simultaneous"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ReleasingMotion"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ReleasingMotion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:label>Releasing grasp</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#ReleasingMotion -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#ReleasingMotion">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PrehensileMotion"/>
-        <rdfs:label>Releasing motion</rdfs:label>
     </owl:Class>
     
 
@@ -1522,7 +1325,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#contains"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Deformation"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Deformation"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -1531,14 +1334,14 @@
                 <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#Deformation"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Deformation"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#during"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DirectedMotion"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion"/>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#during"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#EffectorContact"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -1558,15 +1361,6 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#SupportingContact -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#SupportingContact">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Contact"/>
-        <rdfs:label>Supporting contact</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE.owl#SurfaceOfARoom -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#SurfaceOfARoom">
@@ -1577,15 +1371,6 @@
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#RoomInABuilding"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Swimming -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Swimming">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Locomotion"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Walking"/>
     </owl:Class>
     
 
@@ -1657,7 +1442,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#contains"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ReleasingMotion"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ReleasingMotion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -1666,10 +1451,10 @@
                 <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#LimbMotion"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#LimbMotion"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#overlappedBy"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#EffectorContact"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -1679,17 +1464,9 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#startedBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#LimbMotion"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#LimbMotion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Walking -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Walking">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Locomotion"/>
     </owl:Class>
     
 
