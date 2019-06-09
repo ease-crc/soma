@@ -123,7 +123,7 @@ In some sense any process that results in entities being created or destroyed mi
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Contact -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ForceDynamicsProcess"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEventType"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
@@ -141,7 +141,7 @@ In some sense any process that results in entities being created or destroyed mi
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Deformation -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Deformation">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ForceDynamicsProcess"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEventType"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
@@ -162,7 +162,7 @@ A soft slab of clay deforming under its own weight on Earth would still count as
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#MotionType"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#UndirectedMotion"/>
         <rdfs:comment>A Motion that is considered to be toward a location or along a path. It is not important that the final location or path be the intention of some Agent, but it is considered that the important feature of this Motion is that it has a path and/or destination.</rdfs:comment>
         <rdfs:label>Directed motion</rdfs:label>
@@ -210,7 +210,7 @@ A soft slab of clay deforming under its own weight on Earth would still count as
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#FluidFlow -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#FluidFlow">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ForceDynamicsProcess"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEventType"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
@@ -231,6 +231,30 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Locomotion"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Swimming"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Walking"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEvent -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEvent">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicsProcess"/>
+        <rdfs:comment>A process by which, under the influence of some Force, an Entity or some of its constituent parts change their state of motion.</rdfs:comment>
+        <rdfs:label>Force event</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEventType -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEventType">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEvent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -257,7 +281,7 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#HeadMovement -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#HeadMovement">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#MotionType"/>
         <rdfs:comment>todo: (Mihai:) This seems too specific, given the &quot;Directed&quot;/&quot;Undirected motion&quot; categories.</rdfs:comment>
     </owl:Class>
     
@@ -305,6 +329,20 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicsProcess"/>
         <rdfs:comment>A process by which a physical Entity changes its spatial relations to other physical Entities in the world. </rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#MotionType -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#MotionType">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -399,6 +437,32 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#ReleasingMotion -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ReleasingMotion">
@@ -429,7 +493,7 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#UndirectedMotion -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#UndirectedMotion">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#MotionType"/>
         <rdfs:comment>A Motion of a physical Entity for which a destination or path are unknown and/or considered irrelevant; the important aspect about this Motion is simply that it occurs, rather than where it is headed or how it proceeds towards it.</rdfs:comment>
         <rdfs:label>Undirected motion</rdfs:label>
     </owl:Class>
@@ -466,16 +530,6 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#ForceDynamicsProcess -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#ForceDynamicsProcess">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicsProcess"/>
-        <rdfs:comment>A process by which, under the influence of some Force, an Entity or some of its constituent parts change their state of motion.</rdfs:comment>
-        <rdfs:label>Force dynamic process</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE.owl#Limb -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Limb"/>
@@ -506,32 +560,6 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
     <!-- http://www.ease-crc.org/ont/EASE.owl#PrehensileEffector -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#PrehensileEffector"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#ProcessType -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#ProcessType">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ProcessType"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
-                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
     
 
 
