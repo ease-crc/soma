@@ -2,11 +2,17 @@ import untangle
 import sys
 import os
 
+import datetime
+import argparse
+import uuid
+import hashlib
+import itertools
+
 cvPath = '../owl/elan_action_labels.txt'
 
 DULAction = "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"
 
-ease = "http://www.ease.org/ont/EASE.owl#"
+ease = "http://www.ease-crc.org/ont/EASE.owl#"
 rdfs = "http://www.w3.org/2000/01/rdf-schema#"
 rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 owl = "http://www.w3.org/2002/07/owl#"
@@ -19,19 +25,56 @@ owl_Class = owl + "Class"
 owl_Ontology = owl + "Ontology"
 owl_versionInfo = owl + "versionInfo"
 ELANName = ease + "ELANName"
+ELANUsage = ease + "ELANUsageGuideline"
 
-argc = len(sys.argv)
-paths = []
+parser = argparse.ArgumentParser(description='Testing.')
+parser.add_argument('--language_ref', '-lr', metavar='LR', type=str, help='a name to refer to the language by in the file, default is \"und\"', default='und')
+parser.add_argument('--language_label', '-lb', metavar='LB', type=str, help='a short description of the language, default is the same value as the language_ref. An example description might be \"A set of words for objects.\"')
+parser.add_argument('--output_file', '-of', metavar='OF', type=str, help='path to the output file', required=True)
+parser.add_argument('--input_files', '-if', metavar='IF', type=str, required=True, nargs='+', help='paths to the input files')
+parser.add_argument('--vocabulary_id', '-vi', metavar='LR', type=str, action='append', help='a human readable identifier for the vocabulary, default is \"und\"', required=True)
+parser.add_argument('--namespace', '-ns', metavar='N', type=str, required=True, action='append', help='namespace to prepend to start concepts. An example namespace is \'http://www.ease-crc.org/ont/EASE.owl#\'')
+parser.add_argument('--start_concepts', '-sc', metavar='C', type=str, required=True, nargs='+', action='append',
+                    help='concepts to start from when creating the vocabulary; these and their subconcepts will be included. An example concept is Action')
 
-if 1 < argc:
-    cvPath = sys.argv[1]
-else:
-    print('Need at least an output file. Call script as \n\tpython elan_cv.py outfilepath [infile1 infile2 ...]\n')
+args = parser.parse_args()
+
+lang_ref = args.language_ref
+lang_label = args.language_label
+if not lang_label:
+    lang_label = lang_ref
+
+if not args.output_file:
+    print('Need at least an output file. Call script as \n\tpython elan_cv.py -h for usage info\n')
     sys.exit(2)
-if 2 < argc:
-    paths = sys.argv[2:]
 
-#TODO: format output into a proper ELAN cv file
+cvPath = args.output_file
+
+if not args.input_files:
+    print('Need at least an input file. Call script as \n\tpython elan_cv.py -h for usage info\n')
+    sys.exit(2)
+
+paths = args.input_files
+
+if not args.start_concepts:
+    print('Need at least one concept to start crawling the ontology from. Call script as \n\tpython elan_cv.py -h for usage info\n')
+    sys.exit(2)
+
+if (not args.vocabulary_id) or (len(args.vocabulary_id) != len(args.start_concepts)):
+    print('Need at least a vocabulary id per set of start concepts. Call script as \n\tpython elan_cv.py -h for usage info')
+
+if (not args.namespace) or (len(args.namespace) != len(args.start_concepts)):
+    print('Need one namespace per set of start concepts. Call script as \n\tpython elan_cv.py -h for usage info\n')
+    sys.exit(2)
+
+vocabs = {}
+
+for vid, ns, scs in itertools.izip(args.vocabulary_id, args.namespace, args.start_concepts):
+    if vid not in vocabs:
+        vocabs[vid] = []
+    for sc in scs:
+        vocabs[vid].append(ns + sc)
+
 
 def shaveOffNamespace(name):
     return name[name.rfind('#') + 1:]
@@ -122,7 +165,7 @@ def getELANName(owlNode, namespaces):
     return retq, True
 
 def getDescription(owlNode, namespaces):
-    description = hasChild(owlNode, namespaces, rdfs_comment)
+    description = hasChild(owlNode, namespaces, ELANUsage)
     retq = []
     for d in description:
         retq.append(str(d.cdata))
@@ -143,74 +186,84 @@ def gatherActions(onto, actionClassNames, namespaces):
             retq[owlClassName]['parents'] = retq[owlClassName]['parents'].union(parents)
     return retq
 
-ontos = paths
+def makeHTMLAttributeSafe(string):
+    string = string.replace('\n', '')
+    string = string.replace('\r', '')
+    string = string.replace('\t', '')
+    string = string.replace('\"', '\'')
+    return string
 
-for onto in ontos:
-    if not os.path.isfile(onto):
-        print("Error, file does not exist: %s" % onto)
-        sys.exit(1)
-
-version = ""
-
-actionParents = set([DULAction])
-actionClasses = {}
-
-# Gather version strings
-for onto in ontos:
-    adds = str(onto[onto.rfind('/') + 1:]) + " 0.0.0 | "
-    ontoP, namespaces = parseXMLOnto(onto)
-    owlOntology = hasChild(ontoP.rdf_RDF, namespaces, owl_Ontology)
-    if owlOntology:
-        owlVersionInfo = hasChild(owlOntology[0], namespaces, owl_versionInfo)
-        if owlVersionInfo:
-           adds = str(owlVersionInfo[0].cdata) + " | "
-    version += adds
-
-# Gather actions
-while actionParents:
-    newActionClasses = {}
+vocab_words = []
+for cv_id, actionParents in vocabs.items():
+    actionParents = set(actionParents)
+    ontos = paths
+    for onto in ontos:
+        if not os.path.isfile(onto):
+            print("Error, file does not exist: %s" % onto)
+            sys.exit(1)
+    version = ""
+    actionClasses = {}
+    # Gather version strings
+    for onto in ontos:
+        adds = str(onto[onto.rfind('/') + 1:]) + " 0.0.0 | "
+        ontoP, namespaces = parseXMLOnto(onto)
+        owlOntology = hasChild(ontoP.rdf_RDF, namespaces, owl_Ontology)
+        if owlOntology:
+            owlVersionInfo = hasChild(owlOntology[0], namespaces, owl_versionInfo)
+            if owlVersionInfo:
+                adds = str(owlVersionInfo[0].cdata) + " | "
+        version += adds
+    # Gather actions
+    while actionParents:
+        newActionClasses = {}
+        for onto in ontos:
+            ontoP, namespaces = parseXMLOnto(onto)
+            newActionClasses.update(gatherActions(ontoP, actionParents, namespaces))
+        actionParents = set(newActionClasses.keys())
+        actionClasses.update(newActionClasses)
+    # Gather 'descriptions' for actions
     for onto in ontos:
         ontoP, namespaces = parseXMLOnto(onto)
-        newActionClasses.update(gatherActions(ontoP, actionParents, namespaces))
-    actionParents = set(newActionClasses.keys())
-    actionClasses.update(newActionClasses)
+        rdfDescription = hasChild(ontoP.rdf_RDF, namespaces, rdf_Description)
+        for d in rdfDescription:
+            name, hasIt = hasAttribute(d, namespaces, rdf_about)
+            if hasIt:
+                name = explicateValueNamespace(name, namespaces)
+                if name in actionClasses:
+                    actionClasses[name]['description'] += getDescription(d, namespaces)
+                    elanName, haveName = getELANName(d, namespaces)
+                    if haveName:
+                        actionClasses[name]['ELANName'] = elanName + actionClasses[name]['ELANName']
+    # Classes may have all sorts of parents, but we only need the parents that are also actions
+    actionClassNames = set(actionClasses.keys())
+    for actName, act in actionClasses.items():
+        act['parents'] = act['parents'].intersection(actionClassNames)
+    # Construct the list of words in the controlled vocabulary
+    words = []
+    for actName, act in actionClasses.items():
+        if 2 < len(act['ELANName']):
+            print("Warning: more than 2 ELAN Names configured for action %s" % actName)
+        words.append({'ELANName': act['ELANName'][0], 'parents': act['parents'], 'description': act['description']})
+    words.sort(key=lambda dic: dic['ELANName'])
+    vocab_words.append((cv_id, words))
 
-# Gather 'descriptions' for actions
-for onto in ontos:
-    ontoP, namespaces = parseXMLOnto(onto)
-    rdfDescription = hasChild(ontoP.rdf_RDF, namespaces, rdf_Description)
-    for d in rdfDescription:
-        name, hasIt = hasAttribute(d, namespaces, rdf_about)
-        if hasIt:
-            name = explicateValueNamespace(name, namespaces)
-            if name in actionClasses:
-                actionClasses[name]['description'] += getDescription(d, namespaces)
-                elanName, haveName = getELANName(d, namespaces)
-                if haveName:
-                    actionClasses[name]['ELANName'] = elanName + actionClasses[name]['ELANName']
-
-# Classes may have all sorts of parents, but we only need the parents that are also actions
-actionClassNames = set(actionClasses.keys())
-for actName, act in actionClasses.items():
-    act['parents'] = act['parents'].intersection(actionClassNames)
-
-# Construct the list of words in the controlled vocabulary
-words = []
-for actName, act in actionClasses.items():
-    if 2 < len(act['ELANName']):
-        print("Warning: more than 2 ELAN Names configured for action %s" % actName)
-    words.append({'ELANName': act['ELANName'][0], 'parents': act['parents'], 'description': act['description']})
-
-# TODO: format output appropriately
-
-words.sort(key=lambda dic: dic['ELANName'])
+vocab_words.sort(key=lambda p: p[0])
 
 with open(cvPath, 'w') as outfile:
-    outfile.write('Version %s\n' % version)
-    outfile.write('===\n')
-    for word in words:
-        outfile.write('%s\n' % word['ELANName'])
-        outfile.write('Parents: %s\n' % str(word['parents']))
-        outfile.write('%s\n' % str(word['description']))
-        outfile.write('========\n')
+    outfile.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+    outfile.write('<CV_RESOURCE AUTHOR=\"\" DATE=\"%s\" VERSION=\"%s\"\n\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"http://www.mpi.nl/tools/elan/EAFv2.8.xsd\">\n' % (str(datetime.datetime.now()), version))
+    outfile.write('\t<LANGUAGE LANG_DEF="http://cdb.iso.org/lg/CDB-00130975-001" LANG_ID="%s" LANG_LABEL="%s"/>\n' % (lang_ref, lang_label))
+    for cv_id, words in vocab_words:
+        outfile.write('\t<CONTROLLED_VOCABULARY CV_ID="%s">\n' % (cv_id))
+        outfile.write('\t\t<DESCRIPTION LANG_REF="%s"/>\n' % (lang_ref,))
+        for word in words:
+            outfile.write('\t\t<CV_ENTRY_ML CVE_ID="%s">\n' % ("cveid_"+ str(hashlib.md5((lang_ref + cv_id + word['ELANName']).encode('utf-8')).hexdigest())))
+            # outfile.write('\t\t<CV_ENTRY_ML CVE_ID="%s">\n' % ("cveid_"+ str(uuid.uuid4()),))
+            desc = str(word['description'])
+            if 1 == len(word['description']):
+                desc = str(word['description'][0])
+            outfile.write('\t\t\t<CVE_VALUE DESCRIPTION="%s" LANG_REF="%s">%s</CVE_VALUE>\n' % (makeHTMLAttributeSafe(desc), lang_ref, word['ELANName']))
+            outfile.write('\t\t</CV_ENTRY_ML>\n')
+        outfile.write('\t</CONTROLLED_VOCABULARY>\n')
+    outfile.write('</CV_RESOURCE>\n')
 

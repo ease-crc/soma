@@ -9,9 +9,9 @@
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl">
-        <owl:imports rdf:resource="http://www.ease-crc.org/ont/EASE.owl"/>
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl"/>
         <owl:imports rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/EASE.owl"/>
     </owl:Ontology>
     
 
@@ -228,6 +228,8 @@
         </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#EffectorPositioning"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Navigation"/>
+        <ease:ELANName>move-object</ease:ELANName>
+        <ease:ELANUsageGuideline>Superconcept for the Agent moving some (usually, but not always, grasped) object; use more specific labels where appropriate.</ease:ELANUsageGuideline>
         <rdfs:comment>todo: think about use of tools. force events are generated between artifacts then. also not only the tool would be the &apos;salient artifact&apos; here.</rdfs:comment>
     </owl:Class>
     
@@ -244,7 +246,9 @@
                 <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Avoiding"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Distancing"/>
+        <ease:ELANName>move-body-walk-to</ease:ELANName>
+        <ease:ELANUsageGuideline>walk (to a location, or in a direction)</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -253,29 +257,18 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ArrangeObjects">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ConstructObject"/>
+        <ease:ELANName>construction-arrange-objects</ease:ELANName>
+        <ease:ELANUsageGuideline>a task involving the arrangement of a collection of objects in a particular way</ease:ELANUsageGuideline>
     </owl:Class>
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#AssembleObject -->
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#AssembleObjects -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#AssembleObject">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#AssembleObjects">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ConstructObject"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Avoiding -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Avoiding">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Taxis"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
+        <ease:ELANName>construction-assembly</ease:ELANName>
+        <ease:ELANUsageGuideline>a task involving the putting together of objects to form an assembly, usually in a way in which these objects can be recovered</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -307,6 +300,8 @@
             </owl:Restriction>
         </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PickingUp"/>
+        <ease:ELANName>move-hand-grasp-catch</ease:ELANName>
+        <ease:ELANUsageGuideline>grasp a moving object with hand</ease:ELANUsageGuideline>
         <rdfs:comment>todo: would be nice to have &apos;Falling&apos; as force dynamics process.</rdfs:comment>
     </owl:Class>
     
@@ -371,6 +366,48 @@
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Lifting"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Opening"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Squeezing"/>
+        <ease:ELANName>move-object-close</ease:ELANName>
+        <ease:ELANUsageGuideline>move an object so that it no longer exposes an interior surface</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationReport -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationReport">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationTask"/>
+        <rdfs:comment>A task in which an Agent endeavors to describe truthfully some state of affairs.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationTask -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationTask">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+                    </owl:Restriction>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A Task in which two or more Agents exchange information.
+
+Of course, the means of exchange is Physical, however this concept is to classify events for which we are not interested in the physical substrate, but rather who communicated and what the information content was.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>A role that appears in communication tasks, and indicates what the communication is about.</rdfs:comment>
     </owl:Class>
     
 
@@ -379,6 +416,8 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ConstructObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <ease:ELANName>construction-general</ease:ELANName>
+        <ease:ELANUsageGuideline>Superconcept for tasks requiring the creation of some object (including an arrangement or collection of objects); use more specific labels where appropriate</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -390,6 +429,23 @@
         <rdfs:comment>A task in which the Agent, using general logical principles that it considers logically valid, applied to premises that it considers logically true, arrives at conclusions that it considers logically certain.
 
 Deduction is often explained as starting from the &quot;general&quot; (some property X is known about all members of a set S), applying it to the &quot;specific&quot; (some Entity Y is known to belong to set S), to arrive at a specialization of the general property (X applies to Y).</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Distancing -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Distancing">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Taxis"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <ease:ELANName>move-body-walk-backaway</ease:ELANName>
+        <ease:ELANUsageGuideline>walk (away from a location, in a direction)</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -443,6 +499,8 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
             </owl:Restriction>
         </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Placing"/>
+        <ease:ELANName>move-object-drop</ease:ELANName>
+        <ease:ELANUsageGuideline>release grasp on an object before a supporting surface is reached, and without imparting significant momentum to the object</ease:ELANUsageGuideline>
         <rdfs:comment>The dropped object falls mainly under the influence of gravity. However, an agent may also drop something during navigation. The difference to &apos;Throwing&apos; is that there is no &apos;Limb motion&apos; which is a constitiuent of the action.
 
 &apos;Dropping&apos; is intentional. Dropping by accident may not has a phase to release the grasp. It could be that the grasp was not strong enough and the objects &quot;slips&quot; away.</rdfs:comment>
@@ -480,6 +538,7 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
             </owl:Restriction>
         </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Navigation"/>
+        <ease:ELANUsageGuideline>Superconcept for the Agent moving their arm(s) to positioning their hand/end effector; use more specific labels where appropriate.</ease:ELANUsageGuideline>
         <rdfs:label>Effector positioning</rdfs:label>
     </owl:Class>
     
@@ -533,6 +592,16 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PickingUp"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#GraspTransfer -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#GraspTransfer">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Grasping"/>
+        <ease:ELANName>move-hand-grasp-transfer</ease:ELANName>
+        <ease:ELANUsageGuideline>have grasped an object with one hand, now grasp it with the other and release it from the first</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -592,6 +661,28 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
             </owl:Restriction>
         </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ReleasingGrasp"/>
+        <ease:ELANName>move-hand-grasp</ease:ELANName>
+        <ease:ELANUsageGuideline>grasp object with hand</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#HeadAction -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#HeadAction">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ObservedAction"/>
+        <ease:ELANUsageGuideline>Superconcept for the Agent moving their head; use more specific labels where appropriate.</ease:ELANUsageGuideline>
+        <rdfs:comment>The Agent moves a part of their body carrying high-bandwidth sensors such as cameras. The movement of other body parts is not significant.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#HeadTurning -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#HeadTurning">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#HeadAction"/>
+        <ease:ELANName>move-head-turn</ease:ELANName>
+        <ease:ELANUsageGuideline>turn head (e.g. for visual search)</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -612,6 +703,8 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <ease:ELANName>move-object-hold</ease:ELANName>
+        <ease:ELANUsageGuideline>have grasped an object with hand, and move it while held</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -654,6 +747,8 @@ In this category we will place Actions for which such extra knowledge is require
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Leaning">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PosturalAction"/>
+        <ease:ELANName>move-body-lean</ease:ELANName>
+        <ease:ELANUsageGuideline>move, bending, with torso in a specific direction</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -686,6 +781,8 @@ In this category we will place Actions for which such extra knowledge is require
         </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Opening"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Pushing"/>
+        <ease:ELANName>move-object-lift</ease:ELANName>
+        <ease:ELANUsageGuideline>have grasped an object with hand and now lift it from the supporting surface</ease:ELANUsageGuideline>
         <rdfs:comment>todo: how to distinguish from e.g. &apos;pushing from the table&apos;</rdfs:comment>
     </owl:Class>
     
@@ -704,6 +801,7 @@ In this category we will place Actions for which such extra knowledge is require
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ManipulationAction">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ObservedAction"/>
+        <ease:ELANUsageGuideline>Superconcept for the Agent doing something with their hands/end effectors; use more specific labels where appropriate.</ease:ELANUsageGuideline>
         <rdfs:comment>These are Actions in which the Agent exerts or prepares to exert some influence over some other participant Phyiscal Objects by way of its prehensile body parts (usually, hands).</rdfs:comment>
     </owl:Class>
     
@@ -749,6 +847,66 @@ One could argue Mental actions are all Physical actions, because anything the Ag
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionEvaluationTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionEvaluationTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionTopic"/>
+        <ease:ELANName>ta-meta-cognition-evaluation</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent analyzes and describes the process by which they evaluate whether/to what a extent a goal was reached</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionMemoryTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionMemoryTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionTopic"/>
+        <ease:ELANName>ta-meta-cognition-memory</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent describes how and/or why they (failed to) memorize something</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionPlanningTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionPlanningTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionTopic"/>
+        <ease:ELANName>ta-meta-cognition-planning</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent analyzes and describes the process they use to plan their behavior</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic"/>
+        <ease:ELANName>ta-meta-cognition</ease:ELANName>
+        <ease:ELANUsageGuideline>Superconcept for cases where the agent describes the results of analyzing their own thought processes; use more specific labels where appropriate.</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#MixObjects -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#MixObjects">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ConstructObject"/>
+        <ease:ELANName>construction-mixing</ease:ELANName>
+        <ease:ELANUsageGuideline>a task involving the putting together of several objects, which are thereafter not recoverable</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ModifyObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ModifyObject">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <ease:ELANName>object-modification-general</ease:ELANName>
+        <ease:ELANUsageGuideline>Superconcept for tasks involving the changing of the state some object(s) is/are in; use more specific labels where appropriate.</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Navigation -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Navigation">
@@ -779,6 +937,8 @@ One could argue Mental actions are all Physical actions, because anything the Ag
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <ease:ELANName>navigation-general</ease:ELANName>
+        <ease:ELANUsageGuideline>Superconcept for tasks involving the agent planning and enacting routes through the environment to reach or avoid a location</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -873,6 +1033,18 @@ Our stance is to treat the goals of ObservedActions as convenient fictions, tole
             </owl:Restriction>
         </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Squeezing"/>
+        <ease:ELANName>move-object-open</ease:ELANName>
+        <ease:ELANUsageGuideline>move an object so as to expose an interior surface</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#OrientingObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#OrientingObject">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Actuating"/>
+        <ease:ELANName>move-object-orient</ease:ELANName>
+        <ease:ELANUsageGuideline>move object to re-orient it in place (on an area or while holding) without additional grasp/release</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -905,6 +1077,16 @@ Our stance is to treat the goals of ObservedActions as convenient fictions, tole
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicallyAcquireObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicallyAcquireObject">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ModifyObject"/>
+        <ease:ELANName>physically-acquire-object</ease:ELANName>
+        <ease:ELANUsageGuideline>Superconcept for tasks requiring that an object be put in such a physical state so that it is usable/available for other tasks.</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -1039,6 +1221,8 @@ Our stance is to treat the goals of ObservedActions as convenient fictions, tole
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <ease:ELANName>move-hand-grasp-pickup</ease:ELANName>
+        <ease:ELANUsageGuideline>grasp an object resting on a surface with hand</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -1079,6 +1263,8 @@ Our stance is to treat the goals of ObservedActions as convenient fictions, tole
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <ease:ELANName>move-object-place</ease:ELANName>
+        <ease:ELANUsageGuideline>lower a grasped object to a supporting surface and then leave it there</ease:ELANUsageGuideline>
         <rdfs:comment>todo: add subclass &apos;Stacking&apos;? But how could this be defined? Does it depend on object types, or rather their roles?</rdfs:comment>
     </owl:Class>
     
@@ -1103,7 +1289,9 @@ Our stance is to treat the goals of ObservedActions as convenient fictions, tole
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#PosturalAction">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ObservedAction"/>
-        <rdfs:comment>The Agent changes the or assumes an overall configuration of their body but is otherwise not significantly affecting other objects nor moving a significant amount from its original location.
+        <ease:ELANName>move-body-posture</ease:ELANName>
+        <ease:ELANUsageGuideline>Superconcept for motions where the Agent changes posture; use more specific labels where appropriate.</ease:ELANUsageGuideline>
+        <rdfs:comment>The Agent changes or takes an overall configuration of their body but is otherwise not significantly affecting other objects nor moving a significant amount from its original location.
 
 Posture changes may take place as part of other actions, for example turning when walking.</rdfs:comment>
     </owl:Class>
@@ -1132,6 +1320,8 @@ Posture changes may take place as part of other actions, for example turning whe
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Pushing">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Actuating"/>
+        <ease:ELANName>move-object-push</ease:ELANName>
+        <ease:ELANUsageGuideline>Superconcept for the Agent exerting force on an object to push it; use more specific labels where appropriate.</ease:ELANUsageGuideline>
         <rdfs:comment>todo: define subclass &apos;PushingOver&apos;? Would we expect two distinct contacts with the same surface then?</rdfs:comment>
     </owl:Class>
     
@@ -1168,6 +1358,8 @@ Posture changes may take place as part of other actions, for example turning whe
             </owl:Restriction>
         </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PushingDown"/>
+        <ease:ELANName>move-object-push-away</ease:ELANName>
+        <ease:ELANUsageGuideline>exert force on object to move it away from self</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -1202,6 +1394,8 @@ Posture changes may take place as part of other actions, for example turning whe
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <ease:ELANName>move-object-push-down</ease:ELANName>
+        <ease:ELANUsageGuideline>exert force on an object to move it in some functionally meaningful direction, such as pushing down a button (even when the actual direction the button was pushed in was up)</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -1256,6 +1450,8 @@ Posture changes may take place as part of other actions, for example turning whe
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Reaching">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#EffectorPositioning"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Retracting"/>
+        <ease:ELANName>move-hand+arm-reach</ease:ELANName>
+        <ease:ELANUsageGuideline>reach arm out to prepare to grasp with hand</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -1339,6 +1535,8 @@ Note, this classification has nothing to do with reasoning domain (e.g. SpatialR
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ReleasingMotion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <ease:ELANName>move-hand-release</ease:ELANName>
+        <ease:ELANUsageGuideline>release a grasped object</ease:ELANUsageGuideline>
         <rdfs:label>Releasing grasp</rdfs:label>
     </owl:Class>
     
@@ -1357,6 +1555,8 @@ Note, this classification has nothing to do with reasoning domain (e.g. SpatialR
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Retracting">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#EffectorPositioning"/>
+        <ease:ELANName>move-hand+arm-retract</ease:ELANName>
+        <ease:ELANUsageGuideline>draw in arm and hand toward body</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -1377,6 +1577,8 @@ As an example, a kind of Abductive reasoning would fit here: reconstruction, in 
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#SearchForObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <ease:ELANName>search-for-object</ease:ELANName>
+        <ease:ELANUsageGuideline>Superconcept for tasks whose goal is to find out the location, or a possible new location, of an object</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -1422,6 +1624,8 @@ Simulation does not commit itself to state accuracy: the initial state of the si
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <ease:ELANName>move-object-squeeze</ease:ELANName>
+        <ease:ELANUsageGuideline>exert compressive force on a (usually, but not always, grasped) object</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -1430,6 +1634,18 @@ Simulation does not commit itself to state accuracy: the initial state of the si
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Standing">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PosturalAction"/>
+        <ease:ELANName>move-body-stand</ease:ELANName>
+        <ease:ELANUsageGuideline>stand (at a location)</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#SurveyArea -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#SurveyArea">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#SearchForObject"/>
+        <ease:ELANName>perception-survey-area</ease:ELANName>
+        <ease:ELANUsageGuideline>visually survey an area, for objects or potential object positions</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -1450,6 +1666,106 @@ Simulation does not commit itself to state accuracy: the initial state of the si
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Locomotion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <ease:ELANUsageGuideline>Superconcept for the Agent moving around; use more specific labels where appropriate.</ease:ELANUsageGuideline>
+        <rdfs:comment>The Agent repositions their body in the environment</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloud -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloud">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationReport"/>
+        <rdfs:comment>A task in which an Agent, while in the course of performing some other task(s), reports on their own decision processes that guide this other task(s) for the benefit of an outside observer.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudActionTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudActionTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic"/>
+        <ease:ELANName>ta-actions</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent describes what they are currently doing</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudGeneralKnowledgeTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudGeneralKnowledgeTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudKnowledgeTopic"/>
+        <ease:ELANName>ta-knowledge-general</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent makes a statement of general knowledge, as opposed to knowledge specific to the immediate environment they are in</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudKnowledgeTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudKnowledgeTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic"/>
+        <ease:ELANName>ta-knowledge</ease:ELANName>
+        <ease:ELANUsageGuideline>Superconcept for when an agent makes a statement of knowledge of something not immediately perceivable; use more specific labels where appropriate.</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudObstructionTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudObstructionTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic"/>
+        <ease:ELANName>ta-issues</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent describes what prevents them from undertaking some action</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudOpinionTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudOpinionTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic"/>
+        <ease:ELANName>ta-opinions</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent makes a statement of opinion</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudPerceptionTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudPerceptionTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic"/>
+        <ease:ELANName>ta-perception</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent describes what they perceive</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudPlanTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudPlanTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic"/>
+        <ease:ELANName>ta-plans</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent describes their current plan</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudSceneKnowledgeTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudSceneKnowledgeTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudKnowledgeTopic"/>
+        <ease:ELANName>ta-knowledge-scene</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent makes a statement that they know something about the environment they are in, which they cannot at that moment perceive directly (but they may have perceived it earlier)</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationTopic"/>
+        <rdfs:comment>A topic relevant for a think-aloud communication.</rdfs:comment>
     </owl:Class>
     
 
@@ -1538,6 +1854,8 @@ Simulation does not commit itself to state accuracy: the initial state of the si
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#LimbMotion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <ease:ELANName>move-object-throw</ease:ELANName>
+        <ease:ELANUsageGuideline>having imparted momentum to an object, release it</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -1554,7 +1872,9 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#TransportObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#TransportObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ModifyObject"/>
+        <ease:ELANName>transport-object</ease:ELANName>
+        <ease:ELANUsageGuideline>a task that requires chaging the location of an object</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -1563,6 +1883,8 @@ Simulation does not commit itself to state accuracy: the initial state of the si
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Turning">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PosturalAction"/>
+        <ease:ELANName>move-body-turn</ease:ELANName>
+        <ease:ELANUsageGuideline>move own body, turn</ease:ELANUsageGuideline>
     </owl:Class>
     
 
