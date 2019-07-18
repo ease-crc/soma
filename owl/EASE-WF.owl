@@ -11,7 +11,7 @@
      xmlns:EASE="http://www.ease-crc.org/ont/EASE.owl#"
      xmlns:ease_wf="http://www.ease-crc.org/ont/EASE-WF.owl#">
     <owl:Ontology rdf:about="http://www.ease-crc.org/ont/EASE-WF.owl">
-        <owl:imports rdf:resource="package://ease_ontology/owl/EASE.owl"/>
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/EASE.owl"/>
         <owl:imports rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
         <owl:imports rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl"/>
     </owl:Ontology>
@@ -211,13 +211,9 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-WF.owl#isWorkflowFor -->
+    <!-- http://www.ease-crc.org/ont/EASE.owl#isPlanFor -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-WF.owl#isWorkflowFor">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#isPlanFor"/>
     
 
 
@@ -498,7 +494,7 @@ Usually, has a non-empty set of input (Role or Parameter)s, and a non-empty set 
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-WF.owl#isWorkflowFor"/>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#isPlanFor"/>
                 <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
                 <owl:onClass rdf:resource="http://www.ease-crc.org/ont/EASE-WF.owl#OGPTask"/>
             </owl:Restriction>

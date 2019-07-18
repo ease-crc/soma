@@ -10,7 +10,7 @@
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:EASE="http://www.ease-crc.org/ont/EASE.owl#">
     <owl:Ontology rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl">
-        <owl:imports rdf:resource="package://ease_ontologies/owl/EASE.owl"/>
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/EASE.owl"/>
     </owl:Ontology>
     
 
@@ -23,6 +23,35 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#transitionsBack -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#transitionsBack">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#transitionsFrom"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#transitionsTo"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#transitionsFrom -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#transitionsFrom">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasCommonBoundary"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Transient"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#transitionsTo -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#transitionsTo">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasCommonBoundary"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Transient"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+    </owl:ObjectProperty>
     
 
 
@@ -61,6 +90,15 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#AvoidedObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#AvoidedObject">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>An object that is avoided by the agent.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#BakedGood -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#BakedGood">
@@ -79,6 +117,7 @@
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Sliceability"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:comment>todo(DB): this seems too specific. Should it go to a more specific ontology? like &quot;EASE-kitchen&quot;?</rdfs:comment>
     </owl:Class>
     
 
@@ -87,6 +126,33 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Capacity">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#CommitedObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#CommitedObject">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>An object that is committed to a bigger whole. After being committed, the object does not exist anymore in its old form.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Containment -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Containment">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
+        <rdfs:comment>The description of a design that allows to contain other objects.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#CreatedObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#CreatedObject">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>An object that is created.</rdfs:comment>
     </owl:Class>
     
 
@@ -107,6 +173,104 @@
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Severance"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:comment>An object designed as a tool for cutting saomething.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Destination -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Destination">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#DestroyedObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#DestroyedObject">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>An object that is detroyed.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#DetectedObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#DetectedObject">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#DeviceState -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#DeviceState">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#DeviceStateRange -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#DeviceStateRange">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#DeviceTurnedOff"/>
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#DeviceTurnedOn"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#DeviceTurnedOff -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#DeviceTurnedOff">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#DeviceStateRange"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#DeviceTurnedOn -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#DeviceTurnedOn">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#DeviceStateRange"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Effort -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Effort">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#HasQualityRegion -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#HasQualityRegion">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Relation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The relation between an individual quality and a region.</rdfs:comment>
+        <rdfs:comment>todo(DB): added for NEEMs (quale change), but not sure yet about it...</rdfs:comment>
     </owl:Class>
     
 
@@ -131,6 +295,46 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Material -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Material">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#MovedObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#MovedObject">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>An object that is moved to somewhere else.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#OperatedObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#OperatedObject">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>An object that is operated.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Origin -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Origin">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Package -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Package">
@@ -143,6 +347,7 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Pancake">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#BakedGood"/>
+        <rdfs:comment>todo(DB): this seems too specific. Should it go to a more specific ontology? like &quot;EASE-kitchen&quot;?</rdfs:comment>
     </owl:Class>
     
 
@@ -151,6 +356,7 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#PancakeMix">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedSubstance"/>
+        <rdfs:comment>todo(DB): this seems too specific. Should it go to a more specific ontology? like &quot;EASE-kitchen&quot;?</rdfs:comment>
     </owl:Class>
     
 
@@ -167,7 +373,7 @@
                         <owl:someValuesFrom>
                             <owl:Class>
                                 <owl:intersectionOf rdf:parseType="Collection">
-                                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#FluidContainment"/>
+                                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#LiquidContainment"/>
                                     <owl:Restriction>
                                         <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#designatedPatient"/>
                                         <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#PancakeMix"/>
@@ -180,6 +386,37 @@
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Package"/>
+        <rdfs:comment>todo(DB): this seems too specific. Should it go to a more specific ontology? like &quot;EASE-kitchen&quot;?</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#QualityTransition -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#QualityTransition">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
+        <rdfs:comment>todo(DB): added for NEEMs (quale change), but not sure yet about it...</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#QualityType -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#QualityType">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#QualityType"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>todo(DB): added for NEEMs (quale change), but not sure yet about it...</rdfs:comment>
     </owl:Class>
     
 
@@ -189,6 +426,25 @@
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Recipe">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
         <rdfs:comment>A description of the ingredients and amounts needed to produce a particular Dish.</rdfs:comment>
+        <rdfs:comment>todo(DB): recipes also often have steps, which would be rather a plan. Are we sure Recipe is a design?</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#RemainingObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#RemainingObject">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>An object that remains as it was before.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#RemovedObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#RemovedObject">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>An object that is removed from something.</rdfs:comment>
     </owl:Class>
     
 
@@ -235,6 +491,47 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>An object that is used as a tool.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#TransformedObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#TransformedObject">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>An object that is undergoes certain transformation.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Transient -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Transient">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#transitionsFrom"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Objects may undergo changes during Processes; however, while the change Process is in operation, one cannot strictly say either the input of the Process still exists, nor that the result exists yet.
+
+A prototypical example is making a pancake on a heater. When PancakeMix is put on the hot plate, it ceases to be PancakeMix-- already, the chemical structure of the substance gets altered-- however it is only after sufficient heating that this object becomes a Pancake.
+
+Transients are the objects undergoing such change processes; they are no longer the initial objects fed into the process, nor are they the objects produced as results.
+
+Instead, a Transient transitionsFrom some initial Object that was fed into a change Process. Typically, a Transient may transitionTo some resulting Object (though not always, some processes simply destroy objects).
+
+It is also possible that a Transient transitionsBack to the initial object. An example is the catalyst in a chemical reaction; another example is a loaf of bread after a slice has been cut off.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE.owl#DesignedBlade -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DesignedBlade">
@@ -245,7 +542,7 @@
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Sharpness"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>An item designed to provide at least one sharp edge.</rdfs:comment>
+        <rdfs:comment>An item designed to cut things.</rdfs:comment>
     </owl:Class>
     
 
@@ -287,6 +584,7 @@
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DesignedTool">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
         <rdfs:comment>An item designed to enable some action, in which it will play an instrumental role.</rdfs:comment>
+        <rdfs:comment>todo(DB): why is e.g. *DesignedBlade* not a *DesignedTool*?</rdfs:comment>
     </owl:Class>
     
 
@@ -311,14 +609,17 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#FlippingDesign">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
+        <rdfs:comment>The design of an object that allows it to flip other objects from one side to another when operated in a certain way.</rdfs:comment>
     </owl:Class>
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#FluidContainment -->
+    <!-- http://www.ease-crc.org/ont/EASE.owl#LiquidContainment -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#FluidContainment">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#LiquidContainment">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Containment"/>
+        <rdfs:comment>The description of a design that allows to contain liquids. i.e. in such a way that the liquid would not drop out of the container in case it is intact.</rdfs:comment>
+        <rdfs:label>Liquid containment</rdfs:label>
     </owl:Class>
     
 
@@ -334,20 +635,6 @@
     <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design -->
 
     <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
-    
-
-
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact -->
-
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedSubstance -->
-
-    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedSubstance"/>
-    
-
-
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality -->
-
-    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
 </rdf:RDF>
 
 
