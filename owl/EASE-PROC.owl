@@ -147,7 +147,7 @@ In some sense any process that results in entities being created or destroyed mi
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Contact -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEventType"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEvent"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
@@ -162,10 +162,28 @@ In some sense any process that results in entities being created or destroyed mi
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Creation -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Creation">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasCreated"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A process by which an Entity is created in the physical world.
+
+Note, most of the physical Entities we will be considering here are in fact arrangements of many other, smaller physical Entities. Therefore another way to look at this is, a &apos;Physical creation&apos; is the process by which a set of physical Entities is arranged in a certain way, and the arrangement is then itself considered a physical Entity.</rdfs:comment>
+        <rdfs:label>Creation</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Deformation -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Deformation">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEventType"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEvent"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
@@ -183,10 +201,28 @@ A soft slab of clay deforming under its own weight on Earth would still count as
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Destruction -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Destruction">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasDestroyed"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A process by which a physical Entity is destroyed.
+
+Note, most of the physical Entities we are concerned with are actually arrangements of many smaller physical Entities, so another way to look at this is that a &apos;Physical destruction&apos; is a process by which an arrangement of physical Entities, which was previously itself considered a physical Entity, is changed to such an extent that it is no longer recognized as continuing to exist.</rdfs:comment>
+        <rdfs:label>Destruction</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#MotionType"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#UndirectedMotion"/>
         <rdfs:comment>A Motion that is considered to be toward a location or along a path. It is not important that the final location or path be the intention of some Agent, but it is considered that the important feature of this Motion is that it has a path and/or destination.</rdfs:comment>
         <rdfs:label>Directed motion</rdfs:label>
@@ -234,7 +270,7 @@ A soft slab of clay deforming under its own weight on Earth would still count as
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#FluidFlow -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#FluidFlow">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEventType"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEvent"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
@@ -262,23 +298,9 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEvent -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEvent">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicsProcess"/>
-        <rdfs:comment>A process by which, under the influence of some Force, an Entity or some of its constituent parts change their state of motion.</rdfs:comment>
-        <rdfs:label>Force event</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEventType -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEventType">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEvent"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
+        <rdfs:comment>An EventType that classifies force interactions.</rdfs:comment>
+        <rdfs:label>Force event</rdfs:label>
     </owl:Class>
     
 
@@ -305,7 +327,7 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#HeadMovement -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#HeadMovement">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#MotionType"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion"/>
         <rdfs:comment>todo: (Mihai:) This seems too specific, given the &quot;Directed&quot;/&quot;Undirected motion&quot; categories.</rdfs:comment>
     </owl:Class>
     
@@ -351,22 +373,9 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Motion -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicsProcess"/>
-        <rdfs:comment>A process by which a physical Entity changes its spatial relations to other physical Entities in the world. </rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#MotionType -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#MotionType">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
+        <rdfs:comment>An EventType that classifies motion Processes.</rdfs:comment>
+        <rdfs:comment>Motion type</rdfs:comment>
     </owl:Class>
     
 
@@ -374,47 +383,12 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#PhaseTransition -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#PhaseTransition">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicsProcess"/>
-        <rdfs:comment>A process by which matter changes from some distinguishable phase to another. We will use this to refer to the classical phase transitions between Solid, Liquid, Gaseous, Plasma etc. phases.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
+        <rdfs:comment>An EventType that classifies processes by which matter changes from some distinguishable phase to another. We will use this to refer to the classical phase transitions between Solid, Liquid, Gaseous, Plasma etc. phases.</rdfs:comment>
+        <rdfs:label>Phase transition</rdfs:label>
         <rdfs:seeAlso>The phase transition concept has also been more or less metaphorically applied in other contexts. An example from physics is the &quot;jamming transition&quot;, and sometimes &quot;phase transitions&quot; are spoken of when describing problem spaces such as 3SAT.
 
 In all these cases, the metaphor points to the existence of several regions of qualitatively different behavior (unimpeded passage of solid grains vs deadlock in a corridor; problem instances where the answer NO is trivial to prove vs. problem instances where the answer YES is trivial to prove), separated fairly sharply when some quantity reaches a threshold.</rdfs:seeAlso>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicalCreation -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicalCreation">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicsProcess"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasCreated"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A process by which an Entity is created in the physical world.
-
-Note, most of the physical Entities we will be considering here are in fact arrangements of many other, smaller physical Entities. Therefore another way to look at this is, a &apos;Physical creation&apos; is the process by which a set of physical Entities is arranged in a certain way, and the arrangement is then itself considered a physical Entity.</rdfs:comment>
-        <rdfs:label>Physical creation</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicalDestruction -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#PhysicalDestruction">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicsProcess"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasDestroyed"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A process by which a physical Entity is destroyed.
-
-Note, most of the physical Entities we are concerned with are actually arrangements of many smaller physical Entities, so another way to look at this is that a &apos;Physical destruction&apos; is a process by which an arrangement of physical Entities, which was previously itself considered a physical Entity, is changed to such an extent that it is no longer recognized as continuing to exist.</rdfs:comment>
-        <rdfs:label>Physical destruction</rdfs:label>
     </owl:Class>
     
 
@@ -465,7 +439,14 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessFlow">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
-        <rdfs:comment>A description of how a process evolves over time.</rdfs:comment>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#definesProcess"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A description that structures a Process.</rdfs:comment>
+        <rdfs:label>Process flow</rdfs:label>
     </owl:Class>
     
 
@@ -492,6 +473,8 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
                 <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:comment>An EventType that classifies Processes.</rdfs:comment>
+        <rdfs:label>Process type</rdfs:label>
     </owl:Class>
     
 
@@ -541,7 +524,7 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#UndirectedMotion -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#UndirectedMotion">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#MotionType"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion"/>
         <rdfs:comment>A Motion of a physical Entity for which a destination or path are unknown and/or considered irrelevant; the important aspect about this Motion is simply that it occurs, rather than where it is headed or how it proceeds towards it.</rdfs:comment>
         <rdfs:label>Undirected motion</rdfs:label>
     </owl:Class>
