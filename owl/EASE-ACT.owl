@@ -19,6 +19,29 @@
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#ELANName -->
+
+    <owl:AnnotationProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#ELANName"/>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#ELANUsageGuideline -->
+
+    <owl:AnnotationProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#ELANUsageGuideline"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
     // Object Properties
     //
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -225,6 +248,80 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationReport -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationReport">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationTask"/>
+        <rdfs:comment>A task in which an Agent endeavors to describe truthfully some state of affairs.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationTask -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationTask">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                        <owl:allValuesFrom>
+                            <owl:Class>
+                                <owl:unionOf rdf:parseType="Collection">
+                                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+                                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
+                                </owl:unionOf>
+                            </owl:Class>
+                        </owl:allValuesFrom>
+                    </owl:Restriction>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A Task in which two or more Agents exchange information. A CommunicationTask classifies only Events that have only Agents and Social objects as participants.
+
+Of course, the means of exchange is Physical, however this concept is to classify events for which we are not interested in the physical substrate, but rather who communicated and what the information content was.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
+                                <owl:someValuesFrom>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
+                                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationTask"/>
+                                    </owl:Restriction>
+                                </owl:someValuesFrom>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A role that appears in communication tasks, and indicates what the communication is about.
+
+CommunicationTopic can only classify a Social object that participates in an Action that is classified as (the execution of) a CommunicationTask.
+
+Note that classifies here is used in the plays-role sense. This isn&apos;t to say that the social object, ie the information exchanged in the communication, is an instance of the topic. Rather, the topic role refers to what the information is about.
+
+For example, if the topic of a communication is flowers, this does not mean the words themselves are flowers, merely that, in some sense, they are about flowers.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Constructing -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Constructing">
@@ -405,6 +502,46 @@ One could argue Mental actions are all Physical actions, because anything the Ag
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>A Task classifying some MentalAction, that is, an Action through which an Agent manipulates representations stored in its own cognition.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionEvaluationTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionEvaluationTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionTopic"/>
+        <ease:ELANName>ta-meta-cognition-evaluation</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent analyzes and describes the process by which they evaluate whether/to what a extent a goal was reached</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionMemoryTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionMemoryTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionTopic"/>
+        <ease:ELANName>ta-meta-cognition-memory</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent describes how and/or why they (failed to) memorize something</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionPlanningTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionPlanningTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionTopic"/>
+        <ease:ELANName>ta-meta-cognition-planning</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent analyzes and describes the process they use to plan their behavior</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic"/>
+        <ease:ELANName>ta-meta-cognition</ease:ELANName>
+        <ease:ELANUsageGuideline>Superconcept for cases where the agent describes the results of analyzing their own thought processes; use more specific labels where appropriate.</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -766,6 +903,104 @@ Simulation does not commit itself to state accuracy: the initial state of the si
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Locomotion"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloud -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloud">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationReport"/>
+        <rdfs:comment>A task in which an Agent, while in the course of performing some other task(s), reports on their own decision processes that guide this other task(s) for the benefit of an outside observer.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudActionTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudActionTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic"/>
+        <ease:ELANName>ta-actions</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent describes what they are currently doing</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudGeneralKnowledgeTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudGeneralKnowledgeTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudKnowledgeTopic"/>
+        <ease:ELANName>ta-knowledge-general</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent makes a statement of general knowledge, as opposed to knowledge specific to the immediate environment they are in</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudKnowledgeTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudKnowledgeTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic"/>
+        <ease:ELANName>ta-knowledge</ease:ELANName>
+        <ease:ELANUsageGuideline>Superconcept for when an agent makes a statement of knowledge of something not immediately perceivable; use more specific labels where appropriate.</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudObstructionTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudObstructionTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic"/>
+        <ease:ELANName>ta-issues</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent describes what prevents them from undertaking some action</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudOpinionTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudOpinionTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic"/>
+        <ease:ELANName>ta-opinions</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent makes a statement of opinion</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudPerceptionTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudPerceptionTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic"/>
+        <ease:ELANName>ta-perception</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent describes what they perceive</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudPlanTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudPlanTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic"/>
+        <ease:ELANName>ta-plans</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent describes their current plan</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudSceneKnowledgeTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudSceneKnowledgeTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudKnowledgeTopic"/>
+        <ease:ELANName>ta-knowledge-scene</ease:ELANName>
+        <ease:ELANUsageGuideline>an agent makes a statement that they know something about the environment they are in, which they cannot at that moment perceive directly (but they may have perceived it earlier)</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationTopic"/>
+        <rdfs:comment>A topic relevant for a think-aloud communication.</rdfs:comment>
     </owl:Class>
     
 
