@@ -1,3 +1,26 @@
+
+#Script to generate ELAN controlled vocabularies from the EASE ontology
+#
+
+# Usage:
+# python ./elan_cv.py -of /path/to/outputfile.ecv -if /path/to/inputfile1.owl /path/to/inputfile2.owl ... -vi "vocabulary id string" -ns "namespace of start concepts" -sc StartConcept1 StartConcept2 ...
+
+# Note that several -vi specifications can be made in the same call to the script. Each -vi must be followed by at least one -ns, and each -ns must be followed by one -sc.
+
+# The script will crawl through the taxonomy of concepts in the input files. For each vocabulary id, the script starts with the list of concepts following the subsequent -sc parameter. The concept names should be bare, with no namespace. The namespace is defined by using an -ns parameter before the -sc list.
+
+# Examples:
+
+# python ./elan_cv.py -of ex1.ecv -if exin1.owl exin2.owl -vi "motions" -ns "https://example.org/exin.owl#" -sc Motion
+# python ./elan_cv.py -of ex2.ecv -if exin1.owl exin2.owl -vi "motions" -ns "https://example.org/exin.owl#" -sc Motion -vi "places" -ns "https://example.org/exin.owl#" -sc Place Location
+# python ./elan_cv.py -of ex3.ecv -if exin1.owl exin2.owl -vi "objects" -ns "https://ex.org/physical.owl#" -sc PhysicalObject -ns "https://ex.org/social.owl#" -sc SocialObject
+
+#__author__ = "Mihai Pomarlan"
+#__license__ = "GPL"
+#__version__ = "1.0.0"
+#__maintainer__ = "Mihai Pomarlan"
+#__email__ = "pomarlan@uni-bremen.de"
+
 import untangle
 import sys
 import os
