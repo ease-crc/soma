@@ -207,10 +207,9 @@
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#AreaSurveying -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#AreaSurveying">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#LookingFor"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Perceiving"/>
         <ease:ELANName>perception-survey-area</ease:ELANName>
         <ease:ELANUsageGuideline>Visually survey an area, for objects or potential object positions.</ease:ELANUsageGuideline>
-        <rdfs:comment>The task also specifies a particular way to look for an object: by surveying some defined target area.</rdfs:comment>
     </owl:Class>
     
 
@@ -341,7 +340,7 @@ For example, if the topic of a communication is flowers, this does not mean the 
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Constructing">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ModifyingObject"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ModifyingPhysicalObject"/>
         <ease:ELANName>construction-general</ease:ELANName>
         <ease:ELANUsageGuideline>Superconcept for tasks requiring the creation of some object (including an arrangement or collection of objects); use more specific labels where appropriate</ease:ELANUsageGuideline>
     </owl:Class>
@@ -462,9 +461,9 @@ In this category we will place Actions for which such extra knowledge is require
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#LookingFor -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#LookingFor">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
-        <ease:ELANName>search-for-object</ease:ELANName>
-        <ease:ELANUsageGuideline>Superconcept for tasks whose goal is to find out the location, or a possible new location, of an object</ease:ELANUsageGuideline>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Perceiving"/>
+        <ease:ELANName>perception-search-for-object</ease:ELANName>
+        <ease:ELANUsageGuideline>The agent searches, usually visually, for the location, or a possible new location, of an object</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -526,32 +525,12 @@ One could argue Mental actions are all Physical actions, because anything the Ag
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Mixing -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Mixing">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Constructing"/>
-        <ease:ELANName>construction-mixing</ease:ELANName>
-        <ease:ELANUsageGuideline>A task involving the putting together of several objects, which are thereafter not recoverable.</ease:ELANUsageGuideline>
-    </owl:Class>
-
-
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionEvaluationTopic -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionEvaluationTopic">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#MetaCognitionTopic"/>
         <ease:ELANName>ta-meta-cognition-evaluation</ease:ELANName>
         <ease:ELANUsageGuideline>an agent analyzes and describes the process by which they evaluate whether/to what a extent a goal was reached</ease:ELANUsageGuideline>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ModifyingObject -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ModifyingObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
-        <ease:ELANName>object-modification-general</ease:ELANName>
-        <ease:ELANUsageGuideline>Superconcept for tasks involving the changing of the state some object(s) is/are in; use more specific labels where appropriate.</ease:ELANUsageGuideline>
-        <rdfs:comment>Superconcept for tasks that involve affecting some state that an object is in (e.g. where it is located), without creating or destroying the object.</rdfs:comment>
     </owl:Class>
     
 
@@ -582,6 +561,27 @@ One could argue Mental actions are all Physical actions, because anything the Ag
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ThinkAloudTopic"/>
         <ease:ELANName>ta-meta-cognition</ease:ELANName>
         <ease:ELANUsageGuideline>Superconcept for cases where the agent describes the results of analyzing their own thought processes; use more specific labels where appropriate.</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Mixing -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Mixing">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Constructing"/>
+        <ease:ELANName>construction-mixing</ease:ELANName>
+        <ease:ELANUsageGuideline>A task involving the putting together of several objects, which are thereafter not recoverable.</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#ModifyingPhysicalObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#ModifyingPhysicalObject">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <ease:ELANName>object-modification-general</ease:ELANName>
+        <ease:ELANUsageGuideline>Superconcept for tasks involving the changing of the state some object(s) is/are in; use more specific labels where appropriate.</ease:ELANUsageGuideline>
+        <rdfs:comment>Superconcept for tasks that involve affecting some state that an object is in (e.g. where it is located), without creating or destroying the object.</rdfs:comment>
     </owl:Class>
     
 
@@ -652,10 +652,20 @@ Our stance is to treat the goals of ObservedActions as convenient fictions, tole
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalGetting -->
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Perceiving -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalGetting">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ModifyingObject"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Perceiving">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <ease:ELANName>perception-general</ease:ELANName>
+        <ease:ELANUsageGuideline>Superconcept for perception tasks. Use more specific levels where appropriate.</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalAcquiring -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalAcquiring">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ModifyingPhysicalObject"/>
         <ease:ELANName>physically-acquire-object</ease:ELANName>
         <ease:ELANUsageGuideline>Superconcept for tasks requiring that an object be put in such a physical state so that it is usable/available for other tasks.</ease:ELANUsageGuideline>
         <rdfs:comment>The goal of this task is to make some object usable for other tasks, by possibly changing its physical state. Usually, it overlaps some task that describes the manner in which an object is obtained.
@@ -1079,7 +1089,7 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Transporting -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Transporting">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ModifyingObject"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ModifyingPhysicalObject"/>
         <ease:ELANName>transport-object</ease:ELANName>
         <ease:ELANUsageGuideline>A task that requires chaging the location of an object.</ease:ELANUsageGuideline>
     </owl:Class>
