@@ -195,11 +195,24 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Approaching -->
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Actuating -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Approaching">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Actuating">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Avoiding"/>
+        <ease:ELANName>move-object</ease:ELANName>
+        <ease:ELANUsageGuideline>Superconcept for the Agent moving some (usually, but not always, grasped) object; use more specific labels where appropriate.</ease:ELANUsageGuideline>
+        <rdfs:comment>Tasks where the goal is to move an object.
+
+Usually, an agent will use their prehensile effectors, ie. hands, for this purpose, so there is a lot of conceptual overlap between Actuating and Manipulating.
+
+However, these categories are nonetheless distinguished in that there are more ways to actuate objects than simply manipulating them; for example, some tool like a net or frying pan might be used to catch an object.
+
+Another way to look at the difference between Actuating and Manipulating is in what they &quot;profile&quot;, ie. focus on as important.
+
+For Actuating, it is the object&apos;s motion that is paramount.
+
+For Manipulating, it is the movement of the hand(s) and the change in functional relationships (such as kinematic control) between the hand(s) and the manipulated object(s).</rdfs:comment>
+        <rdfs:comment>todo: think about use of tools. force events are generated between artifacts then. also not only the tool would be the &apos;salient artifact&apos; here.</rdfs:comment>
     </owl:Class>
     
 
@@ -237,7 +250,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Avoiding -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Avoiding">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Navigating"/>
     </owl:Class>
     
 
@@ -245,8 +258,10 @@
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Catching -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Catching">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Actuating"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PickingUp"/>
+        <ease:ELANName>move-object-catch</ease:ELANName>
+        <ease:ELANUsageGuideline>Agent intercepts and arrests the motion of an object.</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -254,10 +269,12 @@
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Closing -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Closing">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Actuating"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Lifting"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Opening"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Squeezing"/>
+        <ease:ELANName>move-object-close</ease:ELANName>
+        <ease:ELANUsageGuideline>Move an object so that it no longer exposes an interior surface.</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -370,8 +387,10 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Dropping -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Dropping">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Actuating"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Placing"/>
+        <ease:ELANName>move-object-drop</ease:ELANName>
+        <ease:ELANUsageGuideline>Agent undoes whatever functional control they have on an object, but without imparting significant momentum to it, and allows the object to fall under the influence of gravity.</ease:ELANUsageGuideline>
         <rdfs:comment>The dropped object falls mainly under the influence of gravity. However, an agent may also drop something during navigation. The difference to &apos;Throwing&apos; is that there is no &apos;Limb motion&apos; which is a constitiuent of the action.
 
 &apos;Dropping&apos; is intentional. Dropping by accident may not has a phase to release the grasp. It could be that the grasp was not strong enough and the objects &quot;slips&quot; away.</rdfs:comment>
@@ -379,11 +398,23 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#EndEffectorPositioning -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#EndEffectorPositioning">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Manipulating"/>
+        <ease:ELANName>manipulation-hand-positioning</ease:ELANName>
+        <ease:ELANUsageGuideline>Superconcept for the Agent moving their arm(s) to positioning their hand/end effector; use more specific labels where appropriate.</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Grasping -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Grasping">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Manipulating"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Releasing"/>
+        <ease:ELANName>manipulation-grasp</ease:ELANName>
+        <ease:ELANUsageGuideline>Agent grasps an object.</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -391,7 +422,9 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Holding -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Holding">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Manipulating"/>
+        <ease:ELANName>move-object-hold</ease:ELANName>
+        <ease:ELANUsageGuideline>Have grasped an object with hand, and move it while held.</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -430,20 +463,14 @@ In this category we will place Actions for which such extra knowledge is require
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Leaning -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Leaning">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Lifting -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Lifting">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Actuating"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Opening"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Pushing"/>
+        <ease:ELANName>move-object-lift</ease:ELANName>
+        <ease:ELANUsageGuideline>Having grasped an object with their hand, the agent now lifts it from the supporting surface.</ease:ELANUsageGuideline>
         <rdfs:comment>todo: how to distinguish from e.g. &apos;pushing from the table&apos;</rdfs:comment>
     </owl:Class>
     
@@ -471,7 +498,40 @@ In this category we will place Actions for which such extra knowledge is require
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Lowering -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Lowering">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Actuating"/>
+        <ease:ELANName>move-object-lower</ease:ELANName>
+        <ease:ELANUsageGuideline>The agent lowers a, usually held in hand(s), object.</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Manipulating -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Manipulating">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#ManipulationAction"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <ease:ELANName>manipulation-general</ease:ELANName>
+        <ease:ELANUsageGuideline>These are Actions in which the Agent exerts or prepares to exert some influence over some other participant Phyiscal Objects by way of its prehensile body parts (usually, hands).</ease:ELANUsageGuideline>
+        <rdfs:comment>Tasks where the goal is to move the prehensile effectors, ie. hands, of an agent so as to achieve some spatial or functional relation with some manipulated object. 
+
+Spatial relations refer to positioning the hands in certain ways relative to the manipulated object, for example nearing or distancing them, or aligning them with some relevant axis.
+
+Functional relations here refer to interactions between the hands and manipulated object which constrain the possible behavior of the object. Examples of functional relations in manipulation are support and kinematic control.
+
+Note that manipulation tasks are usually performed with the intention of moving an object in some way, so there is a large conceptual overlap between Manipulating and Actuating.
+
+However these concepts are nonetheless distinguished in what they &quot;profile&quot;, ie. what they focus on as particularly important.
+
+Actuating profiles the movement of the object itself.
+
+Manipulating profiles the movement of the hands and the functional relations, such as kinematic control, they establish with the manipulated object.
+
+Note: we employ Manipulating here in its literal, original sense, of using hands for some purpose, and not in the metaphorical sense of exerting psychological pressure on someone.</rdfs:comment>
     </owl:Class>
     
 
@@ -586,18 +646,10 @@ One could argue Mental actions are all Physical actions, because anything the Ag
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#MovingAway -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#MovingAway">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#MovingTo -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#MovingTo">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Navigating"/>
     </owl:Class>
     
 
@@ -646,8 +698,20 @@ Our stance is to treat the goals of ObservedActions as convenient fictions, tole
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Opening -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Opening">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Actuating"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Squeezing"/>
+        <ease:ELANName>move-object-open</ease:ELANName>
+        <ease:ELANUsageGuideline>Move an object so as to expose an interior surface.</ease:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Orienting -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Orienting">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Positioning"/>
+        <ease:ELANName>move-object-orient</ease:ELANName>
+        <ease:ELANUsageGuideline>Move object to re-orient it in place on an area, or while holding.</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -712,7 +776,9 @@ Note that buying an object is NOT PhysicalGetting. Buying, or ownership transfer
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#PickingUp -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#PickingUp">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Manipulating"/>
+        <ease:ELANName>move-object-pick-up</ease:ELANName>
+        <ease:ELANUsageGuideline>Agent grasps an object and removes it from its previous location.</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -721,6 +787,7 @@ Note that buying an object is NOT PhysicalGetting. Buying, or ownership transfer
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Placing">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:comment>Distinguished from Positioning in that this task is more about placing an object at a functionally specified location (e.g., place the cup on the table) as opposed to positioning an object at a location defined by coordinates or a region of coordinates (position the cup at xyz).</rdfs:comment>
     </owl:Class>
     
 
@@ -743,7 +810,9 @@ Note that buying an object is NOT PhysicalGetting. Buying, or ownership transfer
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Positioning -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Positioning">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Actuating"/>
+        <ease:ELANName>move-object-positioning</ease:ELANName>
+        <ease:ELANUsageGuideline>Move an object so that it has a particular pose.</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -780,7 +849,10 @@ Posture changes may take place as part of other actions, for example turning whe
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Pushing -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Pushing">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Actuating"/>
+        <ease:ELANName>move-object-push</ease:ELANName>
+        <ease:ELANUsageGuideline>Superconcept for the Agent exerting force on an object to push it; use more specific labels where appropriate.</ease:ELANUsageGuideline>
+        <rdfs:comment>todo: define subclass &apos;PushingOver&apos;? Would we expect two distinct contacts with the same surface then?</rdfs:comment>
     </owl:Class>
     
 
@@ -790,6 +862,8 @@ Posture changes may take place as part of other actions, for example turning whe
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#PushingAway">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Pushing"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PushingDown"/>
+        <ease:ELANName>move-object-push-away</ease:ELANName>
+        <ease:ELANUsageGuideline>Agent exerts force on an object to move it away from themselves.</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -798,6 +872,8 @@ Posture changes may take place as part of other actions, for example turning whe
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#PushingDown">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Pushing"/>
+        <ease:ELANName>move-object-push-down</ease:ELANName>
+        <ease:ELANUsageGuideline>Exert force on an object to move it in some functionally meaningful direction, such as pushing down a button (even when the actual direction the button was pushed in was up).</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -805,7 +881,9 @@ Posture changes may take place as part of other actions, for example turning whe
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#PuttingDown -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#PuttingDown">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Manipulating"/>
+        <ease:ELANName>manipulation-put-down</ease:ELANName>
+        <ease:ELANUsageGuideline>Agent releases their grasp on an object, but only after positioning it so that it is supported and won&apos;t fall.</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -858,8 +936,10 @@ Posture changes may take place as part of other actions, for example turning whe
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Reaching -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Reaching">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#EndEffectorPositioning"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Retracting"/>
+        <ease:ELANName>move-hand+arm-reach</ease:ELANName>
+        <ease:ELANUsageGuideline>Reach arm out to prepare to grasp with hand.</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -891,7 +971,9 @@ Note, this classification has nothing to do with reasoning domain (e.g. SpatialR
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Releasing -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Releasing">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Manipulating"/>
+        <ease:ELANName>manipulation-release</ease:ELANName>
+        <ease:ELANUsageGuideline>Agent releases grasp on an object.</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -908,7 +990,9 @@ Note, this classification has nothing to do with reasoning domain (e.g. SpatialR
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Retracting -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Retracting">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#EndEffectorPositioning"/>
+        <ease:ELANName>move-hand+arm-retract</ease:ELANName>
+        <ease:ELANUsageGuideline>Draw in arm and hand toward body, and away from some object or location.</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -939,15 +1023,9 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Squeezing -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Squeezing">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Standing -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Standing">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Actuating"/>
+        <ease:ELANName>move-object-squeeze</ease:ELANName>
+        <ease:ELANUsageGuideline>Exert compressive force on a (usually, but not always, grasped) object.</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -1073,7 +1151,10 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Throwing -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Throwing">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Actuating"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Manipulating"/>
+        <ease:ELANName>move-object-throw</ease:ELANName>
+        <ease:ELANUsageGuideline>Using its arm(s), an agent imparts momentum to a held object then releases it.</ease:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -1093,86 +1174,6 @@ Simulation does not commit itself to state accuracy: the initial state of the si
         <ease:ELANName>transport-object</ease:ELANName>
         <ease:ELANUsageGuideline>A task that requires chaging the location of an object.</ease:ELANUsageGuideline>
     </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-ACT.owl#Turning -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#Turning">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#PhysicalTask"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Deformation -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Deformation"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#GraspingMotion -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#GraspingMotion"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#LimbMotion -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#LimbMotion"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Locomotion -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Locomotion"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#ReleasingMotion -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ReleasingMotion"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#ActionStatus -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#ActionStatus"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#ClosedState -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#ClosedState"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#OpenedState -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#OpenedState"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#PhysicalEffector -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#PhysicalEffector"/>
 </rdf:RDF>
 
 

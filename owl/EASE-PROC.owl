@@ -97,6 +97,121 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Approaching -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Approaching">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Locomotion"/>
+        <EASE:ELANName>move-body-walk-to</EASE:ELANName>
+        <EASE:ELANUsageGuideline>walk (to a location, or in a direction)</EASE:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#BodyMovement -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#BodyMovement">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                                <owl:someValuesFrom>
+                                    <owl:Class>
+                                        <owl:intersectionOf rdf:parseType="Collection">
+                                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPartOf"/>
+                                                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
+                                            </owl:Restriction>
+                                        </owl:intersectionOf>
+                                    </owl:Class>
+                                </owl:someValuesFrom>
+                            </owl:Restriction>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <EASE:ELANName>move-body-general</EASE:ELANName>
+        <EASE:ELANUsageGuideline>The Agent moves its body in some way. Use more specific labels where appropriate.</EASE:ELANUsageGuideline>
+        <rdfs:comment>Motion described in terms of how parts of an Agent&apos;s body move.
+
+As such, this concept can be applied only to motions involving some PhysicalAgent, or body parts of a PhysicalAgent.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#HeadTurning -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#HeadTurning">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#HeadMovement"/>
+        <EASE:ELANName>move-head-turn</EASE:ELANName>
+        <EASE:ELANUsageGuideline>Turn head (e.g. for visual search).</EASE:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Leaning -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Leaning">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PosturalMoving"/>
+        <EASE:ELANName>move-body-lean</EASE:ELANName>
+        <EASE:ELANUsageGuideline>move, bending, with torso in a specific direction</EASE:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#MovingAway -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#MovingAway">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Locomotion"/>
+        <EASE:ELANName>move-body-walk-backaway</EASE:ELANName>
+        <EASE:ELANUsageGuideline>walk (away from a location, in a direction)</EASE:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#PosturalMoving -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#PosturalMoving">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#BodyMovement"/>
+        <EASE:ELANName>move-body-posture</EASE:ELANName>
+        <EASE:ELANUsageGuideline>Superconcept for motions where the Agent changes posture; use more specific labels where appropriate.</EASE:ELANUsageGuideline>
+        <rdfs:comment>The Agent changes or takes an overall configuration of its body but is otherwise not significantly affecting other objects nor moving a significant amount from its original location.
+
+Posture changes may take place as part of other actions, for example turning when walking.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Standing -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Standing">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PosturalMoving"/>
+        <EASE:ELANName>move-body-stand</EASE:ELANName>
+        <EASE:ELANUsageGuideline>stand (at a location)</EASE:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Turning -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Turning">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PosturalMoving"/>
+        <EASE:ELANName>move-body-turn</EASE:ELANName>
+        <EASE:ELANUsageGuideline>move own body, turn</EASE:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#ArtifactContact -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ArtifactContact">
@@ -327,7 +442,10 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#HeadMovement -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#HeadMovement">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#BodyMovement"/>
+        <EASE:ELANName>move-head</EASE:ELANName>
+        <EASE:ELANUsageGuideline>Superconcept for the Agent moving their head; use more specific labels where appropriate.</EASE:ELANUsageGuideline>
+        <rdfs:comment>The Agent moves a part of their body carrying high-bandwidth sensors such as cameras. The movement of other body parts is not significant.</rdfs:comment>
         <rdfs:comment>todo: (Mihai:) This seems too specific, given the &quot;Directed&quot;/&quot;Undirected motion&quot; categories.</rdfs:comment>
     </owl:Class>
     
@@ -364,8 +482,17 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Locomotion -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Locomotion">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#BodyMovement"/>
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PrehensileMotion"/>
+        <EASE:ELANName>move-body-locomotion</EASE:ELANName>
+        <EASE:ELANUsageGuideline>Superconcept for the Agent moving around; use more specific labels where appropriate.</EASE:ELANUsageGuideline>
+        <rdfs:comment>Conceptually related to Navigation, but distinguishable from it because of the profile, ie. the focus of the task.
+
+Navigation is about reaching some goal.
+
+Locomotion is concerned more with the actual motion.</rdfs:comment>
+        <rdfs:comment>The Agent repositions their body in the environment.</rdfs:comment>
     </owl:Class>
     
 
