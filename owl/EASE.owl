@@ -916,7 +916,7 @@ Such an event does NOT fall under the definition of Accident here. An example of
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Amateurish">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DexterityDiagnosis"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Masterful"/>
-        <rdfs:comment>The description of amateurish behavior.</rdfs:comment>
+        <rdfs:comment>A description of amateurish behavior.</rdfs:comment>
     </owl:Class>
     
 
@@ -933,14 +933,21 @@ Such an event does NOT fall under the definition of Accident here. An example of
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#BehavioralDiagnosis">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Diagnosis"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment>A diagnosis of how a system interacts with its world.</rdfs:comment>
+        <rdfs:label>Behavioral diagnosis</rdfs:label>
     </owl:Class>
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Clumsy -->
+    <!-- http://www.ease-crc.org/ont/EASE.owl#Clumsiness -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Clumsy">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Clumsiness">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Amateurish"/>
         <rdfs:comment>A description of clumsy behavior.</rdfs:comment>
     </owl:Class>
@@ -952,6 +959,7 @@ Such an event does NOT fall under the definition of Accident here. An example of
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DexterityDiagnosis">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#BehavioralDiagnosis"/>
         <rdfs:comment>A description of the dexterity of a system, possibly in comparison to another system.</rdfs:comment>
+        <rdfs:label>Dexterity diagnosis</rdfs:label>
     </owl:Class>
     
 
@@ -967,7 +975,7 @@ Such an event does NOT fall under the definition of Accident here. An example of
     <!-- http://www.ease-crc.org/ont/EASE.owl#FailedAttempt -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#FailedAttempt">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#GoalUnfulfilled"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Unsuccessfulness"/>
         <rdfs:comment>A description of a failed attempt to achieve some goal.</rdfs:comment>
     </owl:Class>
     
@@ -981,9 +989,9 @@ Such an event does NOT fall under the definition of Accident here. An example of
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Foolish -->
+    <!-- http://www.ease-crc.org/ont/EASE.owl#Foolishness -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Foolish">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Foolishness">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Amateurish"/>
         <rdfs:comment>A description of foolish behavior.</rdfs:comment>
     </owl:Class>
@@ -995,40 +1003,7 @@ Such an event does NOT fall under the definition of Accident here. An example of
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#FunctionalDiagnosis">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Diagnosis"/>
         <rdfs:comment>An internal diagnosis of a system.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#GoalDiagnosis -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#GoalDiagnosis">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#BehavioralDiagnosis"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A diagnosis of the fullfilment of a goal that motivates the behavior of a system.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#GoalFulfilled -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#GoalFulfilled">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#GoalDiagnosis"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#GoalUnfulfilled"/>
-        <rdfs:comment>A description of a situation with a goal that was achieved by some system.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#GoalUnfulfilled -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#GoalUnfulfilled">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#GoalDiagnosis"/>
-        <rdfs:comment>A description of a situation with a goal that was not or not fully achieved by some system.</rdfs:comment>
+        <rdfs:label>Functional diagnosis</rdfs:label>
     </owl:Class>
     
 
@@ -1037,6 +1012,8 @@ Such an event does NOT fall under the definition of Accident here. An example of
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#HardwareDiagnosis">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#TechnicalDiagnosis"/>
+        <rdfs:comment>A diagnosis of the hardware of a system.</rdfs:comment>
+        <rdfs:label>Hardware diagnosis</rdfs:label>
     </owl:Class>
     
 
@@ -1044,7 +1021,7 @@ Such an event does NOT fall under the definition of Accident here. An example of
     <!-- http://www.ease-crc.org/ont/EASE.owl#Inability -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Inability">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#GoalUnfulfilled"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Unsuccessfulness"/>
         <rdfs:comment>A description of a situation with a goal that some system is unable to achieve.</rdfs:comment>
     </owl:Class>
     
@@ -1053,7 +1030,7 @@ Such an event does NOT fall under the definition of Accident here. An example of
     <!-- http://www.ease-crc.org/ont/EASE.owl#Infeasibility -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Infeasibility">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#GoalUnfulfilled"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Unsuccessfulness"/>
         <rdfs:comment>A description of a situation with a goal that is impossible to achieve in some situational context.</rdfs:comment>
     </owl:Class>
     
@@ -1088,14 +1065,7 @@ Such an event does NOT fall under the definition of Accident here. An example of
         </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#TechnicalDiagnosis"/>
         <rdfs:comment>A functional diagnosis of an organism.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Mistake -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Mistake">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#BehavioralDiagnosis"/>
+        <rdfs:label>Medical diagnosis</rdfs:label>
     </owl:Class>
     
 
@@ -1184,11 +1154,11 @@ Such an event does NOT fall under the definition of Accident here. An example of
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#Sluggish -->
+    <!-- http://www.ease-crc.org/ont/EASE.owl#Sluggishness -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Sluggish">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Sluggishness">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Amateurish"/>
-        <rdfs:comment>A description of suggish behavior.</rdfs:comment>
+        <rdfs:comment>A description of sluggish behavior.</rdfs:comment>
     </owl:Class>
     
 
@@ -1218,6 +1188,8 @@ Note also that the DUL SocialAgent class is not an appropriate restriction howev
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#SoftwareDiagnosis">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#TechnicalDiagnosis"/>
+        <rdfs:comment>A diagnosis of the software of a system.</rdfs:comment>
+        <rdfs:label>Software diagnosis</rdfs:label>
     </owl:Class>
     
 
@@ -1244,17 +1216,29 @@ The second issue relates to what is &quot;outside&quot;. The state is a configur
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE.owl#SuccessDiagnosis -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#SuccessDiagnosis">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#BehavioralDiagnosis"/>
+        <rdfs:comment>A diagnosis of the fullfilment of a goal that motivates the behavior of a system.</rdfs:comment>
+        <rdfs:label>Success diagnosis</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#Successfulness -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Successfulness">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#SuccessDiagnosis"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Unsuccessfulness"/>
+        <rdfs:comment>A description of a situation with a goal that was achieved by some system.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE.owl#TechnicalDiagnosis -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#TechnicalDiagnosis">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#HardwareDiagnosis"/>
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#SoftwareDiagnosis"/>
-                </owl:unionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#FunctionalDiagnosis"/>
         <rdfs:subClassOf>
             <owl:Restriction>
@@ -1263,6 +1247,7 @@ The second issue relates to what is &quot;outside&quot;. The state is a configur
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>A functional diagnosis of a technical system.</rdfs:comment>
+        <rdfs:label>Technical diagnosis</rdfs:label>
     </owl:Class>
     
 
@@ -1271,6 +1256,15 @@ The second issue relates to what is &quot;outside&quot;. The state is a configur
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Threshold">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#Unsuccessfulness -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Unsuccessfulness">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#SuccessDiagnosis"/>
+        <rdfs:comment>A description of a situation with a goal that was not or not fully achieved by some system.</rdfs:comment>
     </owl:Class>
     
 
