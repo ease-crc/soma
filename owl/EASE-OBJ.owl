@@ -26,6 +26,29 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasColor -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasColor">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isColorOf"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ColorAttribute"/>
+        <rdfs:label>has color</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDesign -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDesign">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
+        <rdfs:label>has design</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasFrictionAttribute -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasFrictionAttribute">
@@ -34,6 +57,18 @@
         <rdfs:range rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#FrictionAttribute"/>
         <rdfs:comment>A relation between physical objects and their friction attribute.</rdfs:comment>
         <rdfs:label>has friction attribute</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasLocalization -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasLocalization">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isLocalizationOf"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Localization"/>
+        <rdfs:label>has localization</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -50,14 +85,84 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasShapeAttribute -->
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasShape -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasShapeAttribute">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasShape">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isShapeOf"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeAttribute"/>
-        <rdfs:comment>A relation between physical objects and their shape.</rdfs:comment>
-        <rdfs:label>has shape attribute</rdfs:label>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Shape"/>
+        <rdfs:label>has shape</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasSpaceRegion -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasSpaceRegion">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isSpaceRegionFor"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Localization"/>
+                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
+        <rdfs:label>has space region</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#isColorOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isColorOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ColorAttribute"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:label>is color of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#isLocalizationOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isLocalizationOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Localization"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:label>is localization of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#isShapeOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isShapeOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Shape"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:label>is shape of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#isSpaceRegionFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isSpaceRegionFor">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Localization"/>
+                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+        <rdfs:label>is space region for</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -91,9 +196,14 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#designatedPatient -->
+    <!-- http://www.ease-crc.org/ont/EASE.owl#hasDesignatedPatient -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#designatedPatient"/>
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#hasDesignatedPatient">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+        <rdfs:label>has designated patient</rdfs:label>
+    </owl:ObjectProperty>
     
 
 
@@ -126,11 +236,21 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasColorValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasColorValue">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ColorRegion"/>
+        <rdfs:label>has color value</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDepth -->
 
     <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDepth">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
-        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeAttribute"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasShapeParameter"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeRegion"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
         <rdfs:comment>The depth of a shape.</rdfs:comment>
         <rdfs:label>has depth</rdfs:label>
@@ -161,11 +281,22 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasHSVValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasHSVValue">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasColorValue"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ColorRegion"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/EASE.owl#array_double"/>
+        <rdfs:label>has hsv value</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasHeight -->
 
     <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasHeight">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
-        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeAttribute"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasShapeParameter"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeRegion"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
         <rdfs:comment>The height of a shape.</rdfs:comment>
         <rdfs:label>has height</rdfs:label>
@@ -176,11 +307,21 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasLength -->
 
     <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasLength">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
-        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeAttribute"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasShapeParameter"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeRegion"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
         <rdfs:comment>The length of a shape.</rdfs:comment>
         <rdfs:label>has length</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasLocalizationParameter -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasLocalizationParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
+        <rdfs:label>has localization parameter</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -197,11 +338,40 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasOrientationVector -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasOrientationVector">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasLocalizationParameter"/>
+        <rdfs:label>has orientation vector</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasPositionVector -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasPositionVector">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasLocalizationParameter"/>
+        <rdfs:label>has position vector</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasRGBValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasRGBValue">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasColorValue"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ColorRegion"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/EASE.owl#array_double"/>
+        <rdfs:label>has rgb value</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasRadius -->
 
     <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasRadius">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
-        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeAttribute"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasShapeParameter"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeRegion"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
         <rdfs:comment>The radius of a circular or oval shape.</rdfs:comment>
         <rdfs:label>has radius</rdfs:label>
@@ -209,11 +379,39 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasReferenceFrame -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasReferenceFrame">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasLocalizationParameter"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label>has reference frame</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasShapeParameter -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasShapeParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeRegion"/>
+        <rdfs:label>has shape parameter</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasWidth -->
 
     <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasWidth">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
-        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeAttribute"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasShapeParameter"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeRegion"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
         <rdfs:comment>The width of a shape.</rdfs:comment>
         <rdfs:label>has width</rdfs:label>
@@ -249,10 +447,10 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#BoxShapeAttribute -->
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#BoxShape -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#BoxShapeAttribute">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeAttribute"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#BoxShape">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeRegion"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDepth"/>
@@ -275,7 +473,7 @@
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>A symmetrical shape, either solid or hollow, contained by six rectangles.</rdfs:comment>
-        <rdfs:label>Box shape attribute</rdfs:label>
+        <rdfs:label>Box shape</rdfs:label>
     </owl:Class>
     
 
@@ -303,10 +501,10 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#CircularCylinderShapeAttribute -->
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#CircularCylinder -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#CircularCylinderShapeAttribute">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#CylinderShapeAttribute"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#CircularCylinder">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#CylinderShape"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasRadius"/>
@@ -315,7 +513,7 @@
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>A cylinder figure with circular cross section.</rdfs:comment>
-        <rdfs:label>Circular cylinder shape attribute</rdfs:label>
+        <rdfs:label>Circular cylinder</rdfs:label>
     </owl:Class>
     
 
@@ -323,8 +521,42 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#ColorAttribute -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#ColorAttribute">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAttribute"/>
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ColorRegion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ColorRegion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:label>Color</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#ColorRegion -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#ColorRegion">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ColorAttribute"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Color region</rdfs:label>
     </owl:Class>
     
 
@@ -377,10 +609,10 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#CylinderShapeAttribute -->
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#CylinderShape -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#CylinderShapeAttribute">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeAttribute"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#CylinderShape">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeRegion"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasRadius"/>
@@ -395,7 +627,7 @@
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>A solid geometrical figure with straight parallel sides and a circular or oval cross section.</rdfs:comment>
-        <rdfs:label>Cylinder shape attribute</rdfs:label>
+        <rdfs:label>Cylinder shape</rdfs:label>
     </owl:Class>
     
 
@@ -490,6 +722,15 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#GreenColor -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#GreenColor">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ColorRegion"/>
+        <rdfs:label>Green color</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#HasQualityRegion -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#HasQualityRegion">
@@ -544,6 +785,33 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Localization -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Localization">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#MassAttribute -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#MassAttribute">
@@ -575,11 +843,10 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#MeshAttribute -->
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#MeshShape -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#MeshAttribute">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ColorAttribute"/>
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeAttribute"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#MeshShape">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeRegion"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasFilePath"/>
@@ -588,7 +855,7 @@
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>A solid geometrical figure described in a mesh file.</rdfs:comment>
-        <rdfs:label>Mesh attribute</rdfs:label>
+        <rdfs:label>Mesh shape</rdfs:label>
     </owl:Class>
     
 
@@ -659,7 +926,7 @@
                                 <owl:intersectionOf rdf:parseType="Collection">
                                     <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#LiquidContainment"/>
                                     <owl:Restriction>
-                                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#designatedPatient"/>
+                                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasDesignatedPatient"/>
                                         <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#PancakeMix"/>
                                     </owl:Restriction>
                                 </owl:intersectionOf>
@@ -715,6 +982,15 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#RedColor -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#RedColor">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ColorRegion"/>
+        <rdfs:label>Red color</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#RemainingObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#RemainingObject">
@@ -733,11 +1009,44 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeAttribute -->
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Shape -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeAttribute">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAttribute"/>
-        <rdfs:label>Shape attribute</rdfs:label>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Shape">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeRegion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeRegion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeRegion -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeRegion">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Shape"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Shape region</rdfs:label>
     </owl:Class>
     
 
@@ -784,10 +1093,10 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#SphereShapeAttribute -->
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#SphereShape -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#SphereShapeAttribute">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeAttribute"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#SphereShape">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapeRegion"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasRadius"/>
@@ -796,7 +1105,7 @@
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>A round solid figure with every point on its surface equidistant from its centre.</rdfs:comment>
-        <rdfs:label>Sphere shape attribute</rdfs:label>
+        <rdfs:label>Sphere shape</rdfs:label>
     </owl:Class>
     
 
@@ -852,6 +1161,45 @@ It is also possible that a Transient transitionsBack to the initial object. An e
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#3DPosition -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#3DPosition">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasPositionVector"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.ease-crc.org/ont/EASE.owl#array_double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A point in three dimensional space, given as translation.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#6DPose -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#6DPose">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasOrientationVector"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.ease-crc.org/ont/EASE.owl#array_double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasPositionVector"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.ease-crc.org/ont/EASE.owl#array_double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A point in three dimensional space, given as translation, and its orientation.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE.owl#DesignedBlade -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DesignedBlade">
@@ -871,6 +1219,12 @@ It is also possible that a Transient transitionsBack to the initial object. An e
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DesignedContainer">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDesign"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Containment"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
@@ -934,10 +1288,22 @@ It is also possible that a Transient transitionsBack to the initial object. An e
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE.owl#Liquid -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Liquid"/>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE.owl#LiquidContainment -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#LiquidContainment">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Containment"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasDesignatedPatient"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Liquid"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment>The description of a design that allows to contain liquids. i.e. in such a way that the liquid would not drop out of the container in case it is intact.</rdfs:comment>
         <rdfs:label>Liquid containment</rdfs:label>
     </owl:Class>
