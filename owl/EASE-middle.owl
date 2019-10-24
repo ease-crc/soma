@@ -9,8 +9,8 @@
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:EASE="http://www.ease-crc.org/ont/EASE.owl#">
     <owl:Ontology rdf:about="http://www.ease-crc.org/ont/EASE-middle.owl">
-        <owl:imports rdf:resource="http://www.ease-crc.org/ont/EASE.owl"/>
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl"/>
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/EASE.owl"/>
     </owl:Ontology>
     
 
@@ -59,12 +59,6 @@
     <!-- http://www.ease-crc.org/ont/EASE.owl#hasPhase -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#hasPhase"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#hasState -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#hasState"/>
     
 
 
@@ -212,24 +206,7 @@
     <!-- http://www.ease-crc.org/ont/EASE.owl#ClosedState -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#ClosedState">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#OpeningState"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasState"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ClosedRegion"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#OpeningState"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasState"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#ClosedRegion"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE.owl#OpenedState"/>
         <rdfs:label>Closed state</rdfs:label>
     </owl:Class>
@@ -311,24 +288,7 @@
     <!-- http://www.ease-crc.org/ont/EASE.owl#OpenedState -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#OpenedState">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#OpeningState"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasState"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#OpenedRegion"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#OpeningState"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasState"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#OpenedRegion"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:label>Openend state</rdfs:label>
     </owl:Class>
     
@@ -352,12 +312,6 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#OpeningState">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicalState"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasState"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#OpeningAngleRegion"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:label>Opening state</rdfs:label>
     </owl:Class>
     
