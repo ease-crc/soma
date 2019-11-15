@@ -26,23 +26,6 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#attracts -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#attracts">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
-        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isAttractedBy"/>
-        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Disposition"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
-        <owl:propertyChainAxiom rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
-            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
-            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-        </owl:propertyChainAxiom>
-        <rdfs:comment>Relates a disposition to an object that is a potential trigger of the affordance that describes the disposition.</rdfs:comment>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#contains -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#contains">
@@ -58,7 +41,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
         <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isBearerDefinedIn"/>
         <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
@@ -68,10 +51,36 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#definesParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isParameterDefinedIn"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+        <rdfs:comment>A relation between a description and a parameter.</rdfs:comment>
+        <rdfs:label>defines parameter</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#definesSetpoint -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesSetpoint">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesParameter"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isSetpointDefinedIn"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Setpoint"/>
+        <rdfs:comment>Defines the dedicated goal region of a description.</rdfs:comment>
+        <rdfs:label>defines setpoint</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
         <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isTriggerDefinedIn"/>
         <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
@@ -84,16 +93,29 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#describesAlteredQuality -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#describesAlteredQuality">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#describesQuality"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
         <owl:propertyChainAxiom rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
-            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasSetpoint"/>
-            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isQualeOf"/>
+            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesParameter"/>
+            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
         </owl:propertyChainAxiom>
         <rdfs:comment>Relates the description of an alteration to the qualities that could be altered.</rdfs:comment>
         <rdfs:label>describes altered quality</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#describesQuality -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#describesQuality">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isQualityDescribedBy"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+        <rdfs:comment>Relates a description to a quality that it describes.</rdfs:comment>
+        <rdfs:label>describes quality</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -219,7 +241,12 @@
         <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isSetpointOf"/>
         <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
-        <rdfs:comment>Relates an alteration disposition to its dedicated setpoint, i.e. the targeted quality for altered objects.</rdfs:comment>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesSetpoint"/>
+            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+        </owl:propertyChainAxiom>
+        <rdfs:comment>Relates an alteration disposition to its dedicated setpoint, i.e. the targeted quality &quot;value&quot; for altered objects.</rdfs:comment>
         <rdfs:label>has setpoint</rdfs:label>
     </owl:ObjectProperty>
     
@@ -274,27 +301,10 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#isAttractedBy -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isAttractedBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
-        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Disposition"/>
-        <owl:propertyChainAxiom rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
-            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isTriggerDefinedIn"/>
-            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
-        </owl:propertyChainAxiom>
-        <rdfs:comment>Relates a disposition to an object that is a potential trigger of the affordance that describes the disposition.</rdfs:comment>
-        <rdfs:label>is attracted by</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#isBearerDefinedIn -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isBearerDefinedIn">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRoleDefinedIn"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
         <rdfs:range rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
         <rdfs:comment>Relates an affordance which is a relation between a bearer and a trigger, to the role of the bearer when the affordance is manifested.</rdfs:comment>
@@ -375,6 +385,18 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#isParameterDefinedIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isParameterDefinedIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+        <rdfs:comment>A relation between a description and a parameter.</rdfs:comment>
+        <rdfs:label>is parameter defined in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#isQualeOf -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isQualeOf">
@@ -387,13 +409,37 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#isQualityDescribedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isQualityDescribedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Quality"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+        <rdfs:comment>Relates a description to a quality that it describes.</rdfs:comment>
+        <rdfs:label>is quality described by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#isSetpointDefinedIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isSetpointDefinedIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isParameterDefinedIn"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Setpoint"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+        <rdfs:comment>Defines the dedicated goal region of a description.</rdfs:comment>
+        <rdfs:label>is setpoint defined in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#isSetpointOf -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isSetpointOf">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
         <rdfs:range rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration"/>
-        <rdfs:comment>Relates an alteration disposition to its dedicated setpoint, i.e. the targeted quality for altered objects.</rdfs:comment>
+        <rdfs:comment>Relates an alteration disposition to its dedicated setpoint, i.e. the targeted quality &quot;value&quot; for altered objects.</rdfs:comment>
         <rdfs:label>is setpoint of</rdfs:label>
     </owl:ObjectProperty>
     
@@ -450,7 +496,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#isTriggerDefinedIn -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isTriggerDefinedIn">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRoleDefinedIn"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
         <rdfs:range rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
         <rdfs:comment>Relates an affordance which is a relation between a bearer and a trigger, to the role of the trigger when the affordance is manifested.</rdfs:comment>
@@ -722,15 +768,6 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#AffectedObject -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#AffectedObject">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-        <rdfs:comment>An object that undergoes the event.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance">
@@ -770,7 +807,7 @@
                             <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Modifier"/>
+                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool"/>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
@@ -781,7 +818,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>The disposition to modify an aspect of objects.</rdfs:comment>
+        <rdfs:comment>The disposition of an object (the tool) to change some aspect of others.</rdfs:comment>
     </owl:Class>
     
 
@@ -789,7 +826,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#AlteredObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#AlteredObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#AffectedObject"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient"/>
         <rdfs:comment>An object undergoing modifications.</rdfs:comment>
     </owl:Class>
     
@@ -807,7 +844,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#AvoidedObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#AvoidedObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#AffectedObject"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient"/>
         <rdfs:comment>An object that is avoided.</rdfs:comment>
     </owl:Class>
     
@@ -824,8 +861,8 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Barrier -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Barrier">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Excluder"/>
-        <rdfs:comment>A tool used as a barrier to prevent access to a protected space, or to prevent enclosed objects from escaping.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Instrument"/>
+        <rdfs:comment>An object used to prevent others from entering or leaving a restricted space or group.</rdfs:comment>
     </owl:Class>
     
 
@@ -833,7 +870,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Blockage -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Blockage">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Exclusion"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Disposition"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
@@ -843,7 +880,7 @@
                             <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Blocker"/>
+                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Barrier"/>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
@@ -854,7 +891,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>The disposition to constrain the motion of objects by blocking certain pathways.</rdfs:comment>
+        <rdfs:comment>The disposition of an object (the barrier) to prevent others from accessing, leaving, or seeing a restricted space, or group.</rdfs:comment>
     </owl:Class>
     
 
@@ -862,17 +899,8 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#BlockedObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#BlockedObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ExcludedObject"/>
-        <rdfs:comment>An object that is blocked.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Blocker -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Blocker">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Excluder"/>
-        <rdfs:comment>A tool used to restrict movement within a protected space.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient"/>
+        <rdfs:comment>An object that is blocked from accessing something.</rdfs:comment>
     </owl:Class>
     
 
@@ -1024,10 +1052,52 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Combination -->
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Combinator -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Combination">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Disposition"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Combinator">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool"/>
+        <rdfs:comment>A tool used to combine objects.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#CombinedObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#CombinedObject">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient"/>
+        <rdfs:comment>An object that is combined with another object.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#CommitedObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#CommitedObject">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#CombinedObject"/>
+        <rdfs:comment>An object committed to a bigger whole. After being committed, the object does not exist anymore in its old form.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Compartment -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Compartment">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#DesignedComponent"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Insertion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Composing -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Composing">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
@@ -1048,42 +1118,15 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>The disposition to combine objects into a bigger whole.</rdfs:comment>
+        <rdfs:comment>The disposition of an object (the tool) to change the compositional structure of others.</rdfs:comment>
     </owl:Class>
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Combinator -->
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Connectivity -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Combinator">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool"/>
-        <rdfs:comment>A tool used to combine objects.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#CombinedObject -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#CombinedObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#AffectedObject"/>
-        <rdfs:comment>An object that is combined with another object.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#CommitedObject -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#CommitedObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#CombinedObject"/>
-        <rdfs:comment>An object committed to a bigger whole. After being committed, the object does not exist anymore in its old form.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Coverage -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Coverage">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Exclusion"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Connectivity">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Disposition"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
@@ -1093,7 +1136,94 @@
                             <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Barrier"/>
+                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#CombinedObject"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
+                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#CombinedObject"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The disposition of an object (the connected object) to establish a connection with others.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Container -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Container">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Instrument"/>
+        <rdfs:comment>An object used to contain others.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Containment -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Containment">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Disposition"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer"/>
+                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Container"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
+                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#IncludedObject"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isDispositionOf"/>
+                <owl:allValuesFrom>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Capacity"/>
+                    </owl:Restriction>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The disposition of an object (the container) to contain others.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Cover -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Cover">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Barrier"/>
+        <rdfs:comment>An object used to cover up others, such as a lid used as a cover for a pot.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Coverage -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Coverage">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Blockage"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer"/>
+                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Cover"/>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
@@ -1104,7 +1234,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>The disposition to cover up objects to hide or to protect them.</rdfs:comment>
+        <rdfs:comment>The disposition of an object (the cover) to hide or to protect objects by covering them. An example is a door that covers items in a container to e.g. prevent dust getting inside of the container.</rdfs:comment>
     </owl:Class>
     
 
@@ -1112,7 +1242,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#CoveredObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#CoveredObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ExcludedObject"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#BlockedObject"/>
         <rdfs:comment>An object that is covered.</rdfs:comment>
     </owl:Class>
     
@@ -1121,7 +1251,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#CreatedObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#CreatedObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#AffectedObject"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient"/>
         <rdfs:comment>An object that is created.</rdfs:comment>
     </owl:Class>
     
@@ -1212,7 +1342,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#DestroyedObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#DestroyedObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#AffectedObject"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient"/>
         <rdfs:comment>An object that is detroyed.</rdfs:comment>
     </owl:Class>
     
@@ -1221,17 +1351,8 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#DetectedObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#DetectedObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#AffectedObject"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient"/>
         <rdfs:comment>An object that is detected.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Detector -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Detector">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool"/>
-        <rdfs:comment>A tool used to detect objects.</rdfs:comment>
     </owl:Class>
     
 
@@ -1314,6 +1435,14 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#DishwasherTab -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#DishwasherTab">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedSubstance"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Disposition -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Disposition">
@@ -1325,7 +1454,29 @@
                 <owl:onClass rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>The tendency to play certain roles during the course of events.</rdfs:comment>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer"/>
+                                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:onClass>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The tendency of an object (the bearer) to be used to perform certain tasks with others (the triggers).</rdfs:comment>
         <rdfs:comment>extrinsic</rdfs:comment>
     </owl:Class>
     
@@ -1348,19 +1499,10 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Encloser -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Encloser">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Includer"/>
-        <rdfs:comment>A tool used to enclose other objects.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Enclosing -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Enclosing">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Inclusion"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Containment"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
@@ -1368,10 +1510,6 @@
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Encloser"/>
-                            </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
                                 <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#EnclosedObject"/>
@@ -1381,101 +1519,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>The disposition to enclose objects such that they are contained in a host object.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#ExcludedObject -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#ExcludedObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#AffectedObject"/>
-        <rdfs:comment>An object that is excluded to be part of something.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Excluder -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Excluder">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool"/>
-        <rdfs:comment>A tool used to exclude objects.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Exclusion -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Exclusion">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Disposition"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
-                <owl:someValuesFrom>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Excluder"/>
-                            </owl:Restriction>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ExcludedObject"/>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
-                </owl:someValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>The disposition to exclude objects from a bigger whole.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#ExtractedObject -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#ExtractedObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ExcludedObject"/>
-        <rdfs:comment>An object extracted from a bigger whole.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Extraction -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Extraction">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Exclusion"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
-                <owl:someValuesFrom>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Extractor"/>
-                            </owl:Restriction>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ExtractedObject"/>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
-                </owl:someValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>The disposition to extract objects from a bigger whole.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Extractor -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Extractor">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Excluder"/>
-        <rdfs:comment>A tool used to extract objects from a bigger whole.</rdfs:comment>
+        <rdfs:comment>The disposition of an object (the container) to contain other objects by enclosing them to prevent their free movement.</rdfs:comment>
     </owl:Class>
     
 
@@ -1486,6 +1530,78 @@
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#PhysicalQuality"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Intrinsic"/>
         <rdfs:comment>A physical quality that depends on relationships to other objects, such as the color of an object which depends on light conditions in the environment.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#FreezerCompartment -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#FreezerCompartment">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Compartment"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Insertion"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+                                <owl:someValuesFrom>
+                                    <owl:Class>
+                                        <owl:intersectionOf rdf:parseType="Collection">
+                                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
+                                                <owl:allValuesFrom>
+                                                    <owl:Restriction>
+                                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                                        <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DesignedContainer"/>
+                                                    </owl:Restriction>
+                                                </owl:allValuesFrom>
+                                            </owl:Restriction>
+                                        </owl:intersectionOf>
+                                    </owl:Class>
+                                </owl:someValuesFrom>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:onClass>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tempering"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+                                <owl:someValuesFrom>
+                                    <owl:Class>
+                                        <owl:intersectionOf rdf:parseType="Collection">
+                                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
+                                                <owl:allValuesFrom>
+                                                    <owl:Restriction>
+                                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                                        <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
+                                                    </owl:Restriction>
+                                                </owl:allValuesFrom>
+                                            </owl:Restriction>
+                                        </owl:intersectionOf>
+                                    </owl:Class>
+                                </owl:someValuesFrom>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:onClass>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -1541,28 +1657,89 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#IncludedObject -->
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Hotplate -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#IncludedObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#AffectedObject"/>
-        <rdfs:comment>An object that is included to be part of something.</rdfs:comment>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Hotplate">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#DesignedComponent"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Support"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+                                <owl:someValuesFrom>
+                                    <owl:Class>
+                                        <owl:intersectionOf rdf:parseType="Collection">
+                                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
+                                                <owl:allValuesFrom>
+                                                    <owl:Restriction>
+                                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                                        <owl:allValuesFrom>
+                                                            <owl:Class>
+                                                                <owl:intersectionOf rdf:parseType="Collection">
+                                                                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Pan"/>
+                                                                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Pot"/>
+                                                                </owl:intersectionOf>
+                                                            </owl:Class>
+                                                        </owl:allValuesFrom>
+                                                    </owl:Restriction>
+                                                </owl:allValuesFrom>
+                                            </owl:Restriction>
+                                        </owl:intersectionOf>
+                                    </owl:Class>
+                                </owl:someValuesFrom>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:onClass>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tempering"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+                                <owl:someValuesFrom>
+                                    <owl:Class>
+                                        <owl:intersectionOf rdf:parseType="Collection">
+                                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
+                                                <owl:allValuesFrom>
+                                                    <owl:Restriction>
+                                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                                        <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
+                                                    </owl:Restriction>
+                                                </owl:allValuesFrom>
+                                            </owl:Restriction>
+                                        </owl:intersectionOf>
+                                    </owl:Class>
+                                </owl:someValuesFrom>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:onClass>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Includer -->
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Impediment -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Includer">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool"/>
-        <rdfs:comment>A tool used to include objects.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Inclusion -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Inclusion">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Disposition"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Impediment">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Blockage"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
@@ -1572,29 +1749,27 @@
                             <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Includer"/>
+                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Obstacle"/>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#IncludedObject"/>
+                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#RestrictedObject"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isDispositionOf"/>
-                <owl:allValuesFrom>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Capacity"/>
-                    </owl:Restriction>
-                </owl:allValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>The disposition to include objects into a bigger whole.</rdfs:comment>
+        <rdfs:comment>The disposition of an object (the obstacle) to prohibit certain ways of entering or leaving a space or group. An example is a doorstopper constraining a door, prohibiting it to enter the area behind it.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#IncludedObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#IncludedObject">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient"/>
+        <rdfs:comment>An object that is included to be contained in something.</rdfs:comment>
     </owl:Class>
     
 
@@ -1602,17 +1777,8 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#InsertedObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#InsertedObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#IncludedObject"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#EnclosedObject"/>
         <rdfs:comment>An object inserted into another object.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Inserter -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Inserter">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Includer"/>
-        <rdfs:comment>A tool used to insert objects into something.</rdfs:comment>
     </owl:Class>
     
 
@@ -1620,7 +1786,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Insertion -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Insertion">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Inclusion"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Enclosing"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
@@ -1628,10 +1794,6 @@
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Inserter"/>
-                            </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
                                 <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#InsertedObject"/>
@@ -1641,7 +1803,16 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>The disposition to insert objects into something.</rdfs:comment>
+        <rdfs:comment>The disposition of an object (the container) to contain other objects that can be inserted into the container through a portal.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Instrument -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Instrument">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>An object used to carry out the event.</rdfs:comment>
     </owl:Class>
     
 
@@ -1690,7 +1861,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Linkage -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Linkage">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Combination"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Connectivity"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
@@ -1700,7 +1871,7 @@
                             <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Linker"/>
+                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#LinkedObject"/>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
@@ -1711,7 +1882,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>The disposition to link objects to form a bigger whole.</rdfs:comment>
+        <rdfs:comment>The disposition of an object (the linked object) to establish a connection with others by being linked together.</rdfs:comment>
     </owl:Class>
     
 
@@ -1815,44 +1986,6 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Mixture -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Mixture">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Combination"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
-                <owl:someValuesFrom>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Mixer"/>
-                            </owl:Restriction>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#CommitedObject"/>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
-                </owl:someValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>The disposition to mix objects together.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Modifier -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Modifier">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool"/>
-        <rdfs:comment>A tool used to modify objects.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#MovedObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#MovedObject">
@@ -1862,13 +1995,33 @@
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isTriggerDefinedIn"/>
                 <owl:someValuesFrom>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#describesAlteredQuality"/>
+                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#describesQuality"/>
                         <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Localization"/>
                     </owl:Restriction>
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Localization"/>
+                    </owl:Restriction>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment>An object undergoing location change.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Obstacle -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Obstacle">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Barrier"/>
+        <rdfs:comment>An object used to restrict access to a protected space or group.</rdfs:comment>
     </owl:Class>
     
 
@@ -1920,30 +2073,17 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#PancakeMixBottle -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#PancakeMixBottle">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Package"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
-                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                        <owl:onClass>
-                            <owl:Class>
-                                <owl:intersectionOf rdf:parseType="Collection">
-                                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Enclosing"/>
-                                    <owl:Restriction>
-                                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#attracts"/>
-                                        <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#PancakeMix"/>
-                                    </owl:Restriction>
-                                </owl:intersectionOf>
-                            </owl:Class>
-                        </owl:onClass>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Package"/>
         <rdfs:comment>todo(DB): this seems too specific. Should it go to a more specific ontology? like &quot;EASE-kitchen&quot;?</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>An object that undergoes the event.</rdfs:comment>
     </owl:Class>
     
 
@@ -1970,6 +2110,55 @@
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Pot">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Crockery"/>
         <rdfs:comment>A container used for cooking food.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Purification -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Purification">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesSetpoint"/>
+                                <owl:allValuesFrom>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                        <owl:allValuesFrom>
+                                            <owl:Class>
+                                                <owl:intersectionOf rdf:parseType="Collection">
+                                                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Clean"/>
+                                                    <owl:Restriction>
+                                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
+                                                        <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Cleanliness"/>
+                                                    </owl:Restriction>
+                                                </owl:intersectionOf>
+                                            </owl:Class>
+                                        </owl:allValuesFrom>
+                                    </owl:Restriction>
+                                </owl:allValuesFrom>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
+                                <owl:allValuesFrom>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                        <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#DirtyObject"/>
+                                    </owl:Restriction>
+                                </owl:allValuesFrom>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The disposition of an object (the tool) to change the cleanliness of others.</rdfs:comment>
     </owl:Class>
     
 
@@ -2023,49 +2212,11 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#RegulatedObject -->
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#RestrictedObject -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#RegulatedObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#AlteredObject"/>
-        <rdfs:comment>An object undergoing regulations.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Regulation -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Regulation">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
-                <owl:someValuesFrom>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Regulator"/>
-                            </owl:Restriction>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#RegulatedObject"/>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
-                </owl:someValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>The disposition to modify an aspect of objects to a dedicated target manifestation such as a heater trying to reach a particular room temperature.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Regulator -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Regulator">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Modifier"/>
-        <rdfs:comment>A tool used to regulate an aspect of objects.</rdfs:comment>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#RestrictedObject">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#BlockedObject"/>
+        <rdfs:comment>An object with restrictions to access something.</rdfs:comment>
     </owl:Class>
     
 
@@ -2075,6 +2226,15 @@
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#RoomSurface">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Surface"/>
         <rdfs:comment>The surface of a room.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Setpoint -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Setpoint">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+        <rdfs:comment>Classifies some dedicated goal region.</rdfs:comment>
     </owl:Class>
     
 
@@ -2119,7 +2279,7 @@
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isTriggerDefinedIn"/>
                 <owl:someValuesFrom>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#describesAlteredQuality"/>
+                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#describesQuality"/>
                         <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Shape"/>
                     </owl:Restriction>
                 </owl:someValuesFrom>
@@ -2141,15 +2301,6 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Shaper -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Shaper">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Modifier"/>
-        <rdfs:comment>A tool used to modify the shape of objects.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Shaping -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Shaping">
@@ -2162,8 +2313,13 @@
                         <owl:intersectionOf rdf:parseType="Collection">
                             <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
                             <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Shaper"/>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesSetpoint"/>
+                                <owl:allValuesFrom>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                        <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Shape"/>
+                                    </owl:Restriction>
+                                </owl:allValuesFrom>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
@@ -2174,7 +2330,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>The disposition to modify the shape of an object.</rdfs:comment>
+        <rdfs:comment>The disposition of an object (the tool) to change the shape of others.</rdfs:comment>
     </owl:Class>
     
 
@@ -2183,15 +2339,6 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Sharpness">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Intrinsic"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Shifter -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Shifter">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Modifier"/>
-        <rdfs:comment>A tool used to modify the location of objects.</rdfs:comment>
     </owl:Class>
     
 
@@ -2208,8 +2355,13 @@
                         <owl:intersectionOf rdf:parseType="Collection">
                             <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
                             <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesBearer"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Shifter"/>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesSetpoint"/>
+                                <owl:allValuesFrom>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                        <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Localization"/>
+                                    </owl:Restriction>
+                                </owl:allValuesFrom>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
@@ -2220,7 +2372,7 @@
                 </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>The disposition to modify the localization of an object.</rdfs:comment>
+        <rdfs:comment>The disposition of an object (the tool) to change the localization of others.</rdfs:comment>
     </owl:Class>
     
 
@@ -2314,7 +2466,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#SupportedObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#SupportedObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#AffectedObject"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient"/>
         <rdfs:comment>An object that is supported by some supporter.</rdfs:comment>
     </owl:Class>
     
@@ -2323,8 +2475,8 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Supporter -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Supporter">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool"/>
-        <rdfs:comment>A tool used to support objects.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Instrument"/>
+        <rdfs:comment>An object used to support others.</rdfs:comment>
     </owl:Class>
     
 
@@ -2368,11 +2520,41 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Tempering -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tempering">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesSetpoint"/>
+                                <owl:allValuesFrom>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                        <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Temperature"/>
+                                    </owl:Restriction>
+                                </owl:allValuesFrom>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The disposition of an object (the tool) to change the temperature of others.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-        <rdfs:comment>An object used to carry out the event.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Instrument"/>
+        <rdfs:comment>An object used to modify or actuate others.</rdfs:comment>
     </owl:Class>
     
 
@@ -2459,10 +2641,25 @@ It is also possible that a Transient transitionsBack to the initial object. An e
                 <owl:onClass>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Enclosing"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Containment"/>
                             <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#attracts"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Fluid"/>
+                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+                                <owl:someValuesFrom>
+                                    <owl:Class>
+                                        <owl:intersectionOf rdf:parseType="Collection">
+                                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
+                                                <owl:allValuesFrom>
+                                                    <owl:Restriction>
+                                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                                        <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Fluid"/>
+                                                    </owl:Restriction>
+                                                </owl:allValuesFrom>
+                                            </owl:Restriction>
+                                        </owl:intersectionOf>
+                                    </owl:Class>
+                                </owl:someValuesFrom>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -2478,23 +2675,6 @@ It is also possible that a Transient transitionsBack to the initial object. An e
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Bowl">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Crockery"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Enclosing"/>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#attracts"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
-                </owl:onClass>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:comment>A round, deep dish or basin used to store food or liquid.</rdfs:comment>
     </owl:Class>
     
@@ -2570,7 +2750,7 @@ It is also possible that a Transient transitionsBack to the initial object. An e
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Enclosing"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Containment"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>An item designed to be able to hold some other items, preventing their free movement and/or protecting them from outside influence. Containers may be used for storage, or to obtain control over items that are otherwise hard to manipulate directly (e.g. liquids).</rdfs:comment>
@@ -2603,13 +2783,6 @@ It is also possible that a Transient transitionsBack to the initial object. An e
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#DesignedSpade">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#DesignedComponent"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Support"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:comment>A sharp-edged metal blade used for digging or cutting.</rdfs:comment>
         <rdfs:label>Designed spade</rdfs:label>
     </owl:Class>
@@ -2649,69 +2822,97 @@ It is also possible that a Transient transitionsBack to the initial object. An e
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DesignedContainer"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasPhysicalComponent"/>
+                <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Enclosing"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Compartment"/>
                             <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#attracts"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tableware"/>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
-                </owl:onClass>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Regulation"/>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#attracts"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#DirtyObject"/>
-                            </owl:Restriction>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasSetpoint"/>
-                                <owl:allValuesFrom>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
+                                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                                <owl:onClass>
                                     <owl:Class>
                                         <owl:intersectionOf rdf:parseType="Collection">
-                                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Clean"/>
+                                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Insertion"/>
                                             <owl:Restriction>
-                                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isQualeOf"/>
-                                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Cleanliness"/>
+                                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
+                                                <owl:allValuesFrom>
+                                                    <owl:Restriction>
+                                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                                        <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#DishwasherTab"/>
+                                                    </owl:Restriction>
+                                                </owl:allValuesFrom>
                                             </owl:Restriction>
                                         </owl:intersectionOf>
                                     </owl:Class>
-                                </owl:allValuesFrom>
+                                </owl:onClass>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
-                </owl:onClass>
+                </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasPhysicalComponent"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass>
+                <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
                             <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#Door"/>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
-                                <owl:someValuesFrom>
+                                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                                <owl:onClass>
                                     <owl:Class>
                                         <owl:intersectionOf rdf:parseType="Collection">
                                             <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Coverage"/>
                                             <owl:Restriction>
-                                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#attracts"/>
-                                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Dishwasher"/>
+                                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
+                                                <owl:allValuesFrom>
+                                                    <owl:Restriction>
+                                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                                        <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Dishwasher"/>
+                                                    </owl:Restriction>
+                                                </owl:allValuesFrom>
+                                            </owl:Restriction>
+                                        </owl:intersectionOf>
+                                    </owl:Class>
+                                </owl:onClass>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Purification"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Insertion"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+                                <owl:someValuesFrom>
+                                    <owl:Class>
+                                        <owl:intersectionOf rdf:parseType="Collection">
+                                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
+                                                <owl:allValuesFrom>
+                                                    <owl:Restriction>
+                                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                                        <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tableware"/>
+                                                    </owl:Restriction>
+                                                </owl:allValuesFrom>
                                             </owl:Restriction>
                                         </owl:intersectionOf>
                                     </owl:Class>
@@ -2838,15 +3039,62 @@ It is also possible that a Transient transitionsBack to the initial object. An e
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasPhysicalComponent"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE.owl#Door"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
+                                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                                <owl:onClass>
+                                    <owl:Class>
+                                        <owl:intersectionOf rdf:parseType="Collection">
+                                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Coverage"/>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
+                                                <owl:allValuesFrom>
+                                                    <owl:Restriction>
+                                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                                        <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Refrigerator"/>
+                                                    </owl:Restriction>
+                                                </owl:allValuesFrom>
+                                            </owl:Restriction>
+                                        </owl:intersectionOf>
+                                    </owl:Class>
+                                </owl:onClass>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
                 <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
                 <owl:onClass>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Enclosing"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Insertion"/>
                             <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#attracts"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DesignedContainer"/>
+                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+                                <owl:someValuesFrom>
+                                    <owl:Class>
+                                        <owl:intersectionOf rdf:parseType="Collection">
+                                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
+                                                <owl:allValuesFrom>
+                                                    <owl:Restriction>
+                                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                                        <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#DesignedContainer"/>
+                                                    </owl:Restriction>
+                                                </owl:allValuesFrom>
+                                            </owl:Restriction>
+                                        </owl:intersectionOf>
+                                    </owl:Class>
+                                </owl:someValuesFrom>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -2860,19 +3108,25 @@ It is also possible that a Transient transitionsBack to the initial object. An e
                 <owl:onClass>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Regulation"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tempering"/>
                             <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#attracts"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
-                            </owl:Restriction>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasSetpoint"/>
-                                <owl:allValuesFrom>
-                                    <owl:Restriction>
-                                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isQualeOf"/>
-                                        <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Temperature"/>
-                                    </owl:Restriction>
-                                </owl:allValuesFrom>
+                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+                                <owl:someValuesFrom>
+                                    <owl:Class>
+                                        <owl:intersectionOf rdf:parseType="Collection">
+                                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance"/>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#definesTrigger"/>
+                                                <owl:allValuesFrom>
+                                                    <owl:Restriction>
+                                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                                        <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
+                                                    </owl:Restriction>
+                                                </owl:allValuesFrom>
+                                            </owl:Restriction>
+                                        </owl:intersectionOf>
+                                    </owl:Class>
+                                </owl:someValuesFrom>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -2899,52 +3153,8 @@ It is also possible that a Transient transitionsBack to the initial object. An e
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Appliance"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Regulation"/>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#attracts"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
-                            </owl:Restriction>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasSetpoint"/>
-                                <owl:allValuesFrom>
-                                    <owl:Restriction>
-                                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isQualeOf"/>
-                                        <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Temperature"/>
-                                    </owl:Restriction>
-                                </owl:allValuesFrom>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
-                </owl:onClass>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasDisposition"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Support"/>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#attracts"/>
-                                <owl:allValuesFrom>
-                                    <owl:Class>
-                                        <owl:intersectionOf rdf:parseType="Collection">
-                                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Pan"/>
-                                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Pot"/>
-                                        </owl:intersectionOf>
-                                    </owl:Class>
-                                </owl:allValuesFrom>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
-                </owl:onClass>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasPhysicalComponent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Hotplate"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>An appliance for cooking or heating.</rdfs:comment>
