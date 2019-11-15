@@ -240,6 +240,18 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasFeature -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasFeature">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isFeatureOf"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Feature"/>
+        <rdfs:label>has feature</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#hasFrictionAttribute -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#hasFrictionAttribute">
@@ -411,6 +423,17 @@
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
         <rdfs:comment>Associates a disposition quality to the object holding it.</rdfs:comment>
         <rdfs:label>is disposition of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#isFeatureOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isFeatureOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isConstituentOf"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Feature"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:label>is feature of</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -1595,6 +1618,22 @@
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#PhysicalQuality"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Intrinsic"/>
         <rdfs:comment>A physical quality that depends on relationships to other objects, such as the color of an object which depends on light conditions in the environment.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Feature -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Feature">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#isFeatureOf"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Features are &apos;parasitic&apos; entities that only exist insofar their host exists. Typical examples are holes, bumps, boundaries, or spots of color.</rdfs:comment>
     </owl:Class>
     
 
