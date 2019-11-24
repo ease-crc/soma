@@ -39,6 +39,20 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#interactsWith -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#interactsWith">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#interactsWith"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:comment>A relation between objects that interact with each other.</rdfs:comment>
+        <rdfs:label>interacts with</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#isProcessDefinedIn -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#isProcessDefinedIn">
@@ -46,6 +60,25 @@
         <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
         <rdfs:label>is process defined in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#isSupportedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#isSupportedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#interactsWith"/>
+        <rdfs:comment>A relation between an object (the supporter) and another object (the supportee) where the supporter cancels the effect of gravity on the supportee.</rdfs:comment>
+        <rdfs:label>is supported by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#supports -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#supports">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#interactsWith"/>
+        <rdfs:comment>A relation between an object (the supporter) and another object (the supportee) where the supporter cancels the effect of gravity on the supportee.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -149,95 +182,6 @@ As such, this concept can be applied only to motions involving some PhysicalAgen
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#HeadTurning -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#HeadTurning">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#HeadMovement"/>
-        <EASE:ELANName>move-head-turn</EASE:ELANName>
-        <EASE:ELANUsageGuideline>Turn head (e.g. for visual search).</EASE:ELANUsageGuideline>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Leaning -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Leaning">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PosturalMoving"/>
-        <EASE:ELANName>move-body-lean</EASE:ELANName>
-        <EASE:ELANUsageGuideline>move, bending, with torso in a specific direction</EASE:ELANUsageGuideline>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#MovingAway -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#MovingAway">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Locomotion"/>
-        <EASE:ELANName>move-body-walk-backaway</EASE:ELANName>
-        <EASE:ELANUsageGuideline>walk (away from a location, in a direction)</EASE:ELANUsageGuideline>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#PosturalMoving -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#PosturalMoving">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#BodyMovement"/>
-        <EASE:ELANName>move-body-posture</EASE:ELANName>
-        <EASE:ELANUsageGuideline>Superconcept for motions where the Agent changes posture; use more specific labels where appropriate.</EASE:ELANUsageGuideline>
-        <rdfs:comment>The Agent changes or takes an overall configuration of its body but is otherwise not significantly affecting other objects nor moving a significant amount from its original location.
-
-Posture changes may take place as part of other actions, for example turning when walking.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Standing -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Standing">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PosturalMoving"/>
-        <EASE:ELANName>move-body-stand</EASE:ELANName>
-        <EASE:ELANUsageGuideline>stand (at a location)</EASE:ELANUsageGuideline>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Turning -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Turning">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PosturalMoving"/>
-        <EASE:ELANName>move-body-turn</EASE:ELANName>
-        <EASE:ELANUsageGuideline>move own body, turn</EASE:ELANUsageGuideline>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#ArtifactContact -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ArtifactContact">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:label>Artifact contact</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Boiling -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Boiling">
@@ -255,6 +199,15 @@ Posture changes may take place as part of other actions, for example turning whe
 
 In some sense any process that results in entities being created or destroyed might trivially fit here, however this concept is intended specifically for Events where the occuring chemical reactions are of importance.</rdfs:comment>
         <rdfs:label>Chemical process</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Colliding -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Colliding">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
+        <rdfs:comment>A contact event of objects moving into opposite directions.</rdfs:comment>
     </owl:Class>
     
 
@@ -356,32 +309,6 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#EffectorContact">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicalEffector"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicalEffector"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:label>Effector contact</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#FluidFlow -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#FluidFlow">
@@ -451,6 +378,25 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#HeadTurning -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#HeadTurning">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#HeadMovement"/>
+        <EASE:ELANName>move-head-turn</EASE:ELANName>
+        <EASE:ELANUsageGuideline>Turn head (e.g. for visual search).</EASE:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Holding -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Holding">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Supporting"/>
+        <rdfs:comment>A contact event where movement of the object being held is restricted to some extend.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#IntermediateGrasp -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#IntermediateGrasp">
@@ -458,6 +404,25 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PowerGrasp"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PrecisionGrasp"/>
         <rdfs:label>Intermediate grasp</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Launching -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Launching">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
+        <rdfs:comment>A contact event where kinetic energy is added to a still standing object such that it starts to move.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Leaning -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Leaning">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PosturalMoving"/>
+        <EASE:ELANName>move-body-lean</EASE:ELANName>
+        <EASE:ELANUsageGuideline>move, bending, with torso in a specific direction</EASE:ELANUsageGuideline>
     </owl:Class>
     
 
@@ -507,6 +472,16 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#MovingAway -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#MovingAway">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Locomotion"/>
+        <EASE:ELANName>move-body-walk-backaway</EASE:ELANName>
+        <EASE:ELANUsageGuideline>walk (away from a location, in a direction)</EASE:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#PhaseTransition -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#PhaseTransition">
@@ -516,6 +491,19 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
         <rdfs:seeAlso>The phase transition concept has also been more or less metaphorically applied in other contexts. An example from physics is the &quot;jamming transition&quot;, and sometimes &quot;phase transitions&quot; are spoken of when describing problem spaces such as 3SAT.
 
 In all these cases, the metaphor points to the existence of several regions of qualitatively different behavior (unimpeded passage of solid grains vs deadlock in a corridor; problem instances where the answer NO is trivial to prove vs. problem instances where the answer YES is trivial to prove), separated fairly sharply when some quantity reaches a threshold.</rdfs:seeAlso>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#PosturalMoving -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#PosturalMoving">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#BodyMovement"/>
+        <EASE:ELANName>move-body-posture</EASE:ELANName>
+        <EASE:ELANUsageGuideline>Superconcept for motions where the Agent changes posture; use more specific labels where appropriate.</EASE:ELANUsageGuideline>
+        <rdfs:comment>The Agent changes or takes an overall configuration of its body but is otherwise not significantly affecting other objects nor moving a significant amount from its original location.
+
+Posture changes may take place as part of other actions, for example turning when walking.</rdfs:comment>
     </owl:Class>
     
 
@@ -630,11 +618,30 @@ In all these cases, the metaphor points to the existence of several regions of q
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact -->
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Rubbing -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#SupportingContact">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Rubbing">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Touching"/>
+        <rdfs:comment>A contact event where one object is sliding along the surface of another, for example, to clean the surface.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Standing -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Standing">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PosturalMoving"/>
+        <EASE:ELANName>move-body-stand</EASE:ELANName>
+        <EASE:ELANUsageGuideline>stand (at a location)</EASE:ELANUsageGuideline>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Supporting -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Supporting">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
-        <rdfs:label>Supporting contact</rdfs:label>
+        <rdfs:comment>A contact event where one object cancels the gravity force on the other object.</rdfs:comment>
     </owl:Class>
     
 
@@ -644,6 +651,34 @@ In all these cases, the metaphor points to the existence of several regions of q
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Swimming">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Locomotion"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Walking"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Tapping -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Tapping">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Touching"/>
+        <rdfs:comment>A short contact event usually repeated several times, for example, to probe the surface of an object.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Touching -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Touching">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
+        <rdfs:comment>A contact event that does not effect kinematics of involved objects, i.e., the objects are not pushing or supporting each other.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Turning -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Turning">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PosturalMoving"/>
+        <EASE:ELANName>move-body-turn</EASE:ELANName>
+        <EASE:ELANUsageGuideline>move own body, turn</EASE:ELANUsageGuideline>
     </owl:Class>
     
 
