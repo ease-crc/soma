@@ -10,8 +10,31 @@
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:EASE="http://www.ease-crc.org/ont/EASE.owl#">
     <owl:Ontology rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl">
-        <owl:imports rdf:resource="http://www.ease-crc.org/ont/EASE.owl"/>
+        <owl:imports rdf:resource="package://ease_ontology/owl/EASE.owl"/>
     </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#ELANName -->
+
+    <owl:AnnotationProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#ELANName"/>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#ELANUsageGuideline -->
+
+    <owl:AnnotationProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#ELANUsageGuideline"/>
     
 
 
@@ -83,21 +106,21 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#hasCreated -->
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#hasCreated"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#hasDestroyed -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#hasDestroyed"/>
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
     
 
 
     <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies -->
 
     <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines -->
+
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
     
 
 
@@ -116,6 +139,18 @@
     <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn -->
 
     <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPartOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPartOf"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#satisfies -->
+
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#satisfies"/>
     
 
 
@@ -203,11 +238,11 @@ In some sense any process that results in entities being created or destroyed mi
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Colliding -->
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Collision -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Colliding">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Collision">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
-        <rdfs:comment>A contact event of objects moving into opposite directions.</rdfs:comment>
+        <rdfs:comment>A contact event of objects bumping into each other such that their movement is affected.</rdfs:comment>
     </owl:Class>
     
 
@@ -234,12 +269,6 @@ In some sense any process that results in entities being created or destroyed mi
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Creation">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasCreated"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:comment>A process by which an Entity is created in the physical world.
 
 Note, most of the physical Entities we will be considering here are in fact arrangements of many other, smaller physical Entities. Therefore another way to look at this is, a &apos;Physical creation&apos; is the process by which a set of physical Entities is arranged in a certain way, and the arrangement is then itself considered a physical Entity.</rdfs:comment>
@@ -273,12 +302,6 @@ A soft slab of clay deforming under its own weight on Earth would still count as
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Destruction">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasDestroyed"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:comment>A process by which a physical Entity is destroyed.
 
 Note, most of the physical Entities we are concerned with are actually arrangements of many smaller physical Entities, so another way to look at this is that a &apos;Physical destruction&apos; is a process by which an arrangement of physical Entities, which was previously itself considered a physical Entity, is changed to such an extent that it is no longer recognized as continuing to exist.</rdfs:comment>
@@ -305,6 +328,15 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Flying"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Swimming"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Walking"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Fixation -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Fixation">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
+        <rdfs:comment>A contact event where one object is fixed to another.</rdfs:comment>
     </owl:Class>
     
 
@@ -388,15 +420,6 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Holding -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Holding">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Supporting"/>
-        <rdfs:comment>A contact event where movement of the object being held is restricted to some extend.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#IntermediateGrasp -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#IntermediateGrasp">
@@ -404,15 +427,6 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PowerGrasp"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PrecisionGrasp"/>
         <rdfs:label>Intermediate grasp</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Launching -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Launching">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
-        <rdfs:comment>A contact event where kinetic energy is added to a still standing object such that it starts to move.</rdfs:comment>
     </owl:Class>
     
 
@@ -621,7 +635,7 @@ Posture changes may take place as part of other actions, for example turning whe
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Rubbing -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Rubbing">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Touching"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
         <rdfs:comment>A contact event where one object is sliding along the surface of another, for example, to clean the surface.</rdfs:comment>
     </owl:Class>
     
@@ -637,11 +651,11 @@ Posture changes may take place as part of other actions, for example turning whe
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Supporting -->
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Support -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Supporting">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Support">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
-        <rdfs:comment>A contact event where one object cancels the gravity force on the other object.</rdfs:comment>
+        <rdfs:comment>A contact event where one object (the supporter) absorbs the gravitational energy of another obejct (the supportee).</rdfs:comment>
     </owl:Class>
     
 
@@ -658,17 +672,8 @@ Posture changes may take place as part of other actions, for example turning whe
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Tapping -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Tapping">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Touching"/>
-        <rdfs:comment>A short contact event usually repeated several times, for example, to probe the surface of an object.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Touching -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Touching">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
-        <rdfs:comment>A contact event that does not effect kinematics of involved objects, i.e., the objects are not pushing or supporting each other.</rdfs:comment>
+        <rdfs:comment>A short contact event usually repeated several times, for example, to probe the surface of an object.</rdfs:comment>
     </owl:Class>
     
 
@@ -768,6 +773,12 @@ Posture changes may take place as part of other actions, for example turning whe
     
 
 
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent -->
+
+    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
+    
+
+
     <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact -->
 
     <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
@@ -783,6 +794,12 @@ Posture changes may take place as part of other actions, for example turning whe
     <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process -->
 
     <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation -->
+
+    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
     
 
 
