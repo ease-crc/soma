@@ -18,8 +18,17 @@ parser.add_option("-r", "--reasoner", dest="reasoner", metavar="REASONER", defau
 if 1 != len(args):
     parser.error("incorrect number of arguments")
 
-proc = subprocess.Popen(["java", "-Xmx1024M", "-jar", options.reasoner, "--classify", "--classifyOPs", args[0]], stdout=subprocess.PIPE)
-results = proc.stdout.read().decode()
+try:
+    proc = subprocess.Popen(["java", "-Xmx1024M", "-jar", options.reasoner, "--classify", "--classifyOPs", args[0]], stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+    stdout, stderr = proc.communicate()
+except OSError as e:
+    sys.exit("ERROR: failed to execute seq: %s" % (str(e)))
+
+if stderr:
+    print("ERROR: reasoner failed to complete classification query\n%s" % str(stderr))
+    sys.exit()
+
+results = stdout.decode()
 
 if options.output:
     with open(options.output, "w") as outfile:
@@ -36,6 +45,9 @@ subClassOf = re.compile('^SubClassOf\\( (?P<sub>[\\w\\#\\<\\>:/\\-\\.]*) (?P<sup
 subObjectPropertyOf = re.compile('^SubObjectPropertyOf\\( (?P<sub>[\\w\\#\\<\\>:/\\-\\.]*) (?P<sup>[\\w\\#\\<\\>:/\\-\\.]*) \\)$')
 
 for s in subsumptions:
+    s = s.strip()
+    if not s:
+        continue
     isEquivalentClass = equivalentClasses.match(s)
     isEquivalentProperty = equivalentObjectProperties.match(s)
     isSubclass = subClassOf.match(s)
@@ -47,19 +59,20 @@ for s in subsumptions:
             print("WARNING: %s is subclass of Nothing" % isEquivalentClass.group('B'))
         if BisNothing:
             print("WARNING: %s is subclass of Nothing" % isEquivalentClass.group('A'))
-    if isEquivalentProperty:
+    elif isEquivalentProperty:
         AisNothing = owlBottomObjectProperty.search(isEquivalentProperty.group('A'))
         BisNothing = owlBottomObjectProperty.search(isEquivalentProperty.group('B'))
         if AisNothing:
             print("WARNING: %s is subproperty of bottomObjectProperty" % isEquivalentProperty.group('B'))
         if BisNothing:
             print("WARNING: %s is subproperty of bottomObjectProperty" % isEquivalentProperty.group('A'))
-    if isSubclass:
+    elif isSubclass:
         SupisNothing = owlNothing.search(isSubclass.group('sup'))
         if SupisNothing:
             print("WARNING: %s is subclass of Nothing" % isSubclass.group('sub'))
-    if isSubproperty:
+    elif isSubproperty:
         SupisNothing = owlBottomObjectProperty.search(isSubproperty.group('sup'))
         if SupisNothing:
             print("WARNING: %s is subproperty of bottomObjectProperty" % isSubproperty.group('sub'))
-
+    else:
+        print("ERROR: %s" % s)
