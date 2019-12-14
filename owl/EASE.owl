@@ -192,14 +192,26 @@ Sub-properties are used to distinct between different cases of event endpoint re
     <!-- http://www.ease-crc.org/ont/EASE.owl#contains -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#contains">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#isContainedIn"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#containsEvent -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#containsEvent">
         <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#coOccurs"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#contains"/>
         <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#during"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">di</symbol>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A contains B` means that A strictly starts before, and ends after B, i.e. B is wholly contained in A.</rdfs:comment>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">todo(DB): `contains` also applies to spatial domain, not only events</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A contains event B` means that A strictly starts before, and ends after B, i.e. B is wholly contained in A.</rdfs:comment>
+        <rdfs:label>contains event</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -208,6 +220,7 @@ Sub-properties are used to distinct between different cases of event endpoint re
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#during">
         <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#coOccurs"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#isContainedIn"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
@@ -481,6 +494,17 @@ Sub-properties are used to distinct between different cases of event endpoint re
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
         <rdfs:label>is concept included in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#isContainedIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#isContainedIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:label>is contained in</rdfs:label>
     </owl:ObjectProperty>
     
 
