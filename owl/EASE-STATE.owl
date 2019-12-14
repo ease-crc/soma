@@ -81,21 +81,6 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#AssemblyConnectionConfiguration -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#AssemblyConnectionConfiguration">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Configuration"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#ConnectedObject"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>Describes a State in which some ConnectedObjects are placed in rigid contact, so that the movement of one determines the movement of others.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#Configuration -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#Configuration">
@@ -234,6 +219,21 @@ Note that this State focuses on how the interaction of, usually non-agentive, ob
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#LinkageConfiguration -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#LinkageConfiguration">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Configuration"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#ConnectedObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Describes a State in which some ConnectedObjects are placed in rigid contact, so that the movement of one determines the movement of others.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#LinkageGestallt -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#LinkageGestallt">
@@ -241,7 +241,7 @@ Note that this State focuses on how the interaction of, usually non-agentive, ob
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#AssemblyConnectionConfiguration"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#LinkageConfiguration"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>Classifies States in which two objects are in a rigid connection, such that the movement of one determines the movement of the other.</rdfs:comment>
