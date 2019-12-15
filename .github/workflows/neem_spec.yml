@@ -1,0 +1,22 @@
+name: Build NEEM Specification
+on:
+  push:
+    paths:
+      - 'docs/**'
+
+jobs:
+  build_neem_spec:
+    name: Build NEEM Specification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Build
+        uses: ./.github/actions/build-neem-spec
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: NEEM Specification
+          path: ./docs/NEEM-specification/build

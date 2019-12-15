@@ -1,0 +1,23 @@
+name: Uglify Ontology
+on:
+  push:
+    paths:
+      - '**'
+      - '!docs/**'
+
+jobs:
+  uglify_ontology:
+    name: Uglify Ontology
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Uglify
+        uses: ./.github/actions/uglify-ontology
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: EASE Ontology
+          path: ./owl
