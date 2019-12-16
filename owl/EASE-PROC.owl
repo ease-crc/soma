@@ -140,6 +140,32 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#ArtifactContact -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ArtifactContact">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Artifact contact</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#BodyMovement -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#BodyMovement">
@@ -234,12 +260,6 @@ In some sense any process that results in entities being created or destroyed mi
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Creation">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasCreated"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:comment>A process by which an Entity is created in the physical world.
 
 Note, most of the physical Entities we will be considering here are in fact arrangements of many other, smaller physical Entities. Therefore another way to look at this is, a &apos;Physical creation&apos; is the process by which a set of physical Entities is arranged in a certain way, and the arrangement is then itself considered a physical Entity.</rdfs:comment>
@@ -273,12 +293,6 @@ A soft slab of clay deforming under its own weight on Earth would still count as
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Destruction">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasDestroyed"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:comment>A process by which a physical Entity is destroyed.
 
 Note, most of the physical Entities we are concerned with are actually arrangements of many smaller physical Entities, so another way to look at this is that a &apos;Physical destruction&apos; is a process by which an arrangement of physical Entities, which was previously itself considered a physical Entity, is changed to such an extent that it is no longer recognized as continuing to exist.</rdfs:comment>

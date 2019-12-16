@@ -267,24 +267,6 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#hasCreated -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#hasCreated">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
-        <rdfs:label>has created</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#hasDestroyed -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#hasDestroyed">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
-        <rdfs:label>has destroyed</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE.owl#hasGoal -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE.owl#hasGoal">
@@ -1097,31 +1079,6 @@ Such an event does NOT fall under the definition of Accident here. An example of
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE.owl#PhysicalExistence -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#PhysicalExistence">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#PhysicalState"/>
-        <rdfs:comment>A State in which an Entity is said to exist in the physical world.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#PhysicalState -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#PhysicalState">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#State"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A State describing how Entities in the physical world relate to each other.</rdfs:comment>
-        <rdfs:label>Physical state</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE.owl#Question -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Question">
@@ -1151,27 +1108,6 @@ Such an event does NOT fall under the definition of Accident here. An example of
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#Sluggishness">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#Amateurish"/>
         <rdfs:comment>A description of sluggish behavior.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE.owl#SocialState -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#SocialState">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#State"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A State which describes how Agents relate to each other.
-
-One can argue that any Social state is a Physical state, since anything the Agents may use to construct a social relationship is made of physical things. The difference is that the physical support of the social relationships is not important here, what matters instead is the nature and content of the social relations, regardless of how they are physically realized.</rdfs:comment>
-        <rdfs:comment>Note here a distinction: the Agents involved must be able to communicate. This is because while it is often assumed that an Agent has or aspires to have similar cognitive capacities to a human, This need not be the case; in particular, not all Agents need to maintain theories of mind about each other and therefore not all Agents need to communicate with each other. It is hard to see what sort of meaning Social concepts might have to such Agents, since Social concepts are all about shared constructions.
-
-Note also that the DUL SocialAgent class is not an appropriate restriction however. SocialAgent is one that exists by agreement of PhysicalAgents. For example, a corporation or a nation are SocialAgents. An Agent with the capability to engage socially is not necessarily a DUL SocialAgent.</rdfs:comment>
-        <rdfs:label>Social state</rdfs:label>
     </owl:Class>
     
 
