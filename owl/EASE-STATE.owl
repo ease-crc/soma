@@ -11,6 +11,7 @@
      xmlns:EASE="http://www.ease-crc.org/ont/EASE.owl#">
     <owl:Ontology rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl">
         <owl:imports rdf:resource="package://ease_ontology/owl/EASE.owl"/>
+        <owl:imports rdf:resource="package://ease_ontology/owl/EASE-OBJ.owl"/>
     </owl:Ontology>
     
 
@@ -72,18 +73,39 @@
 
     
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#ConnectedObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#ConnectedObject"/>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Container -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Container"/>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Item -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Item"/>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Restrictor -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Restrictor"/>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Supporter -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Supporter"/>
+    
+
 
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#LinkedObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#LinkedObject"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#Accessor -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#Accessor">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#UsuallyAgentive"/>
-    </owl:Class>
     
 
 
@@ -100,14 +122,6 @@
         <rdfs:comment>A description of a State. This would include e.g. what acceptable regions for participant objects of the State might look like.
 
 Several other Description subclasses may function as Configurations. For example, a Goal is a description of a desired State. A Norm describes a State that should be maintained. A Diagnosis describes a State that causes certain symptoms etc.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#ConnectedObject -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#ConnectedObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#UsuallyThematic"/>
     </owl:Class>
     
 
@@ -133,14 +147,6 @@ Several other Description subclasses may function as Configurations. For example
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#Container -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#Container">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Restrictor"/>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#Containment -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#Containment">
@@ -157,7 +163,7 @@ Several other Description subclasses may function as Configurations. For example
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Container"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Container"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>Describes a State in which an Item is placed inside a Container.</rdfs:comment>
@@ -183,13 +189,13 @@ Note that this State focuses on how the interaction of, usually non-agentive, ob
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Item"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Item"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Restrictor"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Restrictor"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>Describes a state in which an Item and Restrictor are placed such that the Restrictor constrains the possible motions of the Item.</rdfs:comment>
@@ -213,14 +219,6 @@ Note that this State focuses on how the interaction of, usually non-agentive, ob
                 <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Gestallt"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#Item -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#Item">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#UsuallyThematic"/>
     </owl:Class>
     
 
@@ -283,13 +281,13 @@ Note that this State focuses on how the interaction of, usually non-agentive, ob
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Item"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Item"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Restrictor"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Restrictor"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>Describes a State in which an Item is located inside a Container or behind a Protector, but is still reachable for an Accessor so that the Accessor can perform some Task.
@@ -321,13 +319,13 @@ The Accessor and Task are optional in this description. If not explicitly specif
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Item"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Item"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Restrictor"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Restrictor"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>Describes a State in which access to an Item is blocked by a Restrictor.</rdfs:comment>
@@ -335,18 +333,48 @@ The Accessor and Task are optional in this description. If not explicitly specif
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#Protector -->
+    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#PhysicalExistence -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#Protector">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Restrictor"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#PhysicalExistence">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#PhysicalState"/>
+        <rdfs:comment>A State in which an Entity is said to exist in the physical world.</rdfs:comment>
     </owl:Class>
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#Restrictor -->
+    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#PhysicalState -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#Restrictor">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#PhysicalState">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#State"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A State describing how Entities in the physical world relate to each other.</rdfs:comment>
+        <rdfs:label>Physical state</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#SocialState -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#SocialState">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#State"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A State which describes how Agents relate to each other.
+
+One can argue that any Social state is a Physical state, since anything the Agents may use to construct a social relationship is made of physical things. The difference is that the physical support of the social relationships is not important here, what matters instead is the nature and content of the social relations, regardless of how they are physically realized.</rdfs:comment>
+        <rdfs:comment>Note here a distinction: the Agents involved must be able to communicate. This is because while it is often assumed that an Agent has or aspires to have similar cognitive capacities to a human, This need not be the case; in particular, not all Agents need to maintain theories of mind about each other and therefore not all Agents need to communicate with each other. It is hard to see what sort of meaning Social concepts might have to such Agents, since Social concepts are all about shared constructions.
+
+Note also that the DUL SocialAgent class is not an appropriate restriction however. SocialAgent is one that exists by agreement of PhysicalAgents. For example, a corporation or a nation are SocialAgents. An Agent with the capability to engage socially is not necessarily a DUL SocialAgent.</rdfs:comment>
+        <rdfs:label>Social state</rdfs:label>
     </owl:Class>
     
 
@@ -367,7 +395,7 @@ The Accessor and Task are optional in this description. If not explicitly specif
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Supporter"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Supporter"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>Describes a state in which an Item cannot move under gravity because of its position relative to a Supporter.</rdfs:comment>
@@ -375,41 +403,15 @@ The Accessor and Task are optional in this description. If not explicitly specif
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#Supporter -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#Supporter">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Restrictor"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#UsuallyAgentive -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#UsuallyAgentive">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-        <rdfs:comment>TODO: rename.
-
-Some roles to be used by State descriptions (Configurations) have an &quot;agentive&quot; flavor. However, the roles may be applied non-agentively as well. An example is an Accessor. Usually, it is an Agent that wishes to gain access, but we may speak of blockage when we want to prevent the wind to enter a room as well.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#UsuallyThematic -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#UsuallyThematic">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-        <rdfs:comment>TODO: rename. Current name inspired by Theme/patient roles from linguistics.
-
-Some of the roles in State descriptions (Configurations) have a &quot;thematic&quot; flavor, that is, they are meant to classify objects that simply participate, rather than teleologically direct, events. Such roles may be applied to Agents however as well, sometimes; it&apos;s just that when applied to an Agent, it means that for this particular description we do not care about the agentive aspect of the entity.
-
-For example, consider a scenario where Bob leans against the wall. There is a contact state between Bob and the wall, but to describe it we do not need to make reference to Bob being an agent.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE.owl#State -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#State"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent -->
+
+    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
     
 
 
