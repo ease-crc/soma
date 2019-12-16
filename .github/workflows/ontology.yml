@@ -15,7 +15,9 @@ jobs:
         with:
           fetch-depth: 1
       - name: Uglify
-        uses: ./.github/actions/uglify-ontology
+        uses: docker://swipl:8.0.3
+        with:
+          args: swipl -f prolog/uglify_ease.pl -t uglify_ease
       - name: Upload
         uses: actions/upload-artifact@v1
         with:

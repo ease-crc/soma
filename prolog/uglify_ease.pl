@@ -36,12 +36,12 @@ uglify_ease :-
     'EASE-OBJ.owl'
   ],
   rdf_assert(EASE_UGLY,rdf:type,owl:'Ontology',ease),
+  source_file(uglify_ease, Filepath),
+  string_concat(Basepath, '/prolog/uglify_ease.pl', Filepath),
   forall(member(N,Ontologies), (
-      atomic_list_concat(['package://ease_ontology/owl/',N],'',URL),
-      ros_path(URL,GlobalPath),
+      atomic_list_concat([Basepath, '/owl/', N], GlobalPath),
       ease_load(GlobalPath,ease)
   )),
   %%%
-  atomic_list_concat(['package://ease_ontology/owl/EASE-UGLY.owl'],'',OUT_URL),
-  ros_path(OUT_URL,OUT_Path),
+  atomic_list_concat([Basepath, '/owl/EASE-UGLY.owl'], OUT_Path),
   rdf_save(OUT_Path, [graph(ease),sorted(true)]).
