@@ -33,7 +33,8 @@ uglify_ease :-
     'EASE-ACT.owl',
     'EASE-WF.owl',
     'EASE-IO.owl',
-    'EASE-OBJ.owl'
+    'EASE-OBJ.owl',
+    'EASE-PROC.owl'
   ],
   rdf_assert(EASE_UGLY,rdf:type,owl:'Ontology',ease),
   source_file(uglify_ease, Filepath),
