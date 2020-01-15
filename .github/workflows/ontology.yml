@@ -18,6 +18,10 @@ jobs:
         uses: docker://swipl:8.0.3
         with:
           args: swipl -f prolog/uglify_ease.pl -t uglify_ease
+      - name: Convert
+        uses: ./.github/actions/convert
+        with:
+          args: python3 ./scripts/uglify_ease_as_owl.py
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
