@@ -6,7 +6,6 @@ Run ecv.sh to get an ELAN controlled vocabulary, constructed from concepts in th
 
 Dependencies:
 
-
 * bash
 * python (2.7 or higher)
 * (python package) untangle
@@ -16,4 +15,11 @@ Dependencies:
 
 **Merging of ontology files**
 
-Run uglify.sh to merge all EASE owl files into a single one. The generated file is called EASE-UGLY.owl, and will appear in the owl subfolder of this package.
+Run uglify.sh to merge all EASE owl files into a single one. The generated file is called EASE-UGLY.owl, and will appear in the owl subfolder of this ROS package.
+
+Dependencies:
+
+* bash
+* ROS
+* rosprolog
+
