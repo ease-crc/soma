@@ -36,12 +36,20 @@ if options.output:
 
 subsumptions = results.splitlines()
 
-owlNothing = re.compile("owl\\#Nothing[\\>]?")
-owlBottomObjectProperty = re.compile("owl\\#bottomObjectProperty[\\>]?")
+#### Define parsing patterns for HermiT output
+## Parsing proceeds by first recognizing axioms in OWL functional notation, and extracting the participating concept/relation names from these axioms.
+## Names of concepts/relations are allowed to include alphanumeric characters, _, -, /, #, :, ., and the < and > characters
 
+owlNothing = re.compile("owl\\#Nothing[\\>]?") ## Recognize a mention of owl:Nothing; example: owl#Nothing
+owlBottomObjectProperty = re.compile("owl\\#bottomObjectProperty[\\>]?") ## Recognize a mention of owl:bottomObjectProperty; example: owl#bottomObjectProperty
+
+## Parse an EquivalentClasses axiom; example: EquivalentClasses( https://example.org/example.owl#Thing1 owl#Nothing )
 equivalentClasses = re.compile('^EquivalentClasses\\( (?P<A>[\\w\\#\\<\\>:/\\-\\.]*) (?P<B>[\\w\\#\\<\\>:/\\-\\.]*) \\)$')
+## Parse an EquivalentObjectProperties axiom; example: EquivalentObjectProperties( https://example.org/example.owl#relation1 owl#bottomObjectProperty )
 equivalentObjectProperties = re.compile('^EquivalentObjectProperties\\( (?P<A>[\\w\\#\\<\\>:/\\-\\.]*) (?P<B>[\\w\\#\\<\\>:/\\-\\.]*) \\)$')
+## Parse a SubclassOf axiom; example: SubClassOf( https://example.org/example.owl#Thing1 owl#Nothing )
 subClassOf = re.compile('^SubClassOf\\( (?P<sub>[\\w\\#\\<\\>:/\\-\\.]*) (?P<sup>[\\w\\#\\<\\>:/\\-\\.]*) \\)$')
+## Parse a SubObjectProperty axiom; example: SubObjectPropertyOf( https://example.org/example.owl#relation1 owl#bottomObjectProperty )
 subObjectPropertyOf = re.compile('^SubObjectPropertyOf\\( (?P<sub>[\\w\\#\\<\\>:/\\-\\.]*) (?P<sup>[\\w\\#\\<\\>:/\\-\\.]*) \\)$')
 
 for s in subsumptions:
