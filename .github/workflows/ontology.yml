@@ -1,0 +1,45 @@
+name: Uglify Ontology
+on:
+  push:
+    paths:
+      - '**'
+      - '!docs/**'
+
+jobs:
+  uglify_ontology:
+    name: Uglify Ontology
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Uglify
+        uses: docker://swipl:8.0.3
+        with:
+          args: swipl -f prolog/uglify_ease.pl -t uglify_ease
+
+      - name: Convert
+        uses: ./.github/actions/convert
+        with:
+          args: python3 ./scripts/uglify_ease_as_owl.py
+
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: EASE Ontology
+          path: ./owl
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        if: github.ref == 'refs/heads/master'
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: owl
+
+      - name: Deploy failure
+        if: failure()
+        run: echo Deployment failed, maybe no ACCESS_TOKEN was set?
