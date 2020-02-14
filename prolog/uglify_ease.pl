@@ -14,13 +14,21 @@ ease_assert(_Graph, rdf(_S,_P,O)) :-
 
 ease_assert(Graph, rdf(_S,P,O)) :-
   rdf_equal(P,owl:imports),!,
-  ( rdf_split_url('http://www.ease-crc.org/ont/',_,O) -> true ; (
-    ease_ugly_ontology(EASE_UGLY),
-    rdf_assert(EASE_UGLY,P,O,Graph)
-  )).
+  ease_assert_import(Graph,O).
 
 ease_assert(Graph, rdf(S,P,O)) :-
   rdf_assert(S,P,O,Graph).
+
+%%
+ease_assert_import(Graph,Ontology) :-
+  % ignore all imports of EASE ontology modules
+  ( atom_concat('http://www.ease-crc.org/',_,Ontology) ;
+    atom_concat('package://ease_ontology/',_,Ontology)
+  ),!.
+
+ease_assert_import(Graph,Ontology) :-
+  ease_ugly_ontology(EASE_UGLY),
+  rdf_assert(EASE_UGLY,owl:imports,Ontology,Graph).
 
 ease_load(URL, Graph) :-
   load_rdf(URL, Triples, [blank_nodes(noshare)]),
@@ -46,3 +54,4 @@ uglify_ease :-
   %%%
   atomic_list_concat([Basepath, '/owl/EASE-UGLY.owl'], OUT_Path),
   rdf_save(OUT_Path, [graph(ease),sorted(true)]).
+
