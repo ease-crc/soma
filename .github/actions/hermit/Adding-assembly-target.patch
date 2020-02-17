@@ -1,0 +1,46 @@
+From 7e8658035fe0b5172594a0ce5b043192aa168f90 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Sebastian=20H=C3=B6ffner?= <info@sebastian-hoeffner.de>
+Date: Mon, 17 Feb 2020 15:50:06 +0000
+Subject: [PATCH] Adding assembly target to build jar with dependencies.
+
+---
+ pom.xml | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+
+diff --git a/pom.xml b/pom.xml
+index bfdc6338..bf0589f4 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -113,6 +113,29 @@
+ 
+ 	<build>
+ 		<plugins>
++			<plugin>
++				<groupId>org.apache.maven.plugins</groupId>
++				<artifactId>maven-assembly-plugin</artifactId>
++				<executions>
++					<execution>
++						<id>make-assembly</id>
++						<phase>package</phase>
++						<goals>
++							<goal>single</goal>
++						</goals>
++						<configuration>
++							<archive>
++								<manifest>
++									<mainClass>org.semanticweb.HermiT.cli.CommandLine</mainClass>
++								</manifest>
++							</archive>
++							<descriptorRefs>
++								<descriptorRef>jar-with-dependencies</descriptorRef>
++							</descriptorRefs>
++						</configuration>
++					</execution>
++				</executions>
++			</plugin>
+ 			<plugin>
+ 				<groupId>org.apache.maven.plugins</groupId>
+ 				<artifactId>maven-compiler-plugin</artifactId>
+-- 
+2.20.1
+
