@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import argparse
 import re
+import sys
 from pathlib import Path
 
 
@@ -75,6 +76,11 @@ def main():
     output = format_output(results, format=args.output.suffix)
     args.output.write_text(output)
     print(format_output(results))
+
+    # check if there are problems, return non-zero exit code if so
+    for k, v in results.items():
+        if len(v) != 0:
+            sys.exit(1)
 
 
 def as_html(titles, results):
