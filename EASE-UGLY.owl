@@ -598,6 +598,8 @@
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasCommonBoundary"/>
 </owl:ObjectProperty>
 
+<owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPartOf"/>
+
 <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#definesProcess">
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
   <rdfs:range rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
@@ -605,10 +607,29 @@
   <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#isProcessDefinedIn"/>
 </owl:ObjectProperty>
 
+<owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#satisfies"/>
+
 <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#isProcessDefinedIn">
   <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
   <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#hasProcessType">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+  <rdfs:range rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRelatedToConcept"/>
+  <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#isProcessTypeOf"/>
+  <rdfs:comment>A relation between roles and process types, e.g. a catalysator is needed to trigger some chemical reaction.</rdfs:comment>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRelatedToConcept"/>
+
+<owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#isProcessTypeOf">
+  <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRelatedToConcept"/>
+  <rdfs:comment>A relation between roles and process types, e.g. a catalysator is needed to trigger some chemical reaction.</rdfs:comment>
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#interactsWith">
@@ -1621,6 +1642,8 @@ One could argue Mental actions are all Physical actions, because anything the Ag
 <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-ACT.owl#MovingTo">
   <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#Navigating"/>
 </owl:Class>
+
+<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
 
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
 
@@ -3607,6 +3630,8 @@ In all these cases, the metaphor points to the existence of several regions of q
   </owl:equivalentClass>
   <rdfs:comment>A situation that sattisies a description of how a process evolves over time.</rdfs:comment>
 </owl:Class>
+
+<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
 
 <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Rubbing">
   <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
