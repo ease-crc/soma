@@ -27,6 +27,31 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#hasGestallt -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#hasGestallt">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRelatedToConcept"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#isGestalltOf"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Gestallt"/>
+        <rdfs:comment>A relation between roles and gestallts, e.g. &apos;the chair is the supporter of the person sitting on it&apos;.</rdfs:comment>
+        <rdfs:label>has gestallt</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#isGestalltOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#isGestalltOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRelatedToConcept"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Gestallt"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>A relation between roles and gestallts, e.g. &apos;the chair is the supporter of the person sitting on it&apos;.</rdfs:comment>
+        <rdfs:label>is gestallt of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies -->
 
     <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
@@ -63,6 +88,12 @@
     
 
 
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRelatedToConcept -->
+
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRelatedToConcept"/>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -72,6 +103,7 @@
      -->
 
     
+
 
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#ConnectedObject -->
 
@@ -91,6 +123,12 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#LinkedObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#LinkedObject"/>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Restrictor -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Restrictor"/>
@@ -100,12 +138,6 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Supporter -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Supporter"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#LinkedObject -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#LinkedObject"/>
     
 
 
@@ -151,22 +183,13 @@ Several other Description subclasses may function as Configurations. For example
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#Containment">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#FunctionalControl"/>
-        <rdfs:comment>Classifies States in which an object is placed inside another.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#ContainmentConfiguration -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#ContainmentConfiguration">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#FunctionalControlConfiguration"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#isGestalltOf"/>
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Container"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>Describes a State in which an Item is placed inside a Container.</rdfs:comment>
+        <rdfs:comment>Classifies States in which an object is placed inside another.</rdfs:comment>
     </owl:Class>
     
 
@@ -175,30 +198,21 @@ Several other Description subclasses may function as Configurations. For example
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#FunctionalControl">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Gestallt"/>
-        <rdfs:comment>Classifies States in which an object restricts the movement of another, at least partially. Usually neither object is construed to be an agent.
-
-Note that this State focuses on how the interaction of, usually non-agentive, objects restricts their motion. This is in contrast to Blockage/Accessibility states where the placement of some objects influences the access to some of them by a third, usually agentive party.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#FunctionalControlConfiguration -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#FunctionalControlConfiguration">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Configuration"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#isGestalltOf"/>
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Item"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#isGestalltOf"/>
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Restrictor"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>Describes a state in which an Item and Restrictor are placed such that the Restrictor constrains the possible motions of the Item.</rdfs:comment>
+        <rdfs:comment>Classifies States in which an object restricts the movement of another, at least partially. Usually neither object is construed to be an agent.
+
+Note that this State focuses on how the interaction of, usually non-agentive, objects restricts their motion. This is in contrast to Blockage/Accessibility states where the placement of some objects influences the access to some of them by a third, usually agentive party.</rdfs:comment>
     </owl:Class>
     
 
@@ -219,27 +233,7 @@ Note that this State focuses on how the interaction of, usually non-agentive, ob
                 <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Gestallt"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#LinkageConfiguration -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#LinkageConfiguration">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Configuration"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#LinkedObject"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#LinkageGestallt"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>Describes a State in which some LinkedObjects are placed in rigid contact, so that the movement of one determines the movement of others.</rdfs:comment>
+        <rdfs:comment>An EventType that classifies States.</rdfs:comment>
     </owl:Class>
     
 
@@ -250,8 +244,8 @@ Note that this State focuses on how the interaction of, usually non-agentive, ob
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Gestallt"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#LinkageConfiguration"/>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#isGestalltOf"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#LinkedObject"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>Classifies States in which two objects are in a rigid connection, such that the movement of one determines the movement of the other.</rdfs:comment>
@@ -265,34 +259,17 @@ Note that this State focuses on how the interaction of, usually non-agentive, ob
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Gestallt"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#PhysicalAccessibilityConfiguration"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>Classifies States in which an item is placed in a container or protected by a protector, but the placement of the item and container is such that a, usually agentive, accessor may nevertheless reach the item in order to perform a task.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#PhysicalAccessibilityConfiguration -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#PhysicalAccessibilityConfiguration">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Configuration"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#isGestalltOf"/>
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Item"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#isGestalltOf"/>
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Restrictor"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>Describes a State in which an Item is located inside a Container or behind a Protector, but is still reachable for an Accessor so that the Accessor can perform some Task.
-
-The Accessor and Task are optional in this description. If not explicitly specified, some &quot;default&quot; Agent and Task is to be assumed.</rdfs:comment>
+        <rdfs:comment>Classifies States in which an item is placed in a container or protected by a protector, but the placement of the item and container is such that a, usually agentive, accessor may nevertheless reach the item in order to perform a task.</rdfs:comment>
     </owl:Class>
     
 
@@ -303,32 +280,17 @@ The Accessor and Task are optional in this description. If not explicitly specif
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Gestallt"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#PhysicalBlockageConfiguration"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>Classifies States in which an object, in general called restrictor, blocks access to an item. A usually agentive accessor, whose access is blocked, may be specified.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#PhysicalBlockageConfiguration -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#PhysicalBlockageConfiguration">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Configuration"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#isGestalltOf"/>
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Item"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#isGestalltOf"/>
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Restrictor"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>Describes a State in which access to an Item is blocked by a Restrictor.</rdfs:comment>
+        <rdfs:comment>Classifies States in which an object, in general called restrictor, blocks access to an item. A usually agentive accessor, whose access is blocked, may be specified.</rdfs:comment>
     </owl:Class>
     
 
@@ -383,22 +345,13 @@ Note also that the DUL SocialAgent class is not an appropriate restriction howev
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#Support">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#FunctionalControl"/>
-        <rdfs:comment>Classifies States in which an object is not able to move under gravity because of its placement relative to some other object.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-STATE.owl#SupportConfiguration -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-STATE.owl#SupportConfiguration">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#FunctionalControlConfiguration"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#isGestalltOf"/>
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Supporter"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>Describes a state in which an Item cannot move under gravity because of its position relative to a Supporter.</rdfs:comment>
+        <rdfs:comment>Classifies States in which an object is not able to move under gravity because of its placement relative to some other object.</rdfs:comment>
     </owl:Class>
     
 
