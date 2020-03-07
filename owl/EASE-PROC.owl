@@ -245,37 +245,50 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Agonist -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Agonist">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient"/>
+        <rdfs:comment>A role that classifies entities with a tendency to either cause an alteration or to preserve some state.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Alteration -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Alteration">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
+        <rdfs:comment>A process by which an aspect of some object changes such as ice cream melting in the sun.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#AlterativeInteraction -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#AlterativeInteraction">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceInteraction"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PreservativeInteraction"/>
+        <rdfs:comment>A force interaction where the agonist has the tendency to alter the antagonist. An example is &apos;opening a door&apos; where the tendency is to alter the state of the door.</rdfs:comment>
+        <rdfs:label>Alterative interaction</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Antagonist -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Antagonist">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient"/>
+        <rdfs:comment>A role that classifies entities that are opposed to the tendency of some agonist.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Approaching -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Approaching">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Locomotion"/>
         <EASE:ELANName>move-body-walk-to</EASE:ELANName>
         <EASE:ELANUsageGuideline>walk (to a location, or in a direction)</EASE:ELANUsageGuideline>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#ArtifactContact -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ArtifactContact">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#isProcessTypeOf"/>
-                        <owl:someValuesFrom>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
-                            </owl:Restriction>
-                        </owl:someValuesFrom>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
-        <rdfs:label>Artifact contact</rdfs:label>
     </owl:Class>
     
 
@@ -346,26 +359,8 @@ In some sense any process that results in entities being created or destroyed mi
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Collision -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Collision">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
         <rdfs:comment>A contact event of objects bumping into each other such that their movement is affected.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Contact -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEvent"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#isProcessTypeOf"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Deformation"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#FluidFlow"/>
-        <rdfs:comment>An event in which two physical Entities approach each other to the point that their boundaries touch.</rdfs:comment>
     </owl:Class>
     
 
@@ -391,7 +386,7 @@ Note, most of the physical Entities we will be considering here are in fact arra
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Deformation -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Deformation">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEvent"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Alteration"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#isProcessTypeOf"/>
@@ -449,19 +444,10 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Fixation -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Fixation">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
-        <rdfs:comment>A contact event where one object is fixed to another.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#FluidFlow -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#FluidFlow">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEvent"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Motion"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#isProcessTypeOf"/>
@@ -486,12 +472,33 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEvent -->
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#ForceInteraction -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceEvent">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceInteraction">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#AlterativeInteraction"/>
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#PreservativeInteraction"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
-        <rdfs:comment>An EventType that classifies force interactions.</rdfs:comment>
-        <rdfs:label>Force event</rdfs:label>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#isProcessTypeOf"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Agonist"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#isProcessTypeOf"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Antagonist"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Classifies events in which two entities interact with each other with a reference to force. One of the entities, the agonist, has a tendency to either set the other entity (the antagonist) into motion, or to keep it still under the influence of some other force. The tendency only manifests in case the agonist is the &quot;stronger entity&quot;.</rdfs:comment>
+        <rdfs:label>Force interaction</rdfs:label>
+        <rdfs:seeAlso>Talmy, Leonard (1981) ‘Force Dynamics’. Language and Mental Imagery. May 1981, University of California, Berkeley.</rdfs:seeAlso>
     </owl:Class>
     
 
@@ -626,7 +633,7 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#PhaseTransition -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#PhaseTransition">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ProcessType"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Alteration"/>
         <rdfs:comment>An EventType that classifies processes by which matter changes from some distinguishable phase to another. We will use this to refer to the classical phase transitions between Solid, Liquid, Gaseous, Plasma etc. phases.</rdfs:comment>
         <rdfs:label>Phase transition</rdfs:label>
         <rdfs:seeAlso>The phase transition concept has also been more or less metaphorically applied in other contexts. An example from physics is the &quot;jamming transition&quot;, and sometimes &quot;phase transitions&quot; are spoken of when describing problem spaces such as 3SAT.
@@ -697,6 +704,16 @@ Posture changes may take place as part of other actions, for example turning whe
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:label>Prehensile motion</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#PreservativeInteraction -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#PreservativeInteraction">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#ForceInteraction"/>
+        <rdfs:comment>A force interaction where the agonist has the tendency to preserve some aspect of the antagonist. An example is &apos;keeping a door closed&apos; where the tendency is to preserve the state of the door.</rdfs:comment>
+        <rdfs:label>Preservative interaction</rdfs:label>
     </owl:Class>
     
 
@@ -772,8 +789,8 @@ Posture changes may take place as part of other actions, for example turning whe
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Rubbing -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Rubbing">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
-        <rdfs:comment>A contact event where one object is sliding along the surface of another, for example, to clean the surface.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion"/>
+        <rdfs:comment>The motion of an object is sliding along the surface of another, for example, to clean the surface.</rdfs:comment>
     </owl:Class>
     
 
@@ -784,15 +801,6 @@ Posture changes may take place as part of other actions, for example turning whe
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#PosturalMoving"/>
         <EASE:ELANName>move-body-stand</EASE:ELANName>
         <EASE:ELANUsageGuideline>stand (at a location)</EASE:ELANUsageGuideline>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Support -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Support">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
-        <rdfs:comment>A contact event where one object (the supporter) absorbs the gravitational energy of another obejct (the supportee).</rdfs:comment>
     </owl:Class>
     
 
@@ -809,8 +817,8 @@ Posture changes may take place as part of other actions, for example turning whe
     <!-- http://www.ease-crc.org/ont/EASE-PROC.owl#Tapping -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-PROC.owl#Tapping">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#Contact"/>
-        <rdfs:comment>A short contact event usually repeated several times, for example, to probe the surface of an object.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-PROC.owl#DirectedMotion"/>
+        <rdfs:comment>A motion, usually repeated several times, for example, to probe the surface of an object.</rdfs:comment>
     </owl:Class>
     
 
