@@ -2034,27 +2034,6 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
 
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Relation"/>
 
-<owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#affordsBearer"/>
-      <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#affordsTrigger"/>
-      <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#AlteredObject"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Disposition"/>
-  <rdfs:comment>The disposition of an object (the tool) to change some aspect of others.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool">
-  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Instrument"/>
-</owl:Class>
-
 <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#AlteredObject">
   <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient"/>
 </owl:Class>
@@ -2296,8 +2275,25 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
       <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ConnectedObject"/>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration"/>
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Variability"/>
   <rdfs:comment>The disposition of an object (the tool) to change the compositional structure of others.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Variability">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#affordsBearer"/>
+      <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#affordsTrigger"/>
+      <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#AlteredObject"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Disposition"/>
+  <rdfs:comment>The disposition of an object (the tool) to change some aspect of others.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Connectivity">
@@ -2470,7 +2466,7 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
       <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#ShapedObject"/>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration"/>
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Variability"/>
   <rdfs:comment>The disposition of an object (the tool) to change the shape of others.</rdfs:comment>
 </owl:Class>
 
@@ -2714,7 +2710,7 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
       </owl:allValuesFrom>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration"/>
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Variability"/>
   <rdfs:comment>The disposition of an object (the tool) to change the temperature of others.</rdfs:comment>
 </owl:Class>
 
@@ -3077,7 +3073,7 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
       </owl:allValuesFrom>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration"/>
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Variability"/>
   <rdfs:comment>The disposition of an object (the tool) to change the cleanliness of others.</rdfs:comment>
 </owl:Class>
 
@@ -3171,7 +3167,7 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
       <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#MovedObject"/>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration"/>
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Variability"/>
   <rdfs:comment>The disposition of an object (the tool) to change the localization of others.</rdfs:comment>
 </owl:Class>
 
@@ -3238,6 +3234,10 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
 
 <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#TemperatureRegion">
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+</owl:Class>
+
+<owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Instrument"/>
 </owl:Class>
 
 <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Transient">
