@@ -151,9 +151,14 @@
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-STATE.owl#Gestallt"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>A description of a State. This would include e.g. what acceptable regions for participant objects of the State might look like.
+        <rdfs:comment>A description of a State. This includes e.g. what acceptable regions for participant objects of the State might look like.
+A configuration of the world is construed to be stable on its own. Outside disturbances may cause state transitions, and the settling into some other, self-stable configuration.
 
-Several other Description subclasses may function as Configurations. For example, a Goal is a description of a desired State. A Norm describes a State that should be maintained. A Diagnosis describes a State that causes certain symptoms etc.</rdfs:comment>
+Several other Description subclasses may function as Configurations. For example, a Goal is a description of a desired State. A Norm describes a State that should be maintained. A Diagnosis describes a State that causes certain symptoms etc.
+
+Note a couple of issues here. First one relates to what &quot;configuration&quot; means; in particular, this doesn&apos;t mean a configuration that is unchanging according to any viewpoint. The analogy here is the &quot;macrostate&quot; from thermodynamics: a macrostate with two gases mixed does not mean all gas particles are motionless, but rather that the locations and movements of gas particles are such that any particle is likely to have as many neighbors of one type as the other.
+
+The second issue relates to what is &quot;outside&quot;. The state is a configuration of some, but not necessarily all, Entities in the world. Entities not in this configuration are outside of it.</rdfs:comment>
     </owl:Class>
     
 
@@ -360,12 +365,11 @@ Note also that the DUL SocialAgent class is not an appropriate restriction howev
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#State">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-        <rdfs:comment>A configuration of the world that is construed to be stable on its own. Outside disturbances may cause state transitions, and the settling into some other, self-stable configuration.
+        <rdfs:comment>States are stative and homeomeric events.
 
-Note a couple of issues here. First one relates to what &quot;configuration&quot; means; in particular, this doesn&apos;t mean a configuration that is unchanging according to any viewpoint. The analogy here is the &quot;macrostate&quot; from thermodynamics: a macrostate with two gases mixed does not mean all gas particles are motionless, but rather that the locations and movements of gas particles are such that any particle is likely to have as many neighbors of one type as the other.
+For stative events, the mereological sum of two instances has the same type as both instances. This is, for example, the state of sitting on a chair, or the process of a pendulum swinging around.
 
-The second issue relates to what is &quot;outside&quot;. The state is a configuration of some, but not necessarily all, Entities in the world. Entities not in this configuration are outside of it.
-</rdfs:comment>
+The difference between states and processes is that states are, in addition, homeomeric, and processes are not.  This means that, when considering time slices  of an event, for states, these time slices always have the same type as the state, but for processes this is not the case.</rdfs:comment>
     </owl:Class>
     
 
