@@ -977,27 +977,6 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Disposition"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#affordsBearer"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#affordsTrigger"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#AlteredObject"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>The disposition of an object (the tool) to change some aspect of others.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#AlteredObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#AlteredObject">
@@ -1243,7 +1222,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Composing -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Composing">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Variability"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#affordsTrigger"/>
@@ -2341,7 +2320,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Purification -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Purification">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Variability"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#affordsSetpoint"/>
@@ -2507,7 +2486,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Shaping -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Shaping">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Variability"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#affordsSetpoint"/>
@@ -2541,7 +2520,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Shifting -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Shifting">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Variability"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#affordsSetpoint"/>
@@ -2681,7 +2660,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Tempering -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tempering">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Alteration"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Variability"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#affordsSetpoint"/>
@@ -2726,6 +2705,27 @@ Transients are the objects undergoing such change processes; they are no longer 
 Instead, a Transient transitionsFrom some initial Object that was fed into a change Process. Typically, a Transient may transitionTo some resulting Object (though not always, some processes simply destroy objects).
 
 It is also possible that a Transient transitionsBack to the initial object. An example is the catalyst in a chemical reaction; another example is a loaf of bread after a slice has been cut off.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Variability -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Variability">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Disposition"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#affordsBearer"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Tool"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#affordsTrigger"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#AlteredObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The disposition of an object (the tool) to change some aspect of others.</rdfs:comment>
     </owl:Class>
     
 
