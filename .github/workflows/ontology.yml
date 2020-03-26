@@ -4,6 +4,10 @@ on:
     paths:
       - '**'
       - '!docs/**'
+  pull_request:
+    paths:
+      - '**'
+      - '!docs/**'
 
 jobs:
   uglify_ontology:
@@ -20,6 +24,21 @@ jobs:
         uses: docker://swipl:8.0.3
         with:
           args: swipl -f prolog/uglify_ease.pl -t uglify_ease
+
+      - name: HermiT
+        uses: ./.github/actions/hermit
+        with:
+          args: ./owl/EASE-UGLY.owl
+
+      - name: Print HermiT output
+        run: cat ./hermit.output
+        if: always()
+
+      - name: Evaluate HermiT output
+        if: success()
+        uses: docker://python:3.7.6-slim
+        with:
+          args: python ./scripts/hermit_test.py -o ./owl/hermit.html ./hermit.output
 
       - name: Convert
         uses: ./.github/actions/convert
@@ -42,4 +61,4 @@ jobs:
 
       - name: Deploy failure
         if: failure()
-        run: echo Deployment failed, maybe no ACCESS_TOKEN was set?
+        run: echo Deployment failed. If the other steps succeeded, maybe no ACCESS_TOKEN was set?
