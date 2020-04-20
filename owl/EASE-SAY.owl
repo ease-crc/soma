@@ -1,0 +1,392 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.ease-crc.org/ont/EASE-SAY.owl#"
+     xml:base="http://www.ease-crc.org/ont/EASE-SAY.owl"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:EASE="http://www.ease-crc.org/ont/EASE.owl#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+     xmlns:knowrob="http://knowrob.org/kb/knowrob.owl#">
+    <owl:Ontology rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl">
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Assertion -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Assertion">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Illocution"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#DeclarativeClause"/>
+                    </owl:Restriction>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#ClausalObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#ClausalObject">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#LinguisticObject"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#LexicalObject"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#PhrasalObject"/>
+        <rdfs:comment>A linguistic object that contains information which would be linguistically expressed as a clause.</rdfs:comment>
+        <rdfs:label>Clausal object</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Command -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Command">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Illocution"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ImperativeClause"/>
+                    </owl:Restriction>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Containment -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Containment">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#FunctionalRelation"/>
+        <rdfs:comment>A functional relation describing that the location of some entity, the containee, is constrained to be within some region which is the interior of some other entity, the container.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#DeclarativeClause -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#DeclarativeClause">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ClausalObject"/>
+        <rdfs:comment>A clause which makes an assertion or declaration.</rdfs:comment>
+        <rdfs:label>Declarative clause</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#FunctionalRelation -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#FunctionalRelation">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ImageSchemaTheory"/>
+        <rdfs:comment>An image schema describing that the relation between some entities imposes constraints on the collective behavior of those objects.</rdfs:comment>
+        <rdfs:label>Functional relation</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Illocution -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Illocution">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#CommunicationTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Locution"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A task which is executed by a Locution action.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#ImageSchemaTheory -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#ImageSchemaTheory">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#SchematicTheory"/>
+        <rdfs:comment>A theory that describes an image-schematic relationship between some entities.
+
+Image schemas are considered as fundamental, pre-conceptual, building blocks of cognition. They were introduced to characterize how human beings seem to organize and make sense of experience.</rdfs:comment>
+        <rdfs:label>Image schema theory</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#ImperativeClause -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#ImperativeClause">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ClausalObject"/>
+        <rdfs:comment>A clause which commands some agent to perform a task or bring about a state of affairs.</rdfs:comment>
+        <rdfs:label>Imperative clause</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#InterrogativeClause -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#InterrogativeClause">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ClausalObject"/>
+        <rdfs:comment>A clause which makes a request, typically information, of some agent.
+
+Note that in a semantic sense such clauses always request information, but in a pragmatic sense they can be used to convey commands or requests for action, such as e.g. &quot;can you close the door?&quot; The question is not just a request for information about ability, but a request to perform a task.</rdfs:comment>
+        <rdfs:label>Interrogative clause</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#LexicalObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#LexicalObject">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#LinguisticObject"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#PhrasalObject"/>
+        <rdfs:comment>A linguistic object that contains information which would be linguistically expressed as a lexical item (loosely speaking, a word).</rdfs:comment>
+        <rdfs:label>Lexical object</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#LinguisticObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#LinguisticObject">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+        <rdfs:comment>An information bearing object that is used to analyze some linguistic production.</rdfs:comment>
+        <rdfs:label>Linguistic object</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Locution -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Locution">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl#InterpretedAction"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#LinguisticObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>An action in which an agent uses some actuator for communication purposes.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#NN -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#NN">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#LexicalObject"/>
+        <rdfs:comment>A non-proper, singular or mass noun.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#NNP -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#NNP">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#NN"/>
+        <rdfs:comment>A plural non-proper noun.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#NNS -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#NNS">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#NN"/>
+        <rdfs:comment>A singular non-proper noun.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#NP -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#NP">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#PhrasalObject"/>
+        <rdfs:comment>A &quot;noun phrase&quot;.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#PP -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#PP">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#PhrasalObject"/>
+        <rdfs:comment>A &quot;prepositional phrase&quot;.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#PhrasalObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#PhrasalObject">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#LinguisticObject"/>
+        <rdfs:comment>A linguistic object that contains information which would be linguistically expressed as a phrase.</rdfs:comment>
+        <rdfs:label>Phrasal object</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Query -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Query">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Illocution"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#InterrogativeClause"/>
+                    </owl:Restriction>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Scene -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Scene">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExpressedBy"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#satisfies"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ImageSchemaTheory"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#SchematicTheory -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#SchematicTheory">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Theory"/>
+        <rdfs:comment>A theory used to describe, analyze, and reason with the meaning of a linguistic message.
+
+Note that such theories are useful both when analyzing an actual linguistic production, and when creating a linguistic production to describe some observed experience.</rdfs:comment>
+        <rdfs:label>Schematic theory</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#SourcePathGoal -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#SourcePathGoal">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ImageSchemaTheory"/>
+        <rdfs:comment>A very general image-schema of the Path family, this schema describes movement along a path from a source towards a goal.</rdfs:comment>
+        <rdfs:label>Source-Path-Goal</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#StateTransition -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#StateTransition">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasInitialState"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Scene"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasTerminalState"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Scene"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasInitialState"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Scene"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE.owl#hasTerminalState"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Scene"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/EASE.owl#State"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A transition between two states.</rdfs:comment>
+        <rdfs:label>State transition</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#TrajectorLandmark -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#TrajectorLandmark">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ImageSchemaTheory"/>
+        <rdfs:comment>A very general image schema describing that the location of some entity, the Trajector, is describable with reference to another entity, the Landmark.</rdfs:comment>
+        <rdfs:label>Trajector-Landmark</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#V -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#V">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#LexicalObject"/>
+        <rdfs:comment>A syntactical verb.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#VP -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#VP">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#PhrasalObject"/>
+        <rdfs:comment>A &quot;verbal phrase&quot;.</rdfs:comment>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
