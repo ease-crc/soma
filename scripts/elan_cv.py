@@ -31,7 +31,7 @@ import uuid
 import hashlib
 import itertools
 
-cvPath = '../owl/elan_action_labels.txt'
+cvPath = './elan_action_labels.txt'
 
 DULAction = "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"
 
