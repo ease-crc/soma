@@ -993,6 +993,34 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Aesthetic -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Aesthetic">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#SocialQuality"/>
+        <rdfs:comment>The quality of aesthetic representation of an object.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#AestheticDesign -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#AestheticDesign">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#describesQuality"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Aesthetic"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Aesthetics is the philosophical study of beauty and taste. The term stems from the Greek word “aisthetikos,” meaning “of sense perception,” and is related to the study of sensory values. In design, aesthetics refers to the visual attractiveness of a product. Visual aesthetics have these key elements: Color, Shape, Pattern, Line, Texture, Visual weight, Balance, Scale, Proximity and Movement.
+
+Aesthetic design *describes* Aesthetics quality of an object.
+https://www.interaction-design.org/literature/topics/aesthetics</rdfs:comment>
+        <rdfs:label>Aesthetic Design</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Affordance">
@@ -1876,6 +1904,22 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#FunctionalDesign -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#FunctionalDesign">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#affordsBearer"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Disposition"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>THe description of an object from functionality point of view.</rdfs:comment>
+        <rdfs:label>Functional Design</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Geometric -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Geometric">
@@ -2665,6 +2709,37 @@
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#FrictionAttribute"/>
         <rdfs:comment>Friction between two touching objects that do not move relative to each other.</rdfs:comment>
         <rdfs:label>Static friction attribute</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#StructuralDesign -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#StructuralDesign">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#affordsBearer"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Disposition"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Geometric"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Material"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Structural means relating to the way in which parts of a system or object are arranged. Structural design is the methodical investigation of the stability, strength and rigidity of structures. The basic objective in structural analysis and design is to produce a structure capable of resisting all applied loads without failure during its intended life.
+
+The structure of the object/artifact helps to realise its function.</rdfs:comment>
+        <rdfs:label>Structural Design</rdfs:label>
     </owl:Class>
     
 
