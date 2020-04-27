@@ -1876,6 +1876,16 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Geometry -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Geometry">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Intrinsic"/>
+        <rdfs:comment>Geometry is a branch of mathematics concerned with questions of shape, size, relative position of figures, and the properties of space.
+https://en.wikipedia.org/wiki/Geometry</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#GreenColor -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#GreenColor">
@@ -2476,7 +2486,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Shape -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Shape">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Intrinsic"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Geometry"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
@@ -2564,7 +2574,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Sharpness -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Sharpness">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Intrinsic"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Geometry"/>
     </owl:Class>
     
 
@@ -2591,6 +2601,16 @@
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>The disposition of an object (the tool) to change the localization of others.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Size -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Size">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Geometry"/>
+        <rdfs:comment>Size is the magnitude or dimensions of a thing. Size can be measured as length, width, height, diameter, perimeter, area, volume, or mass.
+https://en.wikipedia.org/wiki/Size</rdfs:comment>
     </owl:Class>
     
 
@@ -3470,6 +3490,26 @@ It is also possible that a Transient transitionsBack to the initial object. An e
     <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject -->
 
     <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#DeviceState"/>
+            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Geometry"/>
+            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Material"/>
+            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Temperature"/>
+        </owl:members>
+    </rdf:Description>
 </rdf:RDF>
 
 
