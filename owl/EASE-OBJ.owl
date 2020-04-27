@@ -562,9 +562,6 @@
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isPhysicallyContainedIn">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isLocationOf"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-        <rdfs:comment>A spatial relation holding between an object (the container), and objects it contains.</rdfs:comment>
-        <rdfs:label>is physically contained in</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -658,9 +655,6 @@
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasCommonBoundary"/>
         <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#supports"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-        <rdfs:comment>Relates a supportee to one of its supporters.</rdfs:comment>
-        <rdfs:label>is supported by</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -727,8 +721,6 @@
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#supports">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasCommonBoundary"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-        <rdfs:comment>Relates a supportee to one of its supporters.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -970,6 +962,30 @@
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
         <rdfs:comment>The width of a shape.</rdfs:comment>
         <rdfs:label>has width</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#isPhysicallyContainedIn -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isPhysicallyContainedIn">
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#isSupportedBy -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isSupportedBy">
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#supports -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#supports">
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
     </owl:DatatypeProperty>
     
 
@@ -1876,6 +1892,16 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Geometry -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Geometry">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Intrinsic"/>
+        <rdfs:comment>Geometry (from the Ancient Greek: γεωμετρία; geo- &quot;earth&quot;, -metron &quot;measurement&quot;) is a branch of mathematics concerned with questions of shape, size, relative position of figures, and the properties of space.
+https://en.wikipedia.org/wiki/Geometry</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#GreenColor -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#GreenColor">
@@ -2476,7 +2502,7 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Shape -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Shape">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Intrinsic"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Geometry"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
@@ -2564,7 +2590,9 @@
     <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Sharpness -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Sharpness">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Intrinsic"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Geometry"/>
+        <rdfs:comment>The quality of having a thin edge or point that can cut something or make a hole in something.
+https://dictionary.cambridge.org/dictionary/english/sharpness</rdfs:comment>
     </owl:Class>
     
 
@@ -2591,6 +2619,16 @@
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>The disposition of an object (the tool) to change the localization of others.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#Size -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Size">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Geometry"/>
+        <rdfs:comment>Size is the magnitude or dimensions of a thing. Size can be measured as length, width, height, diameter, perimeter, area, volume, or mass.
+https://en.wikipedia.org/wiki/Size</rdfs:comment>
     </owl:Class>
     
 
@@ -3470,6 +3508,48 @@ It is also possible that a Transient transitionsBack to the initial object. An e
     <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject -->
 
     <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isPhysicallyContainedIn">
+        <rdfs:comment>A spatial relation holding between an object (the container), and objects it contains.</rdfs:comment>
+        <rdfs:label>is physically contained in</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isSupportedBy">
+        <rdfs:comment>Relates a supportee to one of its supporters.</rdfs:comment>
+        <rdfs:label>is supported by</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#supports">
+        <rdfs:comment>Relates a supportee to one of its supporters.</rdfs:comment>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // General axioms
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#DeviceState"/>
+            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Geometry"/>
+            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Material"/>
+            <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#Temperature"/>
+        </owl:members>
+    </rdf:Description>
 </rdf:RDF>
 
 
