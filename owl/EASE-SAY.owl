@@ -86,12 +86,6 @@
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Illocution"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#StateTransition"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
                 <owl:allValuesFrom>
                     <owl:Restriction>
@@ -99,12 +93,6 @@
                         <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ImperativeClause"/>
                     </owl:Restriction>
                 </owl:allValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#StateTransition"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -171,6 +159,18 @@ Image schemas are considered as fundamental, pre-conceptual, building blocks of 
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#ImperativeClause">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ClausalObject"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#StateTransition"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#StateTransition"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment>A clause which commands some agent to perform a task or bring about a state of affairs.</rdfs:comment>
         <rdfs:label>Imperative clause</rdfs:label>
     </owl:Class>
@@ -355,6 +355,12 @@ Note that such theories are useful both when analyzing an actual linguistic prod
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
                 <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#satisfies"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ImageSchemaTheory"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
