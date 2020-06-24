@@ -1,0 +1,64 @@
+name: Uglify Ontology
+on:
+  push:
+    paths:
+      - '**'
+      - '!docs/**'
+  pull_request:
+    paths:
+      - '**'
+      - '!docs/**'
+
+jobs:
+  uglify_ontology:
+    name: Uglify Ontology
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Uglify
+        uses: docker://swipl:8.0.3
+        with:
+          args: swipl -f prolog/uglify_ease.pl -t uglify_ease
+
+      - name: HermiT
+        uses: ./.github/actions/hermit
+        with:
+          args: ./owl/EASE-UGLY.owl
+
+      - name: Print HermiT output
+        run: cat ./hermit.output
+        if: always()
+
+      - name: Evaluate HermiT output
+        if: success()
+        uses: docker://python:3.7.6-slim
+        with:
+          args: python ./scripts/hermit_test.py -o ./owl/hermit.html ./hermit.output
+
+      - name: Convert
+        uses: ./.github/actions/convert
+        with:
+          args: python3 ./scripts/uglify_ease_as_owl.py
+
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: EASE Ontology
+          path: ./owl
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        if: github.ref == 'refs/heads/master'
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: owl
+
+      - name: Deploy failure
+        if: failure()
+        run: echo Deployment failed. If the other steps succeeded, maybe no ACCESS_TOKEN was set?
