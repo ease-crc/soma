@@ -1,4 +1,3 @@
-
 #Script to generate ELAN controlled vocabularies from the EASE ontology
 #
 
