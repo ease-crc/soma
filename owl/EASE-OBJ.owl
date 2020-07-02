@@ -562,9 +562,6 @@
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isPhysicallyContainedIn">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isLocationOf"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-        <rdfs:comment>A spatial relation holding between an object (the container), and objects it contains.</rdfs:comment>
-        <rdfs:label>is physically contained in</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -658,9 +655,6 @@
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasCommonBoundary"/>
         <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#supports"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-        <rdfs:comment>Relates a supportee to one of its supporters.</rdfs:comment>
-        <rdfs:label>is supported by</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -727,8 +721,6 @@
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#supports">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasCommonBoundary"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-        <rdfs:comment>Relates a supportee to one of its supporters.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -974,6 +966,30 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#isPhysicallyContainedIn -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isPhysicallyContainedIn">
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#isSupportedBy -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isSupportedBy">
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-OBJ.owl#supports -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#supports">
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -997,9 +1013,9 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#AestheticDesign">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
-        <rdfs:comment>Aesthetics is the philosophical study of beauty and taste. The term stems from the Greek word “aisthetikos,” meaning “of sense perception,” and is related to the study of sensory values. In design, aesthetics refers to the visual attractiveness of a product. Visual aesthetics have these key elements: Color, Shape, Pattern, Line, Texture, Visual weight, Balance, Scale, Proximity and Movement.
+        <rdfs:comment>Aesthetic design *describes* Aesthetics quality of an object.
 
-Aesthetic design *describes* Aesthetics quality of an object.</rdfs:comment>
+Aesthetics is the philosophical study of beauty and taste. The term stems from the Greek word “aisthetikos,” meaning “of sense perception,” and is related to the study of sensory values. In design, aesthetics refers to the visual attractiveness of a product. Visual aesthetics have these key elements: Color, Shape, Pattern, Line, Texture, Visual weight, Balance, Scale, Proximity and Movement.</rdfs:comment>
         <rdfs:label>Aesthetic Design</rdfs:label>
     </owl:Class>
     
@@ -1892,7 +1908,7 @@ Aesthetic design *describes* Aesthetics quality of an object.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#FunctionalDesign">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
-        <rdfs:comment>The description of an object from functionality point of view.</rdfs:comment>
+        <rdfs:comment>The design of an object from functionality point of view.</rdfs:comment>
         <rdfs:label>Functional Design</rdfs:label>
     </owl:Class>
     
@@ -2688,7 +2704,9 @@ Aesthetic design *describes* Aesthetics quality of an object.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#StructuralDesign">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
-        <rdfs:comment>Structural means relating to the way in which parts of a system or object are arranged. Structural design is the methodical investigation of the stability, strength and rigidity of structures. The basic objective in structural analysis and design is to produce a structure capable of resisting all applied loads without failure during its intended life.
+        <rdfs:comment>Structural design is the methodical investigation of the stability, strength and rigidity of structures and considers the way in which parts of a system or object are arranged. 
+
+The basic objective in structural analysis and design is to produce a structure capable of resisting all applied loads without failure during its intended life.
 
 The structure of the object/artifact helps to realise its function.</rdfs:comment>
         <rdfs:label>Structural Design</rdfs:label>
@@ -3514,6 +3532,28 @@ It is also possible that a Transient transitionsBack to the initial object. An e
     <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject -->
 
     <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isPhysicallyContainedIn">
+        <rdfs:comment>A spatial relation holding between an object (the container), and objects it contains.</rdfs:comment>
+        <rdfs:label>is physically contained in</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#isSupportedBy">
+        <rdfs:comment>Relates a supportee to one of its supporters.</rdfs:comment>
+        <rdfs:label>is supported by</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-OBJ.owl#supports">
+        <rdfs:comment>Relates a supportee to one of its supporters.</rdfs:comment>
+    </rdf:Description>
 </rdf:RDF>
 
 
