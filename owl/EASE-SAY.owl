@@ -63,6 +63,21 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Agent -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Agent">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Semantic macrorole employed in ExecutableSchemas that generalises across thematic relations, such as agent or experiencer, which themselves abstract away over verb-specific semantic roles.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Assertion -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Assertion">
@@ -78,6 +93,49 @@
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#CausalProcess -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#CausalProcess">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Refers to the ExecutableSchema which is causing a motion.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#CausedMotion -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#CausedMotion">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ImageSchemaTheory"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Agent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#CausalProcess"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Path"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Trajector"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A causes B to move C by doing D.
+(Extension of Goldberg&apos;s CausedMotion (1995: 152) by additionally specifying a CausalProcess.)</rdfs:comment>
     </owl:Class>
     
 
@@ -113,12 +171,159 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Containment -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Containment">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Control"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GUM-4-space: A functional relation describing that the location of some entity, the containee, is constrained to be within some region which is the interior of some other entity, the container.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Control -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Control">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#FunctionalSpatialSchema"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GUM-4-space: The binary functional relation holding between two spatial objects x and y, such that x controls y&apos;s position in space; if x moves, then y moves as well; x and y need not be in contact.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Coverage -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Coverage">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ImageSchemaTheory"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Locatum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Relatum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Could belong to FunctionalSpatialSchema, but a covering might impose restrictions on the behaviour of more objects than just the covered thing. Thinking of a lid covering a pot, thereby constraining the freedom of movement of the contained popcorn...</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#CoveringSchema -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#CoveringSchema">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ExecutableSchematicTheory"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Agent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Patient"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#CrackingSchema -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#CrackingSchema">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ExecutableSchematicTheory"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Agent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Patient"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#DeclarativeClause -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#DeclarativeClause">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ClausalObject"/>
         <rdfs:comment>A clause which makes an assertion or declaration.</rdfs:comment>
         <rdfs:label>Declarative clause</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#ESTSchema -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#ESTSchema">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ImageSchemaTheory"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Entity"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A most general image schema, denoting the existence of some entity.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Entity -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Entity">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes an existing entity, included in ESTSchemas.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#ExecutableSchematicTheory -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#ExecutableSchematicTheory">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#SchematicTheory"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#FunctionalSpatialSchema -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#FunctionalSpatialSchema">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ImageSchemaTheory"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Locatum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Relatum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GUM-4-space: The most general type of functional spatial relations.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Goal -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Goal">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the destination of a route. Typically represented by a FunctionalSpatialSchema.</rdfs:comment>
     </owl:Class>
     
 
@@ -171,6 +376,21 @@ Image schemas are considered as fundamental, pre-conceptual, building blocks of 
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Instrument -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Instrument">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role included in many executable schemas, denotes the instrument employed for an action.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#InterrogativeClause -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#InterrogativeClause">
@@ -204,6 +424,21 @@ Note that in a semantic sense such clauses always request information, but in a 
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Locatum -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Locatum">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the object with primary focal prominence in a spatial (-temporal) schema. Terminological variants: Figure (Talmy 1983), Trajector (Langacker 1986).</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Locution -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Locution">
@@ -219,12 +454,77 @@ Note that in a semantic sense such clauses always request information, but in a 
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Path -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Path">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The path of a motion is represented by a Source-Path-Goal schema.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Patient -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Patient">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Semantic macrorole employed in ExecutableSchemas that generalises across thematic relations, such as theme or recipient, which themselves abstract away over verb-specific semantic roles.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#PhrasalObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#PhrasalObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#LinguisticObject"/>
         <rdfs:comment>A linguistic object that contains information which would be linguistically expressed as a phrase.</rdfs:comment>
         <rdfs:label>Phrasal object</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#PlacingSchema -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#PlacingSchema">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ExecutableSchematicTheory"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Agent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Patient"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Proximal -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Proximal">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ImageSchemaTheory"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Locatum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Relatum"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GUM-4-space: A qualitative spatial relation indicating relative proximity, as expressed by the prepositions &apos;near&apos;, &apos;close to&apos;, &apos;next to&apos;, etc.</rdfs:comment>
     </owl:Class>
     
 
@@ -244,6 +544,21 @@ Note that in a semantic sense such clauses always request information, but in a 
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Relatum -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Relatum">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the reference object in a spatial (-temporal) schema, i.e. the object with secondary focal prominence. Terminological variants: Ground (Talmy 1983), Landmark (Langacker 1986).</rdfs:comment>
     </owl:Class>
     
 
@@ -280,6 +595,48 @@ Note that such theories are useful both when analyzing an actual linguistic prod
     
 
 
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Source -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Source">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the source of a route. Usually represented by a FunctionalSpatialSchema.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Source-Path-Goal -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Source-Path-Goal">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ImageSchemaTheory"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Goal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Path"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Source"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A very general image-schema of the Path family, this schema describes movement along a path from a source towards a goal.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#StateTransition -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#StateTransition">
@@ -310,6 +667,62 @@ Note that such theories are useful both when analyzing an actual linguistic prod
         </rdfs:subClassOf>
         <rdfs:comment>A transition between two states brought about by the Action of some Agent.</rdfs:comment>
     </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Support -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Support">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Control"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GUM-4-space: The reified functional relation holding between two spatial objects x and y, such that x physically supports y in the presence of gravity; x and y need not be in contact. An example of such an expression is &quot;The bowl is on the table&quot;.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Trajector -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Trajector">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the profiled, moving entity of a MotionSchema.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#WhiskingSchema -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#WhiskingSchema">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ExecutableSchematicTheory"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Agent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Instrument"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#Patient"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE.owl#State -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#State"/>
 </rdf:RDF>
 
 
