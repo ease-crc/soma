@@ -11,6 +11,7 @@
      xmlns:knowrob="http://knowrob.org/kb/knowrob.owl#">
     <owl:Ontology rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl">
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/EASE-ACT.owl"/>
+        <owl:imports rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl"/>
     </owl:Ontology>
     
 
@@ -155,10 +156,10 @@
     <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#ClausalObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#ClausalObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#LinguisticObject"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#LexicalObject"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#PhrasalObject"/>
-        <rdfs:comment>A linguistic object that contains information which would be linguistically expressed as a clause.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#Phrase"/>
+        <rdfs:comment>A linguistic object that contains information which would be linguistically expressed as a clause.
+
+A clause is a phrase containing a subject and a predicate.</rdfs:comment>
         <rdfs:label>Clausal object</rdfs:label>
     </owl:Class>
     
@@ -430,27 +431,6 @@ Note that in a semantic sense such clauses always request information, but in a 
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#LexicalObject -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#LexicalObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#LinguisticObject"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#PhrasalObject"/>
-        <rdfs:comment>A linguistic object that contains information which would be linguistically expressed as a lexical item (loosely speaking, a word).</rdfs:comment>
-        <rdfs:label>Lexical object</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#LinguisticObject -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#LinguisticObject">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
-        <rdfs:comment>An information bearing object that is used to analyze some linguistic production.</rdfs:comment>
-        <rdfs:label>Linguistic object</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#LocatumRole -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#LocatumRole">
@@ -473,7 +453,7 @@ Note that in a semantic sense such clauses always request information, but in a 
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#LinguisticObject"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#LinguisticObject"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>An action in which an agent uses some actuator for communication purposes.</rdfs:comment>
@@ -528,16 +508,6 @@ Note that in a semantic sense such clauses always request information, but in a 
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Semantic macrorole often employed in ExecutableSchemas that generalises across thematic relations, such as theme or recipient, which themselves abstract away over verb-specific semantic roles.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#PhrasalObject -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#PhrasalObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#LinguisticObject"/>
-        <rdfs:comment>A linguistic object that contains information which would be linguistically expressed as a phrase.</rdfs:comment>
-        <rdfs:label>Phrasal object</rdfs:label>
     </owl:Class>
     
 
