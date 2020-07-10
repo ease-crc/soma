@@ -276,7 +276,15 @@ Adopted from GUM-4-space (Bateman et al. 2010).</rdfs:comment>
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#PhysicalObjectRole"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A most general image schema, denoting the existence of some physical object.</rdfs:comment>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The ESTSchema constitutes the most basic schema that describes the existance of an entity, thereby having one Role, i.e. what entity is asserted to exist.
+
+In SOMA, this schema will refer to the existence of physical objects.</rdfs:comment>
     </owl:Class>
     
 
@@ -468,7 +476,9 @@ Note that in a semantic sense such clauses always request information, but in a 
                 <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Represents the concept of a physical object, e.g. a cup or a pipe.</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The PhysicalObjectRole requires its filler simply to exist, unlike other roles that may demand e.g. agentive or instrumental participation in some executable schema or plan (AgentRole and Instrument respectively).
+
+The intention of such a simple role is to have a way to represent, in a schematic formalism used to describe some scene, that an object is present. In particular, the schema used to convey this information is the ESTSchemaTheory, which has PhysicialObjectRole as its sole defined role.</rdfs:comment>
     </owl:Class>
     
 
