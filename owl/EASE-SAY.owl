@@ -74,7 +74,7 @@
                 <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Semantic macrorole often employed in ExecutableSchemas that generalises across thematic relations, such as agent or experiencer, which themselves abstract away over verb-specific semantic roles.</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role often employed in ExecutableSchemas that generalises across thematic relations, such as agent or experiencer, which themselves abstract away from verb-specific roles.</rdfs:comment>
     </owl:Class>
     
 
@@ -108,7 +108,7 @@
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ExecutableSchematicTheory"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Refers to the ExecutableSchema which is causing a motion.</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes some physical process that plays the role of causing a motion, e.g. motions, forces, etc.</rdfs:comment>
     </owl:Class>
     
 
@@ -147,8 +147,7 @@
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#SourcePathGoalTheory"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A has caused B to move C by having done D.
-(Extension of Goldberg&apos;s CausedMotion (1995: 152) by additionally specifying a CausalProcess.)</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic theory describing a situation in which an agent performs an action which causes an object to move along a certain path. A popular example being &quot;He sneezed the napkin off the table.&quot; (Goldberg 1995)</rdfs:comment>
     </owl:Class>
     
 
@@ -188,9 +187,9 @@ A clause is a phrase containing a subject and a predicate.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#ContainmentTheory">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ControlTheory"/>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GUM-4-space: A functional relation describing that the location of some entity, the containee, is constrained to be within some region which is the interior of some other entity, the container.
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A functional relation describing that the location of some entity, the containee, is constrained to be within some region which is the interior of some other entity, the container.
 
-This is also known as FunctionalControlInternal in GUM.</rdfs:comment>
+This is also known as FunctionalControlInternal in GUM-4-space (Bateman et al. 2010).</rdfs:comment>
     </owl:Class>
     
 
@@ -199,7 +198,39 @@ This is also known as FunctionalControlInternal in GUM.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#ControlTheory">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#FunctionalSpatialSchemaTheory"/>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GUM-4-space: The binary functional relation holding between two spatial objects x and y, such that x controls y&apos;s position in space; if x moves, then y moves as well; x and y need not be in contact.</rdfs:comment>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ControlledLocatumRole"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ControllingRelatumRole"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A description of functional-spatial configurations where one object controls another object&apos;s position in space, e.g. if a pot moves, then the popcorn contained therein moves, as well. Note that the objects do not need to be in direct contact.
+
+Adopted from GUM-4-space (Bateman et al. 2010).</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#ControlledLocatumRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#ControlledLocatumRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#LocatumRole"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">All entities whose location can be controlled or confined by other entities.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#ControllingRelatumRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#ControllingRelatumRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#RelatumRole"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">All entities that can be used to support or confine the location of other entities.</rdfs:comment>
     </owl:Class>
     
 
@@ -284,25 +315,10 @@ This is also known as FunctionalControlInternal in GUM.</rdfs:comment>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#EntityRole"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#PhysicalObjectRole"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A most general image schema, denoting the existence of some entity.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#EntityRole -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#EntityRole">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes an existing entity, included in ESTSchemas.</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A most general image schema, denoting the existence of some physical object.</rdfs:comment>
     </owl:Class>
     
 
@@ -340,7 +356,9 @@ They maintain their role however as representations able to drive a simulation, 
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#RelatumRole"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GUM-4-space: The most general type of functional spatial relations.</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The most general type of functional spatial relations.
+
+Adopted from GUM-4-space (Bateman et al. 2010).</rdfs:comment>
     </owl:Class>
     
 
@@ -441,7 +459,7 @@ Note that in a semantic sense such clauses always request information, but in a 
                 <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the object with primary focal prominence in a spatial (-temporal) schema. Terminological variants: Figure (Talmy 1983), Trajector (Langacker 1986).</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the object with primary focal prominence in a spatial or spatio-temporal schema. Terminological variants: Figure (Talmy 1983), Trajector (Langacker 1986).</rdfs:comment>
     </owl:Class>
     
 
@@ -507,7 +525,22 @@ Note that in a semantic sense such clauses always request information, but in a 
                 <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Semantic macrorole often employed in ExecutableSchemas that generalises across thematic relations, such as theme or recipient, which themselves abstract away over verb-specific semantic roles.</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role often employed in ExecutableSchemas that generalises across thematic relations, such as theme or recipient, which themselves abstract away from verb-specific roles.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#PhysicalObjectRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#PhysicalObjectRole">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Represents the concept of a physical object, e.g. a cup or a pipe.</rdfs:comment>
     </owl:Class>
     
 
@@ -555,11 +588,13 @@ Note that in a semantic sense such clauses always request information, but in a 
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#RelatumRole"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GUM-4-space: A qualitative spatial relation indicating relative proximity, as expressed by the prepositions &apos;near&apos;, &apos;close to&apos;, &apos;next to&apos;, etc.
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A qualitative spatial relation indicating relative proximity, as expressed by the prepositions &apos;near&apos;, &apos;close to&apos;, &apos;next to&apos;, etc.
 
 It may seem that proximity is a very simple notion, requiring no sophisticated theoretical underpinnings. However, proximity is an extremely object- and purpose-dependent relation. A store next door is in a closeness relation to a person, and so is the Sun in the sky, despite the physical distances being different by several orders of magnitude.
 
-As such, a theory, i.e. a description of what a particular kind of closeness means and in which contexts it applies, is necessary.</rdfs:comment>
+As such, a theory, i.e. a description of what a particular kind of closeness means and in which contexts it applies, is necessary.
+
+Adopted from GUM-4-space (Bateman et al. 2010).</rdfs:comment>
     </owl:Class>
     
 
@@ -593,7 +628,7 @@ As such, a theory, i.e. a description of what a particular kind of closeness mea
                 <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the reference object in a spatial (-temporal) schema, i.e. the object with secondary focal prominence. Terminological variants: Ground (Talmy 1983), Landmark (Langacker 1986).</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the reference object in a spatial or spatio-temporal schema, i.e. the object with secondary focal prominence. Terminological variants: Ground (Talmy 1983), Landmark (Langacker 1986).</rdfs:comment>
     </owl:Class>
     
 
@@ -709,9 +744,9 @@ Note that such theories are useful both when analyzing an actual linguistic prod
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#SupportTheory">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ControlTheory"/>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GUM-4-space: The reified functional relation holding between two spatial objects x and y, such that x physically supports y in the presence of gravity; x and y need not be in contact. An example of such an expression is &quot;The bowl is on the table&quot;.
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The reified functional relation holding between two spatial objects x and y, such that x physically supports y in the presence of gravity; x and y need not be in contact. An example of such an expression is &quot;The bowl is on the table&quot;.
 
-This is also known as FunctionalControlExternal in GUM.</rdfs:comment>
+This is also known as FunctionalControlExternal in GUM (Bateman et al. 2010).</rdfs:comment>
     </owl:Class>
     
 
@@ -719,6 +754,18 @@ This is also known as FunctionalControlExternal in GUM.</rdfs:comment>
     <!-- http://www.ease-crc.org/ont/EASE.owl#State -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE.owl#State"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#LinguisticObject -->
+
+    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#LinguisticObject"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#Phrase -->
+
+    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#Phrase"/>
 </rdf:RDF>
 
 
