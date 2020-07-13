@@ -400,15 +400,6 @@ Adopted from GUM-4-space (Bateman et al. 2010).</rdfs:comment>
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#GoalRole -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#GoalRole">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the destination of a route. Typically represented by a FunctionalSpatialSchema.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#Illocution -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#Illocution">
@@ -555,13 +546,13 @@ The intention of such a simple role is to have a way to represent, in a schemati
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Destination"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#GoalRole"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>A schematic theory of how an agent might set a patient at a particular goal location.</rdfs:comment>
@@ -671,7 +662,13 @@ Note that such theories are useful both when analyzing an actual linguistic prod
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#GoalRole"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Destination"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Origin"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -680,22 +677,11 @@ Note that such theories are useful both when analyzing an actual linguistic prod
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#PathRole"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#SourceRole"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A very general image-schema of the Path family, this schema describes movement along a path from a source towards a goal.</rdfs:comment>
-    </owl:Class>
-    
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A very general image-schema of the Path family, this schema describes movement along a path from a source towards a goal.
 
+Note: in cognitive linguistics literature, the roles of this schema are Source, Path, Goal. However, to avoid overloading some other terminology in SOMA, we renamed Source to Origin and Goal to Destination.
 
-    <!-- http://www.ease-crc.org/ont/EASE-SAY.owl#SourceRole -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#SourceRole">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the source of a route. Usually represented by a FunctionalSpatialSchema.</rdfs:comment>
+As yet, this schema is not associated to any object property.</rdfs:comment>
     </owl:Class>
     
 
