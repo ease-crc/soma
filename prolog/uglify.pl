@@ -45,7 +45,7 @@ uglify :-
     'SOMA-PROC.owl'
   ],
   rdf_assert(EASE_UGLY,rdf:type,owl:'Ontology',ease),
-  source_file(uglify_ease, Filepath),
+  source_file(uglify, Filepath),
   string_concat(Basepath, '/prolog/uglify.pl', Filepath),
   forall(member(N,Ontologies), (
       atomic_list_concat([Basepath, '/owl/', N], GlobalPath),
