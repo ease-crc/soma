@@ -1,17 +1,15 @@
 <?xml version="1.0"?>
-<rdf:RDF xmlns="http://www.ease-crc.org/ont/EASE-IO.owl#"
-     xml:base="http://www.ease-crc.org/ont/EASE-IO.owl"
+<rdf:RDF xmlns="http://www.ease-crc.org/ont/SOMA.owl#"
+     xml:base="http://www.ease-crc.org/ont/SOMA.owl"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:knowrob="http://knowrob.org/kb/knowrob.owl#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:EASE="http://www.ease-crc.org/ont/EASE.owl#">
-    <owl:Ontology rdf:about="http://www.ease-crc.org/ont/EASE-IO.owl">
+     xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#">
+    <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA-IO.owl">
         <owl:imports rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl"/>
-        <owl:imports rdf:resource="http://www.ease-crc.org/ont/EASE.owl"/>
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
     </owl:Ontology>
     
 
@@ -27,13 +25,13 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-IO.owl#ComputationalAgent -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#ComputationalAgent -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-IO.owl#ComputationalAgent">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ComputationalAgent">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/EASE-IO.owl#SoftwareImplementation"/>
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwareImplementation"/>
                     <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
                 </owl:intersectionOf>
             </owl:Class>
@@ -44,9 +42,9 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-IO.owl#DigitalData -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#DigitalData -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-IO.owl#DigitalData">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DigitalData">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource"/>
         <rdfs:comment>An information realization of quantitative data.</rdfs:comment>
         <rdfs:label>Digital data</rdfs:label>
@@ -54,9 +52,9 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-IO.owl#DigitalObject -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#DigitalObject -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-IO.owl#DigitalObject">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DigitalObject">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource"/>
         <rdfs:comment>An information realization with object character. e.g. a software agent etc.</rdfs:comment>
@@ -65,52 +63,52 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-IO.owl#FaultySoftware -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#FaultySoftware -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-IO.owl#FaultySoftware">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#SoftwareDiagnosis"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FaultySoftware">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SoftwareDiagnosis"/>
         <rdfs:comment>A description of a situation where some software has a bug.</rdfs:comment>
     </owl:Class>
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-IO.owl#IncompatibleSoftware -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#IncompatibleSoftware -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-IO.owl#IncompatibleSoftware">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#SoftwareDiagnosis"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#IncompatibleSoftware">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SoftwareDiagnosis"/>
         <rdfs:comment>A description of a situation where two software systems are incompatible with each other.</rdfs:comment>
     </owl:Class>
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-IO.owl#SoftwareImplementation -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#SoftwareImplementation -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-IO.owl#SoftwareImplementation">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-IO.owl#DigitalObject"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwareImplementation">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DigitalObject"/>
         <rdfs:comment>An information realization in form of a executable computer program.</rdfs:comment>
         <rdfs:label>Software implementation</rdfs:label>
     </owl:Class>
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-IO.owl#SoftwarePackage -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#SoftwarePackage -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-IO.owl#SoftwarePackage">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-IO.owl#DigitalObject"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwarePackage">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DigitalObject"/>
         <rdfs:comment>A structured archive of software that also often contains data needed to run the software, and scripts to build and configure the software.</rdfs:comment>
         <rdfs:label>Software package</rdfs:label>
     </owl:Class>
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-IO.owl#SoftwareType -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#SoftwareType -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-IO.owl#SoftwareType">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwareType">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-IO.owl#SoftwareImplementation"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SoftwareImplementation"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>A concept that classifies software objects.</rdfs:comment>
@@ -119,10 +117,10 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/EASE-IO.owl#UnavailableSoftware -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#UnavailableSoftware -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-IO.owl#UnavailableSoftware">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE.owl#SoftwareDiagnosis"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#UnavailableSoftware">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SoftwareDiagnosis"/>
         <rdfs:comment>A description of a situation where some software dependency is not available.</rdfs:comment>
     </owl:Class>
 </rdf:RDF>

@@ -1,2 +1,2 @@
 
-:- use_module(library(uglify_ease)).
+:- use_module(library(uglify)).
