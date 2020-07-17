@@ -34,7 +34,7 @@ ease_load(URL, Graph) :-
   load_rdf(URL, Triples, [blank_nodes(noshare)]),
   maplist(ease_assert(Graph), Triples).
 
-uglify_ease :-
+uglify :-
   ease_ugly_ontology(EASE_UGLY),
   Ontologies=[
     'SOMA.owl',
