@@ -23,12 +23,12 @@ jobs:
       - name: Uglify
         uses: docker://swipl:8.0.3
         with:
-          args: swipl -f prolog/uglify_ease.pl -t uglify_ease
+          args: swipl -f prolog/uglify.pl -t uglify
 
       - name: HermiT
         uses: ./.github/actions/hermit
         with:
-          args: ./owl/EASE-UGLY.owl
+          args: ./owl/SOMA-UGLY.owl
 
       - name: Print HermiT output
         run: cat ./hermit.output
@@ -48,7 +48,7 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
-          name: EASE Ontology
+          name: SOMA Ontology
           path: ./owl
 
       - name: Deploy
