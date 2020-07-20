@@ -176,7 +176,7 @@ The entity playing an AgentRole is endowed with sentience and the capacity to de
                 <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ExecutableSchematicTheory"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes some physical process that plays the role of causing a motion, e.g. motions, forces, etc.</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role that denotes physical processes causing a motion such as the force interaction of a tennis racket hitting a ball and setting it into motion.</rdfs:comment>
     </owl:Class>
     
 
@@ -257,7 +257,7 @@ A clause is a phrase containing a subject and a predicate.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/EASE-SAY.owl#ContainmentTheory">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/EASE-SAY.owl#ControlTheory"/>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A functional relation describing that the location of some entity, the containee, is constrained to be within some region which is the interior of some other entity, the container.
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic theory that describes a functional relation which ensures that the location of some entity, the locatum, is constrained to be within some region which is the interior of some other entity, the relatum.
 
 This is also known as FunctionalControlInternal in GUM-4-space (Bateman et al. 2010).
 
@@ -301,7 +301,8 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/EASE-OBJ.owl#Patient"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>A schematic theory of how an agent might use an instrument to prevent access to the interior of a patient.</rdfs:comment>
@@ -356,9 +357,9 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
                 <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The ESTSchema constitutes the most basic schema that describes the existance of an entity, thereby having one Role, i.e. what entity is asserted to exist.
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic theory that describes the existence of an entity, thereby having one Role, i.e. what entity is asserted to exist.
 
-In SOMA, this schema will refer to the existence of physical objects. As such, it is not associated to a relation between two objects.</rdfs:comment>
+In SOMA, this schema refers to the existence of physical objects. As such, it is not associated to a relation between two objects.</rdfs:comment>
     </owl:Class>
     
 
@@ -375,11 +376,10 @@ In SOMA, this schema will refer to the existence of physical objects. As such, i
         </rdfs:subClassOf>
         <rdfs:comment>Also known as &quot;executing schemas&quot; or &quot;x-schemas&quot;, these were defined by Bergen and Chang in their work &quot;Embodied Construction Grammar in Simulation-Based Language Understanding&quot; as:
 
-&quot;Executing schemas, or x-schemas, are dynamic representations motivated in part by motor and perceptual systems (Bailey 1997; Narayanan 1997), on the assumption that the same underlying representations used for executing and perceiving an action are brought to bear in understanding language about that action. The
-x-schema formalism is an extension of Petri nets (Murata 1989) that can model sequential, concurrent, and
+&quot;Executing schemas, or x-schemas, are dynamic representations motivated in part by motor and perceptual systems (Bailey 1997; Narayanan 1997), on the assumption that the same underlying representations used for executing and perceiving an action are brought to bear in understanding language about that action. The x-schema formalism is an extension of Petri nets (Murata 1989) that can model sequential, concurrent, and
 asynchronous events&quot;
 
-In SOMA, we do not restrict the formalism of ExecutableSchematicTheories; i.e. they don&apos;t have to be Petri Nets.
+SOMA does not restrict the formalism of ExecutableSchematicTheories; i.e. they don&apos;t have to be Petri Nets.
 
 They maintain their role however as representations able to drive a simulation, at some level of abstraction, of an embodied action. This level of abstraction may be still fairly underspecified as in the case of the original x-schemas and as such not a plan that an agent could run in an actual physical environment without further information.</rdfs:comment>
     </owl:Class>
