@@ -1,0 +1,103 @@
+\chapter{Robot \neems}
+
+This chapter focuses on describing how to generate \neems~from robot 
+
+\section{Prerequisite}
+
+Before you are generating logs, make sure you are familiar with the Cognitive Robot Abstract Machine (\cram) system \url{http://cram-system.org/cram}.
+In addition, you will need also a MongoDB Server with version 3.4.10.
+Make sure you also installed Knowrob
+https://github.com/knowrob/knowrob
+
+and the following ontologies
+https://github.com/ease-crc/cram\_knowledge
+https://github.com/ease-crc/ease\_ontology
+
+Having those components make sure before you run your cram plan, launch the \knowrob with the memory function via "roslaunch knowrob\_memory knowrob.launch"
+
+
+
+\section{Generating Logs}
+Intention of the logger is to log everything what is will be execute during the \cram action.
+First it is required that you include "cram-cloud-logger" package in your \cram package, before you can start to create \neems.
+After you included your the logger package, you need to set \textit{is-logging-enabled} to true via "(setf ccl::*is-logging-enabled* t)".
+The only things left to do start the logging before the plan execution and after the execution, finishing it.
+It can look like the following:
+	(ccl::start-episode)
+	(urdf-proj:with-simulated-robot (demo::demo-random nil ))
+	(ccl::stop-episode)
+	
+The generate log file is stored per default in "~/knowrob-memory" 
+
+\section{Data}
+After you generate your first \neem~you will find a folder with a timestamp store in the "~/knowrob-memory" folder (per default).
+This folder contains the \neemnar and \neemexp . The \neemnar is represented in the "beliefstate.owl". The triple store and the \neemexp are stored in the "roslog" folder. The triple store is stored in the "triples.bson". The other bsons files are presentening the logged rostopics. More about the rostopics is stated in Section \todo{put reference to rostopic section}
+
+\section{Log own designed plans}
+The disadvantage of having a strong semantic knowledge representation is that our ontology.
+Currently, we focused on the support on setting-up and cleaning-up a table.
+If you want for instance create \neems for an autonomous car, you will need to extend the \ease ontologies and the logger with your required actions, parameters etc.
+In the following subsection, we will describe how you can add the required stuff so they are semantical log.
+In general, please feel free to share your changes with us in form of an pull request to our repositories.
+So we can provide you feedback and your help us to extend the features
+
+\subsection{Adding New Tasks}
+The most obvious requirement is to define your tasks.
+A task might be something like cutting, stopping or accelerating.
+To be able to semantaclly log the task, you will need first define the task in the \easeAct.
+Make sure that the new action is a child of the \textit{CommunicationTask}, \textit{MentalTask} or \textit{PhysicalTask}.
+If you will try to log unknown task, there will be logged as \textit{PhysicalTask}.
+The \textit{PlanExecution} instance pointing to that \textit{PhysicalTask} , will have a comment attached with the statement "Unknown Action: <CRAM-ACTION-NAME>".
+After you add the new action to the ontology, please open the "knowrob-action-name-handler.lisp" in the cram-cloud-logger package and add your new action in the format "(CRAM-ACTION-NAME EASE-ONTOLOGY-NAME)".
+If this step you added successfully the support of the new action to the logger.
+
+\subsection{Adding New Objects}
+Unknown object will be logged as \textit{DesignedArtifact} with the comment attached "Unknown Object: CRAM-OBJECT-TYPE"
+To add your object to the ontology, you need to add it in the \easeObj.
+Afterwards, open the "utils-for-perform.lisp" in the 
+cram-cloud-logger package and include the new object in the hash table generate in "get-ease-object-lookup-table" where the key is the CRAM-OBJECT-TYPE and the value is the uri to the object concept created in \easeObj.
+
+\subsection{Adding New Failure}
+Unknown failures will be logged as \textit{Failure} with the comment attached "Unknown failure: CRAM-FAILURE-NAME".
+To integrate your new \cram failures in to the ontology, you need to add your new failures into the \cramOwl.
+Afterwards, open "failure-handler.lisp" in the cram-cloud-logger package and your new action in the format "(CRAM-FAILURE-NAME CRAM-ONTOLOGY-NAME)".	
+
+\subsection{Adding New Rostopic}
+Per default, we log the rostopics \tf and tf\_static.
+If you need to log additional topics, open "memory.pl" in the "knowrob\_memory" package from \knowrob and include your topic in the "mem\_episode\_start(Episode)" function.
+After the \neem generation, the data will be stored in the created \neem folder under the file "roslog/<rostopic>.bson".
+
+\subsection{Adding New Parameters}
+Unknown parameters will be logged as comment attached to the corresponding \textit{PlanExecution} instance.
+The comment statement "Unknown Parameter: PARAMETER-NAME  -\#\#\#\#- PARAMETER-VALUE/>"
+The current parameter types are represented 
+
+\todo{@Ontology group: Please make sure that is available in the ontology }
+
+\begin{enumerate} 
+	\item Integer/Floats
+	\item Posen
+	\item Spatial Relations
+	\item Link to entities of other ontologies such as http://knowrob.org/kb/PR2.owl\#pr2\_right\_arm
+\end{enumerate}
+
+Before you want to model your parameter what data type your parameter is.
+If it is a complex object, you need to consider how you want to to represent it an the ontology.
+For simpler representaion such has a discrete domain representation, you might represented as the domain values as \textit{Region} and add the model the parameter as a subconcept of \textit{Parameter}.
+More information about the concepts \textit{Region} and \textit{Parameter} can be found in \todo{ reference to Region and parameter}.
+
+
+\subsection{Adding New Reasoning Tasks}
+\todo{@Ontology group: How to log the result of the reasoning query ?}
+
+
+
+\section{Next steps}
+After you have generate your \neem, you can use the tool \todo{Add neem2narrative} to generate an cvs file for your \neem.
+Keep in mind that the csv is a abstraction of \neemnar and can be used to make data-mining on explicit knowledge.
+For more sophisticated analysis, you will need to use \knowrob. 
+We use this general analysis to identify bottlenecks in our plan execution.
+We also showed that with a collection of \neems we are able to improve the robot's performance.
+\todo{Af}
+The tools for the feature extraction can be found here \todo{Add link}
+Now that you we encourage you to generate your \neems and share them via our \neemhub.
