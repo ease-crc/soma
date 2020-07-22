@@ -27,6 +27,7 @@
 \usepackage{tabularx}
 \usepackage{watermark} % titlepage image
 \usepackage{booktabs}
+\usepackage{hyperref}
 
 \usetikzlibrary{shapes.misc, arrows, positioning, calc, decorations.markings}
 \tikzset{
@@ -53,13 +54,11 @@
 
 \title*{NEEM Specification}
 \author{The EASE Researchers}
-\institute{CRC Everyday Activity Science and Engineering (EASE)
-       \at University Bremen, Am Fallturm 1, 28359 Bremen, \email{ai-office@cs.uni-bremen.de}}
+\institute{CRC Everyday Activity Science and Engineering (EASE)\\ University Bremen, Am Fallturm 1, 28359 Bremen\\ \texttt{ai-office@cs.uni-bremen.de}}
 \thiswatermark{
-  \centering
-  \put(-50,-450){\includegraphics[width=14cm]{img/NarrativesStory.png}}
-  \put(340,-10){\includegraphics[width=4.0cm]{img/ease-logo.pdf}}
-}
+ \centering
+ \put(-50,-500){\includegraphics[width=14cm]{img/NarrativesStory.png}}
+ \put(340,-10){\includegraphics[width=4.0cm]{img/ease-logo.pdf}}}
 
 \newcommand{\neemversion}{0.1~}
 \newcommand{\neemexp}{NEEM-experience~}
@@ -67,6 +66,7 @@
 \newcommand{\neemnar}{NEEM-narrative~}
 \newcommand{\neem}{NEEM~}
 \newcommand{\neems}{NEEMs~}
+\newcommand{\neemhub}{NEEM-hub~}
 \newcommand{\tf}{tf~}
 \newcommand{\openease}{openEASE~}
 \newcommand{\ease}{EASE~}
@@ -79,6 +79,10 @@
 \newcommand{\boxy}{Boxy~}
 \newcommand{\eg}{e.g.~}
 \newcommand{\ros}{ROS~}
+\newcommand{\easeOwl}{EASE.owl~}
+\newcommand{\easeAct}{EASE-ACT.owl~}
+\newcommand{\easeObj}{EASE-OBJ.owl~}
+\newcommand{\cramOwl}{cram\_failures.owl}
 \newcommand{\owlClass}[1]{\textit{#1}}
 \newcommand{\owlPredicate}[1]{\textit{#1}}
 
@@ -89,25 +93,14 @@
 \begin{document}
 \maketitle
 
-%\input{content/intro/intro}
+\input{content/intro/intro}
 
-%\input{content/requirements/requirements}
-
-%\subimport{../17-information-storage/}{contribution}
-
-\input{content/design-patterns/chapter}
-
-%\input{content/neem-experience/neem-experience}
-
-%\input{content/neem-narrative/neem-narrative}
-
-%\input{content/example/example.tex}
-
-%\input{content/upload/upload.tex}
-
-%\input{content/knowledge-bases/knowledge-bases.tex}
-
-%\input{content/future-work/future-work}
+\input{content/requirements/requirements}
+\input{content/representation/representation}
+\input{content/acquisition/acquisition}
+\input{content/neem-hub/neem-hub}
+\input{content/application/application}
+\input{content/future-work/future-work}
 
 \bibliography{neem}{}
 \bibliographystyle{plain}
