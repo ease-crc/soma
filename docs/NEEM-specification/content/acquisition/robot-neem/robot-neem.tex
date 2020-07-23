@@ -1,5 +1,6 @@
 \section{Narrative Enabled Episodic Memories for Robotic Agents}
 \label{sec:robot-neem}
+\lstset{style=lispcode}
 This section focuses on describing how to generate \neems from experiments performed by the robot. 
 
 \subsection{Prerequisite}
@@ -8,6 +9,7 @@ Before you are intending to generate your episodic memories, make sure you are f
 \cram is a cognitive-enabled planning framework which allows to design high-level plan for robots.\todo{@Seba: Add more detailed description}
 This section requires that your robot plan is written in \cram to be able to generate \neems.
 However, once you are familiar with our planning and logging components, you will be able to port those components to your preferred planning tool.
+
 In addition to having a valid \cram plan, you will need the following software components to be installed:
 \begin{itemize}
 	\item A MongoDB server with at least version 3.4.10\footnote{\url{https://www.mongodb.com/}}
@@ -17,18 +19,33 @@ In addition to having a valid \cram plan, you will need the following software c
 \end{itemize}
 
 
-\subsection{Generating Logs}
-Intention of the logger is to log everything what is will be execute during the \cram action.
-First it is required that you include "cram-cloud-logger" package in your \cram package, before you can start to create \neems.
-After you included your the logger package, you need to set \textit{is-logging-enabled} to true via "(setf ccl::*is-logging-enabled* t)".
-The only things left to do start the logging before the plan execution and after the execution, finishing it.
+\subsection{Recording Narrative Enabled Episodic Memories}
+Our recording mechanism  captures every executed \cram action and its parameter.
+In addition, the logger puts the actions in relation to each other by creating a hierarchy which is described in Section \ref{ch:narrative,sec:actionHierarchy}.
+
+Before you can begin to record your own \neems, you need to include the "cram-cloud-logger" package into your \cram plan.
+After you included the package, you need to enable the logging via:
+
+
+\begin{lstlisting}[language=lisp, caption=Enabling \neem Logging in a \cram plan]
+	(setf ccl::*is-logging-enabled* t)
+\end{lstlisting}
+
+The only things left to do start the logging before the plan execution and after the execution to finishing it.
 It can look like the following:
+\begin{lstlisting}[language=lisp, caption=Steps to Record an Episode for a \cram Plan]
 	(ccl::start-episode)
 	(urdf-proj:with-simulated-robot (demo::demo-random nil ))
 	(ccl::stop-episode)
+\end{lstlisting}
 	
-The generate log file is stored per default in "~/knowrob-memory".
-Having those components make sure before you run your cram plan, launch the \knowrob with the memory function via "roslaunch knowrob\_memory knowrob.launch" 
+The generate \neem will be stored per default in "\raisebox{-0.9ex}{\~{}}/knowrob-memory".
+Keep in mind to  have \knowrob launched before starting the \neem recording. 
+You can start \knowrob via:
+
+\begin{lstlisting}[language=bash, caption=How to Start \knowrob]
+	roslaunch knowrob_memory knowrob.launch
+\end{lstlisting}
 
 \subsection{Data}
 After you generate your first \neem~you will find a folder with a timestamp store in the "~/knowrob-memory" folder (per default).
