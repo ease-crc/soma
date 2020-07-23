@@ -1,20 +1,20 @@
-\section{Robot \neems}
-
-This chapter focuses on describing how to generate \neems~from robot 
+\section{Narrative Enabled Episodic Memories for Robotic Agents}
+\label{sec:robot-neem}
+This section focuses on describing how to generate \neems from experiments performed by the robot. 
 
 \subsection{Prerequisite}
 
-Before you are generating logs, make sure you are familiar with the Cognitive Robot Abstract Machine (\cram) system \url{http://cram-system.org/cram}.
-In addition, you will need also a MongoDB Server with version 3.4.10.
-Make sure you also installed Knowrob
-https://github.com/knowrob/knowrob
-
-and the following ontologies
-https://github.com/ease-crc/cram\_knowledge
-https://github.com/ease-crc/ease\_ontology
-
-Having those components make sure before you run your cram plan, launch the \knowrob with the memory function via "roslaunch knowrob\_memory knowrob.launch"
-
+Before you are intending to generate your episodic memories, make sure you are familiar with the Cognitive Robot Abstract Machine (\cram)\footnote{\url{http://cram-system.org/cram}} system and installed it on your machine.
+\cram is a cognitive-enabled planning framework which allows to design high-level plan for robots.\todo{@Seba: Add more detailed description}
+This section requires that your robot plan is written in \cram to be able to generate \neems.
+However, once you are familiar with our planning and logging components, you will be able to port those components to your preferred planning tool.
+In addition to having a valid \cram plan, you will need the following software components to be installed:
+\begin{itemize}
+	\item A MongoDB server with at least version 3.4.10\footnote{\url{https://www.mongodb.com/}}
+	\item \knowrob\footnote{\url{https://github.com/knowrob/knowrob}}
+	\item \soma ontology\footnote{\url{https://github.com/ease-crc/soma}}
+	\item \cram ontology\footnote{\url{https://github.com/ease-crc/cram\_knowledge}}
+\end{itemize}
 
 
 \subsection{Generating Logs}
@@ -27,7 +27,8 @@ It can look like the following:
 	(urdf-proj:with-simulated-robot (demo::demo-random nil ))
 	(ccl::stop-episode)
 	
-The generate log file is stored per default in "~/knowrob-memory" 
+The generate log file is stored per default in "~/knowrob-memory".
+Having those components make sure before you run your cram plan, launch the \knowrob with the memory function via "roslaunch knowrob\_memory knowrob.launch" 
 
 \subsection{Data}
 After you generate your first \neem~you will find a folder with a timestamp store in the "~/knowrob-memory" folder (per default).
