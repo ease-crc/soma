@@ -6,7 +6,7 @@ This section focuses on describing how to generate \neems from experiments perfo
 \subsection{Prerequisite}
 
 Before you are intending to generate your episodic memories, make sure you are familiar with the Cognitive Robot Abstract Machine (\cram)\footnote{\url{http://cram-system.org/cram}} system and installed it on your machine.
-\cram is a cognitive-enabled planning framework which allows to design high-level plan for robots.\todo{@Seba: Add more detailed description}
+\cram is a cognitive-enabled planning framework which allows to design high-level plan for robots.\todo{@Seba: Add more detailed description about CRAM}
 This section requires that your robot plan is written in \cram to be able to generate \neems.
 However, once you are familiar with our planning and logging components, you will be able to port those components to your preferred planning tool.
 
@@ -48,26 +48,46 @@ You can start \knowrob via:
 \end{lstlisting}
 
 \subsection{Data}
-After you generate your first \neem~you will find a folder with a timestamp store in the "~/knowrob-memory" folder (per default).
-This folder contains the \neemnar and \neemexp . The \neemnar is represented in the "beliefstate.owl". The triple store and the \neemexp are stored in the "roslog" folder. The triple store is stored in the "triples.bson". The other bsons files are presentening the logged rostopics. More about the rostopics is stated in Section \todo{put reference to rostopic section}
+Per default your generated \neem will be stored under "\raisebox{-0.9ex}{\~{}}/knowrob-memory/\textless timestamp \textgreater". 
+Your \neem will consits of at least 5 folders - \textit{annotations}, \textit{inferred}, \textit{roslog}, \textit{ros\_tf} and \textit{triples}.
+In the following, we will give an overview which information is contained in those folders:
 
-\subsection{Log own designed plans}
-The disadvantage of having a strong semantic knowledge representation is that our ontology.
-Currently, we focused on the support on setting-up and cleaning-up a table.
-If you want for instance create \neems for an autonomous car, you will need to extend the \ease ontologies and the logger with your required actions, parameters etc.
-In the following subsection, we will describe how you can add the required stuff so they are semantical log.
-In general, please feel free to share your changes with us in form of an pull request to our repositories.
-So we can provide you feedback and your help us to extend the features
+\todo{@Seba add proper}
+\begin{description}
+	\item[annotations] description
+	\item[inferred] description
+	\item[roslog] description
+	\item[ros\_tf] description
+	\item[triples] description	
+\end{description}
+%This folder contains the \neemnar and \neemexp . The \neemnar is represented in the "beliefstate.owl". The triple store and the \neemexp are stored in the "roslog" folder. The triple store is stored in the "triples.bson". The other bsons files are presentening the logged rostopics. More about the rostopics is stated in Section \todo{put reference to rostopic section}
 
-\subsubsection{Adding New Tasks}
-The most obvious requirement is to define your tasks.
-A task might be something like cutting, stopping or accelerating.
-To be able to semantaclly log the task, you will need first define the task in the \easeAct.
-Make sure that the new action is a child of the \textit{CommunicationTask}, \textit{MentalTask} or \textit{PhysicalTask}.
-If you will try to log unknown task, there will be logged as \textit{PhysicalTask}.
-The \textit{PlanExecution} instance pointing to that \textit{PhysicalTask} , will have a comment attached with the statement "Unknown Action: <CRAM-ACTION-NAME>".
-After you add the new action to the ontology, please open the "knowrob-action-name-handler.lisp" in the cram-cloud-logger package and add your new action in the format "(CRAM-ACTION-NAME EASE-ONTOLOGY-NAME)".
-If this step you added successfully the support of the new action to the logger.
+\subsection{Add Semantic Support to your Designed Plans}
+The disadvantage of having a strong semantic knowledge representation is that the used ontology requires updates when semantic knowledge has to be extended. 
+Currently, \soma focuses on the support to record table setting/cleaning-up experiments.
+If you want for instance create \neems for autonomous cars, you will need to extend the \soma ontology and the recording mechanism with your required actions, parameters and objects.
+How to extend the \soma ontology is described in Section \ref{sec:extension}.
+Instead, in the following subsection, we will describe how you can extend the \cram recording mechanism to support your required semantic knowledge.
+
+\subsubsection{New Tasks Definition}
+If you want to semantically record new tasks such as e.g. accelerating or breaking, you need to define them in the ontology as described in Section \ref{sec:extension,subsec:task}.
+Unknown tasks will be logged as \textit{PhysicalTask}.
+The \textit{PlanExecution} instance pointing to the\textit{PhysicalTask} will have a comment attached with the statement "Unknown Action: \textless CRAM-ACTION-NAME\textgreater", where \textless CRAM-ACTION-NAME\textgreater" is the action name you defined in your plan.
+After you defined your new actions in \soma, please open the "knowrob-action-name-handler.lisp" in the "cram-cloud-logger" package and add your new actions in the format:
+
+\begin{lstlisting}[language=lisp, caption=Steps to Record an Episode for a \cram Plan]
+(defun init-action-name-mapper ()
+   (let ((action-name-mapper (make-instance 'ccl::cram-2-knowrob-mapper))
+     (definition
+         '(("reaching" "Reaching")
+           ("retracting" "Retracting")
+           ("lifting" "Lifting")
+           ("opening" "Opening")
+           ("<CRAM-ACTION-NAME>" "<SOMA-ONTOLOGY-NAME>")
+\end{lstlisting}
+
+where \textless CRAM-ACTION-NAME\textgreater is the name of your action used in the cram plan and \textless SOMA-ONTOLOGY-NAME\textgreater.
+With this step you added successfully the support of the new action to \cram \neem episodic memory logger.
 
 \subsubsection{Adding New Objects}
 Unknown object will be logged as \textit{DesignedArtifact} with the comment attached "Unknown Object: CRAM-OBJECT-TYPE"
