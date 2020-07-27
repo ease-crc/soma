@@ -1,13 +1,13 @@
 
-:- module(uglify_ease,
+:- module(uglify,
     [
-      uglify_ease/0
+      uglify/0
     ]).
 
 :- use_module(library('semweb/rdfs')).
 :- use_module(library('semweb/rdf_db')).
 
-ease_ugly_ontology('http://www.ease-crc.org/ont/EASE-UGLY.owl').
+ease_ugly_ontology('http://www.ease-crc.org/ont/SOMA-UGLY.owl').
 
 ease_assert(_Graph, rdf(_S,_P,O)) :-
   rdf_equal(O,owl:'Ontology'),!.
@@ -23,7 +23,7 @@ ease_assert(Graph, rdf(S,P,O)) :-
 ease_assert_import(Graph,Ontology) :-
   % ignore all imports of EASE ontology modules
   ( atom_concat('http://www.ease-crc.org/',_,Ontology) ;
-    atom_concat('package://ease_ontology/',_,Ontology)
+    atom_concat('package://soma/',_,Ontology)
   ),!.
 
 ease_assert_import(Graph,Ontology) :-
@@ -34,24 +34,24 @@ ease_load(URL, Graph) :-
   load_rdf(URL, Triples, [blank_nodes(noshare)]),
   maplist(ease_assert(Graph), Triples).
 
-uglify_ease :-
+uglify :-
   ease_ugly_ontology(EASE_UGLY),
   Ontologies=[
-    'EASE.owl',
-    'EASE-ACT.owl',
-    'EASE-WF.owl',
-    'EASE-IO.owl',
-    'EASE-OBJ.owl',
-    'EASE-PROC.owl'
+    'SOMA.owl',
+    'SOMA-ACT.owl',
+    'SOMA-WF.owl',
+    'SOMA-IO.owl',
+    'SOMA-OBJ.owl',
+    'SOMA-PROC.owl'
   ],
   rdf_assert(EASE_UGLY,rdf:type,owl:'Ontology',ease),
-  source_file(uglify_ease, Filepath),
-  string_concat(Basepath, '/prolog/uglify_ease.pl', Filepath),
+  source_file(uglify, Filepath),
+  string_concat(Basepath, '/prolog/uglify.pl', Filepath),
   forall(member(N,Ontologies), (
       atomic_list_concat([Basepath, '/owl/', N], GlobalPath),
       ease_load(GlobalPath,ease)
   )),
   %%%
-  atomic_list_concat([Basepath, '/owl/EASE-UGLY.owl'], OUT_Path),
+  atomic_list_concat([Basepath, '/owl/SOMA-UGLY.owl'], OUT_Path),
   rdf_save(OUT_Path, [graph(ease),sorted(true)]).
 

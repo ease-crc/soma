@@ -1,4 +1,3 @@
-
 #Script to generate ELAN controlled vocabularies from the EASE ontology
 #
 
@@ -35,7 +34,7 @@ cvPath = './elan_action_labels.txt'
 
 DULAction = "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"
 
-ease = "http://www.ease-crc.org/ont/EASE.owl#"
+ease = "http://www.ease-crc.org/ont/SOMA.owl#"
 rdfs = "http://www.w3.org/2000/01/rdf-schema#"
 rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 owl = "http://www.w3.org/2002/07/owl#"
@@ -56,7 +55,7 @@ parser.add_argument('--language_label', '-lb', metavar='LB', type=str, help='a s
 parser.add_argument('--output_file', '-of', metavar='OF', type=str, help='path to the output file', required=True)
 parser.add_argument('--input_files', '-if', metavar='IF', type=str, required=True, nargs='+', help='paths to the input files')
 parser.add_argument('--vocabulary_id', '-vi', metavar='LR', type=str, action='append', help='a human readable identifier for the vocabulary, default is \"und\"', required=True)
-parser.add_argument('--namespace', '-ns', metavar='N', type=str, required=True, action='append', help='namespace to prepend to start concepts. An example namespace is \'http://www.ease-crc.org/ont/EASE.owl#\'')
+parser.add_argument('--namespace', '-ns', metavar='N', type=str, required=True, action='append', help='namespace to prepend to start concepts. An example namespace is \'http://www.ease-crc.org/ont/SOMA.owl#\'')
 parser.add_argument('--start_concepts', '-sc', metavar='C', type=str, required=True, nargs='+', action='append',
                     help='concepts to start from when creating the vocabulary; these and their subconcepts will be included. An example concept is Action')
 
