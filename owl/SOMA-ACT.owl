@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
-<rdf:RDF xmlns="http://www.ease-crc.org/ont/SOMA.owl#"
-     xml:base="http://www.ease-crc.org/ont/SOMA.owl"
-     xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+<rdf:RDF xmlns="http://www.ease-crc.org/ont/SOMA-ACT.owl#"
+     xml:base="http://www.ease-crc.org/ont/SOMA-ACT.owl"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl">
-        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-STATE.owl"/>
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
         <owl:imports rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
     </owl:Ontology>
     
@@ -24,39 +24,6 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasAction -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasAction">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-        <rdfs:label>has action</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasExecutionState -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasExecutionState">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ExecutionStateRegion"/>
-        <rdfs:label>has execution state</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#isPerformedBy -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isPerformedBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-        <rdfs:label>is performed by</rdfs:label>
-    </owl:ObjectProperty>
     
 
 
@@ -87,6 +54,28 @@
     <!-- http://www.ease-crc.org/ont/SOMA.owl#finishedBy -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#finishedBy"/>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasAction -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasAction">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+        <rdfs:label>has action</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasExecutionState -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasExecutionState">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ExecutionStateRegion"/>
+        <rdfs:label>has execution state</rdfs:label>
+    </owl:ObjectProperty>
     
 
 
@@ -123,6 +112,17 @@
     <!-- http://www.ease-crc.org/ont/SOMA.owl#isAskedBy -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isAskedBy"/>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isPerformedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isPerformedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+        <rdfs:label>is performed by</rdfs:label>
+    </owl:ObjectProperty>
     
 
 
@@ -176,6 +176,33 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#Cutting -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#Cutting">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ModifyingPhysicalObject"/>
+        <rdfs:comment>The goal of this task is to separate some target object into several pieces by means of cutting into its constituent material. Unlike a disassembly, a cut is usually not easily reversible.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#Dicing -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#Dicing">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl#Cutting"/>
+        <rdfs:comment>A particular kind of cutting where the goal is to produce small pieces out of some object or material. Unlike slices, the pieces to be obtained do not have one or two dimensions being more prominent than others. &quot;Dice&quot;, the pieces dicing results in, are approximately cubic.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#Slicing -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#Slicing">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl#Cutting"/>
+        <rdfs:comment>A particular kind of cutting where the goal is to produce slices from some solid object.</rdfs:comment>
+    </owl:Class>
     
 
 
@@ -615,6 +642,7 @@ One could argue Mental actions are all Physical actions, because anything the Ag
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionTopic"/>
     </owl:Class>
     
+
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionTopic -->
 
@@ -1177,5 +1205,5 @@ Simulation does not commit itself to state accuracy: the initial state of the si
 
 
 
-<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
 
