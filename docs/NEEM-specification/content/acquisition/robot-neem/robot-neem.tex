@@ -49,10 +49,10 @@ You can start \knowrob via:
 
 \subsection{Data}
 Per default your generated \neem will be stored under "\raisebox{-0.9ex}{\~{}}/knowrob-memory/\textless timestamp \textgreater". 
-Your \neem will consits of at least 5 folders - \textit{annotations}, \textit{inferred}, \textit{roslog}, \textit{ros\_tf} and \textit{triples}.
+Your \neem will consist of at least 5 folders - \textit{annotations}, \textit{inferred}, \textit{roslog}, \textit{ros\_tf} and \textit{triples}.
 In the following, we will give an overview which information is contained in those folders:
 
-\todo{@Seba add proper}
+\todo{@Seba add proper descriptions}
 \begin{description}
 	\item[annotations] description
 	\item[inferred] description
@@ -65,9 +65,9 @@ In the following, we will give an overview which information is contained in tho
 \subsection{Add Semantic Support to your Designed Plans}
 The disadvantage of having a strong semantic knowledge representation is that the used ontology requires updates when semantic knowledge has to be extended. 
 Currently, \soma focuses on the support to record table setting/cleaning-up experiments.
-If you want for instance create \neems for autonomous cars, you will need to extend the \soma ontology and the recording mechanism with your required actions, parameters and objects.
+If you want for instance create \neems for e.g.\ autonomous cars, you will need to extend the \soma ontology and the recording mechanism with your required actions, parameters and objects.
 How to extend the \soma ontology is described in Section \ref{sec:extension}.
-Instead, in the following subsection, we will describe how you can extend the \cram recording mechanism to support your required semantic knowledge.
+In the following subsection, we will describe how you can extend the \cram recording mechanism to support your required semantic knowledge.
 
 \subsubsection{New Tasks Definition}
 If you want to semantically record new tasks such as e.g. accelerating or breaking, you need to define them in the ontology as described in Section \ref{sec:extension,subsec:task}.
@@ -75,7 +75,7 @@ Unknown tasks will be logged as \textit{PhysicalTask}.
 The \textit{PlanExecution} instance pointing to the\textit{PhysicalTask} will have a comment attached with the statement "Unknown Action: \textless CRAM-ACTION-NAME\textgreater", where \textless CRAM-ACTION-NAME\textgreater" is the action name you defined in your plan.
 After you defined your new actions in \soma, please open the "knowrob-action-name-handler.lisp" in the "cram-cloud-logger" package and add your new actions in the format:
 
-\begin{lstlisting}[language=lisp, caption=Steps to Record an Episode for a \cram Plan]
+\begin{lstlisting}[language=lisp, caption=Linking the CRAM Action to the Ontology Concept]
 (defun init-action-name-mapper ()
    (let ((action-name-mapper (make-instance 'ccl::cram-2-knowrob-mapper))
      (definition
@@ -90,10 +90,21 @@ where \textless CRAM-ACTION-NAME\textgreater is the name of your action used in 
 With this step you added successfully the support of the new action to \cram \neem episodic memory logger.
 
 \subsubsection{Adding New Objects}
-Unknown object will be logged as \textit{DesignedArtifact} with the comment attached "Unknown Object: CRAM-OBJECT-TYPE"
-To add your object to the ontology, you need to add it in the \easeObj.
-Afterwards, open the "utils-for-perform.lisp" in the 
-cram-cloud-logger package and include the new object in the hash table generate in "get-ease-object-lookup-table" where the key is the CRAM-OBJECT-TYPE and the value is the uri to the object concept created in \easeObj.
+Unknown objects will be logged as instance of \textit{DesignedArtifact}.
+In addition, a comment attached "Unknown Object: \cramentitytoreplace{CRAM-OBJECT-TYPE}" to this instance.
+\cramentitytoreplace{CRAM-OBJECT-TYPE} indicates which object you need to define in the ontology.
+After you added your object to the ontology, open the "utils-for-perform.lisp" in the \cramloggerpackage package and include the new object in the hash table generate in "get-ease-object-lookup-table" like:
+
+\begin{lstlisting}[language=lisp, caption=Linking the CRAM Object to the Ontology Concept]
+(defun get-ease-object-lookup-table()
+  (let ((lookup-table (make-hash-table :test 'equal)))
+    (setf (gethash "BOWL" lookup-table) "'http://www.ease-crc.org/ont/EASE-OBJ.owl#Bowl'")
+    (setf (gethash "CUP" lookup-table) "'http://www.ease-crc.org/ont/EASE-OBJ.owl#Cup'")
+    (setf (gethash "<CRAM-OBJECT-TYPE>" lookup-table) "'<SOMA-ONTOLOGY-ENTITY-URL>'")
+ lookup-table))
+\end{lstlisting}
+
+where the key is \cramentitytoreplace{CRAM-OBJECT-TYPE}, the object type used in the \cram plan, and \cramentitytoreplace{SOMA-ONTOLOGY-ENTITY-URL}the value which is the uri pointing to the object concept created in \soma.
 
 \subsubsection{Adding New Failure}
 Unknown failures will be logged as \textit{Failure} with the comment attached "Unknown failure: CRAM-FAILURE-NAME".
