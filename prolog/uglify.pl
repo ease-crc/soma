@@ -17,7 +17,24 @@ ease_assert(Graph, rdf(_S,P,O)) :-
   ease_assert_import(Graph,O).
 
 ease_assert(Graph, rdf(S,P,O)) :-
-  rdf_assert(S,P,O,Graph).
+  soma_iri(S,S0),
+  soma_iri(P,P0),
+  soma_iri(O,O0),
+  rdf_assert(S0,P0,O0,Graph).
+
+% convert any 'http://www.ease-crc.org/SOMA[.*].owl#[.*]' IRI
+% to 'http://www.ease-crc.org/SOMA.owl#[.*]'
+soma_iri(IN,IN) :-
+  \+ atom(IN),
+  !.
+soma_iri(IN,OUT) :-
+  ( atom_concat('http://www.ease-crc.org/SOMA',_,IN)
+  -> soma_iri1(IN,OUT)
+  ;  OUT=IN
+  ).
+soma_iri1(IN,OUT) :-
+  rdf_split_url(_,Name,IN),
+  atom_concat('http://www.ease-crc.org/SOMA.owl#',Name,OUT).
 
 %%
 ease_assert_import(Graph,Ontology) :-
@@ -42,6 +59,8 @@ uglify :-
     'SOMA-WF.owl',
     'SOMA-IO.owl',
     'SOMA-OBJ.owl',
+    'SOMA-STATE.owl',
+    'SOMA-SAY.owl',
     'SOMA-PROC.owl'
   ],
   rdf_assert(EASE_UGLY,rdf:type,owl:'Ontology',ease),
