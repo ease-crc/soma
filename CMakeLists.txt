@@ -3,7 +3,7 @@
 ##############################################################################
 
 cmake_minimum_required(VERSION 2.8.3)
-project(ease_ontology)
+project(soma)
 
 find_package(catkin REQUIRED COMPONENTS dul)
 
