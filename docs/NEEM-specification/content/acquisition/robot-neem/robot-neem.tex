@@ -56,7 +56,6 @@ In the following, we will give an overview which information is contained in tho
 \begin{description}
 	\item[annotations] description
 	\item[inferred] description
-	\item[roslog] description
 	\item[ros\_tf] description
 	\item[triples] description	
 \end{description}
@@ -91,8 +90,8 @@ With this step you added successfully the support of the new action to \cram \ne
 
 \subsubsection{Adding New Objects}
 Unknown objects will be logged as instance of \textit{DesignedArtifact}.
-In addition, a comment attached "Unknown Object: \cramentitytoreplace{CRAM-OBJECT-TYPE}" to this instance.
-\cramentitytoreplace{CRAM-OBJECT-TYPE} indicates which object you need to define in the ontology.
+In addition, a comment like "Unknown Object: \cramentitytoreplace{CRAM-OBJECT-TYPE}" will be attached to this instance.
+\cramentitytoreplace{CRAM-OBJECT-TYPE} indicates which object you need to define in the ontology \todo{set reference}.
 After you added your object to the ontology, open the "utils-for-perform.lisp" in the \cramloggerpackage package and include the new object in the hash table generate in "get-ease-object-lookup-table" like:
 
 \begin{lstlisting}[language=lisp, caption=Linking the CRAM Object to the Ontology Concept]
@@ -107,9 +106,22 @@ After you added your object to the ontology, open the "utils-for-perform.lisp" i
 where the key is \cramentitytoreplace{CRAM-OBJECT-TYPE}, the object type used in the \cram plan, and \cramentitytoreplace{SOMA-ONTOLOGY-ENTITY-URL}the value which is the uri pointing to the object concept created in \soma.
 
 \subsubsection{Adding New Failure}
-Unknown failures will be logged as \textit{Failure} with the comment attached "Unknown failure: CRAM-FAILURE-NAME".
-To integrate your new \cram failures in to the ontology, you need to add your new failures into the \cramOwl.
-Afterwards, open "failure-handler.lisp" in the cram-cloud-logger package and your new action in the format "(CRAM-FAILURE-NAME CRAM-ONTOLOGY-NAME)".	
+Unknown \cram failures will be logged as instance of \textit{Failure}.
+In addition, a comment like "Unknown failure: \cramentitytoreplace{CRAM-FAILURE-NAME}" will be attached to the instance.
+\cramentitytoreplace{CRAM-FAILURE-NAME} indicates which failure you need to define in the ontology\todo{set reference}.
+After you added your failure to the ontology, open the "failure-handler.lisp" in the \cramloggerpackage package and add your new failure in the format:
+
+\begin{lstlisting}[language=lisp, caption=Linking the CRAM Action to the Ontology Concept]
+(defun init-failure-mapper ()
+  (let ((failure-mapper (make-instance 'ccl::cram-2-knowrob-mapper))
+    (definition
+      '(("cram-common-failures:low-level-failure" "LowLevelFailure")
+        ("cram-common-failures:actionlib-action-timed-out" "ActionlibTimeout")
+        ("<CRAM-FAILURE-NAME>" "<SOMA-ONTOLOGY-NAME>")
+\end{lstlisting}
+
+where \cramentitytoreplace{CRAM-FAILURE-NAME} is the name of your failure defined in the cram plan and \cramentitytoreplace{SOMA-ONTOLOGY-NAME}.
+With this step you added successfully the support of the new failure to \cram \neem episodic memory logger.".	
 
 \subsubsection{Adding New Rostopic}
 Per default, we log the rostopics \tf and tf\_static.
