@@ -97,6 +97,40 @@ coupled with a very
 detailed story about the actions, motions, their purposes, effects,
 the behavior they generate, the images that are captured, etc.
 
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+\subsection{Scope} % Domain of Discourse
+\label{sec:narrative:scope}
+
+% NOTE: taken from SOMA paper
+The broad scope of our work is everyday object manipulation tasks in autonomous robot control, and in particular the motion and force characteristics of objects that interact with each other.
+The research question driving us is whether a single general control program can be written that can generate adequate behavior in many different contexts: for different tasks, objects, and environments.
+
+% NOTE: taken from SOMA paper
+One of the challenges is that, using such a general plan, the agent needs to fill the knowledge gaps between abstract instructions included in the plan and the realization of context specific behavior. That is, for example, the many ways of how humans perform a pouring task depending on the source from which is poured, the destination, and the substance that is to be poured.
+Another challenge is that object manipulation tasks may fail if the agent does not perform the motions competently and well. This is caused by the agent choosing inappropriate parametrization of its control-level functions.
+
+% NOTE: taken from SOMA paper
+The employment of a general plan thus requires an abstract task and object model, and a mechanism to apply this abstract knowledge in situational context.
+To achieve this, an agent needs to be equipped with the necessary common-sense and intuitive physics knowledge, which is what SOMA attempts.
+
+\textbf{TODO: write about competency questions}
+
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+\subsection{Foundational Commitments}
+\label{sec:narrative:commitments}
+
+% NOTE: taken from SOMA paper
+We decided to base our model on the DOLCE+DnS Ultralite (DUL) foundational framework~\cite{DOLCE2003}.
+This decision is greatly motivated by their underlying ontological commitments.
+%The decision to base our model on the DOLCE+DnS Ultralite foundational framework, is greatly motivated by their underlying ontological commitments.
+Firstly, DUL is not a revisionary model, but seeks to express stands that shape human cognition. Furthermore it assumes a reductionist approach -- rather than capturing, for example, the flexibility of our usage of objects via multiple inheritance in a multiplicative manner, we commit to a reduced {\it ground} classification and use a {\it descriptive} approach for handling this flexibility. For this a primary branch of the ontology represents the ground {\bf physical model}, e.g. objects and actions, while a secondary branch represents the {\bf social model}, e.g. roles and tasks. All entities in the social branch would not exist without humans, i.e. they constitute social objects that represent concepts about or descriptions of ground elements. 
+
+% NOTE: taken from SOMA paper
+Every axiomatization in the physical branch can, therefore, be regarded as expressing some physical context whereas axiomatizations in the descriptive social branch are used to express social contexts. A set of dedicated relations is provided that connect both branches. For example, as detailed in Section~\ref{subsec:roles}, the relation \emph{classifies} connects ground objects, e.g. a hammer, with the roles they can play, i.e. potential classifications. Thus, we can state that a hammer can in some context be conceptualized as a murder weapon, a paper weight or a door stopper. Nevertheless, neither its ground ontological classification as a tool will change nor will hammers be subsumed as kinds of door stoppers, paper weights or weapons via multiple inheritance. Following a quick overview of the central modules of SOMA where these commitments apply, we will provide detailed examples of where and how our commitments apply in Sections~\ref{sec:perdurants} and~\ref{sec:endurants}.
+
+
 \subsection{Actions}
 
 \todo{Describe ACT, PROC, STATE from the SOMA paper}
