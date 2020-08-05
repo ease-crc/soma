@@ -6,7 +6,7 @@ import owlready2
 
 
 def convert():
-    ease_ugly = Path(__file__).parent.parent / 'owl' / 'SOMA-UGLY.owl'
+    ease_ugly = Path(__file__).parent.parent / 'build' / 'SOMA.owl'
     if not ease_ugly.exists():
         print('Generating rdf')
         command = 'swipl -f prolog/uglify.pl -t uglify'.split()
@@ -16,7 +16,7 @@ def convert():
 
     print('Converting to owl')
     owlready2.onto_path.insert(0, str(ease_ugly.parent))
-    ontology = owlready2.get_ontology('SOMA-UGLY.owl').load()
+    ontology = owlready2.get_ontology('SOMA.owl').load()
     ontology.save()
     print('Converted')
 

@@ -7,7 +7,7 @@
 :- use_module(library('semweb/rdfs')).
 :- use_module(library('semweb/rdf_db')).
 
-ease_ugly_ontology('http://www.ease-crc.org/ont/SOMA-UGLY.owl').
+ease_ugly_ontology('http://www.ease-crc.org/ont/SOMA.owl').
 
 ease_assert(_Graph, rdf(_S,_P,O)) :-
   rdf_equal(O,owl:'Ontology'),!.
@@ -17,7 +17,24 @@ ease_assert(Graph, rdf(_S,P,O)) :-
   ease_assert_import(Graph,O).
 
 ease_assert(Graph, rdf(S,P,O)) :-
-  rdf_assert(S,P,O,Graph).
+  soma_iri(S,S0),
+  soma_iri(P,P0),
+  soma_iri(O,O0),
+  rdf_assert(S0,P0,O0,Graph).
+
+% convert any 'http://www.ease-crc.org/SOMA[.*].owl#[.*]' IRI
+% to 'http://www.ease-crc.org/SOMA.owl#[.*]'
+soma_iri(IN,IN) :-
+  \+ atom(IN),
+  !.
+soma_iri(IN,OUT) :-
+  ( atom_concat('http://www.ease-crc.org/SOMA',_,IN)
+  -> soma_iri1(IN,OUT)
+  ;  OUT=IN
+  ).
+soma_iri1(IN,OUT) :-
+  rdf_split_url(_,Name,IN),
+  atom_concat('http://www.ease-crc.org/SOMA.owl#',Name,OUT).
 
 %%
 ease_assert_import(Graph,Ontology) :-
@@ -42,6 +59,7 @@ uglify :-
     'SOMA-WF.owl',
     'SOMA-IO.owl',
     'SOMA-OBJ.owl',
+    %'SOMA-STATE.owl',
     'SOMA-SAY.owl',
     'SOMA-PROC.owl'
   ],
@@ -53,6 +71,11 @@ uglify :-
       ease_load(GlobalPath,ease)
   )),
   %%%
-  atomic_list_concat([Basepath, '/owl/SOMA-UGLY.owl'], OUT_Path),
+  atomic_list_concat([Basepath, '/build'], BUILD_Path),
+  ( exists_directory(BUILD_Path)
+  -> true
+  ;  make_directory(BUILD_Path)
+  ),
+  atomic_list_concat([BUILD_Path, '/SOMA.owl'], OUT_Path),
   rdf_save(OUT_Path, [graph(ease),sorted(true)]).
 
