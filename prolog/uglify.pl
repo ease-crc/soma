@@ -42,6 +42,7 @@ uglify :-
     'SOMA-WF.owl',
     'SOMA-IO.owl',
     'SOMA-OBJ.owl',
+    'SOMA-SAY.owl',
     'SOMA-PROC.owl'
   ],
   rdf_assert(EASE_UGLY,rdf:type,owl:'Ontology',ease),
