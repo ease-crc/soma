@@ -66,16 +66,12 @@ uglify :-
   rdf_assert(EASE_UGLY,rdf:type,owl:'Ontology',ease),
   % assert owl:versionInfo
   % TODO: assert more version information (e.g. a description, diff to last version, ..)
-  (  getenv('GIT_REF', GitRef)
+  (  getenv('SOMA_VERSION', VersionString)
   -> true
-  ;  GitRef=current
-  ),
-  (  atom_concat('refs/tags/',Tag,GitRef)
-  -> Version=Tag
-  ;  Version=current
+  ;  VersionString=current
   ),
   rdf_assert(EASE_UGLY,owl:versionInfo,
-    literal(type(xsd:string,Version)),ease),
+    literal(type(xsd:string,VersionString)),ease),
   %
   source_file(uglify, Filepath),
   string_concat(Basepath, '/prolog/uglify.pl', Filepath),
