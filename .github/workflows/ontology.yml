@@ -28,7 +28,7 @@ jobs:
       - name: Uglify
         uses: docker://swipl:8.0.3
         with:
-          GIT_REF: {{ github.ref }}
+          GIT_REF: ${{ github.ref }}
           args: swipl -f prolog/uglify.pl -t uglify
 
       - name: HermiT
