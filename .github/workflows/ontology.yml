@@ -8,6 +8,11 @@ on:
     paths:
       - '**'
       - '!docs/**'
+  release:
+    types: [created]
+    paths:
+      - '**'
+      - '!docs/**'
 
 jobs:
   uglify_ontology:
@@ -23,6 +28,7 @@ jobs:
       - name: Uglify
         uses: docker://swipl:8.0.3
         with:
+          GIT_REF: {{ github.ref }}
           args: swipl -f prolog/uglify.pl -t uglify
 
       - name: HermiT
@@ -51,7 +57,7 @@ jobs:
           name: SOMA Ontology
           path: ./build
 
-      - name: Deploy
+      - name: Deploy current
         uses: JamesIves/github-pages-deploy-action@releases/v3
         if: github.ref == 'refs/heads/master'
         with:
@@ -59,6 +65,17 @@ jobs:
           BRANCH: gh-pages
           FOLDER: build
           TARGET_FOLDER: owl/current
+
+      - name: Deploy tag
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build
+          TARGET_FOLDER: owl/${{ github.event.release.tag_name }}
+          #TARGET_FOLDER: owl/${{ GITHUB_REF/refs\/tags\// }}
+          #TARGET_FOLDER: owl/${{ GITHUB_REF#refs/tags/ }}
 
       - name: Deploy failure
         if: failure()
