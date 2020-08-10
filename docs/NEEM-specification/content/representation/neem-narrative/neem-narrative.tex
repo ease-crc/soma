@@ -168,6 +168,38 @@ Every axiomatization in the physical branch can, therefore, be regarded as expre
 % % % % % % % % % % % % % % % % %
 \subsection{Object Branch in SOMA}
 
+\subsubsection{Classification}
+
+\newpage
+\subsubsection{Designed Artifact ODP}
+\begin{ODP}{Designed Artifact}
+\ODPDESCRIPTION{A DesignedArtifact is a physical object described by a Design. In EASE, Designs refer to the form, but also the function of an object. This allows us to say that an object is ``for'' a particular purpose, even though it might be used for something else instead. For example, a cup is a BeverageContainer but can be used as a Flowerpot. Designs form a hierarchy of specificity, for example $DesignMilkContainer \sqsubseteq DesignBeverageContainer \sqsubseteq DesginContainer \sqsubseteq Design$. The justification for this pattern is that the type of an object is rigid, but the roles it plays in events change. A naive taxonomy, without a notion similar to Design, cannot tackle the fact that objects are usable in several ways beyond the obvious; a hammer isn't always a hammer, sometimes it's a paperweight. On the other hand, a usable ontology of objects must take into account how human users refer to objects by their default use.}
+\ODPINTENT{To explicate the intuitive classification human users would have of objects, based on their default uses.}
+\ODPDOMAIN{
+  \texttt{Object classification},
+  \texttt{Event narratives}}
+\ODPDEFINEDIN{DUL.owl, EASE.owl, EASE-middle.owl}
+\ODPQUESTION{
+  \emph{What sort of object is this?}
+  \emph{What is the intended use of the object?}
+  \emph{How did an event unfold?}}
+\ODPGRAPHIC{
+\begin{tikzpicture}
+ \node[owlclass] (DESIGNEDARTIFACT) {
+ \begin{owlclass}{DesignedArtifact}
+  \item \texttt{PhysicalArtifact}
+  \item $(\exists\emph{isDescribedBy}.\texttt{Design})$
+ \end{owlclass}
+ };
+ \node[owlclass,below=0.6cm of DESIGNEDARTIFACT] (DESIGN) {
+ \begin{owlclass}{Design}
+  \item \texttt{Description}
+ \end{owlclass}
+ };
+ \draw (DESIGNEDARTIFACT) edge[thick,-,dashed,blue!60] (DESIGN);
+\end{tikzpicture}
+}
+\end{ODP}
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
 
