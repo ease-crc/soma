@@ -5,20 +5,20 @@
 \newcommand{\givenODPNAME}{}
 \newcommand{\givenODPINTENT}{}
 \newcommand{\givenODPDEFINEDIN}{}
-\newcommand{\givenODPDESCRIPTION}{}
+%\newcommand{\givenODPDESCRIPTION}{}
 \newcommand{\givenODPGRAPHIC}{}
 \newcommand{\givenODPDOMAIN}{}
 \newcommand{\givenODPQUESTION}{}
 \newcommand{\ODPINTENT}[1]     {\renewcommand{\givenODPINTENT}{#1}}
 \newcommand{\ODPDEFINEDIN}[1]  {\renewcommand{\givenODPDEFINEDIN}{#1}}
-\newcommand{\ODPDESCRIPTION}[1]{\renewcommand{\givenODPDESCRIPTION}{#1}}
+%\newcommand{\ODPDESCRIPTION}[1]{\renewcommand{\givenODPDESCRIPTION}{#1}}
 \newcommand{\ODPGRAPHIC}[1]    {\renewcommand{\givenODPGRAPHIC}{#1}}
 \newcommand{\ODPDOMAIN}[1]     {\renewcommand{\givenODPDOMAIN}{#1}}
 \newcommand{\ODPQUESTION}[1]   {\renewcommand{\givenODPQUESTION}{#1}}
 \newcommand{\OPDinit}{
   \renewcommand{\givenODPINTENT}{REQUIRED!}
   \renewcommand{\givenODPDEFINEDIN}{REQUIRED!}
-  \renewcommand{\givenODPDESCRIPTION}{REQUIRED!}
+  %\renewcommand{\givenODPDESCRIPTION}{REQUIRED!}
   \renewcommand{\givenODPGRAPHIC}{REQUIRED!}
   \renewcommand{\givenODPQUESTION}{}
   \renewcommand{\givenODPDOMAIN}{}
@@ -43,8 +43,8 @@
 \OPDinit
 \renewcommand{\givenODPNAME}{#1}
 }{
-\givenODPDESCRIPTION
-\begin{figure}[htb]
+%\givenODPDESCRIPTION
+\begin{figure}[htb!]
 \begin{minipage}{0.45\textwidth}
 \begin{tabular}{ p{1.8cm} p{3.2cm} }
 \toprule
@@ -61,86 +61,86 @@
 \givenODPGRAPHIC
 \end{center}
 \end{minipage}
-\caption{The \emph{\givenODPNAME} ODP.}
+\caption{\emph{\givenODPNAME}.}
 \end{figure}
 }
 
-
-\tikzset{owlclass/.style={draw=blue!40,fill=blue!20,rounded corners}}
-
-% % % % % % % % % % % % % % % % %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{NEEM-Narrative}
 \label{ch:narrative}
 
-% NOTE: taken from KnowRob2.0
-% One of the most powerful components of the human memory system is the
-% episodic memory. 
-When somebody talks about the deciding goal in the
-last soccer world championship many of us can ``replay'' the episode
-in our ``mind's eye''. %, or if somebody talks about a cross court hit
-%in tennis we can recall how such a hit feels in the arm.
-The memory
-mechanism that allows us to recall these very detailed pieces of
-information from abstract descriptions is our episodic memory.
-Episodic memory is powerful because it allows us to remember special
-experiences we had. It can also serve as a ``repository'' from which
-we learn general knowledge.
-
-% NOTE: taken from KnowRob2.0
-EASE integrates episodic memories
-deeply into the knowledge acquisition, representation, and processing
-system. Whenever a robotic agent performs, observes, prospects, and
-reads about an activity, it creates an episodic memory. An episodic
-memory is best understood as a video that the agent makes of the
-ongoing activity 
-%in its inner world knowledge base
-coupled with a very
-detailed story about the actions, motions, their purposes, effects,
-the behavior they generate, the images that are captured, etc.
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+\subsection{Taxonomy}
+\label{sec:taxonomy}
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsection{Scope} % Domain of Discourse
-\label{sec:narrative:scope}
+\subsection{Occurrences}
+\label{sec:occurrences}
+The basic building blocks of a NEEM are the events that occur during the course of an activity. An event is defined as \emph{any physical, social, or mental process, event, or state}. Events have an associated time interval that determines the time at which the event occurs. Time data is represented as unix timestamps, or using XSD date types. As discussed in porevious section, we distinguish between three different event classes: \owlClass{Action}, \owlClass{State}, and \owlClass{Process}.
 
-% NOTE: taken from SOMA paper
-The broad scope of our work is everyday object manipulation tasks in autonomous robot control, and in particular the motion and force characteristics of objects that interact with each other.
-The research question driving us is whether a single general control program can be written that can generate adequate behavior in many different contexts: for different tasks, objects, and environments.
+To deal with occurences, the EASE knowledge base provides the unary \emph{occurs} predicate whose argument is an event entity. It is usually wrapped into a temporal scope to assert the time data of the interval associates to the event. For the tell case, this can be written as: \emph{tell(occurs(Event) during [Begin,End])}.
 
-% NOTE: taken from SOMA paper
-One of the challenges is that, using such a general plan, the agent needs to fill the knowledge gaps between abstract instructions included in the plan and the realization of context specific behavior. That is, for example, the many ways of how humans perform a pouring task depending on the source from which is poured, the destination, and the substance that is to be poured.
-Another challenge is that object manipulation tasks may fail if the agent does not perform the motions competently and well. This is caused by the agent choosing inappropriate parametrization of its control-level functions.
-
-% NOTE: taken from SOMA paper
-The employment of a general plan thus requires an abstract task and object model, and a mechanism to apply this abstract knowledge in situational context.
-To achieve this, an agent needs to be equipped with the necessary common-sense and intuitive physics knowledge, which is what SOMA attempts.
-
-\textbf{TODO: write about competency questions}
-
-% % % % % % % % % % % % % % % % %
-% % % % % % % % % % % % % % % % %
-\subsection{Upper-Level Ontology}
-\label{sec:narrative:commitments}
-
-% NOTE: taken from SOMA paper
-We decided to base our model on the DOLCE+DnS Ultralite (DUL) foundational framework~\cite{DOLCE2003}.
-This decision is greatly motivated by their underlying ontological commitments.
-%The decision to base our model on the DOLCE+DnS Ultralite foundational framework, is greatly motivated by their underlying ontological commitments.
-Firstly, DUL is not a revisionary model, but seeks to express stands that shape human cognition. Furthermore it assumes a reductionist approach -- rather than capturing, for example, the flexibility of our usage of objects via multiple inheritance in a multiplicative manner, we commit to a reduced {\it ground} classification and use a {\it descriptive} approach for handling this flexibility. For this a primary branch of the ontology represents the ground {\bf physical model}, e.g. objects and actions, while a secondary branch represents the {\bf social model}, e.g. roles and tasks. All entities in the social branch would not exist without humans, i.e. they constitute social objects that represent concepts about or descriptions of ground elements. 
-
-% NOTE: taken from SOMA paper
-Every axiomatization in the physical branch can, therefore, be regarded as expressing some physical context whereas axiomatizations in the descriptive social branch are used to express social contexts. A set of dedicated relations is provided that connect both branches. For example, as detailed in Section~\ref{subsec:roles}, the relation \emph{classifies} connects ground objects, e.g. a hammer, with the roles they can play, i.e. potential classifications. Thus, we can state that a hammer can in some context be conceptualized as a murder weapon, a paper weight or a door stopper. Nevertheless, neither its ground ontological classification as a tool will change nor will hammers be subsumed as kinds of door stoppers, paper weights or weapons via multiple inheritance. Following a quick overview of the central modules of SOMA where these commitments apply, we will provide detailed examples of where and how our commitments apply in Sections~\ref{sec:perdurants} and~\ref{sec:endurants}.
-
-% % % % % % % % % % % % % % % % %
-% % % % % % % % % % % % % % % % %
-\subsection{SOMA Taxonomy}
-\label{sec:narrative:taxonomy}
-
-\textbf{TODO: provide a broad overview about types in SOMA, what branches the ontology has. Show a Figure, maybe use this Figure to indicate in subsections at which branch in the taxonomy we are?}
+\begin{ODP}{The Representation of Occurences}
+\ODPINTENT{To represent that something has happened.}
+\ODPDOMAIN{\texttt{Event observation}}
+\ODPDEFINEDIN{DUL.owl}
+\ODPQUESTION{
+    \emph{Did it happen?}
+    \emph{When did it happen?}}
+\ODPGRAPHIC{
+\begin{tikzpicture}
+    \node[owlclass] (EVT) {\begin{owlclass}{Event}
+        \item \texttt{Entity}
+    \end{owlclass}};
+    \node[owlclass,below=0.6cm of EVT] (TI) {\begin{owlclass}{Time Interval}
+        \item \texttt{Region}
+    \end{owlclass}};
+    \node[data,below=0.6cm of TI,xshift=-1.2cm] (BEGIN) {xsd:double};
+    \node[data,below=0.6cm of TI,xshift=1.2cm] (END) {xsd:double};
+    \draw (EVT) edge[relation] node[midway,label=right:hasTimeInterval] {} (TI);
+    \draw (TI) edge[relation] node[midway,label=left:hasIntervalBegin] {} (BEGIN);
+    \draw (TI) edge[relation] node[midway,label=right:hasIntervalEnd] {} (END);
+\end{tikzpicture}
+}
+\end{ODP}
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsection{Event Branch in SOMA}
+\subsection{Participation}
+\label{sec:participation}
+
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+\subsection{Composition}
+\label{sec:composition}
+
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+\subsection{Qualification}
+\label{sec:qualification}
+
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+\subsection{Classification}
+\label{sec:classification}
+
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+\subsection{Interpretation}
+\label{sec:interpretation}
+
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+\subsection{Transformation}
+\label{sec:transformation}
+
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+\iffalse
+\subsection{Events}
 \begin{itemize}
 \item show SOMA Figure highlight event branch
 \item write about different types of events
@@ -160,7 +160,7 @@ Every axiomatization in the physical branch can, therefore, be regarded as expre
 
 \paragraph{Process vs. Action ODP}
 \begin{ODP}{Process vs. Action}
-\ODPDESCRIPTION{An Action is an Event with at least one Agent participant, such that this Agent has a Task, often defined by a Plan or Workflow, which it executes through the Action. A Process is an Event for which no such commitments have been made. In DUL, these classes are not disjoint, allowing a particular event individual to be classified as either, depending on whether we care to record an agent and its goals or not. In EASE, we use Process as a top-level class for events with no agentive participant.}
+%\ODPDESCRIPTION{An Action is an Event with at least one Agent participant, such that this Agent has a Task, often defined by a Plan or Workflow, which it executes through the Action. A Process is an Event for which no such commitments have been made. In DUL, these classes are not disjoint, allowing a particular event individual to be classified as either, depending on whether we care to record an agent and its goals or not. In EASE, we use Process as a top-level class for events with no agentive participant.}
 \ODPINTENT{To represent the intentional and agentive structure-- or lack thereof-- behind Events.}
 \ODPDOMAIN{
   \texttt{Event classification},
@@ -190,14 +190,7 @@ Every axiomatization in the physical branch can, therefore, be regarded as expre
 \textbf{tasks are used to classify events}
 \paragraph{Task Execution ODP}
 \begin{ODP}{Task Execution}
-\ODPDESCRIPTION{
-This ODP allows to make assertions on roles played by agents
-without involving the agents that play that roles, and vice versa.
-It allows to express neither the context type in which tasks are defined,
-not the particular context in which the action is carried out.
-Moreover, it does not allow to express the time at which
-the task is executed through the action
-(for actions that do not solely execute that certain task).}
+%\ODPDESCRIPTION{This ODP allows to make assertions on roles played by agents without involving the agents that play that roles, and vice versa. It allows to express neither the context type in which tasks are defined, not the particular context in which the action is carried out. Moreover, it does not allow to express the time at which the task is executed through the action (for actions that do not solely execute that certain task).}
 \ODPINTENT{To represent actions through which tasks are executed. }
 \ODPDOMAIN{
   \texttt{Organization},
@@ -230,7 +223,7 @@ the task is executed through the action
 
 \paragraph{State, Configuration, Gestallt ODP}
 \begin{ODP}{State, Configuration, Gestallt}
-\ODPDESCRIPTION{A state is a configuration of the world that is construed to be stable on its own. Outside disturbances may cause state transitions, and the settling into some other, self-stable configuration. A State is also characterized by a Description, that indicates things such as what kind of entities participate in the state, what relations might exist between them, what regions may be used by particular qualities of the participants. This Description is, in general, referred to as a Configuration, however some common examples are Goals-- describe desired states of the world--, Norms-- describe states that should be kept--, and Diagnoses-- describe a state that causes certain observable symptoms. States are classified by Gestallts. \textbf{TODO}: Generalize this and/or split it: classification by an event type and structuring by a description are different ODPs in the current list. All three event subclasses (Actions, Processes, States) now are each part of their own Event-Concept-Description triad, where the Concept classifies the Event, and the Description, by describing the classifying Concept, structures the Event.
+%\ODPDESCRIPTION{A state is a configuration of the world that is construed to be stable on its own. Outside disturbances may cause state transitions, and the settling into some other, self-stable configuration. A State is also characterized by a Description, that indicates things such as what kind of entities participate in the state, what relations might exist between them, what regions may be used by particular qualities of the participants. This Description is, in general, referred to as a Configuration, however some common examples are Goals-- describe desired states of the world--, Norms-- describe states that should be kept--, and Diagnoses-- describe a state that causes certain observable symptoms. States are classified by Gestallts. \textbf{TODO}: Generalize this and/or split it: classification by an event type and structuring by a description are different ODPs in the current list. All three event subclasses (Actions, Processes, States) now are each part of their own Event-Concept-Description triad, where the Concept classifies the Event, and the Description, by describing the classifying Concept, structures the Event.
 }
 \ODPINTENT{Ontological representation for situations in the world that are cognitively construed as stable arrangements of entities.}
 \ODPDOMAIN{
@@ -253,6 +246,8 @@ the task is executed through the action
 \subsubsection{Interpretation}
 \textbf{events are interpreted through situations that satisfy some description of the task that is executed.}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
 \subsection{Object Branch in SOMA}
@@ -262,7 +257,7 @@ the task is executed through the action
 %\newpage
 \paragraph{Designed Artifact ODP}
 \begin{ODP}{Designed Artifact}
-\ODPDESCRIPTION{A DesignedArtifact is a physical object described by a Design. In EASE, Designs refer to the form, but also the function of an object. This allows us to say that an object is ``for'' a particular purpose, even though it might be used for something else instead. For example, a cup is a BeverageContainer but can be used as a Flowerpot. Designs form a hierarchy of specificity, for example $DesignMilkContainer \sqsubseteq DesignBeverageContainer \sqsubseteq DesginContainer \sqsubseteq Design$. The justification for this pattern is that the type of an object is rigid, but the roles it plays in events change. A naive taxonomy, without a notion similar to Design, cannot tackle the fact that objects are usable in several ways beyond the obvious; a hammer isn't always a hammer, sometimes it's a paperweight. On the other hand, a usable ontology of objects must take into account how human users refer to objects by their default use.}
+%\ODPDESCRIPTION{A DesignedArtifact is a physical object described by a Design. In EASE, Designs refer to the form, but also the function of an object. This allows us to say that an object is ``for'' a particular purpose, even though it might be used for something else instead. For example, a cup is a BeverageContainer but can be used as a Flowerpot. Designs form a hierarchy of specificity, for example $DesignMilkContainer \sqsubseteq DesignBeverageContainer \sqsubseteq DesginContainer \sqsubseteq Design$. The justification for this pattern is that the type of an object is rigid, but the roles it plays in events change. A naive taxonomy, without a notion similar to Design, cannot tackle the fact that objects are usable in several ways beyond the obvious; a hammer isn't always a hammer, sometimes it's a paperweight. On the other hand, a usable ontology of objects must take into account how human users refer to objects by their default use.}
 \ODPINTENT{To explicate the intuitive classification human users would have of objects, based on their default uses.}
 \ODPDOMAIN{
   \texttt{Object classification},
@@ -294,7 +289,7 @@ the task is executed through the action
 
 \paragraph{Quality -- Region ODP}
 \begin{ODP}{Quality -- Region}
-\ODPDESCRIPTION{This ODP allows structuring information about the properties of an Entity. It distinguishes between dependent aspects of the Entity (things that cannot exist without the Entity itself existing), and the values that may be ascribed to those aspects. These values may be points in some Region. Note that a Region may be a finite set of discrete labels, allowing for ``qualitative'' descriptions, but more often a Region is some dimensional space allowing ``quantitative'' descriptions. A Region may contain a single point, in cases where the value of a Quality is known precisely.}
+%\ODPDESCRIPTION{This ODP allows structuring information about the properties of an Entity. It distinguishes between dependent aspects of the Entity (things that cannot exist without the Entity itself existing), and the values that may be ascribed to those aspects. These values may be points in some Region. Note that a Region may be a finite set of discrete labels, allowing for ``qualitative'' descriptions, but more often a Region is some dimensional space allowing ``quantitative'' descriptions. A Region may contain a single point, in cases where the value of a Quality is known precisely.}
 \ODPINTENT{To distinguish between an aspect of an Entity and a particular numerical description of it.}
 \ODPDOMAIN{
   \texttt{Measurement},
@@ -327,7 +322,7 @@ the task is executed through the action
 \subsubsection{Transformation}
 \paragraph{Transient ODP}
 \begin{ODP}{Transient}
-\ODPDESCRIPTION{This pattern addresses the fact that objects change by undergoing/taking part in Processes. For example, the PancakeMix becomes, through Baking, a Pancake. However, the ontological status of the object while the process takes place is unclear: the object placed on the frying pan is not a Pancake until Baking finishes, but it's not PancakeMix either once it begins to coagulate. In the EASE approach, the object in-between such characterizations is a Transient. A Transient transitionsFrom an Object, and possibly transitionsTo an Object. It may also be the case that a Transient transitionsBack to an Object, to indicate that once the process completes, the same Object is restored; this would be the case for example for catalysts in chemistry, or a loaf of bread after slicing, if there is enough bread left.}
+%\ODPDESCRIPTION{This pattern addresses the fact that objects change by undergoing/taking part in Processes. For example, the PancakeMix becomes, through Baking, a Pancake. However, the ontological status of the object while the process takes place is unclear: the object placed on the frying pan is not a Pancake until Baking finishes, but it's not PancakeMix either once it begins to coagulate. In the EASE approach, the object in-between such characterizations is a Transient. A Transient transitionsFrom an Object, and possibly transitionsTo an Object. It may also be the case that a Transient transitionsBack to an Object, to indicate that once the process completes, the same Object is restored; this would be the case for example for catalysts in chemistry, or a loaf of bread after slicing, if there is enough bread left.}
 \ODPINTENT{Ontological classification for objects undergoing type changes.}
 \ODPDOMAIN{
   \texttt{Object classification},
@@ -355,6 +350,7 @@ the task is executed through the action
 \end{tikzpicture}
 }
 \end{ODP}
+\fi
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
