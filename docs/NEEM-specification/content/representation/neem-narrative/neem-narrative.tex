@@ -25,20 +25,6 @@
   \renewcommand{\labelitemi}{$\mathbf{\sqsubseteq}$}
 }
 
-\newenvironment{owlclass}[2][,] {
-  \begin{minipage}{5.0cm}
-  \begin{center}
-  \texttt{\bf#2} \\[-0.2cm]
-  \par\noindent\rule{\textwidth}{0.4pt}
-  \vspace{-0.6cm}
-  \begin{itemize}[#1]
-  \raggedright} {
-  % % % % % %
-  \end{itemize}
-  \end{center}
-  \end{minipage}
-}
-
 \newenvironment{ODP}[1]{
 \OPDinit
 \renewcommand{\givenODPNAME}{#1}
@@ -46,22 +32,22 @@
 %\givenODPDESCRIPTION
 \begin{figure}[htb!]
 \begin{minipage}{0.45\textwidth}
-\begin{tabular}{ p{1.8cm} p{3.2cm} }
-\toprule
+\fcolorbox{easeblue!40}{easeblue!10}{\begin{tabular}{ p{1.8cm} p{3.2cm} }
+%\toprule
 % {\it\bf Name}                 & \emph{\givenODPNAME} \\
-{\it\bf Intent}               & \givenODPINTENT \\
-{\it\bf Domains}              & \givenODPDOMAIN \\
-{\it\bf Competency Questions} & \givenODPQUESTION \\
-{\it\bf Defined in}           & \givenODPDEFINEDIN \\
-\bottomrule
-\end{tabular}
+{\noindent\color{easeblue}\it\bf Intent}               & \givenODPINTENT \\
+{\noindent\color{easeblue}\it\bf Domains}              & \givenODPDOMAIN \\
+{\noindent\color{easeblue}\it\bf Competency Questions} & \givenODPQUESTION \\
+{\noindent\color{easeblue}\it\bf Defined in}           & \givenODPDEFINEDIN \\
+%\bottomrule
+\end{tabular}}
 \end{minipage}
 \begin{minipage}{0.55\textwidth}
 \begin{center}
 \givenODPGRAPHIC
 \end{center}
 \end{minipage}
-\caption{\emph{\givenODPNAME}.}
+\caption{\emph{The Representation of \givenODPNAME}.}
 \end{figure}
 }
 
@@ -81,21 +67,17 @@
 \label{sec:occurrences}
 The basic building blocks of a NEEM are the events that occur during the course of an activity. An event is defined as \emph{any physical, social, or mental process, event, or state}. Events have an associated time interval that determines the time at which the event occurs. Time data is represented as unix timestamps, or using XSD date types. As discussed in porevious section, we distinguish between three different event classes: \owlClass{Action}, \owlClass{State}, and \owlClass{Process}.
 
-\begin{ODP}{The Representation of Occurences}
+\begin{ODP}{Occurences}
 \ODPINTENT{To represent that something has happened.}
-\ODPDOMAIN{\texttt{Event observation}}
+\ODPDOMAIN{Event observation}
 \ODPDEFINEDIN{DUL.owl}
 \ODPQUESTION{
     \emph{Did it happen?}
     \emph{When did it happen?}}
 \ODPGRAPHIC{
 \begin{tikzpicture}
-    \node[owlclass] (EVT) {\begin{owlclass}{Event}
-        \item \texttt{Entity}
-    \end{owlclass}};
-    \node[owlclass,below=0.6cm of EVT] (TI) {\begin{owlclass}{Time Interval}
-        \item \texttt{Region}
-    \end{owlclass}};
+    \node[owlclass] (EVT) {Event};
+    \node[owlclass,below=0.6cm of EVT] (TI) {Time Interval};
     \node[data,below=0.6cm of TI,xshift=-1.2cm] (BEGIN) {xsd:double};
     \node[data,below=0.6cm of TI,xshift=1.2cm] (END) {xsd:double};
     \draw (EVT) edge[relation] node[midway,label=right:hasTimeInterval] {} (TI);
