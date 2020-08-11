@@ -81,8 +81,6 @@
 \label{sec:occurrences}
 The basic building blocks of a NEEM are the events that occur during the course of an activity. An event is defined as \emph{any physical, social, or mental process, event, or state}. Events have an associated time interval that determines the time at which the event occurs. Time data is represented as unix timestamps, or using XSD date types. As discussed in porevious section, we distinguish between three different event classes: \owlClass{Action}, \owlClass{State}, and \owlClass{Process}.
 
-To deal with occurences, the EASE knowledge base provides the unary \emph{occurs} predicate whose argument is an event entity. It is usually wrapped into a temporal scope to assert the time data of the interval associates to the event. For the tell case, this can be written as: \emph{tell(occurs(Event) during [Begin,End])}.
-
 \begin{ODP}{The Representation of Occurences}
 \ODPINTENT{To represent that something has happened.}
 \ODPDOMAIN{\texttt{Event observation}}
@@ -106,6 +104,9 @@ To deal with occurences, the EASE knowledge base provides the unary \emph{occurs
 \end{tikzpicture}
 }
 \end{ODP}
+
+To deal with occurences, the EASE knowledge base provides the unary \emph{occurs} predicate whose argument is an event entity. The statement that an event named \emph{MyEvent} occurs can be written as: \emph{occurs('MyEvent')}. Temporal scoping is used to assign time data to occurences. The statement that an event occurred between some timestamps can be written using the \emph{during} keyword: \emph{occurs('MyEvent') during [10.0,14.0]}, where $10.0$ denotes the begin of the event, and $14.0$ the end.
+It is further valid to assert partial time data using the keywords \emph{since} and \emph{until}.
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
