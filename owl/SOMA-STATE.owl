@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
-<rdf:RDF xmlns="http://www.ease-crc.org/ont/SOMA.owl#"
-     xml:base="http://www.ease-crc.org/ont/SOMA.owl"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+<rdf:RDF xmlns="http://www.ease-crc.org/ont/SOMA-STATE.owl#"
+     xml:base="http://www.ease-crc.org/ont/SOMA-STATE.owl"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#">
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#">
     <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA-STATE.owl">
-        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
     </owl:Ontology>
     
 
@@ -104,39 +104,27 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#ConnectedObject -->
+    <!-- http://www.ease-crc.org/ont/SOMA-STATE.owl#ContainmentState -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ConnectedObject"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Container -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Container"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Item -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Item"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#LinkedObject -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#LinkedObject"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Restrictor -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Restrictor"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Supporter -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Supporter"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-STATE.owl#ContainmentState">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FunctionalControl"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isStateTypeOf"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Container"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Containment"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
     
 
 
@@ -162,6 +150,12 @@ The second issue relates to what is &quot;outside&quot;. The state is a configur
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#ConnectedObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ConnectedObject"/>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#ContactState -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ContactState">
@@ -183,16 +177,15 @@ The second issue relates to what is &quot;outside&quot;. The state is a configur
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Container -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Container"/>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Containment -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Containment">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FunctionalControl"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isStateTypeOf"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Container"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:comment>Classifies States in which an object is placed inside another.</rdfs:comment>
     </owl:Class>
     
@@ -221,6 +214,12 @@ Note that this State focuses on how the interaction of, usually non-agentive, ob
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Item -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Item"/>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#LinkageState -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#LinkageState">
@@ -233,6 +232,12 @@ Note that this State focuses on how the interaction of, usually non-agentive, ob
         </rdfs:subClassOf>
         <rdfs:comment>Classifies States in which two objects are in a rigid connection, such that the movement of one determines the movement of the other.</rdfs:comment>
     </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#LinkedObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#LinkedObject"/>
     
 
 
@@ -303,6 +308,12 @@ Note that this State focuses on how the interaction of, usually non-agentive, ob
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Restrictor -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Restrictor"/>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#SocialState -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SocialState">
@@ -320,6 +331,19 @@ One can argue that any Social state is a Physical state, since anything the Agen
 
 Note also that the DUL SocialAgent class is not an appropriate restriction however. SocialAgent is one that exists by agreement of PhysicalAgents. For example, a corporation or a nation are SocialAgents. An Agent with the capability to engage socially is not necessarily a DUL SocialAgent.</rdfs:comment>
         <rdfs:label>Social state</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#State -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#State">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:comment>States are stative and homeomeric events.
+
+For stative events, the mereological sum of two instances has the same type as both instances. This is, for example, the state of sitting on a chair, or the process of a pendulum swinging around.
+
+The difference between states and processes is that states are, in addition, homeomeric, and processes are not.  This means that, when considering time slices  of an event, for states, these time slices always have the same type as the state, but for processes this is not the case.</rdfs:comment>
     </owl:Class>
     
 
@@ -345,14 +369,24 @@ Note also that the DUL SocialAgent class is not an appropriate restriction howev
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Support -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#SupportState -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Support">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SupportState">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FunctionalControl"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isStateTypeOf"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Supporter"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Supporter"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Deposition"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>Classifies States in which an object is not able to move under gravity because of its placement relative to some other object.</rdfs:comment>
@@ -360,16 +394,9 @@ Note also that the DUL SocialAgent class is not an appropriate restriction howev
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#State -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Supporter -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#State">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-        <rdfs:comment>States are stative and homeomeric events.
-
-For stative events, the mereological sum of two instances has the same type as both instances. This is, for example, the state of sitting on a chair, or the process of a pendulum swinging around.
-
-The difference between states and processes is that states are, in addition, homeomeric, and processes are not.  This means that, when considering time slices  of an event, for states, these time slices always have the same type as the state, but for processes this is not the case.</rdfs:comment>
-    </owl:Class>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Supporter"/>
     
 
 
@@ -410,5 +437,5 @@ The difference between states and processes is that states are, in addition, hom
 
 
 
-<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
 
