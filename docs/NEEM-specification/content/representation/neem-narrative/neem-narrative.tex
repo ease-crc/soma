@@ -8,12 +8,14 @@
 %\newcommand{\givenODPDESCRIPTION}{}
 \newcommand{\givenODPGRAPHIC}{}
 \newcommand{\givenODPDOMAIN}{}
+\newcommand{\givenODPEXAMPLES}{}
 \newcommand{\givenODPQUESTION}{}
 \newcommand{\ODPINTENT}[1]     {\renewcommand{\givenODPINTENT}{#1}}
 \newcommand{\ODPDEFINEDIN}[1]  {\renewcommand{\givenODPDEFINEDIN}{#1}}
 %\newcommand{\ODPDESCRIPTION}[1]{\renewcommand{\givenODPDESCRIPTION}{#1}}
 \newcommand{\ODPGRAPHIC}[1]    {\renewcommand{\givenODPGRAPHIC}{#1}}
 \newcommand{\ODPDOMAIN}[1]     {\renewcommand{\givenODPDOMAIN}{#1}}
+\newcommand{\ODPEXAMPLES}[1]   {\renewcommand{\givenODPEXAMPLES}{#1}}
 \newcommand{\ODPQUESTION}[1]   {\renewcommand{\givenODPQUESTION}{#1}}
 \newcommand{\OPDinit}{
   \renewcommand{\givenODPINTENT}{REQUIRED!}
@@ -21,6 +23,7 @@
   %\renewcommand{\givenODPDESCRIPTION}{REQUIRED!}
   \renewcommand{\givenODPGRAPHIC}{REQUIRED!}
   \renewcommand{\givenODPQUESTION}{}
+  \renewcommand{\givenODPEXAMPLES}{}
   \renewcommand{\givenODPDOMAIN}{}
   \renewcommand{\labelitemi}{$\mathbf{\sqsubseteq}$}
 }
@@ -47,6 +50,16 @@
 \givenODPGRAPHIC
 \end{center}
 \end{minipage}
+\\[0.4cm]
+\fcolorbox{easeblue!40}{easeblue!10}{
+	\begin{minipage}{\textwidth}
+		\begin{tabular}{p{5.4cm}p{6.3cm}}
+		{\noindent\color{easeblue}\it\bf Expression}  &
+		{\noindent\color{easeblue}\it\bf Meaning} \\
+		\givenODPEXAMPLES
+		\end{tabular}
+	\end{minipage}
+}
 \caption{\emph{The Representation of \givenODPNAME}.}
 \end{figure}
 }
@@ -65,35 +78,75 @@
 % % % % % % % % % % % % % % % % %
 \subsection{Occurrences}
 \label{sec:occurrences}
-The basic building blocks of a NEEM are the events that occur during the course of an activity. An event is defined as \emph{any physical, social, or mental process, event, or state}. Events have an associated time interval that determines the time at which the event occurs. Time data is represented as unix timestamps, or using XSD date types. As discussed in porevious section, we distinguish between three different event classes: \owlClass{Action}, \owlClass{State}, and \owlClass{Process}.
+%% Summary of Figure below
+The basic building blocks of NEEMs are the events that occur during the course of an activity. An event is defined as \emph{any physical, social, or mental process, event, or state}. Events have an associated time interval that determines the time at which the event occurs. Time data is represented as unix timestamps using XSD types.
+%As discussed in porevious section, we distinguish between three different event classes: \owlClass{Action}, \owlClass{State}, and \owlClass{Process}.
 
 \begin{ODP}{Occurences}
-\ODPINTENT{To represent that something has happened.}
+\ODPINTENT{To quantify when something has happened.}
 \ODPDOMAIN{Event observation}
 \ODPDEFINEDIN{DUL.owl}
 \ODPQUESTION{
     \emph{Did it happen?}
     \emph{When did it happen?}}
-\ODPGRAPHIC{
-\begin{tikzpicture}
+\ODPGRAPHIC{\begin{tikzpicture}
     \node[owlclass] (EVT) {Event};
     \node[owlclass,below=0.6cm of EVT] (TI) {Time Interval};
     \node[data,below=0.6cm of TI,xshift=-1.2cm] (BEGIN) {xsd:double};
     \node[data,below=0.6cm of TI,xshift=1.2cm] (END) {xsd:double};
     \draw (EVT) edge[relation] node[midway,label=right:hasTimeInterval] {} (TI);
-    \draw (TI) edge[relation] node[midway,label=left:hasIntervalBegin] {} (BEGIN);
-    \draw (TI) edge[relation] node[midway,label=right:hasIntervalEnd] {} (END);
-\end{tikzpicture}
+    \draw (TI)  edge[relation] node[midway,label=left:hasIntervalBegin] {} (BEGIN);
+    \draw (TI)  edge[relation] node[midway,label=right:hasIntervalEnd] {} (END);
+\end{tikzpicture}}
+%% Example KnowRob language expressions
+\ODPEXAMPLES{
+	\emph{occurs('EV')} &
+	the resource named \emph{EV} is an occurence \\
+	% % % % %
+	\emph{occurs('EV') during [10,14]} &
+	\emph{EV} occurs between the timestamps $10$ and $14$ \\
+	% % % % %
+	\emph{occurs('EV') since 10} &
+	\emph{EV} occurs since the timestamp $10$
 }
 \end{ODP}
-
-To deal with occurences, the EASE knowledge base provides the unary \emph{occurs} predicate whose argument is an event entity. The statement that an event named \emph{MyEvent} occurs can be written as: \emph{occurs('MyEvent')}. Temporal scoping is used to assign time data to occurences. The statement that an event occurred between some timestamps can be written using the \emph{during} keyword: \emph{occurs('MyEvent') during [10.0,14.0]}, where $10.0$ denotes the begin of the event, and $14.0$ the end.
-It is further valid to assert partial time data using the keywords \emph{since} and \emph{until}.
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
 \subsection{Participation}
 \label{sec:participation}
+%% Summary of Figure below
+Events always involve some objects that play a certain role during the event. The role of being the \emph{patient} of some event being an example. This is that the event is directed towards the object. It is not always directly observable what the role of an object might be, however, it is less problematic to just state that the object \emph{has participated} in some event without naming a role.
+Agent participation is handled in a special case, using the property \emph{involvesAgent} which is a sub-property of \emph{hasParticipant}.
+
+\begin{ODP}{Participation}
+\ODPINTENT{To represent participation of an object in an event.}
+\ODPDOMAIN{Event representation}
+\ODPDEFINEDIN{DUL.owl}
+\ODPQUESTION{
+    \emph{Which objects do participate in this event?}
+    \emph{Which events do this object participate in?}}
+\ODPGRAPHIC{
+\begin{tikzpicture}
+    \node[owlclass] (EVT) {Event};
+    \node[owlclass,below=0.6cm of EVT,xshift=-1.3cm] (OBJ) {Object};
+    \node[owlclass,below=0.6cm of EVT,xshift=1.3cm] (A) {Agent};
+    \draw (EVT) edge[relation] node[midway,label=left:hasParticipant] {} (OBJ);
+    \draw (EVT) edge[relation] node[midway,label=right:involvesAgent] {} (A);
+\end{tikzpicture}
+}
+%% Example KnowRob language expressions
+\ODPEXAMPLES{
+	\emph{has\_participant('EV','O')} &
+	the resource named \emph{O} is involved in the event named \emph{EV} \\
+	% % % % %
+	\emph{has\_participant('EV',X)} &
+	what are the objects that are involved in \emph{EV}? \\
+	% % % % %
+	\emph{has\_participant(X,'O')} &
+	what are the events involving \emph{O}?
+}
+\end{ODP}
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
