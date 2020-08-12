@@ -33,7 +33,8 @@
 \renewcommand{\givenODPNAME}{#1}
 }{
 %\givenODPDESCRIPTION
-\begin{figure}[htb!]
+%\begin{figure}[htb!]
+\vspace{0.2cm}
 \begin{minipage}{0.45\textwidth}
 \fcolorbox{easeblue!40}{easeblue!10}{\begin{tabular}{ p{1.8cm} p{3.2cm} }
 %\toprule
@@ -52,16 +53,17 @@
 \end{minipage}
 \\[0.4cm]
 \fcolorbox{easeblue!40}{easeblue!10}{
-	\begin{minipage}{\textwidth}
-		\begin{tabular}{p{5.4cm}p{6.3cm}}
+	\begin{minipage}{0.96\textwidth}
+		\begin{tabular}{p{5.4cm}p{5.7cm}}
 		{\noindent\color{easeblue}\it\bf Expression}  &
 		{\noindent\color{easeblue}\it\bf Meaning} \\
 		\givenODPEXAMPLES
 		\end{tabular}
 	\end{minipage}
 }
-\caption{\emph{The Representation of \givenODPNAME}.}
-\end{figure}
+%\caption{\emph{The Representation of \givenODPNAME}.}
+%\end{figure}
+\vspace{0.2cm}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -111,6 +113,8 @@ The basic building blocks of NEEMs are the events that occur during the course o
 }
 \end{ODP}
 
+\lipsum[2]
+
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
 \subsection{Participation}
@@ -121,7 +125,7 @@ Agent participation is handled in a special case, using the property \emph{invol
 
 \begin{ODP}{Participation}
 \ODPINTENT{To represent participation of an object in an event.}
-\ODPDOMAIN{Event representation}
+\ODPDOMAIN{?}
 \ODPDEFINEDIN{DUL.owl}
 \ODPQUESTION{
     \emph{Which objects do participate in this event?}
@@ -148,25 +152,131 @@ Agent participation is handled in a special case, using the property \emph{invol
 }
 \end{ODP}
 
+\lipsum[2]
+
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
 \subsection{Composition}
 \label{sec:composition}
+
+\lipsum[2]
+
+\begin{ODP}{Composition}
+\ODPINTENT{To represent how an entity is composed of others.}
+\ODPDOMAIN{?}
+\ODPDEFINEDIN{DUL.owl}
+\ODPQUESTION{
+    \emph{What is this entity composed of?}
+    \emph{To which bigger whole does this entity belong?}}
+\ODPGRAPHIC{
+\begin{tikzpicture}
+    \node[owlclass] (E) {Entity};
+    \path (E) edge[relation] [loop above] node {hasPart, hasComponent} (E);
+\end{tikzpicture}
+}
+%% Example KnowRob language expressions
+\ODPEXAMPLES{
+	\emph{has\_component('A','B')} &
+	\emph{B} is a proper physical part of \emph{A} \\
+	% % % % %
+	\emph{has\_part('A','B')} &
+	\emph{B} is a part of \emph{A} \\
+	% % % % %
+	\emph{has\_part('A',X)} &
+	What are the parts of \emph{A}? \\
+	% % % % %
+	\emph{has\_part(X,'A')} &
+	What are the entities \emph{A} is part of? \\
+}
+\end{ODP}
+
+\lipsum[2]
+
+\begin{ODP}{Constituency}
+\ODPINTENT{To represent the constituents of a layered structure.}
+\ODPDOMAIN{Parts and Collections}
+\ODPDEFINEDIN{DUL.owl}
+\ODPQUESTION{
+    \emph{Which are the constituents of this entity?}
+    \emph{What does this entity is constituent of?}}
+\ODPGRAPHIC{
+\begin{tikzpicture}
+    \node[owlclass] (E) {Entity};
+    \path (E) edge[relation] [loop above] node {hasConstituent} (E);
+\end{tikzpicture}
+}
+%% Example KnowRob language expressions
+\ODPEXAMPLES{
+	\emph{has\_constituent('A','B')} &
+	\emph{B} is a constituent of \emph{A} \\
+}
+\end{ODP}
+
+\lipsum[2]
+
+\begin{ODP}{Event Phases}
+\ODPINTENT{To represent how an event is composed of phases.}
+\ODPDOMAIN{?}
+\ODPDEFINEDIN{SOMA.owl}
+\ODPQUESTION{
+    \emph{What are the phases of this action?}
+    \emph{Is this a phase of some action?}}
+\ODPGRAPHIC{
+\begin{tikzpicture}
+    \node[owlclass] (E) {Event};
+    \path (E) edge[relation] [loop above] node {hasPhase} (E);
+\end{tikzpicture}
+}
+%% Example KnowRob language expressions
+\ODPEXAMPLES{
+	\emph{has\_phase('A','B')} &
+	\emph{B} is a phase of \emph{A}
+}
+\end{ODP}
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
 \subsection{Qualification}
 \label{sec:qualification}
 
+\lipsum[2]
+
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
 \subsection{Classification}
 \label{sec:classification}
 
+\lipsum[2]
+
+\begin{ODP}{Composition}
+\ODPINTENT{To represent relations between concepts and entities.}
+\ODPDOMAIN{General}
+\ODPDEFINEDIN{DUL.owl}
+\ODPQUESTION{
+    \emph{What concept is assigned to this entity?}
+    \emph{Which category does this entity belong to?}}
+\ODPGRAPHIC{
+\begin{tikzpicture}
+    \node[owlclass] (E) {Entity};
+    \node[owlclass,below=0.6cm of EVT] (C) {Concept};
+    \draw (C) edge[relation] node[midway,label=right:classifies] {} (E);
+\end{tikzpicture}
+}
+%% Example KnowRob language expressions
+\ODPEXAMPLES{
+	\emph{has\_role('O','R')} &
+	\emph{O} is classified by \emph{R} (a role) 
+}
+\end{ODP}
+
+\lipsum[2]
+
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
 \subsection{Interpretation}
 \label{sec:interpretation}
+
+\lipsum[2]
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
