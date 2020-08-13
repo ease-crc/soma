@@ -425,14 +425,19 @@ This is to allow assigning regions to entities without explicating the quality a
 \subsection{Object Transformation}
 \label{sec:transformation}
 
-\textbf{todo: Mihai write this}
+Objects typically undergo changes by taking part in actions or processes. Such changes typically take one of two forms: either some property of an object changes value, or the object itself modifies its ontological characterization. As an example, a wad of dough being transported from the table to the inside of an oven has changed its position, but is still, at this point, a wad of dough. Left in a hot oven for enough time however, the wad of dough becomes bread.
+
+The variation with time of object qualities has been described in section~\ref{sec:qualification}. The object transformation pattern, described here, handles the changes of an object's ontological classification through time. An immediate problem is that ontological characterizations are necessarily discrete -- there is a finite number of classes an object can belong to -- while change in the physical world is continuous. In the example above, the wad of dough ceases to be dough after a few moments in the oven, because its chemical composition is changing away from the composition of dough. Nonetheless, it is not bread yet.
+
+For practical purposes however, human beings often do not care about the exact classification of an object undergoing ontological change; only the endpoints are important. Also, there is a tendency to loosely apply ontological classification to the changing object, as if it were on either side of the transformation. The cooking wad of dough could be referred to as dough, or it could be referred to as bread. It is both, and neither. While sufficient for causal discourse, such carelessness would not work in a formal system. Hence, the approach in SOMA is to define a class of objects called \emph{Transient}, and it is to this class that objects undergoing ontological classification change belong to. A Transient \emph{transitionsFrom} some object with a specific classification (e.g. \emph{Dough}) and \emph{transitionsTo} another object with a specific classification (e.g. \emph{Bread}). These two relations can be combined into the \emph{transitionsBack} relation, to cover situations where an object changes in essential ways during an event, but returns to being itself after the event completes, such as a catalyst in a chemical reaction.
+ 
 % This pattern addresses the fact that objects change by undergoing/taking part in Processes. For example, the PancakeMix becomes, through Baking, a Pancake. However, the ontological status of the object while the process takes place is unclear: the object placed on the frying pan is not a Pancake until Baking finishes, but it's not PancakeMix either once it begins to coagulate. In the EASE approach, the object in-between such characterizations is a Transient. A Transient transitionsFrom an Object, and possibly transitionsTo an Object. It may also be the case that a Transient transitionsBack to an Object, to indicate that once the process completes, the same Object is restored; this would be the case for example for catalysts in chemistry, or a loaf of bread after slicing, if there is enough bread left.
-\lipsum[2]
+%\lipsum[2]
 
 \begin{ODP}{Transient}
 	\ODPINTENT{Ontological classification for objects undergoing type changes.}
 	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{What sort of object is this? What objects ``went'' in the making of another? Does an object preserve or restore its identity after change?}
+	\ODPQUESTION{What sort of object is this? What objects ``went'' into the making of another? What is the outcome of some process of change acting on an object? Does an object preserve or restore its identity after change?}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
  %\node[owlclass] (TRANSIENT) {
@@ -448,15 +453,18 @@ This is to allow assigning regions to entities without explicating the quality a
  % \item \texttt{transitionsTo}
  %\end{owlclass}
  %};
-	    \node[owlclass] (A) {?};
-	    \node[owlclass,below=0.6cm of EVT] (B) {?};
-	    \draw (B) edge[relation] node[midway,label=right:?] {} (A);
+	    \node[owlclass] (A) {Transient};
+	    \node[owlclass,below=0.6cm of EVT] (B) {Object};
+	    \node[owlclass,above=0.6cm of EVT] (C) {Object};
+	    \draw (A) edge[relation] node[midway,label=right:transitionsFrom] {} (B);
+	    \draw (A) edge[relation] node[midway,label=right:transitionsTo] {} (C);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{??} &
-		??
+		\emph{transitionsFrom('A','B')} & By entering some process of change, object 'B' becomes Transient object 'A'.\\
+		\emph{transitionsTo('A','B')} & By completing some process of change, transient 'A' becomes object 'B'.\\
+		\emph{transitionsBack('A','B')} & Object 'B' entered some process of change during which its ontological classification is unclear and it is replaced by Transient 'A', but after the process completes object 'B' is restored.\\
 	}
 \end{ODP}
 
