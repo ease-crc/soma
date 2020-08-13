@@ -204,9 +204,9 @@ Events always involve some objects that play a certain role during the event. Th
 \subsection{Composition}
 \label{sec:composition}
 
+\textbf{todo: Mihai write this.}
+\textbf{todo: why isn't hasPhase Event-to-Event?}
 \lipsum[2]
-
-\textbf{TODO: why isn't hasPhase Event-to-Event?}
 
 \begin{ODP}{Event Phases}
 	\ODPINTENT{To represent how an event is composed of phases.}
@@ -341,9 +341,13 @@ Events always involve some objects that play a certain role during the event. Th
 \subsection{Object Properties}
 \label{sec:qualification}
 
-\textbf{todo: Daniel write this}
-%This ODP allows structuring information about the properties of an Entity. It distinguishes between dependent aspects of the Entity (things that cannot exist without the Entity itself existing), and the values that may be ascribed to those aspects. These values may be points in some Region. Note that a Region may be a finite set of discrete labels, allowing for ``qualitative'' descriptions, but more often a Region is some dimensional space allowing ``quantitative'' descriptions. A Region may contain a single point, in cases where the value of a Quality is known precisely.
-\lipsum[2]
+Qualities are the properties of an object that are not part of it, but cannot exist without it.
+This is, for example, the quality of having a shape -- a quality inherited by all physical objects.
+Another example is the quality of a floor being slippery.
+A robot navigating on such a floor could use this knowledge to avoid, for example,
+spillage when moving on the floor with a coffee-filled cup.
+The quality concept does not directly encode the value of the object property, but only focusses on characteristics of the property itself.
+This is mainly useful in cases where individual aspects of an entity are considered in the domain of discourse.
 
 \begin{ODP}{Object Qualities}
 	\ODPINTENT{To represent the qualities of an object.}
@@ -370,12 +374,25 @@ Events always involve some objects that play a certain role during the event. Th
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{??} &
-		??
+		\emph{has\_quality('A','B')} &
+		\emph{B} is a quality of \emph{A} \\
+		% % % % %
+		\emph{has\_quality('A',X)} &
+		What are the qualities of \emph{A}? \\
+		% % % % %
+		\emph{has\_quality(X,'A')} &
+		What entity is the host of \emph{A}? \\
 	}
 \end{ODP}
 
-\lipsum[2]
+Each object property has one value at a time. The value of an object property is called \emph{region}.
+The value itself is an element, or a sub-region in some dimensional
+space such as \emph{time interval} or \emph{space region}.
+A region may be a finite set of discrete labels, allowing for ``qualitative'' descriptions,
+but more often a region is some dimensional space allowing ``quantitative'' descriptions.
+A Region may contain a single point, in cases where the value of a property is known precisely.
+Note that the domain of the relation \emph{hasRegion} is not \emph{Quality} but \emph{Entity}.
+This is to allow assigning regions to entities without explicating the quality as a concept (quality-as-relation).
 
 \begin{ODP}{Regions}
 	\ODPINTENT{To represent values of attributes of things.}
@@ -392,8 +409,14 @@ Events always involve some objects that play a certain role during the event. Th
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{??} &
-		??
+		\emph{has\_region('A','B')} &
+		\emph{B} is a region of \emph{A} \\
+		% % % % %
+		\emph{has\_region('A',X)} &
+		What is the region of \emph{A}? \\
+		% % % % %
+		\emph{has\_data\_value('A','B')} &
+		\emph{B} is a data value of \emph{A} 
 	}
 \end{ODP}
 
