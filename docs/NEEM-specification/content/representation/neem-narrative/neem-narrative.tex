@@ -115,10 +115,13 @@ The basic building blocks of NEEMs are the events that occur during the course o
 		\emph{EV} is an occurence \\
 		% % % % %
 		\emph{occurs('EV') during [10,14]} &
-		\emph{EV} occurs between the timestamps $10$ and $14$ \\
+		\emph{EV} occurs between the times $10$ and $14$ \\
 		% % % % %
 		\emph{occurs('EV') since 10} &
-		\emph{EV} occurs since the timestamp $10$
+		\emph{EV} occurs since the time $10$ \\
+		% % % % %
+		\emph{occurs('EV0') since 'EV1'} &
+		\emph{EV0} and \emph{EV1} begin at the same time
 	}
 \end{ODP}
 
@@ -132,7 +135,7 @@ Events always involve some objects that play a certain role during the event. Th
 \begin{ODP}{Participation}
 	\ODPINTENT{To represent participation of an object in an event.}
 	\ODPDEFINEDIN{DUL.owl}
-	\ODPQUESTION{Which objects do participate in this event? Which events do this object participate in?}
+	\ODPQUESTION{Which objects do participate in this event? In which events does this object participate in?}
 	\ODPGRAPHIC{\begin{tikzpicture}
 	    \node[owlclass] (EVT) {Event};
 	    \node[owlclass,below=0.6cm of EVT] (OBJ) {Object};
@@ -140,13 +143,13 @@ Events always involve some objects that play a certain role during the event. Th
 	\end{tikzpicture}}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{tell(has\_participant('EV','O'))} &
+		\emph{has\_participant('EV','O')} &
 		\emph{O} is involved in event \emph{EV} \\
 		% % % % %
-		\emph{ask(has\_participant('EV',X))} &
+		\emph{has\_participant('EV',X)} &
 		what are the entities involved in \emph{EV}? \\
 		% % % % %
-		\emph{ask(has\_participant(X,'O'))} &
+		\emph{has\_participant(X,'O')} &
 		what are the events involving \emph{O}?
 	}
 \end{ODP}
@@ -155,7 +158,7 @@ Events always involve some objects that play a certain role during the event. Th
 
 \begin{ODP}{Action Execution}
 	\ODPINTENT{To represent that an agent has executed an action.}
-	\ODPDEFINEDIN{DUL.owl}
+	\ODPDEFINEDIN{SOMA.owl}
 	\ODPQUESTION{?}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
@@ -432,12 +435,13 @@ Events always involve some objects that play a certain role during the event. Th
 \subsection{Episodes}
 \label{sec:interpretation}
 
-\lipsum[2]
+An episode is seen as a \emph{relational context} created by an observer that creates a view on a set of entities such as actions that were perfomed, and objects that played a role. We say that an episode is a \emph{setting for} each entity that is relevant for the scope of the episode. As an example, consider the statement \emph{"this morning the robot made a mess on the floor while preparing coffee"}, where the preparation of coffee in the morning is the setting for the robot, the floor, and the actions that were perfomed.
+Several specializations of the general \emph{is setting for} relation exist that can be used to distinguish between entities based on their type -- these are, among others, \emph{includesObject} and \emph{includesAgent}.
 
 \begin{ODP}{isSettingFor}
 	\ODPINTENT{To represent that entites are included in a situation.}
 	\ODPDEFINEDIN{DUL.owl}
-	\ODPQUESTION{??}
+	\ODPQUESTION{What are the entities that are relevant for this situation? What are the situations where this entity is relevant?}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Situation};
@@ -447,17 +451,31 @@ Events always involve some objects that play a certain role during the event. Th
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{??} &
-		??
+		\emph{is\_setting\_for('Episode1', 'Obj1')} &
+		\emph{Episode1} is a setting for \emph{Obj1} \\
+		% % % % %
+		\emph{is\_setting\_for('Episode1', X)} &
+		What is \emph{Episode1} setting of? \\
+		% % % % %
+		\emph{is\_setting\_for(X, 'Evt1')} &
+		What are the episodes that include \emph{Evt1}? \\
 	}
 \end{ODP}
 
-\lipsum[2]
+Episodes refer to concrete occurences with actual objects that are involved, and actual events that occur.
+The conceptualization of an episode is an abstraction that refers to concepts instead.
+Such conceptualizations are called \emph{descriptions}.
+We say that an episode \emph{satisfies} a description in case the view represented
+by the episode is consistent with the conceptualization given by the desciption.
+Diagnosis being one example of a description of an episode.
+Stating that the performance of the robot was amateurish when it made a mess on the floor while
+preparing coffee is one example for describing an epsiode.
+Another type of descriptions are plans that are used to conceptualize the structure of an activity.
 
 \begin{ODP}{satisfies}
-	\ODPINTENT{To represent abstractions of situations.}
+	\ODPINTENT{To represent a conceptualization of a situation.}
 	\ODPDEFINEDIN{DUL.owl}
-	\ODPQUESTION{??}
+	\ODPQUESTION{How can this situation be conceptualized? What are the situations that are consitent with this conceptualization?}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Situation};
@@ -467,8 +485,14 @@ Events always involve some objects that play a certain role during the event. Th
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{??} &
-		??
+		\emph{satisfies('Episode1', 'Descr1')} &
+		\emph{Episode1} is consistent with \emph{Descr1} \\
+		% % % % %
+		\emph{satisfies('Episode1', X)} &
+		What are conceptualization of \emph{Episode1}? \\
+		% % % % %
+		\emph{satisfies(X, 'Descr1')} &
+		What are the episodes that are conceptualized by \emph{Descr1}? \\
 	}
 \end{ODP}
 
