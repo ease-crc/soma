@@ -186,19 +186,41 @@ Events always involve some objects that play a certain role during the event. Th
 \lipsum[2]
 
 \begin{ODP}{?}
-	\ODPINTENT{??}
+	\ODPINTENT{To qualify force dynamical event characteristics.}
 	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{?}
+	\ODPQUESTION{What entity is the agonist in this event? What are the events where this entity is an antagonist? Which entity is stronger in this event?}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
-	    \node[owlclass,below=0.6cm of A] (B) {Object};
+	    \node[owlclass] (B) {Force Interaction};
 	    \node[owlclass,below=0.6cm of B,xshift=-1.3cm] (C) {Agonist};
 	    \node[owlclass,below=0.6cm of B,xshift=1.3cm]  (D) {Antagonist};
-	    \node[owlclass,below=1.8cm of B] (E) {Force Interaction};
-	    \draw (C) edge[relation] node[midway,label=left:classifies] {} (B);
-	    \draw (D) edge[relation] node[midway,label=right:classifies] {} (B);
-	    \draw (E) edge[relation] node[midway,label=left:xx] {} (C);
-	    \draw (E) edge[relation] node[midway,label=right:xx] {} (D);
+	    \node[owlclass,above=0.6cm of B] (E) {Stronger Entity};
+	    \draw (B) edge[relation] node[midway,label=left:xx] {} (C);
+	    \draw (B) edge[relation] node[midway,label=right:xx] {} (D);
+	    \draw (B) edge[relation] node[midway,label=left:xx] {} (E);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{??} & ??
+	}
+\end{ODP}
+
+\lipsum[2]
+
+\begin{ODP}{?}
+	\ODPINTENT{To quantify force dynamical event characteristics.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What is the effort of the agonist in this event?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (B) {Force Interaction};
+	    \node[owlclass,below=0.6cm of B,xshift=-1.3cm] (C) {Resultant};
+	    \node[owlclass,below=0.6cm of C] (D) {Effort};
+	    \node[data,right=0.6cm of D] (E) {$Nm$};
+	    \draw (B) edge[relation] node[midway,label=right:xx] {} (C);
+	    \draw (C) edge[relation] node[midway,label=right:xx] {} (D);
+	    \draw (D) edge[relation] node[midway,label=above:xx] {} (E);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
@@ -314,7 +336,8 @@ Events always involve some objects that play a certain role during the event. Th
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Process};
 	    \node[owlclass,below=0.6cm of EVT] (B) {Process Type};
-	    \draw (B) edge[relation] node[midway,label=right:??] {} (A);
+	    \draw (B) edge[relation]
+	    	node[midway,label=right:isOccurringIn] {} (A);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
@@ -334,7 +357,8 @@ Events always involve some objects that play a certain role during the event. Th
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {State};
 	    \node[owlclass,below=0.6cm of EVT] (B) {State Type};
-	    \draw (B) edge[relation] node[midway,label=right:??] {} (A);
+	    \draw (B) edge[relation]
+	    	node[midway,label=right:isOccurringIn] {} (A);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
