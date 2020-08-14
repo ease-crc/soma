@@ -295,7 +295,29 @@ Events always involve some objects that play a certain role during the event. Th
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Object};
 	    \node[owlclass,below=0.6cm of EVT] (B) {Role};
-	    \draw (B) edge[relation] node[midway,label=right:isRoleOf] {} (A);
+	    \draw (A) edge[relationxl] node[midway,label=left:hasRole] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isRoleOf] {} (A);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{??} &
+		??
+	}
+\end{ODP}
+
+\lipsum[2]
+
+\begin{ODP}{??}
+	\ODPINTENT{??}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{??}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Event};
+	    \node[owlclass,below=0.6cm of EVT] (B) {Event Type};
+	    \draw (A) edge[relationxl] node[midway,label=left:isOccurrenceOf] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isOccurringIn] {} (A);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
@@ -316,49 +338,8 @@ Events always involve some objects that play a certain role during the event. Th
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Action};
 	    \node[owlclass,below=0.6cm of EVT] (B) {Task};
-	    \draw (B) edge[relation] node[midway,label=right:isExecutedIn] {} (A);
-	\end{tikzpicture}
-	}
-	%% Example KnowRob language expressions
-	\ODPEXAMPLES{
-		\emph{??} &
-		??
-	}
-\end{ODP}
-
-\lipsum[2]
-
-\begin{ODP}{??}
-	\ODPINTENT{??}
-	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{??}
-	\ODPGRAPHIC{
-	\begin{tikzpicture}
-	    \node[owlclass] (A) {Process};
-	    \node[owlclass,below=0.6cm of EVT] (B) {Process Type};
-	    \draw (B) edge[relation]
-	    	node[midway,label=right:isOccurringIn] {} (A);
-	\end{tikzpicture}
-	}
-	%% Example KnowRob language expressions
-	\ODPEXAMPLES{
-		\emph{??} &
-		??
-	}
-\end{ODP}
-
-\lipsum[2]
-
-\begin{ODP}{??}
-	\ODPINTENT{??}
-	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{??}
-	\ODPGRAPHIC{
-	\begin{tikzpicture}
-	    \node[owlclass] (A) {State};
-	    \node[owlclass,below=0.6cm of EVT] (B) {State Type};
-	    \draw (B) edge[relation]
-	    	node[midway,label=right:isOccurringIn] {} (A);
+	    \draw (A) edge[relationxl] node[midway,label=left:executesTask] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isExecutedIn] {} (A);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
