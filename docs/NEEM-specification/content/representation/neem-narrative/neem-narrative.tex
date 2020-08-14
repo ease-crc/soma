@@ -180,6 +180,9 @@ Events always involve some objects that play a certain role during the event. Th
 \subsection{Force Interaction}
 
 \textbf{todo: Daniel write this}
+\textbf{todo: preservative vs. alterative interaction}
+\textbf{todo: how to represent who is stronger? can measured forces be included in the NEEM?}
+\textbf{todo: isProcessTypeOf relation is not nice}
 \lipsum[2]
 
 \begin{ODP}{?}
@@ -188,9 +191,14 @@ Events always involve some objects that play a certain role during the event. Th
 	\ODPQUESTION{?}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
-	    \node[owlclass] (EVT) {?};
-	    \node[owlclass,below=0.6cm of EVT] (A) {?};
-	    \draw (EVT) edge[relation] node[midway,label=right:?] {} (A);
+	    \node[owlclass,below=0.6cm of A] (B) {Object};
+	    \node[owlclass,below=0.6cm of B,xshift=-1.3cm] (C) {Agonist};
+	    \node[owlclass,below=0.6cm of B,xshift=1.3cm]  (D) {Antagonist};
+	    \node[owlclass,below=1.8cm of B] (E) {Force Interaction};
+	    \draw (C) edge[relation] node[midway,label=left:classifies] {} (B);
+	    \draw (D) edge[relation] node[midway,label=right:classifies] {} (B);
+	    \draw (E) edge[relation] node[midway,label=left:xx] {} (C);
+	    \draw (E) edge[relation] node[midway,label=right:xx] {} (D);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
