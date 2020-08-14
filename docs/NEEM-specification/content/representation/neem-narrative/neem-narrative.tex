@@ -285,6 +285,7 @@ Events always involve some objects that play a certain role during the event. Th
 \subsection{Classification}
 \label{sec:classification}
 
+%A Concept is a SocialObject, and isDefinedIn some Description; once defined, a Concept can be used in other Description(s). If a Concept isDefinedIn exactly one Description, see the LocalConcept class. The classifies relation relates Concept(s) to Entity(s) at some TimeInterval
 \lipsum[2-3]
 
 \begin{ODP}{Object Role}
@@ -295,8 +296,8 @@ Events always involve some objects that play a certain role during the event. Th
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Object};
 	    \node[owlclass,below=0.6cm of EVT] (B) {Role};
-	    \draw (A) edge[relationxl] node[midway,label=left:hasRole] {} (B);
-	    \draw (B) edge[relationxr] node[midway,label=right:isRoleOf] {} (A);
+	    \draw (A) edge[relationxl] node[midway,label=left:$\text{hasRole}_t$] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:$\text{isRoleOf}_t$] {} (A);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
@@ -306,6 +307,7 @@ Events always involve some objects that play a certain role during the event. Th
 	}
 \end{ODP}
 
+% A Concept that classifies an Event . An event type describes how an Event should be interpreted, executed, expected, seen, etc., according to the Description that the EventType isDefinedIn (or used in)
 \lipsum[2]
 
 \begin{ODP}{??}
