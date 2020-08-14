@@ -64,6 +64,15 @@
 \section{NEEM-Narrative}
 \label{ch:narrative}
 
+The narrative part of NEEMs can be seen as a story of what has happened
+in terms of events that occurred, goals that were followed, and objects
+that were involved.
+From a machine learning viewpoint, the narrative part of a NEEM is the annotation of data represented in the NEEM experience.
+Such annotations contain two basic elements: classified entities such as events and objects, and relationships between them.
+The representation of these annotations is based on a formal model called SOMA.
+SOMA defines a set of representational patterns for different aspects of activities.
+These patterns are discussed in this section.
+
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
 \subsection{Upper-Level Model}
@@ -167,60 +176,6 @@ Events always involve some objects that play a certain role during the event. Th
 	    \node[owlclass] (EVT) {Action};
 	    \node[owlclass,below=0.6cm of EVT] (A) {Agent};
 	    \draw (EVT) edge[relation] node[midway,label=right:isPerformedBy] {} (A);
-	\end{tikzpicture}
-	}
-	%% Example KnowRob language expressions
-	\ODPEXAMPLES{
-		\emph{??} & ??
-	}
-\end{ODP}
-
-% % % % % % % % % % % % % % % % %
-% % % % % % % % % % % % % % % % %
-\subsection{Force Interaction}
-
-\textbf{todo: Daniel write this}
-\textbf{todo: preservative vs. alterative interaction}
-\textbf{todo: how to represent who is stronger? can measured forces be included in the NEEM?}
-\textbf{todo: isProcessTypeOf relation is not nice}
-\lipsum[2]
-
-\begin{ODP}{?}
-	\ODPINTENT{To qualify force dynamical event characteristics.}
-	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{What entity is the agonist in this event? What are the events where this entity is an antagonist? Which entity is stronger in this event?}
-	\ODPGRAPHIC{
-	\begin{tikzpicture}
-	    \node[owlclass] (B) {Force Interaction};
-	    \node[owlclass,below=0.6cm of B,xshift=-1.3cm] (C) {Agonist};
-	    \node[owlclass,below=0.6cm of B,xshift=1.3cm]  (D) {Antagonist};
-	    \node[owlclass,above=0.6cm of B] (E) {Stronger Entity};
-	    \draw (B) edge[relation] node[midway,label=left:xx] {} (C);
-	    \draw (B) edge[relation] node[midway,label=right:xx] {} (D);
-	    \draw (B) edge[relation] node[midway,label=left:xx] {} (E);
-	\end{tikzpicture}
-	}
-	%% Example KnowRob language expressions
-	\ODPEXAMPLES{
-		\emph{??} & ??
-	}
-\end{ODP}
-
-\lipsum[2]
-
-\begin{ODP}{?}
-	\ODPINTENT{To quantify force dynamical event characteristics.}
-	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{What is the effort of the agonist in this event?}
-	\ODPGRAPHIC{
-	\begin{tikzpicture}
-	    \node[owlclass] (B) {Force Interaction};
-	    \node[owlclass,below=0.6cm of B,xshift=-1.3cm] (C) {Resultant};
-	    \node[owlclass,below=0.6cm of C] (D) {Effort};
-	    \node[data,right=0.6cm of D] (E) {$Nm$};
-	    \draw (B) edge[relation] node[midway,label=right:xx] {} (C);
-	    \draw (C) edge[relation] node[midway,label=right:xx] {} (D);
-	    \draw (D) edge[relation] node[midway,label=above:xx] {} (E);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
@@ -506,6 +461,60 @@ For practical purposes however, human beings often do not care about the exact c
 		\emph{transitionsFrom('A','B')} & By entering some process of change, object 'B' becomes Transient object 'A'.\\
 		\emph{transitionsTo('A','B')} & By completing some process of change, transient 'A' becomes object 'B'.\\
 		\emph{transitionsBack('A','B')} & Object 'B' entered some process of change during which its ontological classification is unclear and it is replaced by Transient 'A', but after the process completes object 'B' is restored.\\
+	}
+\end{ODP}
+
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+\subsection{Force Interaction}
+
+\textbf{todo: Daniel write this}
+\textbf{todo: preservative vs. alterative interaction}
+\textbf{todo: how to represent who is stronger? can measured forces be included in the NEEM?}
+\textbf{todo: isProcessTypeOf relation is not nice}
+\lipsum[2]
+
+\begin{ODP}{?}
+	\ODPINTENT{To qualify force dynamical event characteristics.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What entity is the agonist in this event? What are the events where this entity is an antagonist? Which entity is stronger in this event?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (B) {Force Interaction};
+	    \node[owlclass,below=0.6cm of B,xshift=-1.3cm] (C) {Agonist};
+	    \node[owlclass,below=0.6cm of B,xshift=1.3cm]  (D) {Antagonist};
+	    \node[owlclass,above=0.6cm of B] (E) {Stronger Entity};
+	    \draw (B) edge[relation] node[midway,label=left:xx] {} (C);
+	    \draw (B) edge[relation] node[midway,label=right:xx] {} (D);
+	    \draw (B) edge[relation] node[midway,label=left:xx] {} (E);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{??} & ??
+	}
+\end{ODP}
+
+\lipsum[2]
+
+\begin{ODP}{?}
+	\ODPINTENT{To quantify force dynamical event characteristics.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What is the effort of the agonist in this event?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (B) {Force Interaction};
+	    \node[owlclass,below=0.6cm of B,xshift=-1.3cm] (C) {Resultant};
+	    \node[owlclass,below=0.6cm of C] (D) {Effort};
+	    \node[data,right=0.6cm of D] (E) {$Nm$};
+	    \draw (B) edge[relation] node[midway,label=right:xx] {} (C);
+	    \draw (C) edge[relation] node[midway,label=right:xx] {} (D);
+	    \draw (D) edge[relation] node[midway,label=above:xx] {} (E);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{??} & ??
 	}
 \end{ODP}
 
