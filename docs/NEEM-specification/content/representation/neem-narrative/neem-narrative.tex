@@ -64,28 +64,22 @@
 \section{NEEM-Narrative}
 \label{ch:narrative}
 
-The narrative part of NEEMs can be seen as a story of what has happened
-in terms of events that occurred, goals that were followed, and objects
-that were involved.
-From a machine learning viewpoint, the \neemnar is the annotation of data represented in the \neemexp.
-Such annotations contain two basic elements: classified entities such as events and objects, and relationships between them.
-The representation of these annotations is based on a formal model called \soma.
-\soma defines a set of representational patterns for different aspects of activities.
-These patterns are discussed in this section.
+The narrative part of NEEMs can be seen as a story of what has happened in terms of events that occurred, goals that were followed, and objects that were involved.
+The \neemnar representation contains two basic elements: classified entities such as events and objects, and relationships between them.
+The events being particularly important as their time interval is used for time-indexed data access.
+Data represented in the \neemexp may further be correlated to the classes and structures in the \neemnar in order to train models that can predict the \neemnar given the \neemexp and possibly some contextual parameter.
 
-% % % % % % % % % % % % % % % % %
-% % % % % % % % % % % % % % % % %
-\subsection{Upper-Level Model}
-\label{sec:narrative:commitments}
+The \neemnar model is formally defined in form of an \owl ontology which is based on the DOLCE+DnS Ultralite (DUL) upper-level ontology~\cite{DOLCE2003}.
+DUL is a carefully designed ontology that seeks to model general categories underlying human cognition without making any discipline-specific assumptions.
+Our extensions of DUL mainly focus on characterizing different aspects of activities that were not considered in much detail in DUL.
+These extensions are part of an ontology that we have called \soma.
+A \neemnar is made of several patterns defined either in \dul or in \soma.
 
-% NOTE: taken from SOMA paper
-We decided to base our model on the DOLCE+DnS Ultralite (DUL) foundational framework~\cite{DOLCE2003}.
-This decision is greatly motivated by their underlying ontological commitments.
-%The decision to base our model on the DOLCE+DnS Ultralite foundational framework, is greatly motivated by their underlying ontological commitments.
-Firstly, DUL is not a revisionary model, but seeks to express stands that shape human cognition. Furthermore it assumes a reductionist approach -- rather than capturing, for example, the flexibility of our usage of objects via multiple inheritance in a multiplicative manner, we commit to a reduced {\it ground} classification and use a {\it descriptive} approach for handling this flexibility. For this a primary branch of the ontology represents the ground {\bf physical model}, e.g. objects and actions, while a secondary branch represents the {\bf social model}, e.g. roles and tasks. All entities in the social branch would not exist without humans, i.e. they constitute social objects that represent concepts about or descriptions of ground elements. 
-
-% NOTE: taken from SOMA paper
-Every axiomatization in the physical branch can, therefore, be regarded as expressing some physical context whereas axiomatizations in the descriptive social branch are used to express social contexts. A set of dedicated relations is provided that connect both branches. For example, as detailed in Section~\ref{subsec:roles}, the relation \emph{classifies} connects ground objects, e.g. a hammer, with the roles they can play, i.e. potential classifications. Thus, we can state that a hammer can in some context be conceptualized as a murder weapon, a paper weight or a door stopper. Nevertheless, neither its ground ontological classification as a tool will change nor will hammers be subsumed as kinds of door stoppers, paper weights or weapons via multiple inheritance. Following a quick overview of the central modules of SOMA where these commitments apply, we will provide detailed examples of where and how our commitments apply in Sections~\ref{sec:perdurants} and~\ref{sec:endurants}.
+While it is possible to create the representations listed in this chapter through a custom exporter, it is not advised to do so.
+Instead, it is advised to interface with the \knowrob knowledge base.
+\knowrob provides an interface based on predicate logics that allows to interact with \neems.
+The language is a collection of predicates that can be called by users to ask certain types of competency questions covering different aspects of activitiy, or to add labels and relationships in the \neemnar.
+We will provide example expressions in this section that highlight how the knowledge base shall be used to interact with \neems.
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
