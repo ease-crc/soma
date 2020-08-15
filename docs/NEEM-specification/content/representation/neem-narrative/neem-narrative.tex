@@ -67,10 +67,10 @@
 The narrative part of NEEMs can be seen as a story of what has happened
 in terms of events that occurred, goals that were followed, and objects
 that were involved.
-From a machine learning viewpoint, the narrative part of a NEEM is the annotation of data represented in the NEEM experience.
+From a machine learning viewpoint, the \neemnar is the annotation of data represented in the \neemexp.
 Such annotations contain two basic elements: classified entities such as events and objects, and relationships between them.
-The representation of these annotations is based on a formal model called SOMA.
-SOMA defines a set of representational patterns for different aspects of activities.
+The representation of these annotations is based on a formal model called \soma.
+\soma defines a set of representational patterns for different aspects of activities.
 These patterns are discussed in this section.
 
 % % % % % % % % % % % % % % % % %
@@ -475,18 +475,23 @@ For practical purposes however, human beings often do not care about the exact c
 \lipsum[2]
 
 \begin{ODP}{?}
-	\ODPINTENT{To qualify force dynamical event characteristics.}
+	\ODPINTENT{To represent force dynamical event characteristics.}
 	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{What entity is the agonist in this event? What are the events where this entity is an antagonist? Which entity is stronger in this event?}
+	\ODPQUESTION{What entity is the agonist in this event? What are the events where this entity is an antagonist? Which entity is stronger in this event? What is the force dynamical tendency in this event?}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
-	    \node[owlclass] (B) {Force Interaction};
+	    \node[owlclass] (A) {Event};
+	    \node[owlclass,below=0.6cm of A] (B) {Object};
 	    \node[owlclass,below=0.6cm of B,xshift=-1.3cm] (C) {Agonist};
 	    \node[owlclass,below=0.6cm of B,xshift=1.3cm]  (D) {Antagonist};
-	    \node[owlclass,above=0.6cm of B] (E) {Stronger Entity};
-	    \draw (B) edge[relation] node[midway,label=left:xx] {} (C);
-	    \draw (B) edge[relation] node[midway,label=right:xx] {} (D);
-	    \draw (B) edge[relation] node[midway,label=left:xx] {} (E);
+	    \node[owlclass_f,above=0.6cm of A,xshift=-1.3cm] (E) {Alterative Interaction};
+	    \node[owlclass_f,above=0.6cm of A,xshift=1.3cm]  (F) {Preservative Interaction};
+	    \draw (B) edge[relation] node[midway,label=left:$\text{hasRole}_t$] {} (C);
+	    \draw (B) edge[relation] node[midway,label=right:$\text{hasRole}_t$] {} (D);
+	    \draw (A) edge[relation] node[midway,label=left:$\text{isOccurrenceOf}$] {} (E);
+	    \draw (A) edge[relation] node[midway,label=right:$\text{isOccurrenceOf}$] {} (F);
+	    \draw (A) edge[relationxl] node[midway,label=left:hasWeakerEntitiy] {} (B);
+	    \draw (A) edge[relationxr] node[midway,label=right:hasStrongerEntitiy] {} (B);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
