@@ -179,33 +179,6 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Cutting -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Cutting">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ModifyingPhysicalObject"/>
-        <rdfs:comment>The goal of this task is to separate one or more pieces from some target object by means of cutting into its constituent material. Unlike a disassembly, a cut is usually not easily reversible.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Dicing -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Dicing">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Cutting"/>
-        <rdfs:comment>A particular kind of cutting where the goal is to produce small pieces out of some object or material. Unlike slices, the pieces to be obtained do not have one or two dimensions being more prominent than others. &quot;Dice&quot;, the pieces dicing results in, are approximately cubic.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Slicing -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Slicing">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Cutting"/>
-        <rdfs:comment>A particular kind of cutting where the goal is to produce slices from some solid object.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#AbductiveReasoning -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AbductiveReasoning">
@@ -370,6 +343,15 @@ For example, if the topic of a communication is flowers, this does not mean the 
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Cutting -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Cutting">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ModifyingPhysicalObject"/>
+        <rdfs:comment>The goal of this task is to separate one or more pieces from some target object by means of cutting into its constituent material. Unlike a disassembly, a cut is usually not easily reversible.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#DeductiveReasoning -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DeductiveReasoning">
@@ -381,17 +363,19 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Dicing -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Dicing">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Cutting"/>
+        <rdfs:comment>A particular kind of cutting where the goal is to produce small pieces out of some object or material. Unlike slices, the pieces to be obtained do not have one or two dimensions being more prominent than others. &quot;Dice&quot;, the pieces dicing results in, are approximately cubic.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Distancing -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Distancing">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Taxis"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Navigating"/>
     </owl:Class>
     
 
@@ -492,20 +476,6 @@ Induction is often described as a move from many &quot;specifics&quot; (swan A i
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#InterpretedAction -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#InterpretedAction">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ObservedAction"/>
-        <rdfs:comment>The DUL concept of Action is that it is an Event with an Agent participant, which causes the Event to happen because the Agent executes some Task, in pursuit of a Goal.
-
-In general, identifying what an Agent actually intended is a hard problem of interpretation. Sometimes it may &quot;seem obvious&quot; that a sequence of movements corresponds to some activity or other, but even such &quot;obvious&quot; interpretation has to rely on a lot of shared cultural assumptions between the Agent performing the action and some other Agent observing the first&apos;s behavior, or some history of communication between them.
-
-In this category we will place Actions for which such extra knowledge is required, in order to have justification for interpretation.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Lifting -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Lifting">
@@ -546,12 +516,6 @@ In this category we will place Actions for which such extra knowledge is require
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Manipulating">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PhysicalTask"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ManipulationAction"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:comment>Tasks where the goal is to move the prehensile effectors, ie. hands, of an agent so as to achieve some spatial or functional relation with some manipulated object. 
 
 Spatial relations refer to positioning the hands in certain ways relative to the manipulated object, for example nearing or distancing them, or aligning them with some relevant axis.
@@ -571,51 +535,11 @@ Note: we employ Manipulating here in its literal, original sense, of using hands
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#ManipulationAction -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ManipulationAction">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ObservedAction"/>
-        <rdfs:comment>These are Actions in which the Agent exerts or prepares to exert some influence over some other participant Phyiscal Objects by way of its prehensile body parts (usually, hands).</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#MentalAction -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MentalAction">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InterpretedAction"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                <owl:allValuesFrom>
-                    <owl:Class>
-                        <owl:unionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
-                        </owl:unionOf>
-                    </owl:Class>
-                </owl:allValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>An Event construed as the Agent participant affecting Entities that are representations of actual or potential Entities or Events in the physical world in which the Agent is embodied. These representations are maintained by the Agent participant in the &apos;Mental action&apos; event.
-
-One could argue Mental actions are all Physical actions, because anything the Agent may use to maintain such representations will be physical things, However, we make this distinction because for Mental actions it is less important to consider the physical support of the representation and how it changes, and more important to track how the information content of the representation changes.</rdfs:comment>
-        <rdfs:label>Mental action</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#MentalTask -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MentalTask">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#MentalAction"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A Task classifying some MentalAction, that is, an Action through which an Agent manipulates representations stored in its own cognition.</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A Task classifying some Action through which an Agent manipulates representations stored in its own cognition.</rdfs:comment>
     </owl:Class>
     
 
@@ -681,39 +605,6 @@ One could argue Mental actions are all Physical actions, because anything the Ag
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Navigating">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PhysicalTask"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#ObservedAction -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ObservedAction">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isPerformedBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>The DUL concept of Action is that it is an Event with an Agent participant, which causes the Event to happen because the Agent executes some Task, in pursuit of a Goal.
-
-In general, identifying what an Agent actually intended is a hard problem of interpretation. However, it is often useful to stop interpretation at what is readily observable, for example when labeling manipulation actions.
-
-ObservedActions are therefore those for which we do not care about the Agent&apos;s goals, but we do care about what happened in the world as a result of the Agent&apos;s interference. This is why we prefer a separate concept, rather than Process which makes no agentive commitments at all.
-
-Because of the above restriction, ObservedActions are &quot;physical&quot; ones, involving participants that are physical objects or agents which we could observe.
-
-Another obvious but less intuitive consequence of the above is that even &quot;mistakes&quot; are included in this category. For example, suppose that Alice drops a vase. This would correspond to a Dropping action, with a dropping goal, if we modeled that goal explicitly. Alice could protest that she didn&apos;t intend to drop the vase, it simply slipped, however taking that into account requires going beyond what&apos;s inferrable by simply observing the motion of the participants; we have to get access to Alice&apos;s intentions, which falls under the domain of InterpretedActions.
-
-If however the &quot;goals&quot; for ObservedActions do not belong to the Agent performing the action, who do they belong to?
-
-Our stance is to treat the goals of ObservedActions as convenient fictions, tolerable for the pragmatic reason that it is often useful to speak of Actions purely in terms of their physical effects, as opposed to conformance to the performing Agent&apos;s inner goals.</rdfs:comment>
     </owl:Class>
     
 
@@ -833,17 +724,6 @@ Note that buying an object is NOT PhysicalGetting. Buying, or ownership transfer
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#PosturalAction -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PosturalAction">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ObservedAction"/>
-        <rdfs:comment>The Agent changes or takes an overall configuration of their body but is otherwise not significantly affecting other objects nor moving a significant amount from its original location.
-
-Posture changes may take place as part of other actions, for example turning when walking.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Prediction -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Prediction">
@@ -896,44 +776,6 @@ Posture changes may take place as part of other actions, for example turning whe
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Querying -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Querying">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InterpretedAction"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isAskedBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Receiving"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Transmitting"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isAnsweredBy"/>
-                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isAskedBy"/>
-                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Reaching -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Reaching">
@@ -955,14 +797,6 @@ Both Abductive and Inductive inference may, and often do, use Probabilistic meth
 Any of the Abductive/Deductive/Inductive triad can be further affected by the Monotone/Non-monotone distinction. There are preferences (Inductive and Abductive reasoning is probably most often non-monotonic; most of Deductive reasoning is probably done in monotonic formalisms), but it is certainly the case that, e.g., non-monotone Deduction is possible.
 
 Note, this classification has nothing to do with reasoning domain (e.g. SpatialReasoning, TemporalReasoning, ...) and merely with techniques/logical-mathematical underpinnings.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Receiving -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Receiving">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
     </owl:Class>
     
 
@@ -1015,6 +849,15 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Slicing -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Slicing">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Cutting"/>
+        <rdfs:comment>A particular kind of cutting where the goal is to produce slices from some solid object.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Squeezing -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Squeezing">
@@ -1026,7 +869,7 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Taxis -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Taxis">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ObservedAction"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#BodyMovement"/>
         <rdfs:comment>An innate behavioural response such as the knee-jerk reflex or the sucking reflex of human infants.</rdfs:comment>
     </owl:Class>
     
@@ -1123,14 +966,6 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Transmitting -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Transmitting">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Transporting -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Transporting">
@@ -1205,5 +1040,5 @@ Simulation does not commit itself to state accuracy: the initial state of the si
 
 
 
-<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.5.12.2019-05-06T20:49:08Z) https://github.com/owlcs/owlapi -->
 
