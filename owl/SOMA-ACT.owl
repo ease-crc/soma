@@ -260,6 +260,22 @@ For Manipulating, it is the movement of the hand(s) and the change in functional
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#CommunicationAction -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CommunicationAction">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#LinguisticObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>An action in which an agent uses some actuator for communication purposes.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Communication action</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#CommunicationReport -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CommunicationReport">
@@ -516,6 +532,12 @@ Induction is often described as a move from many &quot;specifics&quot; (swan A i
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Manipulating">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PhysicalTask"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PhysicalAction"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment>Tasks where the goal is to move the prehensile effectors, ie. hands, of an agent so as to achieve some spatial or functional relation with some manipulated object. 
 
 Spatial relations refer to positioning the hands in certain ways relative to the manipulated object, for example nearing or distancing them, or aligning them with some relevant axis.
@@ -535,11 +557,42 @@ Note: we employ Manipulating here in its literal, original sense, of using hands
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#MentalAction -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MentalAction">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>An Event construed as the Agent participant affecting Entities that are representations of actual or potential Entities or Events in the physical world in which the Agent is embodied. These representations are maintained by the Agent participant in the &apos;Mental action&apos; event.
+
+One could argue Mental actions are all Physical actions, because anything the Agent may use to maintain such representations will be physical things, However, we make this distinction because for Mental actions it is less important to consider the physical support of the representation and how it changes, and more important to track how the information content of the representation changes.</rdfs:comment>
+        <rdfs:label>Mental action</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#MentalTask -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MentalTask">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A Task classifying some Action through which an Agent manipulates representations stored in its own cognition.</rdfs:comment>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#MentalAction"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A Task classifying some MentalAction, that is, an Action through which an Agent manipulates representations stored in its own cognition.</rdfs:comment>
     </owl:Class>
     
 
@@ -643,6 +696,16 @@ Note: we employ Manipulating here in its literal, original sense, of using hands
 The prototypical example of PhysicalGetting is picking up an object.
 
 Note that buying an object is NOT PhysicalGetting. Buying, or ownership transfer in general, also involves an adjustment in social structures describing ownership.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#PhysicalAction -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PhysicalAction">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+        <rdfs:comment>These are Actions in which the Agent exerts or prepares to exert some influence over some other participant Phyiscal Objects by way of its prehensile body parts (usually, hands).</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Physical action</rdfs:label>
     </owl:Class>
     
 
@@ -862,15 +925,6 @@ Simulation does not commit itself to state accuracy: the initial state of the si
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Squeezing">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Actuating"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Taxis -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Taxis">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#BodyMovement"/>
-        <rdfs:comment>An innate behavioural response such as the knee-jerk reflex or the sucking reflex of human infants.</rdfs:comment>
     </owl:Class>
     
 
