@@ -159,12 +159,13 @@ Events always involve some objects that play a certain role during the event. Th
 \end{ODP}
 
 \textbf{todo: Sascha write this}
-\lipsum[2]
+
+Actions are performed by Agents. A robot performing a action is a example with the robot being the agent. 
 
 \begin{ODP}{Action Execution}
 	\ODPINTENT{To represent that an agent has executed an action.}
 	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{?}
+	\ODPQUESTION{Which agent did perform this action? Which actions are performed by this agent?}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
 	    \node[owlclass] (EVT) {Action};
@@ -174,7 +175,14 @@ Events always involve some objects that play a certain role during the event. Th
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{??} & ??
+		\emph{is\_performed\_by('ACT','AG')} &
+		\emph{ACT} is performed by \emph{AG} \\
+		% % % % %
+		\emph{is\_performed\_by('ACT',X)} &
+		what are the agents that performed \emph{ACT}? \\
+		% % % % %
+		\emph{is\_performed\_by(X,'AG')} &
+		which actions are performed by \emph{AG}?
 	}
 \end{ODP}
 
