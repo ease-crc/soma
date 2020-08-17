@@ -1003,6 +1003,23 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:comment>A relation from an agent to an object that the agent causes to move.</rdfs:comment>
 </owl:ObjectProperty>
 
+<owl:ObjectProperty rdf:about="#isOccurrenceOf">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
+  <owl:inverseOf rdf:resource="#isOccurringIn"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between an event and an event type, e.g. 'taking the cup from the table' is an occurence of the motion 'approaching'.</rdfs:comment>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is occurence of</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#isOccurringIn">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between an event and an event type, e.g. 'taking the cup from the table' is an occurence of the motion 'approaching'.</rdfs:comment>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is occurring in</rdfs:label>
+</owl:ObjectProperty>
+
 <owl:ObjectProperty rdf:about="#isPhysicallyContainedIn">
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
   <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
@@ -5178,6 +5195,14 @@ It is also possible that a Transient transitionsBack to the initial object. An e
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic relation between any entities that also implies ordering, e.g. "she has worked into the night".</rdfs:comment>
   <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">o</symbol>
 </owl:AsymmetricProperty>
+
+<rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#executesTask">
+  <rdfs:subPropertyOf rdf:resource="#isOccurrenceOf"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExecutedIn">
+  <rdfs:subPropertyOf rdf:resource="#isOccurringIn"/>
+</rdf:Description>
 
 
 </rdf:RDF>
