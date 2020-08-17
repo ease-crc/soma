@@ -5,11 +5,11 @@
 # Author: Daniel Beßler
 
 BASEDIR=$(dirname "$0")
-OWL_FILE="$BASEDIR/../owl/EASE-UGLY.owl"
+OWL_FILE="$BASEDIR/../owl/SOMA-UGLY.owl"
 
 rm -f "$OWL_FILE"
 # roslaunch and remember PID
-roslaunch ease_ontology uglify_ease.launch &
+roslaunch soma uglify.launch &
 roslaunch_PID=$!
 # Wait until file is created
 while [ ! -f "$OWL_FILE" ]; do sleep 1; done
