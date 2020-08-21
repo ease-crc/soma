@@ -64,6 +64,15 @@ uglify :-
     'SOMA-PROC.owl'
   ],
   rdf_assert(EASE_UGLY,rdf:type,owl:'Ontology',ease),
+  % assert owl:versionInfo
+  % TODO: assert more version information (e.g. a description, diff to last version, ..)
+  (  getenv('SOMA_VERSION', VersionString)
+  -> true
+  ;  VersionString=current
+  ),
+  rdf_assert(EASE_UGLY,owl:versionInfo,
+    literal(type(xsd:string,VersionString)),ease),
+  %
   source_file(uglify, Filepath),
   string_concat(Basepath, '/prolog/uglify.pl', Filepath),
   forall(member(N,Ontologies), (
