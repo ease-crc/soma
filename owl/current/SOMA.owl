@@ -171,12 +171,6 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
   <owl:inverseOf rdf:resource="#isQualityDescribedBy"/>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#isPerformedBy">
-  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
-</owl:ObjectProperty>
-
 <owl:ObjectProperty rdf:about="#definesProcess">
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
   <rdfs:range rdf:resource="#ProcessType"/>
@@ -205,14 +199,6 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
     </rdf:Description>
   </owl:propertyChainAxiom>
   <rdfs:comment>Relates a disposition to the setpoint parameter defined by the affordance describing the disposition.</rdfs:comment>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="#isAskedBy">
-  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="#isAnsweredBy">
-  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#hasSuccedence">
@@ -981,6 +967,14 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
 </owl:ObjectProperty>
 
+<owl:ObjectProperty rdf:about="#isAnsweredBy">
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#isAskedBy">
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
+</owl:ObjectProperty>
+
 <owl:ObjectProperty rdf:about="#isDepositOf">
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
   <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
@@ -1035,6 +1029,12 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between an event and an event type, e.g. 'taking the cup from the table' is an occurence of the motion 'approaching'.</rdfs:comment>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is occurring in</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#isPerformedBy">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#isPhysicallyContainedIn">
@@ -1534,13 +1534,6 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
-      <owl:onClass rdf:resource="#Affordance"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
       <owl:onClass>
         <owl:Class>
           <owl:intersectionOf rdf:parseType="Collection">
@@ -1563,6 +1556,13 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
           </owl:intersectionOf>
         </owl:Class>
       </owl:onClass>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+      <owl:onClass rdf:resource="#Affordance"/>
       <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
     </owl:Restriction>
   </rdfs:subClassOf>
@@ -1775,7 +1775,7 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-      <owl:allValuesFrom rdf:resource="#Locution"/>
+      <owl:allValuesFrom rdf:resource="#CommunicationAction"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#CommunicationTask"/>
@@ -2499,6 +2499,20 @@ In some sense any process that results in entities being created or destroyed mi
 <owl:Class rdf:about="#ConnectedObject">
   <rdfs:subClassOf rdf:resource="#Patient"/>
 </owl:Class>
+
+<owl:Class rdf:about="#CommunicationAction">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#LinguisticObject"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+  <rdfs:comment>An action in which an agent uses some actuator for communication purposes.</rdfs:comment>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Communication action</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#LinguisticObject"/>
 
 <owl:Class rdf:about="#CommunicationReport">
   <rdfs:subClassOf rdf:resource="#CommunicationTask"/>
@@ -3383,19 +3397,7 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
 </owl:Class>
 
 <owl:Class rdf:about="#Distancing">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-      <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#Taxis"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Taxis">
-  <rdfs:subClassOf rdf:resource="#ObservedAction"/>
-  <rdfs:comment>An innate behavioural response such as the knee-jerk reflex or the sucking reflex of human infants.</rdfs:comment>
+  <rdfs:subClassOf rdf:resource="#Navigating"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Drawer">
@@ -3550,7 +3552,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-      <owl:allValuesFrom rdf:resource="#ManipulationAction"/>
+      <owl:allValuesFrom rdf:resource="#PhysicalAction"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#PhysicalTask"/>
@@ -4009,17 +4011,6 @@ Note that such theories are useful both when analyzing an actual linguistic prod
   <rdfs:subClassOf rdf:resource="#Crockery"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Locution">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#LinguisticObject"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#InterpretedAction"/>
-  <rdfs:comment>An action in which an agent uses some actuator for communication purposes.</rdfs:comment>
-</owl:Class>
-
 <owl:Class rdf:about="#Imagining">
   <rdfs:subClassOf rdf:resource="#MentalTask"/>
   <rdfs:comment>A Mental task in which the Agent constructs a mental representation of a possible world. An Agent performing an Imagining activity does not aim to construct a representation that aspires to be faithful to some past, present, or future state of affairs of the actual world it is embodied in.</rdfs:comment>
@@ -4104,45 +4095,6 @@ Induction is often described as a move from many "specifics" (swan A is white, s
 
 <owl:Class rdf:about="#InsertedObject">
   <rdfs:subClassOf rdf:resource="#EnclosedObject"/>
-</owl:Class>
-
-<owl:Class rdf:about="#InterpretedAction">
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-  <owl:disjointWith rdf:resource="#ObservedAction"/>
-  <rdfs:comment>The DUL concept of Action is that it is an Event with an Agent participant, which causes the Event to happen because the Agent executes some Task, in pursuit of a Goal.
-
-In general, identifying what an Agent actually intended is a hard problem of interpretation. Sometimes it may "seem obvious" that a sequence of movements corresponds to some activity or other, but even such "obvious" interpretation has to rely on a lot of shared cultural assumptions between the Agent performing the action and some other Agent observing the first's behavior, or some history of communication between them.
-
-In this category we will place Actions for which such extra knowledge is required, in order to have justification for interpretation.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#ObservedAction">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#isPerformedBy"/>
-      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-      <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-  <rdfs:comment>The DUL concept of Action is that it is an Event with an Agent participant, which causes the Event to happen because the Agent executes some Task, in pursuit of a Goal.
-
-In general, identifying what an Agent actually intended is a hard problem of interpretation. However, it is often useful to stop interpretation at what is readily observable, for example when labeling manipulation actions.
-
-ObservedActions are therefore those for which we do not care about the Agent's goals, but we do care about what happened in the world as a result of the Agent's interference. This is why we prefer a separate concept, rather than Process which makes no agentive commitments at all.
-
-Because of the above restriction, ObservedActions are "physical" ones, involving participants that are physical objects or agents which we could observe.
-
-Another obvious but less intuitive consequence of the above is that even "mistakes" are included in this category. For example, suppose that Alice drops a vase. This would correspond to a Dropping action, with a dropping goal, if we modeled that goal explicitly. Alice could protest that she didn't intend to drop the vase, it simply slipped, however taking that into account requires going beyond what's inferrable by simply observing the motion of the participants; we have to get access to Alice's intentions, which falls under the domain of InterpretedActions.
-
-If however the "goals" for ObservedActions do not belong to the Agent performing the action, who do they belong to?
-
-Our stance is to treat the goals of ObservedActions as convenient fictions, tolerable for the pragmatic reason that it is often useful to speak of Actions purely in terms of their physical effects, as opposed to conformance to the performing Agent's inner goals.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#InterrogativeClause">
@@ -4307,8 +4259,6 @@ Posture changes may take place as part of other actions, for example turning whe
   <rdfs:comment>The localization of an object. The region of this quality encodes values to localize the object in a dimensional space, e.g. Euclidean positions that localize the object in Euclidean space.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#LinguisticObject"/>
-
 <owl:Class rdf:about="#LookingAt">
   <rdfs:subClassOf rdf:resource="#PhysicalTask"/>
 </owl:Class>
@@ -4321,9 +4271,10 @@ Posture changes may take place as part of other actions, for example turning whe
   <rdfs:subClassOf rdf:resource="#Actuating"/>
 </owl:Class>
 
-<owl:Class rdf:about="#ManipulationAction">
-  <rdfs:subClassOf rdf:resource="#ObservedAction"/>
-  <rdfs:comment>These are Actions in which the Agent exerts or prepares to exert some influence over some other participant Phyiscal Objects by way of its prehensile body parts (usually, hands).</rdfs:comment>
+<owl:Class rdf:about="#PhysicalAction">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An action performed by an agent by using its body in some way to interact with the physical world, e.g., through manipulation of objects, or by changing the posture.</rdfs:comment>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Physical action</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#MassAttribute">
@@ -4367,7 +4318,7 @@ Posture changes may take place as part of other actions, for example turning whe
       </owl:allValuesFrom>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#InterpretedAction"/>
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
   <rdfs:comment>An Event construed as the Agent participant affecting Entities that are representations of actual or potential Entities or Events in the physical world in which the Agent is embodied. These representations are maintained by the Agent participant in the 'Mental action' event.
 
 One could argue Mental actions are all Physical actions, because anything the Agent may use to maintain such representations will be physical things, However, we make this distinction because for Mental actions it is less important to consider the physical support of the representation and how it changes, and more important to track how the information content of the representation changes.</rdfs:comment>
@@ -4593,13 +4544,6 @@ The difference between states and processes is that states are, in addition, hom
   <rdfs:comment>A flat and usually circular object from which food is eaten or served.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#PosturalAction">
-  <rdfs:subClassOf rdf:resource="#ObservedAction"/>
-  <rdfs:comment>The Agent changes or takes an overall configuration of their body but is otherwise not significantly affecting other objects nor moving a significant amount from its original location.
-
-Posture changes may take place as part of other actions, for example turning when walking.</rdfs:comment>
-</owl:Class>
-
 <owl:Class rdf:about="#Prediction">
   <rdfs:subClassOf rdf:resource="#Prospecting"/>
   <rdfs:comment>A Mental task in which the Agent endeavours to construct a representation of a future state of the world. Prediction commits itself to some degree of accuracy: the Agent believes that eventually something similar to the predicted state will come to pass.</rdfs:comment>
@@ -4688,48 +4632,6 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#Illocution"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Querying">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#isAskedBy"/>
-      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
-      <owl:someValuesFrom rdf:resource="#Receiving"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
-      <owl:someValuesFrom rdf:resource="#Transmitting"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#isAnsweredBy"/>
-      <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#isAskedBy"/>
-      <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#InterpretedAction"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Receiving">
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Transmitting">
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Question">
@@ -5155,6 +5057,11 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
 </owl:Class>
 
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow"/>
+
+<owl:Class rdf:about="#Taxis">
+  <rdfs:subClassOf rdf:resource="#BodyMovement"/>
+  <rdfs:comment>An innate behavioural response such as the knee-jerk reflex or the sucking reflex of human infants.</rdfs:comment>
+</owl:Class>
 
 <owl:Class rdf:about="#Temperature">
   <rdfs:subClassOf>
