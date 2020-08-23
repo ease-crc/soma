@@ -1,4 +1,4 @@
-This folder includes several utility scripts for working with the EASE ontologies.
+This folder includes several utility scripts for working with the SOMA ontology.
 
 **Controlled vocabulary generation**
 
@@ -15,7 +15,7 @@ Dependencies:
 
 **Merging of ontology files**
 
-Run uglify.sh to merge all EASE owl files into a single one. The generated file is called EASE-UGLY.owl, and will appear in the owl subfolder of this ROS package.
+Run uglify.sh to merge all SOMA owl files into a single one. The generated file is called SOMA-UGLY.owl, and will appear in the owl subfolder of this ROS package.
 
 Dependencies:
 
