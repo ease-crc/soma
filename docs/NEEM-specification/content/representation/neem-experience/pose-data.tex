@@ -45,7 +45,7 @@ member has the same time stamp. \\
 \begin{center}\begin{tabular}{ >{\ttfamily}p{3.5cm} >{\ttfamily}p{2cm} p{5cm} }
 \toprule
 \bf Field   & \bf Type & \bf Description \\ \midrule
-tf			& [dict]	& -- \\
+tf			& dict	& -- \\
 \ \ header		& dict		& -- \\
 \ \ \ \ seq		& uint32	& consecutively increasing ID \\
 \ \ \ \ stamp		& time		& time stamp of this transform \\
@@ -88,77 +88,3 @@ such as motion JPEG, is supported.
 % piece of the database without having to decompress any other mo-
 % tion
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Symbol Abstraction}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{center}
-\begin{tabular}{ >{\ttfamily\bf}p{3.5cm} >{\ttfamily}p{8.2cm} }
-\toprule
-Module  & knowrob\_objects\footnote{\url{https://github.com/knowrob/knowrob/tree/master/knowrob\_objects}} \\
-Symbols & object pose \\
-Implementation & Prolog \\
-\bottomrule
-\end{tabular}
-\end{center}
-\begin{description}
-\item[\textbf{belief\_at(Object, [Parent,Child,Translation,Rotation], Instant)}]
-This temporal predicate computes a Prolog-based pose representation (2nd argument)
-for a named object (1st argument). Time is supplied to the predicate as time stamp
-(3rd argument).
-\end{description}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{center}
-\begin{tabular}{ >{\ttfamily\bf}p{3.5cm} >{\ttfamily}p{8.2cm} }
-\toprule
-Module  & comp\_spatial\footnote{\url{https://github.com/knowrob/knowrob/tree/master/comp\_spatial}} \\
-Symbols & spatial relations \\
-Implementation & Prolog \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-
-\begin{description}
-\item[\textbf{comp\_inCenterOf(Inner,Outer,Interval)}]
-Check if \owlClass{Inner} is in the center of \owlClass{Outer}.
-Currently does not take the orientation into account, only the position and dimension.
-Computes the \owlPredicate{inCenterOf} relation.
-
-\item[\textbf{comp\_inFrontOf(Front,Back,Interval)}]
-Check if \owlClass{Front} is in front of \owlClass{Back}.
-Currently does not take the orientation
-into account, only the position and dimension.
-Computes the \owlPredicate{inFrontOf-Generally} relation.
-
-\item[\textbf{comp\_inContGeneric(Inner,Outer,Interval)}]
-True iff the object \owlClass{Inner} is inside 
-of the bounding box of container \owlClass{Outer} during
-the specified interval.
-Computes the \owlPredicate{in-ContGeneric} relation.
-
-\item[\textbf{comp\_onPhysical(Top,Bottom,Interval)}]
-Check if \owlClass{Top} is in the area of and above \owlClass{Bottom}.
-Computes the \owlPredicate{on-Physical} relation
-
-\item[\textbf{comp\_above(Top,Bottom,Interval)}]
-Check if \owlClass{Top} is in the area of and above \owlClass{Bottom}.
-Computes the \owlPredicate{above-Generally} relation.
-
-\item[\textbf{comp\_below(Bottom,Top,Interval)}]
-Check if \owlClass{Top} is in the area of and above \owlClass{Bottom}.
-Computes the \owlPredicate{below-Generally} relation.
-
-\item[\textbf{comp\_toTheLeftOf(Left,Right,Interval)}]
-Check if \owlClass{Left} is to the left of \owlClass{Right}.
-Currently does not take the orientation
-into account, only the position and dimension.
-Computes the \owlPredicate{toTheLeftOf} relation.
-
-\item[\textbf{comp\_toTheRightOf(Right,Left,Interval)}]
-Check if \owlClass{Left} is to the left of \owlClass{Right}.
-Currently does not take the orientation
-into account, only the position and dimension.
-Computes the \owlPredicate{toTheRightOf} relation.
-\end{description}
