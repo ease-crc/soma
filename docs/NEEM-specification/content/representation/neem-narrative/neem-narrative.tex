@@ -125,35 +125,54 @@ A social concept which is basically used for an object classification. An object
 \subsection{Occurrences}
 \label{sec:occurrences}
 %% Summary of Figure below
-The basic building blocks of NEEMs are the events that occur during the course of an activity\todo{Seba: Is activity a general term for experiments or is it also a definition form the ontology?}. An event is defined as \emph{any physical, social, or mental process, event, or state}. Events have an associated time interval that determines the time at which the event occurs. Time data is represented as unix timestamps using XSD types.
+The basic building blocks of \neems are the events that occur when an agent interacts with its environment through movements of its body.
+An event is defined as \emph{any physical, social, or mental process, event, or state}. Events have an associated time interval that determines the time at which the event occurs. Time data is represented as unix timestamps using XSD types.
 %As discussed in porevious section, we distinguish between three different event classes: \owlClass{Action}, \owlClass{State}, and \owlClass{Process}.
 
-\begin{ODP}{Occurences}
-	\ODPINTENT{To quantify when something has happened.}
+\begin{ODP}{Occurences1}
+	\ODPINTENT{To represent the temporal extension of events.}
 	\ODPDEFINEDIN{DUL.owl}
-	\ODPQUESTION{Did it happen? When did it happen?}
+	\ODPQUESTION{What is the time interval associated to this event?}
 	\ODPGRAPHIC{\begin{tikzpicture}
-	    \node[owlclass] (EVT) {Event};
-	    \node[owlclass,below=0.6cm of EVT] (TI) {Time Interval};
+	    \node[owlclass] (A) {Event};
+	    \node[owlclass,below=0.6cm of A] (B) {Time Interval};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasTimeInterval] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isTimeIntervalOf] {} (A);
+	\end{tikzpicture}}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{occurs($x$)} &
+		$x$ is an occurence \\
+		% % % % %
+		\emph{is\_time\_interval($x$)} &
+		$x$ is a time interval \\
+		% % % % %
+		\emph{has\_time\_interval($y$,$x$)} &
+		$x$ is the time interval of event $y$
+	}
+\end{ODP}
+
+\begin{ODP}{Occurences2}
+	\ODPINTENT{To quantify when something has happened.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{When did it happen?}
+	\ODPGRAPHIC{\begin{tikzpicture}
+	    \node[owlclass] (TI) {Time Interval};
 	    \node[data,below=0.6cm of TI,xshift=-1.2cm] (BEGIN) {xsd:double};
 	    \node[data,below=0.6cm of TI,xshift=1.2cm] (END) {xsd:double};
-	    \draw (EVT) edge[relation] node[midway,label=right:hasTimeInterval] {} (TI);
 	    \draw (TI)  edge[relation] node[midway,label=left:hasIntervalBegin] {} (BEGIN);
 	    \draw (TI)  edge[relation] node[midway,label=right:hasIntervalEnd] {} (END);
 	\end{tikzpicture}}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{occurs('EV')} &
-		\emph{EV} is an occurence \\
+		\emph{occurs($x$) during [$y$,$z$]} &
+		$x$ occurs between the occurrences of $y$ and $z$ \\
 		% % % % %
-		\emph{occurs('EV') during [10,14]} &
-		\emph{EV} occurs between the times $10$ and $14$ \\
+		\emph{occurs($x$) since $y$} &
+		$x$ and $y$ begin at the same time \\
 		% % % % %
-		\emph{occurs('EV') since 10} &
-		\emph{EV} occurs since the time $10$ \\
-		% % % % %
-		\emph{occurs('EV0') since 'EV1'} &
-		\emph{EV0} and \emph{EV1} begin at the same time
+		\emph{occurs($x$) until $y$} &
+		$x$ and $y$ end at the same time
 	}
 \end{ODP}
 
@@ -170,7 +189,7 @@ Events always involve some objects that play a certain role during the event. Th
 	\ODPQUESTION{Which objects do participate in this event? In which events does this object participate in?}
 	\ODPGRAPHIC{\begin{tikzpicture}
 	    \node[owlclass] (A) {Event};
-	    \node[owlclass,below=0.6cm of EVT] (B) {Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Object};
 	    \draw (A) edge[relationxl] node[midway,label=left:hasParticipant] {} (B);
 	    \draw (B) edge[relationxr] node[midway,label=right:isParticipantIn] {} (A);
 	\end{tikzpicture}}
@@ -197,7 +216,7 @@ Agents are defined as \emph{agentive objects, either physical (e.g. a robot, a h
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Action};
-	    \node[owlclass,below=0.6cm of EVT] (B) {Agent};
+	    \node[owlclass,below=0.6cm of A] (B) {Agent};
 	    \draw (A) edge[relationxl] node[midway,label=left:isExecutedBy] {} (B);
 	    \draw (B) edge[relationxr] node[midway,label=right:executesAction] {} (A);
 	\end{tikzpicture}
@@ -301,7 +320,7 @@ Instead, roles are defined as concepts that are used to classify the objects tha
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Object};
-	    \node[owlclass,below=0.6cm of EVT] (B) {Role};
+	    \node[owlclass,below=0.6cm of A] (B) {Role};
 	    \draw (A) edge[relationxl] node[midway,label=left:$\text{hasRole}_t$] {} (B);
 	    \draw (B) edge[relationxr] node[midway,label=right:$\text{isRoleOf}_t$] {} (A);
 	\end{tikzpicture}
@@ -334,7 +353,7 @@ This allows us to represent several different classifications of the same event 
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Event};
-	    \node[owlclass,below=0.6cm of EVT] (B) {Event Type};
+	    \node[owlclass,below=0.6cm of A] (B) {Event Type};
 	    \draw (A) edge[relationxl] node[midway,label=left:isOccurrenceOf] {} (B);
 	    \draw (B) edge[relationxr] node[midway,label=right:isOccurringIn] {} (A);
 	\end{tikzpicture}
@@ -391,7 +410,7 @@ This is mainly useful in cases where individual aspects of an entity are conside
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Object};
-	    \node[owlclass,below=0.6cm of EVT] (B) {Quality};
+	    \node[owlclass,below=0.6cm of A] (B) {Quality};
 	    \draw (A) edge[relation] node[midway,label=right:hasQuality] {} (B);
  %\node[owlclass] (QUALITY) {
  %\begin{owlclass}{Quality}
@@ -437,7 +456,7 @@ This is to allow assigning regions to entities without explicating the quality a
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Entity};
-	    \node[owlclass,below=0.6cm of EVT] (B) {Region};
+	    \node[owlclass,below=0.6cm of A] (B) {Region};
 	    \node[data,below=0.6cm of B] (C) {XSD Type};
 	    \draw (A) edge[relation] node[midway,label=right:hasRegion] {} (B);
 	    \draw (B) edge[relation] node[midway,label=right:hasRegionDataValue] {} (C);
@@ -490,8 +509,8 @@ For practical purposes however, human beings often do not care about the exact c
  %\end{owlclass}
  %};
 	    \node[owlclass] (A) {Transient};
-	    \node[owlclass,below=0.6cm of EVT] (B) {Object};
-	    \node[owlclass,above=0.6cm of EVT] (C) {Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Object};
+	    \node[owlclass,above=0.6cm of A] (C) {Object};
 	    \draw (A) edge[relation] node[midway,label=right:transitionsFrom] {} (B);
 	    \draw (A) edge[relation] node[midway,label=right:transitionsTo] {} (C);
 	\end{tikzpicture}
@@ -579,7 +598,7 @@ However, assuming hierachical organization of objects (i.e. all objects are part
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Situation};
-	    \node[owlclass,below=0.6cm of EVT] (B) {Entity};
+	    \node[owlclass,below=0.6cm of A] (B) {Entity};
 	    \draw (A) edge[relationxl] node[midway,label=left:isSettingFor] {} (B);
 	    \draw (B) edge[relationxr] node[midway,label=right:hasSetting] {} (A);
 	    hasSetting
@@ -615,7 +634,7 @@ Another type of descriptions are plans that are used to conceptualize the struct
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Situation};
-	    \node[owlclass,below=0.6cm of EVT] (B) {Description};
+	    \node[owlclass,below=0.6cm of A] (B) {Description};
 	    \draw (A) edge[relationxl] node[midway,label=left:satisfies] {} (B);
 	    \draw (B) edge[relationxr] node[midway,label=right:isSatisfiedBy] {} (A);
 	\end{tikzpicture}
