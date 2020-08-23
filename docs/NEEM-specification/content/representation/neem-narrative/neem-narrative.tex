@@ -576,7 +576,9 @@ However, assuming hierachical organization of objects (i.e. all objects are part
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Situation};
 	    \node[owlclass,below=0.6cm of EVT] (B) {Entity};
-	    \draw (A) edge[relation] node[midway,label=right:isSettingFor] {} (B);
+	    \draw (A) edge[relationxl] node[midway,label=left:isSettingFor] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:hasSetting] {} (A);
+	    hasSetting
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
@@ -593,10 +595,10 @@ However, assuming hierachical organization of objects (i.e. all objects are part
 \end{ODP}
 
 Episodes refer to concrete occurences with actual objects that are involved, and actual events that occur.
-The conceptualization \todo{Seba: can you provide a definition ? Before readining this section I assumed that a synomy for classification}of an episode is an abstraction that refers to concepts instead.
+The conceptualization of an episode is an abstraction that refers to concepts instead that are used to classify entities that are included in the episode.
 Such conceptualizations are called \emph{descriptions}.
 We say that an episode \emph{satisfies} a description in case the view represented
-by the episode is consistent with the conceptualization given by the description \todo{Seba: Will be description somewhere defined ?}).
+by the episode is consistent with the conceptualization given by the description.
 Diagnosis being one example of a description of an episode.
 Stating that the performance of the robot was \emph{amateurish} when it made a mess on the floor while
 preparing coffee is one example for describing an epsiode.
@@ -610,7 +612,8 @@ Another type of descriptions are plans that are used to conceptualize the struct
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Situation};
 	    \node[owlclass,below=0.6cm of EVT] (B) {Description};
-	    \draw (A) edge[relation] node[midway,label=right:satisfies] {} (B);
+	    \draw (A) edge[relationxl] node[midway,label=left:satisfies] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isSatisfiedBy] {} (A);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
