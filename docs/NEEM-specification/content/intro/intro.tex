@@ -1,11 +1,7 @@
 \section{Introduction}
 
 This document, referred to as the ``\neem Handbook'' hereafter,
-describes the \ease system for episodic memories of everyday activities:
-what they are, how they are represented and acquired.
-% and what reasoning and learning tasks can be performed with them.
-% This document requires at least rudimentary understanding of
-% description logic and knowledge modeling.
+describes the \ease system for episodic memories of everyday activities.
 The \neem Handbook will be updated along the progress in the CRC \ease.
 It is thought to provide \ease researchers with compact but still comprehensive
 information about what information is contained in \neems, and how it is represented.
@@ -18,6 +14,7 @@ The memory mechanism that allows us to recall these very detailed pieces of
 information from abstract descriptions is our episodic memory.
 Episodic memory is powerful because it allows us to remember special
 experiences we had. It can also serve as a ``repository'' from which we learn general knowledge.
+\todo{somebody needs to rephrase this! it is copied from ICRA paper}
 
 % From KnowRob 2.0
 \ease integrates episodic memories deeply into the knowledge acquisition, representation, and processing
@@ -26,6 +23,7 @@ reads about an activity, it creates an episodic memory. An episodic
 memory is best understood as a video that the agent makes of the
 ongoing activity coupled with a very detailed story about the actions, motions, their purposes, effects,
 the behavior they generate, the images that are captured, etc.
+\todo{somebody needs to rephrase this! it is copied from ICRA paper}
 
 % From KnowRob 2.0
 We term the episodic memories created by our system narrative-enabled episodic memories (\neems).
@@ -36,8 +34,7 @@ These can be used to replay an episode in detail.
 \neem experiences are linked to \neem narratives, which are stories
 that provide more abstract, symbolic descriptions of what is happening in an episode.
 These narratives contain information regarding the tasks, the context, intended goals, observed effects, etc.
-
-\todo{Are we providing a definition of term episode?}
+\todo{somebody needs to rephrase this! it is copied from ICRA paper}
 
 \neems are representations of experiences acquired through experimentation, reading, observing, mental simulation, etc.
 The main goal is to establish a common vocabulary used to annotate experience data across different tasks, scientific disciplines, and modalities of acquisition, and to define models for the representation of experience data.
@@ -49,34 +46,33 @@ These definitions are done such that a set of \emph{competency questions} about 
 \subsection{Scope} % Domain of Discourse
 \label{sec:scope}
 
+\todo{write about competency questions here. Probably would be good to provide a list of them that we intend to cover with the information contained in neems}
+
 % NOTE: taken from SOMA paper
 The broad scope of our work is everyday object manipulation tasks in autonomous robot control, and in particular the motion and force characteristics of objects that interact with each other.
 The research question driving us is whether a single general control program can be written that can generate adequate behavior in many different contexts: for different tasks, objects, and environments.
+\todo{somebody needs to rephrase this! it is copied from SOMA paper}
 
 % NOTE: taken from SOMA paper
 One of the challenges is that, using such a general plan, the agent needs to fill the knowledge gaps between abstract instructions included in the plan and the realization of context specific behavior. That is, for example, the many ways of how humans perform a pouring task depending on the source from which is poured, the destination, and the substance that is to be poured.
 Another challenge is that object manipulation tasks may fail if the agent does not perform the motions competently and well. This is caused by the agent choosing inappropriate parametrization of its control-level functions.
+\todo{somebody needs to rephrase this! it is copied from SOMA paper}
 
 % NOTE: taken from SOMA paper
 The employment of a general plan thus requires an abstract task and object model, and a mechanism to apply this abstract knowledge in situational context.
 To achieve this, an agent needs to be equipped with the necessary common-sense and intuitive physics knowledge, which is what SOMA\todo{The acronym is no where defined} attempts.
-
-\textbf{TODO: write about competency questions}
+\todo{somebody needs to rephrase this! it is copied from SOMA paper}
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
 \subsection{Outline} % Domain of Discourse
-First, this document provides an overview about version \neemversion of the \neem Handbook,
-and outlines how we, the \ease researchers, envision the evolution of the \neem Handbook
-throughout the CRC \ease.
-The next two sections are dedicated to the two distinct parts of \neems: experience and narrative.
-For both, we describe data format in detail, providing
-a compact tabular view on data structures and meaning.
-Finally, we provide a concrete example for a table setting activity,
-a highly relevant example for research in \ease.
-
+The purpose of this document is to provide an overview about version \neemversion of \neems.
+This is, first of all, how \neems are represented using ontological categories and relationships, and time series data.
 The purpose of this document is not to provide a full overview about the ontological modelling underlying \neems, but rather to concentrate on aspects that are directly relevant when a \neem is created.
 These are the representations that are used in the \neemnar (Section~\ref{ch:narrative}) and \neemexp (Section~\ref{ch:experience}).
-In addition, \neems are situated in an environment, and acquired by some agent performing a task by interacting with its environment (the \neembak).
-However, the agent and the environment may be involved in many different \neems such that their representation is seperated from the representation of \neems (Section~\ref{ch:background}).
+In addition, \neems are situated in an environment, and acquired by some agent executing a task by interacting with its environment (the \neembak).
+However, the agent and the environment may be involved in many different \neems such that their representation is seperated from the representation of the \neemnar and \neemexp (Section~\ref{ch:background}).
+Second, this document provides an overview about software tools that were developed to support the acquisition of \neems in different modalities such as a tool that can be hooked into a robot control system to auto-generate \neems (Section~\ref{ch:acquisition}).
+Finally, the document provides information about the \neemhub, which is an infrastructure software for the management and curation of \neems (Section~\ref{ch:neemhub}).
+
 
