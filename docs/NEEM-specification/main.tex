@@ -21,6 +21,7 @@
 \usepackage{import}
 \usepackage{enumitem}
 \usepackage{booktabs}
+\usepackage{lipsum}
 
 \usepackage{capt-of}
 \usepackage{float}
@@ -34,7 +35,13 @@
 \tikzset{
   query/.style={draw=blue!10,thick,fill=blue!2,inner sep=.15cm},
   answer/.style={rectangle,draw=black!10,fill=gray!4},
-  icon/.style={circle,thick,fill=blue!20,draw=blue!30,inner sep=.05cm,font=\bfseries}
+  icon/.style={circle,thick,fill=blue!20,draw=blue!30,inner sep=.05cm,font=\bfseries},
+  data/.style={draw=easeblue!30,thick,fill=easeblue!10,inner sep=.15cm},
+  owlclass/.style={draw=easeblue!40,fill=easeblue!10,text=easeblue,font=\bf,minimum width=2.5cm},
+  owlclass_f/.style={owlclass,text width=2.0cm,text badly centered},
+  relation/.style={thick,-latex,black,font=\it\scriptsize},
+  relationxl/.style={relation,transform canvas={xshift=-3mm}},
+  relationxr/.style={relation,transform canvas={xshift=3mm}},
 }
 \pgfdeclarelayer{back}
 \pgfdeclarelayer{front}
@@ -66,13 +73,18 @@
 	tabsize=2
 }
 
+\definecolor{ease_lightblue}{HTML}{D4E5EF}
+\definecolor{ease_darkblue}{HTML}{144F78}
+\colorlet{easeblue}{ease_darkblue}
+\colorlet{robotblue}{ease_darkblue}
+
 \newcommand{\todo}[1]{\textcolor{red}{\textbf{TODO}: #1}}
 %\lstdefinelanguage[OWL]{XML} {morekeywords={Individual,ObjectProperty,Types,Facts,Class,SubClassOf,Domain,Range,SubPropertyOf,EquivalentTo}}
 %\lstdefinestyle{OWL}    {language=[OWL]XML,    lineskip=0.2ex, fontadjust=true, basicstyle={\scriptsize \nopagebreak[4]}}
 %\lstdefinestyle{Prolog} {language=Prolog, lineskip=0.2ex, fontadjust=true, basicstyle={\scriptsize \nopagebreak[4]}, commentstyle=\scriptsize,
 %    morekeywords={entity, occurs, holds, show, append, forall, findall, member}}
 
-\title*{NEEM Specification}
+\title*{NEEM Handbook}
 \author{The EASE Researchers}
 \institute{CRC Everyday Activity Science and Engineering (EASE)\\ University Bremen, Am Fallturm 1, 28359 Bremen\\ \texttt{ai-office@cs.uni-bremen.de}}
 \thiswatermark{
@@ -100,6 +112,7 @@
 \newcommand{\eg}{e.g.~}
 \newcommand{\ros}{ROS~}
 \newcommand{\soma}{SOMA~}
+\newcommand{\dul}{DUL~}
 \newcommand{\easeOwl}{EASE.owl~}
 \newcommand{\easeAct}{EASE-ACT.owl~}
 \newcommand{\easeObj}{EASE-OBJ.owl~}

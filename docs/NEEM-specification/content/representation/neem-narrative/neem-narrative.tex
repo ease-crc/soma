@@ -5,179 +5,673 @@
 \newcommand{\givenODPNAME}{}
 \newcommand{\givenODPINTENT}{}
 \newcommand{\givenODPDEFINEDIN}{}
-\newcommand{\givenODPDESCRIPTION}{}
 \newcommand{\givenODPGRAPHIC}{}
-\newcommand{\givenODPDOMAIN}{}
+\newcommand{\givenODPEXAMPLES}{}
 \newcommand{\givenODPQUESTION}{}
 \newcommand{\ODPINTENT}[1]     {\renewcommand{\givenODPINTENT}{#1}}
 \newcommand{\ODPDEFINEDIN}[1]  {\renewcommand{\givenODPDEFINEDIN}{#1}}
-\newcommand{\ODPDESCRIPTION}[1]{\renewcommand{\givenODPDESCRIPTION}{#1}}
 \newcommand{\ODPGRAPHIC}[1]    {\renewcommand{\givenODPGRAPHIC}{#1}}
-\newcommand{\ODPDOMAIN}[1]     {\renewcommand{\givenODPDOMAIN}{#1}}
+\newcommand{\ODPEXAMPLES}[1]   {\renewcommand{\givenODPEXAMPLES}{#1}}
 \newcommand{\ODPQUESTION}[1]   {\renewcommand{\givenODPQUESTION}{#1}}
 \newcommand{\OPDinit}{
   \renewcommand{\givenODPINTENT}{REQUIRED!}
   \renewcommand{\givenODPDEFINEDIN}{REQUIRED!}
-  \renewcommand{\givenODPDESCRIPTION}{REQUIRED!}
   \renewcommand{\givenODPGRAPHIC}{REQUIRED!}
   \renewcommand{\givenODPQUESTION}{}
-  \renewcommand{\givenODPDOMAIN}{}
+  \renewcommand{\givenODPEXAMPLES}{}
   \renewcommand{\labelitemi}{$\mathbf{\sqsubseteq}$}
-}
-
-\newenvironment{owlclass}[2][,] {
-  \begin{minipage}{5.0cm}
-  \begin{center}
-  \texttt{\bf#2} \\[-0.2cm]
-  \par\noindent\rule{\textwidth}{0.4pt}
-  \vspace{-0.6cm}
-  \begin{itemize}[#1]
-  \raggedright} {
-  % % % % % %
-  \end{itemize}
-  \end{center}
-  \end{minipage}
 }
 
 \newenvironment{ODP}[1]{
 \OPDinit
 \renewcommand{\givenODPNAME}{#1}
 }{
-\givenODPDESCRIPTION
-\begin{figure}[htb]
-\begin{minipage}{0.45\textwidth}
-\begin{tabular}{ p{1.8cm} p{3.2cm} }
-\toprule
-% {\it\bf Name}                 & \emph{\givenODPNAME} \\
-{\it\bf Intent}               & \givenODPINTENT \\
-{\it\bf Domains}              & \givenODPDOMAIN \\
-{\it\bf Competency Questions} & \givenODPQUESTION \\
-{\it\bf Defined in}           & \givenODPDEFINEDIN \\
-\bottomrule
-\end{tabular}
-\end{minipage}
+%\givenODPDESCRIPTION
+%\begin{figure}[htb!]
+\vspace{0.2cm}
 \begin{minipage}{0.55\textwidth}
+\fcolorbox{easeblue!40}{easeblue!10}{\begin{tabular}{ p{1.8cm} p{4.2cm} }
+%\toprule
+% {\it\bf Name}                 & \emph{\givenODPNAME} \\
+{\noindent\color{easeblue}\it\bf Intent}               & \givenODPINTENT \\
+{\noindent\color{easeblue}\it\bf Competency Questions} & \emph{\givenODPQUESTION} \\
+{\noindent\color{easeblue}\it\bf Defined in}           & \givenODPDEFINEDIN \\
+%\bottomrule
+\end{tabular}}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
 \begin{center}
 \givenODPGRAPHIC
 \end{center}
 \end{minipage}
-\caption{The \emph{\givenODPNAME} ODP.}
-\end{figure}
+\\[0.4cm]
+\fcolorbox{easeblue!40}{easeblue!10}{
+	\begin{minipage}{0.96\textwidth}
+		\begin{tabular}{p{4.4cm}p{6.7cm}}
+		{\noindent\color{easeblue}\it\bf Expression}  &
+		{\noindent\color{easeblue}\it\bf Meaning} \\
+		\givenODPEXAMPLES
+		\end{tabular}
+	\end{minipage}
+}
+%\caption{\emph{The Representation of \givenODPNAME}.}
+%\end{figure}
+\vspace{0.2cm}
 }
 
-\tikzset{owlclass/.style={draw=blue!40,fill=blue!20,rounded corners}}
-
-% % % % % % % % % % % % % % % % %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{NEEM-Narrative}
 \label{ch:narrative}
 
-% NOTE: taken from KnowRob2.0
-% One of the most powerful components of the human memory system is the
-% episodic memory. 
-When somebody talks about the deciding goal in the
-last soccer world championship many of us can ``replay'' the episode
-in our ``mind's eye''. %, or if somebody talks about a cross court hit
-%in tennis we can recall how such a hit feels in the arm.
-The memory
-mechanism that allows us to recall these very detailed pieces of
-information from abstract descriptions is our episodic memory.
-Episodic memory is powerful because it allows us to remember special
-experiences we had. It can also serve as a ``repository'' from which
-we learn general knowledge.
+The narrative part of NEEMs can be seen as a story of what has happened in terms of events that occurred, goals that were followed, and objects that were involved.
+The \neemnar representation contains two basic elements: classified entities such as events and objects, and relationships between them.
+The events being particularly important as their time interval is used for time-indexed data access.
+Data represented in the \neemexp may further be correlated to the classes and structures in the \neemnar in order to train models that can predict the \neemnar given the \neemexp and possibly some contextual parameter.
 
-% NOTE: taken from KnowRob2.0
-EASE integrates episodic memories
-deeply into the knowledge acquisition, representation, and processing
-system. Whenever a robotic agent performs, observes, prospects, and
-reads about an activity, it creates an episodic memory. An episodic
-memory is best understood as a video that the agent makes of the
-ongoing activity 
-%in its inner world knowledge base
-coupled with a very
-detailed story about the actions, motions, their purposes, effects,
-the behavior they generate, the images that are captured, etc.
+The \neemnar model is formally defined in form of an \owl ontology which is based on the DOLCE+DnS Ultralite (DUL) upper-level ontology~\cite{DOLCE2003}.
+DUL is a carefully designed ontology that seeks to model general categories underlying human cognition without making any discipline-specific assumptions.
+Our extensions of DUL mainly focus on characterizing different aspects of activities that were not considered in much detail in DUL.
+These extensions are part of an ontology that we have called \soma.
+A \neemnar is made of several patterns defined either in \dul or in \soma.
+
+While it is possible to create the representations listed in this chapter through a custom exporter, it is not advised to do so.
+Instead, it is advised to interface with the \knowrob knowledge base.
+\knowrob provides an interface based on predicate logics that allows to interact with \neems.
+The language is a collection of predicates that can be called by users to ask certain types of competency questions covering different aspects of activitiy, or to add labels and relationships in the \neemnar.
+We will provide example expressions in this section that highlight how the knowledge base shall be used to interact with \neems.
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsection{Scope} % Domain of Discourse
-\label{sec:narrative:scope}
+\subsection{Taxonomy}
+\label{sec:taxonomy}
+\textbf{todo: Abhijit write me}
 
-% NOTE: taken from SOMA paper
-The broad scope of our work is everyday object manipulation tasks in autonomous robot control, and in particular the motion and force characteristics of objects that interact with each other.
-The research question driving us is whether a single general control program can be written that can generate adequate behavior in many different contexts: for different tasks, objects, and environments.
+\paragraph{Actions} \dots \textbf{(todo: write about task taxonomy)
+}
 
-% NOTE: taken from SOMA paper
-One of the challenges is that, using such a general plan, the agent needs to fill the knowledge gaps between abstract instructions included in the plan and the realization of context specific behavior. That is, for example, the many ways of how humans perform a pouring task depending on the source from which is poured, the destination, and the substance that is to be poured.
-Another challenge is that object manipulation tasks may fail if the agent does not perform the motions competently and well. This is caused by the agent choosing inappropriate parametrization of its control-level functions.
+\textbf{(A brief intro about Action taxonomy)}
+An action can be defined as an event where at least one agent participates, such that this agent performs a dedicated task, defined by a plan or workflow, which it
+executes through the Action. Sometimes intention of an agent is hard to identify even though it may seem obvious that a series of steps required to perform certain activity
+which might be subjected to shared cultural assumptions between an agent performing an action and it’s observer. An interpreted action which handles such extra knowledge required to perform certain tasks which can justify an agents behaviour. Whereas, an observed action, which is simply an observable
+fact that an agent has performed during task execution which would in tern liberate us from action interpretation and be helpful to log actions related to manipulation. Bodily motion however deals with information realization which consists movements of an agents body.
+In the appendix section, we further describe all three type of actions into subcategories. 
 
-% NOTE: taken from SOMA paper
-The employment of a general plan thus requires an abstract task and object model, and a mechanism to apply this abstract knowledge in situational context.
-To achieve this, an agent needs to be equipped with the necessary common-sense and intuitive physics knowledge, which is what SOMA attempts.
+\textbf{(How an Action is related to task)}
+An action executes the task which is of special event type. A task can be performed as series of actions according to a plan. Such as cleaning a table would be performed by various set of actions. A plan describes set of action and in which order they needs to be executed in order to perform certain task. 
 
-\textbf{TODO: write about competency questions}
+\textbf{(task taxonomy)}
+A task can be further classfied into three main catagories, physical task, mental task and communication task. A task which requires to execute an action through which an agent has to manipulate representations stored in its own cognition can be categorized as mental task, dreaming, imagining, prospecting, reasoning, retrospecting falls under mental task. Where as physical task requires an agent to perform certain physical activities such as actuating, constructing, modifying physical object, looking at, placing, navigating and perceiving. At last, communication task in which two more more agents shares information. This is used to classify special kind of events that have participants as agents and  social objects. The means of information exchange is physical however the scope of interest here is to  identify which agent communicates and what kind of information it has?
+In the appendix section, we further describe all three tasks into subcategories. 
 
-% % % % % % % % % % % % % % % % %
-% % % % % % % % % % % % % % % % %
-\subsection{Upper-Level Ontology}
-\label{sec:narrative:commitments}
+\paragraph{Motions} \dots \textbf{(todo: write about motion taxonomy)}
+An event type which deals with movements of an agent and motions it makes during task execution. Motion taxonomy includes concepts such as body movement which concentrates on the movements of agents body parts, directed motion which involves a destination and directed path for an agent to follow, an un-directed motion is opposite to directed where agent does not have any particular destination but it is important to know that the agent has moved and motion has occurred, and fluid flow is the process by which fluid moves or has moved from one location to other. All four concepts are further sub-categorized in appendix section.
 
-% NOTE: taken from SOMA paper
-We decided to base our model on the DOLCE+DnS Ultralite (DUL) foundational framework~\cite{DOLCE2003}.
-This decision is greatly motivated by their underlying ontological commitments.
-%The decision to base our model on the DOLCE+DnS Ultralite foundational framework, is greatly motivated by their underlying ontological commitments.
-Firstly, DUL is not a revisionary model, but seeks to express stands that shape human cognition. Furthermore it assumes a reductionist approach -- rather than capturing, for example, the flexibility of our usage of objects via multiple inheritance in a multiplicative manner, we commit to a reduced {\it ground} classification and use a {\it descriptive} approach for handling this flexibility. For this a primary branch of the ontology represents the ground {\bf physical model}, e.g. objects and actions, while a secondary branch represents the {\bf social model}, e.g. roles and tasks. All entities in the social branch would not exist without humans, i.e. they constitute social objects that represent concepts about or descriptions of ground elements. 
+\paragraph{Objects} \dots \textbf{(todo: write about 
+object taxonomy)}
+According to DOLCE, an object participates in an event during its lifetime and has its own spatial location. SOMA describes object into several subcategories which includes agent, digital object, feature, physical object, social object and transient. It further includes taxonomy of dispositions which describes the potential way an object can be used and design taxonomy which considers functional, structural and aesthetic aspect of object design.
 
-% NOTE: taken from SOMA paper
-Every axiomatization in the physical branch can, therefore, be regarded as expressing some physical context whereas axiomatizations in the descriptive social branch are used to express social contexts. A set of dedicated relations is provided that connect both branches. For example, as detailed in Section~\ref{subsec:roles}, the relation \emph{classifies} connects ground objects, e.g. a hammer, with the roles they can play, i.e. potential classifications. Thus, we can state that a hammer can in some context be conceptualized as a murder weapon, a paper weight or a door stopper. Nevertheless, neither its ground ontological classification as a tool will change nor will hammers be subsumed as kinds of door stoppers, paper weights or weapons via multiple inheritance. Following a quick overview of the central modules of SOMA where these commitments apply, we will provide detailed examples of where and how our commitments apply in Sections~\ref{sec:perdurants} and~\ref{sec:endurants}.
+\paragraph{Roles} \dots \textbf{(todo: write about role taxonomy)}
+A social concept which is basically used for an object classification. An object can have different roles when it participates in the event during its lifetime. Role taxonomy includes agent role, answer, causal process role, communication topic, existing object role, explanation, instrument, linguistic function, location, locatum role, path role, patient, question, relatum role, and software type. Further role sub-categories will be defined under appendix section.
 
-% % % % % % % % % % % % % % % % %
-% % % % % % % % % % % % % % % % %
-\subsection{SOMA Taxonomy}
-\label{sec:narrative:taxonomy}
-
-\textbf{TODO: provide a broad overview about types in SOMA, what branches the ontology has. Show a Figure, maybe use this Figure to indicate in subsections at which branch in the taxonomy we are?}
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsection{Event Branch in SOMA}
-\begin{itemize}
-\item show SOMA Figure highlight event branch
-\item write about different types of events
-\item write about relationships between events
-\item write about relationships between events and objects
-\item provide examples of everything
-\item display examples as graph figures
-\end{itemize}
+\subsection{Occurrences}
+\label{sec:occurrences}
+%% Summary of Figure below
+The basic building blocks of NEEMs are the events that occur during the course of an activity. An event is defined as \emph{any physical, social, or mental process, event, or state}. Events have an associated time interval that determines the time at which the event occurs. Time data is represented as unix timestamps using XSD types.
+%As discussed in porevious section, we distinguish between three different event classes: \owlClass{Action}, \owlClass{State}, and \owlClass{Process}.
 
-\subsubsection{Occurs}
-\textbf{events occur, they have a time interval}
-
-\subsubsection{Participation}
-\textbf{objects participate in events}
-
-\subsubsection{Classification}
-\textbf{tasks are used to classify events}
-
-\subsubsection{Composition / Constituency}
-\textbf{events may have sub-events, or some other events that are constituents of it. the structure of events is described in plans. Plans use Allen's relations to structure the event, etc.}
-
-\subsubsection{Interpretation}
-\textbf{events are interpreted through situations that satisfy some description of the task that is executed.}
+\begin{ODP}{Occurences}
+	\ODPINTENT{To quantify when something has happened.}
+	\ODPDEFINEDIN{DUL.owl}
+	\ODPQUESTION{Did it happen? When did it happen?}
+	\ODPGRAPHIC{\begin{tikzpicture}
+	    \node[owlclass] (EVT) {Event};
+	    \node[owlclass,below=0.6cm of EVT] (TI) {Time Interval};
+	    \node[data,below=0.6cm of TI,xshift=-1.2cm] (BEGIN) {xsd:double};
+	    \node[data,below=0.6cm of TI,xshift=1.2cm] (END) {xsd:double};
+	    \draw (EVT) edge[relation] node[midway,label=right:hasTimeInterval] {} (TI);
+	    \draw (TI)  edge[relation] node[midway,label=left:hasIntervalBegin] {} (BEGIN);
+	    \draw (TI)  edge[relation] node[midway,label=right:hasIntervalEnd] {} (END);
+	\end{tikzpicture}}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{occurs('EV')} &
+		\emph{EV} is an occurence \\
+		% % % % %
+		\emph{occurs('EV') during [10,14]} &
+		\emph{EV} occurs between the times $10$ and $14$ \\
+		% % % % %
+		\emph{occurs('EV') since 10} &
+		\emph{EV} occurs since the time $10$ \\
+		% % % % %
+		\emph{occurs('EV0') since 'EV1'} &
+		\emph{EV0} and \emph{EV1} begin at the same time
+	}
+\end{ODP}
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsection{Object Branch in SOMA}
+\subsection{Participation}
+\label{sec:participation}
+%% Summary of Figure below
+Events always involve some objects that play a certain role during the event. The role of being the \emph{patient} of some event being an example. This is that the event is directed towards the object. It is not always directly observable what the role of an object might be, however, it is less problematic to just state that the object \emph{has participated} in some event without naming a role.
 
-\subsubsection{Classification}
+\begin{ODP}{Participation}
+	\ODPINTENT{To represent participation of an object in an event.}
+	\ODPDEFINEDIN{DUL.owl}
+	\ODPQUESTION{Which objects do participate in this event? In which events does this object participate in?}
+	\ODPGRAPHIC{\begin{tikzpicture}
+	    \node[owlclass] (EVT) {Event};
+	    \node[owlclass,below=0.6cm of EVT] (OBJ) {Object};
+	    \draw (EVT) edge[relation] node[midway,label=left:hasParticipant] {} (OBJ);
+	\end{tikzpicture}}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_participant('EV','O')} &
+		\emph{O} is involved in event \emph{EV} \\
+		% % % % %
+		\emph{has\_participant('EV',X)} &
+		what are the entities involved in \emph{EV}? \\
+		% % % % %
+		\emph{has\_participant(X,'O')} &
+		what are the events involving \emph{O}?
+	}
+\end{ODP}
 
-\newpage
-\subsubsection{Designed Artifact ODP}
+%\textbf{todo: Sascha write this}
+Agents are defined as \emph{agentive objects, either physical (e.g. a robot, a human or a whale) or social (e.g. a corporation, an institution or a community)}, Actions are defined as events with \emph{at least one agent that is participating in it, and that is executing a task}. An example would be an robot that is grasping an object. In that case the robot is the agent and grasping would be the a task executed in an action. Actions can be performed by multiple agents. 
+
+\begin{ODP}{Action Execution}
+	\ODPINTENT{To represent that an agent has executed an action.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{Which agent did perform this action? Which actions are performed by this agent?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (EVT) {Action};
+	    \node[owlclass,below=0.6cm of EVT] (A) {Agent};
+	    \draw (EVT) edge[relation] node[midway,label=right:isPerformedBy] {} (A);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{is\_performed\_by('ACT','AG')} &
+		\emph{ACT} is performed by \emph{AG} \\
+		% % % % %
+		\emph{is\_performed\_by('ACT',X)} &
+		what are the agents that performed \emph{ACT}? \\
+		% % % % %
+		\emph{is\_performed\_by(X,'AG')} &
+		which actions are performed by \emph{AG}?
+	}
+\end{ODP}
+
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+\subsection{Composition}
+\label{sec:composition}
+
+%\textbf{todo: Mihai write this.}
+%\textbf{todo: why isn't hasPhase Event-to-Event?}
+
+Because an Entity often has relevant internal structure, it is necessary to represent relations between it and the other entities that make up its composition. DUL provides two such structuring relations: \emph{hasConstituent} and \emph{hasPart}. We will focus on \emph{hasPart} in this section, but we will briefly discuss the difference between the two relations as well.
+
+The \emph{hasConstituent} relation is intended to connect entities from different ontological layers or levels of abstraction of looking at the world. A material is a constituent of the object it makes up; individual persons are constituents of a corporation. While these constituency relations could often be in colloquial language described as parthood, DUL reserves parthood for more restrictive connections between entities closer to each other in their ontological characterization. For example, a corporation is a \emph{SocialObject} and as such can only have \emph{SocialObjects} as parts, whereas human persons are \emph{PhysicalAgents}, disjoint from \emph{SocialObjects}.
+
+The \emph{hasPart} relation is transitive and defined to have domain and range \emph{Entity}, that is, in principle it could link entities from any concepts together. However, various concepts restrict what can be parts of their instances as exemplified above; as another example, \emph{PhysicalObjects} can only have other \emph{PhysicalObjects} as parts. In SOMA, we define more specialized subproperties of \emph{hasPart} to deal with parts of \emph{Events} vs. parts of \emph{Objects}. The relevant properties are \emph{hasPhase} and \emph{hasComponent} respectively; both are subproperties of \emph{hasPart}.
+
+\begin{ODP}{Event Phases}
+	\ODPINTENT{To represent how an event is composed of phases.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What are the phases of this action? Is this a phase of some action?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (E) {Event};
+	    \path (E) edge[relation,loop above] node {hasPhase} (E);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_phase('A','B')} &
+		\emph{B} is a phase of \emph{A}
+	}
+\end{ODP}
+
+%\lipsum[2]
+
+\begin{ODP}{Composition}
+	\ODPINTENT{To represent proper parthood of objects.}
+	\ODPDEFINEDIN{DUL.owl}
+	\ODPQUESTION{What is this object component of? What are the components of this object?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (E) {Object};
+	    \path (E) edge[relation,loop above] node {hasComponent} (E);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_component('A','B')} &
+		\emph{B} is a proper part of \emph{A} \\
+		% % % % %
+		\emph{has\_component('A',X)} &
+		What are the components of \emph{A}? \\
+		% % % % %
+		\emph{has\_component(X,'A')} &
+		What are the entities \emph{A} is component of? \\
+	}
+\end{ODP}
+
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+\subsection{Conceptual Classification}
+\label{sec:classification}
+
+The classification of entities is done from multiple viewpoints.
+The most essential one is \emph{what the entitiy really is}.
+This is reflected in the taxonomy.
+However, entities may further be classified according to social aspects such as intention, purpose, etc.
+This type of classification is based on the \emph{conceptualization} of entities.
+In particular, conceptualizations of objects and events are used to classify them in the scope of some activity.
+For this purpose,
+a comprehensive collection of concepts is used to classify objects and events from a conceptual viewpoint (\textbf{todo: insert link to list of all concepts}).
+
+An object that participates in an event usually plays a certain role during the event.
+Some objects are designed to be used in certain ways, thus playing certain roles in specific tasks.
+This is, for example, a box which is designed to be used as a container to store items.
+However, roles may also be taken by objects that are not designed to be used as such.
+The box could, for example, also be used as a door stopper, but surely it would be
+inappropriate to classify it as such taxonomically.
+Instead, roles are defined as concepts that are used to classify the objects that particpate in an event from a conceptual viewpoint.
+
+\begin{ODP}{Object Role}
+	\ODPINTENT{To represents objects and the roles they play.}
+	\ODPDEFINEDIN{DUL.owl}
+	\ODPQUESTION{What role does this object play? Which objects do play that role?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Object};
+	    \node[owlclass,below=0.6cm of EVT] (B) {Role};
+	    \draw (A) edge[relationxl] node[midway,label=left:$\text{hasRole}_t$] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:$\text{isRoleOf}_t$] {} (A);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_role('A','B')} &
+		\emph{B} is a role of \emph{A} \\
+		% % % % %
+		\emph{has\_role('A','B') during 'C'} &
+		\emph{B} is a role of \emph{A} during the occurrence of \emph{C} \\
+		% % % % %
+		\emph{has\_role('A','B') during [$t_0$,$t_1$]} &
+		\emph{B} is a role of \emph{A} during the timepoints $t_0$ and $t_1$
+	}
+\end{ODP}
+
+The conceptualization of an event is about how it should be interpreted, executed, expected, seen, etc.
+One aspect is that a single event may contribute to multiple goals, such as when an ingredient is fetched that is partly used in a step of a cooking recipe, and partly eaten raw to satisfy hunger.
+In such a case, the taxonomical category of the event would be unclear in case it should describe the goal to which the event contributes.
+Another aspect is that intentions of agents may not always be known such that the classification of events based on their goals is difficult, and different viewpoints on the same event may exist.
+Hence, when referring to goals, intentions, etc. we rather employ conceptual classification.
+
+\begin{ODP}{??}
+	\ODPINTENT{To represent how events should be interpreted, executed, expected, seen, etc.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What are the events that are classified by this concept? What are the concepts that classify this event?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Event};
+	    \node[owlclass,below=0.6cm of EVT] (B) {Event Type};
+	    \draw (A) edge[relationxl] node[midway,label=left:isOccurrenceOf] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isOccurringIn] {} (A);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{is\_occurring\_in('C0','Evt0')} &
+		\emph{Evt0} is an occurrence that is classified by \emph{C0} \\
+		% % % % %
+		\emph{is\_executed\_in('Tsk0','Act0')} &
+		\emph{Act0} is an action that executes the task \emph{Tsk0}
+	}
+\end{ODP}
+
+%This ODP allows to make assertions on roles played by agents without involving the agents that play that roles, and vice versa. It allows to express neither the context type in which tasks are defined, not the particular context in which the action is carried out. Moreover, it does not allow to express the time at which the task is executed through the action (for actions that do not solely execute that certain task).
+%\lipsum[2]
+
+%\begin{ODP}{Task Execution}
+%	\ODPINTENT{To represent actions through which tasks are executed.}
+%	\ODPDEFINEDIN{DUL.owl}
+%	\ODPQUESTION{Which task is executed through this action? What actions could execute that task?}
+%	\ODPGRAPHIC{
+%	\begin{tikzpicture}
+%	    \node[owlclass] (A) {Action};
+%	    \node[owlclass,below=0.6cm of EVT] (B) {Task};
+%	    \draw (A) edge[relationxl] node[midway,label=left:executesTask] {} (B);
+%	    \draw (B) edge[relationxr] node[midway,label=right:isExecutedIn] {} (A);
+%	\end{tikzpicture}
+%	}
+%	%% Example KnowRob language expressions
+%	\ODPEXAMPLES{
+%		\emph{??} &
+%		??
+%	}
+%\end{ODP}
+
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+\subsection{Object Properties}
+\label{sec:qualification}
+
+Qualities are the properties of an object that are not part of it, but cannot exist without it.
+This is, for example, the quality of having a shape -- a quality inherited by all physical objects.
+Another example is the quality of a floor being slippery.
+A robot navigating on such a floor could use this knowledge to avoid, for example,
+spillage when moving on the floor with a coffee-filled cup.
+The quality concept does not directly encode the value of the object property, but only focusses on characteristics of the property itself.
+This is mainly useful in cases where individual aspects of an entity are considered in the domain of discourse.
+
+\begin{ODP}{Object Qualities}
+	\ODPINTENT{To represent the qualities of an object.}
+	\ODPDEFINEDIN{DUL.owl}
+	\ODPQUESTION{What qualities does this object have? That are the objects with this quality?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Object};
+	    \node[owlclass,below=0.6cm of EVT] (B) {Quality};
+	    \draw (A) edge[relation] node[midway,label=right:hasQuality] {} (B);
+ %\node[owlclass] (QUALITY) {
+ %\begin{owlclass}{Quality}
+ % \item $(\exists \emph{isQualityOf}.\texttt{Entity})$
+ % \item $(\exists \emph{hasRegion}.\texttt{Region})$
+ %\end{owlclass}
+ %};
+ %\node[owlclass,below=0.6cm of QUALITY] (REGION) {
+ %\begin{owlclass}{Region}
+ % \item $(\exists \emph{isRegionFor}.\texttt{Quality})$
+ %\end{owlclass}
+ %};
+ %\draw (QUALITY) edge[thick,-,dashed,blue!60] (REGION);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_quality('A','B')} &
+		\emph{B} is a quality of \emph{A} \\
+		% % % % %
+		\emph{has\_quality('A',X)} &
+		What are the qualities of \emph{A}? \\
+		% % % % %
+		\emph{has\_quality(X,'A')} &
+		What entity is the host of \emph{A}? \\
+	}
+\end{ODP}
+
+Each object property has one value at a time. The value of an object property is called \emph{region}.
+The value itself is an element, or a sub-region in some dimensional
+space such as \emph{time interval} or \emph{space region}.
+A region may be a finite set of discrete labels, allowing for ``qualitative'' descriptions,
+but more often a region is some dimensional space allowing ``quantitative'' descriptions.
+A Region may contain a single point, in cases where the value of a property is known precisely.
+Note that the domain of the relation \emph{hasRegion} is not \emph{Quality} but \emph{Entity}.
+This is to allow assigning regions to entities without explicating the quality as a concept (quality-as-relation).
+
+\begin{ODP}{Regions}
+	\ODPINTENT{To represent values of attributes of things.}
+	\ODPDEFINEDIN{DUL.owl}
+	\ODPQUESTION{What is the value for the attribute of that entity? Which entities have a certain value on that parameter/attribute/feature?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Entity};
+	    \node[owlclass,below=0.6cm of EVT] (B) {Region};
+	    \node[data,below=0.6cm of B] (C) {XSD Type};
+	    \draw (A) edge[relation] node[midway,label=right:hasRegion] {} (B);
+	    \draw (B) edge[relation] node[midway,label=right:hasRegionDataValue] {} (C);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_region('A','B')} &
+		\emph{B} is a region of \emph{A} \\
+		% % % % %
+		\emph{has\_region('A',X)} &
+		What is the region of \emph{A}? \\
+		% % % % %
+		\emph{has\_data\_value('A','B')} &
+		\emph{B} is a data value of \emph{A} 
+	}
+\end{ODP}
+
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+\subsection{Object Transformation}
+\label{sec:transformation}
+
+Objects typically undergo changes by taking part in actions or processes. Such changes typically take one of two forms: either some property of an object changes value, or the object itself modifies its ontological characterization. As an example, a wad of dough being transported from the table to the inside of an oven has changed its position, but is still, at this point, a wad of dough. Left in a hot oven for enough time however, the wad of dough becomes bread.
+
+The variation with time of object qualities has been described in section~\ref{sec:qualification}. The object transformation pattern, described here, handles the changes of an object's ontological classification through time. An immediate problem is that ontological characterizations are necessarily discrete -- there is a finite number of classes an object can belong to -- while change in the physical world is continuous. In the example above, the wad of dough ceases to be dough after a few moments in the oven, because its chemical composition is changing away from the composition of dough. Nonetheless, it is not bread yet.
+
+For practical purposes however, human beings often do not care about the exact classification of an object undergoing ontological change; only the endpoints are important. Also, there is a tendency to loosely apply ontological classification to the changing object, as if it were on either side of the transformation. The cooking wad of dough could be referred to as dough, or it could be referred to as bread. It is both, and neither. While sufficient for causal discourse, such carelessness would not work in a formal system. Hence, the approach in SOMA is to define a class of objects called \emph{Transient}, and it is to this class that objects undergoing ontological classification change belong to. A Transient \emph{transitionsFrom} some object with a specific classification (e.g. \emph{Dough}) and \emph{transitionsTo} another object with a specific classification (e.g. \emph{Bread}). These two relations can be combined into the \emph{transitionsBack} relation, to cover situations where an object changes in essential ways during an event, but returns to being itself after the event completes, such as a catalyst in a chemical reaction.
+ 
+% This pattern addresses the fact that objects change by undergoing/taking part in Processes. For example, the PancakeMix becomes, through Baking, a Pancake. However, the ontological status of the object while the process takes place is unclear: the object placed on the frying pan is not a Pancake until Baking finishes, but it's not PancakeMix either once it begins to coagulate. In the EASE approach, the object in-between such characterizations is a Transient. A Transient transitionsFrom an Object, and possibly transitionsTo an Object. It may also be the case that a Transient transitionsBack to an Object, to indicate that once the process completes, the same Object is restored; this would be the case for example for catalysts in chemistry, or a loaf of bread after slicing, if there is enough bread left.
+%\lipsum[2]
+
+\begin{ODP}{Transient}
+	\ODPINTENT{Ontological classification for objects undergoing type changes.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What sort of object is this? What objects ``went'' into the making of another? What is the outcome of some process of change acting on an object? Does an object preserve or restore its identity after change?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+ %\node[owlclass] (TRANSIENT) {
+ %\begin{owlclass}{Transient}
+ % \item \texttt{Object}
+ % \item $(\exists\emph{transitionsFrom}.\texttt{Object})$
+ % \item $(\forall\emph{transitionsTo}.\texttt{Object})$
+ %\end{owlclass}
+ %};
+ %\node[owlclass,below=0.6cm of TRANSIENT] (TRANSITIONSBACK) {
+ %\begin{owlclass}{transitionsBack}
+ % \item \texttt{transitionsFrom}
+ % \item \texttt{transitionsTo}
+ %\end{owlclass}
+ %};
+	    \node[owlclass] (A) {Transient};
+	    \node[owlclass,below=0.6cm of EVT] (B) {Object};
+	    \node[owlclass,above=0.6cm of EVT] (C) {Object};
+	    \draw (A) edge[relation] node[midway,label=right:transitionsFrom] {} (B);
+	    \draw (A) edge[relation] node[midway,label=right:transitionsTo] {} (C);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{transitionsFrom('A','B')} & By entering some process of change, object 'B' becomes Transient object 'A'.\\
+		\emph{transitionsTo('A','B')} & By completing some process of change, transient 'A' becomes object 'B'.\\
+		\emph{transitionsBack('A','B')} & Object 'B' entered some process of change during which its ontological classification is unclear and it is replaced by Transient 'A', but after the process completes object 'B' is restored.\\
+	}
+\end{ODP}
+
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+\subsection{Force Interaction}
+
+\textbf{todo: Daniel write this}
+\textbf{todo: preservative vs. alterative interaction}
+\textbf{todo: how to represent who is stronger? can measured forces be included in the NEEM?}
+\textbf{todo: isProcessTypeOf relation is not nice}
+\lipsum[2]
+
+\begin{ODP}{?}
+	\ODPINTENT{To represent force dynamical event characteristics.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What entity is the agonist in this event? What are the events where this entity is an antagonist? Which entity is stronger in this event? What is the force dynamical tendency in this event?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Event};
+	    \node[owlclass,below=0.6cm of A] (B) {Object};
+	    \node[owlclass,below=0.6cm of B,xshift=-1.3cm] (C) {Agonist};
+	    \node[owlclass,below=0.6cm of B,xshift=1.3cm]  (D) {Antagonist};
+	    \node[owlclass_f,above=0.6cm of A,xshift=-1.3cm] (E) {Alterative Interaction};
+	    \node[owlclass_f,above=0.6cm of A,xshift=1.3cm]  (F) {Preservative Interaction};
+	    \draw (B) edge[relation] node[midway,label=left:$\text{hasRole}_t$] {} (C);
+	    \draw (B) edge[relation] node[midway,label=right:$\text{hasRole}_t$] {} (D);
+	    \draw (A) edge[relation] node[midway,label=left:$\text{isOccurrenceOf}$] {} (E);
+	    \draw (A) edge[relation] node[midway,label=right:$\text{isOccurrenceOf}$] {} (F);
+	    \draw (A) edge[relationxl] node[midway,label=left:hasWeakerEntitiy] {} (B);
+	    \draw (A) edge[relationxr] node[midway,label=right:hasStrongerEntitiy] {} (B);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{??} & ??
+	}
+\end{ODP}
+
+\lipsum[2]
+
+\begin{ODP}{?}
+	\ODPINTENT{To quantify force dynamical event characteristics.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What is the effort of the agonist in this event?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (B) {Force Interaction};
+	    \node[owlclass,below=0.6cm of B,xshift=-1.3cm] (C) {Resultant};
+	    \node[owlclass,below=0.6cm of C] (D) {Effort};
+	    \node[data,right=0.6cm of D] (E) {$Nm$};
+	    \draw (B) edge[relation] node[midway,label=right:xx] {} (C);
+	    \draw (C) edge[relation] node[midway,label=right:xx] {} (D);
+	    \draw (D) edge[relation] node[midway,label=above:xx] {} (E);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{??} & ??
+	}
+\end{ODP}
+
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+\subsection{Episodes}
+\label{sec:episodes}
+
+An episode is seen as a \emph{relational context} created by an observer that creates a view on a set of entities such as actions that were perfomed, and objects that played a role. We say that an episode is a \emph{setting for} each entity that is relevant for the scope of the episode. As an example, consider the statement \emph{"this morning the robot made a mess on the floor while preparing coffee"}, where the preparation of coffee in the morning is the setting for the robot, the floor, and the actions that were perfomed.
+Several specializations of the general \emph{is setting for} relation exist that can be used to distinguish between entities based on their type -- these are, among others, \emph{includesObject} and \emph{includesAgent}.
+
+\begin{ODP}{isSettingFor}
+	\ODPINTENT{To represent that entites are included in a situation.}
+	\ODPDEFINEDIN{DUL.owl}
+	\ODPQUESTION{What are the entities that are relevant for this situation? What are the situations where this entity is relevant?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Situation};
+	    \node[owlclass,below=0.6cm of EVT] (B) {Entity};
+	    \draw (A) edge[relation] node[midway,label=right:isSettingFor] {} (B);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{is\_setting\_for('Episode1', 'Obj1')} &
+		\emph{Episode1} is a setting for \emph{Obj1} \\
+		% % % % %
+		\emph{is\_setting\_for('Episode1', X)} &
+		What is \emph{Episode1} setting of? \\
+		% % % % %
+		\emph{is\_setting\_for(X, 'Evt1')} &
+		What are the episodes that include \emph{Evt1}? \\
+	}
+\end{ODP}
+
+Episodes refer to concrete occurences with actual objects that are involved, and actual events that occur.
+The conceptualization of an episode is an abstraction that refers to concepts instead.
+Such conceptualizations are called \emph{descriptions}.
+We say that an episode \emph{satisfies} a description in case the view represented
+by the episode is consistent with the conceptualization given by the desciption.
+Diagnosis being one example of a description of an episode.
+Stating that the performance of the robot was \emph{amateurish} when it made a mess on the floor while
+preparing coffee is one example for describing an epsiode.
+Another type of descriptions are plans that are used to conceptualize the structure of an activity.
+
+\begin{ODP}{satisfies}
+	\ODPINTENT{To represent a conceptualization of a situation.}
+	\ODPDEFINEDIN{DUL.owl}
+	\ODPQUESTION{How can this situation be conceptualized? What are the situations that are consitent with this conceptualization?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Situation};
+	    \node[owlclass,below=0.6cm of EVT] (B) {Description};
+	    \draw (A) edge[relation] node[midway,label=right:satisfies] {} (B);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{satisfies('Episode1', 'Descr1')} &
+		\emph{Episode1} is consistent with \emph{Descr1} \\
+		% % % % %
+		\emph{satisfies('Episode1', X)} &
+		What are conceptualization of \emph{Episode1}? \\
+		% % % % %
+		\emph{satisfies(X, 'Descr1')} &
+		What are the episodes that are conceptualized by \emph{Descr1}? \\
+	}
+\end{ODP}
+
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+
+\iffalse
+\begin{ODP}{Process vs. Action}
+%\ODPDESCRIPTION{An Action is an Event with at least one Agent participant, such that this Agent has a Task, often defined by a Plan or Workflow, which it executes through the Action. A Process is an Event for which no such commitments have been made. In DUL, these classes are not disjoint, allowing a particular event individual to be classified as either, depending on whether we care to record an agent and its goals or not. In EASE, we use Process as a top-level class for events with no agentive participant.}
+\ODPINTENT{To represent the intentional and agentive structure-- or lack thereof-- behind Events.}
+\ODPDEFINEDIN{DUL.owl}
+\ODPQUESTION{
+  \emph{Is there anyone responsible for the event?}
+  \emph{What are they trying to do?}
+  \emph{How did an event unfold?}}
+\ODPGRAPHIC{
+\begin{tikzpicture}
+ \node[owlclass] (ACTION) {
+ \begin{owlclass}{Action}
+  \item \texttt{Event}
+  \item $(\exists \emph{hasParticipant}.\texttt{Agent})$
+ \end{owlclass}
+ };
+ \node[owlclass,below=0.6cm of ACTION] (PROCESS) {
+ \begin{owlclass}{Process}
+  \item \texttt{Event}
+ \end{owlclass}
+ };
+\end{tikzpicture}
+}
+\end{ODP}
+
+\begin{ODP}{State, Configuration, Gestallt}
+%\ODPDESCRIPTION{A state is a configuration of the world that is construed to be stable on its own. Outside disturbances may cause state transitions, and the settling into some other, self-stable configuration. A State is also characterized by a Description, that indicates things such as what kind of entities participate in the state, what relations might exist between them, what regions may be used by particular qualities of the participants. This Description is, in general, referred to as a Configuration, however some common examples are Goals-- describe desired states of the world--, Norms-- describe states that should be kept--, and Diagnoses-- describe a state that causes certain observable symptoms. States are classified by Gestallts. \textbf{TODO}: Generalize this and/or split it: classification by an event type and structuring by a description are different ODPs in the current list. All three event subclasses (Actions, Processes, States) now are each part of their own Event-Concept-Description triad, where the Concept classifies the Event, and the Description, by describing the classifying Concept, structures the Event.
+}
+\ODPINTENT{Ontological representation for situations in the world that are cognitively construed as stable arrangements of entities.}
+\ODPDEFINEDIN{EASE-STATE.owl}
+\ODPQUESTION{
+  \emph{What are stable arrangements?}
+  \emph{What is meant by ``state'' of the world?}
+  \emph{What characterizes a state?}}
+\emph{Examples}
+%\begin{itemize}
+%  \item AssemblyConnection: two objects are in a rigid connection, such that the movement of one determines the movement of the other. In this case the characterizing Configuration for this State uses several Roles-- one for each part/geometric feature belonging to the connected objects-- and puts constraints on the relative positioning of these geometric features such that they interlock to produce the rigid connection.
+%  \item Contact: two objects are in mechanical contact. The characterizing Configuration uses two Roles, one for each participating object, and puts constraints on the Pose qualities of the participants: the poses should be such that the participants touch.
+%  \item FunctionalControl: an object restricts the movement of another, at least partially. The Configuration uses the Roles Item and Restrictor. More concrete examples are Containment: the Restrictor is a Container, and the Pose quality of the Item should use the region inside the Container; and Support: both Restrictor and Item are objects, placed in such a way that the Item does not move because of gravity.
+%  \item PhysicallyAccessible: the Configuration for this state uses the roles Item, a Container or Protector, and optionally an Accessor and a Task, and states that an Item is either placed in a Container or protected by a Protector, but the placement of the Item and Container is such that an Accessor may nevertheless reach the Item in order to perform a Task. For a more concrete example, a DoorOpen is a kind of PhysicallyAccessible where the Protector is a door, the Item is the inside of the room behind the door, the Accessor is some person and the Task is to walk into the inside of the room.
+%\end{itemize}
+\end{ODP}
+
 \begin{ODP}{Designed Artifact}
-\ODPDESCRIPTION{A DesignedArtifact is a physical object described by a Design. In EASE, Designs refer to the form, but also the function of an object. This allows us to say that an object is ``for'' a particular purpose, even though it might be used for something else instead. For example, a cup is a BeverageContainer but can be used as a Flowerpot. Designs form a hierarchy of specificity, for example $DesignMilkContainer \sqsubseteq DesignBeverageContainer \sqsubseteq DesginContainer \sqsubseteq Design$. The justification for this pattern is that the type of an object is rigid, but the roles it plays in events change. A naive taxonomy, without a notion similar to Design, cannot tackle the fact that objects are usable in several ways beyond the obvious; a hammer isn't always a hammer, sometimes it's a paperweight. On the other hand, a usable ontology of objects must take into account how human users refer to objects by their default use.}
+%\ODPDESCRIPTION{A DesignedArtifact is a physical object described by a Design. In EASE, Designs refer to the form, but also the function of an object. This allows us to say that an object is ``for'' a particular purpose, even though it might be used for something else instead. For example, a cup is a BeverageContainer but can be used as a Flowerpot. Designs form a hierarchy of specificity, for example $DesignMilkContainer \sqsubseteq DesignBeverageContainer \sqsubseteq DesginContainer \sqsubseteq Design$. The justification for this pattern is that the type of an object is rigid, but the roles it plays in events change. A naive taxonomy, without a notion similar to Design, cannot tackle the fact that objects are usable in several ways beyond the obvious; a hammer isn't always a hammer, sometimes it's a paperweight. On the other hand, a usable ontology of objects must take into account how human users refer to objects by their default use.}
 \ODPINTENT{To explicate the intuitive classification human users would have of objects, based on their default uses.}
-\ODPDOMAIN{
-  \texttt{Object classification},
-  \texttt{Event narratives}}
 \ODPDEFINEDIN{DUL.owl, EASE.owl, EASE-middle.owl}
 \ODPQUESTION{
   \emph{What sort of object is this?}
@@ -200,57 +694,7 @@ Every axiomatization in the physical branch can, therefore, be regarded as expre
 \end{tikzpicture}
 }
 \end{ODP}
-% % % % % % % % % % % % % % % % %
-% % % % % % % % % % % % % % % % %
-
-%\subsection{Actions}
-
-%\todo{Describe ACT, PROC, STATE from the SOMA paper}
-
-%\subsubsection{Ontology Design Patterns (ODP)}
-
-%\newpage
-%\subsubsection{Process vs. Action ODP}
-
-%\begin{ODP}{Process vs. Action}
-%\ODPDESCRIPTION{An Action is an Event with at least one Agent participant, such that this Agent has a Task, often defined by a Plan or Workflow, which it executes through the Action. A Process is an Event for which no such commitments have been made. In DUL, these classes are not disjoint, allowing a particular event individual to be classified as either, depending on whether we care to record an agent and its goals or not. In EASE, we use Process as a top-level class for events with no agentive participant.}
-%\ODPINTENT{To represent the intentional and agentive structure-- or lack thereof-- behind Events.}
-%\ODPDOMAIN{
-%  \texttt{Event classification},
-%  \texttt{Event narratives}}
-%\ODPDEFINEDIN{DUL.owl}
-%\ODPQUESTION{
-%  \emph{Is there anyone responsible for the event?}
-%  \emph{What are they trying to do?}
-%  \emph{How did an event unfold?}}
-%\ODPGRAPHIC{
-%\begin{tikzpicture}
-% \node[owlclass] (ACTION) {
-% \begin{owlclass}{ACTION}
-%  \item \texttt{Event}
-%  \item $(\exists \emph{hasParticipant}.\texttt{Agent})$
-% \end{owlclass}
-% };
-% \node[owlclass,below=0.6cm of ACTION] (PROCESS) {
-% \begin{owlclass}{Process}
-%  \item \texttt{Event}
-% \end{owlclass}
-% };
-%\end{tikzpicture}
-%}
-%\end{ODP}
-
-%\newpage
-
-
-%\todo{Describe the OBJ Module of Soma}
-
-%\subsection{Situations}
-
-%\todo{Describe the EXEC Module of Soma}
-
-%\subsubsection{Ontology Design Patterns (ODP)}
-
+\fi
 
 % In version \neemversion the \neemnar consists the belief state and action task hierarchy. 
 % In the following sections we will describe how the belief state and action task hierarchy are represented.
@@ -497,4 +941,6 @@ Every axiomatization in the physical branch can, therefore, be regarded as expre
 % 	This Timepoint represenation makes the prolog quering much more easier.
 
 % \input{content/representation/neem-narrative/design-patterns/chapter}
+
+
 % \input{content/representation/neem-narrative/knowledge-bases/knowledge-bases}
