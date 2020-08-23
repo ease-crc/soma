@@ -195,14 +195,8 @@ Events always involve some objects that play a certain role during the event. Th
 	\end{tikzpicture}}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{has\_participant('EV','O')} &
-		\emph{O} is involved in event \emph{EV} \\
-		% % % % %
-		\emph{has\_participant('EV',X)} &
-		what are the entities involved in \emph{EV}? \\
-		% % % % %
-		\emph{has\_participant(X,'O')} &
-		what are the events involving \emph{O}?
+		\emph{has\_participant($x$,$y$)} &
+		$y$ is involved in event $x$
 	}
 \end{ODP}
 
@@ -223,14 +217,8 @@ Agents are defined as \emph{agentive objects, either physical (e.g. a robot, a h
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{is\_executed\_by('ACT','AG')} &
-		\emph{ACT} is executed by \emph{AG} \\
-		% % % % %
-		\emph{is\_executed\_by('ACT',X)} &
-		what are the agents that execute \emph{ACT}? \\
-		% % % % %
-		\emph{is\_executed\_by(X,'AG')} &
-		which actions are executed by \emph{AG}?
+		\emph{is\_executed\_by($x$,$y$)} &
+		$y$ is executed by $x$
 	}
 \end{ODP}
 
@@ -260,8 +248,8 @@ The \emph{hasPart} relation is transitive and defined to have domain and range \
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{has\_phase('A','B')} &
-		\emph{B} is a phase of \emph{A}
+		\emph{has\_phase($x$,$y$)} &
+		$y$ is a phase of $x$
 	}
 \end{ODP}
 
@@ -279,14 +267,8 @@ The \emph{hasPart} relation is transitive and defined to have domain and range \
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{has\_component('A','B')} &
-		\emph{B} is a proper part of \emph{A} \\
-		% % % % %
-		\emph{has\_component('A',X)} &
-		What are the components of \emph{A}? \\
-		% % % % %
-		\emph{has\_component(X,'A')} &
-		What are the entities \emph{A} is component of? \\
+		\emph{has\_component($x$,$y$)} &
+		$y$ is a proper part of $x$
 	}
 \end{ODP}
 
@@ -327,14 +309,11 @@ Instead, roles are defined as concepts that are used to classify the objects tha
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{has\_role('A','B')} &
-		\emph{B} is a role of \emph{A} \\
+		\emph{has\_role($x$,$y$)} &
+		$y$ is a role of $x$ \\
 		% % % % %
-		\emph{has\_role('A','B') during 'C'} &
-		\emph{B} is a role of \emph{A} during the occurrence of \emph{C} \\
-		% % % % %
-		\emph{has\_role('A','B') during [$t_0$,$t_1$]} &
-		\emph{B} is a role of \emph{A} during the timepoints $t_0$ and $t_1$
+		\emph{has\_role($x$,$y$) during $z$} &
+		$y$ is a role of $x$ during the occurrence of $z$
 	}
 \end{ODP}
 
@@ -360,11 +339,11 @@ This allows us to represent several different classifications of the same event 
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{is\_occurring\_in('C0','Evt0')} &
-		\emph{Evt0} is an occurrence that is classified by \emph{C0} \\
+		\emph{is\_occurring\_in($x$,$y$)} &
+		$y$ is an occurrence that is classified by $x$ \\
 		% % % % %
-		\emph{is\_executed\_in('Tsk0','Act0')} &
-		\emph{Act0} is an action that executes the task \emph{Tsk0}
+		\emph{is\_executed\_in($x$,$y$)} &
+		$y$ is an action that executes the task $x$
 	}
 \end{ODP}
 
@@ -428,14 +407,8 @@ This is mainly useful in cases where individual aspects of an entity are conside
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{has\_quality('A','B')} &
-		\emph{B} is a quality of \emph{A} \\
-		% % % % %
-		\emph{has\_quality('A',X)} &
-		What are the qualities of \emph{A}? \\
-		% % % % %
-		\emph{has\_quality(X,'A')} &
-		What entity is the host of \emph{A}? \\
+		\emph{has\_quality($x$,$y$)} &
+		$y$ is a quality of $x$
 	}
 \end{ODP}
 
@@ -464,14 +437,11 @@ This is to allow assigning regions to entities without explicating the quality a
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{has\_region('A','B')} &
-		\emph{B} is a region of \emph{A} \\
+		\emph{has\_region($x$,$y$)} &
+		$y$ is a region of $x$ \\
 		% % % % %
-		\emph{has\_region('A',X)} &
-		What is the region of \emph{A}? \\
-		% % % % %
-		\emph{has\_data\_value('A','B')} &
-		\emph{B} is a data value of \emph{A} 
+		\emph{has\_data\_value($x$,$y$)} &
+		$y$ is a data value of $x$ 
 	}
 \end{ODP}
 
@@ -606,14 +576,8 @@ However, assuming hierachical organization of objects (i.e. all objects are part
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{is\_setting\_for('Episode1', 'Obj1')} &
-		\emph{Episode1} is a setting for \emph{Obj1} \\
-		% % % % %
-		\emph{is\_setting\_for('Episode1', X)} &
-		What is \emph{Episode1} setting of? \\
-		% % % % %
-		\emph{is\_setting\_for(X, 'Evt1')} &
-		What are the episodes that include \emph{Evt1}? \\
+		\emph{is\_setting\_for($x$,$y$)} &
+		$x$ is a setting for $y$
 	}
 \end{ODP}
 
@@ -641,14 +605,8 @@ Another type of descriptions are plans that are used to conceptualize the struct
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{satisfies('Episode1', 'Descr1')} &
-		\emph{Episode1} is consistent with \emph{Descr1} \\
-		% % % % %
-		\emph{satisfies('Episode1', X)} &
-		What are conceptualization of \emph{Episode1}? \\
-		% % % % %
-		\emph{satisfies(X, 'Descr1')} &
-		What are the episodes that are conceptualized by \emph{Descr1}? \\
+		\emph{satisfies($x$,$y$)} &
+		$x$ is consistent with $y$
 	}
 \end{ODP}
 
