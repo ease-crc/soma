@@ -1,9 +1,9 @@
-\section{Narrative Enabled Episodic Memories for Robotic Agents}
+\subsection{Robot NEEMs}
 \label{sec:robot-neem}
 \lstset{style=lispcode}
 This section focuses on describing how to generate \neems from experiments performed by the robot. 
 
-\subsection{Prerequisite}
+\subsubsection{Prerequisite}
 
 Before you are intending to generate your episodic memories, make sure you are familiar with the Cognitive Robot Abstract Machine (\cram)\footnote{\url{http://cram-system.org/cram}} system and installed it on your machine.
 \cram is a cognitive-enabled planning framework which allows to design high-level plan for robots.\todo{@Seba: Add more detailed description about CRAM}
@@ -19,7 +19,7 @@ In addition to having a valid \cram plan, you will need the following software c
 \end{itemize}
 
 
-\subsection{Recording Narrative Enabled Episodic Memories}
+\subsubsection{Recording Narrative Enabled Episodic Memories}
 Our recording mechanism  captures every executed \cram action and its parameter.
 In addition, the logger puts the actions in relation to each other by creating a hierarchy which is described in Section \ref{ch:narrative,sec:actionHierarchy}.
 
@@ -47,7 +47,7 @@ You can start \knowrob via:
 	roslaunch knowrob_memory knowrob.launch
 \end{lstlisting}
 
-\subsection{Data}
+\subsubsection{Data}
 Per default your generated \neem will be stored under "\raisebox{-0.9ex}{\~{}}/knowrob-memory/\textless timestamp \textgreater". 
 Your \neem will consist of at least 5 folders - \textit{annotations}, \textit{inferred}, \textit{roslog}, \textit{ros\_tf} and \textit{triples}.
 In the following, we will give an overview which information is contained in those folders:
@@ -61,14 +61,14 @@ In the following, we will give an overview which information is contained in tho
 \end{description}
 %This folder contains the \neemnar and \neemexp . The \neemnar is represented in the "beliefstate.owl". The triple store and the \neemexp are stored in the "roslog" folder. The triple store is stored in the "triples.bson". The other bsons files are presentening the logged rostopics. More about the rostopics is stated in Section \todo{put reference to rostopic section}
 
-\subsection{Add Semantic Support to your Designed Plans}
+\subsubsection{Add Semantic Support to your Designed Plans}
 The disadvantage of having a strong semantic knowledge representation is that the used ontology requires updates when semantic knowledge has to be extended. 
 Currently, \soma focuses on the support to record table setting/cleaning-up experiments.
 If you want for instance create \neems for e.g.\ autonomous cars, you will need to extend the \soma ontology and the recording mechanism with your required actions, parameters and objects.
 How to extend the \soma ontology is described in Section \ref{sec:extension}.
 In the following subsection, we will describe how you can extend the \cram recording mechanism to support your required semantic knowledge.
 
-\subsubsection{New Tasks Definition}
+\paragraph{New Tasks Definition}
 If you want to semantically record new tasks such as e.g. accelerating or breaking, you need to define them in the ontology as described in Section \ref{sec:extension,subsec:task}.
 Unknown tasks will be logged as \textit{PhysicalTask}.
 The \textit{PlanExecution} instance pointing to the\textit{PhysicalTask} will have a comment attached with the statement "Unknown Action: \textless CRAM-ACTION-NAME\textgreater", where \textless CRAM-ACTION-NAME\textgreater" is the action name you defined in your plan.
@@ -88,7 +88,7 @@ After you defined your new actions in \soma, please open the "knowrob-action-nam
 where \textless CRAM-ACTION-NAME\textgreater is the name of your action used in the cram plan and \textless SOMA-ONTOLOGY-NAME\textgreater.
 With this step you added successfully the support of the new action to \cram \neem episodic memory logger.
 
-\subsubsection{Adding New Objects}
+\paragraph{Adding New Objects}
 Unknown objects will be logged as instance of \textit{DesignedArtifact}.
 In addition, a comment like "Unknown Object: \cramentitytoreplace{CRAM-OBJECT-TYPE}" will be attached to this instance.
 \cramentitytoreplace{CRAM-OBJECT-TYPE} indicates which object you need to define in the ontology \todo{set reference}.
@@ -105,7 +105,7 @@ After you added your object to the ontology, open the "utils-for-perform.lisp" i
 
 where the key is \cramentitytoreplace{CRAM-OBJECT-TYPE}, the object type used in the \cram plan, and \cramentitytoreplace{SOMA-ONTOLOGY-ENTITY-URL}the value which is the uri pointing to the object concept created in \soma.
 
-\subsubsection{Adding New Failure}
+\paragraph{Adding New Failure}
 Unknown \cram failures will be logged as instance of \textit{Failure}.
 In addition, a comment like "Unknown failure: \cramentitytoreplace{CRAM-FAILURE-NAME}" will be attached to the instance.
 \cramentitytoreplace{CRAM-FAILURE-NAME} indicates which failure you need to define in the ontology\todo{set reference}.
@@ -123,12 +123,12 @@ After you added your failure to the ontology, open the "failure-handler.lisp" in
 where \cramentitytoreplace{CRAM-FAILURE-NAME} is the name of your failure defined in the cram plan and \cramentitytoreplace{SOMA-ONTOLOGY-NAME}.
 With this step you added successfully the support of the new failure to \cram \neem episodic memory logger.".	
 
-\subsubsection{Adding New Rostopic}
+\paragraph{Adding New Rostopic}
 Per default, we log the rostopics \tf and tf\_static.
 If you need to log additional topics, open "memory.pl" in the "knowrob\_memory" package from \knowrob and include your topic in the "mem\_episode\_start(Episode)" function.
 After the \neem generation, the data will be stored in the created \neem folder under the file "roslog/<rostopic>.bson".
 
-\subsubsection{Adding New Parameters}
+\paragraph{Adding New Parameters}
 Unknown parameters will be logged as comment attached to the corresponding \textit{PlanExecution} instance.
 The comment statement "Unknown Parameter: PARAMETER-NAME  -\#\#\#\#- PARAMETER-VALUE/>"
 The current parameter types are represented 
@@ -148,12 +148,12 @@ For simpler representaion such has a discrete domain representation, you might r
 More information about the concepts \textit{Region} and \textit{Parameter} can be found in \todo{ reference to Region and parameter}.
 
 
-\subsection{Adding New Reasoning Tasks}
+\subsubsection{Adding New Reasoning Tasks}
 \todo{@Ontology group: How to log the result of the reasoning query ?}
 
 
 
-\section{Next steps}
+\subsubsection{Next steps}
 After you have generate your \neem, you can use the tool \todo{Add neem2narrative} to generate an cvs file for your \neem.
 Keep in mind that the csv is a abstraction of \neemnar and can be used to make data-mining on explicit knowledge.
 For more sophisticated analysis, you will need to use \knowrob. 
