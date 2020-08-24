@@ -21,14 +21,14 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Uglify current
+      - name: Compile current
         if: startsWith(github.ref, 'refs/tags/') != true
         uses: docker://swipl:8.0.3
         with:
           SOMA_VERSION: current
           args: swipl -f prolog/uglify.pl -t uglify
 
-      - name: Uglify tag
+      - name: Compile tag
         if: startsWith(github.ref, 'refs/tags/')
         uses: docker://swipl:8.0.3
         with:
