@@ -1,0 +1,71 @@
+name: Deployment
+on:
+  push:
+    paths:
+      - '**'
+      - '!docs/**'
+  release:
+    types: [created]
+    paths:
+      - '**'
+      - '!docs/**'
+
+jobs:
+  deployment:
+    name: Deployment
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Uglify current
+        if: startsWith(github.ref, 'refs/tags/') != true
+        uses: docker://swipl:8.0.3
+        with:
+          SOMA_VERSION: current
+          args: swipl -f prolog/uglify.pl -t uglify
+
+      - name: Uglify tag
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: docker://swipl:8.0.3
+        with:
+          SOMA_VERSION: ${{ github.event.release.tag_name }}
+          args: swipl -f prolog/uglify.pl -t uglify
+
+      - name: Convert
+        uses: ./.github/actions/convert
+        with:
+          args: python3 ./scripts/uglify_ease_as_owl.py
+
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: SOMA Ontology
+          path: ./build
+
+      - name: Deploy current
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        if: github.ref == 'refs/heads/master'
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build
+          TARGET_FOLDER: owl/current
+
+      - name: Deploy tag
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build
+          TARGET_FOLDER: owl/${{ github.event.release.tag_name }}
+          #TARGET_FOLDER: owl/${{ GITHUB_REF/refs\/tags\// }}
+          #TARGET_FOLDER: owl/${{ GITHUB_REF#refs/tags/ }}
+
+      - name: Deploy failure
+        if: failure()
+        run: echo Deployment failed. If the other steps succeeded, maybe no ACCESS_TOKEN was set?
