@@ -24,10 +24,13 @@ window.onload = function(){
     };
 
 	$.ajax({
-		url: "/repos/ease-crc/soma/releases",
+		url: "https://api.github.com/repos/ease-crc/soma/releases",
 		type: "GET",
 		success: function(result){
 			console.info(result);
+		},
+		error: function(msg){
+			console.warn(msg);
 		}
 	});
 };
