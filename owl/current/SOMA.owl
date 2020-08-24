@@ -1405,10 +1405,11 @@ Note, this classification has nothing to do with reasoning domain (e.g. SpatialR
 
 <owl:Class rdf:about="#Accessor">
   <rdfs:subClassOf rdf:resource="#Instrument"/>
+  <rdfs:comment>A role classifying an object used to gain access to some other entity.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Instrument">
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+  <rdfs:subClassOf rdf:resource="#ResourceRole"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Accident">
@@ -1581,18 +1582,23 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-      <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
+      <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role employed in ExecutableSchemas that is filled by the main driver in carrying out the executable schema. 
+  <rdfs:subClassOf rdf:resource="#CausativeRole"/>
+  <rdfs:comment>A role classifying an Agent responsible for performing an Action.
 
-Within frame semantics, various frames related to perception might define an Experiencer role; we will treat such Experiencer roles also as instances of our AgentRole.
-
-The entity playing an AgentRole is endowed with sentience and the capacity to deliberately choose actions in pursuit of goals. This distinguishes Agents from Causes, another role that appears in frame semantics as the participant in a situation that brings the situation about.</rdfs:comment>
+The entity playing an AgentRole is endowed with sentience and the capacity to deliberately choose actions in pursuit of goals. This distinguishes Agents from other causes that could bring an event about.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
+<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+
+<owl:Class rdf:about="#CausativeRole">
+  <rdfs:subClassOf rdf:resource="#EventAdjacentRole"/>
+  <rdfs:comment>A role classifying objects that are responsible in bringing about an event.
+
+The paradigmatic example is the Agent performing an Action -- the Agent is the effective cause of the Action it performs. However, not all objects causing events are agents.</rdfs:comment>
+</owl:Class>
 
 <owl:Class rdf:about="#Agonist">
   <rdfs:subClassOf rdf:resource="#Patient"/>
@@ -1600,7 +1606,8 @@ The entity playing an AgentRole is endowed with sentience and the capacity to de
 </owl:Class>
 
 <owl:Class rdf:about="#Patient">
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+  <rdfs:subClassOf rdf:resource="#EventAdjacentRole"/>
+  <rdfs:comment>A role classifying an object that undergoes/is the primary object affected by the event.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Alteration">
@@ -1805,11 +1812,12 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
 
 <owl:Class rdf:about="#Barrier">
   <rdfs:subClassOf rdf:resource="#Restrictor"/>
-  <rdfs:comment>An object used to prevent others from entering or leaving a restricted space or group.</rdfs:comment>
+  <rdfs:comment>A role classifying an object used to prevent others from entering or leaving a restricted space or group.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Restrictor">
   <rdfs:subClassOf rdf:resource="#Instrument"/>
+  <rdfs:comment>A role classifying an object used to deny access to some other entity.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#BehavioralDiagnosis">
@@ -1820,6 +1828,16 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Diagnosis"/>
+</owl:Class>
+
+<owl:Class rdf:about="#BeneficiaryRole">
+  <rdfs:subClassOf rdf:resource="#GoalRole"/>
+  <rdfs:comment>A role classifying an agent for whose benefit an action is performed.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#GoalRole">
+  <rdfs:subClassOf rdf:resource="#EventAdjacentRole"/>
+  <rdfs:comment>A role classifying objects that constitute the goal of an action.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Binding">
@@ -2007,6 +2025,8 @@ TODO: for the robot workflows we are likely to need at the start, testing equali
 
 As such, this concept can be applied only to motions involving some PhysicalAgent, or body parts of a PhysicalAgent.</rdfs:comment>
 </owl:Class>
+
+<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
 
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
 
@@ -2199,35 +2219,18 @@ As such, this concept can be applied only to motions involving some PhysicalAgen
   <rdfs:subClassOf rdf:resource="#Manipulating"/>
 </owl:Class>
 
-<owl:Class rdf:about="#CausalProcessRole">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-      <owl:allValuesFrom rdf:resource="#ExecutableSchematicTheory"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+<owl:Class rdf:about="#CausalEventRole">
+  <rdfs:subClassOf rdf:resource="#CausativeRole"/>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role filled by a description of some action or process that brings about a motion.
 
-As an example, consider the utterance "the tennisman served the ball by hitting it with the racket." In this utterance, the filler of the CausalProcessRole is expressed by the "by hitting it with the racket" constituent.</rdfs:comment>
+As an example, consider the utterance "the tennisman served the ball by hitting it with the racket." In this utterance, the filler of the CausalEventRole is expressed by the "by hitting it with the racket" constituent.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#ExecutableSchematicTheory">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
-      <owl:someValuesFrom rdf:resource="#AgentRole"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#SchematicTheory"/>
-  <rdfs:comment>Also known as "executing schemas" or "x-schemas", these were defined by Bergen and Chang in their work "Embodied Construction Grammar in Simulation-Based Language Understanding" as:
+<owl:Class rdf:about="#EventAdjacentRole">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+  <rdfs:comment>A role classifying a participant in an event.
 
-"Executing schemas, or x-schemas, are dynamic representations motivated in part by motor and perceptual systems (Bailey 1997; Narayanan 1997), on the assumption that the same underlying representations used for executing and perceiving an action are brought to bear in understanding language about that action. The x-schema formalism is an extension of Petri nets (Murata 1989) that can model sequential, concurrent, and
-asynchronous events"
-
-SOMA does not restrict the formalism of ExecutableSchematicTheories; i.e. they don't have to be Petri Nets.
-
-They maintain their role however as representations able to drive a simulation, at some level of abstraction, of an embodied action. This level of abstraction may be still fairly underspecified as in the case of the original x-schemas and as such not a plan that an agent could run in an actual physical environment without further information.</rdfs:comment>
+In linguistics, this is also known as a thematic role.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#CausedMotionTheory">
@@ -2240,7 +2243,7 @@ They maintain their role however as representations able to drive a simulation, 
   <rdfs:subClassOf>
     <owl:Restriction>
       <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
-      <owl:someValuesFrom rdf:resource="#CausalProcessRole"/>
+      <owl:someValuesFrom rdf:resource="#CausalEventRole"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
@@ -2544,8 +2547,6 @@ In some sense any process that results in entities being created or destroyed mi
 Of course, the means of exchange is Physical, however this concept is to classify events for which we are not interested in the physical substrate, but rather who communicated and what the information content was.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-
 <owl:Class rdf:about="#CommunicationTopic">
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -2568,7 +2569,7 @@ Of course, the means of exchange is Physical, however this concept is to classif
       </owl:allValuesFrom>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+  <rdfs:subClassOf rdf:resource="#ResourceRole"/>
   <rdfs:comment>A role that appears in communication tasks, and indicates what the communication is about.
 
 CommunicationTopic can only classify a Social object that participates in an Action that is classified as (the execution of) a CommunicationTask.
@@ -2576,6 +2577,15 @@ CommunicationTopic can only classify a Social object that participates in an Act
 Note that classifies here is used in the plays-role sense. This isn't to say that the social object, ie the information exchanged in the communication, is an instance of the topic. Rather, the topic role refers to what the information is about.
 
 For example, if the topic of a communication is flowers, this does not mean the words themselves are flowers, merely that, in some sense, they are about flowers.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#ResourceRole">
+  <rdfs:subClassOf rdf:resource="#EventAdjacentRole"/>
+  <rdfs:comment>A role classifying objects that are useful or even necessary to sustain the unfolding of an event.
+
+Resources are usually not agentive; a different set of roles classifies the agentive participants in actions. Likewise, typically resources do not play causative or goal roles for the event.
+
+Resources are often consumed by their participation in an event, but this need not always be the case. An instrument and capital are examples of resources that are reusable.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Compartment">
@@ -2875,6 +2885,24 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
   <rdfs:comment>A schematic theory of how an agent can use an instrument to prevent access to the interior of a patient.</rdfs:comment>
 </owl:Class>
 
+<owl:Class rdf:about="#ExecutableSchematicTheory">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
+      <owl:someValuesFrom rdf:resource="#AgentRole"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="#SchematicTheory"/>
+  <rdfs:comment>Also known as "executing schemas" or "x-schemas", these were defined by Bergen and Chang in their work "Embodied Construction Grammar in Simulation-Based Language Understanding" as:
+
+"Executing schemas, or x-schemas, are dynamic representations motivated in part by motor and perceptual systems (Bailey 1997; Narayanan 1997), on the assumption that the same underlying representations used for executing and perceiving an action are brought to bear in understanding language about that action. The x-schema formalism is an extension of Petri nets (Murata 1989) that can model sequential, concurrent, and
+asynchronous events"
+
+SOMA does not restrict the formalism of ExecutableSchematicTheories; i.e. they don't have to be Petri Nets.
+
+They maintain their role however as representations able to drive a simulation, at some level of abstraction, of an embodied action. This level of abstraction may be still fairly underspecified as in the case of the original x-schemas and as such not a plan that an agent could run in an actual physical environment without further information.</rdfs:comment>
+</owl:Class>
+
 <owl:Class rdf:about="#CrackingTheory">
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -3104,7 +3132,7 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
 
 <owl:Class rdf:about="#Deposit">
   <rdfs:subClassOf rdf:resource="#Instrument"/>
-  <rdfs:comment>An object ontop which others are put to e.g. store them, or to place them in a meaningful way for future activities.</rdfs:comment>
+  <rdfs:comment>A role classifying an object ontop which others are put to e.g. store them, or to place them in a meaningful way for future activities.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#DepositedObject">
@@ -3122,10 +3150,12 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
 
 <owl:Class rdf:about="#Destination">
   <rdfs:subClassOf rdf:resource="#Location"/>
+  <rdfs:comment>A role classifying the location where an event or object is directed towards.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Location">
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+  <rdfs:subClassOf rdf:resource="#SpatioTemporalRole"/>
+  <rdfs:comment>A role classifying a location of interest, often specified as a spatial relation between several objects, themselves usually classified by spatial relation roles.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#DestroyedObject">
@@ -3518,7 +3548,7 @@ Because each instance of an ESTSchemaTheory refers to a single object, ESTSchema
       <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+  <rdfs:subClassOf rdf:resource="#RelationAdjacentRole"/>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role that requires of its filler simply to exist, unlike other roles that may demand e.g. agentive or instrumental participation in some executable schema or plan (AgentRole and Instrument respectively).
 
 The intention behind such a simple role is to have a way to represent, in a schematic formalism used to describe some scene, that an object is present. In particular, the schema used to convey this information is the ESTSchemaTheory, which has ExistingObjectRole as its sole defined role.</rdfs:comment>
@@ -3601,6 +3631,16 @@ Note that such theories are useful both when analyzing an actual linguistic prod
     </owl:Class>
   </owl:equivalentClass>
   <rdfs:comment>A region containing labels that describe different states in the evolution/completion of a task execution.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#RelationAdjacentRole">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+  <rdfs:comment>A role classifying an object participating in some relation, e.g. a participant in a spatial relation or a linguistic fragment in a rhetorical relation to another.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#ExperiencerRole">
+  <rdfs:subClassOf rdf:resource="#AgentRole"/>
+  <rdfs:comment>A role used in frame semantics to classify agents performing perception actions, or being the subjects affected by some biological process.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#ExtractedObject">
@@ -3779,6 +3819,13 @@ Note that such theories are useful both when analyzing an actual linguistic prod
       <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
     </owl:Restriction>
   </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+      <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="#SpatialRelationRole"/>
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the object with primary focal prominence in a spatial or spatio-temporal schema. Terminological variants that appear in the literature on cognitive linguistics include Figure (Talmy 1983) and Trajector (Langacker 1986).</rdfs:comment>
 </owl:Class>
@@ -3790,7 +3837,7 @@ Note that such theories are useful both when analyzing an actual linguistic prod
       <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+  <rdfs:subClassOf rdf:resource="#SpatialRelationRole"/>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the reference object in a spatial or spatio-temporal schema, i.e. the object with secondary focal prominence. Terminological variants: Ground (Talmy 1983), Landmark (Langacker 1986).</rdfs:comment>
 </owl:Class>
 
@@ -4259,6 +4306,16 @@ Posture changes may take place as part of other actions, for example turning whe
   <rdfs:comment>The localization of an object. The region of this quality encodes values to localize the object in a dimensional space, e.g. Euclidean positions that localize the object in Euclidean space.</rdfs:comment>
 </owl:Class>
 
+<owl:Class rdf:about="#SpatioTemporalRole">
+  <rdfs:subClassOf rdf:resource="#EventAdjacentRole"/>
+  <rdfs:comment>Roles that classify entities which locate an event or object in space and time.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#SpatialRelationRole">
+  <rdfs:subClassOf rdf:resource="#RelationAdjacentRole"/>
+  <rdfs:comment>Roles classifying entities participating in some spatial relation.</rdfs:comment>
+</owl:Class>
+
 <owl:Class rdf:about="#LookingAt">
   <rdfs:subClassOf rdf:resource="#PhysicalTask"/>
 </owl:Class>
@@ -4394,6 +4451,7 @@ One could argue Mental actions are all Physical actions, because anything the Ag
 
 <owl:Class rdf:about="#Origin">
   <rdfs:subClassOf rdf:resource="#Location"/>
+  <rdfs:comment>A role classifying the location where an event or object originated.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Pack">
@@ -4411,7 +4469,7 @@ One could argue Mental actions are all Physical actions, because anything the Ag
 </owl:Class>
 
 <owl:Class rdf:about="#PathRole">
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+  <rdfs:subClassOf rdf:resource="#SpatioTemporalRole"/>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role that classifies the path of a motion.</rdfs:comment>
 </owl:Class>
 
@@ -4574,6 +4632,7 @@ The difference between states and processes is that states are, in addition, hom
 
 <owl:Class rdf:about="#Protector">
   <rdfs:subClassOf rdf:resource="#Restrictor"/>
+  <rdfs:comment>A role classifying an object that protects another by preventing other entities from coming in contact with the protected object.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#ProximalTheory">
@@ -4656,6 +4715,11 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
 
 <owl:Class rdf:about="#Retracting">
   <rdfs:subClassOf rdf:resource="#EndEffectorPositioning"/>
+</owl:Class>
+
+<owl:Class rdf:about="#RecipientRole">
+  <rdfs:subClassOf rdf:resource="#BeneficiaryRole"/>
+  <rdfs:comment>A role which classifies an agent who receives an object modified or created by an action.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#RedColor">
@@ -4787,6 +4851,11 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
 As an example, a kind of Abductive reasoning would fit here: reconstruction, in which the agent attempts to create a representation of a past state of affairs which the agent has not actually observed, based on traces and clues surviving to the present.</rdfs:comment>
 </owl:Class>
 
+<owl:Class rdf:about="#ResultRole">
+  <rdfs:subClassOf rdf:resource="#GoalRole"/>
+  <rdfs:comment>A role classifying the object that is the outcome of a creation or modification action or process.</rdfs:comment>
+</owl:Class>
+
 <owl:Class rdf:about="#Room">
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalPlace"/>
 </owl:Class>
@@ -4916,6 +4985,11 @@ Note also that the DUL SocialAgent class is not an appropriate restriction howev
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
 </owl:Class>
 
+<owl:Class rdf:about="#SourceMaterialRole">
+  <rdfs:subClassOf rdf:resource="#ResourceRole"/>
+  <rdfs:comment>A role classifying a substance or object that enters a process of transformation intended to create some other object.</rdfs:comment>
+</owl:Class>
+
 <owl:Class rdf:about="#Spatula">
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -4951,6 +5025,11 @@ Note also that the DUL SocialAgent class is not an appropriate restriction howev
 <owl:Class rdf:about="#StaticFrictionAttribute">
   <rdfs:subClassOf rdf:resource="#FrictionAttribute"/>
   <rdfs:comment>Friction between two touching objects that do not move relative to each other.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#StimulusRole">
+  <rdfs:subClassOf rdf:resource="#CausativeRole"/>
+  <rdfs:comment>A role classifying an object that is perceived by some agent and thus triggers some reaction (e.g., a perception event).</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Stove">
@@ -5129,8 +5208,14 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
   <rdfs:subClassOf rdf:resource="#Manipulating"/>
 </owl:Class>
 
+<owl:Class rdf:about="#TimeRole">
+  <rdfs:subClassOf rdf:resource="#SpatioTemporalRole"/>
+  <rdfs:comment>A role filled by a description of the location in time and/or duration of an event or object.</rdfs:comment>
+</owl:Class>
+
 <owl:Class rdf:about="#Tool">
   <rdfs:subClassOf rdf:resource="#Instrument"/>
+  <rdfs:comment>A role to classify an object used to modify or actuate others.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Transient">
@@ -5166,10 +5251,6 @@ It is also possible that a Transient transitionsBack to the initial object. An e
 </owl:Class>
 
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
-
-<owl:Class rdf:about="http://www.ease-crc.org/ont/geom.owl#Explanation">
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-</owl:Class>
 
 <rdfs:Datatype rdf:about="#array_double">
   <owl:equivalentClass rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
