@@ -13,16 +13,6 @@ Dependencies:
 * (python package) itertools
 * (python package) hashlib
 
-**Merging of ontology files**
-
-Run uglify.sh to merge all SOMA owl files into a single one. The generated file is called SOMA-UGLY.owl, and will appear in the owl subfolder of this ROS package.
-
-Dependencies:
-
-* bash
-* ROS
-* rosprolog
-
 **Testing consistency**
 
 Run the hermit.py script to verify an OWL file with the HermiT reasoner. Verification here means checking whether some concepts are subsumed by owl:Nothing, ie. they are unsatisfiable.
