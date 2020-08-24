@@ -1,7 +1,7 @@
 # SOMA
 
-![](https://github.com/ease-crc/ease_ontology/workflows/Uglify%20Ontology/badge.svg)
-![](https://github.com/ease-crc/ease_ontology/workflows/Build%20NEEM%20Specification/badge.svg)
+![](https://github.com/ease-crc/soma/workflows/Consistency/badge.svg)
+![](https://github.com/ease-crc/soma/workflows/Documentation/badge.svg)
 
 SOMA -- the **SO**cio-physical **M**odel of **A**ctivities -- is an ontological model of activities that attempts to equip robotic agents with abstract knowledge to make them perform activities in a more flexible and robust manner.
 *Sôma* is also a word for *body* derived from Ancient Greek, and *body* being a central aspect in this model due to severe difficulties of controlling the body of an agent in the physical world.
