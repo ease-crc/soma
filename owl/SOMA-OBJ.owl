@@ -987,6 +987,7 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Accessor">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Instrument"/>
+        <rdfs:comment>A role classifying an object used to gain access to some other entity.</rdfs:comment>
     </owl:Class>
     
 
@@ -1039,6 +1040,23 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#AgentRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AgentRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CausativeRole"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A role classifying an Agent responsible for performing an Action.
+
+The entity playing an AgentRole is endowed with sentience and the capacity to deliberately choose actions in pursuit of goals. This distinguishes Agents from other causes that could bring an event about.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#AlteredObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AlteredObject">
@@ -1087,7 +1105,25 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Barrier">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Restrictor"/>
-        <rdfs:comment>An object used to prevent others from entering or leaving a restricted space or group.</rdfs:comment>
+        <rdfs:comment>A role classifying an object used to prevent others from entering or leaving a restricted space or group.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#BeneficiaryRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#BeneficiaryRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#GoalRole"/>
+        <rdfs:comment>A role classifying an agent for whose benefit an action is performed.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Blade -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Blade">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
+        <rdfs:comment>A flat cutting edge of an object used to cut through other objects, such as the blade of a ventilator cutting through the air.</rdfs:comment>
     </owl:Class>
     
 
@@ -1232,6 +1268,28 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Capacity">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Intrinsic"/>
         <rdfs:comment>The maximum amount an object can contain.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#CausalEventRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CausalEventRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CausativeRole"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role filled by a description of some action or process that brings about a motion.
+
+As an example, consider the utterance &quot;the tennisman served the ball by hitting it with the racket.&quot; In this utterance, the filler of the CausalEventRole is expressed by the &quot;by hitting it with the racket&quot; constituent.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#CausativeRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CausativeRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#EventAdjacentRole"/>
+        <rdfs:comment>A role classifying objects that are responsible in bringing about an event.
+
+The paradigmatic example is the Agent performing an Action -- the Agent is the effective cause of the Action it performs. However, not all objects causing events are agents.</rdfs:comment>
     </owl:Class>
     
 
@@ -1415,7 +1473,7 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Container">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Restrictor"/>
-        <rdfs:comment>An object used to contain others.</rdfs:comment>
+        <rdfs:comment>A role classifying an object used to contain others.</rdfs:comment>
     </owl:Class>
     
 
@@ -1660,7 +1718,7 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Deposit">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Instrument"/>
-        <rdfs:comment>An object ontop which others are put to e.g. store them, or to place them in a meaningful way for future activities.</rdfs:comment>
+        <rdfs:comment>A role classifying an object ontop which others are put to e.g. store them, or to place them in a meaningful way for future activities.</rdfs:comment>
     </owl:Class>
     
 
@@ -1771,7 +1829,7 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Destination">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Location"/>
-        <rdfs:comment>The location where the event is directed towards.</rdfs:comment>
+        <rdfs:comment>A role classifying the location where an event or object is directed towards.</rdfs:comment>
     </owl:Class>
     
 
@@ -2143,6 +2201,43 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#EventAdjacentRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#EventAdjacentRole">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>A role classifying a participant in an event.
+
+In linguistics, this is also known as a thematic role.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#ExistingObjectRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ExistingObjectRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RelationAdjacentRole"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role that requires of its filler simply to exist, unlike other roles that may demand e.g. agentive or instrumental participation in some executable schema or plan (AgentRole and Instrument respectively).
+
+The intention behind such a simple role is to have a way to represent, in a schematic formalism used to describe some scene, that an object is present. In particular, the schema used to convey this information is the ESTSchemaTheory, which has ExistingObjectRole as its sole defined role.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#ExperiencerRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ExperiencerRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AgentRole"/>
+        <rdfs:comment>A role used in frame semantics to classify agents performing perception actions, or being the subjects affected by some biological process.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#ExtractedObject -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ExtractedObject">
@@ -2289,6 +2384,15 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
         <rdfs:comment>The design of an object from functionality point of view. A functional design is useful to develop complex modular objects with components that have a specific purpose, and can function with minimum side effect on other components of that object. </rdfs:comment>
         <rdfs:label>Functional Design</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#GoalRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#GoalRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#EventAdjacentRole"/>
+        <rdfs:comment>A role classifying objects that constitute the goal of an action.</rdfs:comment>
     </owl:Class>
     
 
@@ -2476,7 +2580,7 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Instrument -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Instrument">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ResourceRole"/>
         <rdfs:comment>An object used to carry out the event.</rdfs:comment>
     </owl:Class>
     
@@ -2644,8 +2748,23 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Location -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Location">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-        <rdfs:comment>A location of interest.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SpatioTemporalRole"/>
+        <rdfs:comment>A role classifying a location of interest, often specified as a spatial relation between several objects, themselves usually classified by spatial relation roles.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#LocatumRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#LocatumRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SpatialRelationRole"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the object with primary focal prominence in a spatial or spatio-temporal schema. Terminological variants that appear in the literature on cognitive linguistics include Figure (Talmy 1983) and Trajector (Langacker 1986).</rdfs:comment>
     </owl:Class>
     
 
@@ -2737,7 +2856,7 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Origin">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Location"/>
-        <rdfs:comment>The location where the event originated.</rdfs:comment>
+        <rdfs:comment>A role classifying the location where an event or object originated.</rdfs:comment>
     </owl:Class>
     
 
@@ -2778,11 +2897,20 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#PathRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PathRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SpatioTemporalRole"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role that classifies the path of a motion.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Patient -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Patient">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-        <rdfs:comment>An object that undergoes the event.</rdfs:comment>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#EventAdjacentRole"/>
+        <rdfs:comment>A role classifying an object that undergoes/is the primary object affected by the event.</rdfs:comment>
     </owl:Class>
     
 
@@ -2836,6 +2964,7 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Protector">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Restrictor"/>
+        <rdfs:comment>A role classifying an object that protects another by preventing other entities from coming in contact with the protected object.</rdfs:comment>
     </owl:Class>
     
 
@@ -2895,6 +3024,15 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Rack">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A frame for holding or storing things.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#RecipientRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RecipientRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#BeneficiaryRole"/>
+        <rdfs:comment>A role which classifies an agent who receives an object modified or created by an action.</rdfs:comment>
     </owl:Class>
     
 
@@ -3020,11 +3158,48 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#RelationAdjacentRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RelationAdjacentRole">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>A role classifying an object participating in some relation, e.g. a participant in a spatial relation or a linguistic fragment in a rhetorical relation to another.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#RelatumRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RelatumRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SpatialRelationRole"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the reference object in a spatial or spatio-temporal schema, i.e. the object with secondary focal prominence. Terminological variants: Ground (Talmy 1983), Landmark (Langacker 1986).</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#RelevantPart -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RelevantPart">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Feature"/>
         <rdfs:comment>Features that are relevant parts of their host, like a bump or an edge.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#ResourceRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ResourceRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#EventAdjacentRole"/>
+        <rdfs:comment>A role classifying objects that are useful or even necessary to sustain the unfolding of an event.
+
+Resources are usually not agentive; a different set of roles classifies the agentive participants in actions. Likewise, typically resources do not play causative or goal roles for the event.
+
+Resources are often consumed by their participation in an event, but this need not always be the case. An instrument and capital are examples of resources that are reusable.</rdfs:comment>
     </owl:Class>
     
 
@@ -3042,6 +3217,16 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Restrictor">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Instrument"/>
+        <rdfs:comment>A role classifying an object used to deny access to some other entity.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#ResultRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ResultRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#GoalRole"/>
+        <rdfs:comment>A role classifying the object that is the outcome of a creation or modification action or process.</rdfs:comment>
     </owl:Class>
     
 
@@ -3215,6 +3400,33 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#SourceMaterialRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SourceMaterialRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ResourceRole"/>
+        <rdfs:comment>A role classifying a substance or object that enters a process of transformation intended to create some other object.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#SpatialRelationRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SpatialRelationRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RelationAdjacentRole"/>
+        <rdfs:comment>Roles classifying entities participating in some spatial relation.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#SpatioTemporalRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SpatioTemporalRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#EventAdjacentRole"/>
+        <rdfs:comment>Roles that classify entities which locate an event or object in space and time.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Spatula -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Spatula">
@@ -3262,6 +3474,15 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#StimulusRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#StimulusRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CausativeRole"/>
+        <rdfs:comment>A role classifying an object that is perceived by some agent and thus triggers some reaction (e.g., a perception event).</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Stove -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Stove">
@@ -3301,7 +3522,7 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Supporter">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Restrictor"/>
-        <rdfs:comment>An object used to support others.</rdfs:comment>
+        <rdfs:comment>A role classifying an object used to support others.</rdfs:comment>
     </owl:Class>
     
 
@@ -3389,11 +3610,20 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#TimeRole -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#TimeRole">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SpatioTemporalRole"/>
+        <rdfs:comment>A role filled by a description of the location in time and/or duration of an event or object.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Tool -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Tool">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Instrument"/>
-        <rdfs:comment>An object used to modify or actuate others.</rdfs:comment>
+        <rdfs:comment>A role to classify an object used to modify or actuate others.</rdfs:comment>
     </owl:Class>
     
 
