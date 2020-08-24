@@ -22,6 +22,14 @@ window.onload = function(){
     document.getElementById("myButton").onclick = function () {
         window.open('http://www.visualdataweb.de/webvowl/#iri=https://ease-crc.github.io/soma/owl/1.0.0/SOMA.owl','_blank'); 
     };
+
+	$.ajax({
+		url: "/repos/:ease-crc/:soma/releases",
+		type: "GET",
+		success: function(result){
+			console.info(result);
+		}
+	});
 };
 
 
