@@ -223,18 +223,22 @@ $.ajax({
 	url: "https://api.github.com/repos/ease-crc/soma/releases",
 	type: "GET",
 	success: function(result){
+		// append releases to #releases
 		for(var i in result) {
-			var release = result[i];
-			var tag_name = release['tag_name'];
-			var option = new Option(tag_name, i);
-			$("#releases").append(option);
+			$("#releases").append(new Option(result[i]['tag_name'], i));
 		}
 		$('#releases-text').text('Select Release');
+		// handle release selection
 		$('#releases').change(function() {
 			var index = $(this).val();
-			console.info(index);
-			var release = result[parseInt(index)];
-			console.info(release);
+			if(index == "-") {
+				console.info("no release selected");
+			}
+			else {
+				console.info("a release was selected");
+				var release = result[parseInt(index)];
+				console.info(release);
+			}
 		});
 	}
 });
