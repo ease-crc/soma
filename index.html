@@ -225,15 +225,15 @@ $.ajax({
 	success: function(result){
 		for(var i in result) {
 			var release = result[i];
-			console.info(release);
 			var tag_name = release['tag_name'];
-			var option = new Option(tag_name, release);
+			var option = new Option(tag_name, i);
 			$("#releases").append(option);
 		}
 		$('#releases-text').text('Select Release');
 		$('#releases').change(function() {
-			var val = $("#releases option:selected");
-			console.info(val);
+			var index = parseInt($("#releases option:selected"));
+			var release = result[index];
+			console.info(release);
 		});
 	}
 });
