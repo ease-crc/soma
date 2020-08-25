@@ -64,7 +64,7 @@
                          
                          <center>
 		                     <div class="btn-group" role="group" aria-label="Link Buttons">
-		                         <button onclick="window.location.href='https://ease-crc.github.io/soma/owl/current/SOMA.owl'" target="_blank" class="btn btn-primary">Download OWL File</a>
+		                         <button onclick="window.location.href='https://ease-crc.github.io/soma/owl/current/SOMA.owl'" target="_blank" class="btn btn-primary">Download Current</a>
 		                         <button onclick="window.location.href='https://github.com/ease-crc/soma'" target="_blank" class="btn btn-primary">View On GitHub</a>
 		                     </div>
                          </center>
@@ -88,6 +88,11 @@
                               <select id="releases">
 				      <option value="-" id="releases-text">Loading</option>
                               </select>
+				 
+		              <div class="btn-group" role="group" aria-label="Link Buttons">
+		                     <button id="btn-release-download" target="_blank" class="btn btn-primary">Download Release</a>
+		                     <button id="btn-release-view" target="_blank" class="btn btn-primary">View On GitHub</a>
+		              </div>
                          </div>
                     </div>
                </div>
@@ -223,6 +228,7 @@ $.ajax({
 	url: "https://api.github.com/repos/ease-crc/soma/releases",
 	type: "GET",
 	success: function(result){
+		var selected = undefined;
 		// append releases to #releases
 		for(var i in result) {
 			$("#releases").append(new Option(result[i]['tag_name'], i));
@@ -236,8 +242,18 @@ $.ajax({
 			}
 			else {
 				console.info("a release was selected");
-				var release = result[parseInt(index)];
-				console.info(release);
+				selected = result[parseInt(index)];
+				console.info(selected);
+			}
+		});
+		$('#btn-release-download').click(function() {
+			if(selected) {
+				window.open(selected.tarball_url);
+			}
+		});
+		$('#btn-release-view').click(function() {
+			if(selected) {
+				window.open(selected.html_url);
 			}
 		});
 	}
