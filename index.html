@@ -16,27 +16,6 @@
 <link rel="stylesheet" href="css/animate.css">
 <link rel="stylesheet" href="css/magnific-popup.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
-
-<script type="text/javascript">
-window.onload = function(){ 
-    document.getElementById("myButton").onclick = function () {
-        window.open('http://www.visualdataweb.de/webvowl/#iri=https://ease-crc.github.io/soma/owl/1.0.0/SOMA.owl','_blank'); 
-    };
-
-	$.ajax({
-		url: "https://api.github.com/repos/ease-crc/soma/releases",
-		type: "GET",
-		success: function(result){
-			console.info(result);
-		},
-		error: function(msg){
-			console.warn(msg);
-		}
-	});
-};
-
-
-</script>
 <!-- Main css -->
 <link rel="stylesheet" href="css/tooplate-style.css">
 
@@ -106,10 +85,24 @@ window.onload = function(){
                               <h3>releases</h3>
                               <p>Credit goes to <a href="#"><b>Ontology Task Force</b></a>. Please take a look at first SOMA version online on webvowl webbased ontology viewer. You can feel free to browse through different SOMA branches and can also search specific concept.</p>
                               
-                            <select>
-                                <option value = "0">SOMA_v1</option>
-                            </select>
-                            <a id="myButton" class="btn btn-success">Submit</a>
+                              <select id="releases">
+				      <option value="-" id="releases-text">Loading</option>
+                              </select>
+<script type="text/javascript">
+// get all release tags
+$.ajax({
+	url: "https://api.github.com/repos/ease-crc/soma/releases",
+	type: "GET",
+	success: function(result){
+		for(var release in result) {
+			var tag_name = release['tag_name'];
+			var option = new Option(tag_name, release);
+			$("#releases").append(option);
+		}
+		$('#releases-text').text('Select Release');
+	}
+});
+</script>
                             
                          </div>
                     </div>
