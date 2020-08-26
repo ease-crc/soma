@@ -189,11 +189,22 @@
 \vspace{0.2cm}
 }
 
-\begin{document}
-\maketitle
 \setcounter{tocdepth}{3}
+
+\begin{document}
+\let\oldaddcontentsline\addcontentsline
+\def\addcontentsline#1#2#3{}
+\maketitle
+\def\addcontentsline#1#2#3{\oldaddcontentsline{#1}{#2}{#3}}
+
+\begin{abstract}
+\textbf{todo: write an abstract?}
+\end{abstract}
+
 \tableofcontents
 
+\pagenumbering{arabic}
+\setcounter{page}{0}
 \cleardoublepage
 \input{content/intro/intro}
 %\input{content/requirements/requirements}
