@@ -30,7 +30,8 @@
 \usepackage{booktabs}
 \usepackage[hidelinks]{hyperref}
 \usepackage[parfill]{parskip}
-\usepackage[nottoc]{tocbibind}
+%\usepackage[nottoc]{tocbibind}
+\usepackage{tocloft}
 
 \usepackage[toc,page]{appendix}
 
@@ -94,6 +95,8 @@
  \centering
  \put(0,-630){\includegraphics[width=12cm]{img/NarrativesStory.png}}
  \put(340,-10){\includegraphics[width=4.0cm]{img/ease-logo.pdf}}}
+
+\renewcommand\thesection{\thechapter.\arabic{section}}
 
 % TODO: use current SOMA version?
 \newcommand{\neemversion}{1.0~}
@@ -207,6 +210,7 @@ The goal of this effort is to establish representations and infrastructure for a
 and to use these data-sets as ground truth data to find generalizations that do not abstract away from movements, and naive physics.
 \end{abstract}
 
+\cleardoublepage
 \tableofcontents
 
 \pagenumbering{arabic}
@@ -216,14 +220,19 @@ and to use these data-sets as ground truth data to find generalizations that do 
 %\input{content/requirements/requirements}
 %\input{content/representation/representation}
 \cleardoublepage
+\setcounter{section}{0}
 \input{content/representation/neem-background}
 \cleardoublepage
+\setcounter{section}{0}
 \input{content/representation/neem-narrative/neem-narrative}
 \cleardoublepage
+\setcounter{section}{0}
 \input{content/representation/neem-experience/neem-experience}
 \cleardoublepage
+\setcounter{section}{0}
 \input{content/acquisition/acquisition}
 \cleardoublepage
+\setcounter{section}{0}
 \input{content/neem-hub/neem-hub}
 %\input{content/application/application}
 %\input{content/future-work/future-work}
