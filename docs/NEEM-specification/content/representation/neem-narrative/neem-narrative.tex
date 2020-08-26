@@ -1,64 +1,4 @@
 
-% % % % % % % % % % % % % % % % % % % % % % % %
-% % % Prelude
-% % % % % % % % % % % % % % % % % % % % % % % %
-\newcommand{\givenODPNAME}{}
-\newcommand{\givenODPINTENT}{}
-\newcommand{\givenODPDEFINEDIN}{}
-\newcommand{\givenODPGRAPHIC}{}
-\newcommand{\givenODPEXAMPLES}{}
-\newcommand{\givenODPQUESTION}{}
-\newcommand{\ODPINTENT}[1]     {\renewcommand{\givenODPINTENT}{#1}}
-\newcommand{\ODPDEFINEDIN}[1]  {\renewcommand{\givenODPDEFINEDIN}{#1}}
-\newcommand{\ODPGRAPHIC}[1]    {\renewcommand{\givenODPGRAPHIC}{#1}}
-\newcommand{\ODPEXAMPLES}[1]   {\renewcommand{\givenODPEXAMPLES}{#1}}
-\newcommand{\ODPQUESTION}[1]   {\renewcommand{\givenODPQUESTION}{#1}}
-\newcommand{\OPDinit}{
-  \renewcommand{\givenODPINTENT}{REQUIRED!}
-  \renewcommand{\givenODPDEFINEDIN}{REQUIRED!}
-  \renewcommand{\givenODPGRAPHIC}{REQUIRED!}
-  \renewcommand{\givenODPQUESTION}{}
-  \renewcommand{\givenODPEXAMPLES}{}
-  \renewcommand{\labelitemi}{$\mathbf{\sqsubseteq}$}
-}
-
-\newenvironment{ODP}[1]{
-\OPDinit
-\renewcommand{\givenODPNAME}{#1}
-}{
-%\givenODPDESCRIPTION
-%\begin{figure}[htb!]
-\vspace{0.2cm}
-\begin{minipage}{0.55\textwidth}
-\fcolorbox{easeblue!40}{easeblue!10}{\begin{tabular}{ p{1.8cm} p{4.2cm} }
-%\toprule
-% {\it\bf Name}                 & \emph{\givenODPNAME} \\
-{\noindent\color{easeblue}\it\bf Intent}               & \givenODPINTENT \\
-{\noindent\color{easeblue}\it\bf Competency Questions} & \emph{\givenODPQUESTION} \\
-{\noindent\color{easeblue}\it\bf Defined in}           & \givenODPDEFINEDIN \\
-%\bottomrule
-\end{tabular}}
-\end{minipage}
-\begin{minipage}{0.45\textwidth}
-\begin{center}
-\givenODPGRAPHIC
-\end{center}
-\end{minipage}
-\\[0.4cm]
-\fcolorbox{easeblue!40}{easeblue!10}{
-	\begin{minipage}{0.96\textwidth}
-		\begin{tabular}{p{4.4cm}p{6.7cm}}
-		{\noindent\color{easeblue}\it\bf Expression}  &
-		{\noindent\color{easeblue}\it\bf Meaning} \\
-		\givenODPEXAMPLES
-		\end{tabular}
-	\end{minipage}
-}
-%\caption{\emph{The Representation of \givenODPNAME}.}
-%\end{figure}
-\vspace{0.2cm}
-}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{NEEM-Narrative}
@@ -119,7 +59,8 @@ A social concept which is basically used for an object classification. An object
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsection{Occurrences}
+\subsection{Relationships}
+\subsubsection{Occurrences}
 \label{sec:occurrences}
 %% Summary of Figure below
 The basic building blocks of \neems are the events that occur when an agent interacts with its environment through movements of its body.
@@ -175,7 +116,7 @@ An event is defined as \emph{any physical, social, or mental process, event, or 
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsection{Participation}
+\subsubsection{Participation}
 \label{sec:participation}
 %% Summary of Figure below
 Events always involve some objects that play a certain role during the event. The role of being the \emph{patient} of some event being an example. This is that the event is directed towards the object. It is not always directly observable what the role of an object might be, however, it is less problematic to just state that the object \emph{has participated} in some event without naming a role.
@@ -221,7 +162,7 @@ Agents are defined as \emph{agentive objects, either physical (e.g. a robot, a h
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsection{Composition}
+\subsubsection{Composition}
 \label{sec:composition}
 
 %\textbf{todo: Mihai write this.}
@@ -275,7 +216,7 @@ The \emph{hasPart} relation is transitive and defined to have domain and range \
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsection{Conceptual Classification}
+\subsubsection{Conceptual Classification}
 \label{sec:classification}
 
 The classification of entities is done from multiple viewpoints.
@@ -371,83 +312,7 @@ This allows us to represent several different classifications of the same event 
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsection{Object Properties}
-\label{sec:qualification}
-
-Qualities are the properties of an object that are not part of it, but cannot exist without it.
-This is, for example, the quality of having a shape -- a quality inherited by all physical objects.
-Another example is the quality of a floor being slippery.
-A robot navigating on such a floor could use this knowledge to avoid, for example,
-spillage when moving on the floor with a coffee-filled cup.
-The quality concept does not directly encode the value of the object property, but only focusses on characteristics of the property itself.
-This is mainly useful in cases where individual aspects of an entity are considered in the domain of discourse.
-
-\begin{ODP}{Object Qualities}
-	\ODPINTENT{To represent the qualities of an object.}
-	\ODPDEFINEDIN{DUL.owl}
-	\ODPQUESTION{What qualities does this object have? That are the objects with this quality?}
-	\ODPGRAPHIC{
-	\begin{tikzpicture}
-	    \node[owlclass] (A) {Object};
-	    \node[owlclass,below=0.6cm of A] (B) {Quality};
-	    \draw (A) edge[relation] node[midway,label=right:hasQuality] {} (B);
- %\node[owlclass] (QUALITY) {
- %\begin{owlclass}{Quality}
- % \item $(\exists \emph{isQualityOf}.\texttt{Entity})$
- % \item $(\exists \emph{hasRegion}.\texttt{Region})$
- %\end{owlclass}
- %};
- %\node[owlclass,below=0.6cm of QUALITY] (REGION) {
- %\begin{owlclass}{Region}
- % \item $(\exists \emph{isRegionFor}.\texttt{Quality})$
- %\end{owlclass}
- %};
- %\draw (QUALITY) edge[thick,-,dashed,blue!60] (REGION);
-	\end{tikzpicture}
-	}
-	%% Example KnowRob language expressions
-	\ODPEXAMPLES{
-		\emph{has\_quality($x$,$y$)} &
-		$y$ is a quality of $x$
-	}
-\end{ODP}
-
-Each object property has one value at a time. The value of an object property is called \emph{region}.
-The value itself is an element, or a sub-region in some dimensional
-space such as \emph{time interval} or \emph{space region}.
-A region may be a finite set of discrete labels, allowing for ``qualitative'' descriptions,
-but more often a region is some dimensional space allowing ``quantitative'' descriptions.
-A Region may contain a single point, in cases where the value of a property is known precisely.
-Note that the domain of the relation \emph{hasRegion} is not \emph{Quality} but \emph{Entity}.
-This is to allow assigning regions to entities without explicating the quality as a concept (quality-as-relation).
-\todo{Seba: maybe some more example would be nice. Or refering to the example with the slippery floor. }
-
-\begin{ODP}{Regions}
-	\ODPINTENT{To represent values of attributes of things.}
-	\ODPDEFINEDIN{DUL.owl}
-	\ODPQUESTION{What is the value for the attribute of that entity? Which entities have a certain value on that parameter/attribute/feature?}
-	\ODPGRAPHIC{
-	\begin{tikzpicture}
-	    \node[owlclass] (A) {Entity};
-	    \node[owlclass,below=0.6cm of A] (B) {Region};
-	    \node[data,below=0.6cm of B] (C) {XSD Type};
-	    \draw (A) edge[relation] node[midway,label=right:hasRegion] {} (B);
-	    \draw (B) edge[relation] node[midway,label=right:hasRegionDataValue] {} (C);
-	\end{tikzpicture}
-	}
-	%% Example KnowRob language expressions
-	\ODPEXAMPLES{
-		\emph{has\_region($x$,$y$)} &
-		$y$ is a region of $x$ \\
-		% % % % %
-		\emph{has\_data\_value($x$,$y$)} &
-		$y$ is a data value of $x$ 
-	}
-\end{ODP}
-
-% % % % % % % % % % % % % % % % %
-% % % % % % % % % % % % % % % % %
-\subsection{Object Transformation}
+\subsubsection{Object Transformation}
 \label{sec:transformation}
 
 Objects typically undergo changes by taking part in actions or processes. Such changes typically take one of two forms: either some property of an object changes value, or the object itself modifies its ontological characterization. As an example, a wad of dough being transported from the table to the inside of an oven has changed its position, but is still, at this point, a wad of dough. Left in a hot oven for enough time however, the wad of dough becomes bread.
@@ -495,7 +360,7 @@ For practical purposes however, human beings often do not care about the exact c
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsection{Force Interaction}
+\subsubsection{Force Interaction}
 
 \textbf{todo: Daniel write this}
 \textbf{todo: preservative vs. alterative interaction}
@@ -554,7 +419,7 @@ For practical purposes however, human beings often do not care about the exact c
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsection{Episodes}
+\subsubsection{Episodes}
 \label{sec:episodes}
 
 An episode is seen as a \emph{relational context} created by an observer that creates a view on a set of entities such as actions that were perfomed, and objects that played a role. We say that an episode is a \emph{setting for} each entity that is relevant for the scope of the episode. As an example, consider the statement \emph{"this morning the robot made a mess on the floor while preparing coffee"}, where the preparation of coffee in the morning is the setting for the robot, the floor, and the actions that were perfomed.

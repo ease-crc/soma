@@ -129,10 +129,69 @@
 
 \renewcommand\tabularxcolumn[1]{m{#1}}
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
+% % % % % % % % % % % % % % % % % % % % % % % %
+% % % Prelude
+% % % % % % % % % % % % % % % % % % % % % % % %
+\newcommand{\givenODPNAME}{}
+\newcommand{\givenODPINTENT}{}
+\newcommand{\givenODPDEFINEDIN}{}
+\newcommand{\givenODPGRAPHIC}{}
+\newcommand{\givenODPEXAMPLES}{}
+\newcommand{\givenODPQUESTION}{}
+\newcommand{\ODPINTENT}[1]     {\renewcommand{\givenODPINTENT}{#1}}
+\newcommand{\ODPDEFINEDIN}[1]  {\renewcommand{\givenODPDEFINEDIN}{#1}}
+\newcommand{\ODPGRAPHIC}[1]    {\renewcommand{\givenODPGRAPHIC}{#1}}
+\newcommand{\ODPEXAMPLES}[1]   {\renewcommand{\givenODPEXAMPLES}{#1}}
+\newcommand{\ODPQUESTION}[1]   {\renewcommand{\givenODPQUESTION}{#1}}
+\newcommand{\OPDinit}{
+  \renewcommand{\givenODPINTENT}{REQUIRED!}
+  \renewcommand{\givenODPDEFINEDIN}{REQUIRED!}
+  \renewcommand{\givenODPGRAPHIC}{REQUIRED!}
+  \renewcommand{\givenODPQUESTION}{}
+  \renewcommand{\givenODPEXAMPLES}{}
+  \renewcommand{\labelitemi}{$\mathbf{\sqsubseteq}$}
+}
+
+\newenvironment{ODP}[1]{
+\OPDinit
+\renewcommand{\givenODPNAME}{#1}
+}{
+%\givenODPDESCRIPTION
+%\begin{figure}[htb!]
+\vspace{0.2cm}
+\begin{minipage}{0.55\textwidth}
+\fcolorbox{easeblue!40}{easeblue!10}{\begin{tabular}{ p{1.8cm} p{4.2cm} }
+%\toprule
+% {\it\bf Name}                 & \emph{\givenODPNAME} \\
+{\noindent\color{easeblue}\it\bf Intent}               & \givenODPINTENT \\
+{\noindent\color{easeblue}\it\bf Competency Questions} & \emph{\givenODPQUESTION} \\
+{\noindent\color{easeblue}\it\bf Defined in}           & \givenODPDEFINEDIN \\
+%\bottomrule
+\end{tabular}}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\begin{center}
+\givenODPGRAPHIC
+\end{center}
+\end{minipage}
+\\[0.4cm]
+\fcolorbox{easeblue!40}{easeblue!10}{
+	\begin{minipage}{0.96\textwidth}
+		\begin{tabular}{p{4.4cm}p{6.7cm}}
+		{\noindent\color{easeblue}\it\bf Expression}  &
+		{\noindent\color{easeblue}\it\bf Meaning} \\
+		\givenODPEXAMPLES
+		\end{tabular}
+	\end{minipage}
+}
+%\caption{\emph{The Representation of \givenODPNAME}.}
+%\end{figure}
+\vspace{0.2cm}
+}
 
 \begin{document}
 \maketitle
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{3}
 \tableofcontents
 
 \cleardoublepage
@@ -140,11 +199,11 @@
 %\input{content/requirements/requirements}
 %\input{content/representation/representation}
 \cleardoublepage
+\input{content/representation/neem-background}
+\cleardoublepage
 \input{content/representation/neem-narrative/neem-narrative}
 \cleardoublepage
 \input{content/representation/neem-experience/neem-experience}
-\cleardoublepage
-\input{content/representation/neem-background}
 \cleardoublepage
 \input{content/acquisition/acquisition}
 \cleardoublepage
