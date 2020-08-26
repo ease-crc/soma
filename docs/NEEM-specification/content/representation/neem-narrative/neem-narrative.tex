@@ -5,10 +5,19 @@
 \label{ch:narrative}
 \chapterauthor{D. Be{\ss}ler, M. Pomarlan, A. Vyas}
 
-The narrative part of NEEMs can be seen as a story of what has happened in terms of events that occurred, goals that were followed, and objects that were involved.
-The \neemnar representation contains two basic elements: classified entities such as events and objects, and relationships between them.
-The events being particularly important as their time interval is used for time-indexed data access.
-Data represented in the \neemexp may further be correlated to the classes and structures in the \neemnar in order to train models that can predict the \neemnar given the \neemexp and possibly some contextual parameter.
+The narrative part of \neems represents a ``story'' of what has happened.
+But the story is more detailed then it would be when told from one human to another
+as it includes details about movements and interactions that would usually not be spelled out in a human conversation.
+The reason to include this type of information is that it is extremely difficult to generalize robotic behaviour, and in particular how the robot needs to move its body to accomplish its goal with varying context such as different environemnts.
+The vision is that a library of \emph{contextualized} motions and interactions will help to uncover models underlying everyday activities.
+
+The story represented in the \neemnar provides context for events that occurred during an activitiy.
+This is, first of all, that labels are assigned to the time intervals where something relevant has happened such as the execution of a task, the interaction between objects, or the occurrence of a motion.
+Labels correspond to classes that are organized in a taxonomy (Section~\ref{sec:narrative:taxonomy}).
+This allows to learn models at different levels of abstraction,
+i.e., for more general or specific variants of a task.
+The \neemnar further represents relationships between instances of these classes, such as that an object plays a role during an event, or that a movement has happened as part of executing an action
+(Section~\ref{sec:narrative:relations}).
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % % 
@@ -203,80 +212,6 @@ The \emph{hasPart} relation is transitive and defined to have domain and range \
 
 \todo{Daniel: I agree, probably we do not need to discuss the distinction between hasConstituent and hasPart here as it does not help the people to generate neems. We should limit to what is necessary here.}
 
-% % % % % % % % % % % % % % % % %
-% % % % % % % % % % % % % % % % %
-\subsection{Classification}
-\label{sec:classification}
-
-The classification of entities is done from multiple viewpoints.
-The most essential one is \emph{what the entitiy really is}.
-This is reflected in the taxonomy.
-However, entities may further be classified according to social aspects such as intention, purpose, etc.
-This type of classification is based on the \emph{conceptualization} of entities.
-In particular, conceptualizations of objects and events are used to classify them in the scope of some activity.
-For this purpose,
-a comprehensive collection of concepts is used to classify objects and events from a conceptual viewpoint (\textbf{todo: insert link to list of all concepts}).
-
-An object that participates in an event usually plays a certain role during the event.
-Some objects are designed to be used in certain ways, thus playing certain roles in specific tasks.
-This is, for example, a box which is designed to be used as a container to store items.
-However, roles may also be taken by objects that are not designed to be used as such.
-The box could, for example, also be used as a door stopper, but surely it would be
-inappropriate to classify it as such taxonomically.
-Instead, roles are defined as concepts that are used to classify the objects that particpate in an event from a conceptual viewpoint.
-
-\begin{ODP}{Object Role}
-	\ODPINTENT{To represents objects and the roles they play.}
-	\ODPDEFINEDIN{DUL.owl}
-	\ODPQUESTION{What role does this object play? Which objects do play that role?}
-	\ODPGRAPHIC{
-	\begin{tikzpicture}
-	    \node[owlclass] (A) {Object};
-	    \node[owlclass,below=0.6cm of A] (B) {Role};
-	    \draw (A) edge[relationxl] node[midway,label=left:$\text{hasRole}_t$] {} (B);
-	    \draw (B) edge[relationxr] node[midway,label=right:$\text{isRoleOf}_t$] {} (A);
-	\end{tikzpicture}
-	}
-	%% Example KnowRob language expressions
-	\ODPEXAMPLES{
-		\emph{has\_role($x$,$y$)} &
-		$y$ is a role of $x$ \\
-		% % % % %
-		\emph{has\_role($x$,$y$) during $z$} &
-		$y$ is a role of $x$ during the occurrence of $z$
-	}
-\end{ODP}
-
-The conceptualization of an event is about how it should be interpreted, executed, expected, seen, etc.
-One aspect is that a single event may contribute to multiple goals, such as when an ingredient is fetched that is partly used in a step of a cooking recipe, and partly eaten raw to satisfy hunger.
-In such a case, the taxonomical category of the event would be unclear in case it should describe the goal to which the event contributes.
-Another aspect is that intentions of agents may not always be known such that the classification of events based on their goals is difficult, and different viewpoints on the same event may exist.
-Hence, when referring to goals, intentions, etc. we rather employ conceptual classification.
-This allows us to represent several different classifications of the same event in one or more situational contexts, for example an interpretations of the same event from different viewpoints.
-%\todo{Seba: How the conceptualization of an event looks in the end? Do we have only one classification or can it have multiple classifications if the goal is not clear?}
-
-\begin{ODP}{??}
-	\ODPINTENT{To represent how events should be interpreted, executed, expected, seen, etc.}
-	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{What are the events that are classified by this concept? What are the concepts that classify this event?}
-	\ODPGRAPHIC{
-	\begin{tikzpicture}
-	    \node[owlclass] (A) {Event};
-	    \node[owlclass,below=0.6cm of A] (B) {Event Type};
-	    \draw (A) edge[relationxl] node[midway,label=left:isOccurrenceOf] {} (B);
-	    \draw (B) edge[relationxr] node[midway,label=right:isOccurringIn] {} (A);
-	\end{tikzpicture}
-	}
-	%% Example KnowRob language expressions
-	\ODPEXAMPLES{
-		\emph{is\_occurring\_in($x$,$y$)} &
-		$y$ is an occurrence that is classified by $x$ \\
-		% % % % %
-		\emph{is\_executed\_in($x$,$y$)} &
-		$y$ is an action that executes the task $x$
-	}
-\end{ODP}
-
 %This ODP allows to make assertions on roles played by agents without involving the agents that play that roles, and vice versa. It allows to express neither the context type in which tasks are defined, not the particular context in which the action is carried out. Moreover, it does not allow to express the time at which the task is executed through the action (for actions that do not solely execute that certain task).
 %\lipsum[2]
 
@@ -407,6 +342,80 @@ For practical purposes however, human beings often do not care about the exact c
 	}
 \end{ODP}
 \fi
+
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % %
+\subsection{Conceptualization}
+\label{sec:classification}
+
+The classification of entities is done from multiple viewpoints.
+The most essential one is \emph{what the entitiy really is}.
+This is reflected in the taxonomy.
+However, entities may further be classified according to social aspects such as intention, purpose, etc.
+This type of classification is based on the \emph{conceptualization} of entities.
+In particular, conceptualizations of objects and events are used to classify them in the scope of some activity.
+For this purpose,
+a comprehensive collection of concepts is used to classify objects and events from a conceptual viewpoint (\textbf{todo: insert link to list of all concepts}).
+
+An object that participates in an event usually plays a certain role during the event.
+Some objects are designed to be used in certain ways, thus playing certain roles in specific tasks.
+This is, for example, a box which is designed to be used as a container to store items.
+However, roles may also be taken by objects that are not designed to be used as such.
+The box could, for example, also be used as a door stopper, but surely it would be
+inappropriate to classify it as such taxonomically.
+Instead, roles are defined as concepts that are used to classify the objects that particpate in an event from a conceptual viewpoint.
+
+\begin{ODP}{Object Role}
+	\ODPINTENT{To represents objects and the roles they play.}
+	\ODPDEFINEDIN{DUL.owl}
+	\ODPQUESTION{What role does this object play? Which objects do play that role?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Role};
+	    \draw (A) edge[relationxl] node[midway,label=left:$\text{hasRole}_t$] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:$\text{isRoleOf}_t$] {} (A);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_role($x$,$y$)} &
+		$y$ is a role of $x$ \\
+		% % % % %
+		\emph{has\_role($x$,$y$) during $z$} &
+		$y$ is a role of $x$ during the occurrence of $z$
+	}
+\end{ODP}
+
+The conceptualization of an event is about how it should be interpreted, executed, expected, seen, etc.
+One aspect is that a single event may contribute to multiple goals, such as when an ingredient is fetched that is partly used in a step of a cooking recipe, and partly eaten raw to satisfy hunger.
+In such a case, the taxonomical category of the event would be unclear in case it should describe the goal to which the event contributes.
+Another aspect is that intentions of agents may not always be known such that the classification of events based on their goals is difficult, and different viewpoints on the same event may exist.
+Hence, when referring to goals, intentions, etc. we rather employ conceptual classification.
+This allows us to represent several different classifications of the same event in one or more situational contexts, for example an interpretations of the same event from different viewpoints.
+%\todo{Seba: How the conceptualization of an event looks in the end? Do we have only one classification or can it have multiple classifications if the goal is not clear?}
+
+\begin{ODP}{??}
+	\ODPINTENT{To represent how events should be interpreted, executed, expected, seen, etc.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What are the events that are classified by this concept? What are the concepts that classify this event?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Event};
+	    \node[owlclass,below=0.6cm of A] (B) {Event Type};
+	    \draw (A) edge[relationxl] node[midway,label=left:isOccurrenceOf] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isOccurringIn] {} (A);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{is\_occurring\_in($x$,$y$)} &
+		$y$ is an occurrence that is classified by $x$ \\
+		% % % % %
+		\emph{is\_executed\_in($x$,$y$)} &
+		$y$ is an action that executes the task $x$
+	}
+\end{ODP}
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
