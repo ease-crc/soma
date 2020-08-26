@@ -1,31 +1,18 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{NEEM-Narrative}
+\chapter{NEEM-Narrative}
 \label{ch:narrative}
+\chapterauthor{D. Be{\ss}ler, M. Pomarlan, A. Vyas}
 
 The narrative part of NEEMs can be seen as a story of what has happened in terms of events that occurred, goals that were followed, and objects that were involved.
 The \neemnar representation contains two basic elements: classified entities such as events and objects, and relationships between them.
 The events being particularly important as their time interval is used for time-indexed data access.
 Data represented in the \neemexp may further be correlated to the classes and structures in the \neemnar in order to train models that can predict the \neemnar given the \neemexp and possibly some contextual parameter.
 
-The \neemnar model is formally defined in form of an \owl ontology which is based on the DOLCE+DnS Ultralite (DUL) upper-level ontology~\cite{DOLCE2003}.
-DUL is a carefully designed ontology that seeks to model general categories underlying human cognition without making any discipline-specific assumptions.
-Our extensions of DUL mainly focus on characterizing different aspects of activities that were not considered in much detail in DUL.
-These extensions are part of an ontology that we have called
-\soma~\footnote{\url{https://ease-crc.github.io/soma}}.
-A \neemnar is made of several patterns defined either in \dul or in \soma.
-
-While it is possible to create the representations listed in this chapter through a custom exporter, it is not advised to do so.
-Instead, it is advised to interface with the
-\knowrob knowledge base~\footnote{\url{https://github.com/knowrob/knowrob}}.
-\knowrob provides an interface based on predicate logics that allows to interact with \neems.
-The language is a collection of predicates that can be called by users to ask certain types of competency questions covering different aspects of activitiy, or to add labels and relationships in the \neemnar.
-We will provide example expressions in this section that highlight how the knowledge base can be used to interact with \neems.
-
 % % % % % % % % % % % % % % % % %
-% % % % % % % % % % % % % % % % %
-\subsection{Taxonomy}
+% % % % % % % % % % % % % % % % % 
+\subsection{Taxonomy} 
 \label{sec:taxonomy} 
 
 Here in the following section, we will discuss taxonomy for the concepts used to describe \neemnar part. A taxonomy provides the hierarchical relationships among various concepts and defines the terminology for each concept. One way to classify an entity in ontology is through taxonomies, which concentrates on \emph{what there actually is?} as compared to conceptual classification which is more about \emph{how an entity is interpreted?}. For instance, the concepts \textit{spoon} and \textit{knife} are subclasses of the concept \textit{cutlery}.
@@ -61,8 +48,8 @@ A social concept which is basically used for an object classification. An object
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsection{Relationships}
-\subsubsection{Occurrences}
+\section{Relationships}
+\subsection{Occurrence}
 \label{sec:occurrences}
 %% Summary of Figure below
 The basic building blocks of \neems are the events that occur when an agent interacts with its environment through movements of its body.
@@ -118,7 +105,7 @@ An event is defined as \emph{any physical, social, or mental process, event, or 
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsubsection{Participation}
+\subsection{Participation}
 \label{sec:participation}
 %% Summary of Figure below
 Events always involve some objects that play a certain role during the event. The role of being the \emph{patient} of some event being an example. This is that the event is directed towards the object. It is not always directly observable what the role of an object might be, however, it is less problematic to just state that the object \emph{has participated} in some event without naming a role.
@@ -164,7 +151,7 @@ Agents are defined as \emph{agentive objects, either physical (e.g. a robot, a h
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsubsection{Composition}
+\subsection{Composition}
 \label{sec:composition}
 
 %\textbf{todo: Mihai write this.}
@@ -218,7 +205,7 @@ The \emph{hasPart} relation is transitive and defined to have domain and range \
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsubsection{Conceptual Classification}
+\subsection{Classification}
 \label{sec:classification}
 
 The classification of entities is done from multiple viewpoints.
@@ -314,7 +301,7 @@ This allows us to represent several different classifications of the same event 
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsubsection{Object Transformation}
+\subsection{Transformation}
 \label{sec:transformation}
 
 Objects typically undergo changes by taking part in actions or processes. Such changes typically take one of two forms: either some property of an object changes value, or the object itself modifies its ontological characterization. As an example, a wad of dough being transported from the table to the inside of an oven has changed its position, but is still, at this point, a wad of dough. Left in a hot oven for enough time however, the wad of dough becomes bread.
@@ -362,7 +349,8 @@ For practical purposes however, human beings often do not care about the exact c
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsubsection{Force Interaction}
+\iffalse
+\subsection{Force Interaction}
 
 \textbf{todo: Daniel write this}
 \textbf{todo: preservative vs. alterative interaction}
@@ -418,10 +406,11 @@ For practical purposes however, human beings often do not care about the exact c
 		\emph{??} & ??
 	}
 \end{ODP}
+\fi
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\subsubsection{Episodes}
+\subsection{Contextualization}
 \label{sec:episodes}
 
 An episode is seen as a \emph{relational context} created by an observer that creates a view on a set of entities such as actions that were perfomed, and objects that played a role. We say that an episode is a \emph{setting for} each entity that is relevant for the scope of the episode. As an example, consider the statement \emph{"this morning the robot made a mess on the floor while preparing coffee"}, where the preparation of coffee in the morning is the setting for the robot, the floor, and the actions that were perfomed.

@@ -1,9 +1,9 @@
-\subsection{Robot NEEMs}
+\section{Robot NEEMs}
 \label{sec:robot-neem}
 \lstset{style=lispcode}
 This section focuses on describing how to generate \neems from experiments performed by the robot. 
 
-\subsubsection{Prerequisite}
+\subsection{Prerequisite}
 
 Before you are intending to generate your episodic memories, make sure you are familiar with the Cognitive Robot Abstract Machine (\cram)\footnote{\url{http://cram-system.org/cram}} system and installed it on your machine.
 \cram is a cognitive-enabled planning framework which allows to design high-level plan for robots.\todo{@Seba: Add more detailed description about CRAM}
@@ -19,7 +19,7 @@ In addition to having a valid \cram plan, you will need the following software c
 \end{itemize}
 
 
-\subsubsection{Recording Narrative Enabled Episodic Memories}
+\subsection{Recording Narrative Enabled Episodic Memories}
 Our recording mechanism  captures every executed \cram action and its parameter.
 In addition, the logger puts the actions in relation to each other by creating a hierarchy which is described in Section \ref{ch:narrative,sec:actionHierarchy}.
 
@@ -47,7 +47,7 @@ You can start \knowrob via:
 	roslaunch knowrob_memory knowrob.launch
 \end{lstlisting}
 
-\subsubsection{Data}
+\subsection{Data}
 Per default your generated \neem will be stored under "\raisebox{-0.9ex}{\~{}}/knowrob-memory/\textless timestamp \textgreater". 
 Your \neem will consist of at least 5 folders - \textit{annotations}, \textit{inferred}, \textit{roslog}, \textit{ros\_tf} and \textit{triples}.
 In the following, we will give an overview which information is contained in those folders:
@@ -61,7 +61,7 @@ In the following, we will give an overview which information is contained in tho
 \end{description}
 %This folder contains the \neemnar and \neemexp . The \neemnar is represented in the "beliefstate.owl". The triple store and the \neemexp are stored in the "roslog" folder. The triple store is stored in the "triples.bson". The other bsons files are presentening the logged rostopics. More about the rostopics is stated in Section \todo{put reference to rostopic section}
 
-\subsubsection{Add Semantic Support to your Designed Plans}
+\subsection{Add Semantic Support to your Designed Plans}
 The disadvantage of having a strong semantic knowledge representation is that the used ontology requires updates when semantic knowledge has to be extended. 
 Currently, \soma focuses on the support to record table setting/cleaning-up experiments.
 If you want for instance create \neems for e.g.\ autonomous cars, you will need to extend the \soma ontology and the recording mechanism with your required actions, parameters and objects.
@@ -148,12 +148,12 @@ For simpler representaion such has a discrete domain representation, you might r
 More information about the concepts \textit{Region} and \textit{Parameter} can be found in \todo{ reference to Region and parameter}.
 
 
-\subsubsection{Adding New Reasoning Tasks}
+\subsection{Adding New Reasoning Tasks}
 \todo{@Ontology group: How to log the result of the reasoning query ?}
 
 
 
-\subsubsection{Next steps}
+\subsection{Next steps}
 After you have generate your \neem, you can use the tool \todo{Add neem2narrative} to generate an cvs file for your \neem.
 Keep in mind that the csv is a abstraction of \neemnar and can be used to make data-mining on explicit knowledge.
 For more sophisticated analysis, you will need to use \knowrob. 
