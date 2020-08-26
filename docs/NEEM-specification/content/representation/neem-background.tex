@@ -4,15 +4,33 @@
 \section{NEEM-Background}
 \label{ch:background}
 
+The background part of \neems represents the (physical) context under which one or more \neems are acquired.
+More concretely, the \neembak represents the environment where events took place, and the agents that participate in these events.
+These are representations of physical objects, their parts, properties, and relationships between them.
+
+Each \neem must have exactly one associated background.
+This is important as only the objects and their properties represented in the background may be involved in events that are part of the \neem.
+Consider, for example, a robot fetching a cup in a kitchen environment to prepare a coffee.
+The cup would be part of the \neembak while the fetching event carried out by the robot would be represented in the \neemnar, however referring to the cup as it is involved in this situation.
+
+The step of creating the \neembak should usually be done before \neems are acquired through an agent performing actions in the respective environment.
+This boils down to the identification of appropiate type label for objects that appear in the environment, and their properties.
+Both, object and property types are organized in a taxonomy, which we will describe in Section~\ref{sec:background:taxonomy}.
+Objects and their properties may further be organized along certain relationships, for example, to represent that an object is made of several parts.
+This will be discussed in Section~\ref{sec:background:relations}.
+It is further possible to make use of some common formats for representing objects and their environment which will be discussed in Section~\ref{sec:background:formats}.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Taxonomy}
+\label{sec:background:taxonomy}
 \subsubsection{Physical Objects}
 \subsubsection{Qualities}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Relationships}
+\label{sec:background:relations}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Componency}
 
@@ -94,6 +112,7 @@ This is to allow assigning regions to entities without explicating the quality a
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Format}
+\label{sec:background:formats}
 \subsubsection{DAE}
 \subsubsection{URDF}
 
