@@ -40,11 +40,22 @@ jobs:
         with:
           args: python3 ./scripts/uglify_ease_as_owl.py
 
-      - name: Upload
+      - name: Upload SOMA
         uses: actions/upload-artifact@v1
         with:
           name: SOMA Ontology
           path: ./build/SOMA.owl
+
+      - name: Metrics
+        runs-on: ubuntu-latest
+        with:
+          args: ./scripts/OntoMetrics.sh ./build/SOMA.owl ./build/
+
+      - name: Upload Metrics
+        uses: actions/upload-artifact@v1
+        with:
+          name: Metrics
+          path: ./build/metrics.json
 
       - name: Deploy current
         uses: JamesIves/github-pages-deploy-action@releases/v3
