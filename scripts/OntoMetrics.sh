@@ -9,6 +9,8 @@ OWL_FILE="$1"
 # The server URL
 HOST="https://ontometrics.informatik.uni-rostock.de/ontologymetrics/ServletController"
 
+echo "${BASEDIR}"
+
 # Prints urldata to stdin
 function get_data {
 	echo -n "text="
@@ -35,6 +37,6 @@ curl ${XML_URL} > "$2/metrics.xml"
 ${BASEDIR}/xml2json.py -t xml2json -o "$2/metrics.json" "$2/metrics.xml"
 # make it accessible as JS script
 echo -n "metric_data='" > "$2/metrics.js"
-cat metrics.json >> "$2/metrics.js"
+cat "$2/metrics.json" >> "$2/metrics.js"
 echo "';" >> "$2/metrics.js"
 
