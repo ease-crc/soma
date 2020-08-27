@@ -32,6 +32,7 @@ jobs:
           args: swipl -f prolog/uglify.pl -t uglify
 
       - name: Find pitfalls
+        uses: actions/setup-python@v2
         run: sudo ./scripts/oops.py $GITHUB_WORKSPACE/build/SOMA.owl $GITHUB_WORKSPACE/build
 
       - name: Upload pitfalls
