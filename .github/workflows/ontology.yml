@@ -15,6 +15,31 @@ on:
       - '!docs/**'
 
 jobs:
+  pitfalls:
+    name: OOPS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Compile
+        uses: docker://swipl:8.0.3
+        with:
+          SOMA_VERSION: current
+          args: swipl -f prolog/uglify.pl -t uglify
+
+      - name: Find pitfalls
+        run: sudo ./scripts/oops.py $GITHUB_WORKSPACE/build/SOMA.owl $GITHUB_WORKSPACE/build
+
+      - name: Upload pitfalls
+        uses: actions/upload-artifact@v1
+        with:
+          name: OOPS Results
+          path: ./build/oops.xml
+  
   consistency:
     name: Consistency
     runs-on: ubuntu-latest
