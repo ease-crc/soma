@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <!-- Main css -->
 <link rel="stylesheet" href="css/tooplate-style.css">
+<link rel="stylesheet" href="css/user.css">
 
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
@@ -115,32 +116,53 @@
 							For more information about the computed metrics, please visit the <a href="https://ontometrics.informatik.uni-rostock.de/wiki/index.php/OntoMetrics">OntoMetrics wiki</a>.
 							The results of this computation for the latest SOMA version is displayed below.
 							<br><br>
-							<div class="panel-group" id="accordion">
+							<div class="panel-group accordion" id="accordion" role="tablist" aria-multiselectable="false">
 								<div class="panel panel-default">
 									<!-- General Metrics -->
-									<div class="panel-heading">
-										<h4 class="panel-title"><a data-toggle="collapse" href="#collapse-metric0">General Metrics</a>
+									<div class="panel-heading" role="tab" id="heading-metrics0">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion" href="#collapse-metric0"
+												aria-expanded="true" aria-controls="collapse-metric0">
+												General Metrics
+											</a>
 										</h4>
 									</div>
-									<div id="collapse-metric0" class="panel-collapse collapse in">
+									<div id="collapse-metric0" class="panel-collapse collapse in"
+											role="tabpanel" aria-labelledby="heading-metrics0">
 										<table id="table-metrics0" class="table table-condensed table-striped">
 											<thead class="hidden"><tr><th data-field="key">Key</th><th data-field="value">Value</th></tr></thead>
 										</table>
 									</div>
+								</div> 
+								<div class="panel panel-default">
 									<!-- Graph Metrics -->
-									<div class="panel-heading">
-										<h4 class="panel-title"><a data-toggle="collapse" href="#collapse-metric1">Graph Metrics</a></h4>
+									<div class="panel-heading" role="tab" id="heading-metrics1">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion" href="#collapse-metric1"
+												aria-expanded="false" aria-controls="collapse-metric1">
+												Graph Metrics
+											</a>
+										</h4>
 									</div>
-									<div id="collapse-metric1" class="panel-collapse collapse">
+									<div id="collapse-metric1" class="panel-collapse collapse"
+											role="tabpanel" aria-labelledby="heading-metrics1">
 										<table id="table-metrics1" class="table table-condensed table-striped">
 											<thead class="hidden"><tr><th data-field="key">Key</th><th data-field="value">Value</th></tr></thead>
 										</table>
 									</div>
+								</div> 
+								<div class="panel panel-default">
 									<!-- Schema Metrics -->
-									<div class="panel-heading">
-										<h4 class="panel-title"><a data-toggle="collapse" href="#collapse-metric2">Schema Metrics</a></h4>
+									<div class="panel-heading" role="tab" id="heading-metrics2">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="#accordion" href="#collapse-metric2"
+												aria-expanded="false" aria-controls="collapse-metric2">
+												Schema Metrics
+											</a>
+										</h4>
 									</div>
-									<div id="collapse-metric2" class="panel-collapse collapse">
+									<div id="collapse-metric2" class="panel-collapse collapse"
+											role="tabpanel" aria-labelledby="heading-metrics2">
 										<table id="table-metrics2" class="table table-condensed table-striped">
 											<thead class="hidden"><tr><th data-field="key">Key</th><th data-field="value">Value</th></tr></thead>
 										</table>
@@ -336,6 +358,11 @@ $(document).ready(function() {
 	//$('#table-metricsx').bootstrapTable(
 	//	{data: getMetricsData(keyMap,metrics['Knowledgebasemetrics'])});
 });
+
+$('document').ready(function(e) {
+  $('#collapse-metric1').collapse({toggle: false});
+  $('#collapse-metric2').collapse({toggle: false});
+});
 </script>
 
 /************************************/
@@ -382,6 +409,42 @@ $.ajax({
 			}
 		});
 	}
+});
+</script>
+
+/************************************/
+/************ ICONS **************/
+/************************************/
+
+<script type="text/javascript">
+
+$(document).on('click', '.panel-heading span.clickable', function (e) {
+    var $this = $(this);
+    if (!$this.hasClass('panel-collapsed')) {
+        $this.parents('.panel').find('.panel-collapse').slideUp();
+        $this.addClass('panel-collapsed');
+        $this.find('i').removeClass('glyphicon-minus').addClass('glyphicon-plus');
+    } else {
+        $this.parents('.panel').find('.panel-collapse').slideDown();
+        $this.removeClass('panel-collapsed');
+        $this.find('i').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+    }
+});
+$(document).on('click', '.panel div.clickable', function (e) {
+    var $this = $(this);
+    if (!$this.hasClass('panel-collapsed')) {
+        $this.parents('.panel').find('.panel-collapse').slideUp();
+        $this.addClass('panel-collapsed');
+        $this.find('i').removeClass('glyphicon-minus').addClass('glyphicon-plus');
+    } else {
+        $this.parents('.panel').find('.panel-collapse').slideDown();
+        $this.removeClass('panel-collapsed');
+        $this.find('i').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+    }
+});
+$(document).ready(function () {
+    $('.panel-heading span.clickable').click();
+    $('.panel div.clickable').click();
 });
 </script>
 
