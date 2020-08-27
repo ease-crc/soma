@@ -33,11 +33,13 @@ if __name__ == "__main__":
 		descr = pitfall_xml.findall('{http://www.oeg-upm.net/oops}Description')[0].text
 		level = pitfall_xml.findall('{http://www.oeg-upm.net/oops}Importance')[0].text
 		iris = get_affected_soma_iris(pitfall_xml)
-		report_pitfall(name,descr,level,iris)
+		if len(iris)>0:
+			report_pitfall(name,descr,level,iris)
 	
 	for suggestion_xml in root.findall('{http://www.oeg-upm.net/oops}Suggestion'):
 		name  = suggestion_xml.findall('{http://www.oeg-upm.net/oops}Name')[0].text
 		descr = suggestion_xml.findall('{http://www.oeg-upm.net/oops}Description')[0].text
 		iris = get_affected_soma_iris(suggestion_xml)
-		report_suggestion(name,descr,iris)
+		if len(iris)>0:
+			report_suggestion(name,descr,iris)
 
