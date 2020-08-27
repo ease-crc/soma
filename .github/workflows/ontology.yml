@@ -33,6 +33,11 @@ jobs:
       
       - name: Setup Python
         uses: actions/setup-python@v2
+      
+      - name: Install python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
 
       - name: Find pitfalls
         run: sudo ./scripts/oops.py $GITHUB_WORKSPACE/build/SOMA.owl $GITHUB_WORKSPACE/build
