@@ -14,7 +14,7 @@ def report_pitfall(name,descr,level,iris):
 	# TODO: include file path and line number
 	msg = format_pitfall(name,descr,iris)
 	if level=="Important":
-		print("::warning::"+msg)
+		print("::warning ::"+msg)
 	elif level=="Minor":
 		pass
 
