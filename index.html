@@ -13,6 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-table.min.css">
 <link rel="stylesheet" href="css/animate.css">
 <link rel="stylesheet" href="css/magnific-popup.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
@@ -81,9 +82,11 @@
                               SOMA has been developed in the collaborative research center <a href="https://www.uni-bremen.de/csl/projekte/laufende-projekte/ease">Everyday Activity Science and Engineering</a> (EASE).
                               <!--</h2>-->
                          </div>
-                         <div class="wow fadeInUp" data-wow-delay="0.8s">
-                              <h3>releases</h3>
-                              Take a look at SOMA online via WebVOWL ontology viewer, or download the OWL file to load it into an ontology editing tool such as Protege. Please select one of the released versions below.<br><br>
+						<!---------------------->
+						<!---------------------->
+						<div class="wow fadeInUp" data-wow-delay="0.8s">
+							<h3>releases</h3>
+							Take a look at SOMA online via WebVOWL ontology viewer, or download the OWL file to load it into an ontology editing tool such as Protege. Please select one of the released versions below.<br><br>
 							<form>
 								<div class="form-group">
 									<select class="form-control" id="releases">
@@ -101,7 +104,50 @@
 								<button id="btn-release-github" type="button" target="_blank" class="btn btn-primary">View with Github</button>
 								<button id="btn-release-webvowl" type="button" target="_blank" class="btn btn-primary">View with WebVOWL</button>
 							</form>
-               </div>
+						</div>
+						<!---------------------->
+						<!---------------------->
+						<div class="wow fadeInUp" data-wow-delay="0.8s">
+							<h3>metrics</h3>
+							Metrics quantify certain characteristics of an ontology such as its readability, adapatability, or reusability.
+							This is useful to compare different ontologies with each other, but it may also serve as quality control during development.
+							SOMA metrics are automatically computed by <a href="https://ontometrics.informatik.uni-rostock.de/ontologymetrics/">OntoMetrics</a>, a webservice for ontology evaluation that supports several different metrics.
+							For more information about the computed metrics, please visit the <a href="https://ontometrics.informatik.uni-rostock.de/wiki/index.php/OntoMetrics">OntoMetrics wiki</a>.
+							The results of this computation for the latest SOMA version is displayed below.
+							<br><br>
+							<div class="panel-group" id="accordion">
+								<div class="panel panel-default">
+									<!-- General Metrics -->
+									<div class="panel-heading">
+										<h4 class="panel-title"><a data-toggle="collapse" href="#collapse-metric0">General Metrics</a>
+										</h4>
+									</div>
+									<div id="collapse-metric0" class="panel-collapse collapse in">
+										<table id="table-metrics0" class="table table-condensed table-striped">
+											<thead class="hidden"><tr><th data-field="key">Key</th><th data-field="value">Value</th></tr></thead>
+										</table>
+									</div>
+									<!-- Graph Metrics -->
+									<div class="panel-heading">
+										<h4 class="panel-title"><a data-toggle="collapse" href="#collapse-metric1">Graph Metrics</a></h4>
+									</div>
+									<div id="collapse-metric1" class="panel-collapse collapse">
+										<table id="table-metrics1" class="table table-condensed table-striped">
+											<thead class="hidden"><tr><th data-field="key">Key</th><th data-field="value">Value</th></tr></thead>
+										</table>
+									</div>
+									<!-- Schema Metrics -->
+									<div class="panel-heading">
+										<h4 class="panel-title"><a data-toggle="collapse" href="#collapse-metric2">Schema Metrics</a></h4>
+									</div>
+									<div id="collapse-metric2" class="panel-collapse collapse">
+										<table id="table-metrics2" class="table table-condensed table-striped">
+											<thead class="hidden"><tr><th data-field="key">Key</th><th data-field="value">Value</th></tr></thead>
+										</table>
+									</div>
+								</div> 
+							</div>
+						</div>
           </div>
      </div>
 </section>
@@ -220,12 +266,81 @@
 <!-- SCRIPTS -->
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-table.min.js"></script>
 <script src="js/jquery.parallax.js"></script>
 <script src="js/jquery.magnific-popup.min.js"></script>
 <script src="js/magnific-popup-options.js"></script>
 <script src="js/smoothscroll.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
+
+/************************************/
+/************* METRICS **************/
+/************************************/
+
+<script src="owl/current/metrics.js"></script>
+
+<script type="text/javascript">
+// convert metrics data so that it can be used as data source
+function getMetricsData(keyMap,input) {
+	var out=[];
+	for(var key in input) {
+		out.push({key: (keyMap[key] || key), value: input[key]});
+	}
+	return out;
+}
+
+$(document).ready(function() {
+	var metrics = JSON.parse(metric_data)['ontometrics-result']['ontology'];
+	var keyMap = {
+		"Axioms":                     "Number of axioms",
+		"Logicalaxiomscount":         "Number of logical axioms",
+		"Classcount":                 "Number of classes",
+		"Totalclassescount":          "Total number of classes",
+		"Objectpropertycount":        "Number of object properties",
+		"Totalobjectpropertiescount": "Total number of object properties",
+		"Datapropertycount":          "Number of data properties",
+		"Totaldatapropertiescount":   "Total number of data properties",
+		"Propertiescount":            "Number of properties",
+		"Individualcount":            "Number of individuals",
+		"Totalindividualscount":      "Total number of individuals",
+		"DLexpressivity":             "DL expressivity",
+		"Absoluterootcardinality":    "Absolute root cardinality",
+		"Absoluteleafcardinality":    "Absolute leaf cardinality",
+		"Absolutesiblingcardinality": "Absolute sibling cardinality",
+		"Absolutedepth":              "Absolute depth",
+		"Averagedepth":               "Average depth",
+		"Maximaldepth":               "Maximal depth",
+		"Absolutebreadth":            "Absolute breadth",
+		"Averagebreadth":             "Average breadth",
+		"Maximalbreadth":             "Maximal breadth",
+		"Ratioofleaffanoutness":      "Ratio of leaf fan-outness",
+		"Ratioofsiblingfanoutness":   "Ratio of sibling fan-outness",
+		"Totalnumberofpaths":         "Total number of paths",
+		"Averagenumberofpaths":       "Average number of paths",
+		"Attributerichness":          "Attribute richness",
+		"Inheritancerichness":        "Inheritance richness",
+		"Relationshiprichness":       "Relation shiprichness",
+		"Attributeclassratio":        "Attribute-class ratio",
+		"Equivalenceratio":           "Equivalence ratio",
+		"Axiomclassratio":            "Axiom-class ratio",
+		"Inverserelationsratio":      "Inverse relations ratio",
+		"Classrelationratio":         "Class relation ratio"
+	};
+	$('#table-metrics0').bootstrapTable(
+		{data: getMetricsData(keyMap,metrics['Basemetrics'])});
+	$('#table-metrics1').bootstrapTable(
+		{data: getMetricsData(keyMap,metrics['Graphmetrics'])});
+	$('#table-metrics2').bootstrapTable(
+		{data: getMetricsData(keyMap,metrics['Schemametrics'])});
+	//$('#table-metricsx').bootstrapTable(
+	//	{data: getMetricsData(keyMap,metrics['Knowledgebasemetrics'])});
+});
+</script>
+
+/************************************/
+/************ RELEASES **************/
+/************************************/
 
 <script type="text/javascript">
 $.ajax({
