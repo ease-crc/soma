@@ -30,9 +30,11 @@ jobs:
         with:
           SOMA_VERSION: current
           args: swipl -f prolog/uglify.pl -t uglify
+      
+      - name: Setup Python
+        uses: actions/setup-python@v2
 
       - name: Find pitfalls
-        uses: actions/setup-python@v2
         run: sudo ./scripts/oops.py $GITHUB_WORKSPACE/build/SOMA.owl $GITHUB_WORKSPACE/build
 
       - name: Upload pitfalls
