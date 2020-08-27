@@ -3,14 +3,18 @@
 import sys
 import xml.etree.ElementTree as ET
 
-def report_important(name,descr,iris):
-	# TODO: include file path and line number
-  #print("::warning file=app.js,line=1,col=5::"+name)
-  print("::warning::"+name)
+def format_pitfall(name,descr,iris):
+	out=name+":"+descr+"\n"
+	out+="This is the case for following resources:\n"
+	for iri in iris:
+		out+="\t"+iri+"\n"
+	return out
 
 def report_pitfall(name,descr,level,iris):
+	# TODO: include file path and line number
+	msg = format_pitfall(name,descr,iris)
 	if level=="Important":
-		report_important(name,descr,iris)
+		print("::warning::"+msg)
 	elif level=="Minor":
 		pass
 
