@@ -11,7 +11,7 @@ def report_pitfall(name,descr,level,iris):
 	if level=="Important":
 		print("::warning ::"+msg)
 	elif level=="Minor":
-		print("::information ::"+msg)
+		print("::warning ::"+msg)
 
 if __name__ == "__main__":
 	# read arguments
