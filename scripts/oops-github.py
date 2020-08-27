@@ -3,24 +3,51 @@
 import sys
 import xml.etree.ElementTree as ET
 
+import os
+
+def find_entity(name):
+	for fname in os.listdir('owl'):
+		fpath='owl/'+fname
+		if not os.path.isfile(fpath):
+			continue
+		with open(fpath) as f:
+			count=0
+			for line in f:
+				count+=1
+				if '#'+name+"\">" in line:
+					return (fpath,count)
+
 def get_affected_soma_iris(xml_elem):
 	affects = xml_elem.findall('{http://www.oeg-upm.net/oops}Affects')[0]
 	iris = list(map(lambda x: x.text,
 		affects.findall('{http://www.oeg-upm.net/oops}AffectedElement')))
 	return list(filter(lambda x: "SOMA.owl" in x, iris))
 
-def format_pitfall(name,descr,iris):
-	return descr+" Affected resources: "+str(list(map(lambda x: x.split('#')[1],iris)))
+def get_resource_names(iris):
+	return list(map(lambda x: x.split('#')[1],iris))
+
+def format_pitfall(name,descr,names):
+	return descr+" Affected resources: "+str(names)
 
 def report_pitfall(name,descr,level,iris):
-	msg = format_pitfall(name,descr,iris)
+	names = get_resource_names(iris)
+	msg = format_pitfall(name,descr,names)
 	if level=="Important":
-		print("::warning ::["+level+"]"+msg)
+		msg_level="warning"
 	elif level=="Minor":
-		print("::warning ::["+level+"]"+msg)
+		msg_level="warning"
+	else:
+		msg_level="debug"
+	needle = find_entity(names[0])
+	if needle!=None:
+		(path,line) = needle
+		print("::"+msg_level+" file="+path+",line="+str(line)+"::["+level+"]"+msg)
+	else:
+		print("::"+msg_level+" file=SOMA.owl::["+level+"]"+msg)
 
 def report_suggestion(name,descr,iris):
-	msg = format_pitfall(name,descr,iris)
+	names = get_resource_names(iris)
+	msg = format_pitfall(name,descr,names)
 	print("::info ::"+msg)
 
 if __name__ == "__main__":
