@@ -4,7 +4,7 @@ import sys
 import xml.etree.ElementTree as ET
 
 def format_pitfall(name,descr,iris):
-	out=name+":"+descr+"<br>"
+	out="\""+name+"\":"+descr+"<br>"
 	out+="This is the case for following resources:<br>"
 	for iri in iris:
 		out+="\t"+iri+"<br>"
