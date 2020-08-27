@@ -31,19 +31,20 @@ def format_pitfall(name,descr,names):
 
 def report_pitfall(name,descr,level,iris):
 	names = get_resource_names(iris)
-	msg = format_pitfall(name,descr,names)
+	#msg = format_pitfall(name,descr,names)
 	if level=="Important":
 		msg_level="warning"
 	elif level=="Minor":
 		msg_level="warning"
 	else:
 		msg_level="debug"
-	needle = find_entity(names[0])
-	if needle!=None:
-		(path,line) = needle
-		print("::"+msg_level+" file="+path+",line="+str(line)+"::["+level+"]"+msg)
-	else:
-		print("::"+msg_level+" file=SOMA.owl::["+level+"]"+msg)
+	for name in names:
+		needle = find_entity(name)
+		if needle!=None:
+			(path,line) = needle
+			print("::"+msg_level+" file="+path+",line="+str(line)+"::["+level+"]"+descr)
+		else:
+			print("::"+msg_level+" file=SOMA.owl::["+level+"]"+descr)
 
 def report_suggestion(name,descr,iris):
 	names = get_resource_names(iris)
