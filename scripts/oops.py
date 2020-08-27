@@ -9,7 +9,7 @@ OOPS_URL="http://oops.linkeddata.es/rest"
 def oops(owl_file):
 	#
 	f = open(owl_file, 'r')
-	content = f.read().encode('utf-8')
+	content = f.read()
 	f.close()
 	#
 	xml_content = """
