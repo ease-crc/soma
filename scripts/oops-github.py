@@ -4,10 +4,10 @@ import sys
 import xml.etree.ElementTree as ET
 
 def format_pitfall(name,descr,iris):
-	out="testxyz: "+descr+"<br>"
-	out+="This is the case for following resources:<br>"
+	out="testxyz: "+descr+"\\n"
+	out+="This is the case for following resources:\\n"
 	for iri in iris:
-		out+="\t"+iri+"<br>"
+		out+="\t"+iri+"\\n"
 	return out
 
 def report_pitfall(name,descr,level,iris):
