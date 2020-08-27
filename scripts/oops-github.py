@@ -4,19 +4,14 @@ import sys
 import xml.etree.ElementTree as ET
 
 def format_pitfall(name,descr,iris):
-	out="testxyz: "+descr+"\\n"
-	out+="This is the case for following resources:\\n"
-	for iri in iris:
-		out+="\t"+iri+"\\n"
-	return out
+	return descr+" Affected resources: "+str(list(map(lambda x: x.split('#')[1],iris)))
 
 def report_pitfall(name,descr,level,iris):
-	# TODO: include file path and line number
 	msg = format_pitfall(name,descr,iris)
 	if level=="Important":
 		print("::warning ::"+msg)
 	elif level=="Minor":
-		pass
+		print("::information ::"+msg)
 
 if __name__ == "__main__":
 	# read arguments
