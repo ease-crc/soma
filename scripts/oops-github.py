@@ -9,9 +9,9 @@ def format_pitfall(name,descr,iris):
 def report_pitfall(name,descr,level,iris):
 	msg = format_pitfall(name,descr,iris)
 	if level=="Important":
-		print("::warning ::"+msg)
+		print("::warning ::["+level+"]"+msg)
 	elif level=="Minor":
-		print("::warning ::"+msg)
+		print("::warning ::["+level+"]"+msg)
 
 def report_suggestion(name,descr,iris):
 	msg = format_pitfall(name,descr,iris)
