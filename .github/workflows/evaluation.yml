@@ -15,9 +15,8 @@ on:
       - '!docs/**'
 
 jobs:
-  pitfalls:
-    name: OOPS
-    runs-on: ubuntu-latest
+  compile:
+    name: Compile SOMA
 
     steps:
       - name: Checkout
@@ -30,6 +29,27 @@ jobs:
         with:
           SOMA_VERSION: current
           args: swipl -f prolog/uglify.pl -t uglify
+
+      - name: Upload OWL file
+        uses: actions/upload-artifact@v1
+        with:
+          name: SOMA OWL
+          path: ./build/SOMA.owl
+  
+  pitfalls:
+    name: OOPS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: SOMA OWL
+          path: ./build
       
       - name: Setup Python
         uses: actions/setup-python@v2
@@ -61,11 +81,10 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Compile
-        uses: docker://swipl:8.0.3
+      - uses: actions/download-artifact@v2
         with:
-          SOMA_VERSION: current
-          args: swipl -f prolog/uglify.pl -t uglify
+          name: SOMA OWL
+          path: ./build
 
       - name: HermiT
         uses: ./.github/actions/hermit
