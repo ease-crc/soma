@@ -38,9 +38,9 @@ def report_pitfall(name,descr,level,iris):
 		needle = find_entity(name)
 		if needle!=None:
 			(path,line) = needle
-			print("::"+msg_level+" file="+path+",line="+str(line)+"::["+level+"]"+descr)
+			print("::"+msg_level+" file="+path+",line="+str(line)+"::["+level+"]("+name+") "+descr)
 		else:
-			print("::"+msg_level+" file=SOMA.owl::["+level+"]"+descr)
+			print("::"+msg_level+" file=SOMA.owl::["+level+"]("+name+") "+descr)
 
 def report_suggestion(name,descr,iris):
 	#names = get_resource_names(iris)
