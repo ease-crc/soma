@@ -87,24 +87,38 @@
 						<!---------------------->
 						<div class="wow fadeInUp" data-wow-delay="0.8s">
 							<h3>releases</h3>
-							Take a look at SOMA online via WebVOWL ontology viewer, or download the OWL file to load it into an ontology editing tool such as Protege. Please select one of the released versions below.<br><br>
+							Take a look at SOMA releases, download released artifacts, or directly load them into an online evauation or visualization tool for ontologies.
+							Please select one of the releases below.<br><br>
 							<form>
 								<div class="form-group">
 									<select class="form-control" id="releases">
 									</select>
 								</div>
-								<div class="form-group">
-									<label for="release-name">Release Name</label>
-									<input type="text" class="form-control" id="release-name" value="" readonly>
+							<div class="panel-group accordion" id="accordion-release0" role="tablist" aria-multiselectable="true">
+								<div class="panel panel-default">
+									<!-- General Metrics -->
+									<div class="panel-heading" role="tab" id="heading-release0">
+										<div class="panel-title font-weight-normal">
+											<a data-toggle="collapse" data-parent="#accordion-release0" href="#collapse-release0"
+												aria-expanded="true" aria-controls="collapse-release0">
+												release information
+											</a>
+										</div>
+									</div>
+									<div id="collapse-release0" class="panel-collapse collapse in"
+											role="tabpanel" aria-labelledby="heading-release0">
+										<table id="table-release0" class="table table-condensed table-striped">
+											<thead class="hidden"><tr><th data-field="key">Key</th><th data-field="value">Value</th></tr></thead>
+										</table>
+									</div>
 								</div>
-								<div class="form-group">
-									<label for="release-date">Release Date</label>
-									<input type="text" class="form-control" id="release-date" value="" readonly>
-								</div>
-								<button id="btn-release-download" type="button" target="_blank" class="btn btn-primary">Download</button>
-								<button id="btn-release-github" type="button" target="_blank" class="btn btn-primary">View with Github</button>
-								<button id="btn-release-webvowl" type="button" target="_blank" class="btn btn-primary">View with WebVOWL</button>
-							</form>
+							</div>
+							More information about this release can be found on <a id="btn-release-github">github</a>.
+							The released OWL file can be downloaded <a id="btn-release-download">here</a>.
+							The file may then be loaded into an ontology editing tool such as <a href="https://protege.stanford.edu/">Protegé</a>.
+							In addition, online tools exist (such as Web-Protegé) that allow to load OWL files without the need to have a local copy available.
+							WebVOWL is one of such tools that may be used to visualize SOMA in the web.
+							This <a class="btn-release-webvowl">link</a> should open SOMA in WebVOWL.
 						</div>
 						<!---------------------->
 						<!---------------------->
@@ -133,7 +147,7 @@
 											<thead class="hidden"><tr><th data-field="key">Key</th><th data-field="value">Value</th></tr></thead>
 										</table>
 									</div>
-								</div> 
+								</div>
 								<div class="panel panel-default">
 									<!-- Graph Metrics -->
 									<div class="panel-heading" role="tab" id="heading-metrics1">
@@ -376,8 +390,11 @@ $.ajax({
 	success: function(result){
 		var selected = result[0];
 		var updateSelection = function() {
-			$('#release-name').val(selected.name);
-			$('#release-date').val(selected.published_at);
+			var releaseData = [
+				{key: "Release name", value: selected.name},
+				{key: "Release data", value: selected.published_at}
+			];
+			$('#table-release0').bootstrapTable({data: releaseData});
 		};
 		// append releases to #releases
 		for(var i in result) {
@@ -409,42 +426,6 @@ $.ajax({
 			}
 		});
 	}
-});
-</script>
-
-/************************************/
-/************ ICONS **************/
-/************************************/
-
-<script type="text/javascript">
-
-$(document).on('click', '.panel-heading span.clickable', function (e) {
-    var $this = $(this);
-    if (!$this.hasClass('panel-collapsed')) {
-        $this.parents('.panel').find('.panel-collapse').slideUp();
-        $this.addClass('panel-collapsed');
-        $this.find('i').removeClass('glyphicon-minus').addClass('glyphicon-plus');
-    } else {
-        $this.parents('.panel').find('.panel-collapse').slideDown();
-        $this.removeClass('panel-collapsed');
-        $this.find('i').removeClass('glyphicon-plus').addClass('glyphicon-minus');
-    }
-});
-$(document).on('click', '.panel div.clickable', function (e) {
-    var $this = $(this);
-    if (!$this.hasClass('panel-collapsed')) {
-        $this.parents('.panel').find('.panel-collapse').slideUp();
-        $this.addClass('panel-collapsed');
-        $this.find('i').removeClass('glyphicon-minus').addClass('glyphicon-plus');
-    } else {
-        $this.parents('.panel').find('.panel-collapse').slideDown();
-        $this.removeClass('panel-collapsed');
-        $this.find('i').removeClass('glyphicon-plus').addClass('glyphicon-minus');
-    }
-});
-$(document).ready(function () {
-    $('.panel-heading span.clickable').click();
-    $('.panel div.clickable').click();
 });
 </script>
 
