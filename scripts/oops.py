@@ -17,7 +17,7 @@ def oops(owl_file):
     <OOPSRequest>
           <OntologyUrl>http://www.ease-crc.org/ont/SOMA.owl</OntologyUrl>
           <OntologyContent>%s</OntologyContent>
-          <Pitfalls></Pitfalls>
+          <Pitfalls>2 3 4 5 6 7 8 10 11 12 13 19 20 21 22 25 25 26 27 28 29</Pitfalls>
           <OutputFormat>XML</OutputFormat>
     </OOPSRequest>
 	""" % (content)
