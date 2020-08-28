@@ -43,9 +43,9 @@ def report_pitfall(name,descr,level,iris):
 			print("::"+msg_level+" file=SOMA.owl::["+level+"]"+descr)
 
 def report_suggestion(name,descr,iris):
-	names = get_resource_names(iris)
-	msg = format_pitfall(name,descr,names)
-	print("::info ::"+msg)
+	#names = get_resource_names(iris)
+	#msg = format_pitfall(name,descr,names)
+	print("::info ::"+descr)
 
 if __name__ == "__main__":
 	# read arguments
