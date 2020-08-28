@@ -14,4 +14,4 @@ Our extensions mainly focus on characterizing different aspects of activities th
 
 ## Further Information
 
-SOMA-related papers, releases, and some tools can be accessed on the [SOMA Project Website](https://ease-crc.github.io/soma/)
+SOMA-related papers, releases, metrics, and some tools can be accessed on the [SOMA Project Website](https://ease-crc.github.io/soma/)
