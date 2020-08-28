@@ -1,6 +1,6 @@
 # SOMA
 
-![](https://github.com/ease-crc/soma/workflows/Consistency/badge.svg)
+![](https://github.com/ease-crc/soma/workflows/Evaluation/badge.svg)
 ![](https://github.com/ease-crc/soma/workflows/Documentation/badge.svg)
 ![](https://github.com/ease-crc/soma/workflows/Deployment/badge.svg)
 
