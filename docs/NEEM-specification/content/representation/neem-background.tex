@@ -1,11 +1,164 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{NEEM-Background}
+\chapter{NEEM-Background}
 \label{ch:background}
+\chapterauthor{D. Be{\ss}ler, M. Pomarlan, A. Vyas}
 
-\textbf{todo: environment map}
-\textbf{todo: object parts and joints}
+The background part of \neems represents the (physical) context under which one or more \neems are acquired.
+More concretely, the \neembak represents the environment where events took place, and the agents that participate in these events.
+These are representations of physical objects, their parts, properties, and relationships between them.
 
+Each \neem must have exactly one associated \neembak.
+This is important as only the objects and their properties represented in the \neembak may be involved in events that are part of the \neem.
+Consider, for example, a robot fetching a cup in a kitchen environment to prepare a coffee.
+The cup would be part of the \neembak while the fetching event carried out by the robot would be represented in the \neemnar, however, the event would refer to the cup.
+
+The step of creating the \neembak should usually take place before any \neems are acquired through an agent performing actions in the respective environment.
+This boils down to the identification of appropiate type labels for objects that appear in the environment, and their properties.
+Both, object and property types, are organized in a taxonomy, which we will describe in Section~\ref{sec:background:taxonomy}.
+Objects and their properties may further be organized along certain relationships, for example, to represent that an object is made of several parts.
+This will be discussed in Section~\ref{sec:background:relations}.
+It is further possible to make use of some common formats for representing objects and their environment which will be discussed in Section~\ref{sec:background:formats}.
+ 
+\section{Taxonomy}
+\label{sec:background:taxonomy}
+
+The way how a task can be solved best depends on what is available in the environment.
+The suitability of an object to be used to perform a certain task is often derived from the class of objects it belongs to, e.g., that each knife can be used for cutting.
+However, the usability of an object is ultimatively grounded in its properties, and, e.g., a dulled knife may proof to be unusable to perform a cutting task.
+It is thus important to treat both the objects and their qualities as first class citizens.
+Consequently, we provide a taxonomy of objects as well as a taxonomy of their qualities.
+
+\subsection{Object Taxonomy}
+Objects and agents that appear in an environment are classified as \emph{physical objects}.
+The \neem model distingiushes between physical, digital, and social objects, however, this distinction is not important here.
+Physical objects are exactly the objects you can point on, as they have a location in space.
+
+The most common physical objects in non-natural environments are \emph{artifacts}.
+An artifact is an item that has certain structure, often to serve a particular purpose such as to use it in a certain way, or to enjoy looking at it in case of, e.g., an art piece.
+Artifacts that were created with a purpose in mind are called \emph{designed artifacts}.
+Most objects in human-made environments belong to this category.
+Note that, e.g., a \emph{container} is not a designed artifact, as also objects that were not designed as such may serve as container.
+Consequently, the class \emph{designed container} is used for the objects that were designed to be used as a container.
+Other examples of designed artifacts are \emph{tools} and \emph{appliances} designed for specific tasks or agents, and \emph{components} designed to fit together to form a larger whole.
+
+Another category of objects are \emph{physical bodies}.
+Most commonly one would use this category for \emph{substances} that appear in the environment such as a blob of dough, or the coffee inside of a cup.
+However, it is more appropiate to classify the substance as \emph{designed substance} in case it was created with a purpose in mind which is, e.g., the case for the dough that is made according to a recipe, and supposed to be eaten after being baked.
+
+Agents that appear in a \neem are classified as \emph{physical agents}.
+The difference to other types of objects is that agents have intentions, execute actions, and attempt to achieve goals, e.g., by following a plan and moving their body in a way to generate interactions with the environment to cause intended effects.
+Each agent is composed of \emph{body parts} organized in a skeletal structure. \todo{there is no class body part}
+Interactions with the environment are carried out through \emph{effectors} such as arms, legs, or hands.
+Effectors that are used for grasping are called \emph{prehensile effectors}.
+
+The last top-level category in our object taxonomy is \emph{physical place}.
+Places are objects with a specific location such as the surface of a table, or the campus of the University.
+Each \neem refers at least to the place where it was acquired, which is usually a room in a building with objects that can be used to perform certain everyday tasks.
+
+\todo{show object taxonomy Figure}
+\todo{provide details about e.g. how many labels are available?}
+
+%According to \dul~\footnote{\url{http://www.ontologydesignpatterns.org/ont/dul/DUL.owl}} upper level ontology, an object participates in an event during its lifetime and has its own spatial location. During an everyday activity, we come across many objects which are mainly of physical type. A physical object is defined as an object that has a proper space region and associated mass. Sub-classes of physical objects are dirty object, physical agent, physical artifact, physical body, physical space, and physical effector. A typical object participate in an event and can be classified by role. It can have physical qualities such as color, localization, disposition, capacity, shape, size, and temperature that are aspect of an object dependent on its physical manifestation. 
+
+%An object branch also covers a design taxonomy which considers functional, structural and aesthetic aspect of object design. Designs are useful to support an agent to hypothesize unknown functions that can be served by an entity\todo{Seba; What exactly is en entity ? An object ? an instance of a concept ?}. A design describes objects which host a common design relevant qualities such as, dispositional, geometrical, and aesthetic. An intelligent agent would be able to infer based on dispositional quality of an object if it can be used to serve other function in everyday task. For example, a heavy door stopper would also be able to function as paper weight or a dining table can be also used as ping pong table based on appropriate dimensions.
+
+\subsection{Feature Taxonomy}
+\todo{not sure if needed}
+
+\subsection{Quality Taxonomy}
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Relationships}
+\label{sec:background:relations}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Componency}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Kinematics}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Properties}
+\label{sec:qualification}
+
+Qualities are the properties of an object that are not part of it, but cannot exist without it.
+This is, for example, the quality of having a shape -- a quality inherited by all physical objects.
+Another example is the quality of a floor being slippery.
+A robot navigating on such a floor could use this knowledge to avoid, for example,
+spillage when moving on the floor with a coffee-filled cup.
+The quality concept does not directly encode the value of the object property, but only focusses on characteristics of the property itself.
+This is mainly useful in cases where individual aspects of an entity are considered in the domain of discourse.
+
+\begin{ODP}{Object Qualities}
+	\ODPINTENT{To represent the qualities of an object.}
+	\ODPDEFINEDIN{DUL.owl}
+	\ODPQUESTION{What qualities does this object have? That are the objects with this quality?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Quality};
+	    \draw (A) edge[relation] node[midway,label=right:hasQuality] {} (B);
+ %\node[owlclass] (QUALITY) {
+ %\begin{owlclass}{Quality}
+ % \item $(\exists \emph{isQualityOf}.\texttt{Entity})$
+ % \item $(\exists \emph{hasRegion}.\texttt{Region})$
+ %\end{owlclass}
+ %};
+ %\node[owlclass,below=0.6cm of QUALITY] (REGION) {
+ %\begin{owlclass}{Region}
+ % \item $(\exists \emph{isRegionFor}.\texttt{Quality})$
+ %\end{owlclass}
+ %};
+ %\draw (QUALITY) edge[thick,-,dashed,blue!60] (REGION);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_quality($x$,$y$)} &
+		$y$ is a quality of $x$
+	}
+\end{ODP}
+
+Each object property has one value at a time. The value of an object property is called \emph{region}.
+The value itself is an element, or a sub-region in some dimensional
+space such as \emph{time interval} or \emph{space region}.
+A region may be a finite set of discrete labels, allowing for ``qualitative'' descriptions,
+but more often a region is some dimensional space allowing ``quantitative'' descriptions.
+A Region may contain a single point, in cases where the value of a property is known precisely.
+Note that the domain of the relation \emph{hasRegion} is not \emph{Quality} but \emph{Entity}.
+This is to allow assigning regions to entities without explicating the quality as a concept (quality-as-relation).
+\todo{Seba: maybe some more example would be nice. Or refering to the example with the slippery floor. }
+
+\begin{ODP}{Regions}
+	\ODPINTENT{To represent values of attributes of things.}
+	\ODPDEFINEDIN{DUL.owl}
+	\ODPQUESTION{What is the value for the attribute of that entity? Which entities have a certain value on that parameter/attribute/feature?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Entity};
+	    \node[owlclass,below=0.6cm of A] (B) {Region};
+	    \node[data,below=0.6cm of B] (C) {XSD Type};
+	    \draw (A) edge[relation] node[midway,label=right:hasRegion] {} (B);
+	    \draw (B) edge[relation] node[midway,label=right:hasRegionDataValue] {} (C);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_region($x$,$y$)} &
+		$y$ is a region of $x$ \\
+		% % % % %
+		\emph{has\_data\_value($x$,$y$)} &
+		$y$ is a data value of $x$ 
+	}
+\end{ODP}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Data Format}
+\label{sec:background:formats}
+\subsection{DAE}
 \subsection{URDF}
 

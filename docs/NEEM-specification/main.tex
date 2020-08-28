@@ -30,7 +30,10 @@
 \usepackage{booktabs}
 \usepackage[hidelinks]{hyperref}
 \usepackage[parfill]{parskip}
-\usepackage[nottoc]{tocbibind}
+%\usepackage[nottoc]{tocbibind}
+\usepackage{tocloft}
+
+\usepackage[toc,page]{appendix}
 
 \usetikzlibrary{shapes.misc, arrows, positioning, calc, decorations.markings}
 \tikzset{
@@ -90,8 +93,10 @@
 \institute{CRC Everyday Activity Science and Engineering (EASE)\\ University Bremen, Am Fallturm 1, 28359 Bremen\\ \texttt{ai-office@cs.uni-bremen.de}}
 \thiswatermark{
  \centering
- \put(-50,-500){\includegraphics[width=14cm]{img/NarrativesStory.png}}
+ \put(0,-630){\includegraphics[width=12cm]{img/NarrativesStory.png}}
  \put(340,-10){\includegraphics[width=4.0cm]{img/ease-logo.pdf}}}
+
+\renewcommand\thesection{\thechapter.\arabic{section}}
 
 % TODO: use current SOMA version?
 \newcommand{\neemversion}{1.0~}
@@ -125,27 +130,118 @@
 \newcommand{\owlClass}[1]{\textit{#1}}
 \newcommand{\owlPredicate}[1]{\textit{#1}}
 
+\makeatletter
+\newcommand{\chapterauthor}[1]{%
+  {\parindent0pt\vspace*{-25pt}%
+  \linespread{1.1}\large\scshape#1%
+  \par\nobreak\vspace*{35pt}}
+  \@afterheading%
+}
+\makeatother
+
 \renewcommand\tabularxcolumn[1]{m{#1}}
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
+% % % % % % % % % % % % % % % % % % % % % % % %
+% % % Prelude
+% % % % % % % % % % % % % % % % % % % % % % % %
+\newcommand{\givenODPNAME}{}
+\newcommand{\givenODPINTENT}{}
+\newcommand{\givenODPDEFINEDIN}{}
+\newcommand{\givenODPGRAPHIC}{}
+\newcommand{\givenODPEXAMPLES}{}
+\newcommand{\givenODPQUESTION}{}
+\newcommand{\ODPINTENT}[1]     {\renewcommand{\givenODPINTENT}{#1}}
+\newcommand{\ODPDEFINEDIN}[1]  {\renewcommand{\givenODPDEFINEDIN}{#1}}
+\newcommand{\ODPGRAPHIC}[1]    {\renewcommand{\givenODPGRAPHIC}{#1}}
+\newcommand{\ODPEXAMPLES}[1]   {\renewcommand{\givenODPEXAMPLES}{#1}}
+\newcommand{\ODPQUESTION}[1]   {\renewcommand{\givenODPQUESTION}{#1}}
+\newcommand{\OPDinit}{
+  \renewcommand{\givenODPINTENT}{REQUIRED!}
+  \renewcommand{\givenODPDEFINEDIN}{REQUIRED!}
+  \renewcommand{\givenODPGRAPHIC}{REQUIRED!}
+  \renewcommand{\givenODPQUESTION}{}
+  \renewcommand{\givenODPEXAMPLES}{}
+  \renewcommand{\labelitemi}{$\mathbf{\sqsubseteq}$}
+}
+
+\newenvironment{ODP}[1]{
+\OPDinit
+\renewcommand{\givenODPNAME}{#1}
+}{
+%\givenODPDESCRIPTION
+%\begin{figure}[htb!]
+\vspace{0.2cm}
+\begin{minipage}{0.55\textwidth}
+\fcolorbox{easeblue!40}{easeblue!10}{\begin{tabular}{ p{1.8cm} p{4.2cm} }
+%\toprule
+% {\it\bf Name}                 & \emph{\givenODPNAME} \\
+{\noindent\color{easeblue}\it\bf Intent}               & \givenODPINTENT \\
+{\noindent\color{easeblue}\it\bf Competency Questions} & \emph{\givenODPQUESTION} \\
+{\noindent\color{easeblue}\it\bf Defined in}           & \givenODPDEFINEDIN \\
+%\bottomrule
+\end{tabular}}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\begin{center}
+\givenODPGRAPHIC
+\end{center}
+\end{minipage}
+\\[0.4cm]
+\fcolorbox{easeblue!40}{easeblue!10}{
+	\begin{minipage}{0.96\textwidth}
+		\begin{tabular}{p{4.4cm}p{6.7cm}}
+		{\noindent\color{easeblue}\it\bf Expression}  &
+		{\noindent\color{easeblue}\it\bf Meaning} \\
+		\givenODPEXAMPLES
+		\end{tabular}
+	\end{minipage}
+}
+%\caption{\emph{The Representation of \givenODPNAME}.}
+%\end{figure}
+\vspace{0.2cm}
+}
+
+\setcounter{tocdepth}{3}
 
 \begin{document}
+\let\oldaddcontentsline\addcontentsline
+\def\addcontentsline#1#2#3{}
 \maketitle
-\setcounter{tocdepth}{2}
+\def\addcontentsline#1#2#3{\oldaddcontentsline{#1}{#2}{#3}}
+
+\begin{abstract}
+The Collaborative Research Center \ease is an interdisciplinary research initiative at the University of Bremen that attempts to advance our understanding of how human-scale manipulation tasks can be mastered by robotic agents.
+The challenge is that the same task needs to be executed by the robot in different ways depending on, for example, what tools are available, and how the environment is shaped.
+The key to solve this issue is \emph{generalization}.
+However, the robot needs to know more then what step it needs to execute next -- it further needs to decide on how the next step is carried out through motions of its body, and interactions with its environment.
+In this document, we will describe how these types of information are represented in the \ease system, how such data-sets are acquired, and how they are stored, maintained, and curated using a centralized web-service.
+The goal of this effort is to establish representations and infrastructure for a shared experience storage with annotated data-sets of agents performing everyday activities,
+and to use these data-sets as ground truth data to find generalizations that do not abstract away from movements, and naive physics.
+\end{abstract}
+
+\cleardoublepage
 \tableofcontents
 
+\pagenumbering{arabic}
+\setcounter{page}{0}
 \cleardoublepage
 \input{content/intro/intro}
 %\input{content/requirements/requirements}
 %\input{content/representation/representation}
-\cleardoublepage
-\input{content/representation/neem-narrative/neem-narrative}
-\cleardoublepage
-\input{content/representation/neem-experience/neem-experience}
-\cleardoublepage
+
+\setcounter{section}{0}
 \input{content/representation/neem-background}
-\cleardoublepage
+
+\setcounter{section}{0}
+\input{content/representation/neem-narrative/neem-narrative}
+
+\setcounter{section}{0}
+\input{content/representation/neem-experience/neem-experience}
+
+\setcounter{section}{0}
 \input{content/acquisition/acquisition}
-\cleardoublepage
+
+\setcounter{section}{0}
 \input{content/neem-hub/neem-hub}
 %\input{content/application/application}
 %\input{content/future-work/future-work}
@@ -154,5 +250,4 @@
 \bibliography{neem}{}
 \bibliographystyle{plain}
 \end{document}
-
 \end{document}
