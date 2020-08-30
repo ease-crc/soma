@@ -155,19 +155,228 @@ A \neem may not represent each supported view, however, it is recommended to rep
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Appearance}
-\textbf{TODO: write about how appearance of objects is represented}
+
+\lipsum[2]
+\todo{TODO: write about how appearance of objects is represented}
+
+\begin{ODP}{Shape}
+	\ODPINTENT{To represent the shape of physical objects.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What is the shape of this object? Which objects have this shape?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Shape};
+	    \node[owlclass,below=0.6cm of B] (C) {Shape Region};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasShape] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isShapeOf] {} (A);
+	    \draw (B) edge[relationxl] node[midway,label=left:hasShapeRegion] {} (C);
+	    \draw (C) edge[relationxr] node[midway,label=right:isShapeRegionOf] {} (B);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{object\_dimensions($x$,$d$,$w$,$h$)} &
+		$d,w,h$ are the depth,width,height of the bounding box of $x$ \\
+		% % % % %
+		\emph{object\_shape($x$,$s$,$o$)} &
+		$s$ is the data of a shape of $x$ located at $o$
+	}
+\end{ODP}
+
+\lipsum[2]
+\todo{TODO: write about how appearance of objects is represented}
+
+\begin{ODP}{Color}
+	\ODPINTENT{To represent the color of physical objects.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What is the color of this object? Which objects have this color?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Color};
+	    \node[owlclass,below=0.6cm of B] (C) {Color Region};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasColor] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isColorOf] {} (A);
+	    \draw (B) edge[relationxl] node[midway,label=left:hasColorRegion] {} (C);
+	    \draw (C) edge[relationxr] node[midway,label=right:isColorRegionOf] {} (B);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{object\_color\_rgb($x$,$[r,g,b]$)} &
+		$r,g,b$ is the RGB color data of $x$
+	}
+\end{ODP}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Components}
-\textbf{TODO: write about how components of objectsare represented}
+
+\lipsum[2]
+\todo{TODO: write about how components of objectsare represented}
+
+\begin{ODP}{Composition}
+	\ODPINTENT{To represent proper parthood of objects.}
+	\ODPDEFINEDIN{DUL.owl}
+	\ODPQUESTION{What is this object component of? What are the components of this object?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Physical Object};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasComponent] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isComponentOf] {} (A);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_component($x$,$y$)} &
+		$y$ is a proper part of $x$
+	}
+\end{ODP}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Kinematics}
-\textbf{TODO: write about how kinematics of objects is represented}
+
+\lipsum[2]
+\todo{TODO: write about how kinematics of objects is represented}
+
+\begin{ODP}{Joints}
+	\ODPINTENT{To represent how parts are attached to each other via a joint.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{Is there a joint between these objects? What objects are connected by this joint?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Joint};
+	    \node[owlclass,below=0.6cm of B] (C) {Physical Object};
+	    \draw (A) edge[relationxl] node[midway,label=left:isParentLinkOf] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:hasParentLink] {} (A);
+	    \draw (B) edge[relationxl] node[midway,label=left:hasChildLink] {} (C);
+	    \draw (C) edge[relationxr] node[midway,label=right:isChildLinkOf] {} (B);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{xxx\_xxxxx($x$,$y$)} &
+		\textbf{todo}
+	}
+\end{ODP}
+
+\lipsum[2]
+
+\begin{ODP}{Component Chains}
+	\ODPINTENT{To represent objects as chains of parts.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What is the base link of this object? What are the end links of this object?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Physical Object};
+	    \node[owlclass,below=0.6cm of B] (C) {Physical Object};
+	    \draw (A) edge[relationxl] node[midway,label=left:isRootLinkOf] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:hasRootLink] {} (A);
+	    \draw (B) edge[relationxl] node[midway,label=left:hasEndLink] {} (C);
+	    \draw (C) edge[relationxr] node[midway,label=right:isEndLinkOf] {} (B);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{xxx\_xxxxx($x$,$y$)} &
+		\textbf{todo}
+	}
+\end{ODP}
+
+\lipsum[2]
+
+\begin{ODP}{Joint limits}
+	\ODPINTENT{To represent the hard limits of a joint.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{How far can this joint move into some direction?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Joint};
+	    \node[owlclass,below=0.6cm of A] (B) {Joint Limit};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasJointLimit] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isLimitOfJoint] {} (A);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{xxx\_xxxxx($x$,$y$)} &
+		\textbf{todo}
+	}
+\end{ODP}
+
+\lipsum[2]
+
+\begin{ODP}{Joint Positions}
+	\ODPINTENT{To represent the position of a joint.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What is the position of this joint?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Joint};
+	    \node[owlclass,below=0.6cm of A] (B) {Joint Position};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasJointPosition] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isPositionOfJoint] {} (A);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{xxx\_xxxxx($x$,$y$)} &
+		\textbf{todo}
+	}
+\end{ODP}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Naive Physics}
-\textbf{TODO: write about how physical attributes of objects are represented}
+
+\lipsum[2]
+\todo{TODO: write about how physical attributes of objects are represented}
+
+\begin{ODP}{Mass}
+	\ODPINTENT{To represent the quantity of matter which a body contains.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What is the mass of this object?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Mass Attribute};
+	    \node[data,below=0.6cm of B] (C) {xsd:double};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasMassAtrribute] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isMassAtrributeOf] {} (A);
+	    \draw (B) edge[relation] node[midway,label=left:hasMassValue] {} (C);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{xxx\_xxxxx($x$,$y$)} &
+		\textbf{todo}
+	}
+\end{ODP}
+
+\lipsum[2]
+
+\begin{ODP}{Friction}
+	\ODPINTENT{To represent the resistance that one surface or object encounters when moving over another.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What is the friction of this object?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Friction Attribute};
+	    \node[data,below=0.6cm of B] (C) {xsd:double};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasFrictionAtrribute] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isFrictionAtrributeOf] {} (A);
+	    \draw (B) edge[relation] node[midway,label=left:hasFrictionValue] {} (C);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{xxx\_xxxxx($x$,$y$)} &
+		\textbf{todo}
+	}
+\end{ODP}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
