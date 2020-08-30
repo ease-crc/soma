@@ -3,27 +3,32 @@
 \label{ch:background}
 \chapterauthor{D. Be{\ss}ler, M. Pomarlan, A. Vyas}
 
-The background part of \neems represents the (physical) context under which one or more \neems are acquired.
-More concretely, the \neembak represents the environment where events took place, and the agents that participate in these events.
+The \neembak represents the (physical) context of \neems.
+More concretely, the \neembak represents the environment where events took place, and the agents that are involved.
 These are representations of physical objects, their parts, properties, and relationships between them.
 
 Each \neem must have exactly one associated \neembak.
-This is important as only the objects and their properties represented in the \neembak may be involved in events that are part of the \neem.
+This is important as only the objects and their properties represented in the \neembak may be involved in events that occur in \neems.
 Consider, for example, a robot fetching a cup in a kitchen environment to prepare a coffee.
-The cup would be part of the \neembak while the fetching event carried out by the robot would be represented in the \neemnar, however, the event would refer to the cup.
-
-The step of creating the \neembak should usually take place before any \neems are acquired through an agent performing actions in the respective environment.
-This boils down to the identification of appropriate type labels for objects that appear in the environment, and their properties.
-Both, object and property types, are organized in a taxonomy, which we will describe in Section~\ref{sec:background:taxonomy}.
-Objects and their properties may further be organized along certain relationships, for example, to represent that an object is made of several parts.
-This will be discussed in Section~\ref{sec:background:relations}.
-It is further possible to make use of some common formats for representing objects and their environment which will be discussed in Section~\ref{sec:background:formats}.
+The cup would be part of the \neembak while the fetching event carried out by the robot would be represented in the \neemnar (Chapter~\ref{ch:narrative}).
 
 The way how a task can be solved best depends on what is available in the environment.
-The suitability of an object to be used to perform a certain task is often derived from the class of objects it belongs to, e.g., that each knife can be used for cutting.
-However, the usability of an object is ultimately grounded in its properties, and, e.g., a dulled knife may proof to be unusable to perform a cutting task.
-It is thus important to treat both the objects and their qualities\todo{Seba: Properties = Qualities?} as first class citizens\todo{Seba: "First class citizens", is this a phrase or a ontological term?}.
-Consequently, we provide a taxonomy of objects as well as a taxonomy of their qualities.
+The suitability of an object to be used to perform a certain task is often derived from the class of objects it belongs to, e.g., that a knife can be used for cutting.
+The \neem model defines a set of more general object classes such as \emph{agent} and \emph{artifact} (Section~\ref{sec:background:types}).
+These are used to classify each object represented in the \neembak.
+%
+The usability of an object is, however, ultimately grounded in its properties, and, e.g., a dulled knife may proof to be unusable to perform a cutting task.
+It is thus also relevant to characterize object properties as they correlate with how an agent may solve its task.
+Consequently, we treat types of object properties as classes organized in a taxonomy (Section~\ref{sec:background:properties}).
+
+\neems may characterize different aspects of the environment depending on what information is accessible when the \neem is acquired.
+We organize different characteristics in so called \emph{views} (Section~\ref{sec:background:views}).
+Each view has its own set of types and relationships to represent the environment from a specific viewpoint such as appearance or kinematics.
+
+\neems are heterogenous representations that may include additional data files.
+These are, first of all, time series data bases that are annotated by the \neemnar.
+In adddition, some widely used data formats for the representation of objects are supprted (Section~\ref{sec:background:formats}).
+Such data files may be stored within the \neembak, associated to objects it represents, and used to enrich knowledge about the environment.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -31,7 +36,9 @@ Consequently, we provide a taxonomy of objects as well as a taxonomy of their qu
 \label{sec:background:types}
 
 Objects and agents that appear in an environment are classified as \emph{physical objects}.
-Physical objects are exactly the objects you can point on, as they have a location in space. The most common physical objects in non-natural environments are \emph{artifacts}.
+Physical objects are exactly the objects you can point on, as they have a location in space.
+
+The most common physical objects in non-natural environments are \emph{artifacts}.
 An artifact is an item that has certain structure, often to serve a particular purpose such as to use it in a certain way, or to enjoy looking at it in case of, e.g., an art piece.
 Artifacts that were created with a purpose in mind are called \emph{designed artifacts}.
 Most objects in human-made environments belong to this category.
@@ -45,15 +52,16 @@ However, it is more appropiate to classify the substance as \emph{designed subst
 
 Agents that appear in a \neem are classified as \emph{physical agents}.
 The difference to other types of objects is that agents have intentions, execute actions, and attempt to achieve goals, e.g., by following a plan and moving their body in a way to generate interactions with the environment to cause intended effects.
+Each agent is composed of \emph{body parts} organized in a skeletal structure. \todo{there is no class body part}
 Interactions with the environment are carried out through \emph{effectors} such as arms, legs, or hands.
 Effectors that are used for grasping are called \emph{prehensile effectors}.
 
 The last top-level category in our object taxonomy is \emph{physical place}.
 Places are objects with a specific location such as the surface of a table, or the campus of the University.
 Each \neem refers at least to the place where it was acquired, which is usually a room in a building with objects that can be used to perform certain everyday tasks.
-
-\textbf{TODO: show object taxonomy Figure}
-\textbf{TODO: provide details about e.g. how many labels are available?}
+%
+\todo{show object taxonomy Figure}
+\todo{provide details about e.g. how many labels are available?}
 
 %According to \dul~\footnote{\url{http://www.ontologydesignpatterns.org/ont/dul/DUL.owl}} upper level ontology, an object participates in an event during its lifetime and has its own spatial location. During an everyday activity, we come across many objects which are mainly of physical type. A physical object is defined as an object that has a proper space region and associated mass. Sub-classes of physical objects are dirty object, physical agent, physical artifact, physical body, physical space, and physical effector. A typical object participate in an event and can be classified by role. It can have physical qualities such as color, localization, disposition, capacity, shape, size, and temperature that are aspect of an object dependent on its physical manifestation. 
 
@@ -75,12 +83,13 @@ This is mainly useful in cases where individual aspects of an entity are conside
 \begin{ODP}{Object Qualities}
 	\ODPINTENT{To represent the qualities of an object.}
 	\ODPDEFINEDIN{DUL.owl}
-	\ODPQUESTION{What qualities does this object have? That are the objects with this quality?}
+	\ODPQUESTION{What qualities does this object have? What objects have this quality?}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Object};
 	    \node[owlclass,below=0.6cm of A] (B) {Quality};
-	    \draw (A) edge[relation] node[midway,label=right:hasQuality] {} (B);
+	    \draw (A) edge[relationxl] node[midway,label=left:hasQuality] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isQualityOf] {} (A);
  %\node[owlclass] (QUALITY) {
  %\begin{owlclass}{Quality}
  % \item $(\exists \emph{isQualityOf}.\texttt{Entity})$
