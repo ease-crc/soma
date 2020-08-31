@@ -12,6 +12,22 @@
   <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">current</owl:versionInfo>
 </owl:Ontology>
 
+<owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf">
+  <rdfs:domain rdf:resource="#Scene"/>
+  <rdfs:range rdf:resource="#StateTransition"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isObjectIncludedIn"/>
+  <owl:inverseOf rdf:resource="#hasInitialScene"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between StateTransitions and Scenes, which identifies the scene the transition starts from.</rdfs:comment>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-SAY.owl#isTerminalSceneOf">
+  <rdfs:domain rdf:resource="#Scene"/>
+  <rdfs:range rdf:resource="#StateTransition"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isObjectIncludedIn"/>
+  <owl:inverseOf rdf:resource="#hasTerminalScene"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between StateTransitions and Scenes, which identifies the scene the transition is expected to end at.</rdfs:comment>
+</owl:ObjectProperty>
+
 <owl:ObjectProperty rdf:about="#isStateTypeOf">
   <rdfs:domain rdf:resource="#StateType"/>
   <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
@@ -27,6 +43,48 @@
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+
+<owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-WF.owl#hasPreviousStep">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#directlyFollows"/>
+  <owl:inverseOf rdf:resource="#hasNextStep"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has previous step</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasNextStep">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#directlyPrecedes"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-WF.owl#isFirstStepOf">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA-WF.owl#isStepOf"/>
+  <owl:inverseOf rdf:resource="#hasFirstStep"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is first step of</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-WF.owl#isStepOf">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskDefinedIn"/>
+  <owl:inverseOf rdf:resource="#hasStep"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is step of</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasFirstStep">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+  <rdfs:subPropertyOf rdf:resource="#hasStep"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasStep">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask"/>
+</owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
 
@@ -146,6 +204,8 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#hasPhysicalComponent">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
 </owl:ObjectProperty>
 
@@ -184,7 +244,7 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
 
 <owl:ObjectProperty rdf:about="#affordsSetpoint">
   <rdfs:domain rdf:resource="#Disposition"/>
-  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+  <rdfs:range rdf:resource="#Setpoint"/>
   <rdfs:subPropertyOf rdf:resource="#affordsConcept"/>
   <owl:inverseOf rdf:resource="#isSetpointAffordedBy"/>
   <owl:propertyChainAxiom>
@@ -414,6 +474,8 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#assistedBy">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
 </owl:ObjectProperty>
 
@@ -501,7 +563,6 @@ Sub-properties are used to distinct between different cases of event endpoint re
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
   <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
-  <owl:inverseOf rdf:resource="#interactsWith"/>
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
@@ -646,8 +707,6 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf"/>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#hasCreated"/>
-
 <owl:ObjectProperty rdf:about="#hasDesign">
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
   <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
@@ -663,8 +722,6 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:comment>Relates a design to an object that was constructed according to it.</rdfs:comment>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#hasDestroyed"/>
-
 <owl:ObjectProperty rdf:about="#hasExecutionState">
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
   <rdfs:range rdf:resource="#ExecutionStateRegion"/>
@@ -676,18 +733,6 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:range rdf:resource="#Feature"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
   <owl:inverseOf rdf:resource="#isFeatureOf"/>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="#hasFirstStep">
-  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow"/>
-  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-  <rdfs:subPropertyOf rdf:resource="#hasStep"/>
-</owl:ObjectProperty>
-
-<owl:ObjectProperty rdf:about="#hasStep">
-  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow"/>
-  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask"/>
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#hasFrictionAttribute">
@@ -756,12 +801,6 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#hasNextStep">
-  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#directlyPrecedes"/>
-</owl:ObjectProperty>
-
 <owl:ObjectProperty rdf:about="#hasOutputParameter">
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
   <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
@@ -822,10 +861,6 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:comment>Relates a quality to its "value", called quale, which is an atomic quality region.</rdfs:comment>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#hasResult">
-  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
-</owl:ObjectProperty>
-
 <owl:ObjectProperty rdf:about="#hasShape">
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
   <rdfs:range rdf:resource="#Shape"/>
@@ -840,6 +875,8 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#hasSoftwareAgent">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
 </owl:ObjectProperty>
 
@@ -959,19 +996,27 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#involvesPlace">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalPlace"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
   <owl:inverseOf rdf:resource="#isPlaceInvolvedIn"/>
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#isPlaceInvolvedIn">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalPlace"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#isAnsweredBy">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#isAskedBy">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
 </owl:ObjectProperty>
 
@@ -995,7 +1040,6 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
   <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasLocation"/>
-  <owl:inverseOf rdf:resource="#isLinkedTo"/>
   <rdfs:comment>A spatial relation holding between objects that are linked with each other such that they resist spatial separation.</rdfs:comment>
 </owl:ObjectProperty>
 
@@ -1077,7 +1121,6 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
   <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
   <rdfs:subPropertyOf rdf:resource="#coOccurs"/>
-  <owl:inverseOf rdf:resource="#simultaneous"/>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A simultaneous B` means that A strictly starts and ends at the same time instant as B, i.e. their temporal extend is equal.</rdfs:comment>
   <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</symbol>
 </owl:ObjectProperty>
@@ -1102,6 +1145,8 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#transitionsBack">
+  <rdfs:domain rdf:resource="#Transient"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
   <rdfs:subPropertyOf rdf:resource="#transitionsFrom"/>
   <rdfs:subPropertyOf rdf:resource="#transitionsTo"/>
 </owl:ObjectProperty>
@@ -1112,12 +1157,11 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasCommonBoundary"/>
 </owl:ObjectProperty>
 
-<owl:DatatypeProperty rdf:about="#hasPositionVector">
-  <rdfs:subPropertyOf rdf:resource="#hasLocalizationParameter"/>
-</owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="#hasOrientationVector">
-  <rdfs:subPropertyOf rdf:resource="#hasLocalizationParameter"/>
+<owl:DatatypeProperty rdf:about="#hasPositionData">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  <rdfs:subPropertyOf rdf:resource="#hasSpaceParameter"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has position data</rdfs:label>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#hasDepth">
@@ -1184,10 +1228,12 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
 
 <owl:DatatypeProperty rdf:about="#hasShapeParameter">
   <rdfs:domain rdf:resource="#ShapeRegion"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#hasEventBegin">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
   <rdfs:subPropertyOf rdf:resource="#hasEventTime"/>
 </owl:DatatypeProperty>
@@ -1199,6 +1245,7 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#hasEventEnd">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
   <rdfs:subPropertyOf rdf:resource="#hasEventTime"/>
 </owl:DatatypeProperty>
@@ -1207,7 +1254,7 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
 
 <owl:DatatypeProperty rdf:about="#hasHSVValue">
   <rdfs:domain rdf:resource="#ColorRegion"/>
-  <rdfs:range rdf:resource="#array_double"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   <rdfs:subPropertyOf rdf:resource="#hasColorValue"/>
 </owl:DatatypeProperty>
 
@@ -1229,15 +1276,16 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:subPropertyOf rdf:resource="#hasIntervalTime"/>
 </owl:DatatypeProperty>
 
-<owl:DatatypeProperty rdf:about="#hasLocalizationParameter">
-  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
-  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
-</owl:DatatypeProperty>
-
 <owl:DatatypeProperty rdf:about="#hasNameString">
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#hasSpaceParameter">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has space parameter</rdfs:label>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#hasPriority">
@@ -1247,21 +1295,14 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
 
 <owl:DatatypeProperty rdf:about="#hasRGBValue">
   <rdfs:domain rdf:resource="#ColorRegion"/>
-  <rdfs:range rdf:resource="#array_double"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   <rdfs:subPropertyOf rdf:resource="#hasColorValue"/>
 </owl:DatatypeProperty>
 
 <owl:DatatypeProperty rdf:about="#hasReferenceFrame">
-  <rdfs:domain>
-    <owl:Class>
-      <owl:unionOf rdf:parseType="Collection">
-        <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-        <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
-      </owl:unionOf>
-    </owl:Class>
-  </rdfs:domain>
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-  <rdfs:subPropertyOf rdf:resource="#hasLocalizationParameter"/>
+  <rdfs:subPropertyOf rdf:resource="#hasSpaceParameter"/>
 </owl:DatatypeProperty>
 
 <owl:AnnotationProperty rdf:about="#UsageGuideline">
@@ -1277,6 +1318,52 @@ A style recommendation for usage guidelines is that they should be brief. In con
 <owl:AnnotationProperty rdf:about="#nickname">
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Similar to rdfs:label, but without GUI or reasoner impact in Protege; avoiding Protege problems is why this is not a label subproperty. Nicknames are used by particular software working with the ontology as a way to give community-specific names to concepts. Communities are identified by the subproperty of nickname.</rdfs:comment>
 </owl:AnnotationProperty>
+
+<owl:Class rdf:about="#Scene">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
+      <owl:someValuesFrom rdf:resource="#State"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#satisfies"/>
+      <owl:someValuesFrom rdf:resource="#ImageSchemaTheory"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+  <rdfs:comment>Scenes are Situations which interpret a State in terms of its conformance to some qualitative, image schematic description. I.e., the scene is described in terms of qualitative functional and spatial relations existing between participating objects.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#StateTransition">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#hasInitialScene"/>
+      <owl:someValuesFrom rdf:resource="#Scene"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#hasTerminalScene"/>
+      <owl:someValuesFrom rdf:resource="#Scene"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
+      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#satisfies"/>
+      <owl:someValuesFrom rdf:resource="#ImageSchemaTheory"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
+  <rdfs:comment>A transition between two states brought about by the Action of some Agent.</rdfs:comment>
+</owl:Class>
 
 <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-STATE.owl#ContainmentState">
   <rdfs:subClassOf>
@@ -1356,11 +1443,15 @@ A style recommendation for usage guidelines is that they should be brief. In con
 Note that this State focuses on how the interaction of, usually non-agentive, objects restricts their motion. This is in contrast to Blockage/Accessibility states where the placement of some objects influences the access to some of them by a third, usually agentive party.</rdfs:comment>
 </owl:Class>
 
+<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+
+<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow"/>
+
 <owl:Class rdf:about="#3DPosition">
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasPositionVector"/>
-      <owl:onDataRange rdf:resource="#array_double"/>
+      <owl:onProperty rdf:resource="#hasPositionData"/>
+      <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
       <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
     </owl:Restriction>
   </rdfs:subClassOf>
@@ -1370,15 +1461,8 @@ Note that this State focuses on how the interaction of, usually non-agentive, ob
 <owl:Class rdf:about="#6DPose">
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasOrientationVector"/>
-      <owl:onDataRange rdf:resource="#array_double"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasPositionVector"/>
-      <owl:onDataRange rdf:resource="#array_double"/>
+      <owl:onProperty rdf:resource="#hasPositionData"/>
+      <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
       <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
     </owl:Restriction>
   </rdfs:subClassOf>
@@ -1573,8 +1657,6 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
 </owl:Class>
 
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-
-<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
 
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Relation"/>
 
@@ -4089,35 +4171,6 @@ Note that such theories are useful both when analyzing an actual linguistic prod
   <rdfs:subClassOf rdf:resource="#BlockedObject"/>
 </owl:Class>
 
-<owl:Class rdf:about="#StateTransition">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasInitialScene"/>
-      <owl:someValuesFrom rdf:resource="#Scene"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasTerminalScene"/>
-      <owl:someValuesFrom rdf:resource="#Scene"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
-      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#satisfies"/>
-      <owl:someValuesFrom rdf:resource="#ImageSchemaTheory"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
-  <rdfs:comment>A transition between two states brought about by the Action of some Agent.</rdfs:comment>
-</owl:Class>
-
 <owl:Class rdf:about="#Inability">
   <rdfs:subClassOf rdf:resource="#Unsuccessfulness"/>
   <rdfs:comment>A description of a situation with a goal that some system is unable to achieve.</rdfs:comment>
@@ -4869,23 +4922,6 @@ As an example, a kind of Abductive reasoning would fit here: reconstruction, in 
   <rdfs:comment>The motion of an object sliding along the surface of another, for example, to clean the surface.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#Scene">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
-      <owl:someValuesFrom rdf:resource="#State"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#satisfies"/>
-      <owl:someValuesFrom rdf:resource="#ImageSchemaTheory"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-  <rdfs:comment>Scenes are Situations which interpret a State in terms of its conformance to some qualitative, image schematic description. I.e., the scene is described in terms of qualitative functional and spatial relations existing between participating objects.</rdfs:comment>
-</owl:Class>
-
 <owl:Class rdf:about="#Setpoint">
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
 </owl:Class>
@@ -5135,8 +5171,6 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
   <rdfs:comment>A motion, usually repeated several times, for example, to probe the surface of an object.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow"/>
-
 <owl:Class rdf:about="#Taxis">
   <rdfs:subClassOf rdf:resource="#BodyMovement"/>
   <rdfs:comment>An innate behavioural response such as the knee-jerk reflex or the sucking reflex of human infants.</rdfs:comment>
@@ -5252,9 +5286,23 @@ It is also possible that a Transient transitionsBack to the initial object. An e
 
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
 
-<rdfs:Datatype rdf:about="#array_double">
-  <owl:equivalentClass rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-</rdfs:Datatype>
+<owl:AsymmetricProperty rdf:about="#hasInitialScene">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  <rdfs:domain rdf:resource="#StateTransition"/>
+  <rdfs:range rdf:resource="#Scene"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesObject"/>
+  <rdfs:comment>A relation between StateTransitions and Scenes, which identifies the scene the transition starts from.</rdfs:comment>
+</owl:AsymmetricProperty>
+
+<owl:AsymmetricProperty rdf:about="#hasTerminalScene">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  <rdfs:domain rdf:resource="#StateTransition"/>
+  <rdfs:range rdf:resource="#Scene"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesObject"/>
+  <rdfs:comment>A relation between StateTransitions and Scenes, which identifies the scene the transition is expected to end at.</rdfs:comment>
+</owl:AsymmetricProperty>
 
 <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action">
   <rdfs:subClassOf>
@@ -5316,25 +5364,11 @@ It is also possible that a Transient transitionsBack to the initial object. An e
   <isReificationOf rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://www.w3.org/2001/XMLSchema#type</isReificationOf>
 </Reification>
 
-<owl:AsymmetricProperty rdf:about="#hasInitialScene">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-  <rdfs:domain rdf:resource="#StateTransition"/>
-  <rdfs:range rdf:resource="#Scene"/>
-  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesObject"/>
-  <rdfs:comment>A relation between StateTransitions and Scenes, which identifies the scene the transition starts from.</rdfs:comment>
-</owl:AsymmetricProperty>
-
-<owl:AsymmetricProperty rdf:about="#hasTerminalScene">
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
-  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
-  <rdfs:domain rdf:resource="#StateTransition"/>
-  <rdfs:range rdf:resource="#Scene"/>
-  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesObject"/>
-  <rdfs:comment>A relation between StateTransitions and Scenes, which identifies the scene the transition is expected to end at.</rdfs:comment>
-</owl:AsymmetricProperty>
-
 <rdfs:Datatype rdf:about="#array_boolean">
+  <owl:equivalentClass rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</rdfs:Datatype>
+
+<rdfs:Datatype rdf:about="#array_double">
   <owl:equivalentClass rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </rdfs:Datatype>
 
@@ -5357,6 +5391,8 @@ It is also possible that a Transient transitionsBack to the initial object. An e
 <owl:AsymmetricProperty rdf:about="#coversObject">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
   <rdfs:subPropertyOf rdf:resource="#interactsWith"/>
   <owl:inverseOf rdf:resource="#isCoveredByObject"/>
   <rdfs:comment>A relationship from an object (the coverer) that blocks access to another or its interior (the coveree).</rdfs:comment>
@@ -5365,6 +5401,8 @@ It is also possible that a Transient transitionsBack to the initial object. An e
 <owl:AsymmetricProperty rdf:about="#isCoveredByObject">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
   <rdfs:subPropertyOf rdf:resource="#interactsWith"/>
   <rdfs:comment>A relation from an object (the coveree) which is itself, or has its interior, prevented from being accessed from outside by a coverer.</rdfs:comment>
 </owl:AsymmetricProperty>
