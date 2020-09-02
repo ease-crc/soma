@@ -9,29 +9,13 @@ sys.path.append("../../scripts")
 from owl_reader import OwlReader
 \end{pythontexcustomcode}
 
-\begin{pycode}
-
-def printdict(class_dict):
-	for key,val in class_dict.items() :
-		print(r'\textbf{{{}}}'.format(key))
-		for j,k in val.items():
-			print(r'\textit{{{}}}'.format(j),end=" ")
-			print(r'{\textbullet}{}')
-			if isinstance(k,list):
-				print(', '.join(k),end=" ")
-			else:
-				print(k,end=" ")
-		print(r"\linebreak")
-\end{pycode}
-
-
 \begin{multicols}{2}
 
 \begin{pycode}
 
 iri = ["http://www.ontologydesignpatterns.org/ont/dul/DUL.owl", "http://www.ease-crc.org/ont/SOMA.owl"]
 owl_reader = OwlReader(iri)
-printdict(owl_reader.get_classes())
+owl_reader.get_classes()
 
 \end{pycode}
 
