@@ -59,7 +59,7 @@ uglify :-
     'SOMA-WF.owl',
     'SOMA-IO.owl',
     'SOMA-OBJ.owl',
-    %'SOMA-STATE.owl',
+    'SOMA-STATE.owl',
     'SOMA-SAY.owl',
     'SOMA-PROC.owl'
   ],
