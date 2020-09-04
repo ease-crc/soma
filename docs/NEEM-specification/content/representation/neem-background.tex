@@ -245,7 +245,7 @@ This is, for example, the case for walls without doors preventing movement from 
 Kinematically coupled objects are often part of a bigger hierarchical structure, and one of the linked objects, the parent link of the joint, is the one closer to the root of the structure then the child link of the joint.
 
 \begin{ODP}{Joints}
-	\ODPINTENT{To represent how parts are attached to each other via a joint.}
+	\ODPINTENT{To represent kinematic trees of objects connected via joints.}
 	\ODPDEFINEDIN{SOMA.owl}
 	\ODPQUESTION{Is there a joint between these objects? What objects are connected by this joint?}
 	\ODPGRAPHIC{
@@ -270,10 +270,11 @@ The pattern above is used to represent kinematical structures, however these rep
 Such objects may be referred to directly in kinematical structures in case of not being composed of movable parts.
 In the case of having movable parts, the object corresponds to chains of links connected via joints in the kinematics representation.
 This is, for example, that the kinematical chain from shoulder to wrist forms an arm component.
-Each object has exactly one root link, but may have many end links such as a hand component having its root in the wrist, and ending at each finger tip.
+Each kinematic object component has exactly one root link, and may have many end links such as a hand component having its root in the wrist, and ending at each finger tip.
 \todo{Seba:Is there a connection to the URDF files or are the joints described only in the ontology?}
+
 \begin{ODP}{Component Chains}
-	\ODPINTENT{To represent objects as chains of parts.}
+	\ODPINTENT{To represent the kinematic chain of object components.}
 	\ODPDEFINEDIN{SOMA.owl}
 	\ODPQUESTION{What is the base link of this object? What are the end links of this object?}
 	\ODPGRAPHIC{
@@ -296,20 +297,27 @@ Each object has exactly one root link, but may have many end links such as a han
 
 % - position
 % - velocity
-% - acceleration
+% - effort
 
-\lipsum[2]
+The position of a joint determines the position of the child link relative to the parent.
+Depending on wether the joint is either revolute or prismatic, the position is measured in radians or meter respectively.
+When the position changes over time, velocity (measured in $rad/s$ or $m/s$) and effort applied in the joint (measured in $Nm$ or $N$) can be measured.
+Joint states should be recorded in form of time-series data, and stored as part of the \neemexp.
+However, the \neem model defines position, velocity, and effort attributes used to access joint state data.
 
-\begin{ODP}{Joint limits}
-	\ODPINTENT{To represent the hard limits of a joint.}
+\begin{ODP}{Joint States}
+	\ODPINTENT{To represent the position of a joint.}
 	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{How far can this joint move into some direction?}
+	\ODPQUESTION{What is the position of this joint?}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Joint};
-	    \node[owlclass,below=0.6cm of A] (B) {Joint Limit};
-	    \draw (A) edge[relationxl] node[midway,label=left:hasJointLimit] {} (B);
-	    \draw (B) edge[relationxr] node[midway,label=right:isLimitOfJoint] {} (A);
+	    \node[owlclass,below=0.6cm of A] (B) {Joint State};
+	    \node[data,below=1.2cm of B] (C) {xsd:double};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasJointState] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isJointStateOf] {} (A);
+	    \draw (B) edge[relation] node[midway,text width=2.0cm,xshift=1.3cm]
+	    	{hasJointValue hasVelocityValue hasEffortValue} (C);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
@@ -319,18 +327,24 @@ Each object has exactly one root link, but may have many end links such as a han
 	}
 \end{ODP}
 
-\lipsum[2]
+The movement of a joint may be restricted by physical limits.
+This is the case for revolute and prismatic joints.
+The joint position is bounded between a minimum and maximum value, expressed as radians for revolute joints, and meters for prismatic joints.
+In addition, maximum values for the velocity and effort of a joint may be provided.
 
-\begin{ODP}{Joint Positions}
-	\ODPINTENT{To represent the position of a joint.}
+\begin{ODP}{Joint limits}
+	\ODPINTENT{To represent the hard limits of a joint.}
 	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{What is the position of this joint?}
+	\ODPQUESTION{How far can this joint move into some direction?}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Joint};
-	    \node[owlclass,below=0.6cm of A] (B) {Joint Position};
-	    \draw (A) edge[relationxl] node[midway,label=left:hasJointPosition] {} (B);
-	    \draw (B) edge[relationxr] node[midway,label=right:isPositionOfJoint] {} (A);
+	    \node[owlclass,below=0.6cm of A] (B) {Joint Limit};
+	    \node[data,below=1.4cm of B] (C) {xsd:double};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasJointLimit] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isLimitOfJoint] {} (A);
+	    \draw (B) edge[relation] node[midway,text width=2.0cm,xshift=1.3cm]
+	    	{hasMinimumLimit hasMaximumLimit hasVelocityLimit hasEffortLimit} (C);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
