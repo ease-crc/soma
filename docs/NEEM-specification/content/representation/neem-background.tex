@@ -111,15 +111,15 @@ This is mainly useful in cases where individual aspects of an entity are conside
 	}
 \end{ODP}
 
-Each object property has one value at a time. The value of an object property is called \emph{region}.
+Each object property has one value at a time. The value of an object property is called \emph{Region}.
 The value itself is an element, or a sub-region in some dimensional
-space such as \emph{time interval} or \emph{space region}.\todo{Seba: Are those concept names? If not, we should not put those in emph and rather pick another formating style.}
+space such as \emph{TimeInterval} or \emph{SpaceRegion}.\todo{Seba: Are those concept names? MP: yes}
 A region may be a finite set of discrete labels, allowing for ``qualitative'' descriptions,
 but more often a region is some dimensional space allowing ``quantitative'' descriptions.
 A Region may contain a single point, in cases where the value of a property is known precisely.
 Note that the domain of the relation \emph{hasRegion} is not \emph{Quality} but \emph{Entity}.
 This is to allow assigning regions to entities without explicating the quality as a concept (quality-as-relation).
-\todo{Seba: maybe some more example would be nice. Or refering to the example with the slippery floor. }
+\todo{Seba: maybe some more example would be nice. Or refering to the example with the slippery floor. MP: this is also a dangerous thing to do imo unless we also mention that regions are defined to correspond to particular qualities only.}
 
 \begin{ODP}{Regions}
 	\ODPINTENT{To represent values of attributes of things.}
@@ -156,9 +156,9 @@ A \neem may not represent each supported view, however, it is recommended to rep
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Appearance}
 
-\todo{TODO: Mihai: explain how EASE researcher may represent appearance of objects}
+%\todo{TODO: Mihai: explain how EASE researcher may represent appearance of objects}
 
-\lipsum[2]
+SOMA defines several concepts to represent qualities relating to an object's appearance: \emph{Color}, \emph{Shape}, \emph{Size}, \emph{Sharpness} etc. A quality belongs to an object, and can take values only from regions of an appropriate type. \todo{MP: hasShape is a specialization of hasQuality for the Shape quality. Do we want to define such properties for all Quality concepts? Not all qualities have restrictions on which regions they take values from. I trust this will be fixed but until then I would not put in the doc something that's not yet in the ontology, so e.g. I wouldn't discuss Size in detail.}
 
 \begin{ODP}{Shape}
 	\ODPINTENT{To represent the shape of physical objects.}
@@ -185,8 +185,77 @@ A \neem may not represent each supported view, however, it is recommended to rep
 	}
 \end{ODP}
 
-\lipsum[2]
-\todo{TODO: write about how appearance of objects is represented}
+A \emph{ShapeRegion} individual can further be classified as a primitive shape (e.g. \emph{BoxShape}, \emph{CylinderShape} etc.) or a \emph{MeshShape}. This finer classification decides what data is attached to the individual. Primitive shapes are described by their geometric parameters, such as height/widhth/length for a box or radius and length for a cylinder. A mesh shape meanwhile has a data property that is a URI to the file that contains the mesh data. To fill in shape data for a shape region, it is necessary to provide data items -- floats or URIs -- and link them via the appropriate data properties to the region individual.
+
+\todo{MP: the ontology defines hasDepth and hasHeight for BoxShape. I assume this is a mistake and we want hasLength and hasHeight.}
+
+\begin{ODP}{Specifying a BoxShape}
+	\ODPINTENT{To quantitatively describe a box shape.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What quantitative data is available about the shape of an object?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {BoxShape};
+	    \node[data,below=0.6cm of A,xshift=-1.5cm] (B) {xsd:double};
+	    \node[data,below=1.8cm of A] (C) {xsd:double};
+	    \node[data,below=0.6cm of A,xshift=1.5cm] (D) {xsd:double};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasHeight] {} (B);
+	    \draw (A) edge[relationxl,pos=0.8] node[midway,label=right:hasLength] {} (C);
+	    \draw (A) edge[relationxl] node[midway,label=right:hasWdith] {} (D);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{\emph{xxx\_xxxxx($x$,$y$)} & \textbf{todo}}
+\end{ODP}
+
+\begin{ODP}{Specifying a CylinderShape}
+	\ODPINTENT{To quantitatively describe a cylindric shape.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What quantitative data is available about the shape of an object?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {CylinderShape};
+	    \node[data,below=0.6cm of A,xshift=-1.5cm] (B) {xsd:double};
+	    \node[data,below=0.6cm of A,xshift=1.5cm] (C) {xsd:double};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasLength] {} (B);
+	    \draw (A) edge[relationxl] node[midway,label=right:hasRadius] {} (C);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{\emph{xxx\_xxxxx($x$,$y$)} & \textbf{todo}}
+\end{ODP}
+
+\begin{ODP}{Specifying a MeshShape}
+	\ODPINTENT{To link to data about an arbitrary shape.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What quantitative data is available about the shape of an object?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {MeshShape};
+	    \node[data,below=0.6cm of A] (B) {URI};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasFilePath] {} (B);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{\emph{xxx\_xxxxx($x$,$y$)} & \textbf{todo}}
+\end{ODP}
+
+\begin{ODP}{Specifying a SphereShape}
+	\ODPINTENT{To link to data about a sphere shape.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What quantitative data is available about the shape of an object?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {SphereShape};
+	    \node[data,below=0.6cm of A] (B) {xsd:double};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasRadius] {} (B);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{\emph{xxx\_xxxxx($x$,$y$)} & \textbf{todo}}
+\end{ODP}
+
+The color of an object is a quality that may take values from a \emph{ColorRegion}. Color regions may be qualitative, such as \emph{GreenColor} or \emph{RedColor}, which correspond to sets of color values; color regions may also be specified as a single datapoint, i.e. a string representing the color's components in some color space. \todo{MP: Decide how to represent color values and color spaces in the ontology, and push axioms to this effect.}
 
 \begin{ODP}{Color}
 	\ODPINTENT{To represent the color of physical objects.}
@@ -403,6 +472,34 @@ In addition, maximum values for the velocity and effort of a joint may be provid
 		\textbf{todo}
 	}
 \end{ODP}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Naive physics}
+
+This view on objects is comprised of qualitative descriptions of the interactions of these objects, with a focus on how objects could be arranged so as to constrain each other's behavior. The prototypical examples of such interactions are support and containment, but many other interactions are possible. Note, formalizing actual manifestations of such interactions as they occur in an episode will be done in chapter~\ref{ch:narrative}. In this chapter, we focus instead on ontological modelling about what kinds of interactions an object could take part in.
+
+This is achieved by the concept of \emph{Disposition}, which is a quality that, by virtue of being possessed by an object, enables that object to participate in certain roles in certain relations or events. E.g., \emph{Deposition} and \emph{Containment} are the dispositions necessary to enable an object to act as a support or container for another.
+
+\begin{ODP}{Friction}
+	\ODPINTENT{To represent what kinds of interactions an object can participate in.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What can this object be used for? Can this object interact with others in a particular way?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Disposition};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasDisposition] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isDispositionOf] {} (A);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{xxx\_xxxxx($x$,$y$)} &
+		\textbf{todo}
+	}
+\end{ODP}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
