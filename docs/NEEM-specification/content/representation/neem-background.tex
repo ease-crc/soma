@@ -316,7 +316,8 @@ Kinematically coupled objects are often part of a bigger hierarchical structure,
 \begin{ODP}{Joints}
 	\ODPINTENT{To represent kinematic trees of objects connected via joints.}
 	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{Is there a joint between these objects? What objects are connected by this joint?}
+	\ODPQUESTION{Are these objects kinematically coupled?
+			Which objects are linked through this joint?}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Physical Object};
@@ -330,8 +331,10 @@ Kinematically coupled objects are often part of a bigger hierarchical structure,
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{xxx\_xxxxx($x$,$y$)} &
-		\textbf{todo}
+		\emph{has\_child\_link($x$,$y$)} &
+		$y$ is the child link of joint $x$ \\
+		\emph{has\_parent\_link($x$,$y$)} &
+		$y$ is the parent link of joint $x$
 	}
 \end{ODP}
 
@@ -345,7 +348,9 @@ Each kinematic object component has exactly one root link, and may have many end
 \begin{ODP}{Component Chains}
 	\ODPINTENT{To represent the kinematic chain of object components.}
 	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{What is the base link of this object? What are the end links of this object?}
+	\ODPQUESTION{What is the kinematic root of this object?
+			What are the end links of this object?
+	}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Physical Object};
@@ -359,8 +364,10 @@ Each kinematic object component has exactly one root link, and may have many end
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{xxx\_xxxxx($x$,$y$)} &
-		\textbf{todo}
+		\emph{has\_base\_link($x$,$y$)} &
+		$y$ is the first link of $x$ \\
+		\emph{has\_end\_link($x$,$y$)} &
+		$y$ is one of the last links of $x$
 	}
 \end{ODP}
 
@@ -372,12 +379,15 @@ The position of a joint determines the position of the child link relative to th
 Depending on wether the joint is either revolute or prismatic, the position is measured in radians or meter respectively.
 When the position changes over time, velocity (measured in $rad/s$ or $m/s$) and effort applied in the joint (measured in $Nm$ or $N$) can be measured.
 Joint states should be recorded in form of time-series data, and stored as part of the \neemexp.
-However, the \neem model defines position, velocity, and effort attributes used to access joint state data.
+However, the \neem model defines a set of data properties used to access joint state data.
 
 \begin{ODP}{Joint States}
 	\ODPINTENT{To represent the position of a joint.}
 	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{What is the position of this joint?}
+	\ODPQUESTION{What is the state of this joint?
+		What is its position and velocity?
+		How much effort is applied?
+	}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Joint};
@@ -391,8 +401,12 @@ However, the \neem model defines position, velocity, and effort attributes used 
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{xxx\_xxxxx($x$,$y$)} &
-		\textbf{todo}
+		\emph{has\_joint\_position($x$,$y$)} &
+		$y$ is the position of joint $x$ \\
+		\emph{has\_joint\_velocity($x$,$y$)} &
+		$y$ is the velocity of joint $x$ \\
+		\emph{has\_joint\_effort($x$,$y$)} &
+		$y$ is the effort of joint $x$ \\
 	}
 \end{ODP}
 
@@ -418,8 +432,12 @@ In addition, maximum values for the velocity and effort of a joint may be provid
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{xxx\_xxxxx($x$,$y$)} &
-		\textbf{todo}
+		\emph{has\_joint\_position\_limit($x$,$y$,$z$)} &
+		$y$ is the minimum and $z$ the maximum position of joint $x$ \\
+		\emph{has\_joint\_velocity\_limit($x$,$y$)} &
+		$y$ is the maximum velocity of joint $x$ \\
+		\emph{has\_joint\_effort\_limit($x$,$y$)} &
+		$y$ is the maximum effort applied in the joint $x$
 	}
 \end{ODP}
 
