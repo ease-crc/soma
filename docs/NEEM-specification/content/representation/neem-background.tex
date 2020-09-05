@@ -329,10 +329,10 @@ Kinematically coupled objects are often part of a bigger hierarchical structure,
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{has\_child\_link($x$,$y$)} &
-		$y$ is the child link of joint $x$ \\
-		\emph{has\_parent\_link($x$,$y$)} &
-		$y$ is the parent link of joint $x$
+		\emph{has\_child\_link($j$,$o$)} &
+		$o \in \abox$ is the child link of joint $j \in \abox$ \\
+		\emph{has\_parent\_link($j$,$o$)} &
+		$o \in \abox$ is the parent link of joint $j \in \abox$
 	}
 \end{ODP}
 
@@ -362,10 +362,10 @@ Each kinematic object component has exactly one root link, and may have many end
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{has\_base\_link($x$,$y$)} &
-		$y$ is the first link of $x$ \\
-		\emph{has\_end\_link($x$,$y$)} &
-		$y$ is one of the last links of $x$
+		\emph{has\_base\_link($o_1$,$o_2$)} &
+		$o_2 \in \abox$ is the first link of $o_1 \in \abox$ \\
+		\emph{has\_end\_link($o_1$,$o_2$)} &
+		$o_2 \in \abox$ is one of the last links of $o_1 \in \abox$
 	}
 \end{ODP}
 
@@ -395,12 +395,12 @@ However, the \neem model defines a set of data properties used to access joint s
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{has\_joint\_position($x$,$y$)} &
-		$y$ is the position of joint $x$ \\
-		\emph{has\_joint\_velocity($x$,$y$)} &
-		$y$ is the velocity of joint $x$ \\
-		\emph{has\_joint\_effort($x$,$y$)} &
-		$y$ is the effort of joint $x$ \\
+		\emph{has\_joint\_position($j$,$x$)} &
+		$x \in \mathbb{R}$ is the position of joint $j \in \abox$ given in $m$ (prismatic joints) or $rad$ (hinged joints) \\
+		\emph{has\_joint\_velocity($j$,$v$)} &
+		$v \in \mathbb{R}$ is the velocity of joint $j \in \abox$ given in $\frac{m}{s}$ (prismatic joints) or $\frac{rad}{s}$ (hinged joints) \\
+		\emph{has\_joint\_effort($j$,$x$)} &
+		$x \in \mathbb{R}$ is the applied force of a prismatic, or the torque of a hinged joint $j \in \abox$ given in $N$ or $N \cdot m$ respectively.
 	}
 \end{ODP}
 
@@ -426,12 +426,12 @@ In addition, maximum values for the velocity and effort of a joint may be provid
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{has\_joint\_position\_limit($x$,$y$,$z$)} &
-		$y$ is the minimum and $z$ the maximum position of joint $x$ \\
-		\emph{has\_joint\_velocity\_limit($x$,$y$)} &
-		$y$ is the maximum velocity of joint $x$ \\
-		\emph{has\_joint\_effort\_limit($x$,$y$)} &
-		$y$ is the maximum effort applied in the joint $x$
+		\emph{has\_joint\_position\_limit($j$,$\vec{x}$)} &
+		$\vec{x} \in \mathbb{R}^2$ is the minimum and maximum position of joint $j \in \abox$ given in $m$ (prismatic joints) or $rad$ (hinged joints) \\
+		\emph{has\_joint\_velocity\_limit($j$,$v_{max}$)} &
+		$v_{max} \in \mathbb{R}$ is the maximum velocity of joint $j \in \abox$ given in $\frac{m}{s}$ (prismatic joints) or $\frac{rad}{s}$ (hinged joints) \\
+		\emph{has\_joint\_effort\_limit($j$,$x_{max}$)} &
+		$x_{max} \in \mathbb{R}$ is the maximum force of a prismatic, or the maximum torque of a hinged joint $j \in \abox$ given in $N$ or $N \cdot m$ respectively.
 	}
 \end{ODP}
 
@@ -457,8 +457,8 @@ The \neem model only considers solid objects with constant mass, and dynamics go
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{has\_mass($x$,$y$)} &
-		$y$ is the mass of $x$ in kilograms
+		\emph{has\_mass($o$,$v$)} &
+		$v \in \mathbb{R}_{>0}$ is the mass of $o \in \abox$ in kilograms
 	}
 \end{ODP}
 
@@ -481,25 +481,29 @@ The accumulated force may be stored as time-series data in the \neembak, and acc
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{has\_net\_force($x$,$y$)} \emph{during} $t$ &
-		$y$ is the accumulated force, measured in $N$, that acts upon $x$ at time instant $t$
+		\emph{has\_net\_force($o$,$\vec{\f}$)} \emph{during} $\vec{ti}$ &
+		$\vec{\f} \in \mathbb{R}^3$ is the accumulated force, measured in Newton, that acts upon $o \in \abox$ during time interval $\vec{ti} \in \mathbb{R}^2_{\geq 0}$
 	}
 \end{ODP}
 
-\lipsum[2]
+\iffalse
+Joints have additional physical attributes that influence how effort is translated into motion.
+This is particularly relevant in case the joint is simulated.
+Internal static friction force caused by movable elements within the joint, and \dots
 
-\begin{ODP}{Friction}
-	\ODPINTENT{To represent the resistance that one surface or object encounters when moving over another.}
+\begin{ODP}{Joint Dynamics}
+	\ODPINTENT{To represent physical attributes of joints.}
 	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{What is the friction of this object?}
+	\ODPQUESTION{What are the physical attributes of this joint?}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
-	    \node[owlclass] (A) {Physical Object};
-	    \node[owlclass,below=0.6cm of A] (B) {Friction Attribute};
-	    \node[data,below=0.6cm of B] (C) {xsd:double};
-	    \draw (A) edge[relationxl] node[midway,label=left:hasFrictionAtrribute] {} (B);
-	    \draw (B) edge[relationxr] node[midway,label=right:isFrictionAtrributeOf] {} (A);
-	    \draw (B) edge[relation] node[midway,label=left:hasFrictionValue] {} (C);
+	    \node[owlclass] (A) {Joint};
+	    \node[owlclass,below=0.6cm of A] (B) {Joint Dynamics};
+	    \node[data,below=0.8cm of B] (C) {xsd:double};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasJointDynamics] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isJointDynamicsOf] {} (A);
+	    \draw (B) edge[relation] node[midway,text width=2.0cm,xshift=1.3cm]
+	    	{hasFrictionValue hasDampingValue} (C);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
@@ -508,6 +512,7 @@ The accumulated force may be stored as time-series data in the \neembak, and acc
 		$y$ is the friction of $x$ measured in $N$ (prismatic joints) or $Nm$ (revolving joints)
 	}
 \end{ODP}
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Naive physics}
