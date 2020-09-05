@@ -283,7 +283,7 @@ The color of an object is a quality that may take values from a \emph{ColorRegio
 \subsection{Components}
 
 \lipsum[2]
-\todo{TODO: write about how components of objectsare represented}
+\todo{TODO: Mihai: write about how components of objectsare represented. harmonize with other component section}
 
 \begin{ODP}{Composition}
 	\ODPINTENT{To represent proper parthood of objects.}
@@ -376,9 +376,9 @@ Each kinematic object component has exactly one root link, and may have many end
 % - effort
 
 The position of a joint determines the position of the child link relative to the parent.
-Depending on wether the joint is either revolute or prismatic, the position is measured in radians or meter respectively.
+Depending on wether the joint is either \emph{hinged} (rotation around an axis) or prismatic (sliding along an axis), the position is measured in radians or meter respectively.
 When the position changes over time, velocity (measured in $rad/s$ or $m/s$) and effort applied in the joint (measured in $Nm$ or $N$) can be measured.
-Joint states should be recorded in form of time-series data, and stored as part of the \neemexp.
+Joint states are recorded as time-series data, and stored in the \neemexp.
 However, the \neem model defines a set of data properties used to access joint state data.
 
 \begin{ODP}{Joint States}
@@ -411,7 +411,7 @@ However, the \neem model defines a set of data properties used to access joint s
 \end{ODP}
 
 The movement of a joint may be restricted by physical limits.
-This is the case for revolute and prismatic joints.
+This is the case for \emph{revolute} and \emph{prismatic} joints.
 The joint position is bounded between a minimum and maximum value, expressed as radians for revolute joints, and meters for prismatic joints.
 In addition, maximum values for the velocity and effort of a joint may be provided.
 
