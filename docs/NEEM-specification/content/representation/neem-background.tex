@@ -438,8 +438,8 @@ In addition, maximum values for the velocity and effort of a joint may be provid
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Dynamics}
 
-\lipsum[2]
-\todo{write about how physical attributes of objects are represented}
+The dynamics view in the \neembak is used to characterize how objects move under the influence of force.
+The \neem model only considers solid objects with constant mass, and dynamics governed by Newton's laws.
 
 \begin{ODP}{Mass}
 	\ODPINTENT{To represent the quantity of matter which a body contains.}
@@ -457,8 +457,32 @@ In addition, maximum values for the velocity and effort of a joint may be provid
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{xxx\_xxxxx($x$,$y$)} &
-		\textbf{todo}
+		\emph{has\_mass($x$,$y$)} &
+		$y$ is the mass of $x$ in kilograms
+	}
+\end{ODP}
+
+At each point in time, the sum of forces influencing an object determines how its movement will change.
+The accumulated force may be stored as time-series data in the \neembak, and accessed via an attribute defined in the \neem model.
+
+\begin{ODP}{Force}
+	\ODPINTENT{To represent the quantity of force influencing a solid object.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What is the force acting upon this object?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Net Force};
+	    \node[data,below=0.6cm of B] (C) {xsd:double};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasNetForce] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isNetForceOf] {} (A);
+	    \draw (B) edge[relation] node[midway,label=left:$\emph{hasForceValue}_t$] {} (C);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_net\_force($x$,$y$)} \emph{during} $t$ &
+		$y$ is the accumulated force, measured in $N$, that acts upon $x$ at time instant $t$
 	}
 \end{ODP}
 
@@ -480,8 +504,8 @@ In addition, maximum values for the velocity and effort of a joint may be provid
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{xxx\_xxxxx($x$,$y$)} &
-		\textbf{todo}
+		\emph{has\_friction($x$,$y$)} &
+		$y$ is the friction of $x$ measured in $N$ (prismatic joints) or $Nm$ (revolving joints)
 	}
 \end{ODP}
 
