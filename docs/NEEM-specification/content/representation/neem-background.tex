@@ -74,7 +74,7 @@ Each \neem refers at least to the place where it was acquired, which is usually 
 
 Qualities are the properties of an object that are not part of it, but cannot exist without it.
 This is, for example, the quality of having a shape -- a quality inherited by all physical objects.
-Another example is the quality of a floor being slippery.
+Another example is the quality of a floor having a certain surface friction and thus being slippery or not.
 A robot navigating on such a floor could use this knowledge to avoid, for example,
 spillage when moving on the floor with a coffee-filled cup.
 The quality concept does not directly encode the value of the object property, but only focusses on characteristics of the property itself.
@@ -106,20 +106,27 @@ This is mainly useful in cases where individual aspects of an entity are conside
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{has\_quality($x$,$y$)} &
-		$y$ is a quality of $x$
+		\emph{has\_quality($o$,$q$)} &
+		$q \in \abox$ is a quality of $o \in \abox$
 	}
 \end{ODP}
 
-Each object property has one value at a time. The value of an object property is called \emph{Region}.
-The value itself is an element, or a sub-region in some dimensional
-space such as \emph{TimeInterval} or \emph{SpaceRegion}.\todo{Seba: Are those concept names? MP: yes}
-A region may be a finite set of discrete labels, allowing for ``qualitative'' descriptions,
-but more often a region is some dimensional space allowing ``quantitative'' descriptions.
-A Region may contain a single point, in cases where the value of a property is known precisely.
-Note that the domain of the relation \emph{hasRegion} is not \emph{Quality} but \emph{Entity}.
+Several sub-classes of \concept{Quality} and corresponding sub-relations of \relation{has-quality} are defined in the \neem model.
+Some of them will be described later in this chapter.
+
+Each object property has one value at a time.
+The value is an element in a dimensional space.
+Such a dimensional space is called \concept{Region} in the \neem model.
+A region may have an infinite number of elements, or, in the other case, may enumerate all its elements.
+The color of an object, for example, may have a value encoded as RGB vector which is an element of the RGB colorspace (which is a region).
+Regions may further be decomposed into sub-regions, for example, to represent the sub-region of RGB colorspace with dominant red color.
+%The value of an object property is called \emph{Region}.
+%The value itself is an element, or a sub-region in some dimensional space such as \concept{TimeInterval} or \concept{SpaceRegion}.
+%A region may be a finite set of discrete labels, allowing for ``qualitative'' descriptions, but more often a region is some dimensional space allowing ``quantitative'' descriptions.
+%A Region may contain a single point, in cases where the value of a property is known precisely.
+Note that the domain of the relation \relation{has-region} is not \concept{Quality} but \concept{Entity}.
 This is to allow assigning regions to entities without explicating the quality as a concept (quality-as-relation).
-\todo{Seba: maybe some more example would be nice. Or refering to the example with the slippery floor. MP: this is also a dangerous thing to do imo unless we also mention that regions are defined to correspond to particular qualities only.}
+\todo{Seba: maybe some more example would be nice. Or refering to the example with the slippery floor. MP: this is also a dangerous thing to do imo unless we also mention that regions are defined to correspond to particular qualities only. DB: well that is how it is defined in DUL, I do not think that the intention is that regions may only be used with qualities, but that qualities are optional and only explicated when individual qualities are in the domain of discourse.}
 
 \begin{ODP}{Regions}
 	\ODPINTENT{To represent values of attributes of things.}
@@ -272,7 +279,7 @@ The color of an object is a quality that may take values from a \emph{ColorRegio
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{has\_color($o$)}     & $o \in \abox$ has a shape \\
+		\emph{has\_color($o$)}     & $o \in \abox$ has a color \\
 		\emph{has\_color($o$,$c$)} & $c \in \abox$ is the color of $o \in \abox$
 	}
 \end{ODP}
