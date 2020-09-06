@@ -306,7 +306,65 @@ The color of an object is a quality that may take values from a \emph{ColorRegio
 \subsection{Kinematics}
 
 Kinematics, also often referred to as \emph{geometry of motion}, describes how objects may move without considering the influence of forces.
-The kinematic state of an object is represented using a set of object properties such as its position, velocity and acceleration.
+The kinematic state of an object is given by its pose over time, stored in the \neemexp as time-series data, and accessed via a dedicated predicate \emph{is\_at}.
+Poses are expressed within a frame of reference.
+There is one reference frame at the origin of each object, and possibly more at the various locations of interest.
+In addition, there is one dedicated root reference frame, the origin of the map.
+Each other frame must be, possibly indirect, connected to the map origin frame.
+The pose itself is given as 6D pose including the objects' orientation as quaternion vector.
+
+\begin{ODP}{Localization}
+	\ODPINTENT{To represent that objects are localized in a map.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{Is this object localized?
+			In which map is this object localized?
+			What are the objects localized in this map?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Localization};
+	    \node[owlclass,below=0.6cm of B] (C) {Physical Place};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasLocalization] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isLocalizationOf] {} (A);
+	    \draw (B) edge[relationxl] node[midway,label=left:hasOrigin] {} (C);
+	    \draw (C) edge[relationxr] node[midway,label=right:isOriginOf] {} (B);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{is\_localized($o$)} &
+		$o \in \abox$ is localized wrt. some map origin \\
+		\emph{is\_localized($o$,$m$)} &
+		$o \in \abox$ is localized wrt. the origin of $m \in \abox$
+	}
+\end{ODP}
+
+\begin{ODP}{Pose Data}
+	\ODPINTENT{To represent kinematic trees of objects connected via joints.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{Are these objects kinematically coupled?
+			Which objects are linked through this joint?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Localization};
+	    \node[owlclass,below=0.6cm of A] (B) {6D Pose};
+	    \node[data,below=1.0cm of B,xshift=1.0cm] (C) {xsd:double};
+	    \node[data,below=1.0cm of B,xshift=-1.0cm] (D) {xsd:string};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasPose] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isPoseOf] {} (A);
+	    \draw (B) edge[relation,xshift=-0.4cm] node[midway,xshift=0.1cm,label=left:hasReferenceFrame]
+	      {} ($(D.north-|B)$);
+	    \draw (B) edge[relation,xshift=0.3cm] node[midway,text width=2.4cm,xshift=1.4cm]
+	    	{hasTranslationX/Y/Z hasQuaternionX/Y/Z/W} ($(C.north-|B)$);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{is\_at($o$,[$x$,$\vec{p}$,$\vec{q}$]) \emph{during} $\vec{ti}$} &
+		$\vec{p} \in \mathbb{R}^3$ is the position, and $\vec{q} \in \mathbb{R}^4$ the orientation of $o \in \abox$ within the reference frame $x \in \mathcal{F}$ during time interval $\vec{ti} \in \mathbb{R}^2_{\geq 0}$
+	}
+\end{ODP}
+
 However, objects often can not move freely but are constrained in their movement with respect to some reference object.
 This is, for example, the case for walls without doors preventing movement from one room to another, or for two objects that are attached to each other via a \emph{joint} and thus restricting movement relative to each other (kinematic coupling).
 Kinematically coupled objects are often part of a bigger hierarchical structure, and one of the linked objects, the parent link of the joint, is the one closer to the root of the structure then the child link of the joint.
@@ -372,7 +430,7 @@ Each kinematic object component has exactly one root link, and may have many end
 The position of a joint determines the position of the child link relative to the parent.
 Depending on wether the joint is either \emph{hinged} (rotation around an axis) or prismatic (sliding along an axis), the position is measured in radians or meter respectively.
 When the position changes over time, velocity (measured in $rad/s$ or $m/s$) and effort applied in the joint (measured in $Nm$ or $N$) can be measured.
-Joint states are recorded as time-series data, and stored in the \neemexp. \todo{joint state section in neem experience chapter?}
+Joint states are recorded as time-series data, and stored in the \neemexp. \todo{DB: add joint state section in neem experience chapter?}
 However, the \neem model defines a set of data properties used to access joint state data.
 
 \begin{ODP}{Joint States}
@@ -463,7 +521,7 @@ The \neem model only considers solid objects with constant mass, and dynamics go
 \end{ODP}
 
 At each point in time, the sum of forces influencing an object determines how its movement will change.
-The accumulated force may be stored as time-series data in the \neembak, and accessed via an attribute defined in the \neem model. \todo{net force section in neem experience chapter?}
+The accumulated force may be stored as time-series data in the \neembak, and accessed via an attribute defined in the \neem model. \todo{DB: add net force section in neem experience chapter?}
 
 \begin{ODP}{Force}
 	\ODPINTENT{To represent the quantity of force influencing a solid object.}
@@ -517,7 +575,7 @@ Internal static friction force caused by movable elements within the joint, and 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Naive physics}
 
-This view on objects is comprised of qualitative descriptions of the interactions of these objects, with a focus on how objects could be arranged so as to constrain each other's behavior. The prototypical examples of such interactions are support and containment, but many other interactions are possible. Note, formalizing actual manifestations of such interactions as they occur in an episode will be done in chapter~\ref{ch:narrative}. In this chapter, we focus instead on ontological modelling about what kinds of interactions an object could take part in.
+This view on objects is comprised of qualitative descriptions of the interactions of these objects, with a focus on how objects could be arranged so as to constrain each other's behavior. The prototypical examples of such interactions are support and containment, but many other interactions are possible. Note, formalizing actual manifestations of such interactions as they occur in an episode will be done in chapter~\ref{ch:narrative}. In this chapter, we focus instead on ontological modelling about what kinds of interactions an object could take part in. \todo{DB: could you make explicit why this is part of the neem background? should the ease researchers manually assert dispositions of objects, or only use the ones derived from the object types?}
 
 This is achieved by the concept of \emph{Disposition}, which is a quality that, by virtue of being possessed by an object, enables that object to participate in certain roles in certain relations or events. E.g., \emph{Deposition} and \emph{Containment} are the dispositions necessary to enable an object to act as a support or container for another.
 
