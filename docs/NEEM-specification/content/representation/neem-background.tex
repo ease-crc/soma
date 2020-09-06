@@ -156,134 +156,152 @@ A \neem may not represent each supported view, however, it is recommended to rep
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Appearance}
 
-SOMA defines several concepts to represent qualities relating to an object's appearance: \emph{Color}, \emph{Shape}, \emph{Size}, \emph{Sharpness} etc. A quality belongs to an object, and can take values only from regions of an appropriate type. \todo{MP: hasShape is a specialization of hasQuality for the Shape quality. Do we want to define such properties for all Quality concepts? Not all qualities have restrictions on which regions they take values from. I trust this will be fixed but until then I would not put in the doc something that's not yet in the ontology, so e.g. I wouldn't discuss Size in detail.}
+SOMA defines several concepts to represent qualities relating to an object's appearance:
+\concept{Color}, \concept{Shape}, \concept{Size} %, \concept{Sharpness}
+etc.
+A quality belongs to an object, and can take values only from regions of an appropriate type. \todo{MP: hasShape is a specialization of hasQuality for the Shape quality. Do we want to define such properties for all Quality concepts? Not all qualities have restrictions on which regions they take values from. I trust this will be fixed but until then I would not put in the doc something that's not yet in the ontology, so e.g. I wouldn't discuss Size in detail. DB: there are benefits in having specialized properties}
+\todo{DB: better have a list of all appearance qualities? But the first paragraph could alse be removed, I think (e.g. "a quality elongs to an object" is explained before).}
 
-\begin{ODP}{Shape}
-	\ODPINTENT{To represent the shape of physical objects.}
+%A \emph{ShapeRegion} individual can further be classified 
+The shape of an object can either be represented
+as primitive geometry
+(e.g., box or cylinder),
+%(e.g. \emph{BoxShape}, \emph{CylinderShape}),
+or as mesh. %\emph{MeshShape}.
+%This finer classification decides what data is attached to the individual.
+Primitive shapes are described by their geometric parameters, such as height, width and length for a box, and radius and length for a cylinder.
+A mesh shape, on the other hand, has a data property that is a URI of the file that contains the mesh data.
+%To fill in shape data for a shape region, it is necessary to provide data items -- floats or URIs -- and link them via the appropriate data properties to the region individual.
+\todo{MP: the ontology defines hasDepth and hasHeight for BoxShape. I assume this is a mistake and we want hasLength and hasHeight. DB: I believe this is a ROS convention}
+\todo{DB: where is a shape located? the origin of a shape may not be the same as the one of the object}
+\todo{DB: the scale for the mesh is missing!}
+
+\begin{ODP}{Shape Quality}
+	\ODPINTENT{To represent the quality of having a shape.}
 	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{What is the shape of this object? Which objects have this shape?}
+	\ODPQUESTION{Does this objects have a shape?}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Physical Object};
 	    \node[owlclass,below=0.6cm of A] (B) {Shape};
-	    \node[owlclass,below=0.6cm of B] (C) {Shape Region};
+	    %\node[owlclass,below=0.6cm of B] (C) {Shape Region};
 	    \draw (A) edge[relationxl] node[midway,label=left:hasShape] {} (B);
 	    \draw (B) edge[relationxr] node[midway,label=right:isShapeOf] {} (A);
-	    \draw (B) edge[relationxl] node[midway,label=left:hasShapeRegion] {} (C);
-	    \draw (C) edge[relationxr] node[midway,label=right:isShapeRegionOf] {} (B);
+	    %\draw (B) edge[relationxl] node[midway,label=left:hasShapeRegion] {} (C);
+	    %\draw (C) edge[relationxr] node[midway,label=right:isShapeRegionOf] {} (B);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{object\_dimensions($x$,$d$,$w$,$h$)} &
-		$d,w,h$ are the depth,width,height of the bounding box of $x$ \\
+		\emph{has\_shape($o$)}     & $o \in \abox$ has a shape \\
+		\emph{has\_shape($o$,$s$)} & $s \in \abox$ is the shape of $o \in \abox$
+	}
+\end{ODP}
+
+\begin{ODP}{Shape Region}
+	\ODPINTENT{To represent the region of shapes.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What geometric parameters has this shape?
+		What is the URL where a mesh file of this shape can be retrieved?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass_f] (A1) {Box Region};
+	    \node[owlclass_f,right=0.2cm of A1] (A3) {Mesh Region};
+	    \node[owlclass_f,below=0.2cm of A1] (A2) {Cylinder Region};
+	    \node[owlclass_f,right=0.2cm of A2] (A4) {Sphere Region};
+	    \node[data,above=1.0cm of A1] (B1) {xsd:double};
+	    \node[data,below=1.0cm of A2] (B2) {xsd:double};
+	    \node[data,above=1.0cm of A3] (B3) {xsd:string};
+	    \node[data,below=1.0cm of A4] (B4) {xsd:double};
+	    \draw (A4) edge[relation,xshift=0.0cm] node[midway,label=right:hasRadius] {} (B4);
+	    \draw (A3) edge[relation,xshift=0.0cm] node[midway,label=right:hasURL] {} (B3);
+	    \draw (A1) edge[relation,xshift=0.0cm]
+	    	node[midway,text width=1.2cm,xshift=0.9cm] {hasHeight hasLength hasWdith} (B1);
+	    \draw (A2) edge[relation,xshift=0.0cm]
+	    	node[midway,text width=1.2cm,xshift=0.9cm] {hasLength hasRadius} (B2);
+	    %\node[owlclass_f,below=0.8cm of A1] at ($(A1)!0.5!(A3)$) (C) {Shape};
+	    %\draw (C) edge[relation] node[midway,label=left:hasRegion] {} (A1);
+	    %\draw (C) edge[relation] node[midway,label=left:hasRegion] {} (A2);
+	    %\draw (C) edge[relation] node[midway,label=right:hasRegion] {} (A3);
+	    %\draw (C) edge[relation] node[midway,label=right:hasRegion] {} (A4);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_bbox($o$,$d$,$w$,$h$)} &
+		$d,w,h \in \mathbb{R}$ are the depth, width and height of the bounding box of $o \in \abox$ \\
 		% % % % %
-		\emph{object\_shape($x$,$s$,$o$)} &
-		$s$ is the data of a shape of $x$ located at $o$
+		\emph{has\_shape\_data($o$,sphere($r$))} &
+		$r \in \mathbb{R}$ is the radius of the sphere shape of $o \in \abox$
 	}
 \end{ODP}
 
-A \emph{ShapeRegion} individual can further be classified as a primitive shape (e.g. \emph{BoxShape}, \emph{CylinderShape} etc.) or a \emph{MeshShape}. This finer classification decides what data is attached to the individual. Primitive shapes are described by their geometric parameters, such as height/widhth/length for a box or radius and length for a cylinder. A mesh shape meanwhile has a data property that is a URI to the file that contains the mesh data. To fill in shape data for a shape region, it is necessary to provide data items -- floats or URIs -- and link them via the appropriate data properties to the region individual.
-
-\todo{MP: the ontology defines hasDepth and hasHeight for BoxShape. I assume this is a mistake and we want hasLength and hasHeight.}
-
-\begin{ODP}{Specifying a BoxShape}
-	\ODPINTENT{To quantitatively describe a box shape.}
-	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{What quantitative data is available about the shape of an object?}
-	\ODPGRAPHIC{
-	\begin{tikzpicture}
-	    \node[owlclass] (A) {BoxShape};
-	    \node[data,below=0.6cm of A,xshift=-1.5cm] (B) {xsd:double};
-	    \node[data,below=1.8cm of A] (C) {xsd:double};
-	    \node[data,below=0.6cm of A,xshift=1.5cm] (D) {xsd:double};
-	    \draw (A) edge[relationxl] node[midway,label=left:hasHeight] {} (B);
-	    \draw (A) edge[relationxl,pos=0.8] node[midway,label=right:hasLength] {} (C);
-	    \draw (A) edge[relationxl] node[midway,label=right:hasWdith] {} (D);
-	\end{tikzpicture}
-	}
-	%% Example KnowRob language expressions
-	\ODPEXAMPLES{\emph{xxx\_xxxxx($x$,$y$)} & \textbf{todo}}
-\end{ODP}
-
-\begin{ODP}{Specifying a CylinderShape}
-	\ODPINTENT{To quantitatively describe a cylindric shape.}
-	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{What quantitative data is available about the shape of an object?}
-	\ODPGRAPHIC{
-	\begin{tikzpicture}
-	    \node[owlclass] (A) {CylinderShape};
-	    \node[data,below=0.6cm of A,xshift=-1.5cm] (B) {xsd:double};
-	    \node[data,below=0.6cm of A,xshift=1.5cm] (C) {xsd:double};
-	    \draw (A) edge[relationxl] node[midway,label=left:hasLength] {} (B);
-	    \draw (A) edge[relationxl] node[midway,label=right:hasRadius] {} (C);
-	\end{tikzpicture}
-	}
-	%% Example KnowRob language expressions
-	\ODPEXAMPLES{\emph{xxx\_xxxxx($x$,$y$)} & \textbf{todo}}
-\end{ODP}
-
+\iffalse
 \begin{ODP}{Specifying a MeshShape}
 	\ODPINTENT{To link to data about an arbitrary shape.}
 	\ODPDEFINEDIN{SOMA.owl}
 	\ODPQUESTION{What quantitative data is available about the shape of an object?}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
-	    \node[owlclass] (A) {MeshShape};
-	    \node[data,below=0.6cm of A] (B) {URI};
-	    \draw (A) edge[relationxl] node[midway,label=left:hasFilePath] {} (B);
+	    \node[owlclass] (A) {Mesh Shape};
+	    \node[data,below=0.6cm of A] (B) {xsd:string};
+	    \draw (A) edge[relation] node[midway,label=left:hasFilePath] {} (B);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{\emph{xxx\_xxxxx($x$,$y$)} & \textbf{todo}}
 \end{ODP}
-
-\begin{ODP}{Specifying a SphereShape}
-	\ODPINTENT{To link to data about a sphere shape.}
-	\ODPDEFINEDIN{SOMA.owl}
-	\ODPQUESTION{What quantitative data is available about the shape of an object?}
-	\ODPGRAPHIC{
-	\begin{tikzpicture}
-	    \node[owlclass] (A) {SphereShape};
-	    \node[data,below=0.6cm of A] (B) {xsd:double};
-	    \draw (A) edge[relationxl] node[midway,label=left:hasRadius] {} (B);
-	\end{tikzpicture}
-	}
-	%% Example KnowRob language expressions
-	\ODPEXAMPLES{\emph{xxx\_xxxxx($x$,$y$)} & \textbf{todo}}
-\end{ODP}
+\fi
 
 The color of an object is a quality that may take values from a \emph{ColorRegion}. Color regions may be qualitative, such as \emph{GreenColor} or \emph{RedColor}, which correspond to sets of color values; color regions may also be specified as a single datapoint, i.e. a string representing the color's components in some color space. \todo{MP: Decide how to represent color values and color spaces in the ontology, and push axioms to this effect.}
+\todo{DB: most objects have many colors, how is this handled?}
+\todo{DB: color does not remain constant as the light in the environment changes, how is this handled?}
+\todo{DB: is material represented?}
 
-\begin{ODP}{Color}
+\begin{ODP}{Color Quality}
+	\ODPINTENT{To represent the quality of having a color.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{Does this objects have a color?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Color};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasColor] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isColorOf] {} (A);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_color($o$)}     & $o \in \abox$ has a shape \\
+		\emph{has\_color($o$,$c$)} & $c \in \abox$ is the color of $o \in \abox$
+	}
+\end{ODP}
+
+\begin{ODP}{Color Region}
 	\ODPINTENT{To represent the color of physical objects.}
 	\ODPDEFINEDIN{SOMA.owl}
 	\ODPQUESTION{What is the color of this object? Which objects have this color?}
 	\ODPGRAPHIC{
 	\begin{tikzpicture}
-	    \node[owlclass] (A) {Physical Object};
-	    \node[owlclass,below=0.6cm of A] (B) {Color};
 	    \node[owlclass,below=0.6cm of B] (C) {Color Region};
-	    \draw (A) edge[relationxl] node[midway,label=left:hasColor] {} (B);
-	    \draw (B) edge[relationxr] node[midway,label=right:isColorOf] {} (A);
-	    \draw (B) edge[relationxl] node[midway,label=left:hasColorRegion] {} (C);
-	    \draw (C) edge[relationxr] node[midway,label=right:isColorRegionOf] {} (B);
+	    \node[data,below=0.6cm of C] (D) {xsd:string};
+	    \draw (C) edge[relation] node[midway,label=right:hasRGBValue] {} (D);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
-		\emph{object\_color\_rgb($x$,$[r,g,b]$)} &
-		$r,g,b$ is the RGB color data of $x$
+		\emph{object\_color\_rgb($o$,$[r,g,b]$)} &
+		$r,g,b \in \mathbb{R}$ is the RGB color data of $o \in \abox$
 	}
 \end{ODP}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Components}
+\subsection{Structure}
 
 \lipsum[2]
-\todo{Mihai: write about how components of objectsare represented. harmonize with other component section}
+\todo{write about how components of objectsare represented. harmonize with other component section}
 
-\begin{ODP}{Composition}
+\begin{ODP}{Components}
 	\ODPINTENT{To represent proper parthood of objects.}
 	\ODPDEFINEDIN{DUL.owl}
 	\ODPQUESTION{What is this object component of? What are the components of this object?}
@@ -298,7 +316,28 @@ The color of an object is a quality that may take values from a \emph{ColorRegio
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
 		\emph{has\_component($x$,$y$)} &
-		$y$ is a proper part of $x$
+		$y \in \abox$ is a component of $x \in \abox$
+	}
+\end{ODP}
+
+\lipsum[2]
+
+\begin{ODP}{Features}
+	\ODPINTENT{To represent features of objects.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What are the features of this object? What are the objects with this feature?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Feature};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasFeature] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isFeatureOf] {} (A);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_feature($x$,$y$)} &
+		$y \in \abox$ is a feature of $x \in \abox$
 	}
 \end{ODP}
 
