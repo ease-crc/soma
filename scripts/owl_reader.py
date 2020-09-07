@@ -77,15 +77,34 @@ class OwlReader:
 			print("Please pass the right parameters." f"{sub}" " does not have " f"{rel}")
 			return
 
+	# def _printdict(self, class_dict):
+	# 	for key,val in class_dict.items() :
+	# 		print(r'\textbf{{{}}}'.format(key))
+	# 		for j,k in val.items():
+	# 			print(r'\textit{{{}}}'.format(j),end=" ")
+	# 			print(r'{\textbullet}{}')
+	# 			if isinstance(k,list):
+	# 				print(', '.join(k),end=" ")
+	# 			else:
+	# 				print(k,end=" ")
+	# 		print(r"\linebreak")
+
 	def _printdict(self, class_dict):
 		for key,val in class_dict.items() :
-			print(r'\textbf{{{}}}'.format(key))
+			print(r'\appendixstyle', end="")
+			print(r'{{{}}}'.format(key),end=" ")
+			print(r'{', end="")
 			for j,k in val.items():
 				print(r'\textit{{{}}}'.format(j),end=" ")
-				print(r'{\textbullet}{}')
+				#print(r"\hspace*{0.0008cm}")
+				print(r'{$\bullet$}{}', end="")
+				#print(r"\hspace*{0.0008cm}")
 				if isinstance(k,list):
 					print(', '.join(k),end=" ")
+					#print(r"\hspace*{0.0008cm}")
 				else:
 					print(k,end=" ")
+					#print(r"\hspace*{0.0008cm}")
+			print(r'}')
 			print(r"\linebreak")
 		
