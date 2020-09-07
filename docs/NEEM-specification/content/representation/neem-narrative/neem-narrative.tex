@@ -9,12 +9,12 @@ The narrative part of \neems represents a ``story'' of what has happened.
 But the story is more detailed then it would be when told from one human to another
 as it includes details about movements and interactions that would usually not be spelled out in a human conversation.
 The reason to include this type of information is that it is extremely difficult to generalize robotic behaviour, and in particular how the robot needs to move its body to accomplish its goal with varying context such as different environemnts.
-The vision is that a library of \emph{contextualized} motions and interactions will help to uncover models underlying everyday activities.
+The vision is that a library of \emph{contextualized} motions and interactions will help to uncover models underlying everyday activities. In section \ref{sec:episodes}, we discuss contextualization concept which is useful to consider for social interactions. Such as robots performing successful navigation task but failing to consider situational context by ignoring fact that the path it took blocked someone's path. Here, a library of \neems would serve as library of such contextualized motions.
 
 The story represented in the \neemnar provides context for the \neemexp acquired during an activitiy.
 This is, first of all, that labels are assigned to the time intervals where something relevant has happened such as the execution of a task, the interaction between objects, or the occurrence of a motion.
 Labels correspond to classes that are organized in a taxonomy (Section~\ref{sec:narrative:taxonomy}).
-This allows to learn models at different levels of abstraction,
+This allows to learn models at different levels of abstraction, 
 e.g., for more general or specific variants of a task.
 The \neemnar further represents relationships between instances of these classes, such as that an object plays a role during an event, or that a movement has happened as part of executing an action
 (Section~\ref{sec:narrative:relations}).
@@ -31,7 +31,7 @@ Here in the following section, we will discuss taxonomy for the concepts used to
 \subsection{Event}
 An \emph{Event} can be described as any physical, social or mental process that occurs or happens. In \dul upper level ontology, an event is considered as \emph{perdurant} entity, which unfolds over time and can have part of it's presence during any given snapshot of time. All though event taxonomy is not the scope of this section, it is important to clear some of the concepts related to event. Such as \emph{what is an event type? Which are the sub-concepts of an event considered for the scope of \neemnar?}. An event has mainly three sub-concepts defined in \soma which are Accident, Action and Process. 
 
-When causes are considered unknown and/or irrelevant for an event then it falls under \emph{Accident} category. It is worth to note distinction between everyday uses of accident definition which concentrates on a causal structure and responsibility for an event, such as who made a mistake bringing about the event; in "traffic accident", where we want to know who is responsible. Such an event does NOT fall under the definition of Accident here. An example of accident would be a fair coin landing Heads: the causal chain for why this exact face landed is not important, all that matters is the brute fact that the coin landed Heads. 
+When causes are considered unknown and/or irrelevant for an event then it falls under \emph{Accident} category. It is worth to note distinction between everyday uses of accident definition which concentrates on a causal structure and responsibility for an event, such as who made a mistake bringing about the event; in "traffic accident", where we want to know who is responsible. Such an event does NOT fall under the definition of Accident here. However, when an environment suddenly changes around the robotic agent without any interference from robot such as while cleaning kitchen table, the cupboard mounted on the wall falls-down. Here the questions such as \textit{why the cupboard has fallen-down?} \textit{Is it because the nails holing it were rusted and broke? or because the moisture infiltrated and softened the wall plaster?} By assigning an accident to such event, one can say that we don't know what has caused it or how it can be explained.
 
 An  \emph{Action} can be defined as an event where at least one agent participates, such that this agent performs a dedicated task, defined by a plan or workflow, which it executes through the Action. Here workflow refers to a plan that defines role(s), task(s), and specific structure of tasks that needs to be executed. 
 
