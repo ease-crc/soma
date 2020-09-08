@@ -102,11 +102,10 @@ An event is defined as \emph{any physical, social, or mental process, event, or 
 	\ODPDEFINEDIN{SOMA.owl}
 	\ODPQUESTION{When did it happen?}
 	\ODPGRAPHIC{\begin{tikzpicture}
-	    \node[owlclass] (TI) {Time Interval};
-	    \node[data,below=0.6cm of TI,xshift=-1.2cm] (BEGIN) {xsd:double};
-	    \node[data,below=0.6cm of TI,xshift=1.2cm] (END) {xsd:double};
-	    \draw (TI)  edge[relation] node[midway,label=left:hasIntervalBegin] {} (BEGIN);
-	    \draw (TI)  edge[relation] node[midway,label=right:hasIntervalEnd] {} (END);
+	    \node[owlclass] (A) {Time Interval};
+	    \node[data,below=0.8cm of A] (B) {xsd:double};
+	    \draw (A) edge[relation,xshift=0.0cm]
+	    	node[midway,text width=1.6cm,xshift=1.1cm] {hasIntervalBegin hasIntervalEnd} (B);
 	\end{tikzpicture}}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
