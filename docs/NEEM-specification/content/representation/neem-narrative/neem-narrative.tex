@@ -26,8 +26,6 @@ The \neemnar further represents relationships between instances of these classes
 \section{Types of Events}
 \label{sec:narrative:events}
 
-%Here in the following section, we will discuss taxonomy for the concepts used to describe \neemnar part. A taxonomy provides the hierarchical relationships among various concepts and defines the terminology for each concept. One way to classify an entity in ontology is through taxonomies, which concentrates on \emph{what there actually is?} as compared to conceptual classification which is more about \emph{how an entity is interpreted?}. For instance, the concepts \textit{spoon} and \textit{knife} are subclasses of the concept \textit{cutlery}.
-
 % events are temporally extended
 The \neem model defines \concept{Events} as things that unfold over time which is the main difference to \concept{Objects} which are things that are wholly present at each time instant.
 This definition of events implies that an event is not instantaneous, but that it has an associated time interval during which it occurred.
@@ -44,7 +42,7 @@ In this case the fetching event contributes to multiple goals and thus would bel
 Please note that while multiple inheritence is generally supported, it should only be used if absolutely necessary. \todo{DB: any reference for why this is bad?}
 
 % event classes
-The \neem model defines a very shallow event taxonomy with rough distinctions that are not dependend on interpretation.
+The \neem model defines a very shallow event taxonomy with rough distinctions that are not dependend on how an event is interpreted, executed or seen.
 These categories are: \concept{Action}, \concept{Process}, and \concept{State}.
 %%
 Actions are exactly the events that are perfomed intentionally by an agent executing a task by following a plan or workflow.
@@ -53,24 +51,10 @@ Movement being one example, as it does not strictly depend on an agent executing
 For example, in case of the earth rotating around the sun, or some letter in a bottle being transported through the ocean.
 Finally, a state is defined as an event where an object has a dedicated stable configuration which is usually represented as having a certain property value over some fixed time interval.
 \todo{DB: not sure about accidents, aren't they interpretations?}
-%An \emph{Action} can be defined as an event where at least one agent participates, such that this agent performs a dedicated task, defined by a plan or workflow, which it executes through the Action. Here workflow refers to a plan that defines role(s), task(s), and specific structure of tasks that needs to be executed. 
-%%
-%A \emph{Process} is an event for which no such commitments for involvement of an agent have been made. For the scope \soma ontology, we put emphases on process as a top-level class for events with no agentive participant. %we have further categorized process in to chemical and physical processes. For chemical process, by which the chemical constituency of an Entity or set of entities changes. It is safe to assume that any process which results in entities being created or destroyed might fit here, although this concept is specifically intended for events where the chemical reactions are very important occurrence. For physical process it is assumed mostly that the state of an entity will change by involving itself to such process e.g. the cup holding water which goes through pouring process.
-%%
-%When causes are considered unknown and/or irrelevant for an event then it falls under \emph{Accident} category. It is worth to note distinction between everyday uses of accident definition which concentrates on a causal structure and responsibility for an event, such as who made a mistake bringing about the event; in "traffic accident", where we want to know who is responsible. Such an event does NOT fall under the definition of Accident here. However, when an environment suddenly changes around the robotic agent without any interference from robot such as while cleaning kitchen table, the cupboard mounted on the wall falls-down. Here the questions such as \textit{why the cupboard has fallen-down?} \textit{Is it because the nails holing it were rusted and broke? or because the moisture infiltrated and softened the wall plaster?} By assigning an accident to such event, one can say that we don't know what has caused it or how it can be explained.
 
-%\paragraph{Actions} 
- 
-%\paragraph{Event}
-%An \emph{Event} can be described as any physical, social or mental process that occurs or happens. In \dul upper level ontology, an event is considered as \emph{perdurant} entity, which unfolds over time and can have part of it's presence during any given snapshot of time. All though event taxonomy is not the scope of this section, it is important to clear some of the concepts related to event. Such as \emph{what is an event type? Which are the sub-concepts of an event considered for the scope of \neemnar?}. An event has mainly three sub-concepts defined in \soma which are Accident, Action and Process.
-
-The event taxonomy is only used for a very rough distinction of different types of events.
-Aspects such as how an event is interpreted, executed or seen are left out.
-However, it is possible to represent this type of information using a taxonomy of event \concept{Concepts} which is included in the \neem model.
-Concepts are used to classify events.
+However, it is possible to represent how an event is interpreted, executed or seen using a taxonomy of event \concept{Concepts} which is included in the \neem model.
+Concepts are used to classify events in some context.
 On the highest level, the concept taxonomy distinguishes between concepts used to classify the different event categories action, process and state.
-
-%An \emph{EventType} describes how an event should be interpreted, executed, expected, and seen which is \emph{definedIn} according to some description \footnote{\url{http://www.ontologydesignpatterns.org/ont/dul/DUL.owl}}. It is broadly used to classify an event, \emph{ProcessType} and \emph{Task} are some of the EventType sub-classes. An action is an event which is conceptually classified by a Task, similarly Process is an Event which is classified by ProcessTypes.  
 
 \paragraph{Tasks}
 A \concept{task} is defined as a concept that classifies actions based on what goals an agent intents to achieve when executing an action.
@@ -115,7 +99,7 @@ etc. Further role sub-categories will be defined under appendix section.\todo{Se
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\section{Characterization of Events}
+\section{Views on Events}
 \label{sec:narrative:relations} 
 
 \subsection{Occurrence}
