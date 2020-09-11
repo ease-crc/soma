@@ -10,8 +10,72 @@ information about what information is contained in \neems, and how it is represe
 
 \begin{figure}[h!]
 \centering
-\includegraphics[height=8cm]{example-image-a}
-\caption{The EASE system for episodic memories}
+\begin{tikzpicture}[
+    border/.style={draw=easeblue},
+    dark/.style={border,fill=easeblue!20},
+    light/.style={border,fill=easeblue!10},
+    lighter/.style={border,fill=easeblue!5},
+    heading/.style={text=easeblue,font=\bf,text badly centered},
+    label1/.style={text=easeblue,text badly centered},
+    label2/.style={text=black,text badly centered,font=\it},
+    label/.style={text=black,text width=1.7cm,text badly centered},
+    hexagon/.style={regular polygon,regular polygon sides=6,rounded corners},
+    triangle/.style={regular polygon,regular polygon sides=3,rounded corners},
+    trapez/.style={font=\bf,text badly centered,trapezium,trapezium angle=60,rounded corners},
+    user/.style={hexagon,lighter,minimum width=2.5cm,inner sep=0},
+    img/.style={}
+]
+  %\draw[help lines](-4,-4)grid(4,3);
+  %% outer hexagon
+  \node[hexagon,dark,minimum width=5.0cm] (OUTER) {};
+  \node[heading] at (0,-1.8) (ACQ) {acquisition};
+  \node[heading,rotate around={120:(OUTER)},rotate=180] at (ACQ) {curation};
+  \node[heading,rotate around={-120:(OUTER)},rotate=180] at (ACQ) {publication};
+  %% inner triangle
+  \node[triangle,light,minimum width=6.0cm] at (OUTER) (INNER) {};
+  %% inner trapez
+  \node[trapez,lighter,
+    minimum height=21mm,yshift=-0.275cm] at (INNER.center) (LIB) {};
+  \node[label,yshift=0.2cm] at (INNER) (BG) {NEEM Background};
+  \node[label,below=0.2cm of BG.south,anchor=north east] (NAR) {NEEM Narrative};
+  \node[label,below=0.2cm of BG.south,anchor=north west] (EXP) {NEEM Experience};
+  \draw[draw=easeblue] (BG.south west) -- (BG.south east);
+  \draw[draw=easeblue] (NAR.north east) -- (NAR.south east);
+  %% heading
+  \node[label1,text width=14mm,above=0.4cm of BG] (HUB1) {NEEM HUB};
+  %%
+  \node[user,text=black,anchor=north,yshift=-0.2cm,
+    path picture={\node[yshift=1.8cm] at (path picture bounding box.center){
+        \includegraphics[width=2.55cm]{img/topf-2.jpg}
+    };}
+  ] at (OUTER.south) (X1) {};
+  \node[user,anchor=center,yshift=-0.4cm,xshift=2.4cm,
+    path picture={\node[yshift=0.0cm] at (path picture bounding box.center){
+        \includegraphics[height=2.55cm]{img/pr2_milk_frosties_small_top.jpg}
+    };}
+  ] at (X1.north) (X2) {};
+  \node[user,anchor=center,yshift=-0.4cm,xshift=-2.4cm,
+    path picture={\node[yshift=0.0cm] at (path picture bounding box.center){
+        \includegraphics[height=2.55cm]{img/cup-on-plate-unstable-final.jpg}
+    };}
+  ] at (X1.north) (X5) {};
+  \node[user,rotate around={120:(OUTER)},
+    path picture={\node[yshift=0.0cm] at (path picture bounding box.center){
+        \includegraphics[height=2.55cm]{img/Programmer.png}
+    };}
+  ] at (X1) (X3) {};
+  \node[user,rotate around={-120:(OUTER)},
+    path picture={\node[yshift=0.0cm] at (path picture bounding box.center){
+        \includegraphics[height=2.55cm]{img/open-ease-web-page-full_cropped.png}
+    };}
+  ] at (X1) (X4) {};
+  %%
+  \node[label2,anchor=north] at (X1.south) {observation};
+  \node[label2,anchor=north] at (X2.south) {experimentation};
+  \node[label2,anchor=north] at (X5.south) {simulation};
+  
+\end{tikzpicture}
+\caption{The EASE system for acquisition, maintenance and publication of episodic memories}
 \label{fig:architecture}
 \end{figure}
 
