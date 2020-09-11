@@ -4,9 +4,13 @@
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-    <owl:Ontology rdf:about="http://www.ease-crc.org/ont/ease-home.owl"/>
+    <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl">
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
+        <rdfs:comment>SOMA-HOME concentrates on the concepts that are specific to home, e.g. kitchen environment, household stuff.</rdfs:comment>
+    </owl:Ontology>
     
 
 
@@ -18,6 +22,18 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger"/>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasDisposition -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
     
 
 
@@ -40,13 +56,17 @@
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Appliance -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Appliance"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Appliance">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+    </owl:Class>
     
 
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#BakedGood -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#BakedGood"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#BakedGood">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Dish"/>
+    </owl:Class>
     
 
 
@@ -108,7 +128,9 @@
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Compartment -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Compartment"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Compartment">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
+    </owl:Class>
     
 
 
@@ -123,7 +145,40 @@
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Crockery -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Crockery"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Crockery">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Tableware"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Insertion"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Insertion"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger"/>
+                                <owl:allValuesFrom>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                        <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
+                                    </owl:Restriction>
+                                </owl:allValuesFrom>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:onClass>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>An object designed to contain food to store, cook, eat, or serve it.</rdfs:comment>
+    </owl:Class>
     
 
 
@@ -145,31 +200,47 @@
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Cutlery -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Cutlery"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Cutlery">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Tableware"/>
+    </owl:Class>
     
 
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#CuttingTool -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CuttingTool"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CuttingTool">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedTool"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Shaping"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
     
 
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+    </owl:Class>
     
 
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+    </owl:Class>
     
 
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#DesignedFurniture -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedFurniture"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedFurniture">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+    </owl:Class>
     
 
 
@@ -189,6 +260,22 @@
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
         <rdfs:comment>A sharp-edged metal blade used for digging or cutting.</rdfs:comment>
         <rdfs:label>Designed spade</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#DesignedTool -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedTool">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Dish -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Dish">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
     </owl:Class>
     
 
@@ -265,6 +352,12 @@
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
         <rdfs:comment>A flat heated surface used for cooking food or keeping it hot.</rdfs:comment>
     </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Insertion -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Insertion"/>
     
 
 
@@ -379,7 +472,15 @@
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#RoomSurface -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RoomSurface"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RoomSurface">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Surface"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Shaping -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Shaping"/>
     
 
 
@@ -423,6 +524,14 @@
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Table">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedFurniture"/>
         <rdfs:comment>A piece of furniture with a flat top and one or more legs.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Tableware -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Tableware">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedTool"/>
     </owl:Class>
     
 
