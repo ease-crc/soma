@@ -1,12 +1,12 @@
 \section{Robot NEEMs}
 \label{sec:robot-neem}
 \lstset{style=lispcode}
-This section focuses on describing how to generate \neems from experiments performed by the robot. 
+This section focuses on describing how to generate \neems from experiments performed by the robot either in simulation or in the real world. 
 
 \subsection{Prerequisite}
 
 Before you are intending to generate your episodic memories, make sure you are familiar with the Cognitive Robot Abstract Machine (\cram)\footnote{\url{http://cram-system.org/cram}} system and installed it on your machine.
-\cram is a cognitive-enabled planning framework which allows to design high-level plan for robots.\todo{@Seba: Add more detailed description about CRAM}
+\cram is a planning framework which allows to design high-level plan for robots.
 This section requires that your robot plan is written in \cram to be able to generate \neems.
 However, once you are familiar with our planning and logging components, you will be able to port those components to your preferred planning tool.
 
@@ -14,7 +14,6 @@ In addition to having a valid \cram plan, you will need the following software c
 \begin{itemize}
 	\item A MongoDB server with at least version 3.4.10\footnote{\url{https://www.mongodb.com/}}
 	\item \knowrob\footnote{\url{https://github.com/knowrob/knowrob}}
-	\item \soma ontology\footnote{\url{https://github.com/ease-crc/soma}}
 	\item \cram ontology\footnote{\url{https://github.com/ease-crc/cram\_knowledge}}
 \end{itemize}
 
@@ -23,15 +22,9 @@ In addition to having a valid \cram plan, you will need the following software c
 Our recording mechanism  captures every executed \cram action and its parameter.
 In addition, the logger puts the actions in relation to each other by creating a hierarchy which is described in Section \ref{ch:narrative,sec:actionHierarchy}.
 
-Before you can begin to record your own \neems, you need to include the "cram-cloud-logger" package \todo{Abhijit: as an outsider I do not know, where can one find this package?} into your \cram plan.
-After you included the package, you need to enable the logging via:
-
-
-\begin{lstlisting}[language=lisp, caption=Enabling \neem Logging in a \cram plan]
-	(setf ccl::*is-logging-enabled* t)
-\end{lstlisting}
-
-The only things left to do start the logging before the plan execution and after the execution to finishing it. \todo{Abhijit: this sentence needs to be rewritten}
+Before you can begin to record your own \neems, you need to include the "cram-cloud-logger" package into your \cram plan.
+This package is by default included with your \cram installation.
+To start and finish the logging process, run \textit{ccl::start-episode} before your plan execution and when you are finished with your experiment run \textit{ccl::stop-episode}.
 It can look like the following:
 \begin{lstlisting}[language=lisp, caption=Steps to Record an Episode for a \cram Plan]
 	(ccl::start-episode)
@@ -47,31 +40,20 @@ You can start \knowrob via:
 	roslaunch knowrob_memory knowrob.launch
 \end{lstlisting}
 
-\subsection{Data}
-Per \todo{By default?} default your generated \neem will be stored under "\raisebox{-0.9ex}{\~{}}/knowrob-memory/\textless timestamp \textgreater". 
-Your \neem will consist of at least 5 folders - \textit{annotations}, \textit{inferred}, \textit{roslog}, \textit{ros\_tf} and \textit{triples}.
-In the following, we will give an overview which information is contained in those folders:
+By default your generated \neem will be stored under "\raisebox{-0.9ex}{\~{}}/knowrob-memory/\textless timestamp \textgreater".
 
-\todo{@Seba add proper descriptions}
-\begin{description}
-	\item[annotations] description
-	\item[inferred] description
-	\item[ros\_tf] description
-	\item[triples] description	
-\end{description}
-%This folder contains the \neemnar and \neemexp . The \neemnar is represented in the "beliefstate.owl". The triple store and the \neemexp are stored in the "roslog" folder. The triple store is stored in the "triples.bson". The other bsons files are presentening the logged rostopics. More about the rostopics is stated in Section \todo{put reference to rostopic section}
 
 \subsection{Add Semantic Support to your Designed Plans}
 The disadvantage of having a strong semantic knowledge representation is that the used ontology requires updates when semantic knowledge has to be extended. 
-Currently, \soma focuses on the support to record table setting/cleaning-up experiments.
+Currently, the \ease project focuses on the support to record table setting/cleaning-up experiments.
 If you want for instance create \neems for e.g.\ autonomous cars, you will need to extend the \soma ontology and the recording mechanism with your required actions, parameters and objects.
 How to extend the \soma ontology is described in Section \ref{sec:extension} \todo{Abhijit: Are we going to have such section in the scope of this document?}.
 In the following subsection, we will describe how you can extend the \cram recording mechanism to support your required semantic knowledge.
 
 \paragraph{New Tasks Definition}
 If you want to semantically record new tasks such as e.g. accelerating or breaking, you need to define them in the ontology as described in Section \ref{sec:extension,subsec:task}.
-Unknown tasks \todo{Abhijit: By unknown means the task that are not defined in the ontology or something else?} will be logged as \textit{PhysicalTask}.
-The \textit{PlanExecution} instance pointing to the \textit{PhysicalTask} will have a comment attached with the statement "Unknown Action: \textless CRAM-ACTION-NAME\textgreater", where \textless CRAM-ACTION-NAME\textgreater" is the action name you defined in your plan.
+Unknown tasks, tasks which are not defined in the ontology, will be logged as \textit{PhysicalTask}.
+The \textit{PlanExecution} instance pointing to the \textit{PhysicalTask} will have a comment attached with the statement "Unknown Action: \textless CRAM-ACTION-NAME\textgreater", where \textless CRAM-ACTION-NAME\textgreater" is the action name you defined in your plan.\todo{DB: Maybe add this annotation ?}
 After you defined your new actions in \soma, please open the "knowrob-action-name-handler.lisp" in the "cram-cloud-logger" package and add your new actions in the format:
 
 \begin{lstlisting}[language=lisp, caption=Linking the CRAM Action to the Ontology Concept]
@@ -85,8 +67,8 @@ After you defined your new actions in \soma, please open the "knowrob-action-nam
            ("<CRAM-ACTION-NAME>" "<SOMA-ONTOLOGY-NAME>")
 \end{lstlisting}
 
-where \textless CRAM-ACTION-NAME\textgreater is the name of your action used in the cram plan and \textless SOMA-ONTOLOGY-NAME\textgreater \todo{Abhijit: something is missing here in this sentence? i.e. what is soma-ontology-name: it is the action name mentioned in soma ontology?}. 
-With this step you added successfully the support of the new action to \cram \neem episodic memory logger.
+where \textless CRAM-ACTION-NAME\textgreater is the name of your action used in the cram plan and \textless SOMA-ONTOLOGY-NAME\textgreater is the concept name of the task defined in \soma. 
+With this step you added successfully the support of the new action to the \cram \neem episodic memory logger.
 
 \paragraph{Adding New Objects}
 Unknown objects will be logged as instance of \textit{DesignedArtifact}.
@@ -97,13 +79,13 @@ After you added your object to the ontology, open the "utils-for-perform.lisp" i
 \begin{lstlisting}[language=lisp, caption=Linking the CRAM Object to the Ontology Concept]
 (defun get-ease-object-lookup-table()
   (let ((lookup-table (make-hash-table :test 'equal)))
-    (setf (gethash "BOWL" lookup-table) "'http://www.ease-crc.org/ont/EASE-OBJ.owl#Bowl'")
-    (setf (gethash "CUP" lookup-table) "'http://www.ease-crc.org/ont/EASE-OBJ.owl#Cup'")
-    (setf (gethash "<CRAM-OBJECT-TYPE>" lookup-table) "'<SOMA-ONTOLOGY-ENTITY-URL>'")
+    (setf (gethash "BOWL" lookup-table) "'http://www.ease-crc.org/ont/SOMA.owl#Bowl'")
+    (setf (gethash "CUP" lookup-table) "'http://www.ease-crc.org/ont/SOMA.owl#Cup'")
+    (setf (gethash "<CRAM-OBJECT-TYPE>" lookup-table) "'<SOMA-ONTOLOGY-ENTITY-IRI>'")
  lookup-table))
 \end{lstlisting}
 
-where the key is \cramentitytoreplace{CRAM-OBJECT-TYPE}, the object type used in the \cram plan, and \cramentitytoreplace{SOMA-ONTOLOGY-ENTITY-URL}the value which is the uri pointing to the object concept created in \soma.
+where the key is \cramentitytoreplace{CRAM-OBJECT-TYPE}, the object type used in the \cram plan, and \cramentitytoreplace{SOMA-ONTOLOGY-ENTITY-URI}the value which is the uri pointing to the object concept created in \soma.
 
 \paragraph{Adding New Failure}
 Unknown \cram failures will be logged as instance of \textit{Failure}.
@@ -125,8 +107,9 @@ With this step you added successfully the support of the new failure to \cram \n
 
 \paragraph{Adding New Rostopic}
 Per default, we log the rostopics \tf and tf\_static.
+\todo{Seba: This part is outdated. Check how the new topics can be added now.}
 If you need to log additional topics, open "memory.pl" in the "knowrob\_memory" package from \knowrob and include your topic in the "mem\_episode\_start(Episode)" function.
-After the \neem generation, the data will be stored in the created \neem folder under the file "roslog/<rostopic>.bson" \todo{Abhijit: text is not formatted correctly}.
+After the \neem generation, the data will be stored in the created \neem folder under the file "roslog/\textless rostopic\textgreater.bson" \todo{Abhijit: text is not formatted correctly}.
 
 \paragraph{Adding New Parameters}
 Unknown parameters will be logged as comment attached to the corresponding \textit{PlanExecution} instance.
@@ -154,6 +137,7 @@ More information about the concepts \textit{Region} and \textit{Parameter} can b
 
 
 \subsection{Next steps}
+\todo{Seba: Is outdated.}
 After you have generated your \neem, you can use the tool \todo{Add neem2narrative} to generate a csv file for your \neem.
 Keep in mind that the csv is a abstraction of \neemnar and can be used to make data-mining on explicit knowledge.
 For more sophisticated analysis, you will need to use \knowrob \todo{Abhijit: an example would be great.}. 
