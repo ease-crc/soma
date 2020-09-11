@@ -206,7 +206,7 @@ The architecture is shown in Figure~\ref{fig:architecture}, and will be summariz
 % paragraph about representation (neem background, narrative, experience)
 At the core of the \ease system for episodic memories is the \neem datastructure.
 It is a heterogenous datastructure that contains data in different formats to represent different categories of information about everyday activities.
-Each \neem is made of three parts: background, narrative and experience.
+Each \neem is made of three parts: background (Chapter~\ref{ch:background}), narrative (Chapter~\ref{ch:narrative}) and experience (Chapter~\ref{ch:experience}).
 The background represents physical activity context by characterizing the environment, and agents that play a role during the activity.
 A single background may be shared in mutiple \neems.
 The narrative is a representation of events that happened, their characterization and contextualization.
@@ -216,27 +216,17 @@ This is done by associating the event time intervals to slices in the time-serie
 The experience data is used to capture some aspects of kinematics and dynamics of an activity, that is how objects moved, how they got into contact with each other, and how forces act upon objects.
 
 % paragraph about neem hub -- purpose, potential, ... -- add some buzzwords from data science
-\neems are stored on a publicly accessible infrastructure that we have called the \neemhub.
+\neems are stored on a publicly accessible infrastructure that we have called the \neemhub (Chapter~\ref{ch:neemhub}).
 The \neemhub builds ontop of common infrastructure used in datascience to continuously update models learned from \neems.
 Uploading a \neem requires to create a new data on the \neemhub GitLab interface where users can provide documentation, usage examples, additional links and references for their \neem data set.
 Once a user is happy with the state of the data set, it may be published.
 This will make the data set accessible via the knowledge service \openease where users may search for data sets given some keywords, download the data set, or investigate it in an interactive environment.
 
 % paragraph about acquisition (robot, vr) -- what do they have in common? what is different?
-%But we do not only consider experiences acquired through a robot in the physical world. Modern rendering and physics engine are also considered as another resource to acquire experiences. It has been shown, for example, that perception models can be learned from rendered images -- however, only with good results when a few real images were included~\cite{XXX}.
-\lipsum[4]
-\todo{paragraph about acquisition}
-
-% % % % % % % % % % % % % % % % %
-% % % % % % % % % % % % % % % % %
-\section{Outline} % Domain of Discourse
-The purpose of this document is to provide an overview about version \neemversion of \neems.
-This is, first of all, how \neems are represented using ontological categories and relationships, and time series data.
-The purpose of this document is not to provide a full overview about the ontological modelling underlying \neems, but rather to concentrate on aspects that are directly relevant when a \neem is created.
-These are the representations that are used in the \neemnar (Section~\ref{ch:narrative}) and \neemexp (Section~\ref{ch:experience}).
-In addition, \neems are situated in an environment, and acquired by some agent executing a task by interacting with its environment (the \neembak).
-However, the agent and the environment may be involved in many different \neems such that their representation is seperated from the representation of the \neemnar and \neemexp (Section~\ref{ch:background}).
-Second, this document provides an overview about software tools that were developed to support the acquisition of \neems in different modalities such as a tool that can be hooked into a robot control system to auto-generate \neems (Section~\ref{ch:acquisition}).
-Finally, the document provides information about the \neemhub, which is an infrastructure software for the management and curation of \neems (Section~\ref{ch:neemhub}).
-
+As \ease is an interdisciplinary effort, there are also different modalities under which \neems can be acquired.
+We haved developed multiple acquisition infrastructures that support researchers from different domains to acquire \neems (Chapter~\ref{ch:acquisition}).
+This is, first of all, an interface that integrates with a robot control system either in a simulated or real-world scenario where the robot senses its surroundings, and executes specific plans through motions of its body and interaction with its environment.
+A second acquisition interface integrates with simulated virtual reality environments in which humans perform everyday activities.
+In this case, the intentions are not certainly known because even when told to do something specific, a human may do some unrelated experimentation in the virtual reality.
+The state of the environment including force characteristics can, however, fully be monitored.\todo{DB: add ELAN section?}
 
