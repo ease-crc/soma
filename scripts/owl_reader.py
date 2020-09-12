@@ -2,6 +2,7 @@ import owlready2 as owl
 import time
 import sys
 from collections import OrderedDict
+import re
 
 class OwlReader:
 
@@ -72,22 +73,15 @@ class OwlReader:
 				return self._get_valid_string(getattr(getattr(namespace, sub),"is_a")[0])
 			elif(rel == "defined in"):
 				return self._get_valid_string(getattr(getattr(namespace, sub),"isDefinedBy"))
+			elif(rel == "comment"):
+				value_str = getattr(getattr(namespace, sub),rel)
+				if(value_str):
+					pattern = "[.!?][\s]{1,2}(?=[A-Z].)"
+					return re.split(pattern,value_str[0])[0]
 			return getattr(getattr(namespace, sub),rel)
 		except AttributeError:
 			print("Please pass the right parameters." f"{sub}" " does not have " f"{rel}")
 			return
-
-	# def _printdict(self, class_dict):
-	# 	for key,val in class_dict.items() :
-	# 		print(r'\textbf{{{}}}'.format(key))
-	# 		for j,k in val.items():
-	# 			print(r'\textit{{{}}}'.format(j),end=" ")
-	# 			print(r'{\textbullet}{}')
-	# 			if isinstance(k,list):
-	# 				print(', '.join(k),end=" ")
-	# 			else:
-	# 				print(k,end=" ")
-	# 		print(r"\linebreak")
 
 	def _printdict(self, class_dict):
 		for key,val in class_dict.items() :
@@ -97,7 +91,7 @@ class OwlReader:
 			for j,k in val.items():
 				print(r'\textit{{{}}}'.format(j),end=" ")
 				#print(r"\hspace*{0.0008cm}")
-				print(r'{$\bullet$}{}', end="")
+				print(r'{$\bullet$ }', end="")
 				#print(r"\hspace*{0.0008cm}")
 				if isinstance(k,list):
 					print(', '.join(k),end=" ")
