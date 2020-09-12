@@ -1,7 +1,27 @@
-\chapter{List of Scientific Publications}
+\chapter{Appendix}
 \label{app:complete_pub_list}
+\section{Glossary}
+\label{appendix:section1}
 
-%----------------------------------------------------------------------
-\section{My inspiration}
+\pagestyle{fancy} 
 
-cSJKCHyc yxcbyxj cyxbv 
+\newcommand{\appendixstyle}[2]{\textbf{#1}\markboth{#1}{#1}\ {#2}}
+
+\begin{pythontexcustomcode}{py}
+import sys
+sys.path.append("../../scripts")
+from owl_reader import OwlReader
+\end{pythontexcustomcode}
+\raggedright
+\begin{multicols}{2}
+
+\appendixstyle{3DPose}{\textbf{•}}
+\begin{pycode}
+
+iri = ["http://www.ontologydesignpatterns.org/ont/dul/DUL.owl", "http://www.ease-crc.org/ont/SOMA.owl"]
+owl_reader = OwlReader(iri)
+owl_reader.get_classes()
+
+\end{pycode}
+
+\end{multicols}
