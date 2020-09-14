@@ -203,12 +203,6 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
   <rdfs:comment>A relation between roles and process types, e.g. a catalysator is needed to trigger some chemical reaction.</rdfs:comment>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#hasPhysicalComponent">
-  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
-</owl:ObjectProperty>
-
 <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
 
 <owl:ObjectProperty rdf:about="#isFeatureOf">
@@ -834,6 +828,12 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
 </owl:ObjectProperty>
 
+<owl:ObjectProperty rdf:about="#hasPhysicalComponent">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+</owl:ObjectProperty>
+
 <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
 
 <owl:ObjectProperty rdf:about="#hasProcessType">
@@ -1081,13 +1081,6 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#isPhysicallyContainedIn">
-  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isLocationOf"/>
-  <rdfs:comment>A spatial relation holding between an object (the container), and objects it contains.</rdfs:comment>
-</owl:ObjectProperty>
-
 <owl:ObjectProperty rdf:about="#isPlanFor">
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
   <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
@@ -1303,6 +1296,14 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
   <rdfs:subPropertyOf rdf:resource="#hasSpaceParameter"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#isPhysicallyContainedIn">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isLocationOf"/>
+  <rdfs:comment>A spatial relation holding between an object (the container), and objects it contains.</rdfs:comment>
 </owl:DatatypeProperty>
 
 <owl:AnnotationProperty rdf:about="#UsageGuideline">
@@ -1882,16 +1883,6 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
   <rdfs:subClassOf rdf:resource="#PhysicalTask"/>
 </owl:Class>
 
-<owl:Class rdf:about="#BakedGood">
-  <rdfs:subClassOf rdf:resource="#Dish"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Dish">
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-  <rdfs:comment>Some object prepared with the intention that it will be eaten. Its preparation often follows a particular kind of Design, called Recipe.</rdfs:comment>
-  <rdfs:seeAlso>It is sometimes usual to refer to the procedure of preparing a Dish as a recipe. We argue there should be a distinction between a recipe as such, listing ingredients and amounts, vs. a preparation workflow that describes the necessary steps to create a Dish.</rdfs:seeAlso>
-</owl:Class>
-
 <owl:Class rdf:about="#Barrier">
   <rdfs:subClassOf rdf:resource="#Restrictor"/>
   <rdfs:comment>A role classifying an object used to prevent others from entering or leaving a restricted space or group.</rdfs:comment>
@@ -2036,21 +2027,6 @@ TODO: for the robot workflows we are likely to need at the start, testing equali
 
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
 
-<owl:Class rdf:about="#Blade">
-  <rdfs:subClassOf rdf:resource="#DesignedComponent"/>
-  <rdfs:comment>A flat cutting edge of an object used to cut through other objects, such as the blade of a ventilator cutting through the air.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#DesignedComponent">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:someValuesFrom rdf:resource="#Connectivity"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-</owl:Class>
-
 <owl:Class rdf:about="#Blockage">
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -2145,104 +2121,6 @@ As such, this concept can be applied only to motions involving some PhysicalAgen
   <rdfs:seeAlso>Transitions from a solid to a gaseous phase are usually referred to as Sublimation.</rdfs:seeAlso>
 </owl:Class>
 
-<owl:Class rdf:about="#Bottle">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass rdf:resource="#Insertion"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass>
-        <owl:Class>
-          <owl:intersectionOf rdf:parseType="Collection">
-            <rdf:Description rdf:about="#Insertion"/>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#affordsTrigger"/>
-              <owl:allValuesFrom>
-                <owl:Restriction>
-                  <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                  <owl:allValuesFrom rdf:resource="#Fluid"/>
-                </owl:Restriction>
-              </owl:allValuesFrom>
-            </owl:Restriction>
-          </owl:intersectionOf>
-        </owl:Class>
-      </owl:onClass>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#DesignedContainer"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Insertion">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#affordsTrigger"/>
-      <owl:allValuesFrom rdf:resource="#InsertedObject"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#Enclosing"/>
-  <rdfs:comment>The disposition of an object (the container) to contain other objects that can be inserted into the container through a portal.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#Fluid">
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
-</owl:Class>
-
-<owl:Class rdf:about="#DesignedContainer">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:someValuesFrom rdf:resource="#Containment"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-  <rdfs:comment>An item designed to be able to hold some other items, preventing their free movement and/or protecting them from outside influence. Containers may be used for storage, or to obtain control over items that are otherwise hard to manipulate directly (e.g. liquids).</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#Bowl">
-  <rdfs:subClassOf rdf:resource="#Crockery"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Crockery">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass rdf:resource="#Insertion"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass>
-        <owl:Class>
-          <owl:intersectionOf rdf:parseType="Collection">
-            <rdf:Description rdf:about="#Insertion"/>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#affordsTrigger"/>
-              <owl:allValuesFrom>
-                <owl:Restriction>
-                  <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                  <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
-                </owl:Restriction>
-              </owl:allValuesFrom>
-            </owl:Restriction>
-          </owl:intersectionOf>
-        </owl:Class>
-      </owl:onClass>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#DesignedContainer"/>
-  <rdfs:subClassOf rdf:resource="#Tableware"/>
-  <rdfs:comment>An object designed to contain food to store, cook, eat, or serve it.</rdfs:comment>
-</owl:Class>
-
 <owl:Class rdf:about="#BoxShape">
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -2271,15 +2149,6 @@ As such, this concept can be applied only to motions involving some PhysicalAgen
 
 <owl:Class rdf:about="#ShapeRegion">
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Bread">
-  <rdfs:subClassOf rdf:resource="#BakedGood"/>
-  <rdfs:comment>todo(DB): this seems too specific. Should it go to a more specific ontology? like "SOMA-kitchen"?</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#Building">
-  <rdfs:subClassOf rdf:resource="#DesignedContainer"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Capacity">
@@ -2670,17 +2539,6 @@ Resources are usually not agentive; a different set of roles classifies the agen
 Resources are often consumed by their participation in an event, but this need not always be the case. An instrument and capital are examples of resources that are reusable.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#Compartment">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass rdf:resource="#Insertion"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#DesignedComponent"/>
-</owl:Class>
-
 <owl:Class rdf:about="#Composing">
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -2889,33 +2747,6 @@ Adopted from GUM-4-space (Bateman et al. 2010).</rdfs:comment>
 Adopted from GUM-4-space (Bateman et al. 2010).</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#Countertop">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass rdf:resource="#Deposition"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#DesignedComponent"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Deposition">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#affordsBearer"/>
-      <owl:allValuesFrom rdf:resource="#Deposit"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#affordsTrigger"/>
-      <owl:allValuesFrom rdf:resource="#DepositedObject"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#Disposition"/>
-</owl:Class>
-
 <owl:Class rdf:about="#Cover">
   <rdfs:subClassOf rdf:resource="#Barrier"/>
   <rdfs:comment>An object used to cover up others, such as a lid used as a cover for a pot.</rdfs:comment>
@@ -3019,108 +2850,9 @@ They maintain their role however as representations able to drive a simulation, 
 Note, most of the physical Entities we will be considering here are in fact arrangements of many other, smaller physical Entities. Therefore another way to look at this is, a 'Physical creation' is the process by which a set of physical Entities is arranged in a certain way, and the arrangement is then itself considered a physical Entity.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
-
-<owl:Class rdf:about="#Tableware">
-  <rdfs:subClassOf rdf:resource="#DesignedTool"/>
-  <rdfs:comment>Crockery, cutlery, and glassware used for serving and eating meals at a table.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#Cupboard">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasPhysicalComponent"/>
-      <owl:someValuesFrom rdf:resource="#Rack"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass rdf:resource="#Insertion"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass>
-        <owl:Class>
-          <owl:intersectionOf rdf:parseType="Collection">
-            <rdf:Description rdf:about="#Insertion"/>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#affordsTrigger"/>
-              <owl:allValuesFrom>
-                <owl:Restriction>
-                  <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                  <owl:allValuesFrom rdf:resource="#Tableware"/>
-                </owl:Restriction>
-              </owl:allValuesFrom>
-            </owl:Restriction>
-          </owl:intersectionOf>
-        </owl:Class>
-      </owl:onClass>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#DesignedContainer"/>
-  <rdfs:subClassOf rdf:resource="#DesignedFurniture"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Rack">
-  <rdfs:subClassOf rdf:resource="#DesignedComponent"/>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A frame for holding or storing things.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#DesignedFurniture">
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-  <rdfs:comment>An object used to make a room or building suitable for living or working.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#Cutlery">
-  <rdfs:subClassOf rdf:resource="#Tableware"/>
-  <rdfs:comment>Hand tools designed to be used for eating, preparing, or serving food.</rdfs:comment>
-</owl:Class>
-
 <owl:Class rdf:about="#Cutting">
   <rdfs:subClassOf rdf:resource="#ModifyingPhysicalObject"/>
   <rdfs:comment>The goal of this task is to separate one or more pieces from some target object by means of cutting into its constituent material. Unlike a disassembly, a cut is usually not easily reversible.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#CuttingTool">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:someValuesFrom rdf:resource="#Shaping"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#DesignedTool"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Shaping">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#affordsSetpoint"/>
-      <owl:allValuesFrom>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-          <owl:allValuesFrom rdf:resource="#Shape"/>
-        </owl:Restriction>
-      </owl:allValuesFrom>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#affordsTrigger"/>
-      <owl:allValuesFrom rdf:resource="#ShapedObject"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#Variability"/>
-  <rdfs:comment>The disposition of an object (the tool) to change the shape of others.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#DesignedTool">
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-  <rdfs:comment>An item designed to enable some action, in which it will play an instrumental role.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#DeductiveReasoning">
@@ -3221,13 +2953,51 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
   <rdfs:subClassOf rdf:resource="#Patient"/>
 </owl:Class>
 
-<owl:Class rdf:about="#DesignedHandle">
-  <rdfs:subClassOf rdf:resource="#DesignedComponent"/>
-  <rdfs:comment>An item designed to fit well within a grasping hand, often attached to another item to enhance its manipulability.</rdfs:comment>
+<owl:Class rdf:about="#Deposition">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#affordsBearer"/>
+      <owl:allValuesFrom rdf:resource="#Deposit"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#affordsTrigger"/>
+      <owl:allValuesFrom rdf:resource="#DepositedObject"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="#Disposition"/>
 </owl:Class>
 
-<owl:Class rdf:about="#DesignedSpade">
-  <rdfs:subClassOf rdf:resource="#DesignedComponent"/>
+<owl:Class rdf:about="#DesignedComponent">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#hasDisposition"/>
+      <owl:someValuesFrom rdf:resource="#Connectivity"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DesignedContainer">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#hasDisposition"/>
+      <owl:someValuesFrom rdf:resource="#Containment"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+  <rdfs:comment>An item designed to be able to hold some other items, preventing their free movement and/or protecting them from outside influence. Containers may be used for storage, or to obtain control over items that are otherwise hard to manipulate directly (e.g. liquids).</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#DesignedFurniture">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+  <rdfs:comment>An object used to make a room or building suitable for living or working.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#DesignedTool">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+  <rdfs:comment>An item designed to enable some action, in which it will play an instrumental role.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Destination">
@@ -3315,239 +3085,9 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
   <rdfs:subClassOf rdf:resource="#CleanlinessRegion"/>
 </owl:Class>
 
-<owl:Class rdf:about="#DirtyObject">
-  <owl:equivalentClass>
-    <owl:Class>
-      <owl:intersectionOf rdf:parseType="Collection">
-        <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
-          <owl:someValuesFrom>
-            <owl:Class>
-              <owl:intersectionOf rdf:parseType="Collection">
-                <rdf:Description rdf:about="#Cleanliness"/>
-                <owl:Restriction>
-                  <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
-                  <owl:someValuesFrom rdf:resource="#Dirty"/>
-                </owl:Restriction>
-              </owl:intersectionOf>
-            </owl:Class>
-          </owl:someValuesFrom>
-        </owl:Restriction>
-      </owl:intersectionOf>
-    </owl:Class>
-  </owl:equivalentClass>
-  <rdfs:comment>An object whose Cleanliness quality has a value from the Dirty region.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#Dishwasher">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasPhysicalComponent"/>
-      <owl:someValuesFrom>
-        <owl:Class>
-          <owl:intersectionOf rdf:parseType="Collection">
-            <rdf:Description rdf:about="#Compartment"/>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#hasDisposition"/>
-              <owl:onClass rdf:resource="#Insertion"/>
-              <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-            </owl:Restriction>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#hasDisposition"/>
-              <owl:onClass>
-                <owl:Class>
-                  <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Insertion"/>
-                    <owl:Restriction>
-                      <owl:onProperty rdf:resource="#affordsTrigger"/>
-                      <owl:allValuesFrom>
-                        <owl:Restriction>
-                          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                          <owl:allValuesFrom rdf:resource="#DishwasherTab"/>
-                        </owl:Restriction>
-                      </owl:allValuesFrom>
-                    </owl:Restriction>
-                  </owl:intersectionOf>
-                </owl:Class>
-              </owl:onClass>
-              <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-            </owl:Restriction>
-          </owl:intersectionOf>
-        </owl:Class>
-      </owl:someValuesFrom>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasPhysicalComponent"/>
-      <owl:someValuesFrom>
-        <owl:Class>
-          <owl:intersectionOf rdf:parseType="Collection">
-            <rdf:Description rdf:about="#Door"/>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#hasDisposition"/>
-              <owl:onClass rdf:resource="#Coverage"/>
-              <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-            </owl:Restriction>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#hasDisposition"/>
-              <owl:onClass>
-                <owl:Class>
-                  <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Coverage"/>
-                    <owl:Restriction>
-                      <owl:onProperty rdf:resource="#affordsTrigger"/>
-                      <owl:allValuesFrom>
-                        <owl:Restriction>
-                          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                          <owl:allValuesFrom rdf:resource="#Dishwasher"/>
-                        </owl:Restriction>
-                      </owl:allValuesFrom>
-                    </owl:Restriction>
-                  </owl:intersectionOf>
-                </owl:Class>
-              </owl:onClass>
-              <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-            </owl:Restriction>
-          </owl:intersectionOf>
-        </owl:Class>
-      </owl:someValuesFrom>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass rdf:resource="#Insertion"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass rdf:resource="#Purification"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass>
-        <owl:Class>
-          <owl:intersectionOf rdf:parseType="Collection">
-            <rdf:Description rdf:about="#Insertion"/>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#affordsTrigger"/>
-              <owl:allValuesFrom>
-                <owl:Restriction>
-                  <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                  <owl:allValuesFrom rdf:resource="#Tableware"/>
-                </owl:Restriction>
-              </owl:allValuesFrom>
-            </owl:Restriction>
-          </owl:intersectionOf>
-        </owl:Class>
-      </owl:onClass>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#Appliance"/>
-  <rdfs:subClassOf rdf:resource="#DesignedContainer"/>
-</owl:Class>
-
-<owl:Class rdf:about="#DishwasherTab">
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedSubstance"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Door">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass rdf:resource="#Coverage"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#DesignedComponent"/>
-  <rdfs:comment>A hinged, sliding, or revolving barrier at the entrance to a building, room, or vehicle, or in the frame of a cupboard.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#Purification">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#affordsSetpoint"/>
-      <owl:allValuesFrom>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-          <owl:allValuesFrom>
-            <owl:Class>
-              <owl:intersectionOf rdf:parseType="Collection">
-                <rdf:Description rdf:about="#Clean"/>
-                <owl:Restriction>
-                  <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
-                  <owl:allValuesFrom rdf:resource="#Cleanliness"/>
-                </owl:Restriction>
-              </owl:intersectionOf>
-            </owl:Class>
-          </owl:allValuesFrom>
-        </owl:Restriction>
-      </owl:allValuesFrom>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#affordsTrigger"/>
-      <owl:allValuesFrom>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-          <owl:allValuesFrom rdf:resource="#DirtyObject"/>
-        </owl:Restriction>
-      </owl:allValuesFrom>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#Variability"/>
-  <rdfs:comment>The disposition of an object (the tool) to change the cleanliness of others.</rdfs:comment>
-</owl:Class>
-
 <owl:Class rdf:about="#Distancing">
   <rdfs:subClassOf rdf:resource="#Navigating"/>
 </owl:Class>
-
-<owl:Class rdf:about="#Drawer">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass rdf:resource="#Insertion"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass>
-        <owl:Class>
-          <owl:intersectionOf rdf:parseType="Collection">
-            <rdf:Description rdf:about="#Insertion"/>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#affordsTrigger"/>
-              <owl:allValuesFrom>
-                <owl:Restriction>
-                  <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                  <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
-                </owl:Restriction>
-              </owl:allValuesFrom>
-            </owl:Restriction>
-          </owl:intersectionOf>
-        </owl:Class>
-      </owl:onClass>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#DesignedComponent"/>
-  <rdfs:subClassOf rdf:resource="#DesignedContainer"/>
-  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A storage compartment without a lid, made to slide horizontally in and out of a piece of furniture.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
 
 <owl:Class rdf:about="#Dreaming">
   <rdfs:subClassOf rdf:resource="#MentalTask"/>
@@ -3762,6 +3302,12 @@ Note that such theories are useful both when analyzing an actual linguistic prod
   <rdfs:subClassOf rdf:resource="#TechnicalDiagnosis"/>
 </owl:Class>
 
+<owl:Class rdf:about="#Fluid">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
+</owl:Class>
+
+<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
+
 <owl:Class rdf:about="#MovedObject">
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -3790,83 +3336,6 @@ Note that such theories are useful both when analyzing an actual linguistic prod
 
 <owl:Class rdf:about="#Foolishness">
   <rdfs:subClassOf rdf:resource="#Amateurish"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Fork">
-  <rdfs:subClassOf rdf:resource="#Cutlery"/>
-  <rdfs:comment>Cutlery with two or more prongs used for lifting food to the mouth or holding it when cutting.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#FreezerCompartment">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass rdf:resource="#Tempering"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass>
-        <owl:Class>
-          <owl:intersectionOf rdf:parseType="Collection">
-            <rdf:Description rdf:about="#Insertion"/>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#affordsTrigger"/>
-              <owl:allValuesFrom>
-                <owl:Restriction>
-                  <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                  <owl:allValuesFrom rdf:resource="#DesignedContainer"/>
-                </owl:Restriction>
-              </owl:allValuesFrom>
-            </owl:Restriction>
-          </owl:intersectionOf>
-        </owl:Class>
-      </owl:onClass>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass>
-        <owl:Class>
-          <owl:intersectionOf rdf:parseType="Collection">
-            <rdf:Description rdf:about="#Tempering"/>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#affordsTrigger"/>
-              <owl:allValuesFrom>
-                <owl:Restriction>
-                  <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                  <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
-                </owl:Restriction>
-              </owl:allValuesFrom>
-            </owl:Restriction>
-          </owl:intersectionOf>
-        </owl:Class>
-      </owl:onClass>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#Compartment"/>
-  <rdfs:comment>A freezer compartment used to regulate the temperature of contained objects to a value below zero degree Celsius.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#Tempering">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#affordsSetpoint"/>
-      <owl:allValuesFrom>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-          <owl:allValuesFrom rdf:resource="#Temperature"/>
-        </owl:Restriction>
-      </owl:allValuesFrom>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#Variability"/>
-  <rdfs:comment>The disposition of an object (the tool) to change the temperature of others.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#FrictionAttribute">
@@ -4062,84 +3531,6 @@ Note that such theories are useful both when analyzing an actual linguistic prod
   <rdfs:subClassOf rdf:resource="#Manipulating"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Hotplate">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass rdf:resource="#Deposition"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass rdf:resource="#Tempering"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass>
-        <owl:Class>
-          <owl:intersectionOf rdf:parseType="Collection">
-            <rdf:Description rdf:about="#Deposition"/>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#affordsTrigger"/>
-              <owl:allValuesFrom>
-                <owl:Restriction>
-                  <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                  <owl:allValuesFrom>
-                    <owl:Class>
-                      <owl:intersectionOf rdf:parseType="Collection">
-                        <rdf:Description rdf:about="#Pan"/>
-                        <rdf:Description rdf:about="#Pot"/>
-                      </owl:intersectionOf>
-                    </owl:Class>
-                  </owl:allValuesFrom>
-                </owl:Restriction>
-              </owl:allValuesFrom>
-            </owl:Restriction>
-          </owl:intersectionOf>
-        </owl:Class>
-      </owl:onClass>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass>
-        <owl:Class>
-          <owl:intersectionOf rdf:parseType="Collection">
-            <rdf:Description rdf:about="#Tempering"/>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#affordsTrigger"/>
-              <owl:allValuesFrom>
-                <owl:Restriction>
-                  <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                  <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
-                </owl:Restriction>
-              </owl:allValuesFrom>
-            </owl:Restriction>
-          </owl:intersectionOf>
-        </owl:Class>
-      </owl:onClass>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#DesignedComponent"/>
-  <rdfs:comment>A flat heated surface used for cooking food or keeping it hot.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#Pan">
-  <rdfs:subClassOf rdf:resource="#Crockery"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Pot">
-  <rdfs:subClassOf rdf:resource="#Crockery"/>
-</owl:Class>
-
 <owl:Class rdf:about="#Imagining">
   <rdfs:subClassOf rdf:resource="#MentalTask"/>
   <rdfs:comment>A Mental task in which the Agent constructs a mental representation of a possible world. An Agent performing an Imagining activity does not aim to construct a representation that aspires to be faithful to some past, present, or future state of affairs of the actual world it is embodied in.</rdfs:comment>
@@ -4197,6 +3588,17 @@ Induction is often described as a move from many "specifics" (swan A is white, s
   <rdfs:subClassOf rdf:resource="#EnclosedObject"/>
 </owl:Class>
 
+<owl:Class rdf:about="#Insertion">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#affordsTrigger"/>
+      <owl:allValuesFrom rdf:resource="#InsertedObject"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="#Enclosing"/>
+  <rdfs:comment>The disposition of an object (the container) to contain other objects that can be inserted into the container through a portal.</rdfs:comment>
+</owl:Class>
+
 <owl:Class rdf:about="#InterrogativeClause">
   <rdfs:subClassOf rdf:resource="#ClausalObject"/>
   <rdfs:comment>A clause which makes a request, typically information, of some agent.
@@ -4207,23 +3609,6 @@ Note that in a semantic sense such clauses always request information, but in a 
 <owl:Class rdf:about="#KineticFrictionAttribute">
   <rdfs:subClassOf rdf:resource="#FrictionAttribute"/>
   <rdfs:comment>Friction that occurs when two touching objects are moving relative to each other.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#Knife">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasPhysicalComponent"/>
-      <owl:someValuesFrom rdf:resource="#Blade"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasPhysicalComponent"/>
-      <owl:someValuesFrom rdf:resource="#DesignedHandle"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#CuttingTool"/>
-  <rdfs:comment>An instrument composed of a blade fixed into a handle, used for cutting or as a weapon.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Leaning">
@@ -4239,34 +3624,6 @@ Posture changes may take place as part of other actions, for example turning whe
 
 <owl:Class rdf:about="#Leg">
   <rdfs:subClassOf rdf:resource="#Limb"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Lid">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass rdf:resource="#Coverage"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass>
-        <owl:Class>
-          <owl:intersectionOf rdf:parseType="Collection">
-            <rdf:Description rdf:about="#Coverage"/>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#affordsTrigger"/>
-              <owl:allValuesFrom rdf:resource="#Container"/>
-            </owl:Restriction>
-          </owl:intersectionOf>
-        </owl:Class>
-      </owl:onClass>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#DesignedComponent"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Pushing">
@@ -4507,20 +3864,6 @@ One could argue Mental actions are all Physical actions, because anything the Ag
   <rdfs:comment>A role classifying the location where an event or object originated.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#Pack">
-  <rdfs:subClassOf rdf:resource="#DesignedContainer"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Pancake">
-  <rdfs:subClassOf rdf:resource="#BakedGood"/>
-  <rdfs:comment>todo(DB): this seems too specific. Should it go to a more specific ontology? like "SOMA-kitchen"?</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#PancakeMix">
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedSubstance"/>
-  <rdfs:comment>todo(DB): this seems too specific. Should it go to a more specific ontology? like "SOMA-kitchen"?</rdfs:comment>
-</owl:Class>
-
 <owl:Class rdf:about="#PathRole">
   <rdfs:subClassOf rdf:resource="#SpatioTemporalRole"/>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role that classifies the path of a motion.</rdfs:comment>
@@ -4650,11 +3993,6 @@ The difference between states and processes is that states are, in addition, hom
   <rdfs:comment>A Mental task in which an Agent endeavours to construct a representation of a future state of affairs of the world it is embodied in.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#Plate">
-  <rdfs:subClassOf rdf:resource="#Crockery"/>
-  <rdfs:comment>A flat and usually circular object from which food is eaten or served.</rdfs:comment>
-</owl:Class>
-
 <owl:Class rdf:about="#Prediction">
   <rdfs:subClassOf rdf:resource="#Prospecting"/>
   <rdfs:comment>A Mental task in which the Agent endeavours to construct a representation of a future state of the world. Prediction commits itself to some degree of accuracy: the Agent believes that eventually something similar to the predicted state will come to pass.</rdfs:comment>
@@ -4711,6 +4049,43 @@ As such, a theory, i.e. a description of what a particular kind of closeness mea
 Adopted from GUM-4-space (Bateman et al. 2010).
 
 Let xL, xR be objects filling the locatum, relatum roles of this schema. Then one can infer that xL 'near to' xR.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Purification">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#affordsSetpoint"/>
+      <owl:allValuesFrom>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+          <owl:allValuesFrom>
+            <owl:Class>
+              <owl:intersectionOf rdf:parseType="Collection">
+                <rdf:Description rdf:about="#Clean"/>
+                <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
+                  <owl:allValuesFrom rdf:resource="#Cleanliness"/>
+                </owl:Restriction>
+              </owl:intersectionOf>
+            </owl:Class>
+          </owl:allValuesFrom>
+        </owl:Restriction>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#affordsTrigger"/>
+      <owl:allValuesFrom>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+          <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        </owl:Restriction>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="#Variability"/>
+  <rdfs:comment>The disposition of an object (the tool) to change the cleanliness of others.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#PushingAway">
@@ -4779,113 +4154,6 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
   <rdfs:subClassOf rdf:resource="#ColorRegion"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Refrigerator">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasPhysicalComponent"/>
-      <owl:someValuesFrom rdf:resource="#Door"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasPhysicalComponent"/>
-      <owl:someValuesFrom>
-        <owl:Class>
-          <owl:intersectionOf rdf:parseType="Collection">
-            <rdf:Description rdf:about="#Door"/>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#hasDisposition"/>
-              <owl:onClass rdf:resource="#Coverage"/>
-              <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-            </owl:Restriction>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#hasDisposition"/>
-              <owl:onClass>
-                <owl:Class>
-                  <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="#Coverage"/>
-                    <owl:Restriction>
-                      <owl:onProperty rdf:resource="#affordsTrigger"/>
-                      <owl:allValuesFrom>
-                        <owl:Restriction>
-                          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                          <owl:allValuesFrom rdf:resource="#Refrigerator"/>
-                        </owl:Restriction>
-                      </owl:allValuesFrom>
-                    </owl:Restriction>
-                  </owl:intersectionOf>
-                </owl:Class>
-              </owl:onClass>
-              <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-            </owl:Restriction>
-          </owl:intersectionOf>
-        </owl:Class>
-      </owl:someValuesFrom>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass rdf:resource="#Insertion"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass rdf:resource="#Tempering"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass>
-        <owl:Class>
-          <owl:intersectionOf rdf:parseType="Collection">
-            <rdf:Description rdf:about="#Insertion"/>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#affordsTrigger"/>
-              <owl:allValuesFrom>
-                <owl:Restriction>
-                  <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                  <owl:allValuesFrom rdf:resource="#DesignedContainer"/>
-                </owl:Restriction>
-              </owl:allValuesFrom>
-            </owl:Restriction>
-          </owl:intersectionOf>
-        </owl:Class>
-      </owl:onClass>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:onClass>
-        <owl:Class>
-          <owl:intersectionOf rdf:parseType="Collection">
-            <rdf:Description rdf:about="#Tempering"/>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#affordsTrigger"/>
-              <owl:allValuesFrom>
-                <owl:Restriction>
-                  <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                  <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
-                </owl:Restriction>
-              </owl:allValuesFrom>
-            </owl:Restriction>
-          </owl:intersectionOf>
-        </owl:Class>
-      </owl:onClass>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#Appliance"/>
-  <rdfs:subClassOf rdf:resource="#DesignedContainer"/>
-  <rdfs:comment>An appliance which is artificially kept cool and used to store food and drink.</rdfs:comment>
-</owl:Class>
-
 <owl:Class rdf:about="#RelevantPart">
   <rdfs:subClassOf rdf:resource="#Feature"/>
   <rdfs:comment>Features that are relevant parts of their host, like a bump or an edge.</rdfs:comment>
@@ -4940,6 +4208,28 @@ As an example, a kind of Abductive reasoning would fit here: reconstruction, in 
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#Intrinsic"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Shaping">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#affordsSetpoint"/>
+      <owl:allValuesFrom>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+          <owl:allValuesFrom rdf:resource="#Shape"/>
+        </owl:Restriction>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#affordsTrigger"/>
+      <owl:allValuesFrom rdf:resource="#ShapedObject"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="#Variability"/>
+  <rdfs:comment>The disposition of an object (the tool) to change the shape of others.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Sharpness">
@@ -5026,22 +4316,6 @@ Note also that the DUL SocialAgent class is not an appropriate restriction howev
   <rdfs:comment>A role classifying a substance or object that enters a process of transformation intended to create some other object.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#Spatula">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasPhysicalComponent"/>
-      <owl:someValuesFrom rdf:resource="#DesignedHandle"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasPhysicalComponent"/>
-      <owl:someValuesFrom rdf:resource="#DesignedSpade"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#Cutlery"/>
-</owl:Class>
-
 <owl:Class rdf:about="#SphereShape">
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -5066,16 +4340,6 @@ Note also that the DUL SocialAgent class is not an appropriate restriction howev
 <owl:Class rdf:about="#StimulusRole">
   <rdfs:subClassOf rdf:resource="#CausativeRole"/>
   <rdfs:comment>A role classifying an object that is perceived by some agent and thus triggers some reaction (e.g., a perception event).</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#Stove">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasPhysicalComponent"/>
-      <owl:someValuesFrom rdf:resource="#Hotplate"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#Appliance"/>
 </owl:Class>
 
 <owl:Class rdf:about="#StructuralDesign">
@@ -5156,16 +4420,6 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
   <rdfs:subClassOf rdf:resource="#ConnectedObject"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Table">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasDisposition"/>
-      <owl:someValuesFrom rdf:resource="#Deposition"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="#DesignedFurniture"/>
-</owl:Class>
-
 <owl:Class rdf:about="#Tapping">
   <rdfs:subClassOf rdf:resource="#DirectedMotion"/>
   <rdfs:comment>A motion, usually repeated several times, for example, to probe the surface of an object.</rdfs:comment>
@@ -5194,6 +4448,22 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
 
 <owl:Class rdf:about="#TemperatureRegion">
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Tempering">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#affordsSetpoint"/>
+      <owl:allValuesFrom>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+          <owl:allValuesFrom rdf:resource="#Temperature"/>
+        </owl:Restriction>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="#Variability"/>
+  <rdfs:comment>The disposition of an object (the tool) to change the temperature of others.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#ThinkAloud">
@@ -5285,6 +4555,8 @@ It is also possible that a Transient transitionsBack to the initial object. An e
 </owl:Class>
 
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+
+<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
 
 <owl:AsymmetricProperty rdf:about="#hasInitialScene">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
