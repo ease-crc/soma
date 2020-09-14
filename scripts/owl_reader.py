@@ -1,13 +1,17 @@
+'''
+This file parses the owl ontologies to get the comments, label and superclass of entities.
+'''
+
 import owlready2 as owl
 import time
 import sys
 from collections import OrderedDict
 import re
 
+
 class OwlReader:
 
 	def __init__(self, iri_list):
-		## available locally then iri is "file:///path".
 		self.props = ["superclass", "label", "comment", "Defined in"]
 		self.iri_list = iri_list
 		if len(iri_list) == 1:
@@ -21,6 +25,10 @@ class OwlReader:
 		return temp
 
 	def get_classes(self):
+		''' 
+		Gets the classes defined in the ontology their corresponding
+		superclass, label and comment
+		'''
 		class_dict = {}
 		for iri in self.iri_list:
 			class_dict.update(self._get_values(iri))
