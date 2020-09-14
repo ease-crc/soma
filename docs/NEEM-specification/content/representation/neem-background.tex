@@ -13,11 +13,11 @@ Consider, for example, a robot fetching a cup in a kitchen environment to prepar
 The cup would be part of the \neembak while the fetching event carried out by the robot would be represented in the \neemnar (Chapter~\ref{ch:narrative}).
 
 The way how a task can be solved best depends on what is available in the environment.
-The suitability of an object to be used to perform a certain task is often derived from the class of objects it belongs to, e.g., that a knife can be used for cutting.
+The suitability of an object to be used to perform a certain task is often derived from the class of objects it belongs to, e.g., a knife can be used for cutting.
 The \neem model defines a set of more general object classes such as \emph{agent} and \emph{artifact} (Section~\ref{sec:background:types}).
 These are used to classify each object represented in the \neembak.
 %
-The usability of an object is, however, ultimately grounded in its properties, and, e.g., a dulled knife may proof to be unusable to perform a cutting task.
+The usability of an object is, however, ultimately grounded in its properties, e.g., a dulled knife may prove to be unusable to perform a cutting task.
 It is thus also relevant to characterize object properties as they correlate with how an agent may solve its task.
 Consequently, we treat types of object properties as classes organized in a taxonomy (Section~\ref{sec:background:properties}).
 
@@ -26,7 +26,7 @@ We organize different characteristics in so called \emph{views} (Section~\ref{se
 Each view has its own set of types and relationships to represent the environment from a specific viewpoint such as appearance or kinematics.
 
 \neems are heterogenous representations that may include additional data files.
-These are, first of all, time series data bases that are annotated by the \neemnar.
+These representations are time series data that are annotated by the \neemnar.
 In adddition, some widely used data formats for the representation of objects are supported (Section~\ref{sec:background:formats}).
 Such data files may be stored within the \neembak, associated to objects it represents, and used to enrich knowledge about the environment.
 
@@ -36,7 +36,7 @@ Such data files may be stored within the \neembak, associated to objects it repr
 \label{sec:background:types}
 
 Objects and agents that appear in an environment are classified as \emph{physical objects}.
-Physical objects are exactly the objects you can point on, as they have a location in space.
+Physical objects are exactly the objects you can point to, as they have a location in space.
 
 The most common physical objects in non-natural environments are \emph{artifacts}.
 An artifact is an item that has certain structure, often to serve a particular purpose such as to use it in a certain way, or to enjoy looking at it in case of, e.g., an art piece.
@@ -44,14 +44,14 @@ Artifacts that were created with a purpose in mind are called \emph{designed art
 Most objects in human-made environments belong to this category.
 Note that, e.g., a \emph{container} is not a designed artifact, as also objects that were not designed as such may serve as containers.
 Consequently, the class \emph{designed container} is used for the objects that were designed to be used as a container.
-Other examples of designed artifacts are \emph{tools} and \emph{appliances} designed for specific tasks or agents, and \emph{components} designed to fit together to form a larger whole.
+Other examples of designed artifacts are \emph{tools} and \emph{appliances} designed for specific tasks or agents and the \emph{components} designed to fit together to form a larger whole.
 
 Another category of objects are \emph{physical bodies}.
 Most commonly one would use this category for \emph{substances} that appear in the environment such as a blob of dough, or the coffee inside of a cup.
-However, it is more appropriate to classify the substance as \emph{designed substance} in case it was created with a purpose in mind which is, e.g., the case for the dough that is made according to a recipe, and supposed to be eaten after being baked.
+However, it is more appropriate to classify the substance as \emph{designed substance} in case it was created with a purpose in mind, for e.g., in the case for the dough that is made according to a recipe and supposed to be eaten after being baked.
 
 Agents that appear in a \neem are classified as \emph{physical agents}.
-The difference to other types of objects is that agents have intentions, execute actions, and attempt to achieve goals, e.g., by following a plan and moving their body in a way to generate interactions with the environment to cause intended effects.
+The difference from other types of objects is that the agents have intentions, execute actions, and attempt to achieve goals, e.g., by following a plan and moving their body in a way to generate interactions with the environment to cause intended effects.
 Each agent is composed of \emph{body parts} organized in a skeletal structure. \todo{there is no class body part}
 Interactions with the environment are carried out through \emph{effectors} such as arms, legs, or hands.
 Effectors that are used for grasping are called \emph{prehensile effectors}.
@@ -223,7 +223,7 @@ A mesh shape, on the other hand, has a data property that is a URI of the file t
 	    \draw (A4) edge[relation,xshift=0.0cm] node[midway,label=right:hasRadius] {} (B4);
 	    \draw (A3) edge[relation,xshift=0.0cm] node[midway,label=right:hasURL] {} (B3);
 	    \draw (A1) edge[relation,xshift=0.0cm]
-	    	node[midway,text width=1.2cm,xshift=0.9cm] {hasHeight hasLength hasWdith} (B1);
+	    	node[midway,text width=1.2cm,xshift=0.9cm] {hasHeight hasLength hasWidth} (B1);
 	    \draw (A2) edge[relation,xshift=0.0cm]
 	    	node[midway,text width=1.2cm,xshift=0.9cm] {hasLength hasRadius} (B2);
 	    %\node[owlclass_f,below=0.8cm of A1] at ($(A1)!0.5!(A3)$) (C) {Shape};
@@ -307,7 +307,7 @@ The color of an object is a quality that may take values from a \emph{ColorRegio
 
 Parthood represents that objects are composed of smaller things.
 These things may be physical objects themselves, and a \emph{component} of their direct parent in the partonomy.
-Parthood is transitive, that is, parts of parts are parts again, but componency is not.
+Parthood is transitive, that is, part of parts are parts again, but componency is not.
 So one would say that the arm is a component of the robot, and that the elbow is component of the arm, but not that the elbow is a component of the robot.
 \todo{Seba: Why is the elbow not part of the robot ? Sorry I dont get the example.}
 
@@ -330,7 +330,7 @@ So one would say that the arm is a component of the robot, and that the elbow is
 	}
 \end{ODP}
 
-However, another parthood type is needed for objects such as holes, bumps, boundaries, or spots of color that are physical part but not a proper component of their parent in the partonomy.
+However, another parthood type is needed for objects such as holes, bumps, boundaries, or spots of color that are physical parts but not a proper component of their parent in the partonomy.
 These are \emph{features} of the object.
 Features are usually localized in the object reference frame, and may carry additional properties describing, for example, the size of the hole, or the color of the spot.
 
@@ -418,7 +418,7 @@ The pose itself is given as 6D pose including the objects' orientation as quater
 
 However, objects often can not move freely but are constrained in their movement with respect to some reference object.
 This is, for example, the case for walls without doors preventing movement from one room to another, or for two objects that are attached to each other via a \emph{joint} and thus restricting movement relative to each other (kinematic coupling).
-Kinematically coupled objects are often part of a bigger hierarchical structure, and one of the linked objects, the parent link of the joint, is the one closer to the root of the structure then the child link of the joint.
+Kinematically coupled objects are often part of a bigger hierarchical structure, and one of the linked objects, the parent link of the joint, is the one closer to the root of the structure then followed by the child link of the joint.
 
 \begin{ODP}{Joints}
 	\ODPINTENT{To represent kinematic trees of objects connected via joints.}
@@ -480,7 +480,7 @@ Each kinematic object component has exactly one root link, and may have many end
 The position of a joint determines the position of the child link relative to the parent.
 Depending on whether the joint is either \emph{hinged} (rotation around an axis) or prismatic (sliding along an axis), the position is measured in radians or meter respectively.
 When the position changes over time, velocity (measured in $rad/s$ or $m/s$) and effort applied in the joint (measured in $Nm$ or $N$) can be measured.
-Joint states are recorded as time-series data, and stored in the \neemexp.
+Joint states are recorded as time-series data and stored in the \neemexp.
 However, the \neem model defines a set of data properties used to access joint state data.
 
 \begin{ODP}{Joint States}
@@ -547,7 +547,7 @@ In addition, maximum values for the velocity and effort of a joint may be provid
 \subsection{Dynamics}
 
 The dynamics view in the \neembak is used to characterize how objects move under the influence of force.
-The \neem model only considers solid objects with constant mass, and dynamics governed by Newton's laws.
+The \neem model only considers solid objects with constant mass and dynamics governed by Newton's laws.
 
 \begin{ODP}{Mass}
 	\ODPINTENT{To represent the quantity of matter which a body contains.}
@@ -558,8 +558,8 @@ The \neem model only considers solid objects with constant mass, and dynamics go
 	    \node[owlclass] (A) {Physical Object};
 	    \node[owlclass,below=0.6cm of A] (B) {Mass Attribute};
 	    \node[data,below=0.6cm of B] (C) {xsd:double};
-	    \draw (A) edge[relationxl] node[midway,label=left:hasMassAtrribute] {} (B);
-	    \draw (B) edge[relationxr] node[midway,label=right:isMassAtrributeOf] {} (A);
+	    \draw (A) edge[relationxl] node[midway,label=left:hasMassAttribute] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isMassAttributeOf] {} (A);
 	    \draw (B) edge[relation] node[midway,label=left:hasMassValue] {} (C);
 	\end{tikzpicture}
 	}
@@ -625,7 +625,7 @@ Internal static friction force caused by movable elements within the joint, and 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Naive physics}
 
-This view on objects is comprised of qualitative descriptions of the interactions of these objects, with a focus on how objects could be arranged so as to constrain each other's behavior. The prototypical examples of such interactions are support and containment, but many other interactions are possible. Note, formalizing actual manifestations of such interactions as they occur in an episode will be done in chapter~\ref{ch:narrative}. In this chapter, we focus instead on ontological modelling about what kinds of interactions an object could take part in. \todo{DB: could you make explicit why this is part of the neem background? should the ease researchers manually assert dispositions of objects, or only use the ones derived from the object types?}
+This view on objects is comprised of qualitative descriptions of the interactions of these objects, with a focus on how the objects could be arranged so as to constrain each other's behavior. The prototypical examples of such interactions are support and containment, but many other interactions are possible. Note, formalizing actual manifestations of such interactions as they occur in an episode will be done in chapter~\ref{ch:narrative}. In this chapter, we focus instead on ontological modelling about what kinds of interactions an object could take part in. \todo{DB: could you make explicit why this is part of the neem background? should the ease researchers manually assert dispositions of objects, or only use the ones derived from the object types?}
 
 This is achieved by the concept of \emph{Disposition}, which is a quality that, by virtue of being possessed by an object, enables that object to participate in certain roles in certain relations or events. E.g., \emph{Deposition} and \emph{Containment} are the dispositions necessary to enable an object to act as a support or container for another.
 
@@ -648,7 +648,7 @@ This is achieved by the concept of \emph{Disposition}, which is a quality that, 
 	}
 \end{ODP}
 
-By and large, researchers making use of the SOMA ontology to create NEEM backgrounds and NEEMs can rely on the ontology to already provide a rich store of object knowledge, including dispositions. As such, it should usually be sufficient, for researchers adding knowledge about a new type of object, to specify which of the object classes defined in SOMA this object type is a subclass of. However, in case new dispositions need to be added for a new object type in the NEEM background, the above pattern illustrates how.
+By and large, researchers making use of the SOMA ontology to create NEEM backgrounds and NEEMs can rely on the ontology to already provide a rich store of object knowledge, including dispositions. As such, it should usually be sufficient for the researchers adding knowledge about a new type of object, to specify the object classes defined in SOMA, to which the new object type is a subclass of. However, in case new dispositions need to be added for a new object type in the NEEM background, the above pattern illustrates how.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -656,7 +656,7 @@ By and large, researchers making use of the SOMA ontology to create NEEM backgro
 \label{sec:background:formats}
 
 Representations in the \neembak may be enriched through additional data files.
-Data files are stored with the \neembak, and loaded by the \ease knowledge base when a \neem is activated.
+Data files are stored with the \neembak and loaded by the \ease knowledge base when a \neem is activated.
 They may encode information that can be directly represented in the \neem, however, it is not necessary in such a case to duplicate the information.
 A data file may be loaded at runtime, and used by the knowledge base in combination with other representations to answer questions about an activity.
 
@@ -693,6 +693,6 @@ Shapes are either represented as geometrical primitives such as spheres or boxes
 The preferred format for meshes is Collada (DAE).
 The reason primarily being that it is widely supported by modeling tools and rendering engines.
 If possible, the mesh should be accompanied by high-resolution textures in PNG or JPG format.
-The more detailed a mesh, the more immersive the experience of humans interacting with it in VR may be, and the better the perception models that can be trained by images generated by placing the object in a virtual scene. Of course, this must be balanced with the computational demands imposed by mesh rendering and collision checking. When storing mesh and texture data for objects, researchers who produce NEEM background should make sure the meshes match the demands and resources of their applications.
+The more detailed a mesh, the more immersive the experience of humans interacting with it in VR and better the perception models that can be trained by images generated by placing the object in a virtual scene. Of course, this must be balanced with the computational demands imposed by mesh rendering and collision checking. When storing mesh and texture data for objects, researchers who produce NEEM background should make sure the meshes match the demands and resources of their applications.
 \todo{what is the optimal size of meshes?}
 
