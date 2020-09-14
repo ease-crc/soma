@@ -6,10 +6,12 @@
 \chapterauthor{D. Be{\ss}ler, M. Pomarlan, A. Vyas}
 
 The narrative part of \neems represents a ``story'' of what has happened.
-But the story is more detailed then it would be when told from one human to another
+The story is more detailed then it would be when told from one human to another
 as it includes details about movements and interactions that would usually not be spelled out in a human conversation.
 The reason to include this type of information is that it is extremely difficult to generalize robotic behaviour, and in particular how the robot needs to move its body to accomplish its goal with varying context such as different environemnts.
-The vision is that a library of \emph{contextualized} motions and interactions will help to uncover models underlying everyday activities. In section \ref{sec:episodes}, we discuss contextualization concept which is useful to consider for social interactions. Such as robots performing successful navigation task but failing to consider situational context by ignoring fact that the path it took blocked someone's path. Here, a library of \neems would serve as library of such contextualized motions.
+The vision is that a library of \emph{contextualized} motions and interactions will help to uncover models underlying everyday activities.
+With contextualized we mean that each motion and interaction is associated to the context of its occurrence.
+That is the environment where it occurred, objects that were involved, the goals and plans of agents, their behaviour etc.
 
 The story represented in the \neemnar provides context for the \neemexp acquired during an activitiy.
 This is, first of all, that labels are assigned to the time intervals where something relevant has happened such as the execution of a task, the interaction between objects, or the occurrence of a motion.
@@ -21,52 +23,100 @@ The \neemnar further represents relationships between instances of these classes
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % % 
-\section{Types of Events} 
-\label{sec:narrative:taxonomy} 
+\section{Types of Events}
+\label{sec:narrative:events}
 
-Here in the following section, we will discuss taxonomy for the concepts used to describe \neemnar part. A taxonomy provides the hierarchical relationships among various concepts and defines the terminology for each concept. One way to classify an entity in ontology is through taxonomies, which concentrates on \emph{what there actually is?} as compared to conceptual classification which is more about \emph{how an entity is interpreted?}. For instance, the concepts \textit{spoon} and \textit{knife} are subclasses of the concept \textit{cutlery}.
+% event classification is view depended
+There are several ways of classifying events including based on \emph{agentivity} (e.g. intentional, natural), or on \emph{typical participants} (e.g. human, physical, abstract, food).
+The \neem model does not take any of these directions.
+The reason is that events are related to observable situations, and that they can be viewed in different ways at the same time.
+For example, when seeing someone strolling while some piece of paper appears to slip out of a pocket one may view this event as an accident while in reality it was an intentional action to dispose trash on the street.
+The reason being that intentions of agents can usually not be observed directly, and hence an interpretation is required.
+Another aspect is that events may contribute to several goals, and, in such a case, may not be associated to a single category.
+This is, for example, the case when fetching a glas of wine from a fridge in order to first pour some wine into the Bolognese sauce, and second to drink the remaining wine from the glass.
+In this case the fetching event contributes to multiple goals and thus would belong to different classes in an action taxonomy organized based on agentivity.
+Please note that while multiple inheritence is generally supported, it should only be used if absolutely necessary. \todo{DB: any reference for why this is bad?}
 
-%\paragraph{Actions} 
- 
-\subsection{Event}
-An \emph{Event} can be described as any physical, social or mental process that occurs or happens. In \dul upper level ontology, an event is considered as \emph{perdurant} entity, which unfolds over time and can have part of it's presence during any given snapshot of time. All though event taxonomy is not the scope of this section, it is important to clear some of the concepts related to event. Such as \emph{what is an event type? Which are the sub-concepts of an event considered for the scope of \neemnar?}. An event has mainly three sub-concepts defined in \soma which are Accident, Action and Process. 
+% event classes
+The \neem model defines a very shallow event taxonomy with rough distinctions that are not dependend on how an event is interpreted, executed or seen.
+These categories are: \concept{action}, \concept{process}, and \concept{state}.
+%%
+Actions are exactly the events that are perfomed intentionally by an agent executing a task by following a plan or workflow.
+A process, on the other hand, is an event that causes state changes without the necessity of an agent driving or causing the process.
+Movement being one example, as it does not strictly depend on an agent executing a motion.
+For example, in case of the earth rotating around the sun, or some letter in a bottle being transported through the ocean.
+Finally, a state is defined as an event where an object has a dedicated stable configuration which is usually represented as having a certain property value over a fixed time interval.
+\todo{DB: not sure about accidents, aren't they interpretations?}
 
-When causes are considered unknown and/or irrelevant for an event then it falls under \emph{Accident} category. It is worth to note distinction between everyday uses of accident definition which concentrates on a causal structure and responsibility for an event, such as who made a mistake bringing about the event; in "traffic accident", where we want to know who is responsible. Such an event does NOT fall under the definition of Accident here. However, when an environment suddenly changes around the robotic agent without any interference from robot such as while cleaning kitchen table, the cupboard mounted on the wall falls-down. Here the questions such as \textit{why the cupboard has fallen-down?} \textit{Is it because the nails holing it were rusted and broke? or because the moisture infiltrated and softened the wall plaster?} By assigning an accident to such event, one can say that we don't know what has caused it or how it can be explained.
+However, it is possible to represent how an event is interpreted, executed or seen using a taxonomy of event \concept{Concepts} which is included in the \neem model.
+Concepts are used to classify events in some context.
+On the highest level, the concept taxonomy distinguishes between concepts used to classify the different event categories action, process and state.
 
-An  \emph{Action} can be defined as an event where at least one agent participates, such that this agent performs a dedicated task, defined by a plan or workflow, which it executes through the Action. Here workflow refers to a plan that defines role(s), task(s), and specific structure of tasks that needs to be executed. 
+% % % % % % % % % % % % % % % % % 
+\paragraph{Tasks}
+A \concept{task} is defined as a concept that classifies actions based on what goals an agent intents to achieve when executing an action.
+Goals may be achieved in different ways depending on, for example, what is available in the environment, or what skills an agent has.
+Tasks do not imply a particular way of doing something, however, \concept{plans} can be used to decompose a task into several sub-tasks and thus to represent a particular way how the task can be organized.
+For example, beer brewing is a task with a dedicated goal which can be accomplished through different workflows which are slightly different at each brewery.
+Tasks are further classified into three main categories: \concept{physical task}, \concept{mental task} and \concept{communication task}.
+We are primarly interested in \concept{physical tasks}.
+These are the tasks that require a physical agent to execute them.
+That is an agent with its own body and the ability to move meaningfully to achieve a designated goal by interacting in some way with the physical world.
+This category includes tasks such as \concept{actuating}, \concept{constructing}, \concept{modifying}, \concept{placing} and \concept{navigating}. 
+A task that requires to execute an action through which an agent has to manipulate representations stored in its own cognition is seen as a \concept{mental task}.
+\concept{Dreaming}, \concept{imagining}, \concept{prospecting}, \concept{reasoning}, and \concept{retrospecting} are examples of this category.
+Finally, a \concept{communication task} is seen as a task
+in which two or more agents exchange information.
+The scope of interest is to identify which agents communicate, and what kind of information is exchanged.
 
-A \emph{Process} is an event for which no such commitments for involvement of an agent have been made. For the scope \soma ontology, we put emphases on process as a top-level class for events with no agentive participant. %we have further categorized process in to chemical and physical processes. For chemical process, by which the chemical constituency of an Entity or set of entities changes. It is safe to assume that any process which results in entities being created or destroyed might fit here, although this concept is specifically intended for events where the chemical reactions are very important occurrence. For physical process it is assumed mostly that the state of an entity will change by involving itself to such process e.g. the cup holding water which goes through pouring process.
+% % % % % % % % % % % % % % % % % 
+\paragraph{Process Types}
+The \neem model also defines concepts that classify processes.
+One aspect is that of what a process does to objects.
+This is represented through the concepts \concept{alteration}, \concept{destruction} and \concept{creation}.
+Note that this may also be view-dependend, one person may see only the destructive aspects of a process, but another person may see the creation of something new too.
+Another aspect we are interested in are the \emph{force characteristics} of processes.
+That is how objects interact with each other with a reference to force.
+Each process may be labeled as \concept{alterative} or \concept{preservative}, meaning that there was either a tendency to set an object into motion, or to keep it still.
+Finally, in the \neem model, motions are also seen as concepts that classify processes.
+The reason being, as explained before, that motions such as a message in a bottle moving in the ocean are not executed by an agent.
+However, it is ok to say that an event is an occurrence of a task and a motion at the same time as actions and processes are not disjoint.
+The motion taxonomy distinguishes between \emph{directed} and \emph{undirected} motions on the highest level.
+A directed motion is carried out towards a destination and following a directed path, while there is no destination for an undirected motion.
+An Oscillation being an example of an undirected motion.
+However, more relevant for goal-directed behaviour are directed motions such as \concept{locomotion} where an agent navigates to a dedicated target, and \concept{prehensile motion} which is directed towards grasping an object, or releasing the grasp again.
+%In addition, in case of being executed by some agent, the process may further be labeled as \concept{body movement}.
+The \neem model defines another concept \concept{fluid flow} that can be used to label a process where some fluid moves or has been moved from one location to another following the laws of fluid dynamics.
+\todo{DB: why did we dropped again \emph{progression} and \emph{gestalt}?}
 
-An \emph{EventType} describes how an event should be interpreted, executed, expected, and seen which is \emph{definedIn} according to some description \footnote{\url{http://www.ontologydesignpatterns.org/ont/dul/DUL.owl}}. It is broadly used to classify an event, \emph{ProcessType} and \emph{Task} are some of the EventType sub-classes. An action is an event which is conceptually classified by a Task, similarly Process is an Event which is classified by ProcessTypes.  
+% % % % % % % % % % % % % % % % % 
+\paragraph{State Types}
+Finally, there are concepts defined in the \neem model that can be used to classify states.
+We are in particular interested in the states where objects are in contact with each other.
+These are classified as \concept{contact states}.
+Our interest in these states arises from the fact that they capture the interaction with the environment caused by the manipulation of objects where objects get into contact with the agent, or other objects in the environment.
+Other examples of state concepts used for the classification of state events are being \emph{contained} within, and being \emph{supported} or \emph{blocked} by some other object.
 
-\subsection{Task}
-\emph{Task} is an \emph{EventType} that classifies an action to be executed. The actions which needs to be taken in order to execute the task are organized according to a Plan, which is however not the same as defining a task. For example task of cleaning a table that can be defined by a plan which is executed by taking several actions. Where as simpler task such as turning left or right can be executed by taking single action. Task can be further classified into three main categories, \emph{PhysicalTask}, \emph{MentalTask} and \emph{CommunicationTask}. 
+% % % % % % % % % % % % % % % % %
+% % % % % % % % % % % % % % % % % 
+\section{Roles of Objects}
+\label{sec:narrative:roles}
 
-A task which requires to execute an action through which an agent has to manipulate representations stored in its own cognition can be categorized as \emph{MentalTask}. Dreaming, imagining, prospecting, reasoning, retrospecting falls under mental task. 
-
-\emph{PhysicalTask} requires an agent to perform certain physical activities such as actuating, constructing, modifying physical object, looking at, placing, navigating and perceiving. 
-
-\emph{CommunicationTask} in which two or more agents shares information. This is used to classify special kind of events that have participants as agents. The means of information exchange is physical however the scope of interest here is to  identify which agent communicates and what kind of information it has. 
-
-\subsection{Motions} 
-An \emph{EventType} which deals with movements of an agent and motions it makes during task execution. Motion taxonomy includes concepts such as \emph{BodyMovement} which concentrates on the movements of agents body parts. \emph{DirectedMotion} which involves a destination and directed path for an agent to follow. An \emph{UndirectedMotion} is opposite to directed where agent does not have any particular destination but it is important to know that the agent has moved and motion has occurred. And at last \emph{FluidFlow} is the process by which fluid moves or has moved from one location to other.  
-
-\subsection{Roles}
-\emph{Roles} are concepts used to describe how an object participates in an event or a relation. An object can play different roles throughout its lifetime. For example, a knife may play the \emph{PatientRole} of a grasping action, i.e. the object mainly affected by the action, and play an \emph{InstrumentRole} in a cutting action. Other roles include \emph{AgentRole}, \emph{CausalProcessRole}, \emph{AnswerRole}, %communication topic, existing object role, explanation, instrument, linguistic function, location, locatum role, path role, patient, question, relatum role, and software type. 
-etc. Further role sub-categories will be defined under appendix section.\todo{Seba: An example with using those terms would be nice.}
+\concept{Roles} are concepts used to describe how an object participates in an event or a relation. An object can play different roles throughout its lifetime. For example, a knife may play the \concept{PatientRole} of a grasping action, i.e. the object mainly affected by the action, and play an \concept{InstrumentRole} in a cutting action. Other roles include \concept{AgentRole}, \concept{CausalProcessRole}, %communication topic, existing object role, explanation, instrument, linguistic function, location, locatum role, path role, patient, question, relatum role, and software type. 
+etc. Further role sub-categories will be defined under appendix section.\todo{Seba: An example with using those terms would be nice.} \todo{DB: this needs to be extended, it is a section now and should be +1 page length}
 
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
-\section{Characterization of Events}
+\section{Views on Events}
 \label{sec:narrative:relations} 
 
 \subsection{Occurrence}
 \label{sec:occurrences}
 %% Summary of Figure below
 The basic building blocks of \neems are the events that occur when an agent interacts with its environment through movements of its body.
-An event is defined as \emph{any physical, social, or mental process, event, or state}. Events have an associated time interval that determines the time at which the event occurs. Time data is represented as unix timestamps using XSD types.
-%As discussed in porevious section, we distinguish between three different event classes: \owlClass{Action}, \owlClass{State}, and \owlClass{Process}.
+The \neem model defines \concept{Events} as things that unfold over time which is the main difference to \concept{Objects} which are things that are wholly present at each time instant.
+This definition of events implies that an event is not instantaneous, but that it has an associated time interval during which it occurred.
 
 \begin{ODP}{Occurences1}
 	\ODPINTENT{To represent the temporal extension of events.}
@@ -96,11 +146,10 @@ An event is defined as \emph{any physical, social, or mental process, event, or 
 	\ODPDEFINEDIN{SOMA.owl}
 	\ODPQUESTION{When did it happen?}
 	\ODPGRAPHIC{\begin{tikzpicture}
-	    \node[owlclass] (TI) {Time Interval};
-	    \node[data,below=0.6cm of TI,xshift=-1.2cm] (BEGIN) {xsd:double};
-	    \node[data,below=0.6cm of TI,xshift=1.2cm] (END) {xsd:double};
-	    \draw (TI)  edge[relation] node[midway,label=left:hasIntervalBegin] {} (BEGIN);
-	    \draw (TI)  edge[relation] node[midway,label=right:hasIntervalEnd] {} (END);
+	    \node[owlclass] (A) {Time Interval};
+	    \node[data,below=0.8cm of A] (B) {xsd:double};
+	    \draw (A) edge[relation,xshift=0.0cm]
+	    	node[midway,text width=1.6cm,xshift=1.1cm] {hasIntervalBegin hasIntervalEnd} (B);
 	\end{tikzpicture}}
 	%% Example KnowRob language expressions
 	\ODPEXAMPLES{
@@ -169,14 +218,15 @@ Agents are defined as \emph{agentive objects, either physical (e.g. a robot, a h
 %\textbf{todo: Mihai write this.}
 %\textbf{todo: why isn't hasPhase Event-to-Event?}
 
-Because an Event often has relevant internal structure, it is necessary to represent relations between it and the other events that make up its composition. 
+Because an \concept{Event} often has relevant internal structure, it is necessary to represent relations between it and the other events that make up its composition. In general, the parts of an \concept{Event} are themselves \concept{Events}. For example, the parts of an \concept{Action} may be \concept{Actions} or \concept{Processes}. To help identify when an \concept{Event} is to be understood as a part of some larger, we will use the word ``phase'': an \concept{Event} which is a part of another. Note that, as we discussed above, any \concept{Event} may be part of another so the word ``phase'', while useful for our presentation here, does not correspond to a concept in the ontology.
 %DUL provides two such structuring relations: \emph{hasConstituent} and \emph{hasPart}. We will focus on \emph{hasPart} in this section, but we will briefly discuss the difference between the two relations as well. \todo{Seba: Why only hasPart ?}
 %
 %The \emph{hasConstituent} relation is intended to connect entities from different ontological layers or levels of abstraction of looking at the world. A material is a constituent of the object it makes up; individual persons are constituents of a corporation. While these constituency relations could often be in colloquial language described as parthood, DUL reserves parthood for more restrictive connections between entities closer to each other in their ontological characterization. For example, a corporation is a \emph{SocialObject} and as such can only have \emph{SocialObjects} as parts, whereas human persons are \emph{PhysicalAgents}, disjoint from \emph{SocialObjects}.
 %
 %The \emph{hasPart} relation is transitive and defined to have domain and range \emph{Entity}, that is, in principle it could link entities from any concepts together. However, various concepts restrict what can be parts of their instances as exemplified above; as another example, \emph{PhysicalObjects} can only have other \emph{PhysicalObjects} as parts. In SOMA, we define more specialized subproperties of \emph{hasPart} to deal with parts of \emph{Events} vs. parts of \emph{Objects}. The relevant properties are \emph{hasPhase} and \emph{hasComponent} respectively; both are subproperties of \emph{hasPart}.
 %
-In SOMA, we define a \emph{hasPhase} property to represent such relations. This is a transitive property, similar to its superproperty in DUL, \emph{hasPart}.\todo{Seba: What is a phase ?}\todo{Seba: Is hasPart important for the reader ? If not, we can leave it out. Otherwise, we will need some explanation.}
+
+To represent the parthood relation between \concept{Events}, we define the \relation{hasPhase} object property. This is a transitive and asymmetric property; no \concept{Event} may be a part of itself.
 
 \begin{ODP}{Event Phases}
 	\ODPINTENT{To represent how an event is composed of phases.}
