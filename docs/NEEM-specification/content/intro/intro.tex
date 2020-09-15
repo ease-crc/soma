@@ -128,11 +128,32 @@ We will provide example expressions in this document that highlight how the know
 \section{Notation} % Domain of Discourse
 \label{sec:notation}
 
-Because in subsequent sections we will give more formal definitions for various concepts, we now review some basic notions about the main formalism we use in the ontology, as well as introduce the notation we will employ.
+In this Section, we will shortly introduce the notions and notations that are important to follow this document.
+%Because in subsequent sections we will give more formal definitions for various concepts, we now review some basic notions about the main formalism we use in the ontology, as well as introduce the notation we will employ.
 
-An ontology is a collection of logical axioms in some formal language. In the case of many ontologies available in the semantic web, as well as in the case of SOMA, this formal language is description logic, also known as DL. The entities that DL axioms describe can be either ``concepts'', sometimes known as ``classes'', and   \todo{Seba: Can we here remove individuals ? It seems not very well definied that concepts are known as individuals and in the next sentence the instances are called individuals.}``individuals''. An individual is an instance of one or more concepts. A concept may be subsumed by another. Between individuals there may be relations called ``object properties''. As a syntactic convenience, an individual can also have ``data properties'' that link it to some alphanumeric data item which is itself not considered an individual in the ontology. As an example, we might have that Alice and Bob are two individuals belonging to the concept \concept{Human}, and that the object property \relation{hasChild} connects Alice to Bob, i.e. the relation asserts that Alice has Bob as a child. We may also have that Alice \relation{hasHeight} ``1.7m'', where ``1.7m'' is not an individual in the ontology but rather a data item.
-
-Accordingly, there are axioms that describe concepts or object/data properties, and axioms that describe individuals and the relations between them. The set of concepts, object and data properties, and the axioms that define them is called the Tbox, or terminological part, and we will denote it by $\mathcal{T}$. The set of individuals and the axioms describing them is called the Abox, or assertion part, and we will denote it by $\mathcal{A}$.
+\neems are formally represented using an \emph{ontology}.
+An ontology is a collection of logical axioms in some formal language such as description logic (DL).
+%In the case of many ontologies available in the semantic web, as well as in the case of SOMA, this formal language is description logic, also known as DL.
+The entities that DL axioms describe can be either \emph{concepts} (sometimes known as \emph{classes}),
+and \todo{Seba: Can we here remove individuals?
+It seems not very well definied that concepts are known as individuals and in the next sentence the instances are called individuals.} \emph{individuals}.
+An individual is an instance of one or more concepts.
+A concept may be subsumed by another.
+Between individuals there may be relations called \emph{object properties},
+and, in addition, an individual can also have \emph{data properties} that link it to some data values.
+%As a syntactic convenience, an individual can also have ``data properties'' that link it to some alphanumeric data item which is itself not considered an individual in the ontology.
+As an example, let us assume that Alice and Bob are both individuals of the concept \concept{Human},
+and that the object property \relation{hasChild} connects Alice to Bob,
+i.e. the relation asserts that Bob us a child of Alice.
+We may also know the height of Allice, which would be represented by a data property \relation{hasHeight} whose value could be a string such as \emph{1,7m} to represent that she is 1.7m tall.
+%%
+Accordingly, there are axioms that describe concepts or object/data properties,
+and axioms that describe individuals and the relations between them.
+The set of concepts, object and data properties, and the axioms that
+define them is called the Tbox, or terminological part,
+and we will denote it by $\mathcal{T}$.
+The set of individuals and the axioms describing them is called the Abox,
+or assertion part, and we will denote it by $\mathcal{A}$.
 
 It is useful when describing concepts to emphasize the concept names such that it is clear we reference the concept, and not the colloquial word. As such, \concept{Concepts} and \relation{relations} will be written in a different font. Note that the name of a concept always starts with an uppercase letter, whereas the name of a relation with a lowercase one. Any word appearing in a concept or relation name after the first one will always begin with an uppercase letter.
 
