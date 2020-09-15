@@ -175,7 +175,6 @@ An example is a name such as \emph{xsd:double}; in this case, \emph{xsd} is the 
 % % % % % % % % % % % % % % % % %
 \section{Scope} % Domain of Discourse
 \label{sec:scope}
-%\todo{Mihai: write about competency questions here. Probably would be good to provide a list of them that we intend to cover with the information contained in neems}
 
 The broad scope of this work is to provide information about how robotic manipulation activities are represented, acquired, curated and published in the \ease system for episodic memories.
 %Our work aims to provide knowledge modeling for robotic manipulation and autonomous robot control, such that data acquired through performing actions can be stored, interpreted, and used towards training and improving robot skills.
@@ -189,28 +188,11 @@ Information about how the data is collected, with what methods, from what agents
 Note that in principle episodes can be stored of any agent performing any activity, and in actuality many of the NEEMs we expect to store will come from humans demonstrating how to perform a task.
 NEEMs are therefore not simply intended as a kind of self-practice journal, but rather as a store of practical knowledge of a variety of agents, useful for a variety of autonomous, humanoid robots.
 
-%Ideally, the knowledge we formalize in this collection of ontologies will allow a single, general control program to adapt itself, via reasoning, and generate adequate behavior in a large variety of settings, for different tasks and participating objects.
-% NOTE: taken from SOMA paper
-%The broad scope of our work is everyday object manipulation tasks in autonomous robot control, and in particular the motion and force characteristics of objects that interact with each other.
-%The research question driving us is whether a single general control program can be written that can generate adequate behavior in many different contexts: for different tasks, objects, and environments.
-%\todo{somebody needs to rephrase this! it is copied from SOMA paper}
-
 The kinds of knowledge a robot needs for competent performance of its tasks are varied. Usually, knowledge modelling in robotics and AI has focused on a symbolic level, of actions treated as black boxes that relate to a larger plan by means of their preconditions and effects. Actions are also very underspecified when described in spoken commands. This abstract level of description however is insufficient; the physical details of the actions matter. For example, the angle and speed with which a pitcher is moved, and the amount of liquid in it, determines whether there will be spillage. A robot needs to choose appropriate parameters for its actions, and infer these parameters when they are left unspecified in a command.
-% NOTE: taken from SOMA paper
-%One of the challenges is that, using such a general plan, the agent needs to fill the knowledge gaps between abstract instructions included in the plan and the realization of context specific behavior. That is, for example, the many ways of how humans perform a pouring task depending on the source from which is poured, the destination, and the substance that is to be poured.
-%Another challenge is that object manipulation tasks may fail if the agent does not perform the motions competently and well. This is caused by the agent choosing inappropriate parametrization of its control-level functions.
-%\todo{somebody needs to rephrase this! it is copied from SOMA paper}
 
 Such inference requires the robotic agent to be equipped with common-sense and intuitive physics knowledge, as well as an abstract task and object model, and knowledge of how to apply these models in a given situation.
 The \neem model attempts to support each of these requirements.
 A brief list of some of the over-arching competency questions follows.
-
-%%\begin{itemize}
-%%    \item \emph{How are actions conceptualized?} What is an Action, how does it relate to other concepts an Agent might have about the world? What is the purpose of an Action?
-%%    \item \emph{How are possibilities for action formalized?} How does an agent model what is made available by the environment? How does an agent model what it is itself capable of?
-%%    \item \emph{What is the structure of an Action?} How do several actions make up another? What objects participate in an action and with what roles?
-%%    \item \emph{How are qualitative and quantitative features of the world represented?} What is the parameter set of an action? What regions can values for these parameters occupy? What is a good parameterization and how can one be found?
-%%\end{itemize}
 
 \begin{itemize}
     \item \emph{How are actions conceptualized?} What is an action, how does it relate to other concepts an agent might have about the world? What is the purpose of an action?
@@ -221,13 +203,6 @@ A brief list of some of the over-arching competency questions follows.
     \item \emph{How is an action recorded and described?} What is the relevant data to capture how an action unfolded? What are the relevant pieces of contextual information for describing an action that has actually occurred? What was the outcome of the action, in particular, to what extent did it match the goal?
     \item \emph{How is a learning problem formalized?} What is the optimization goal? What assumptions were in effect when collecting the training data? What sort of influence might biases have upon the learned model? What should be essential features that a learned model should use? What would be sanity checks on the learned model to verify it does not abuse spurious correlations?
 \end{itemize}
-\todo{DB: could we add some motion/force questions here?}
-\todo{DB: could we add some questions that require a ML model learned from neems?}
-
-% NOTE: taken from SOMA paper
-%The employment of a general plan thus requires an abstract task and object model, and a mechanism to apply this abstract knowledge in situational context.
-%To achieve this, an agent needs to be equipped with the necessary common-sense and intuitive physics knowledge, which is what SOMA\todo{The acronym is no where defined} attempts.
-%\todo{somebody needs to rephrase this! it is copied from SOMA paper}
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
