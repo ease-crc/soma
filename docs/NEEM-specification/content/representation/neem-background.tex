@@ -374,11 +374,11 @@ The pose itself is given as 6D pose including the objects' orientation as quater
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Physical Object};
 	    \node[owlclass,below=0.6cm of A] (B) {Localization};
-	    \node[owlclass,below=0.6cm of B] (C) {Physical Place};
+	    %\node[owlclass,below=0.6cm of B] (C) {Physical Place};
 	    \draw (A) edge[relationxl] node[midway,label=left:hasLocalization] {} (B);
 	    \draw (B) edge[relationxr] node[midway,label=right:isLocalizationOf] {} (A);
-	    \draw (B) edge[relationxl] node[midway,label=left:hasOrigin] {} (C);
-	    \draw (C) edge[relationxr] node[midway,label=right:isOriginOf] {} (B);
+	    %\draw (B) edge[relationxl] node[midway,label=left:hasOrigin] {} (C);
+	    %\draw (C) edge[relationxr] node[midway,label=right:isOriginOf] {} (B);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
@@ -399,14 +399,14 @@ The pose itself is given as 6D pose including the objects' orientation as quater
 	\begin{tikzpicture}
 	    \node[owlclass] (A) {Localization};
 	    \node[owlclass,below=0.6cm of A] (B) {6D Pose};
-	    \node[data,below=1.0cm of B,xshift=1.0cm] (C) {xsd:double};
+	    \node[data,below=1.0cm of B,xshift=1.0cm] (C) {double[]};
 	    \node[data,below=1.0cm of B,xshift=-1.0cm] (D) {xsd:string};
-	    \draw (A) edge[relationxl] node[midway,label=left:hasPose] {} (B);
-	    \draw (B) edge[relationxr] node[midway,label=right:isPoseOf] {} (A);
+	    \draw (A) edge[relationxl] node[midway,label=left:hasSpaceRegion] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isSpaceRegionOf] {} (A);
 	    \draw (B) edge[relation,xshift=-0.4cm] node[midway,xshift=0.1cm,label=left:hasReferenceFrame]
 	      {} ($(D.north-|B)$);
 	    \draw (B) edge[relation,xshift=0.3cm] node[midway,text width=2.4cm,xshift=1.4cm]
-	    	{hasTranslationX/Y/Z hasQuaternionX/Y/Z/W} ($(C.north-|B)$);
+	    	{hasTranslationVector hasOrientationVector} ($(C.north-|B)$);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
