@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="http://www.ease-crc.org/ont/SOMA-OBJ.owl#"
      xml:base="http://www.ease-crc.org/ont/SOMA-OBJ.owl"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl">
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
@@ -21,6 +21,181 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasChildLink -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasChildLink">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isChildLinkOf"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Joint"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates a joint to the link it connects which is closer to the end of the kinematic chain.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has child link</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasEndLink -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasEndLink">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasLink"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isEndLinkOf"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates an object to kinematic components at the end of the kinematic chain.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has end link</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointLimit -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointLimit">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isJointLimitOf"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Joint"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointLimit"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates a joint to its physical limits.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has joint limit</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointState -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointState">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isJointStateOf"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Joint"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointState"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates a joint to its state.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has joint state</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasLink -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasLink">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isLinkOf"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates an object to its kinematic components.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has link</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasParentLink -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasParentLink">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isParentLinkOf"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Joint"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates a joint to the link it connects which is closer to the root of the kinematic chain.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has parent link</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasRootLink -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasRootLink">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasLink"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isRootLinkOf"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates an object to kinematic components at the root of the kinematic chain.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has root link</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#isChildLinkOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isChildLinkOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isConstituentOf"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Joint"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates a joint to the link it connects which is closer to the end of the kinematic chain.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is child link of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#isEndLinkOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isEndLinkOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isLinkOf"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates an object to kinematic components at the end of the kinematic chain.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is end link of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#isJointLimitOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isJointLimitOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointLimit"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Joint"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates a joint to its physical limits.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is joint limit of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#isJointStateOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isJointStateOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointState"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Joint"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates a joint to its state.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is joint state of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#isLinkOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isLinkOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isComponentOf"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates an object to its kinematic components.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is link of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#isParentLinkOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isParentLinkOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isConstituentOf"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Joint"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates a joint to the link it connects which is closer to the root of the kinematic chain.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is parent link of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#isRootLinkOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isRootLinkOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isLinkOf"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates an object to kinematic components at the root of the kinematic chain.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is root link of</rdfs:label>
+    </owl:ObjectProperty>
     
 
 
@@ -565,6 +740,9 @@
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isPhysicallyContainedIn">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isLocationOf"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A spatial relation holding between an object (the container), and objects it contains.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is physically contained in</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -787,6 +965,102 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointEffort -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointEffort">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointParameter"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointState"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The effort applied in a joint given in N (prismatic joint) or N*m (hinged joints).</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has joint effort</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointEffortLimit -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointEffortLimit">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointParameter"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointLimit"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The maximum effort applied in a joint given in N (prismatic joint) or N*m (hinged joints).</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has joint effort limit</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointParameter -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAttribute"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Assigns a value for an attribute of a joint.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has joint parameter</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointPosition -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointPosition">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointParameter"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointState"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The position of a joint given in m (prismatic joints) or rad (hinged joints).</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has joint position</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointPositionMax -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointPositionMax">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointParameter"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointLimit"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The maximum position of a joint given in m (prismatic joints) or rad (hinged joints).</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has joint position max</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointPositionMin -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointPositionMin">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointParameter"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointLimit"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The minimum position of a joint given in m (prismatic joints) or rad (hinged joints).</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has joint position min</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointVelocity -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointVelocity">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointParameter"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointState"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The velocity of a joint given in m/s (prismatic joints) or rad/s (hinged joints).</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has joint velocity</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointVelocityLimit -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointVelocityLimit">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointParameter"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointLimit"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The maximum velocity of a joint given in m/s (prismatic joints) or rad/s (hinged joints).</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has joint velocity limit</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#hasColorValue -->
 
     <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasColorValue">
@@ -957,14 +1231,6 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#isPhysicallyContainedIn -->
-
-    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isPhysicallyContainedIn">
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </owl:DatatypeProperty>
-    
-
-
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -973,6 +1239,173 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#ContinuousJoint -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#ContinuousJoint">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#HingeJoint"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A continuous hinge joint that rotates around an axis and has no upper and lower limits.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Continuous joint</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#FixedJoint -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#FixedJoint">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Joint"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#MovableJoint"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A joint that cannot move, designed to fixiate links.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fixed joint</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#FloatingJoint -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#FloatingJoint">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#MovableJoint"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A joint that allows motion for all 6 degrees of freedom.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Floating joint</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#HingeJoint -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#HingeJoint">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#MovableJoint"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A joint that rotates along an axis.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hinge joint</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#Joint -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Joint">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#FixedJoint"/>
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#MovableJoint"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalBody"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasChildLink"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointState"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointState"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasParentLink"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An object that is used to articulate links in a kinematic structure.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointLimit -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointLimit">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAttribute"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The physical limits of a joint.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Joint limit</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointState -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointState">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAttribute"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointPosition"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointVelocity"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The state of a joint in terms of position, velocity of the joint and effort applied to it.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Joint state</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#MovableJoint -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#MovableJoint">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Joint"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A joint where the two connected links can move relative to each other in some dimension.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Movable joint</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#PlanarJoint -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#PlanarJoint">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#MovableJoint"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A joint that allows motion in a plane perpendicular to an axis.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Planar joint</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#PrismaticJoint -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#PrismaticJoint">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#MovableJoint"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointLimit"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointLimit"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A sliding joint that slides along an axis, and has a limited range specified by the upper and lower limits.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Prismatic joint</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#RevoluteJoint -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#RevoluteJoint">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#HingeJoint"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointLimit"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointLimit"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A hinge joint that rotates along an axis and has a limited range specified by the upper and lower limits.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Revolute joint</rdfs:label>
+    </owl:Class>
     
 
 
@@ -2823,24 +3256,9 @@ It is also possible that a Transient transitionsBack to the initial object. An e
     <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject -->
 
     <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Annotations
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isPhysicallyContainedIn">
-        <rdfs:comment>A spatial relation holding between an object (the container), and objects it contains.</rdfs:comment>
-        <rdfs:label>is physically contained in</rdfs:label>
-    </rdf:Description>
 </rdf:RDF>
 
 
 
-<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.5.12.2019-05-06T20:49:08Z) https://github.com/owlcs/owlapi -->
 
