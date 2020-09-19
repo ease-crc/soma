@@ -498,7 +498,7 @@ However, the \neem model defines a set of data properties used to access joint s
 	    \draw (A) edge[relationxl] node[midway,label=left:hasJointState] {} (B);
 	    \draw (B) edge[relationxr] node[midway,label=right:isJointStateOf] {} (A);
 	    \draw (B) edge[relation] node[midway,text width=2.0cm,xshift=1.3cm]
-	    	{hasJointValue hasVelocityValue hasEffortValue} (C);
+	    	{hasJointPosition hasJointVelocity hasJointEffort} (C);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
@@ -527,9 +527,9 @@ In addition, maximum values for the velocity and effort of a joint may be provid
 	    \node[owlclass,below=0.6cm of A] (B) {Joint Limit};
 	    \node[data,below=1.4cm of B] (C) {xsd:double};
 	    \draw (A) edge[relationxl] node[midway,label=left:hasJointLimit] {} (B);
-	    \draw (B) edge[relationxr] node[midway,label=right:isLimitOfJoint] {} (A);
-	    \draw (B) edge[relation] node[midway,text width=2.0cm,xshift=1.3cm]
-	    	{hasMinimumLimit hasMaximumLimit hasVelocityLimit hasEffortLimit} (C);
+	    \draw (B) edge[relationxr] node[midway,label=right:isJointLimitOf] {} (A);
+	    \draw (B) edge[relation] node[midway,text width=2.2cm,xshift=1.3cm]
+	    	{hasJointPositionMin hasJointPositionMax hasJointVelocityLimit hasJointEffortLimit} (C);
 	\end{tikzpicture}
 	}
 	%% Example KnowRob language expressions
