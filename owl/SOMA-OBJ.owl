@@ -975,7 +975,7 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#ArtificialAgent">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
-        <rdfs:comment>A physical object with artificial characteristics, which can perform actions to achieve desired goals, typically has sensors and/or actuators.
+        <rdfs:comment>A physical object with artificial characteristics, which can perform actions to achieve desired goals, and typically has sensors and/or actuators.
 
 There can be non-physical artificial agents such as software programs but they are not considered here in the scope of artificial agent.</rdfs:comment>
         <rdfs:label>Artificial agent</rdfs:label>
@@ -987,6 +987,17 @@ There can be non-physical artificial agents such as software programs but they a
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#FunctionalPart">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalBody"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isComponentOf"/>
+                        <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+                    </owl:Restriction>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
         <rdfs:comment>Parts of an agent or an artifact are considered as functional parts.</rdfs:comment>
         <rdfs:label>Functional part</rdfs:label>
     </owl:Class>
