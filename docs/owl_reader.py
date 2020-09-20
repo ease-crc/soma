@@ -90,20 +90,23 @@ class OWLReader:
 
 	def _printdict(self, class_dict):
 		for key,val in class_dict.items() :
-			print(r'\appendixstyle', end="")
-			print(r'{{{}}}'.format(key),end=" ")
-			print(r'{', end="")
-			for j,k in val.items():
-				#print(r'\textit{{{}}}'.format(j),end=" ")
-				#print(r"\hspace*{0.0008cm}")
-				print(r'{-- }', end="")
-				#print(r"\hspace*{0.0008cm}")
-				if isinstance(k,list):
-					print(', '.join(k),end=" ")
-					#print(r"\hspace*{0.0008cm}")
-				else:
-					print(k,end=" ")
-					#print(r"\hspace*{0.0008cm}")
-			print(r'}')
-			print(r"\linebreak")
+			if 'comment' in val:
+				print(r'\appendixstyle{{{}}} {{$\sqsubseteq$ }} \textit{{{}}} {{$\circ$ }} {{{}}}\\'.format(key,str(val['superclass']),str(val['comment'])))
+			else:
+				print(r'\appendixstyle{{{}}} {{$\sqsubseteq$ }} \textit{{{}}}.\\'.format(key,str(val['superclass'])))
+			
+			#for j,k in val.items():
+			#	#print(r'\textit{{{}}}'.format(j),end=" ")
+			#	#print(r"\hspace*{0.0008cm}")
+			#	print(r'{-- }', end="")
+			#	#print(r"\hspace*{0.0008cm}")
+			#	if isinstance(k,list):
+			#		print(', '.join(k),end=" ")
+			#		#print(r"\hspace*{0.0008cm}")
+			#	else:
+			#		print(k,end=" ")
+			#		#print(r"\hspace*{0.0008cm}")
+			
+			#print(r'}')
+			#print(r"\linebreak")
 		
