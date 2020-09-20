@@ -91,7 +91,7 @@ class OWLReader:
 	def _printdict(self, class_dict):
 		for key,val in class_dict.items() :
 			if 'comment' in val:
-				print(r'\appendixstyle{{{}}} {{$\sqsubseteq$ }} \textit{{{}}} {{$\circ$ }} {{{}}}\\'.format(key,str(val['superclass']),str(val['comment'])))
+				print(r'\appendixstyle{{{}}} {{$\sqsubseteq$ }} \textit{{{}}} {{--}} {{{}}}\\'.format(key,str(val['superclass']),str(val['comment'])))
 			else:
 				print(r'\appendixstyle{{{}}} {{$\sqsubseteq$ }} \textit{{{}}}.\\'.format(key,str(val['superclass'])))
 			
