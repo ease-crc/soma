@@ -988,15 +988,17 @@ There can be non-physical artificial agents such as software programs but they a
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#FunctionalPart">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalBody"/>
         <rdfs:subClassOf>
-            <owl:Class>
-                <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isComponentOf"/>
-                        <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-                    </owl:Restriction>
-                </owl:unionOf>
-            </owl:Class>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isComponentOf"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>Parts of an agent or an artifact are considered as functional parts.</rdfs:comment>
         <rdfs:label>Functional part</rdfs:label>
