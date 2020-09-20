@@ -47,9 +47,7 @@ def report_suggestion(name,descr,iris):
 	#msg = format_pitfall(name,descr,names)
 	print("::info ::"+descr)
 
-if __name__ == "__main__":
-	# read arguments
-	xml_file = sys.argv[1]
+def run(xml_file):
 	root = ET.parse(xml_file).getroot()
 	
 	pitfalls = {"Important": [], "Minor": []}
@@ -72,4 +70,11 @@ if __name__ == "__main__":
 		iris = get_affected_soma_iris(suggestion_xml)
 		if len(iris)>0:
 			report_suggestion(name,descr,iris)
+
+if __name__ == "__main__":
+	xml_file = sys.argv[1]
+	try:
+		run(xml_file)
+	except:
+		print("Unexpected error:", sys.exc_info()[0])
 
