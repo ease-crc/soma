@@ -8,8 +8,7 @@ import sys
 from collections import OrderedDict
 import re
 
-
-class OwlReader:
+class OWLReader:
 
 	def __init__(self, iri_list):
 		self.props = ["superclass", "label", "comment", "Defined in"]
@@ -24,6 +23,12 @@ class OwlReader:
 				temp.append(self._parse_string(str(i), ".", 1))
 		return temp
 
+	def _parse_string(self, string_val, split_param, desired_str_pos):
+		if split_param in string_val:
+			return string_val.split(split_param)[desired_str_pos]
+		else:
+			return string_val
+
 	def get_classes(self):
 		''' 
 		Gets the classes defined in the ontology their corresponding
@@ -34,8 +39,6 @@ class OwlReader:
 			class_dict.update(self._get_values(iri))
 			ordered_dict = OrderedDict(sorted(class_dict.items()))
 		self._printdict(ordered_dict)
-		
-			
 	
 	def _get_values(self, iri):
 		ontology = owl.get_ontology(iri).load()
@@ -56,13 +59,6 @@ class OwlReader:
 					temp_dict[prop] = a
 			class_dict[i] = temp_dict
 		return class_dict
-		
-
-	def _parse_string(self, string_val, split_param, desired_str_pos):
-		if split_param in string_val:
-			return string_val.split(split_param)[desired_str_pos]
-		else:
-			return string_val
 
 	def _get_valid_string(self, temp_val):
 		if(isinstance(temp_val, list)):
@@ -84,8 +80,9 @@ class OwlReader:
 			elif(rel == "comment"):
 				value_str = getattr(getattr(namespace, sub),rel)
 				if(value_str):
+					value_str = value_str[0].split('.')[0] + '.'
 					pattern = "[.!?][\s]{1,2}(?=[A-Z].)"
-					return re.split(pattern,value_str[0])[0]
+					return re.split(pattern,value_str)[0]
 			return getattr(getattr(namespace, sub),rel)
 		except AttributeError:
 			print("Please pass the right parameters." f"{sub}" " does not have " f"{rel}")
@@ -97,9 +94,9 @@ class OwlReader:
 			print(r'{{{}}}'.format(key),end=" ")
 			print(r'{', end="")
 			for j,k in val.items():
-				print(r'\textit{{{}}}'.format(j),end=" ")
+				#print(r'\textit{{{}}}'.format(j),end=" ")
 				#print(r"\hspace*{0.0008cm}")
-				print(r'{$\bullet$ }', end="")
+				print(r'{-- }', end="")
 				#print(r"\hspace*{0.0008cm}")
 				if isinstance(k,list):
 					print(', '.join(k),end=" ")
