@@ -55,6 +55,10 @@ jobs:
           name: Metrics
           path: ./build/metrics.json
 
+      - name: Copy SOMA-HOME
+        run: |
+          cp ./owl/SOMA-HOME.owl ./build/
+
       - name: Deploy current
         uses: JamesIves/github-pages-deploy-action@releases/v3
         if: github.ref == 'refs/heads/master'
