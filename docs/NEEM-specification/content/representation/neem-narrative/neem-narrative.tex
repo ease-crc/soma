@@ -13,7 +13,7 @@ The vision is that a library of \emph{contextualized} motions and interactions w
 With contextualized we mean that each motion and interaction is associated to the context of its occurrence.
 That is the environment where it occurred, objects that were involved, the goals and plans of agents, their behaviour etc.
 
-The story represented in the \neemnar provides context for the \neemexp acquired during an activitiy.
+The story represented in the \neemnar provides context for the \neemexp acquired during an activity.
 This is, first of all, that labels are assigned to the time intervals where something relevant has happened such as the execution of a task, the interaction between objects, or the occurrence of a motion.
 Labels correspond to classes that are organized in a taxonomy (Section~\ref{sec:narrative:taxonomy}).
 This allows to learn models at different levels of abstraction, 
@@ -35,18 +35,16 @@ The reason being that intentions of agents can usually not be observed directly,
 Another aspect is that events may contribute to several goals, and, in such a case, may not be associated to a single category.
 This is, for example, the case when fetching a glas of wine from a fridge in order to first pour some wine into the Bolognese sauce, and second to drink the remaining wine from the glass.
 In this case the fetching event contributes to multiple goals and thus would belong to different classes in an action taxonomy organized based on agentivity.
-Please note that while multiple inheritence is generally supported, it should only be used if absolutely necessary. \todo{DB: any reference for why this is bad?}
 
 % event classes
-The \neem model defines a very shallow event taxonomy with rough distinctions that are not dependend on how an event is interpreted, executed or seen.
+The \neem model defines a very shallow event taxonomy with rough distinctions that are not dependent on how an event is interpreted, executed or seen.
 These categories are: \concept{action}, \concept{process}, and \concept{state}.
 %%
-Actions are exactly the events that are perfomed intentionally by an agent executing a task by following a plan or workflow.
+Actions are exactly the events that are performed intentionally by an agent executing a task by following a plan or workflow.
 A process, on the other hand, is an event that causes state changes without the necessity of an agent driving or causing the process.
 Movement being one example, as it does not strictly depend on an agent executing a motion.
 For example, in case of the earth rotating around the sun, or some letter in a bottle being transported through the ocean.
 Finally, a state is defined as an event where an object has a dedicated stable configuration which is usually represented as having a certain property value over a fixed time interval.
-\todo{DB: not sure about accidents, aren't they interpretations?}
 
 However, it is possible to represent how an event is interpreted, executed or seen using a taxonomy of event \concept{Concepts} which is included in the \neem model.
 Concepts are used to classify events in some context.
@@ -59,7 +57,7 @@ Goals may be achieved in different ways depending on, for example, what is avail
 Tasks do not imply a particular way of doing something, however, \concept{plans} can be used to decompose a task into several sub-tasks and thus to represent a particular way how the task can be organized.
 For example, beer brewing is a task with a dedicated goal which can be accomplished through different workflows which are slightly different at each brewery.
 Tasks are further classified into three main categories: \concept{physical task}, \concept{mental task} and \concept{communication task}.
-We are primarly interested in \concept{physical tasks}.
+We are primarily interested in \concept{physical tasks}.
 These are the tasks that require a physical agent to execute them.
 That is an agent with its own body and the ability to move meaningfully to achieve a designated goal by interacting in some way with the physical world.
 This category includes tasks such as \concept{actuating}, \concept{constructing}, \concept{modifying}, \concept{placing} and \concept{navigating}. 
@@ -74,7 +72,7 @@ The scope of interest is to identify which agents communicate, and what kind of 
 The \neem model also defines concepts that classify processes.
 One aspect is that of what a process does to objects.
 This is represented through the concepts \concept{alteration}, \concept{destruction} and \concept{creation}.
-Note that this may also be view-dependend, one person may see only the destructive aspects of a process, but another person may see the creation of something new too.
+Note that this may also be view-dependent, one person may see only the destructive aspects of a process, but another person may see the creation of something new too.
 Another aspect we are interested in are the \emph{force characteristics} of processes.
 That is how objects interact with each other with a reference to force.
 Each process may be labeled as \concept{alterative} or \concept{preservative}, meaning that there was either a tendency to set an object into motion, or to keep it still.
@@ -103,18 +101,22 @@ Other examples of state concepts used for the classification of state events are
 \label{sec:narrative:roles}
 
 \concept{Roles} are concepts used to describe how an object participates in an event or a relation. An object can play different roles throughout its lifetime. For example, a knife may play the \concept{PatientRole} of a grasping action, i.e. the object mainly affected by the action, and play an \concept{InstrumentRole} in a cutting action. Other roles include \concept{AgentRole}, \concept{CausalProcessRole}, %communication topic, existing object role, explanation, instrument, linguistic function, location, locatum role, path role, patient, question, relatum role, and software type. 
-etc. Further role sub-categories will be defined under appendix section.\todo{Seba: An example with using those terms would be nice.} \todo{DB: this needs to be extended, it is a section now and should be +1 page length}
+etc. Further role sub-categories will be defined under appendix section.\todo{Seba: An example with using those terms would be nice.} \todo{DB: this needs to be extended, it is a section now and should be +1 page length. Mihai: could you do this?}
 
 
 % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % %
 \section{Views on Events}
-\label{sec:narrative:relations} 
+\label{sec:narrative:relations}
+
+Events are characterized in the \neemnar through relationships and attributes.
+We encapsulate certain characteristics in so called \emph{event views}.
+Each view focusses on specific characteristics such as when the event occurred, or what roles objects have played in order to cover a set of competency questions that can be answered about an activitiy in case the corresponding view is represented.
+In the following, we will present the different views on events considered in the \neemnar.
+
 
 \subsection{Occurrence}
 \label{sec:occurrences}
-%% Summary of Figure below
-The basic building blocks of \neems are the events that occur when an agent interacts with its environment through movements of its body.
 The \neem model defines \concept{Events} as things that unfold over time which is the main difference to \concept{Objects} which are things that are wholly present at each time instant.
 This definition of events implies that an event is not instantaneous, but that it has an associated time interval during which it occurred.
 
@@ -189,7 +191,7 @@ Events always involve some objects that play a certain role during the event. Th
 \end{ODP}
 
 %\textbf{todo: Sascha write this}
-Agents are defined as \emph{agentive objects, either physical (e.g. a robot, a human or a whale) or social (e.g. a corporation, an institution or a community)}, Actions are defined as events with \emph{at least one agent that is participating in it, and that is executing a task}. An example would be an robot that is grasping an object. In that case the robot is the agent and grasping would be the a task executed in an action. Actions can be executed by multiple agents. 
+Agents are defined as \emph{agentive objects, either physical (e.g. a robot, a human or a whale) or social (e.g. a corporation, an institution or a community)}, Actions are defined as events with \emph{at least one agent that is participating in it, and that is executing a task}. An example would be a robot that is grasping an object. In that case the robot is the agent and grasping would be the a task executed in an action. Actions can be executed by multiple agents. 
 
 \begin{ODP}{Action Execution}
 	\ODPINTENT{To represent that an agent has executed an action.}
@@ -391,8 +393,6 @@ This is reflected in the taxonomy.
 However, entities may further be classified according to social aspects such as intention, purpose, etc.
 This type of classification is based on the \emph{conceptualization} of entities.
 In particular, conceptualizations of objects and events are used to classify them in the scope of some activity.
-For this purpose,
-a comprehensive collection of concepts is used to classify objects and events from a conceptual viewpoint (\textbf{todo: insert link to list of all concepts}).
 
 An object that participates in an event usually plays a certain role during the event.
 Some objects are designed to be used in certain ways, thus playing certain roles in specific tasks.
