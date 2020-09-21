@@ -1256,6 +1256,13 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#FixedJoint">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Joint"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointState"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#MovableJoint"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A joint that cannot move, designed to fixiate links.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fixed joint</rdfs:label>
@@ -1366,6 +1373,13 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#MovableJoint">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Joint"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointState"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointState"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A joint where the two connected links can move relative to each other in some dimension.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Movable joint</rdfs:label>
     </owl:Class>
