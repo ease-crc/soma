@@ -12,6 +12,40 @@
   <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">current</owl:versionInfo>
 </owl:Ontology>
 
+<owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasNetForce">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#NetForce"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+  <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isNetForceOf"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between a physical object and the total force acting on it.</rdfs:comment>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has net force</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+
+<owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isNetForceOf">
+  <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#NetForce"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between a physical object and the total force acting on it.</rdfs:comment>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is net force of</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isMassAttributeOf">
+  <rdfs:domain rdf:resource="#MassAttribute"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
+  <owl:inverseOf rdf:resource="#hasMassAttribute"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between physical objects and their mass.</rdfs:comment>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is mass attribute of</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasMassAttribute">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  <rdfs:range rdf:resource="#MassAttribute"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+</owl:ObjectProperty>
+
 <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf">
   <rdfs:domain rdf:resource="#Scene"/>
   <rdfs:range rdf:resource="#StateTransition"/>
@@ -183,8 +217,6 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
 <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
 
 <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
-
-<owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
 
 <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
 
@@ -789,12 +821,6 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:comment>Relates a localization quality to the object the localization belongs to.</rdfs:comment>
 </owl:ObjectProperty>
 
-<owl:ObjectProperty rdf:about="#hasMassAttribute">
-  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-  <rdfs:range rdf:resource="#MassAttribute"/>
-  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
-</owl:ObjectProperty>
-
 <owl:ObjectProperty rdf:about="#hasOutputParameter">
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
   <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
@@ -1158,6 +1184,16 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasCommonBoundary"/>
 </owl:ObjectProperty>
 
+<owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasForceValue">
+  <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#ForceAttribute"/>
+  <rdfs:range rdf:resource="#array_double"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A value that quantifies a force given in Newton.</rdfs:label>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has force value</rdfs:label>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
+
 <owl:DatatypeProperty rdf:about="#hasPositionData">
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
@@ -1224,8 +1260,6 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:domain rdf:resource="#ColorRegion"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
 </owl:DatatypeProperty>
-
-<owl:DatatypeProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
 
 <owl:DatatypeProperty rdf:about="#hasShapeParameter">
   <rdfs:domain rdf:resource="#ShapeRegion"/>
@@ -1319,6 +1353,39 @@ A style recommendation for usage guidelines is that they should be brief. In con
 <owl:AnnotationProperty rdf:about="#nickname">
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Similar to rdfs:label, but without GUI or reasoner impact in Protege; avoiding Protege problems is why this is not a label subproperty. Nicknames are used by particular software working with the ontology as a way to give community-specific names to concepts. Communities are identified by the subproperty of nickname.</rdfs:comment>
 </owl:AnnotationProperty>
+
+<owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#ForceAttribute">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasForceValue"/>
+      <owl:onDataRange rdf:resource="#array_double"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAttribute"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The value of a force dynamical characteristic. An example is the force exerted on another object when pushing it.</rdfs:comment>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Force attribute</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#NetForce">
+  <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#ForceAttribute"/>
+  <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The accumulated force acting upon an object.</rdfs:comment>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Net force</rdfs:label>
+</owl:Class>
+
+<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+
+<owl:Class rdf:about="#MassAttribute">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#hasMassValue"/>
+      <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAttribute"/>
+  <rdfs:comment>The quantity of matter which a body contains, as measured by its acceleration under given force or by the force exerted on it by a gravitational field.</rdfs:comment>
+</owl:Class>
 
 <owl:Class rdf:about="#Scene">
   <rdfs:subClassOf>
@@ -2085,8 +2152,6 @@ As such, this concept can be applied only to motions involving some PhysicalAgen
 </owl:Class>
 
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
-
-<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
 
 <owl:Class rdf:about="#Motion">
   <rdfs:subClassOf rdf:resource="#ProcessType"/>
@@ -3744,18 +3809,6 @@ Posture changes may take place as part of other actions, for example turning whe
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Physical action</rdfs:label>
 </owl:Class>
 
-<owl:Class rdf:about="#MassAttribute">
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasMassValue"/>
-      <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAttribute"/>
-  <rdfs:comment>The quantity of matter which a body contains, as measured by its acceleration under given force or by the force exerted on it by a gravitational field.</rdfs:comment>
-</owl:Class>
-
 <owl:Class rdf:about="#Material">
   <rdfs:subClassOf rdf:resource="#Intrinsic"/>
 </owl:Class>
@@ -4558,6 +4611,10 @@ It is also possible that a Transient transitionsBack to the initial object. An e
 
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
 
+<rdfs:Datatype rdf:about="#array_double">
+  <owl:equivalentClass rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</rdfs:Datatype>
+
 <owl:AsymmetricProperty rdf:about="#hasInitialScene">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
@@ -4637,10 +4694,6 @@ It is also possible that a Transient transitionsBack to the initial object. An e
 </Reification>
 
 <rdfs:Datatype rdf:about="#array_boolean">
-  <owl:equivalentClass rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-</rdfs:Datatype>
-
-<rdfs:Datatype rdf:about="#array_double">
   <owl:equivalentClass rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
 </rdfs:Datatype>
 
