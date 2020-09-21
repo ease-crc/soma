@@ -832,7 +832,7 @@
 
     <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasForceValue">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#ForceAttribute"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A value that quantifies a force given in Newton.</rdfs:label>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has force value</rdfs:label>
@@ -1021,9 +1021,9 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#NetForce -->
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#ForceAttribute -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#NetForce">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#ForceAttribute">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAttribute"/>
         <rdfs:subClassOf>
             <owl:Restriction>
@@ -1032,6 +1032,16 @@
                 <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The value of a force dynamical characteristic. An example is the force exerted on another object when pushing it.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Force attribute</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#NetForce -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#NetForce">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#ForceAttribute"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The accumulated force acting upon an object.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Net force</rdfs:label>
     </owl:Class>
