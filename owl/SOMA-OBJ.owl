@@ -832,7 +832,7 @@
     <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasShapeScale">
         <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasShapeParameter"/>
         <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ShapeRegion"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#array_double"/>
         <rdfs:comment>The scale of a shape, given as a vector of three real numbers to adjust x, y, z components of vertex vectors. In cases where a shape needs to be flipped compared to the shape described by a mesh, one of the scale components will be negative. 
 
 It is often the case that shapes need to be altered from their description in a shape file, and a typical example of this is scaling a mesh. 
@@ -989,7 +989,9 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
             <rdfs:Datatype>
                 <owl:unionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#float"/>
+                    <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#double"/>
                     <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#string"/>
+                    <rdf:Description rdf:about= "http://www.ease-crc.org/ont/SOMA.owl#array_double"/>
                 </owl:unionOf>
             </rdfs:Datatype>
         </rdfs:range>
@@ -2195,7 +2197,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasShapeScale"/>
                 <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
-                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+                <owl:onDataRange rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#array_double"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>A solid geometrical figure described in a mesh file.</rdfs:comment>
