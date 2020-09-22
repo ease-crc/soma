@@ -30,13 +30,13 @@ soma_iri(IN,IN) :-
   \+ atom(IN),
   !.
 soma_iri(IN,OUT) :-
-  ( atom_concat('http://www.ease-crc.org/SOMA',_,IN)
+  ( atom_concat('http://www.ease-crc.org/ont/SOMA',_,IN)
   -> soma_iri1(IN,OUT)
   ;  OUT=IN
   ).
 soma_iri1(IN,OUT) :-
   rdf_split_url(_,Name,IN),
-  atom_concat('http://www.ease-crc.org/SOMA.owl#',Name,OUT).
+  atom_concat('http://www.ease-crc.org/ont/SOMA.owl#',Name,OUT).
 
 %%
 ease_assert_import(_Graph,Ontology) :-
