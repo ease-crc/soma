@@ -7,6 +7,8 @@
 :- use_module(library('semweb/rdfs')).
 :- use_module(library('semweb/rdf_db')).
 
+:- rdf_register_prefix(soma, 'http://www.ease-crc.org/ont/SOMA.owl#').
+
 ease_ugly_ontology('http://www.ease-crc.org/ont/SOMA.owl').
 
 ease_assert(_Graph, rdf(_S,_P,O)) :-
