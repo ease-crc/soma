@@ -1955,6 +1955,15 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
   <owl:disjointWith rdf:resource="#ModifyingPhysicalObject"/>
 </owl:Class>
 
+<owl:Class rdf:about="#ArtificialAgent">
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
+  <rdfs:comment>A physical object with artificial characteristics, which can perform actions to achieve desired goals, and typically has sensors and/or actuators.
+
+There can be non-physical artificial agents such as software programs but they are not considered here in the scope of artificial agent.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
+
 <owl:Class rdf:about="#Assembling">
   <rdfs:subClassOf rdf:resource="#Constructing"/>
 </owl:Class>
@@ -2201,8 +2210,6 @@ TODO: for the robot workflows we are likely to need at the start, testing equali
 As such, this concept can be applied only to motions involving some PhysicalAgent, or body parts of a PhysicalAgent.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
-
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
 
 <owl:Class rdf:about="#Motion">
@@ -2384,25 +2391,6 @@ Image schemas are considered as fundamental, pre-conceptual, building blocks of 
 For SOMA, whereas the focus of executable schematic theories is to describe how an agent might act, image schematic theories focus on descriptions of how objects behave in the absence of, or after, an active intervention from an agent.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#Ceiling">
-  <rdfs:subClassOf rdf:resource="#RoomSurface"/>
-  <owl:disjointWith rdf:resource="#Floor"/>
-  <owl:disjointWith rdf:resource="#Wall"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Floor">
-  <rdfs:subClassOf rdf:resource="#RoomSurface"/>
-  <owl:disjointWith rdf:resource="#Wall"/>
-</owl:Class>
-
-<owl:Class rdf:about="#Wall">
-  <rdfs:subClassOf rdf:resource="#RoomSurface"/>
-</owl:Class>
-
-<owl:Class rdf:about="#RoomSurface">
-  <rdfs:subClassOf rdf:resource="#Surface"/>
-</owl:Class>
-
 <owl:Class rdf:about="#ChemicalProcess">
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process"/>
   <rdfs:comment>A process by which the chemical constituency of an Entity or set of Entities changes.
@@ -2426,15 +2414,15 @@ In some sense any process that results in entities being created or destroyed mi
 <owl:Class rdf:about="#CylinderShape">
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasRadius"/>
-      <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+      <owl:onProperty rdf:resource="#hasLength"/>
+      <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasLength"/>
-      <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+      <owl:onProperty rdf:resource="#hasRadius"/>
+      <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#ShapeRegion"/>
@@ -3196,14 +3184,14 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
 <owl:Class rdf:about="#Deposition">
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#affordsTrigger"/>
-      <owl:allValuesFrom rdf:resource="#DepositedObject"/>
+      <owl:onProperty rdf:resource="#affordsBearer"/>
+      <owl:allValuesFrom rdf:resource="#Deposit"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#affordsBearer"/>
-      <owl:allValuesFrom rdf:resource="#Deposit"/>
+      <owl:onProperty rdf:resource="#affordsTrigger"/>
+      <owl:allValuesFrom rdf:resource="#DepositedObject"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#Disposition"/>
@@ -3216,7 +3204,26 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
       <owl:someValuesFrom rdf:resource="#Connectivity"/>
     </owl:Restriction>
   </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="#FunctionalPart"/>
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+</owl:Class>
+
+<owl:Class rdf:about="#FunctionalPart">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isComponentOf"/>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+          </owl:unionOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalBody"/>
+  <rdfs:comment>Parts of an agent or an artifact are considered as functional parts.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#DesignedContainer">
@@ -4024,7 +4031,7 @@ Posture changes may take place as part of other actions, for example turning whe
       <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
     </owl:Restriction>
   </rdfs:subClassOf>
-  <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+  <rdfs:subClassOf rdf:resource="#FunctionalPart"/>
 </owl:Class>
 
 <owl:Class rdf:about="#LimbMotion">
@@ -4606,6 +4613,10 @@ As an example, a kind of Abductive reasoning would fit here: reconstruction, in 
 
 <owl:Class rdf:about="#Room">
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalPlace"/>
+</owl:Class>
+
+<owl:Class rdf:about="#RoomSurface">
+  <rdfs:subClassOf rdf:resource="#Surface"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Surface">
