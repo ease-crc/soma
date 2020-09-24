@@ -1566,6 +1566,13 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
   <rdfs:subPropertyOf rdf:resource="#hasColorValue"/>
 </owl:DatatypeProperty>
 
+<owl:DatatypeProperty rdf:about="#hasRealizationWithIdentifier">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
+  <rdfs:comment>A property linking an InformationObject to a persistent identifier such as a DOI, which can then be used to obtain an address at which a realization (digital file) of the information object can be retrieved.</rdfs:comment>
+</owl:DatatypeProperty>
+
 <owl:DatatypeProperty rdf:about="#hasReferenceFrame">
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
   <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
@@ -2414,15 +2421,15 @@ In some sense any process that results in entities being created or destroyed mi
 <owl:Class rdf:about="#CylinderShape">
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasLength"/>
-      <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+      <owl:onProperty rdf:resource="#hasRadius"/>
+      <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasRadius"/>
-      <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+      <owl:onProperty rdf:resource="#hasLength"/>
+      <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#ShapeRegion"/>
@@ -5135,6 +5142,24 @@ It is also possible that a Transient transitionsBack to the initial object. An e
   <rdfs:subPropertyOf rdf:resource="#interactsWith"/>
   <rdfs:comment>A relation from an object (the coveree) which is itself, or has its interior, prevented from being accessed from outside by a coverer.</rdfs:comment>
 </owl:AsymmetricProperty>
+
+<rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#hasRealizationWithIdentifier"/>
+      <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:comment>In SOMA-compliant systems, the way to use InformationObjects to specify extra data about an individual entity is to employ the 'is about' and 'expresses' properties (or their inverses 'is reference of' and 'is expressed by') and to supply a persistent identifier for a realization of the InformationObject.
+
+As a prototypical example, consider an individual called Action_XYZ, about which we have some data for which the meaning is described by Description_ABC. The data would be an individual InformationObject_DEF, and the following property assertions would hold:
+
+InformationObject_DEF 'is about' Action_XYZ
+InformationObject_DEF expresses Description_ABC
+
+
+Usually, an individual InformationObject would be connected to (at least) an InformationRealization individual. Instead, we provide the data property hasRealizationWithIdentifier, which provides a persistent identifier with which to locate a realization for the information object. Typically, this persistent identifier would be a DOI, from which a URL to a file containing a realization of the information object can be retrieved.</rdfs:comment>
+</rdf:Description>
 
 <owl:AsymmetricProperty rdf:about="#meets">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
