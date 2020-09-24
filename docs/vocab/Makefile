@@ -8,7 +8,7 @@ DELETE_FILES=${foreach extension,$(DELETE_EXTENSIONS),${foreach base_name,${BASE
 all: pdf
 
 pdf:
-	latexmk --pdf ${TARGET_FILES}
+	latexmk --pdf SOMA-vocabulary.tex
 
 clean:
 	rm -f ${DELETE_FILES}
