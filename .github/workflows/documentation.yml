@@ -5,6 +5,25 @@ on:
       - 'docs/**'
 
 jobs:
+  vocabulary:
+    name: SOMA Vocabulary
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Build
+        uses: docker://blang/latex:ubuntu
+        with:
+          args: make -f ./docs/vocab/Makefile
+
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: NEEM Vocabulary
+          path: ./docs/vocab/SOMA-vocabulary.pdf
+
   handbook:
     name: NEEM Handbook
     runs-on: ubuntu-latest
