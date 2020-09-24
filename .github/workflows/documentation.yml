@@ -15,8 +15,9 @@ jobs:
 
       - name: Build
         uses: docker://blang/latex:ubuntu
-        with:
-          args: cd ./docs/vocab/ && make
+        run: |
+          cd ./docs/vocab/
+          make
 
       - name: Upload
         uses: actions/upload-artifact@v1
