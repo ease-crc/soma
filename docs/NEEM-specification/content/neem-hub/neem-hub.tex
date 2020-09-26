@@ -3,29 +3,33 @@
 \chapterauthor{S. Koralewski}
 
 
-With the \neemhub we want to 
-neem hub, store data, version control, machine learning access to \openease. 
-To implement the version control of large data sets and machine learning models, we are using DVC\footnote{text}\url{https://dvc.org/}. 
+Our CRC aims to acquire a huge amount of data, make the data accessible to the research community,  allow to analyze the data, create machine learning models from the data and support version control for the data and models. 
+With our \neemhub concept we are covering all those requirements with one system.
+
+To implement the version control of large data sets and machine learning models, we are using DVC\footnote{\url{https://dvc.org/}}. 
 We use Hadoop\footnote{\url{https://hadoop.apache.org/}} and its file system HDFS to store the data and models.
-Hadoop is a cluster system which creates automatically replicas of the data once it is uploaded and allows parallel processing of data to speed up transforming or querying data.
+Hadoop is a cluster system which creates automatically replicas of the data once it is uploaded and allows parallel processing of data to speed up transforming or querying the data.
 
 On a high level perspective we want to realize two pipelines with our \neemhub as depict in Figure \ref{fig:neem-hub}. \todo{Replace with newer and nicer figure}
 The first pipeline can be seen as the acquisition and analytic pipeline.
-Raw data, such as videos, text and images which 
-So called Neemifier should transform this raw data into \neems which are utilizing the semantically representation provided by \soma.
-Since we are using Hadoop, multiple instances of the same Neemifier can neemify the raw data in parallel. 
+The first step in the pipline is storing raw data, such as videos, text, images and electrocardiogram (ECG) data.
+In the next step, so called neemifier are transforming this raw data into \neems which are utilizing the semantically representation provided by \soma.
+Since we are using Hadoop, multiple instances of the same neemifier can neemify the raw data in parallel. 
 There is also the possibility to upload \neems directly to the \neemhub, so the neemifing step can be skipped.
-The stored \neems can be accessed by \openease. \openease allows the inspection and visualization of each individual \neem.
-A direct download of the \neems to the local system is also supported.
+The stored \neems can be accessed by \openease. 
+\openease allows the inspection and visualization of each individual \neem.
+A direct download of the \neems to a local system is also supported.
 
-The second pipeline should be used as a pipeline for learning.
+The second pipeline should be used as a pipeline for learning from the acquired data.
 \neems are so rich full on information that one \neem can be used for multiple learning problems.
-In addition, \neems allow to learn general models e.g.\ the likely location of perishable items or/and specialized models e.g. how an agent should grasp my favorite mug in my kitchen.
-The procedure to generate the models is that Transformers are used to extract the required features from the \neems and store them in a data representation e.g.\ CSV required for the machine learning model.
-The Learners, which create the models , store the data in the model library. 
+In addition, \neems allow to generate models with different levels of abstraction. 
+One can learn general models e.g.\ the likely location of perishable items or/and specialized models e.g. how an agent should grasp my favorite mug in my kitchen.
+The procedure to generate the models is that transformers are used to extract the required features from the \neems and store them in a data representation, e.g.\ CSV, required for the machine learning model.
+The learners, which create the models, store the data in the model library. 
 This model library can be used afterwards by an agent to perform reasoning.
 
-In some scenarios those two pipelines can be combined to create a closed-loop. A possible scenario can be a robot acquiring \neems, uploading them to the \neemhub and download afterwards the new models to improve itself for the next experiment. 
+In some scenarios those two pipelines can be combined to create a closed-loop. 
+A possible scenario can be a robot acquiring \neems, uploading them to the \neemhub and download afterwards the new models to improve itself for the next experiment. 
 
 
 \begin{figure}[h!]
@@ -36,14 +40,14 @@ In some scenarios those two pipelines can be combined to create a closed-loop. A
 \end{figure} 
 
 
-Currently, we are only supporting the upload and hosting from data, like raw data, \neems and processed data.
-In future, we will provide the feature to share your Neemifier and Transformers with the community and create your own pipelines directly on the \neemhub.
-In the rest of this section we will describe how you can upload the \neems to the \neemhub.
+Currently, we are only supporting data upload and hosting, like raw data, \neems and transformed data.
+In future, we will provide the feature to share your neemifier and transformers with the community and create your own pipelines directly on the \neemhub.
+In the rest of this section we will describe how you can upload the data to the \neemhub.
 
 \section{Prerequisite}
 \begin{enumerate}
-	\item Due to security reasons our Hadoop Cluster can be only accessed via the University's intranet right now.	
-	\item To support version control with our \neems we have the Install DVC https://dvc.org/ and get familiar with the tool https://dvc.org/doc/start.
+	\item Due to security reasons our Hadoop cluster can be only accessed via the university's intranet right now.	
+	\item To support version control with our \neems we have the Install DVC \url{https://dvc.org/} and get familiar with the tool \url{https://dvc.org/doc/start}.
 	\item Install Hadoop or a client which can interact with our HDFS filesystem. 
 	\item To be able to publish your data, you are required to have a git account on our GitLab system
 	\url{https://neemgit.informatik.uni-bremen.de} .
@@ -52,16 +56,22 @@ In the rest of this section we will describe how you can upload the \neems to th
 
 
 \section{Publishing}
-At the time of writing this document, we are intending to host 3 groups of data:
+To organized the raw and transformed data and the \neems, we created 3 groups on GitLab.
+Each group corresponds to the specific data set type.
+The general procedure to publish your data set is that you create a git repository in the corresponding group.
+For instance, if you want to upload a \neem data set, create a repository in the \neem group first.
+In the next step, clone the empty repository and initialize DVC in this repository.
+Afterwards you need to define the remote storage, to let DVC store your data set.
+Based on your data set type you need to use the following path to define the storage:
+ 
 \begin{description}
-	\item[Raw data]
-		We define might be data which cannot be captured directly as NEEMs during the acquisition.
-	\item[\neems] 
-	\item[Processed Data]
+	\item[\textbf{Raw data}]\leavevmode \newline
+		\url{hdfs://hadoop@134.102.137.65:9000/raw/<your-repo-name>}
+	\item[\textbf{\neems}] \leavevmode \newline
+		\url{hdfs://hadoop@134.102.137.65:9000/neems/<your-repo-name>}
+	\item[\textbf{Transformed Data}] \leavevmode \newline
+		\url{hdfs://hadoop@134.102.137.65:9000/transformed_data/<your-repo-name>}
 \end{description}
 
-In the future, you will be able to publish your transformers which transform raw data into \neems or the \neems into processed data.
-This will allow to share your tools easily with the community and also automatize data transformation pipeline.
-
-\section{Maintaining}
-
+In future, you will be able to publish your neemifier and transformers.
+This will allow to share your tools easily with the community and also automatize your data transformation and learning pipeline.
