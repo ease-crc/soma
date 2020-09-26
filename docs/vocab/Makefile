@@ -12,7 +12,7 @@ rwildcard=$(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(su
 ${BASE_DIR}${BASE_NAME}.pdf: $(call rwildcard,.,*.tex)
 	cd ${BASE_DIR}
 	pdflatex -interaction=nonstopmode ${BASE_DIR}/${BASE_NAME}.tex
-	pythontex3 ${BASE_DIR}/${BASE_NAME}.tex
+	pythontex ${BASE_DIR}/${BASE_NAME}.tex
 	pdflatex -interaction=nonstopmode ${BASE_DIR}/${BASE_NAME}.tex
 	rm -f ${BASE_DIR}/${DELETE_FILES}
 	rm -rf ${DELETE_FOLDER}
