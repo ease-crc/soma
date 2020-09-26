@@ -15,7 +15,10 @@ jobs:
 
       - name: Build
         uses: docker://blang/latex:ubuntu
+        env:
+          TEXINPUTS: "/github/workspace/template:"
         with:
+          working-directory: ./docs/vocab/
           args: make -f ./docs/vocab/Makefile
 
       - name: Upload
