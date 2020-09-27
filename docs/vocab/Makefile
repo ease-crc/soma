@@ -10,7 +10,7 @@ DELETE_FOLDER=${BASE_DIR}${PYTHONTEX_DIR}${BASE_NAME}
 rwildcard=$(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(subst *,%,$2),$d))
 
 ${BASE_DIR}${BASE_NAME}.pdf: $(call rwildcard,.,*.tex)
-	#$(info $$${BASE_DIR}${BASE_NAME}.tex is [${BASE_DIR}${BASE_NAME}.tex])
+	$(info $$${BASE_DIR}${BASE_NAME}.tex is [${BASE_DIR}${BASE_NAME}.tex])
 	pdflatex -interaction=nonstopmode ${BASE_DIR}${BASE_NAME}.tex
 	ls
 	pythontex ${BASE_DIR}${BASE_NAME}.tex
