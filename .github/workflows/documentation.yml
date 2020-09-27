@@ -8,24 +8,24 @@ jobs:
   vocabulary:
     name: SOMA Vocabulary
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./docs/vocab/
 
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-
+        
       - name: Build
-        uses: docker://blang/latex:ubuntu
-        env:
-          TEXINPUTS: "/github/workspace/template:"
-        with:
-          working-directory: ./docs/vocab/
-          args: make -f ./docs/vocab/Makefile
-
+        uses: ./.github/actions/pythonlatex
+        with: 
+          args: make -f Makefile
+        
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
           name: NEEM Vocabulary
-          path: ./docs/vocab/SOMA-vocabulary.pdf
+          path: ./SOMA-vocabulary.pdf
 
   handbook:
     name: NEEM Handbook
