@@ -7,6 +7,34 @@ on:
       - '.github/**'
 
 jobs:
+  vocabulary:
+    name: SOMA Vocabulary
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./docs/vocab/
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        
+      - name: Copy
+        run: |
+          cp ./Makefile ../../
+          cp ./SOMA-vocabulary.tex ../../
+          cp ./owl_reader.py ../../
+        
+      - name: Build
+        uses: ./.github/actions/pythonlatex
+        with: 
+          args: make
+        
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: SOMA Vocabulary
+          path: ./SOMA-vocabulary.pdf
+
   handbook:
     name: NEEM Handbook
     runs-on: ubuntu-latest
