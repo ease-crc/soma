@@ -1,0 +1,691 @@
+
+\chapter{NEEM-Background}
+\label{ch:background}
+\chapterauthor{D. Be{\ss}ler, M. Pomarlan, A. Vyas}
+
+The \neembak represents the (physical) context of \neems.
+More concretely, the \neembak represents the environment where events took place, and the agents that are involved.
+These are representations of physical objects, their parts, properties, and relationships between them.
+
+Each \neem must have exactly one associated \neembak.
+This is important as only the objects and their properties represented in the \neembak may be involved in events that occur in \neems.
+Consider, for example, a robot fetching a cup in a kitchen environment to prepare a coffee.
+The cup would be part of the \neembak while the fetching event carried out by the robot would be represented in the \neemnar (Chapter~\ref{ch:narrative}).
+
+The way how a task can be solved best depends on what is available in the environment.
+The suitability of an object to be used to perform a certain task is often derived from the class of objects it belongs to, e.g., a knife can be used for cutting.
+The \neem model defines a set of more general object classes such as \emph{agent} and \emph{artifact} (Section~\ref{sec:background:types}).
+These are used to classify each object represented in the \neembak.
+%
+The usability of an object is, however, ultimately grounded in its properties, e.g., a dulled knife may prove to be unusable to perform a cutting task.
+It is thus also relevant to characterize object properties as they correlate with how an agent may solve its task.
+Consequently, we treat types of object properties as classes organized in a taxonomy (Section~\ref{sec:background:properties}).
+
+\neems may characterize different aspects of the environment depending on what information is accessible when the \neem is acquired.
+We organize different characteristics in so called \emph{views} (Section~\ref{sec:background:views}).
+Each view has its own set of types and relationships to represent the environment from a specific viewpoint such as appearance or kinematics.
+
+\neems are heterogeneous representations that may include additional data files.
+These representations are time series data that are annotated by the \neemnar.
+In addition, some widely used data formats for the representation of objects are supported (Section~\ref{sec:background:formats}).
+Such data files may be stored within the \neembak, associated to objects it represents, and used to enrich knowledge about the environment.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Types of Objects}
+\label{sec:background:types}
+
+Objects and agents that appear in an environment are classified as \emph{physical objects}.
+Physical objects are exactly the objects you can point to, as they have a location in space.
+
+The most common physical objects in non-natural environments are \emph{artifacts}.
+An artifact is an item that has certain structure, often to serve a particular purpose such as to use it in a certain way, or to enjoy looking at it in case of, e.g., an art piece.
+Artifacts that were created with a purpose in mind are called \emph{designed artifacts}.
+Most objects in human-made environments belong to this category.
+Note that, e.g., a \emph{container} is not a designed artifact, as also objects that were not designed as such may serve as containers.
+Consequently, the class \emph{designed container} is used for the objects that were designed to be used as a container.
+Other examples of designed artifacts are \emph{tools} and \emph{appliances} designed for specific tasks or agents and the \emph{components} designed to fit together to form a larger whole.
+
+Another category of objects are \emph{physical bodies}.
+Most commonly one would use this category for \emph{substances} that appear in the environment such as a blob of dough, or the coffee inside of a cup.
+However, it is more appropriate to classify the substance as \emph{designed substance} in case it was created with a purpose in mind, for e.g., in the case for the dough that is made according to a recipe and supposed to be eaten after being baked.
+
+Agents that appear in a \neem are classified as \emph{physical agents}.
+The difference from other types of objects is that the agents have intentions, execute actions, and attempt to achieve goals, e.g., by following a plan and moving their body in a way to generate interactions with the environment to cause intended effects.
+Each agent is composed of \emph{functional parts} organized in a skeletal structure.
+Interactions with the environment are carried out through \emph{effectors} such as arms, legs, or hands.
+Effectors that are used for grasping are called \emph{prehensile effectors}.
+
+The last top-level category in our object taxonomy is \emph{physical place}.
+Places are objects with a specific location such as the surface of a table, or the campus of the University.
+Each \neem refers at least to the place where it was acquired, which is usually a room in a building with objects that can be used to perform certain everyday tasks.
+
+%According to \dul~\footnote{\url{http://www.ontologydesignpatterns.org/ont/dul/DUL.owl}} upper level ontology, an object participates in an event during its lifetime and has its own spatial location. During an everyday activity, we come across many objects which are mainly of physical type. A physical object is defined as an object that has a proper space region and associated mass. Sub-classes of physical objects are dirty object, physical agent, physical artifact, physical body, physical space, and physical effector. A typical object participate in an event and can be classified by role. It can have physical qualities such as color, localization, disposition, capacity, shape, size, and temperature that are aspect of an object dependent on its physical manifestation. 
+
+%An object branch also covers a design taxonomy which considers functional, structural and aesthetic aspect of object design. Designs are useful to support an agent to hypothesize unknown functions that can be served by an entity\todo{Seba; What exactly is en entity ? An object ? an instance of a concept ?}. A design describes objects which host a common design relevant qualities such as, dispositional, geometrical, and aesthetic. An intelligent agent would be able to infer based on dispositional quality of an object if it can be used to serve other function in everyday task. For example, a heavy door stopper would also be able to function as paper weight or a dining table can be also used as ping pong table based on appropriate dimensions.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Properties of Objects}
+\label{sec:background:properties}
+
+Qualities are the properties of an object that are not part of it, but cannot exist without it.
+This is, for example, the quality of having a shape -- a quality inherited by all physical objects.
+Another example is the quality of a floor having a certain surface friction and thus being slippery or not.
+A robot navigating on such a floor could use this knowledge to avoid, for example,
+spillage when moving on the floor with a coffee-filled cup.
+The quality concept does not directly encode the value of the object property, but only focuses on characteristics of the property itself.
+This is mainly useful in cases where individual aspects of an entity are considered in the domain of discourse.
+
+\begin{ODP}{Object Qualities}
+	\ODPINTENT{To represent the qualities of an object.}
+	\ODPDEFINEDIN{DUL.owl}
+	\ODPQUESTION{What qualities does this object have? What objects have this quality?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Quality};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasQuality] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isQualityOf] {} (A);
+ %\node[owlclass] (QUALITY) {
+ %\begin{owlclass}{Quality}
+ % \item $(\exists \emph{isQualityOf}.\texttt{Entity})$
+ % \item $(\exists \emph{hasRegion}.\texttt{Region})$
+ %\end{owlclass}
+ %};
+ %\node[owlclass,below=0.6cm of QUALITY] (REGION) {
+ %\begin{owlclass}{Region}
+ % \item $(\exists \emph{isRegionFor}.\texttt{Quality})$
+ %\end{owlclass}
+ %};
+ %\draw (QUALITY) edge[thick,-,dashed,blue!60] (REGION);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_quality($o$,$q$)} &
+		$q \in \abox$ is a quality of $o \in \abox$
+	}
+\end{ODP}
+
+Several sub-classes of \concept{Quality} and corresponding sub-relations of \relation{has-quality} are defined in the \neem model.
+Some of them will be described later in this chapter.
+
+Each object property has one value at a time.
+The value is an element in a dimensional space.
+Such a dimensional space is called \concept{Region} in the \neem model.
+A region may have an infinite number of elements, or, in the other case, may enumerate all its elements.
+The color of an object, for example, may have a value encoded as RGB vector which is an element of the RGB colorspace (which is a region).
+Regions may further be decomposed into sub-regions, for example, to represent the sub-region of RGB colorspace with dominant red color.
+%The value of an object property is called \emph{Region}.
+%The value itself is an element, or a sub-region in some dimensional space such as \concept{TimeInterval} or \concept{SpaceRegion}.
+%A region may be a finite set of discrete labels, allowing for ``qualitative'' descriptions, but more often a region is some dimensional space allowing ``quantitative'' descriptions.
+%A Region may contain a single point, in cases where the value of a property is known precisely.
+Note that the domain of the relation \relation{has-region} is not \concept{Quality} but \concept{Entity}.
+This is to allow assigning regions to entities without requiring an explicit \concept{Quality} individual as an intermediate. Instead, the property connecting the \concept{Entity} specifies what information the \concept{Region} conveys about the object.
+
+As an example, a \concept{PhysicalObject} would be linked via a \relation{hasMassAttribute} to a \concept{MassAttribute}, that is, to a \concept{Region} individual containing information about the object's mass. It is the relation \relation{hasMassAttribute} that specifies what information the \concept{Region} contains.
+
+\begin{ODP}{Regions}
+	\ODPINTENT{To represent values of attributes of things.}
+	\ODPDEFINEDIN{DUL.owl}
+	\ODPQUESTION{What is the value for the attribute of that entity? Which entities have a certain value on that parameter/attribute/feature?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Entity};
+	    \node[owlclass,below=0.6cm of A] (B) {Region};
+	    \node[data,below=0.6cm of B] (C) {XSD Type};
+	    \draw (A) edge[relation] node[midway,label=right:hasRegion] {} (B);
+	    \draw (B) edge[relation] node[midway,label=right:hasRegionDataValue] {} (C);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_region($x$,$y$)} &
+		$y$ is a region of $x$ \\
+		% % % % %
+		\emph{has\_data\_value($x$,$y$)} &
+		$y$ is a data value of $x$ 
+	}
+\end{ODP}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Views on Objects}
+\label{sec:background:views}
+
+The \neembak may represent several different \emph{views} on the same object highlighting different characteristics that are fused in the \neembak to form a more complete representation of the environment.
+Each view has its own vocabulary to describe objects including view-specific types of objects, qualities, and relations, and has a distinct set of competency questions that may be answered in case a \neem represents the view.
+A \neem may not represent each supported view, however, it is recommended to represent as many as possible.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Appearance}
+
+SOMA defines several concepts to represent qualities relating to an object's appearance. The list includes, but is not limited to, 
+\concept{Color}, \concept{Shape}, and \concept{Size} %, \concept{Sharpness}
+.
+A quality belongs to an object, and can take values only from regions of an appropriate type.
+
+%A \emph{ShapeRegion} individual can further be classified 
+The shape of an object can either be represented
+as primitive geometry
+(e.g., box or cylinder),
+%(e.g. \emph{BoxShape}, \emph{CylinderShape}),
+or as mesh. %\emph{MeshShape}.
+%This finer classification decides what data is attached to the individual.
+Primitive shapes are described by their geometric parameters, such as height, width and length for a box, and radius and length for a cylinder.
+A mesh shape, on the other hand, has a data property that is a URI of the file that contains the mesh data.
+%To fill in shape data for a shape region, it is necessary to provide data items -- floats or URIs -- and link them via the appropriate data properties to the region individual.
+\todo{MP: the ontology defines hasDepth and hasHeight for BoxShape. I assume this is a mistake and we want hasLength and hasHeight. DB: I believe this is a ROS convention}
+\todo{DB: where is a shape located? the origin of a shape may not be the same as the one of the object}
+\todo{DB: the scale for the mesh is missing!}
+
+\begin{ODP}{Shape Quality}
+	\ODPINTENT{To represent the quality of having a shape.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{Does this objects have a shape?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Shape};
+	    %\node[owlclass,below=0.6cm of B] (C) {Shape Region};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasShape] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isShapeOf] {} (A);
+	    %\draw (B) edge[relationxl] node[midway,label=left:hasShapeRegion] {} (C);
+	    %\draw (C) edge[relationxr] node[midway,label=right:isShapeRegionOf] {} (B);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_shape($o$)}     & $o \in \abox$ has a shape \\
+		\emph{has\_shape($o$,$s$)} & $s \in \abox$ is the shape of $o \in \abox$
+	}
+\end{ODP}
+
+\begin{ODP}{Shape Region}
+	\ODPINTENT{To represent the region of shapes.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What geometric parameters has this shape?
+		What is the URL where a mesh file of this shape can be retrieved?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass_f] (A1) {Box Region};
+	    \node[owlclass_f,right=0.2cm of A1] (A3) {Mesh Region};
+	    \node[owlclass_f,below=0.2cm of A1] (A2) {Cylinder Region};
+	    \node[owlclass_f,right=0.2cm of A2] (A4) {Sphere Region};
+	    \node[data,above=1.0cm of A1] (B1) {xsd:double};
+	    \node[data,below=1.0cm of A2] (B2) {xsd:double};
+	    \node[data,above=1.0cm of A3] (B3) {xsd:string};
+	    \node[data,below=1.0cm of A4] (B4) {xsd:double};
+	    \draw (A4) edge[relation,xshift=0.0cm] node[midway,label=right:hasRadius] {} (B4);
+	    \draw (A3) edge[relation,xshift=0.0cm] node[midway,label=right:hasURL] {} (B3);
+	    \draw (A1) edge[relation,xshift=0.0cm]
+	    	node[midway,text width=1.2cm,xshift=0.9cm] {hasHeight hasLength hasWidth} (B1);
+	    \draw (A2) edge[relation,xshift=0.0cm]
+	    	node[midway,text width=1.2cm,xshift=0.9cm] {hasLength hasRadius} (B2);
+	    %\node[owlclass_f,below=0.8cm of A1] at ($(A1)!0.5!(A3)$) (C) {Shape};
+	    %\draw (C) edge[relation] node[midway,label=left:hasRegion] {} (A1);
+	    %\draw (C) edge[relation] node[midway,label=left:hasRegion] {} (A2);
+	    %\draw (C) edge[relation] node[midway,label=right:hasRegion] {} (A3);
+	    %\draw (C) edge[relation] node[midway,label=right:hasRegion] {} (A4);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_bbox($o$,$d$,$w$,$h$)} &
+		$d,w,h \in \mathbb{R}$ are the depth, width and height of the bounding box of $o \in \abox$ \\
+		% % % % %
+		\emph{has\_shape\_data($o$,sphere($r$))} &
+		$r \in \mathbb{R}$ is the radius of the sphere shape of $o \in \abox$
+	}
+\end{ODP}
+
+\iffalse
+\begin{ODP}{Specifying a MeshShape}
+	\ODPINTENT{To link to data about an arbitrary shape.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What quantitative data is available about the shape of an object?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Mesh Shape};
+	    \node[data,below=0.6cm of A] (B) {xsd:string};
+	    \draw (A) edge[relation] node[midway,label=left:hasFilePath] {} (B);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{\emph{xxx\_xxxxx($x$,$y$)} & \textbf{todo}}
+\end{ODP}
+\fi
+
+The color of an object is a quality that may take values from a \emph{ColorRegion}. Color regions may be qualitative, such as \emph{GreenColor} or \emph{RedColor}, which correspond to sets of color values; color regions may also be specified as a single datapoint, i.e. a string representing the color's components in some color space. \todo{MP: Decide how to represent color values and color spaces in the ontology, and push axioms to this effect.}
+\todo{DB: most objects have many colors, how is this handled?}
+\todo{DB: color does not remain constant as the light in the environment changes, how is this handled?}
+\todo{DB: is material represented?}
+
+\begin{ODP}{Color Quality}
+	\ODPINTENT{To represent the quality of having a color.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{Does this objects have a color?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Color};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasColor] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isColorOf] {} (A);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_color($o$)}     & $o \in \abox$ has a color \\
+		\emph{has\_color($o$,$c$)} & $c \in \abox$ is the color of $o \in \abox$
+	}
+\end{ODP}
+
+\begin{ODP}{Color Region}
+	\ODPINTENT{To represent the color of physical objects.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What is the color of this object? Which objects have this color?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass,below=0.6cm of B] (C) {Color Region};
+	    \node[data,below=0.6cm of C] (D) {xsd:string};
+	    \draw (C) edge[relation] node[midway,label=right:hasRGBValue] {} (D);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{object\_color\_rgb($o$,$[r,g,b]$)} &
+		$r,g,b \in \mathbb{R}$ is the RGB color data of $o \in \abox$
+	}
+\end{ODP}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Structure}
+
+Parthood represents that objects are composed of smaller things.
+These things may be physical objects themselves, and a \emph{component} of their direct parent in the partonomy.
+Parthood is transitive, that is, parts of parts are parts again, but componency is not.
+So one would say that the arm is a component of the robot, and that the elbow is component of the arm, but not that the elbow is a component of the robot -- however the elbow is a part of the robot due to the transitivity of the parthood relation.
+
+\begin{ODP}{Components}
+	\ODPINTENT{To represent proper parthood of objects.}
+	\ODPDEFINEDIN{DUL.owl}
+	\ODPQUESTION{What is this object component of? What are the components of this object?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Physical Object};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasComponent] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isComponentOf] {} (A);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_component($x$,$y$)} &
+		$y \in \abox$ is a component of $x \in \abox$
+	}
+\end{ODP}
+
+However, another parthood type is needed for objects such as holes, bumps, boundaries, or spots of color that are physical parts but not a proper component of their parent in the partonomy.
+These are \emph{features} of the object.
+Features are usually localized in the object reference frame, and may carry additional properties describing, for example, the size of the hole, or the color of the spot.
+
+\begin{ODP}{Features}
+	\ODPINTENT{To represent features of objects.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What are the features of this object? What are the objects with this feature?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Feature};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasFeature] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isFeatureOf] {} (A);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_feature($x$,$y$)} &
+		$y \in \abox$ is a feature of $x \in \abox$
+	}
+\end{ODP}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Kinematics}
+
+Kinematics, also often referred to as \emph{geometry of motion}, describes how objects may move without considering the influence of forces.
+The kinematic state of an object is given by its pose over time, stored in the \neemexp as time-series data, and accessed via a dedicated predicate \emph{is\_at}.
+Poses are expressed within a frame of reference.
+There is one reference frame at the origin of each object, and possibly more at the various locations of interest.
+In addition, there is one dedicated root reference frame, the origin of the map.
+Each other frame must be, possibly indirect, connected to the map origin frame.
+The pose itself is given as 6D pose including the objects' orientation as quaternion vector.
+
+\begin{ODP}{Localization}
+	\ODPINTENT{To represent that objects are localized in a map.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{Is this object localized?
+			In which map is this object localized?
+			What are the objects localized in this map?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Localization};
+	    %\node[owlclass,below=0.6cm of B] (C) {Physical Place};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasLocalization] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isLocalizationOf] {} (A);
+	    %\draw (B) edge[relationxl] node[midway,label=left:hasOrigin] {} (C);
+	    %\draw (C) edge[relationxr] node[midway,label=right:isOriginOf] {} (B);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{is\_localized($o$)} &
+		$o \in \abox$ is localized wrt. some map origin \\
+		\emph{is\_localized($o$,$m$)} &
+		$o \in \abox$ is localized wrt. the origin of $m \in \abox$
+	}
+\end{ODP}
+
+\begin{ODP}{Pose Data}
+	\ODPINTENT{To represent kinematic trees of objects connected via joints.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{Are these objects kinematically coupled?
+			Which objects are linked through this joint?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Localization};
+	    \node[owlclass,below=0.6cm of A] (B) {6D Pose};
+	    \node[data,below=1.0cm of B,xshift=1.0cm] (C) {double[]};
+	    \node[data,below=1.0cm of B,xshift=-1.0cm] (D) {xsd:string};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasSpaceRegion] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isSpaceRegionOf] {} (A);
+	    \draw (B) edge[relation,xshift=-0.4cm] node[midway,xshift=0.1cm,label=left:hasReferenceFrame]
+	      {} ($(D.north-|B)$);
+	    \draw (B) edge[relation,xshift=0.3cm] node[midway,text width=2.4cm,xshift=1.4cm]
+	    	{hasTranslationVector hasOrientationVector} ($(C.north-|B)$);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{is\_at($o$,[$x$,$\vec{p}$,$\vec{q}$]) \emph{during} $\vec{ti}$} &
+		$\vec{p} \in \mathbb{R}^3$ is the position, and $\vec{q} \in \mathbb{R}^4$ the orientation of $o \in \abox$ within the reference frame $x \in \mathcal{F}$ during time interval $\vec{ti} \in \mathbb{R}^2_{\geq 0}$
+	}
+\end{ODP}
+
+However, objects often can not move freely but are constrained in their movement with respect to some reference object.
+This is, for example, the case for walls without doors preventing movement from one room to another, or for two objects that are attached to each other via a \emph{joint} and thus restricting movement relative to each other (kinematic coupling).
+Kinematically coupled objects are often part of a bigger hierarchical structure, and one of the linked objects, the parent link of the joint, is the one closer to the root of the structure then followed by the child link of the joint.
+
+\begin{ODP}{Joints}
+	\ODPINTENT{To represent kinematic trees of objects connected via joints.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{Are these objects kinematically coupled?
+			Which objects are linked through this joint?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Joint};
+	    \node[owlclass,below=0.6cm of B] (C) {Physical Object};
+	    \draw (A) edge[relationxl] node[midway,label=left:isParentLinkOf] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:hasParentLink] {} (A);
+	    \draw (B) edge[relationxl] node[midway,label=left:hasChildLink] {} (C);
+	    \draw (C) edge[relationxr] node[midway,label=right:isChildLinkOf] {} (B);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_child\_link($j$,$o$)} &
+		$o \in \abox$ is the child link of joint $j \in \abox$ \\
+		\emph{has\_parent\_link($j$,$o$)} &
+		$o \in \abox$ is the parent link of joint $j \in \abox$
+	}
+\end{ODP}
+
+The pattern above is used to represent kinematical structures, however these representations must also be linked to the various typed objects that are represented in the \neembak.
+Such objects may be referred to directly in kinematical structures in case of not being composed of movable parts.
+In the case of having movable parts, the object corresponds to chains of links connected via joints in the kinematics representation.
+This is, for example, that the kinematical chain from shoulder to wrist forms an arm component.
+Each kinematic object component has exactly one root link, and may have many end links such as a hand component having its root in the wrist, and ending at each fingertip.
+
+\begin{ODP}{Component Chains}
+	\ODPINTENT{To represent the kinematic chain of object components.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What is the kinematic root of this object?
+			What are the end links of this object?
+	}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Physical Object};
+	    \node[owlclass,below=0.6cm of B] (C) {Physical Object};
+	    \draw (A) edge[relationxl] node[midway,label=left:isRootLinkOf] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:hasRootLink] {} (A);
+	    \draw (B) edge[relationxl] node[midway,label=left:hasEndLink] {} (C);
+	    \draw (C) edge[relationxr] node[midway,label=right:isEndLinkOf] {} (B);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_base\_link($o_1$,$o_2$)} &
+		$o_2 \in \abox$ is the first link of $o_1 \in \abox$ \\
+		\emph{has\_end\_link($o_1$,$o_2$)} &
+		$o_2 \in \abox$ is one of the last links of $o_1 \in \abox$
+	}
+\end{ODP}
+
+The position of a joint determines the position of the child link relative to the parent.
+Depending on whether the joint is either \emph{hinged} (rotation around an axis) or prismatic (sliding along an axis), the position is measured in radians or meter respectively.
+When the position changes over time, velocity (measured in $rad/s$ or $m/s$) and effort applied in the joint (measured in $Nm$ or $N$) can be measured.
+Joint states are recorded as time-series data and stored in the \neemexp.
+However, the \neem model defines a set of data properties used to access joint state data.
+
+\begin{ODP}{Joint States}
+	\ODPINTENT{To represent the position of a joint.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What is the state of this joint?
+		What is its position and velocity?
+		How much effort is applied?
+	}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Joint};
+	    \node[owlclass,below=0.6cm of A] (B) {Joint State};
+	    \node[data,below=1.2cm of B] (C) {xsd:double};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasJointState] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isJointStateOf] {} (A);
+	    \draw (B) edge[relation] node[midway,text width=2.0cm,xshift=1.3cm]
+	    	{hasJointPosition hasJointVelocity hasJointEffort} (C);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_joint\_position($j$,$x$)} &
+		$x \in \mathbb{R}$ is the position of joint $j \in \abox$ given in $m$ (prismatic joints) or $rad$ (hinged joints) \\
+		\emph{has\_joint\_velocity($j$,$v$)} &
+		$v \in \mathbb{R}$ is the velocity of joint $j \in \abox$ given in $\frac{m}{s}$ (prismatic joints) or $\frac{rad}{s}$ (hinged joints) \\
+		\emph{has\_joint\_effort($j$,$x$)} &
+		$x \in \mathbb{R}$ is the applied force of a prismatic, or the torque of a hinged joint $j \in \abox$ given in $N$ or $N \cdot m$ respectively.
+	}
+\end{ODP}
+
+The movement of a joint may be restricted by physical limits.
+This is the case for \emph{revolute} and \emph{prismatic} joints.
+The joint position is bounded between a minimum and maximum value, expressed as radians for revolute joints, and meters for prismatic joints.
+In addition, maximum values for the velocity and effort of a joint may be provided.
+
+\begin{ODP}{Joint limits}
+	\ODPINTENT{To represent the hard limits of a joint.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{How far can this joint move into some direction?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Joint};
+	    \node[owlclass,below=0.6cm of A] (B) {Joint Limit};
+	    \node[data,below=1.4cm of B] (C) {xsd:double};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasJointLimit] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isJointLimitOf] {} (A);
+	    \draw (B) edge[relation] node[midway,text width=2.2cm,xshift=1.3cm]
+	    	{hasJointPositionMin hasJointPositionMax hasJointVelocityLimit hasJointEffortLimit} (C);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_joint\_position\_limit($j$,$\vec{x}$)} &
+		$\vec{x} \in \mathbb{R}^2$ is the minimum and maximum position of joint $j \in \abox$ given in $m$ (prismatic joints) or $rad$ (hinged joints) \\
+		\emph{has\_joint\_velocity\_limit($j$,$v_{max}$)} &
+		$v_{max} \in \mathbb{R}$ is the maximum velocity of joint $j \in \abox$ given in $\frac{m}{s}$ (prismatic joints) or $\frac{rad}{s}$ (hinged joints) \\
+		\emph{has\_joint\_effort\_limit($j$,$x_{max}$)} &
+		$x_{max} \in \mathbb{R}$ is the maximum force of a prismatic, or the maximum torque of a hinged joint $j \in \abox$ given in $N$ or $N \cdot m$ respectively.
+	}
+\end{ODP}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Dynamics}
+
+The dynamics view in the \neembak is used to characterize how objects move under the influence of force.
+The \neem model only considers solid objects with constant mass and dynamics governed by Newton's laws.
+
+\begin{ODP}{Mass}
+	\ODPINTENT{To represent the quantity of matter which a body contains.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What is the mass of this object?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Mass Attribute};
+	    \node[data,below=0.6cm of B] (C) {xsd:double};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasMassAttribute] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isMassAttributeOf] {} (A);
+	    \draw (B) edge[relation] node[midway,label=left:hasMassValue] {} (C);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_mass($o$,$v$)} &
+		$v \in \mathbb{R}_{>0}$ is the mass of $o \in \abox$ in kilograms
+	}
+\end{ODP}
+
+At each point in time, the sum of forces influencing an object determines how its movement will change.
+The accumulated force may be stored as time-series data in the \neembak, and accessed via an attribute defined in the \neem model.
+
+\begin{ODP}{Force}
+	\ODPINTENT{To represent the quantity of force influencing a solid object.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What is the force acting upon this object?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Net Force};
+	    \node[data,below=0.6cm of B] (C) {xsd:double};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasNetForce] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isNetForceOf] {} (A);
+	    \draw (B) edge[relation] node[midway,label=left:$\emph{hasForceValue}_t$] {} (C);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_net\_force($o$,$\vec{\f}$)} \emph{during} $\vec{ti}$ &
+		$\vec{\f} \in \mathbb{R}^3$ is the accumulated force, measured in Newton, that acts upon $o \in \abox$ during time interval $\vec{ti} \in \mathbb{R}^2_{\geq 0}$
+	}
+\end{ODP}
+
+\iffalse
+Joints have additional physical attributes that influence how effort is translated into motion.
+This is particularly relevant in case the joint is simulated.
+Internal static friction force caused by movable elements within the joint, and \dots
+
+\begin{ODP}{Joint Dynamics}
+	\ODPINTENT{To represent physical attributes of joints.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What are the physical attributes of this joint?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Joint};
+	    \node[owlclass,below=0.6cm of A] (B) {Joint Dynamics};
+	    \node[data,below=0.8cm of B] (C) {xsd:double};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasJointDynamics] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isJointDynamicsOf] {} (A);
+	    \draw (B) edge[relation] node[midway,text width=2.0cm,xshift=1.3cm]
+	    	{hasFrictionValue hasDampingValue} (C);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{has\_friction($x$,$y$)} &
+		$y$ is the friction of $x$ measured in $N$ (prismatic joints) or $Nm$ (revolving joints)
+	}
+\end{ODP}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Naive physics}
+
+This view on objects is comprised of qualitative descriptions of the interactions of these objects, with a focus on how the objects could be arranged so as to constrain each other's behavior. The prototypical examples of such interactions are support and containment, but many other interactions are possible. Note, formalizing actual manifestations of such interactions as they occur in an episode will be done in chapter~\ref{ch:narrative}. In this chapter, we focus instead on ontological modelling about what kinds of interactions an object could take part in. \todo{DB: could you make explicit why this is part of the neem background? should the ease researchers manually assert dispositions of objects, or only use the ones derived from the object types?}
+
+This is achieved by the concept of \emph{Disposition}, which is a quality that, by virtue of being possessed by an object, enables that object to participate in certain roles in certain relations or events. E.g., \emph{Deposition} and \emph{Containment} are the dispositions necessary to enable an object to act as a support or container for another.
+
+\begin{ODP}{Friction}
+	\ODPINTENT{To represent what kinds of interactions an object can participate in.}
+	\ODPDEFINEDIN{SOMA.owl}
+	\ODPQUESTION{What can this object be used for? Can this object interact with others in a particular way?}
+	\ODPGRAPHIC{
+	\begin{tikzpicture}
+	    \node[owlclass] (A) {Physical Object};
+	    \node[owlclass,below=0.6cm of A] (B) {Disposition};
+	    \draw (A) edge[relationxl] node[midway,label=left:hasDisposition] {} (B);
+	    \draw (B) edge[relationxr] node[midway,label=right:isDispositionOf] {} (A);
+	\end{tikzpicture}
+	}
+	%% Example KnowRob language expressions
+	\ODPEXAMPLES{
+		\emph{xxx\_xxxxx($x$,$y$)} &
+		\textbf{todo}
+	}
+\end{ODP}
+
+By and large, researchers making use of the SOMA ontology to create NEEM backgrounds and NEEMs can rely on the ontology to already provide a rich store of object knowledge, including dispositions. As such, it should usually be sufficient for the researchers adding knowledge about a new type of object, to specify the object classes defined in SOMA, to which the new object type is a subclass of. However, in case new dispositions need to be added for a new object type in the NEEM background, the above pattern illustrates how.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Data Formats}
+\label{sec:background:formats}
+
+Representations in the \neembak may be enriched through additional data files.
+Data files are stored with the \neembak and loaded by the \ease knowledge base when a \neem is activated.
+They may encode information that can be directly represented in the \neem, however, it is not necessary in such a case to duplicate the information.
+A data file may be loaded at runtime, and used by the knowledge base in combination with other representations to answer questions about an activity.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{URDF}
+\label{sec:background:urdf}
+
+The Unified Robot Description Format (URDF) is widely used for the representation of kinematics in robotics. That is how objects are organized in a skeletal structure of links and joints, and how links may move relative to each other in case of being connected via a flexible joint.
+URDF was designed to represent robot kinematics.
+It is, however, also often used for other types of objects with movable parts, for example to represent how a door is attached to a shelve via a joint, and what limits the joint has, but can also be used to represent completely static environments (via fixed joints).
+URDF further allows to represent a set of properties for links and joints, such as what the mass of a link is, or what the hard and soft limits of a joint are.
+
+URDF organizes objects and their parts in a common coordinate system, and represents an initial configuration of all links and joints.
+The origin of this coordinate system is often called \emph{world} or \emph{map} frame.
+Each object has an associated frame in this coordinate system with a position relative to the parent frame in the skeletal structure.
+Frame names are further used to identify entities in the knowledge base, and logged position data that corresponds to objects described in the URDF file.
+
+From the point of view of URDF, the world is only made of links and joints.
+Joints are further classified based on how they operate, and have different sets of parameters quantifying their kinematics depending on their type.
+It is, however, not possible to represent that links belong to a certain category, or that a chain of links forms a component of some type.
+However, we can use the information encoded in URDF files to enrich \neembak representations, and on the other hand, use the \neembak to provide classifications for links in URDF files.
+
+Links in URDF files may have multiple associated shapes.
+Two different shape types are distinguished: collision and visualization shapes.
+Each link has usually one shape of each kind.
+Shapes are either represented as geometrical primitives such as spheres or boxes, or refer to an external mesh file in which case this mesh file needs to be stored as an additional data source in the \neembak (next Section).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{DAE}
+\label{sec:background:dae}
+
+The preferred format for meshes is Collada (DAE).
+The reason primarily being that it is widely supported by modeling tools and rendering engines.
+If possible, the mesh should be accompanied by high-resolution textures in PNG or JPG format.
+The more detailed a mesh, the more immersive the experience of humans interacting with it in VR and better the perception models that can be trained by images generated by placing the object in a virtual scene. Of course, this must be balanced with the computational demands imposed by mesh rendering and collision checking. When storing mesh and texture data for objects, researchers who produce NEEM background should make sure the meshes match the demands and resources of their applications.
+

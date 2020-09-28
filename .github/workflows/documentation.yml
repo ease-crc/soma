@@ -2,7 +2,9 @@ name: Documentation
 on:
   push:
     paths:
+      - 'owl/**'
       - 'docs/**'
+      - '.github/**'
 
 jobs:
   handbook:
@@ -15,30 +17,13 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Cache Template
-        id: cache-template
-        uses: actions/cache@v1
-        with:
-          path: ./template
-          key: https://resource-cms.springernature.com/springer-cms/rest/v1/content/20568/data/v8
-
-      - name: Download Template
-        if: steps.cache-template.outputs.cache-hit != 'true'
-        run: curl -o ./template.zip -L https://resource-cms.springernature.com/springer-cms/rest/v1/content/20568/data/v8
-
-      - name: Unzip Template
-        if: steps.cache-template.outputs.cache-hit != 'true'
-        run: unzip -d ./template template.zip
-
       - name: Build
         uses: docker://blang/latex:ubuntu
-        env:
-          TEXINPUTS: "/github/workspace/template:"
         with:
-          args: make -f ./docs/NEEM-specification/Makefile
+          args: make -f ./docs/NEEM-handbook/Makefile
 
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
           name: NEEM Handbook
-          path: ./docs/NEEM-specification/main.pdf
+          path: ./docs/NEEM-handbook/main.pdf
