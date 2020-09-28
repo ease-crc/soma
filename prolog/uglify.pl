@@ -59,6 +59,7 @@ uglify :-
     'SOMA.owl',
     'SOMA-ACT.owl',
     'SOMA-WF.owl',
+    'SOMA-HOME.owl',
     'SOMA-IO.owl',
     'SOMA-OBJ.owl',
     'SOMA-STATE.owl',
