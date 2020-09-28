@@ -16,12 +16,16 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@
+        
+      - name: Copy
+        run: |
+          cp ./docs/vocab/SOMA-vocabulary.tex .
+          cp ./docs/vocab/owl_reader.py .
         
       - name: Build
         uses: ./.github/actions/pythonlatex
         with: 
-          ROOT_DIR: "$GITHUB_WORKSPACE xxxx"
           args: make
         
       - name: Upload
