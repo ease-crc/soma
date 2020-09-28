@@ -42,7 +42,8 @@ jobs:
       - name: Build
         uses: docker://blang/latex:ubuntu
         with:
-          args: make -f ./docs/NEEM-handbook/Makefile
+          args: make
+          working_directory: 'docs/vocab'
 
       - name: Upload
         uses: actions/upload-artifact@v1
