@@ -1,8 +1,7 @@
 BASE_NAME=SOMA-vocabulary
 PYTHONTEX_DIR=pythontex-files-
 
-mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
-BASE_DIR    := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
+BASE_DIR="${GITHUB_WORKSPACE}/docs/vocab"
 
 DELETE_EXTENSIONS=log fdb_latexmk aux bbl blg toc out fls thm pytxcode
 DELETE_FILES=${foreach extension,$(DELETE_EXTENSIONS),${BASE_DIR}/${BASE_NAME}.${extension}}
