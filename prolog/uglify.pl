@@ -7,6 +7,8 @@
 :- use_module(library('semweb/rdfs')).
 :- use_module(library('semweb/rdf_db')).
 
+:- rdf_register_prefix(soma, 'http://www.ease-crc.org/ont/SOMA.owl#').
+
 ease_ugly_ontology('http://www.ease-crc.org/ont/SOMA.owl').
 
 ease_assert(_Graph, rdf(_S,_P,O)) :-
@@ -28,16 +30,16 @@ soma_iri(IN,IN) :-
   \+ atom(IN),
   !.
 soma_iri(IN,OUT) :-
-  ( atom_concat('http://www.ease-crc.org/SOMA',_,IN)
+  ( atom_concat('http://www.ease-crc.org/ont/SOMA',_,IN)
   -> soma_iri1(IN,OUT)
   ;  OUT=IN
   ).
 soma_iri1(IN,OUT) :-
   rdf_split_url(_,Name,IN),
-  atom_concat('http://www.ease-crc.org/SOMA.owl#',Name,OUT).
+  atom_concat('http://www.ease-crc.org/ont/SOMA.owl#',Name,OUT).
 
 %%
-ease_assert_import(Graph,Ontology) :-
+ease_assert_import(_Graph,Ontology) :-
   % ignore all imports of EASE ontology modules
   ( atom_concat('http://www.ease-crc.org/',_,Ontology) ;
     atom_concat('package://soma/',_,Ontology)
@@ -59,7 +61,7 @@ uglify :-
     'SOMA-WF.owl',
     'SOMA-IO.owl',
     'SOMA-OBJ.owl',
-    %'SOMA-STATE.owl',
+    'SOMA-STATE.owl',
     'SOMA-SAY.owl',
     'SOMA-PROC.owl'
   ],

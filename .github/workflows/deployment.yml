@@ -1,10 +1,6 @@
-name: Uglify Ontology
+name: Deployment
 on:
   push:
-    paths:
-      - '**'
-      - '!docs/**'
-  pull_request:
     paths:
       - '**'
       - '!docs/**'
@@ -15,8 +11,8 @@ on:
       - '!docs/**'
 
 jobs:
-  uglify_ontology:
-    name: Uglify Ontology
+  deployment:
+    name: Deployment
     runs-on: ubuntu-latest
 
     steps:
@@ -25,45 +21,39 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Uglify current
+      - name: Compile current
         if: startsWith(github.ref, 'refs/tags/') != true
         uses: docker://swipl:8.0.3
         with:
           SOMA_VERSION: current
           args: swipl -f prolog/uglify.pl -t uglify
 
-      - name: Uglify tag
+      - name: Compile tag
         if: startsWith(github.ref, 'refs/tags/')
         uses: docker://swipl:8.0.3
         with:
           SOMA_VERSION: ${{ github.event.release.tag_name }}
           args: swipl -f prolog/uglify.pl -t uglify
 
-      - name: HermiT
-        uses: ./.github/actions/hermit
-        with:
-          args: ./build/SOMA.owl
-
-      - name: Print HermiT output
-        run: cat ./hermit.output
-        if: always()
-
-      - name: Evaluate HermiT output
-        if: success()
-        uses: docker://python:3.7.6-slim
-        with:
-          args: python ./scripts/hermit_test.py -o ./owl/hermit.html ./hermit.output
-
       - name: Convert
         uses: ./.github/actions/convert
         with:
           args: python3 ./scripts/uglify_ease_as_owl.py
 
-      - name: Upload
+      - name: Upload SOMA
         uses: actions/upload-artifact@v1
         with:
           name: SOMA Ontology
-          path: ./build
+          path: ./build/SOMA.owl
+
+      - name: Metrics
+        run: sudo ./scripts/OntoMetrics.sh $GITHUB_WORKSPACE/build/SOMA.owl $GITHUB_WORKSPACE/build
+
+      - name: Upload Metrics
+        uses: actions/upload-artifact@v1
+        with:
+          name: Metrics
+          path: ./build/metrics.json
 
       - name: Deploy current
         uses: JamesIves/github-pages-deploy-action@releases/v3
