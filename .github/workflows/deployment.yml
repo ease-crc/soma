@@ -56,8 +56,11 @@ jobs:
       - name: Compile NEEM Handbook
         uses: docker://blang/latex:ubuntu
         with:
-          args: make -f ./docs/NEEM-handbook/Makefile && mv ./docs/NEEM-handbook/main.pdf ./build/NEEM-Handbook.pdf
-
+          args: make -f ./docs/NEEM-handbook/Makefile
+      
+      - name: Copy NEEM Handbook
+        run: sudo cp $GITHUB_WORKSPACE/NEEM-handbook/main.pdf $GITHUB_WORKSPACE/build/NEEM-Handbook.pdf
+      
       - name: Deploy current
         uses: JamesIves/github-pages-deploy-action@releases/v3
         if: github.ref == 'refs/heads/master'
