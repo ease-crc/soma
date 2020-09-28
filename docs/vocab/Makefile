@@ -1,6 +1,7 @@
 BASE_NAME=SOMA-vocabulary
-BASE_DIR=$(abspath $(lastword $(MAKEFILE_LIST)))
 PYTHONTEX_DIR=pythontex-files-
+
+BASE_DIR := $(abspath $(lastword $(MAKEFILE_LIST)))
 
 DELETE_EXTENSIONS=log fdb_latexmk aux bbl blg toc out fls thm pytxcode
 DELETE_FILES=${foreach extension,$(DELETE_EXTENSIONS),${BASE_DIR}/${BASE_NAME}.${extension}}
