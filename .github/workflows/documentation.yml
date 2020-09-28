@@ -21,13 +21,14 @@ jobs:
       - name: Build
         uses: ./.github/actions/pythonlatex
         with: 
-          args: make -f Makefile
+          args: make
+          working-directory: ./docs/vocab/
         
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
           name: NEEM Vocabulary
-          path: ./SOMA-vocabulary.pdf
+          path: ./docs/vocab/SOMA-vocabulary.pdf
 
   handbook:
     name: NEEM Handbook
@@ -42,8 +43,7 @@ jobs:
       - name: Build
         uses: docker://blang/latex:ubuntu
         with:
-          args: make
-          working_directory: 'docs/vocab'
+          args: make -f ./docs/NEEM-handbook/Makefile
 
       - name: Upload
         uses: actions/upload-artifact@v1
