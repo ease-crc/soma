@@ -2,14 +2,17 @@
 \label{sec:vr-neem}
 \lstset{style=lispcode}
 
-This section will describe how \neems can be generated within a Virtual Reality environment and how they can be utilized within \cram plans to help a robot perform everyday household activities. The use of VR allows us as humans to show the robot an action we want it to perform within a variety of different environments.\todo{Seba: I dont understand it.} This facilitates learning of  a lot of common sense knowledge, e.g. where the objects necessary to perform a specific action are commonly stored within the environment \todo{Seba: I dont understand it.}, which objects are needed for a specific action, where the human user was standing when he was grasping a certain object, how the objects were arranged on a surface relative to one another and how the human user grasped them.  
+This section will describe how \neems can be generated with a Virtual Reality setup and how they can be used to help a robot to perform everyday household activities. The core idea is essentially to show the robot how to do a specific task by demonstrating it within a Virtual Reality environment. VR also allows to know and record exactly where objects within the environment are located. The actions of the human user can be tracked via the VR-Equipment.  With the headset the general location of the human user within the VR-environment is acquired, as well as what the user is looking at. The VR motion controllers represent virtual hands, which the human user can open and close. Based on this, it is possible to generate data about which objects were grasped, how they were grasped, where was the human located when he interacted with certain objects and much more. 
 
-The example scenario used here is the breakfast setting scenario. This means that the robot is supposed to set up the table with a bowl, cup and a spoon in preparation of a breakfast cereal meal. \todo{@Alina: move this probably to a different section.}
-% Maybe make a section describing all the advantages it brings to use VR? But maybe this is also enough
+In Virtual Reality it is possible to setup any environment imaginable a lot faster than in the real world. This means, that the real environment of a robot can be exactly replicated in Virtual Reality, or it can be slightly changed, or a completely new environment can be generated. Imagine how a kitchen almost never looks exactly the same in two households, even though it contains the same appliances like an oven or a shelf for the plates.  Virtual Reality allows us to setup many variations of a kitchen environment, which allows us to collect \neems of more variety and therefore make sure, that if the robot acts based on the collected data, it is not biased towards one very specific kitchen setup, but rather is able to find what is needed in a different kitchen also. 
+
+These VR-\neems can be used within \cram plans to infer information about the environment. For example, questions like ``''Where was the human user standing when he was grasping the bowl?'', ``On which surface was the bowl placed?'' or ``With which hand did the human grasp the bowl?'' can all be answered by KnowRob, based on the knowledge which the VR-\neems provide. It is also important to take the relations between objects into account. For example, when setting up a breakfast table, the spoon will be placed to the right of the bowl on the table by the most users. It might not be that important to know where exactly the spoon is placed in terms of the exact coordinates, but much rather that it is always placed relative to the bowl and a certain distance away from this bowl. Or that the bowl is placed on the table near an edge rather than in the middle of the table. 
+
+The following section will go into more detail on how exactly one can generate VR-\neems, what needs to be installed to be able to do so, and how they can be used within \cram.
 
 \subsection{Prerequisite}
 %Everythhing needed to be able to record NEEMs. Unreal, Plugins, Kitchen, RobCog, robcog_knowrob (for quering). Refer to RobCog and some of the CRAM-VR Tutorials. Also setup kitchen with all the arrays/Links.
-Before VR-\neem generation can take place, the proper VR-environment needs to be set up within the Unreal Engine, including the installation of the USemLog Plugin, which records the \neems and generates the appropriate .owl files\todo{Seba: Are you using the newest KnowRob with Soma?}. The plugin and a setup of a kitchen environment can be found within the RobCog project. 
+Before VR-\neem generation can take place, the proper VR-environment needs to be set up within the Unreal Engine, including the installation of the USemLog Plugin, which records the \neems and generates the appropriate .owl files\todo{Seba: Are you using the newest KnowRob with Soma? Alina: not yet. The plugin needs to be adapted as well as the knowrob_robcog package}. The plugin and a setup of a kitchen environment can be found within the RobCog project. 
 The KnowRob and MongoDB installation are the same as in the section above. \todo{@Alina add links to the sections}
 In order to be able to use the \neems within \cram, the data first needs to be transferred into the MongoDB and KnowRob. This can be achieved by running the \textit{vr neems to knowrob} scripts. Please refer to the README.md for execution examples.
 
@@ -17,9 +20,9 @@ In order to be able to use the \neems within \cram, the data first needs to be t
 To summarize, you will need to install the following components: 
 \begin{itemize}
 	\item Unreal Engine\footnote{\url{https://www.unrealengine.com/}} Version 4.22.3
-	\item RobCog\footnote{\url{https://github.com/robcog-iai/RobCoG}}
+	\item RobCog (under adaptation) \footnote{\url{https://github.com/robcog-iai/RobCoG}}
 	\item vr\_neems\_to\_knowrob\footnote{\url{https://github.com/ease-crc/vr_neems_to_knowrob}} 
-	\item knowrob\_robcog \todo{@Alina add link}
+	\item knowrob\_robcog (under construction) \todo{@Alina add link}
 	\item CRAM\footnote{\url{https://github.com/cram2/cram.git}} Branch: boxy-melodic
 
 \end{itemize}
@@ -27,7 +30,7 @@ To summarize, you will need to install the following components:
 \subsection{Recording Virtual Reality Narrative Enabled Episodic Memories}
 %Run around in VR and do stuff, dump semantic map using plug in
 \todo{@Alina add screenshots}
-\todo{Seba: can you describe or set a link to tutorials how to familiar with the vr system ?}
+\todo{Seba: can you describe or set a link to tutorials how to familiar with the vr system ? }
 Check if all items that you want to appear in the \neems, have a tag under which they will be represented within the ontology. You can check the tag by clicking any item within the kitchen environment, and going to the \textit{Actor} section in the \textit{details} pane. Click the little arrow to expand the section, and also expand the \textit{Tags} section. There you should see something like this:
 
 \begin{lstlisting}
