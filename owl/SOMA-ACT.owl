@@ -232,6 +232,24 @@ For Manipulating, it is the movement of the hand(s) and the change in functional
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#AssumingArmPose -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AssumingArmPose">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AssumingPose"/>
+        <rdfs:comment>A task by which an Agent arranges one/some/all of its arms according to some configuration.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#AssumingPose -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AssumingPose">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PhysicalTask"/>
+        <rdfs:comment>A task by which an Agent arranges its body, or part of it, according to some configuration.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Avoiding -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Avoiding">
@@ -253,6 +271,7 @@ For Manipulating, it is the movement of the hand(s) and the change in functional
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Closing">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Actuating"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Delivering"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Lifting"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Opening"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Squeezing"/>
@@ -379,6 +398,18 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Delivering -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Delivering">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Actuating"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Closing"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Fetching"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Opening"/>
+        <rdfs:comment>A task in which an Agent brings an item that the Agent already carries to a specified target.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Dicing -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Dicing">
@@ -443,6 +474,16 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
         <rdfs:comment>A region containing labels that describe different states in the evolution/completion of a task execution.</rdfs:comment>
         <rdfs:label>Execution state region</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Fetching -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Fetching">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PhysicalAcquiring"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Delivering"/>
+        <rdfs:comment>A task in which an Agent retrieves an object from a particular location, which puts the object under the Agent's control, who can now e.g. transport the object somewhere else; this task may include repositioning the Agent to better reach the object. Note that while in normal linguistic use fetch can mean transport, we use it here to refer only to (a part of) the first stage of transport.</rdfs:comment>
     </owl:Class>
     
 
@@ -646,6 +687,15 @@ One could argue Mental actions are all Physical actions, because anything the Ag
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#MonitoringJointState -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MonitoringJointState">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Proprioceiving"/>
+        <rdfs:comment>A task in which the Agent keeps track of the physical state of its joints, e.g. their positions, velocities, efforts.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#MovingTo -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MovingTo">
@@ -666,6 +716,8 @@ One could argue Mental actions are all Physical actions, because anything the Ag
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Opening">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Actuating"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Closing"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Delivering"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Squeezing"/>
     </owl:Class>
     
@@ -679,10 +731,20 @@ One could argue Mental actions are all Physical actions, because anything the Ag
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#ParkingArms -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ParkingArms">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AssumingArmPose"/>
+        <rdfs:comment>A task by which an Agent arranges its arms in such a way so as to minimize opportunities for collision while moving through the environment.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Perceiving -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Perceiving">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PhysicalTask"/>
+        <rdfs:comment>A task in which the Agent gathers and interprets sensor information about its surroundings.</rdfs:comment>
     </owl:Class>
     
 
@@ -693,9 +755,9 @@ One could argue Mental actions are all Physical actions, because anything the Ag
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ModifyingPhysicalObject"/>
         <rdfs:comment>The goal of this task is to make some object usable for other tasks, by possibly changing its physical state. Usually, it overlaps some task that describes the manner in which an object is obtained.
 
-The prototypical example of PhysicalGetting is picking up an object.
+The prototypical example of PhysicalAcquiring is picking up an object.
 
-Note that buying an object is NOT PhysicalGetting. Buying, or ownership transfer in general, also involves an adjustment in social structures describing ownership.</rdfs:comment>
+Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transfer in general, also involves an adjustment in social structures describing ownership.</rdfs:comment>
     </owl:Class>
     
 
@@ -796,6 +858,15 @@ Note that buying an object is NOT PhysicalGetting. Buying, or ownership transfer
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Proprioceiving -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Proprioceiving">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PhysicalTask"/>
+        <rdfs:comment>A task in which the Agent gathers and interprets sensor information about itself.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Prospecting -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Prospecting">
@@ -805,11 +876,22 @@ Note that buying an object is NOT PhysicalGetting. Buying, or ownership transfer
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Pulling -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Pulling">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Actuating"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Pushing"/>
+        <rdfs:comment>A task in which an Agent moves an object in a direction loosely from the object's center of mass towards the contact point between agent and object.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Pushing -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Pushing">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Actuating"/>
-        <rdfs:comment>todo: define subclass &apos;PushingOver&apos;? Would we expect two distinct contacts with the same surface then?</rdfs:comment>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Pulling"/>
+        <rdfs:comment>A task in which an Agent moves an object in a direction loosely from the the contact point between agent and object towards object's center of mass. todo: define subclass &apos;PushingOver&apos;? Would we expect two distinct contacts with the same surface then?</rdfs:comment>
     </owl:Class>
     
 
@@ -897,6 +979,15 @@ Note, this classification has nothing to do with reasoning domain (e.g. SpatialR
         <rdfs:comment>Done by analogy with Prospecting. Currently mono-subcategory, but perhaps we might find more.
 
 As an example, a kind of Abductive reasoning would fit here: reconstruction, in which the agent attempts to create a representation of a past state of affairs which the agent has not actually observed, based on traces and clues surviving to the present.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#SettingGripper -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SettingGripper">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AssumingPose"/>
+        <rdfs:comment>A task by which an Agent arranges one/some/all of its grippers in some configuration.</rdfs:comment>
     </owl:Class>
     
 
