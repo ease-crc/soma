@@ -1702,6 +1702,7 @@ For Manipulating, it is the movement of the hand(s) and the change in functional
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+  <rdfs:comment>A task in which a PhysicalAgent affects some physical object.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#AestheticDesign">
@@ -1938,10 +1939,12 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
 
 <owl:Class rdf:about="#AreaSurveying">
   <rdfs:subClassOf rdf:resource="#Perceiving"/>
+  <rdfs:comment>A task in which an Agent uses its perception apparatus to gain information about some location.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Perceiving">
   <rdfs:subClassOf rdf:resource="#PhysicalTask"/>
+  <rdfs:comment>A task in which the Agent gathers and interprets sensor information about its surroundings.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Arm">
@@ -1962,6 +1965,7 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
 
 <owl:Class rdf:about="#Arranging">
   <rdfs:subClassOf rdf:resource="#Constructing"/>
+  <rdfs:comment>A task in which an Agent places a collection of objects at some set of relative poses to each other.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Constructing">
@@ -1980,6 +1984,7 @@ There can be non-physical artificial agents such as software programs but they a
 
 <owl:Class rdf:about="#Assembling">
   <rdfs:subClassOf rdf:resource="#Constructing"/>
+  <rdfs:comment>A task in which an Agent connects some objects such that they form a cohesive whole, and which also imposes constraints on the objects' relative motions. Often, the objects that make up an assemblage can also be separated again.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Assertion">
@@ -2011,16 +2016,28 @@ There can be non-physical artificial agents such as software programs but they a
   <rdfs:subClassOf rdf:resource="#CommunicationTask"/>
 </owl:Class>
 
+<owl:Class rdf:about="#AssumingArmPose">
+  <rdfs:subClassOf rdf:resource="#AssumingPose"/>
+  <rdfs:comment>A task by which an Agent arranges one/some/all of its arms according to some configuration.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#AssumingPose">
+  <rdfs:subClassOf rdf:resource="#PhysicalTask"/>
+  <rdfs:comment>A task by which an Agent arranges its body, or part of it, according to some configuration.</rdfs:comment>
+</owl:Class>
+
 <owl:Class rdf:about="#AvoidedObject">
   <rdfs:subClassOf rdf:resource="#Patient"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Avoiding">
   <rdfs:subClassOf rdf:resource="#Navigating"/>
+  <rdfs:comment>A task in which an Agent moves so as to not enter or pass through a location.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Navigating">
   <rdfs:subClassOf rdf:resource="#PhysicalTask"/>
+  <rdfs:comment>A task in which an Agent moves through space so as to arrive at some location, follow some path, or increase its distance from some location or other entity. Often, navigation involves finding paths around obstacles and forbidden areas.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Barrier">
@@ -2312,10 +2329,12 @@ Note that sometimes the shape as actually used for some purpose may be displaced
 <owl:Class rdf:about="#Catching">
   <rdfs:subClassOf rdf:resource="#Actuating"/>
   <owl:disjointWith rdf:resource="#PickingUp"/>
+  <rdfs:comment>A task by which an Agent stops a moving object and gains kinematic control over it, usually by grasping.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#PickingUp">
   <rdfs:subClassOf rdf:resource="#Manipulating"/>
+  <rdfs:comment>A task in which the Agent uses one or more of its grippers to grasp a usually stationary object.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#CausalEventRole">
@@ -2405,6 +2424,11 @@ Image schemas are considered as fundamental, pre-conceptual, building blocks of 
 For SOMA, whereas the focus of executable schematic theories is to describe how an agent might act, image schematic theories focus on descriptions of how objects behave in the absence of, or after, an active intervention from an agent.</rdfs:comment>
 </owl:Class>
 
+<owl:Class rdf:about="#CheckingObjectPresence">
+  <rdfs:subClassOf rdf:resource="#Perceiving"/>
+  <rdfs:comment>A task by which an Agent uses its sensors to check for the presence of a specific object and to obtain some other information about it, e.g. pose.</rdfs:comment>
+</owl:Class>
+
 <owl:Class rdf:about="#ChemicalProcess">
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process"/>
   <rdfs:comment>A process by which the chemical constituency of an Entity or set of Entities changes.
@@ -2480,24 +2504,97 @@ In some sense any process that results in entities being created or destroyed mi
 
 <owl:Class rdf:about="#Closing">
   <rdfs:subClassOf rdf:resource="#Actuating"/>
+  <owl:disjointWith rdf:resource="#Delivering"/>
+  <owl:disjointWith rdf:resource="#Fetching"/>
   <owl:disjointWith rdf:resource="#Lifting"/>
   <owl:disjointWith rdf:resource="#Opening"/>
+  <owl:disjointWith rdf:resource="#Pulling"/>
+  <owl:disjointWith rdf:resource="#Pushing"/>
   <owl:disjointWith rdf:resource="#Squeezing"/>
+  <rdfs:comment>A task in which an Agent manipulates a container so as to block access to its interior.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Delivering">
+  <rdfs:subClassOf rdf:resource="#Actuating"/>
+  <owl:disjointWith rdf:resource="#Closing"/>
+  <owl:disjointWith rdf:resource="#Fetching"/>
+  <owl:disjointWith rdf:resource="#Lifting"/>
+  <owl:disjointWith rdf:resource="#Opening"/>
+  <owl:disjointWith rdf:resource="#Pulling"/>
+  <owl:disjointWith rdf:resource="#Pushing"/>
+  <owl:disjointWith rdf:resource="#Squeezing"/>
+  <rdfs:comment>A task in which an Agent brings an item that the Agent already carries to a specified target.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Fetching">
+  <rdfs:subClassOf rdf:resource="#PhysicalAcquiring"/>
+  <owl:disjointWith rdf:resource="#Closing"/>
+  <owl:disjointWith rdf:resource="#Delivering"/>
+  <owl:disjointWith rdf:resource="#Lifting"/>
+  <owl:disjointWith rdf:resource="#Opening"/>
+  <owl:disjointWith rdf:resource="#Pulling"/>
+  <owl:disjointWith rdf:resource="#Pushing"/>
+  <owl:disjointWith rdf:resource="#Squeezing"/>
+  <rdfs:comment>A task in which an Agent retrieves an object from a particular location, which puts the object under the Agent's control, who can now e.g. transport the object somewhere else; this task may include repositioning the Agent to better reach the object. Note that while in normal linguistic use fetch can mean transport, we use it here to refer only to (a part of) the first stage of transport.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Lifting">
   <rdfs:subClassOf rdf:resource="#Actuating"/>
+  <owl:disjointWith rdf:resource="#Closing"/>
+  <owl:disjointWith rdf:resource="#Delivering"/>
+  <owl:disjointWith rdf:resource="#Fetching"/>
   <owl:disjointWith rdf:resource="#Opening"/>
+  <owl:disjointWith rdf:resource="#Pulling"/>
   <owl:disjointWith rdf:resource="#Pushing"/>
+  <owl:disjointWith rdf:resource="#Squeezing"/>
 </owl:Class>
 
 <owl:Class rdf:about="#Opening">
   <rdfs:subClassOf rdf:resource="#Actuating"/>
+  <owl:disjointWith rdf:resource="#Closing"/>
+  <owl:disjointWith rdf:resource="#Delivering"/>
+  <owl:disjointWith rdf:resource="#Fetching"/>
+  <owl:disjointWith rdf:resource="#Lifting"/>
+  <owl:disjointWith rdf:resource="#Pulling"/>
+  <owl:disjointWith rdf:resource="#Pushing"/>
   <owl:disjointWith rdf:resource="#Squeezing"/>
+  <rdfs:comment>A task in which an Agent manipulates a container so as to expose its interior.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Pulling">
+  <rdfs:subClassOf rdf:resource="#Actuating"/>
+  <owl:disjointWith rdf:resource="#Closing"/>
+  <owl:disjointWith rdf:resource="#Delivering"/>
+  <owl:disjointWith rdf:resource="#Fetching"/>
+  <owl:disjointWith rdf:resource="#Lifting"/>
+  <owl:disjointWith rdf:resource="#Opening"/>
+  <owl:disjointWith rdf:resource="#Pushing"/>
+  <owl:disjointWith rdf:resource="#Squeezing"/>
+  <rdfs:comment>A task in which an Agent moves an object in a direction loosely from the object's center of mass towards the contact point between agent and object.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Pushing">
+  <rdfs:subClassOf rdf:resource="#Actuating"/>
+  <owl:disjointWith rdf:resource="#Closing"/>
+  <owl:disjointWith rdf:resource="#Delivering"/>
+  <owl:disjointWith rdf:resource="#Fetching"/>
+  <owl:disjointWith rdf:resource="#Lifting"/>
+  <owl:disjointWith rdf:resource="#Opening"/>
+  <owl:disjointWith rdf:resource="#Pulling"/>
+  <owl:disjointWith rdf:resource="#Squeezing"/>
+  <rdfs:comment>A task in which an Agent moves an object in a direction loosely from the the contact point between agent and object towards object's center of mass. todo: define subclass 'PushingOver'? Would we expect two distinct contacts with the same surface then?</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Squeezing">
   <rdfs:subClassOf rdf:resource="#Actuating"/>
+  <owl:disjointWith rdf:resource="#Closing"/>
+  <owl:disjointWith rdf:resource="#Delivering"/>
+  <owl:disjointWith rdf:resource="#Fetching"/>
+  <owl:disjointWith rdf:resource="#Lifting"/>
+  <owl:disjointWith rdf:resource="#Opening"/>
+  <owl:disjointWith rdf:resource="#Pulling"/>
+  <owl:disjointWith rdf:resource="#Pushing"/>
+  <rdfs:comment>A task in which an Agent applies pressure to an object they have in their grasp.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Clumsiness">
@@ -3348,6 +3445,7 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
 
 <owl:Class rdf:about="#Distancing">
   <rdfs:subClassOf rdf:resource="#Navigating"/>
+  <rdfs:comment>A task in which an Agent increases its distance from some location.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Dreaming">
@@ -3459,6 +3557,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
 
 <owl:Class rdf:about="#EndEffectorPositioning">
   <rdfs:subClassOf rdf:resource="#Manipulating"/>
+  <rdfs:comment>A task in which an Agent places its end effectors at particular poses.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Manipulating">
@@ -3561,6 +3660,15 @@ Note that such theories are useful both when analyzing an actual linguistic prod
 
 <owl:Class rdf:about="#SoftwareDiagnosis">
   <rdfs:subClassOf rdf:resource="#TechnicalDiagnosis"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PhysicalAcquiring">
+  <rdfs:subClassOf rdf:resource="#ModifyingPhysicalObject"/>
+  <rdfs:comment>The goal of this task is to make some object usable for other tasks, by possibly changing its physical state. Usually, it overlaps some task that describes the manner in which an object is obtained.
+
+The prototypical example of PhysicalAcquiring is picking up an object.
+
+Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transfer in general, also involves an adjustment in social structures describing ownership.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#FixedJoint">
@@ -3733,17 +3841,25 @@ Note that such theories are useful both when analyzing an actual linguistic prod
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the reference object in a spatial or spatio-temporal schema, i.e. the object with secondary focal prominence. Terminological variants: Ground (Talmy 1983), Landmark (Langacker 1986).</rdfs:comment>
 </owl:Class>
 
+<owl:Class rdf:about="#GetTaskParameter">
+  <rdfs:subClassOf rdf:resource="#MentalTask"/>
+  <rdfs:comment>A task in which an Agent computes some parameter relevant for another task.</rdfs:comment>
+</owl:Class>
+
 <owl:Class rdf:about="#GraspTransfer">
   <rdfs:subClassOf rdf:resource="#Grasping"/>
+  <rdfs:comment>A task in which an Agent switches which of its end effectors holds an object.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Grasping">
   <rdfs:subClassOf rdf:resource="#Manipulating"/>
   <owl:disjointWith rdf:resource="#Releasing"/>
+  <rdfs:comment>A task in which an Agent uses its end effectors to grasp an object, thus gaining kinematic control over it.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Releasing">
   <rdfs:subClassOf rdf:resource="#Manipulating"/>
+  <rdfs:comment>A task in which an agent relinquishes its kinematic control over an object, typically by releasing it from its grasp.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#GraspingMotion">
@@ -3870,6 +3986,7 @@ Note that such theories are useful both when analyzing an actual linguistic prod
 
 <owl:Class rdf:about="#Holding">
   <rdfs:subClassOf rdf:resource="#Manipulating"/>
+  <rdfs:comment>A task by which an Agent keeps an object over which it has kinematic control, typically via grasping, at some specified pose.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Imagining">
@@ -4040,11 +4157,6 @@ Posture changes may take place as part of other actions, for example turning whe
   <rdfs:subClassOf rdf:resource="#Limb"/>
 </owl:Class>
 
-<owl:Class rdf:about="#Pushing">
-  <rdfs:subClassOf rdf:resource="#Actuating"/>
-  <rdfs:comment>todo: define subclass 'PushingOver'? Would we expect two distinct contacts with the same surface then?</rdfs:comment>
-</owl:Class>
-
 <owl:Class rdf:about="#PhysicalEffector">
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -4146,10 +4258,12 @@ Posture changes may take place as part of other actions, for example turning whe
 
 <owl:Class rdf:about="#LookingFor">
   <rdfs:subClassOf rdf:resource="#Perceiving"/>
+  <rdfs:comment>A task by which an Agent uses its perception apparatus to check for the presence of an object in some specified area.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Lowering">
   <rdfs:subClassOf rdf:resource="#Actuating"/>
+  <rdfs:comment>A task in which an Agent reduces the elevation at which they hold an item.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#PhysicalAction">
@@ -4236,18 +4350,22 @@ One could argue Mental actions are all Physical actions, because anything the Ag
 
 <owl:Class rdf:about="#MetaCognitionEvaluationTopic">
   <rdfs:subClassOf rdf:resource="#MetaCognitionTopic"/>
+  <rdfs:comment>A topic used while an Agent describes its own cognitive processes and acions to evaluate them according to some metric.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#MetaCognitionTopic">
   <rdfs:subClassOf rdf:resource="#ThinkAloudTopic"/>
+  <rdfs:comment>A topic for a description that an Agent might make of its own cognitive processes and actions.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#MetaCognitionMemoryTopic">
   <rdfs:subClassOf rdf:resource="#MetaCognitionTopic"/>
+  <rdfs:comment>A topic used while an Agent describes its own cognitive processes and actions, and which covers descriptions of what memories are involved in them.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#MetaCognitionPlanningTopic">
   <rdfs:subClassOf rdf:resource="#MetaCognitionTopic"/>
+  <rdfs:comment>A topic used while an Agent describes the planning it does for its own cognitive processes and actions.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#ThinkAloudTopic">
@@ -4256,6 +4374,7 @@ One could argue Mental actions are all Physical actions, because anything the Ag
 
 <owl:Class rdf:about="#Mixing">
   <rdfs:subClassOf rdf:resource="#Constructing"/>
+  <rdfs:comment>A task by which an Agent combines several entities, such that the combination is difficult or in practice impossible to reverse.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#MixingTheory">
@@ -4275,6 +4394,16 @@ One could argue Mental actions are all Physical actions, because anything the Ag
   <rdfs:comment>A schematic theory about how an agent can mix a fluid or particulate object.</rdfs:comment>
 </owl:Class>
 
+<owl:Class rdf:about="#MonitoringJointState">
+  <rdfs:subClassOf rdf:resource="#Proprioceiving"/>
+  <rdfs:comment>A task in which the Agent keeps track of the physical state of its joints, e.g. their positions, velocities, efforts.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Proprioceiving">
+  <rdfs:subClassOf rdf:resource="#PhysicalTask"/>
+  <rdfs:comment>A task in which the Agent gathers and interprets sensor information about itself.</rdfs:comment>
+</owl:Class>
+
 <owl:Class rdf:about="#MovingAway">
   <rdfs:subClassOf rdf:resource="#Locomotion"/>
 </owl:Class>
@@ -4291,15 +4420,22 @@ One could argue Mental actions are all Physical actions, because anything the Ag
 
 <owl:Class rdf:about="#Orienting">
   <rdfs:subClassOf rdf:resource="#Positioning"/>
+  <rdfs:comment>A task in which an Agent adjusts the orientation of an object.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Positioning">
   <rdfs:subClassOf rdf:resource="#Actuating"/>
+  <rdfs:comment>A task in which an Agent places an object at a particular position.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Origin">
   <rdfs:subClassOf rdf:resource="#Location"/>
   <rdfs:comment>A role classifying the location where an event or object originated.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#ParkingArms">
+  <rdfs:subClassOf rdf:resource="#AssumingArmPose"/>
+  <rdfs:comment>A task by which an Agent arranges its arms in such a way so as to minimize opportunities for collision while moving through the environment.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#PathRole">
@@ -4330,15 +4466,6 @@ In all these cases, the metaphor points to the existence of several regions of q
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#StateType"/>
   <rdfs:comment>Classifies States in which an item is placed in a container or protected by a protector, but the placement of the item and container is such that a, usually agentive, accessor may nevertheless reach the item in order to perform a task.</rdfs:comment>
-</owl:Class>
-
-<owl:Class rdf:about="#PhysicalAcquiring">
-  <rdfs:subClassOf rdf:resource="#ModifyingPhysicalObject"/>
-  <rdfs:comment>The goal of this task is to make some object usable for other tasks, by possibly changing its physical state. Usually, it overlaps some task that describes the manner in which an object is obtained.
-
-The prototypical example of PhysicalGetting is picking up an object.
-
-Note that buying an object is NOT PhysicalGetting. Buying, or ownership transfer in general, also involves an adjustment in social structures describing ownership.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#PhysicalBlockage">
@@ -4548,6 +4675,7 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
 <owl:Class rdf:about="#PushingAway">
   <rdfs:subClassOf rdf:resource="#Pushing"/>
   <owl:disjointWith rdf:resource="#PushingDown"/>
+  <rdfs:comment>A task in which an Agent pushes an object in front of themselves.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#PushingDown">
@@ -4556,6 +4684,7 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
 
 <owl:Class rdf:about="#PuttingDown">
   <rdfs:subClassOf rdf:resource="#Manipulating"/>
+  <rdfs:comment>A task in which an Agent puts down an object they have kinematic control over, e.g. a grasped object.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#QualityTransition">
@@ -4596,10 +4725,12 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
 <owl:Class rdf:about="#Reaching">
   <rdfs:subClassOf rdf:resource="#EndEffectorPositioning"/>
   <owl:disjointWith rdf:resource="#Retracting"/>
+  <rdfs:comment>A task in which an Agent moves one or more of its arms towards a location or object.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Retracting">
   <rdfs:subClassOf rdf:resource="#EndEffectorPositioning"/>
+  <rdfs:comment>A task in which an Agent moves its arms away from a location.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#RecipientRole">
@@ -4683,6 +4814,11 @@ As an example, a kind of Abductive reasoning would fit here: reconstruction, in 
 
 <owl:Class rdf:about="#Setpoint">
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+</owl:Class>
+
+<owl:Class rdf:about="#SettingGripper">
+  <rdfs:subClassOf rdf:resource="#AssumingPose"/>
+  <rdfs:comment>A task by which an Agent arranges one/some/all of its grippers in some configuration.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Shape">
@@ -4970,30 +5106,37 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
 
 <owl:Class rdf:about="#ThinkAloudGeneralKnowledgeTopic">
   <rdfs:subClassOf rdf:resource="#ThinkAloudKnowledgeTopic"/>
+  <rdfs:comment>A topic used when an Agent states general knowledge they have.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#ThinkAloudKnowledgeTopic">
   <rdfs:subClassOf rdf:resource="#ThinkAloudTopic"/>
+  <rdfs:comment>A topic used when an Agent states some item of knowledge. This knowledge can be general, or specific to the environment and task at hand.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#ThinkAloudObstructionTopic">
   <rdfs:subClassOf rdf:resource="#ThinkAloudTopic"/>
+  <rdfs:comment>A topic used when an Agent describes some state of affairs that prevents them from performing an action.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#ThinkAloudOpinionTopic">
   <rdfs:subClassOf rdf:resource="#ThinkAloudTopic"/>
+  <rdfs:comment>A topic used when an Agent expresses an opinion about the action they perform or the environment they are in.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#ThinkAloudPerceptionTopic">
   <rdfs:subClassOf rdf:resource="#ThinkAloudTopic"/>
+  <rdfs:comment>A topic used when an Agent describes what they currently perceive.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#ThinkAloudPlanTopic">
   <rdfs:subClassOf rdf:resource="#ThinkAloudTopic"/>
+  <rdfs:comment>A topic used when an Agent describes what they intend to do. Note, this is not about describing the process through which this plan was constructed; that is covered by the MetaCognitionPlanningTopic.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#ThinkAloudSceneKnowledgeTopic">
   <rdfs:subClassOf rdf:resource="#ThinkAloudKnowledgeTopic"/>
+  <rdfs:comment>A topic used when an Agent describes what they know about their environment, including knowledge of world states that they do not currently perceive.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Threshold">
@@ -5003,6 +5146,7 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
 <owl:Class rdf:about="#Throwing">
   <rdfs:subClassOf rdf:resource="#Actuating"/>
   <rdfs:subClassOf rdf:resource="#Manipulating"/>
+  <rdfs:comment>A task in which an Agent imparts momentum to an object before releasing it so that it flies for some distance unsupported.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#TimeRole">
@@ -5036,6 +5180,7 @@ It is also possible that a Transient transitionsBack to the initial object. An e
 
 <owl:Class rdf:about="#Transporting">
   <rdfs:subClassOf rdf:resource="#ModifyingPhysicalObject"/>
+  <rdfs:comment>A task by which an Agent carries an item from a source to a destination location.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Turning">
