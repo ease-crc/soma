@@ -1704,6 +1704,26 @@ The entity playing an AgentRole is endowed with sentience and the capacity to de
         <rdfs:comment>A limb used to reach for objects.</rdfs:comment>
     </owl:Class>
     
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Head -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Head">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FunctionalPart"/>
+        <rdfs:comment>A functional part of body responsible for carrying high bandwidth sensors ie. camera.</rdfs:comment>
+    </owl:Class>
+    
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Finger -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Finger">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Limb"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPartOf"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Hand"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A limb used for grasping objects.</rdfs:comment>
+    </owl:Class>
+    
 
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#AvoidedObject -->
