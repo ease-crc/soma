@@ -1,7 +1,7 @@
-FROM gokhlayeh/latex:latest
+FROM gokhlayeh/latex:v4
 
-RUN apk add --no-cache \
-    py3-pip \
+RUN dnf install  -y --setopt=install_weak_deps=False \
+    python3-pip \
     && \
     python3 -m pip install --no-cache-dir \
     owlready2
