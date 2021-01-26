@@ -135,17 +135,6 @@ A style recommendation for usage guidelines is that they should be brief. In con
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#assistedBy -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#assistedBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-        <rdfs:label>assisted by</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#before -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#before">
@@ -273,6 +262,7 @@ Sub-properties are used to distinct between different cases of event endpoint re
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from an Entity to a Goal it pursues. Agents can pursue Goals, and Tasks are also construed as pursuing Goals.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -295,9 +285,10 @@ Sub-properties are used to distinct between different cases of event endpoint re
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasInputParameter">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameter"/>
         <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isInputParameterFor"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
         <rdfs:label>has input parameter</rdfs:label>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from an EventType (typically, a Task) and a parameter describing some state of affairs before the event classified by the EventType takes place, and which contributes towards that event happening.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -307,9 +298,10 @@ Sub-properties are used to distinct between different cases of event endpoint re
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasOutputParameter">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameter"/>
         <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isOutputParameterFor"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
         <rdfs:label>has output parameter</rdfs:label>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from an EventType (typically a Task) to a Parameter describing an outcome of the event classified by the EventType.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -369,6 +361,7 @@ Sub-properties are used to distinct between different cases of event endpoint re
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasStatus">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
         <rdfs:label>has status</rdfs:label>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from an Entity to a Quality that is indicative of the Entity's state, e.g. if it is a device, its state of operation.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -458,6 +451,7 @@ Sub-properties are used to distinct between different cases of event endpoint re
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
         <rdfs:label>is answered by</rdfs:label>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from a Query to an Agent that answers it.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -481,6 +475,7 @@ Sub-properties are used to distinct between different cases of event endpoint re
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
         <rdfs:label>is asked by</rdfs:label>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from a Query to the Agent who asks it.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -550,8 +545,9 @@ Sub-properties are used to distinct between different cases of event endpoint re
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isInputParameterFor">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParameterFor"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
         <rdfs:label>is input parameter for</rdfs:label>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from a Parameter to an EventType (typically, a Task). The parameter describes some state of affairs that precedes and will contribute to the event classified by the EventType.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -586,8 +582,9 @@ Sub-properties are used to distinct between different cases of event endpoint re
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isOutputParameterFor">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParameterFor"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
         <rdfs:label>is output parameter for</rdfs:label>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from a Parameter to an EventType (typically, a Task). The parameter describes an outcome of the event classified by the EventType.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -935,6 +932,7 @@ Sub-properties are used to distinct between different cases of event endpoint re
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
         <rdfs:label>is reification of</rdfs:label>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An auxiliary property that is used to generate object individuals, called reifications, from any other Entity, e.g. from relations, classes, data types. These reifications can then be used in DL axioms as any other named individual.</rdfs:comment>
     </owl:DatatypeProperty>
     
 
@@ -962,9 +960,9 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#FunctionalPart -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#FunctionalPart -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#FunctionalPart"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FunctionalPart"/>
     
 
 
@@ -1191,7 +1189,7 @@ Such an event does NOT fall under the definition of Accident here. An example of
     <!-- http://www.ease-crc.org/ont/SOMA.owl#PhysicalEffector -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PhysicalEffector">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#FunctionalPart"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FunctionalPart"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty>

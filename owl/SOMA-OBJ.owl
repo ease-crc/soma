@@ -1355,6 +1355,29 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
 
     
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#FunctionalPart -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FunctionalPart">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalBody"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isComponentOf"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Parts of an agent or an artifact are considered as functional parts.</rdfs:comment>
+        <rdfs:label>Functional part</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#ContinuousJoint -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#ContinuousJoint">
@@ -1578,29 +1601,6 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
 
 There can be non-physical artificial agents such as software programs but they are not considered here in the scope of artificial agent.</rdfs:comment>
         <rdfs:label>Artificial agent</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#FunctionalPart -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#FunctionalPart">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalBody"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isComponentOf"/>
-                <owl:allValuesFrom>
-                    <owl:Class>
-                        <owl:unionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-                        </owl:unionOf>
-                    </owl:Class>
-                </owl:allValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>Parts of an agent or an artifact are considered as functional parts.</rdfs:comment>
-        <rdfs:label>Functional part</rdfs:label>
     </owl:Class>
     
 
@@ -2136,7 +2136,7 @@ The paradigmatic example is the Agent performing an Action -- the Agent is the e
     <!-- http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#FunctionalPart"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FunctionalPart"/>
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
         <rdfs:subClassOf>
             <owl:Restriction>
