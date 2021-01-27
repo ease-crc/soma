@@ -2940,6 +2940,17 @@ The second issue relates to what is "outside". The state is a configuration of s
 <owl:Class rdf:about="#Containment">
   <rdfs:subClassOf>
     <owl:Restriction>
+      <owl:onProperty rdf:resource="#isDispositionOf"/>
+      <owl:allValuesFrom>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
+          <owl:someValuesFrom rdf:resource="#Capacity"/>
+        </owl:Restriction>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
       <owl:onProperty rdf:resource="#affordsBearer"/>
       <owl:allValuesFrom rdf:resource="#Container"/>
     </owl:Restriction>
@@ -2948,17 +2959,6 @@ The second issue relates to what is "outside". The state is a configuration of s
     <owl:Restriction>
       <owl:onProperty rdf:resource="#affordsTrigger"/>
       <owl:allValuesFrom rdf:resource="#IncludedObject"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
-      <owl:onProperty rdf:resource="#isDispositionOf"/>
-      <owl:allValuesFrom>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
-          <owl:someValuesFrom rdf:resource="#Capacity"/>
-        </owl:Restriction>
-      </owl:allValuesFrom>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#Disposition"/>
@@ -3671,6 +3671,20 @@ The prototypical example of PhysicalAcquiring is picking up an object.
 Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transfer in general, also involves an adjustment in social structures describing ownership.</rdfs:comment>
 </owl:Class>
 
+<owl:Class rdf:about="#Finger">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPartOf"/>
+      <owl:someValuesFrom rdf:resource="#Hand"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="#Limb"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Hand">
+  <rdfs:subClassOf rdf:resource="#PrehensileEffector"/>
+</owl:Class>
+
 <owl:Class rdf:about="#FixedJoint">
   <rdfs:subClassOf>
     <owl:Restriction>
@@ -3936,10 +3950,6 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
   <rdfs:comment>An effector used to grasp objects, such as a hand of a human, or the long prehensile tail of a monkey.</rdfs:comment>
 </owl:Class>
 
-<owl:Class rdf:about="#Hand">
-  <rdfs:subClassOf rdf:resource="#PrehensileEffector"/>
-</owl:Class>
-
 <owl:Class rdf:about="#HardwareDiagnosis">
   <rdfs:subClassOf rdf:resource="#TechnicalDiagnosis"/>
 </owl:Class>
@@ -3972,6 +3982,11 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Relation"/>
   <rdfs:comment>The relation between an individual quality and a region.</rdfs:comment>
   <rdfs:comment>todo(DB): added for NEEMs (quale change), but not sure yet about it...</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Head">
+  <rdfs:subClassOf rdf:resource="#FunctionalPart"/>
+  <rdfs:comment>A functional part of the body responsible for carrying high bandwidth sensors, i.e., camera.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#HeadMovement">
