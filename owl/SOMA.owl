@@ -418,19 +418,6 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#involvesEffector -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#involvesEffector">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isEffectorInvolvedIn"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PhysicalEffector"/>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Effector participation.</rdfs:comment>
-        <rdfs:label>involves effector</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#involvesPlace -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#involvesPlace">
@@ -444,18 +431,6 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#isAnsweredBy -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isAnsweredBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-        <rdfs:label>is answered by</rdfs:label>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from a Query to an Agent that answers it.</rdfs:comment>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#isArtifactInvolvedIn -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isArtifactInvolvedIn">
@@ -464,18 +439,6 @@ Sub-properties are used to distinct between different cases of event endpoint re
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Artifact participation.</rdfs:comment>
         <rdfs:label>is artifact involved in</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#isAskedBy -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isAskedBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-        <rdfs:label>is asked by</rdfs:label>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from a Query to the Agent who asks it.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -512,18 +475,6 @@ Sub-properties are used to distinct between different cases of event endpoint re
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
         <rdfs:label>is contained in</rdfs:label>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The inverse of the contains relation. See the contains relation for details.</rdfs:comment>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#isEffectorInvolvedIn -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isEffectorInvolvedIn">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
-        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PhysicalEffector"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Effector participation.</rdfs:comment>
-        <rdfs:label>is effector involved in</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -960,12 +911,6 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#FunctionalPart -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FunctionalPart"/>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Accident -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Accident">
@@ -1186,26 +1131,6 @@ Such an event does NOT fall under the definition of Accident here. An example of
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#PhysicalEffector -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PhysicalEffector">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FunctionalPart"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty>
-                    <rdf:Description>
-                        <owl:inverseOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
-                    </rdf:Description>
-                </owl:onProperty>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:label>Physical effector</rdfs:label>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A functional part belonging to an Agent and which allows that Agent to act upon its surroundings.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Question -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Question">
@@ -1252,7 +1177,14 @@ Such an event does NOT fall under the definition of Accident here. An example of
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#State -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#State"/>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#State">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:comment>States are stative and homeomeric events.
+
+For stative events, the mereological sum of two instances has the same type as both instances. This is, for example, the state of sitting on a chair, or the process of a pendulum swinging around.
+
+The difference between states and processes is that states are, in addition, homeomeric, and processes are not.  This means that, when considering time slices  of an event, for states, these time slices always have the same type as the state, but for processes this is not the case.</rdfs:comment>
+    </owl:Class>
     
 
 
