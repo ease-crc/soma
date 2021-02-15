@@ -53,6 +53,21 @@ In the following, we will give an overview which information is contained in tho
 	\item[\textbf{triples}] The triples collection contains all triples which were asserted into the knowledge base during run time.
 \end{description}
 
+\subsection{Triple data as JSON object}
+	One can provide triple data into JSON format logged in their experiment, where triples are defined in standard subject, predicate and object format. Subject and objects can be defined with valid IRI, which is pointing to concepts or individuals defined by ontology. An individual name is the combination of concept name and random string connected with an underscore. An object can be also other data types, such as a number, string, boolean, etc. Whereas, the predicate is defined by IRI pointing to property concepts mentioned in  ontology. One can also provide additional time scope fields `since` and `until` to indicate that the given triple is valid for the given time scope. An example of such JSON object is given below:
+\begin{lstlisting}[language=json,firstnumber=1]
+[
+ {
+   "s": "http://www.ease-crc.org/ont/SOMA.owl#Salad_PMRVYPJH",
+   "p": "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRole",
+   "o": "http://www.ease-crc.org/ont/SOMA.owl#Patient_YGJUVNDR",
+   "since": 27.739,
+   "until": 29.075
+ }
+]
+\end{lstlisting}
+
+It is important to note that, this is an intermediate data format which is not stored into database but is useful for providing data into agreed common format which can be accessed and inferred into knowledge-base.
 
 \input{content/acquisition/robot-neem/robot-neem}
 \input{content/acquisition/vr-neem/vr-neem}
