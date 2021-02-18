@@ -35,6 +35,7 @@
         <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasNextStep"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+        <rdfs:comment>An ordering relation between tasks in some workflow, stating that a task is preceded by another.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has previous step</rdfs:label>
     </owl:ObjectProperty>
     
@@ -47,6 +48,7 @@
         <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasFirstStep"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow"/>
+        <rdfs:comment>A relation stating that some task is the first one in a workflow.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is first step of</rdfs:label>
     </owl:ObjectProperty>
     
@@ -59,6 +61,7 @@
         <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasStep"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow"/>
+        <rdfs:comment>A relation stating that a task is a step in a workflow.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is step of</rdfs:label>
     </owl:ObjectProperty>
     
@@ -169,6 +172,7 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
         <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasStep"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+        <rdfs:comment>A relation from a Workflow to its first Task.</rdfs:comment>
         <rdfs:label>has first step</rdfs:label>
     </owl:ObjectProperty>
     
@@ -180,6 +184,7 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#directlyPrecedes"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+        <rdfs:comment>An ordering relation between tasks in a workflow, saying that a task is followed by another.</rdfs:comment>
         <rdfs:label>has next step</rdfs:label>
     </owl:ObjectProperty>
     
@@ -202,6 +207,7 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+        <rdfs:comment>A relation between a Workflow and a Task it contains.</rdfs:comment>
         <rdfs:label>has step</rdfs:label>
     </owl:ObjectProperty>
     
@@ -213,6 +219,7 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow"/>
         <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Succedence"/>
+        <rdfs:comment>A relation between a Workflow and a Succedence that appears in it.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -285,7 +292,8 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
 
     <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasPriority">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+        <rdfs:comment>A relation asserting some entity has a particular priority.</rdfs:comment>
     </owl:DatatypeProperty>
     
 
@@ -424,6 +432,7 @@ TODO: for the robot workflows we are likely to need at the start, testing equali
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RoleFillerBinding">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Binding"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RoleRoleBinding"/>
+        <rdfs:comment>A binding that connects a role to a particular filler.</rdfs:comment>
     </owl:Class>
     
 
@@ -445,6 +454,7 @@ TODO: for the robot workflows we are likely to need at the start, testing equali
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:comment>A binding that asserts that two roles have the same filler.</rdfs:comment>
     </owl:Class>
     
 
@@ -453,6 +463,7 @@ TODO: for the robot workflows we are likely to need at the start, testing equali
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#StatusFailure">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+        <rdfs:comment>A status indicating the failure during some workflow execution.</rdfs:comment>
     </owl:Class>
     
 
@@ -582,6 +593,7 @@ Care must be taken with this however, as a natural interpretation of this situat
 
     <owl:NamedIndividual rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FailWFNoContinuation">
         <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#StatusFailure"/>
+        <rdfs:comment>A particular kind of failure: the workflow fails because there is no way to continue it, and the normal exit has not been reached.</rdfs:comment>
     </owl:NamedIndividual>
     
 
@@ -590,6 +602,7 @@ Care must be taken with this however, as a natural interpretation of this situat
 
     <owl:NamedIndividual rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FailWFNondeterministicContinuation">
         <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#StatusFailure"/>
+        <rdfs:comment>A particular kind of failure: it is not clear how to continue a workflow because several possibilities exist.</rdfs:comment>
     </owl:NamedIndividual>
     
 
@@ -598,6 +611,7 @@ Care must be taken with this however, as a natural interpretation of this situat
 
     <owl:NamedIndividual rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FailWFUninterpretableTask">
         <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#StatusFailure"/>
+        <rdfs:comment>A particular kind of failure: a task is not recognized and not associated to anything that could execute it, nor to a workflow that could detail its structure into simpler structure.</rdfs:comment>
     </owl:NamedIndividual>
 </rdf:RDF>
 
