@@ -13,18 +13,18 @@ def oops(owl_file):
 	f.close()
 	#
 	xml_content = """
-    <?xml version="1.0" encoding="ISO-8859-1"?>
+    <?xml version="1.0" encoding="UTF-8"?>
     <OOPSRequest>
           <OntologyUrl>http://www.ease-crc.org/ont/SOMA.owl</OntologyUrl>
           <OntologyContent>%s</OntologyContent>
           <Pitfalls>2,3,4,5,6,7,8,10,11,12,13,19,20,21,22,25,25,26,27,28,29</Pitfalls>
           <OutputFormat>XML</OutputFormat>
     </OOPSRequest>
-	""" % (content)
+	""" % (content.encode('utf-8'))
 	headers = {'Content-Type': 'application/xml',
 	           'Connection': 'Keep-Alive',
 	           'Content-Length': str(len(xml_content)),
-	           'Accept-Charset': 'ISO-8859-1'
+	           'Accept-Charset': 'utf-8'
 	}
 	return requests.post(OOPS_URL, data=xml_content, headers=headers).text
 
