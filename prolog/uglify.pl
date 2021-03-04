@@ -54,8 +54,7 @@ ease_load(URL, Graph) :-
   maplist(ease_assert(Graph), Triples).
 
 uglify :-
-  ease_ugly_ontology(EASE_UGLY),
-  Ontologies=[
+  BaseOntologies=[
     'SOMA.owl',
     'SOMA-ACT.owl',
     'SOMA-WF.owl',
@@ -65,6 +64,16 @@ uglify :-
     'SOMA-SAY.owl',
     'SOMA-PROC.owl'
   ],
+  forall(
+    member([OutFile,Ontologies], [
+      ['SOMA.owl',BaseOntologies],
+      ['SOMA-HOME.owl',['SOMA-HOME.owl'|BaseOntologies]]
+    ]),
+    uglify1(OutFile,Ontologies)
+  ).
+  
+uglify1(OutFile, Ontologies) :-
+  ease_ugly_ontology(EASE_UGLY),
   rdf_assert(EASE_UGLY,rdf:type,owl:'Ontology',ease),
   % assert owl:versionInfo
   % TODO: assert more version information (e.g. a description, diff to last version, ..)
@@ -87,6 +96,6 @@ uglify :-
   -> true
   ;  make_directory(BUILD_Path)
   ),
-  atomic_list_concat([BUILD_Path, '/SOMA.owl'], OUT_Path),
+  atomic_list_concat([BUILD_Path, '/', OutFile], OUT_Path),
   rdf_save(OUT_Path, [graph(ease),sorted(true)]).
 
