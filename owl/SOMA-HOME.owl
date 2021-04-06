@@ -70,6 +70,15 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA-HOME.owl#Grasp -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl#Grasp">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Disposition"/>
+        <rdfs:comment>The disposition of an object (the handle) to afford grasping the object.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA-HOME.owl#KitchenKnife -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl#KitchenKnife">
@@ -272,6 +281,12 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedHandle">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA-HOME.owl#Grasp"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment>An item designed to fit well within a grasping hand, often attached to another item to enhance its manipulability.</rdfs:comment>
         <rdfs:label>Designed handle</rdfs:label>
     </owl:Class>
