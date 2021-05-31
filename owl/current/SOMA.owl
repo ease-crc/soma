@@ -233,6 +233,12 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
   <rdfs:comment>Relates a disposition to the setpoint parameter defined by the affordance describing the disposition.</rdfs:comment>
 </owl:ObjectProperty>
 
+<owl:ObjectProperty rdf:about="#isTaskOfOutputRole">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+</owl:ObjectProperty>
+
 <owl:ObjectProperty rdf:about="#hasSpaceRegion">
   <rdfs:domain>
     <owl:Class>
@@ -810,6 +816,7 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameter"/>
   <owl:inverseOf rdf:resource="#isInputParameterFor"/>
+  <rdfs:comment>A relation between a Task and one of its input parameters.</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from an EventType (typically, a Task) and a parameter describing some state of affairs before the event classified by the EventType takes place, and which contributes towards that event happening.</rdfs:comment>
 </owl:ObjectProperty>
 
@@ -817,6 +824,7 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
   <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParameterFor"/>
+  <rdfs:comment>A relation between a Task and one of its input parameters.</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from a Parameter to an EventType (typically, a Task). The parameter describes some state of affairs that precedes and will contribute to the event classified by the EventType.</rdfs:comment>
 </owl:ObjectProperty>
 
@@ -895,6 +903,7 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameter"/>
   <owl:inverseOf rdf:resource="#isOutputParameterFor"/>
+  <rdfs:comment>A relation between a Task and one of its output parameters.</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from an EventType (typically a Task) to a Parameter describing an outcome of the event classified by the EventType.</rdfs:comment>
 </owl:ObjectProperty>
 
@@ -902,6 +911,7 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
   <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParameterFor"/>
+  <rdfs:comment>A relation between a Task and one of its output parameters.</rdfs:comment>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from a Parameter to an EventType (typically, a Task). The parameter describes an outcome of the event classified by the EventType.</rdfs:comment>
 </owl:ObjectProperty>
 
@@ -1218,6 +1228,19 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between StateTransitions and Scenes, which identifies the scene the transition starts from.</rdfs:comment>
 </owl:ObjectProperty>
 
+<owl:ObjectProperty rdf:about="#isInputRoleOf">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask"/>
+  <owl:inverseOf rdf:resource="#isTaskOfInputRole"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#isTaskOfInputRole">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+</owl:ObjectProperty>
+
 <owl:ObjectProperty rdf:about="#isLinkedTo">
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
   <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
@@ -1265,6 +1288,13 @@ The prototypical example is a Task, which is a concept to classify Actions (a fo
   <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between an event and an event type, e.g. 'taking the cup from the table' is an occurence of the motion 'approaching'.</rdfs:comment>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is occurring in</rdfs:label>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#isOutputRoleOf">
+  <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+  <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+  <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask"/>
+  <owl:inverseOf rdf:resource="#isTaskOfOutputRole"/>
 </owl:ObjectProperty>
 
 <owl:ObjectProperty rdf:about="#isPerformedBy">
@@ -2988,12 +3018,6 @@ The second issue relates to what is "outside". The state is a configuration of s
 <owl:Class rdf:about="#Containment">
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#affordsBearer"/>
-      <owl:allValuesFrom rdf:resource="#Container"/>
-    </owl:Restriction>
-  </rdfs:subClassOf>
-  <rdfs:subClassOf>
-    <owl:Restriction>
       <owl:onProperty rdf:resource="#affordsTrigger"/>
       <owl:allValuesFrom rdf:resource="#IncludedObject"/>
     </owl:Restriction>
@@ -3007,6 +3031,12 @@ The second issue relates to what is "outside". The state is a configuration of s
           <owl:someValuesFrom rdf:resource="#Capacity"/>
         </owl:Restriction>
       </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#affordsBearer"/>
+      <owl:allValuesFrom rdf:resource="#Container"/>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#Disposition"/>
@@ -3920,6 +3950,11 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
   <rdfs:subClassOf rdf:resource="#Manipulating"/>
   <owl:disjointWith rdf:resource="#Releasing"/>
   <rdfs:comment>A task in which an Agent uses its end effectors to grasp an object, thus gaining kinematic control over it.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#Graspability">
+  <rdfs:subClassOf rdf:resource="#Disposition"/>
+  <rdfs:comment>The disposition of an object (e.g. the handle) to afford grasping the object.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Releasing">
@@ -4887,6 +4922,31 @@ As an example, a kind of Abductive reasoning would fit here: reconstruction, in 
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
   <rdfs:comment>Scenes are Situations which interpret a State in terms of its conformance to some qualitative, image schematic description. I.e., the scene is described in terms of qualitative functional and spatial relations existing between participating objects.</rdfs:comment>
+</owl:Class>
+
+<owl:Class rdf:about="#SelectedObject">
+  <rdfs:subClassOf rdf:resource="#Role"/>
+</owl:Class>
+
+<owl:Class rdf:about="#SelectingItem">
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#isTaskOfOutputRole"/>
+      <owl:someValuesFrom>
+        <owl:Class>
+          <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#SelectedObject"/>
+            <owl:Restriction>
+              <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+              <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+          </owl:intersectionOf>
+        </owl:Class>
+      </owl:someValuesFrom>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf rdf:resource="#GetTaskParameter"/>
+  <rdfs:comment>A task in which an Agent selects some object to use for a subsequent task.</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Setpoint">
