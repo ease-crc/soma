@@ -1070,6 +1070,31 @@ As an example, a kind of Abductive reasoning would fit here: reconstruction, in 
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#SelectingItem -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SelectingItem">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#GetTaskParameter"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isTaskOfOutputRole"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SelectedObject"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A task in which an Agent selects some object to use for a subsequent task.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#SettingGripper -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SettingGripper">
