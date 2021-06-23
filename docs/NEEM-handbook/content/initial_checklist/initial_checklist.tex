@@ -85,19 +85,19 @@ urdf_load(\'http://knowrob.org/kb/PR2.owl#PR2_0\', \'package://knowrob/urdf/pr2.
 		\item Create the episode: tell(is\_episode(Episode))
 		\item Add setting\_of relations for robots and locations: 
 		\begin{lstlisting}[language=Prolog]
-is\_setting\_for(Episode,\'http://knowrob.org/kb/PR2.owl#PR2_0\')
+is_setting_for(Episode,\'http://knowrob.org/kb/PR2.owl#PR2_0\')
 		\end{lstlisting}
 	\end{itemize}
 	\item Log the Action-Hierachy
 	\begin{itemize}
 		\item Create an action, e.g.:
 			\begin{lstlisting}[language=Prolog]
-tell(is\_action(Act))
+tell(is_action(Act))
 			\end{lstlisting}
 		\item Add the task that is executed during the action, e.g.: 
 			\begin{lstlisting}[language=Prolog]
-tell([has\_type(Tsk,soma:\'Transporting\'),
-executes\_task(Act,Tsk)])
+tell([has_type(Tsk,soma:\'Transporting\'),
+executes_task(Act,Tsk)])
 			\end{lstlisting}
 		\item Add start and endtime (as unix timestamps) to action, e.g.: 
 			\begin{lstlisting}[language=Prolog]
@@ -105,21 +105,31 @@ tell(occur(Act) during [Start, End])
 			\end{lstlisting}
 		\item Repeat the above points for all sub-actions of the Action-Hierachy, and link them to the parent-actions:
 			\begin{lstlisting}[language=Prolog]
-tell(has\_subevent(ParentAct,Act))
+tell(has_subevent(ParentAct,Act))
 			\end{lstlisting}
 		\item For the top-level action: Link the action to the created Episode, e.g.: 
 			\begin{lstlisting}[language=Prolog]
-tell(is\_setting\_for(Episode,Act))
+tell(is_setting_for(Episode,Act))
 			\end{lstlisting}
 	\end{itemize}
 \end{itemize}
 
-Now we we will list some additional semantic annotation that would be helpful for the future use of the logged NEEM:
+Now we we will list some additional semantic annotation to add more information to the logged NEEM:
 
 \begin{itemize}
-	\item \todo{Add points}
+	\item Add additional informations to better classify an action: 
+	\begin{itemize}
+		\item Add the performing agents, e.g.:
+			\begin{lstlisting}[language=Prolog]
+is_performed_by(Act,pr2:'PR2_0')
+			\end{lstlisting}
+		\item Add executed motions to an action, e.g.:
+			\begin{lstlisting}[language=Prolog]
+tell([has_type(Mot,soma:'LimbMotion'),
+       is_classified_by(Act,Mot)])
+			\end{lstlisting}
+	\end{itemize}
 \end{itemize}
-
 
 \subsection{Checks}
 
