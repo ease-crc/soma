@@ -1,46 +1,50 @@
 \chapter{NEEM Quick-start Guide}
 \label{ch:initial_checklist}
+\chapterauthor{A. Vyas, S. Jongebloed}
 
-In this chapter we give a checklist for the \neems creation process to help the users in generating \neems in case no existing NEEM-logger can be used. 
+In this chapter we present a checklist for the \neems creation process to help the users in generating \neems in case no existing NEEM-logger can be used. 
 
 \section{NEEM Checklist}
 
-\subsection{Necessary files}
+\subsection{Kinematic information with visualization meshes}
 \label{sec:checklist_files}
 
-You should have the following files available:
+In order to visualize \neem experiment in \openease, you should have the following files available:
 
 \begin{itemize}
-	\item Agent meshes and urdf files are available
-	\item Agent owl file corresponding to urdf needs to be created
+	\item Agent meshes and urdf files
+	\item Agent owl file corresponding to urdf. Refer Figure \ref{fig:agent_owl_file} for agent owl file example.
 	\begin{itemize}
-		\item Required kinematic information is provided in owl file pointing to correct urdf file name 
+		\item An owl file should contain all of the links from urdf.
+		\item An agent structure should be created with appropriate SOMA concept. 
+		\item Required kinematic information should be provided in owl file pointing to correct urdf file name. Refer Figure \ref{fig:agent_owl_file}, individuals for kinematics information. 
 	\end{itemize}
-	\item Environment meshes and urdf files are available
-	\item Environment owl file corresponding to urdf needs to be created
+	\item Environment meshes and urdf files
+	\item Environment owl file corresponding to urdf. Refer Figure \ref{fig:environment_owl_file} for agent owl file example.
 	\begin{itemize}
-		\item Required kinematic information is provided in owl file pointing to correct urdf file name
+		\item An owl file should contain all of the links from urdf.
+		\item An Environment structure should be created with appropriate \soma concept.
+		\item Required kinematic information should be provided in owl file pointing to correct urdf file name. Refer Figure \ref{fig:environment_owl_file}, individuals for kinematics information.
 	\end{itemize}
-	\item Agent and environment meshes with urdf files are rendered properly with \knowrob in rviz 
 \end{itemize}
 
-\subsection{Data formats}
+\subsection{\neem Data format}
 
-The data should automatically be in the correct format if KnowRob is used to log the tf and triple information. If the data was recorded without using Knowrob, please follow the checklist below:
+\neem data is represented in tf and triple collections. This data should automatically be in the correct format if KnowRob is used to log the information. But in case you want to create \neem data without Knowrob, please follow the checklist below:
 
 \begin{itemize}
-	\item Make sure if tf data is available in correct format
+	\item The following steps will make sure the correct tf data format is provided. An example of such format is presented in Figure \ref{fig:pose_data}.
 	\begin{itemize}
 		\item Tf data is provided as individual json documents not as the list/array of json documents.
-		\item The coordinate system is right handed
-		\item Correct tf tree is presented in the data
-		\item Joint rotation is provided in quaternion
-		\item Position data is logged in meters
+		\item The coordinate system is right handed.
+		\item Correct tf tree is presented in the data.
+		\item Joint rotation is provided in quaternion.
+		\item Position data is logged in meters.
 	\end{itemize}
-	\item Make sure if triple data is available in correct format
+	\item The following steps will make sure the correct triple data format is provided. An example of such format is presented in Figure \ref{fig:triple_data}.
 	\begin{itemize}
-		\item Triple data is provided as an array of json document
-		\item Correct \soma concepts used from \neemnar part
+		\item Triple data is provided as an array of json document.
+		\item Correct \soma concepts used from \neemnar part.
 	\end{itemize}
 \end{itemize}
 
