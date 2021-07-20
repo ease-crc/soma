@@ -99,11 +99,34 @@ dvc pull
 \section{Publishing}
 To organized the raw and transformed data and the \neems, we created 3 groups on GitLab.
 Each group corresponds to the specific data set type.
-The general procedure to publish your data set is that you create a git repository in the corresponding group.
-For instance, if you want to upload a \neem data set, create a repository in the \neem group first.
-In the next step, clone the empty repository and initialize DVC in this repository.
-Afterwards you need to define the remote storage, to let DVC store your data set.
-Based on your data set type you need to use the following path to define the storage:
+The general procedure to publish your data set is that you create a git repository in the corresponding group. The following is an example step by step guide on how to publish a dataset, in this case a NEEM:
+
+\begin{enumerate}
+	\item Create a repository in the \neem group \url{https://neemgit.informatik.uni-bremen.de/neems}
+	\item Clone the empty repository and initialize DVC in this repository
+\begin{lstlisting}[language=bash, caption=Initialize DVC using \emph{dvc init}]
+git clone git@neemgit.informatik.uni-bremen.de:neems/hello-neem2.git
+cd hello-neem2
+dvc init
+\end{lstlisting}
+	\item Define the remote storage, to let DVC store your data set:
+\begin{lstlisting}[language=bash, caption=Define remote storage using \emph{dvc remote add}]
+dvc remote add -d origin hdfs://hadoop@134.102.137.65:9000/neems/hello-neem2
+\end{lstlisting}	
+\item You can now add your episodes via DVC and push it:
+\begin{lstlisting}[language=bash, caption=Add data and pushing using \emph{dvc add} and \emph{dvc push}]
+dvc add episodes/1599727087.4392.zip
+dvc push
+\end{lstlisting}
+\item After pushing your data, you still need to push the DVC data placeholder\footnote{.dvc files: https://dvc.org/doc/user-guide/project-structure/dvc-files}:
+\begin{lstlisting}[language=bash, caption=Downloading a \neem using \emph{dvc pull}]
+git add episodes/1599727087.4392.zip.dvc
+git commit -m "Some commit message"
+git push
+\end{lstlisting}
+\end{enumerate}
+
+Publishing other data set types will work in a familiar fahion, but you need to create the repository in the corresponding group and define the remote storage based on your data set type:
  
 \begin{description}
 	\item[\textbf{Raw data}]\leavevmode \newline
@@ -116,3 +139,5 @@ Based on your data set type you need to use the following path to define the sto
 
 In future, you will be able to publish your neemifier and transformers.
 This will allow to share your tools easily with the community and also automatize your data transformation and learning pipeline.
+
+
