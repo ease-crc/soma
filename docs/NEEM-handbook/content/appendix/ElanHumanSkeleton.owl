@@ -1,0 +1,209 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://knowrob.org/kb/avatar-skeleton.owl#"
+         xml:base="http://knowrob.org/kb/avatar-skeleton.owl"
+         xmlns:srdl2="http://knowrob.org/kb/srdl2.owl#"
+         xmlns:srdl2-cap="http://knowrob.org/kb/srdl2-cap.owl#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:urdf="http://knowrob.org/kb/urdf.owl#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:qudt-unit="http://qudt.org/vocab/unit#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:soma="http://www.ease-crc.org/ont/SOMA.owl#"
+         xmlns:xml="http://www.w3.org/XML/1998/namespace"
+         xmlns:srdl2-comp="http://knowrob.org/kb/srdl2-comp.owl#"
+         xmlns:knowrob="http://knowrob.org/kb/knowrob.owl#"
+         xmlns:dul="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#">
+
+    <!-- =========================================== -->
+    <!-- |   Ontology Imports                      | -->
+    <!-- =========================================== -->
+
+    <owl:Ontology rdf:about="http://knowrob.org/kb/avatar_skeleton.owl">
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
+    </owl:Ontology>
+
+    <!--
+    //////////////
+    //
+    // Classes
+    //
+    //////////////
+     -->
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject -->
+    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+
+     
+
+    <owl:Class rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+    </owl:Class>
+
+
+    <!--
+    //////////////
+    //
+    // Individuals
+    //
+    //////////////
+     -->
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_1">
+        <rdf:type rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalBody"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hip</urdf:hasBaseLinkName>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_leg_l"/>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_leg_r"/>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_middle_body"/>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_head"/>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_arm_r"/>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_arm_l"/>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_hand_l"/>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_hand_r"/>
+        
+         <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RToe</urdf:hasEndLinkName> 
+<urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LToe</urdf:hasEndLinkName> 
+<urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chest</urdf:hasEndLinkName> 
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_leg_l">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Leg"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hip</urdf:hasBaseLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LToe</urdf:hasEndLinkName>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_leg_r">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Leg"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hip</urdf:hasBaseLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RToe</urdf:hasEndLinkName>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_middle_body">
+        <rdf:type rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalBody"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Hip</urdf:hasBaseLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chest</urdf:hasEndLinkName>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_head">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Head"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chest</urdf:hasBaseLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Head</urdf:hasEndLinkName>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_arm_l">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Arm"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chest</urdf:hasBaseLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LHand</urdf:hasEndLinkName>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_arm_r">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Arm"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Chest</urdf:hasBaseLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RHand</urdf:hasEndLinkName>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_r_hand_null">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Hand"/>
+        <urdf:hasURDFName>RHand</urdf:hasURDFName>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_r_index_null"/>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_r_middle_null"/>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_r_pinky_null"/>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_r_ring_null"/>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_r_thumb_null"/>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_r_index_null">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Finger"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RIndex1</urdf:hasBaseLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RIndex3</urdf:hasEndLinkName>
+    </owl:NamedIndividual>
+
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_r_middle_null">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Finger"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RMiddle1</urdf:hasBaseLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RMiddle3</urdf:hasEndLinkName>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_r_pinky_null">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Finger"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RPinky1</urdf:hasBaseLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RPinky3</urdf:hasEndLinkName>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_r_ring_null">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Finger"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RRing1</urdf:hasBaseLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RRing3</urdf:hasEndLinkName>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_r_thumb_null">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Finger"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RThumb1</urdf:hasBaseLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">RThumb3</urdf:hasEndLinkName>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_l_hand_null">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Hand"/>
+        <urdf:hasURDFName>LHand</urdf:hasURDFName>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LHand</urdf:hasBaseLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LIndex1</urdf:hasEndLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LMiddle1</urdf:hasEndLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LPinky1</urdf:hasEndLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LRing1</urdf:hasEndLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LThumb1</urdf:hasEndLinkName>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_l_index_null"/>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_l_middle_null"/>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_l_pinky_null"/>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_l_ring_null"/>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_l_thumb_null"/>
+    </owl:NamedIndividual>
+
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_l_index_null">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Finger"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LIndex1</urdf:hasBaseLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LIndex3</urdf:hasEndLinkName>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_l_middle_null">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Finger"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LMiddle1</urdf:hasBaseLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LMiddle3</urdf:hasEndLinkName>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_l_pinky_null">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Finger"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LPinky1</urdf:hasBaseLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LPinky3</urdf:hasEndLinkName>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_l_ring_null">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Finger"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LRing1</urdf:hasBaseLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LRing3</urdf:hasEndLinkName>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_l_thumb_null">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Finger"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LThumb1</urdf:hasBaseLinkName>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LThumb3</urdf:hasEndLinkName>
+    </owl:NamedIndividual>
+
+    <!-- Individuals for kinematics information -->
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/Kitchen-clash-agent.owl#InformationObject_KFLDFLKH">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#KinoDynamicData"/>
+        <dul:isAbout rdf:resource="http://knowrob.org/kb/avatar_skeleton.owl#avatar_skeleton_1"/>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/Kitchen-clash-agent.owl#InformationRealization_1RTUIRGH">
+        <rdf:type rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource"/>
+        <dul:realizes rdf:resource="http://knowrob.org/kb/Kitchen-clash-agent.owl#InformationObject_KFLDFLKH"/>
+        <soma:hasPersistentIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ElanHumanSkeleton</soma:hasPersistentIdentifier>
+        <soma:hasDataFormat rdf:datatype="http://www.w3.org/2001/XMLSchema#string">URDF</soma:hasDataFormat>
+    </owl:NamedIndividual>
+
+</rdf:RDF>
+ 
