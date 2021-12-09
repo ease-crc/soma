@@ -1,3 +1,5 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 A robotic system typically has many mobile components arranged in a kinematic chain.
 Each component in a kinematic chain has an associated named coordinate frame such as
@@ -59,6 +61,33 @@ tf			& dict	& -- \\
 \ \ \ \ \ \ w		& float64	& \emph{w} component of quaternion \\
 \bottomrule
 \end{tabular}\end{center}
+
+\begin{lstlisting}[language=json,firstnumber=1]
+{
+ "header": {
+  "seq": 0,
+  "stamp": {
+   "$date": "2018-06-22T09:07:54.072Z"
+  },
+  "frame_id": "map"
+ },
+ "child_frame_id": "spoon",
+ "transform": {
+  "translation": {
+   "x": -0.05888763448188089,
+   "y": -0.23866299023536164,
+   "z": 0.13978717740253815
+  },
+  "rotation": {
+   "x": 0.03631169636551407,
+   "y": 0.974464008041022,
+   "z": 0.1092500799183137,
+   "w": 0.1927842778276488
+  }
+ }
+}
+
+\end{lstlisting}
 \caption{The pose data structure in the \ease system.}
 \label{fig:pose_data}
 \end{figure}
@@ -67,7 +96,10 @@ Note that static frames may be recorded at lower frequency --
 about every two seconds.
 This usually reduces the data size significantly.
 At the moment, no other motion data compression,
-such as motion JPEG, is supported.
+such as motion JPEG, is supported. 
+
+
+
 
 % From ``Compression of Motion Capture Databases'' Okan Arikan
 % The biggest goal of compression is creating a compressed rep-
