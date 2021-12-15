@@ -1,0 +1,168 @@
+\chapter{NEEM Quick-start Guide}
+\label{ch:initial_checklist}
+\chapterauthor{A. Vyas, S. Jongebloed}
+
+In this chapter we present a checklist for the \neems creation process to help the users in generating \neems in case no existing NEEM-logger can be used. 
+
+\section{NEEM Checklist}
+
+\subsection{Kinematic information with visualization meshes}
+\label{sec:checklist_files}
+
+In order to visualize \neem experiment in \openease, you should have the following files available:
+
+\begin{itemize}
+	\item Agent meshes and urdf files
+	\item Agent owl file corresponding to urdf. Refer Figure \ref{fig:agent_owl_file} for agent owl file example.
+	\begin{itemize}
+		\item An owl file should contain all of the links from urdf.
+		\item An agent structure should be created with appropriate SOMA concept. 
+		\item Required kinematic information should be provided in owl file pointing to correct urdf file name. Refer Figure \ref{fig:agent_owl_file}, individuals for kinematics information. 
+	\end{itemize}
+	\item Environment meshes and urdf files
+	\item Environment owl file corresponding to urdf. Refer Figure \ref{fig:environment_owl_file} for agent owl file example.
+	\begin{itemize}
+		\item An owl file should contain all of the links from urdf.
+		\item An Environment structure should be created with appropriate \soma concept.
+		\item Required kinematic information should be provided in owl file pointing to correct urdf file name. Refer Figure \ref{fig:environment_owl_file}, individuals for kinematics information.
+	\end{itemize}
+\end{itemize}
+
+\subsection{\neem Data format}
+
+\neem data is represented in tf and triple collections. This data should automatically be in the correct format if KnowRob is used to log the information. But in case you want to create \neem data without Knowrob, please follow the checklist below:
+
+\begin{itemize}
+	\item The following steps will make sure the correct tf data format is provided. An example of such format is presented in Figure \ref{fig:pose_data}.
+	\begin{itemize}
+		\item Tf data is provided as individual json documents not as the list/array of json documents.
+		\item The coordinate system is right handed.
+		\item Correct tf tree is presented in the data.
+		\item Joint rotation is provided in quaternion.
+		\item Position data is logged in meters.
+	\end{itemize}
+	\item The following steps will make sure the correct triple data format is provided. An example of such format is presented in Figure \ref{fig:triple_data}.
+	\begin{itemize}
+		\item Triple data is provided as an array of json document.
+		\item Correct \soma concepts used from \neemnar part.
+	\end{itemize}
+\end{itemize}
+
+\subsection{Semantic Annotation}
+\label{sec:semantic_annotation}
+
+In this chapter we discuss the necessary semantic annotation that is stored in the triple collection. First we will list the semantic information that is necessary to generate a simple NEEM:
+
+\begin{itemize}
+	\item Necessary steps when starting the logging:
+	\begin{itemize}
+		\item Create the episode and add dul:isSettingFor relation between the episode and the robots and locations (see \ref{sec:episodes})
+	\end{itemize}
+	\item Create an hierachy of actions
+	\begin{itemize}
+		\item Add the task that is executed during the action (see \ref{sec:classification})
+		\item Add start and endtime (as unix timestamps) to action (see \ref{sec:occurrences})
+		\item Repeat the above points for all sub-actions of the Action-Hierachy, and link them to the parent-actions (see \ref{sec:composition})
+		\item For the top-level action: Link the action to the created Episode
+	\end{itemize}
+\end{itemize}
+
+Now we we will list some additional semantic annotation that would be helpful for the future use of the logged NEEM:
+
+\begin{itemize}
+	\item Add additional informations to better classify an action: 
+	\begin{itemize}
+		\item Add the performing agents (see \ref{sec:participation})
+		\item Add objects that are participating in the action (see \ref{sec:participation})
+		\item Add conceptualization to the objects in an action by adding roles (see \ref{sec:narrative:roles})
+		\item Add executed motions to an action (see \ref{sec:narrative:events})
+	\end{itemize}
+\end{itemize}
+
+In general, additional semantic annotations can be added as needed. In the next chapter we show how this annotation can be implemented with KnowRob.
+
+\subsection{Semantic Annotation: KnowRob}
+\label{sec:semantic_annotation_knowrob}
+
+The easiest way to generate a correct semantic annotation described in \ref{sec:semantic_annotation} is using KnowRob. First we will describe which queries are necessary to generate a simple NEEM. The used concepts for agents, objects, roles etc. are examples. Please find the correct concepts for your usage in SOMA\footnote{https://ease-crc.github.io/soma}.
+
+\begin{itemize}
+	\item Necessary steps when starting the logging:
+	\begin{itemize}
+		\item Load the OWL Files collected according to \ref{sec:checklist_files}, e.g.: 
+			\begin{lstlisting}[language=Prolog]
+tripledb_load('package://knowrob/owl/robots/PR2.owl')
+			\end{lstlisting}
+		\item Load the URDF Files and link them to the corresponding robot/location from the OWL File, e.g.:
+		\begin{lstlisting}[language=Prolog]
+urdf_load('http://knowrob.org/kb/PR2.owl#PR2_0', 'package://knowrob/urdf/pr2.urdf', [load_rdf])
+		\end{lstlisting}
+		\item Create the episode: tell(is\_episode(Episode))
+		\item Add setting\_for relations for robots and locations: 
+		\begin{lstlisting}[language=Prolog]
+is_setting_for(Episode,'http://knowrob.org/kb/PR2.owl#PR2_0')
+		\end{lstlisting}
+	\end{itemize}
+	\item Log the Action-Hierachy
+	\begin{itemize}
+		\item Create an action, e.g.:
+			\begin{lstlisting}[language=Prolog]
+tell(is_action(Action))
+			\end{lstlisting}
+		\item Add the task that is executed during the action, e.g.: 
+			\begin{lstlisting}[language=Prolog]
+tell([has_type(Tsk,soma:'Transporting'),
+executes_task(Action,Tsk)])
+			\end{lstlisting}
+		\item Add start and endtime (as unix timestamps) to action, e.g.: 
+			\begin{lstlisting}[language=Prolog]
+tell(occur(Act) during [Start, End])
+			\end{lstlisting}
+		\item Repeat the above points for all sub-actions of the Action-Hierachy, and link them to the parent-actions:
+			\begin{lstlisting}[language=Prolog]
+tell(has_subevent(ParentAct,Action))
+			\end{lstlisting}
+		\item For the top-level action: Link the action to the created Episode, e.g.: 
+			\begin{lstlisting}[language=Prolog]
+tell(is_setting_for(Episode,Action))
+			\end{lstlisting}
+	\end{itemize}
+\end{itemize}
+
+Now we we will list some additional semantic annotation to add more information to the logged NEEM:
+
+\begin{itemize}
+	\item Add additional informations to better classify an action: 
+	\begin{itemize}
+		\item Add the performing agents, e.g.:
+			\begin{lstlisting}[language=Prolog]
+tell(is_performed_by(Action,pr2:'PR2_0'))
+			\end{lstlisting}
+		\item Add objects that are participating in the action, e.g.:
+			\begin{lstlisting}[language=Prolog]
+tell(has_participant(Action,soma:'Milk_0'), \)
+			\end{lstlisting}
+		\item Conceptualize objects and agents in an action by adding roles, e.g.:
+			\begin{lstlisting}[language=Prolog]
+tell([has_type(RobotRole, soma:'AgentRole'),' 
+		has_role(pr2:'PR2_0', RobotRole) during Action,'])
+			\end{lstlisting}
+		\item Add executed motions to an action, e.g.:
+			\begin{lstlisting}[language=Prolog]
+tell([has_type(Mot,soma:'LimbMotion'),
+       is_classified_by(Action,Mot)])
+			\end{lstlisting}
+	\end{itemize}
+\end{itemize}
+
+%\subsection{Checks}
+%
+%\todo{Should this points stay, or do we hope for automatic neem validation in the neemhub?}
+%
+%You can try the following checks to test if your logged data is correct:
+%
+%\begin{itemize}
+%	\item Validate triple data with \neem validation script??
+%	\item Test current neem experiment data (tf, triple, meshes and urdfs) locally with \knowrob, \todo{here not everyone will use knowrob, so some way we need to provide an interface}
+% 	\item Agent and environment meshes with urdf files are rendered properly with \knowrob in rviz 
+%\end{itemize}
