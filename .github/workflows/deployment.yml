@@ -54,6 +54,15 @@ jobs:
           name: SOMA-HOME Ontology
           path: ./build/SOMA-HOME.owl
 
+      - name: Upload DUL
+        uses: actions/upload-artifact@v1
+        with:
+          name: DUL Ontology
+          path: ./owl/DUL.owl
+
+      - name: Copy DUL
+        run: sudo cp ./owl/DUL.owl $GITHUB_WORKSPACE/build/DUL.owl
+
       - name: Metrics
         run: sudo ./scripts/OntoMetrics.sh $GITHUB_WORKSPACE/build/SOMA.owl $GITHUB_WORKSPACE/build
 

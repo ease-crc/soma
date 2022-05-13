@@ -41,7 +41,7 @@ soma_iri1(IN,OUT) :-
 %%
 ease_assert_import(_Graph,Ontology) :-
   % ignore all imports of EASE ontology modules
-  ( atom_concat('http://www.ease-crc.org/',_,Ontology) ;
+  ( atom_concat('http://www.ease-crc.org/ont/SOMA',_,Ontology) ;
     atom_concat('package://soma/',_,Ontology)
   ),!.
 
