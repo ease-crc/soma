@@ -89,16 +89,13 @@ jobs:
           name: SOMA OWL
           path: ./build
 
-      - name: Download DUL v32
-        run: wget http://www.ontologydesignpatterns.org/ont/dul/DUL_v32.owl -O ./build/DUL_v32.owl
-
-      - name: Download IOLite
-        run: wget http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl -O ./build/IOLite.owl
+      - name: Download DUL
+        run: wget http://www.ease-crc.org/ont/DUL.owl -O ./build/DUL.owl
 
       - name: HermiT
         uses: ./.github/actions/hermit
         with:
-          args: ./build/DUL_v32.owl ./build/IOLite.owl ./build/SOMA-HOME.owl
+          args: ./build/DUL.owl ./build/SOMA-HOME.owl
 
       - name: Print HermiT output
         run: cat ./hermit.output
