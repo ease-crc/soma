@@ -12,6 +12,74 @@ SOMA is fully implemented in form of an OWL ontology which is based on the DOLCE
 [DUL](http://www.ontologydesignpatterns.org/ont/dul/DUL.owl) is a carefully designed upper-level ontology that seeks to model general categories underlying human cognition without making any discipline-specific assumptions.
 Our extensions mainly focus on characterizing different aspects of activities that were not considered sufficiently in DUL for the scope of autonomous robotics.
 
+## Release Notes
+
+### 2.0.0
+*   BREAKING CHANGE: Removal of `IOLite`
+    <details>
+        <summary>Details</summary>
+        <ul>
+            <li>
+                Reason: incompatible with <code>DUL-v32</code>
+            </li>
+            <li>
+                Note: Some important concepts, e.g. <code>IOLite#DigitalResource</code>, are still referenced in the taxonomy for backwards-compatibility. If you are missing any crucial concepts/roles, let us know
+            </li>
+            <li>
+                Ongoing effort to create a model of CRAM (see next point) will replace some of the IOLite taxonomy at some point
+            </li>
+        </ul>
+    </details>
+*   BREAKING CHANGE: Complete and still ongoing remodeling of `SOMA-IO`
+    <details>
+        <summary>Details</summary>
+        <ul>
+            <li>
+                Reason: Was in a primitive state; we need a better model of IO stuff to model CRAM
+            </li>
+            <li>
+                Note: Removal/resorting of various concepts and roles. To the best of our knowledge, these should not have been in use anyway - please let us know if you are missing anything
+            </li>
+        </ul>
+    </details>
+* Feat: Added mising labels to various concepts and roles
+* Feat: Protégé-setup for offline development
+    * Reason: Protégé XXXX
+*   Feat: We now host and use our own, modified copy of `DUL`
+    <details>
+        <summary>Details</summary>
+        <ul>
+            <li>
+                Reason: <code>DUL</code>is unreliable (e.g., down for a whole week and no one can open <code>SOMA</code>)
+            </li>
+            <li>
+                As a side effect, we can make changes to <code>DUL</code>, if necessary (yes, we will be very careful)
+                <ul>
+                    <li>
+                        Removed italian lables
+                    </li>
+                    <li>
+                        Added missing annotations of `rdfs:isDefinedIn` (only for <code>DUL</code> concepts / roles)
+                    </li>
+                    <li>
+                        Removed unnecessary annotations of author and date
+                    </li>
+                    <li>
+                        Added missing english labels
+                    </li>
+                </ul>
+        </ul>
+    </details>
+    * Reason: 
+    * 
+        * 
+        * 
+### 1.2.0
+* Base release for starting the changelog! Yay, now you now why stuff might break!
+* Ontologies can now be accessed via a version IRI, e.g., [INSERT VERSION IRI EXAMPLE HERE](INSERT_VERSION_IRI_EXAMPLE_HERE).
+    * The basic ontology IRI, e.g., [http://www.ease-crc.org/ont/SOMA.owl](http://www.ease-crc.org/ont/SOMA.owl), now refers to the newest version that is available (not neccessary associated to a stable release)
+
+
 ## Further Information
 
 SOMA-related papers, releases, metrics, and some tools can be accessed on the [SOMA Project Website](https://ease-crc.github.io/soma/)
