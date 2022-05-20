@@ -42,11 +42,16 @@ Our extensions mainly focus on characterizing different aspects of activities th
             </li>
         </ul>
     </details>
+*   BREAKING CHANGE: New ontology in the import structure: `SOMA NEEM`
+    <details>
+        <summary>Details</summary>
+        Some SOMA entities, e.g., <code>KynoDinamicData</code>, have been decided to be too specific for the basic SOMA ontology. These have been moved to <code>SOMA NEEM</code>, which is of course part of the collapsed SOMA version
+    </details>
 *   Feat: Added mising labels to various concepts and roles
 *   Feat: Protégé-setup for offline development
     <details>
         <summary>Details</summary>
-        When opening SOMA locally from the cloned repository, Protégé will follow the IRI redirects in the catalog file from the same folder. There, we redirected the imports from the online version to the local version. This allows offline editing, while not changing anything when opening the ontologies via the IRI elsewhere.
+        When opening SOMA locally from the cloned repository, Protégé will follow the IRI redirects in the catalog file from the same folder. There, we redirected the imports from the online version to the local version. This allows offline editing, while not changing anything when opening the ontologies via the IRI elsewhere
     </details>
 *   Feat: We now host and use our own, modified copy of `DUL`
     <details>
@@ -74,7 +79,7 @@ Our extensions mainly focus on characterizing different aspects of activities th
         </ul>
     </details>
 ### 1.2.0
-*   Base release for starting the changelog! Yay, now you now why stuff might break!
+*   Base release for starting the changelog! Yay, now you get information why stuff might break!
     <details>
         <summary>Details</summary>
         The SOMA ontologies can now be accessed via a version IRI, e.g., <a href="INSERT VERSION IRI EXAMPLE HERE">INSERT_VERSION_IRI_EXAMPLE_HERE</a>. These are guaranteed to stay the way they are. The basic ontology IRI, e.g., <a href="http://www.ease-crc.org/ont/SOMA.owl">http://www.ease-crc.org/ont/SOMA.owl</a>, now refers to the newest version that is available (not neccessary associated to a stable release)
