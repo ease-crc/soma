@@ -62,7 +62,9 @@ public class IsDefinedInAdder implements CommandLineRunner {
 				addedEntities.add(entity);
 			}
 		}
-		LOGGER.info("Added annotation {} to entities: {}", annotation, addedEntities);
+		if (!addedEntities.isEmpty()) {
+			LOGGER.info("Added annotation {} to entities: {}", annotation, addedEntities);
+		}
 	}
 
 

@@ -28,7 +28,8 @@ public class OntologySaver implements CommandLineRunner {
 	@Override
 	public void run(final String... args) throws OWLOntologyStorageException {
 		for (final OWLOntology ontology : ontologyManager.getOntologyManager().getOntologies()) {
-			LOGGER.info("Saving {}", ontology.getOntologyID().getOntologyIRI());
+			LOGGER.info("Saving {}", ontology.getOntologyID().getOntologyIRI().map(Object::toString)
+			                                 .orElseGet(() -> "unnamed ontology"));
 			ontology.saveOntology();
 		}
 	}
