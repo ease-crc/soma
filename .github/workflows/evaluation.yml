@@ -15,6 +15,18 @@ on:
       - '!docs/**'
 
 jobs:
+  javaStuff:
+    name: Add annotations
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '18'
+        cache: 'maven'
+    - run: mvn spring-boot:run 
+
   compile:
     name: Compile SOMA
     runs-on: ubuntu-latest
