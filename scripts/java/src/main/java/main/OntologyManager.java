@@ -5,7 +5,7 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -35,10 +35,10 @@ public class OntologyManager {
 	 */
 	private final OWLOntologyManager ontologyManager = OWLManager.createConcurrentOWLOntologyManager();
 
-	public OntologyManager(@Value("${ontology.directory}") final Path ontologyDirectory)
-			throws OWLOntologyCreationException, IOException {
-		loadCatalog(ontologyDirectory);
-		loadOntologies(ontologyDirectory);
+	@Autowired
+	public OntologyManager(final OntologyConfig config) throws OWLOntologyCreationException, IOException {
+		loadCatalog(config.directory());
+		loadOntologies(config.directory());
 	}
 
 	@SuppressWarnings("OverlyBroadThrowsClause")
