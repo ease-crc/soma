@@ -63,6 +63,7 @@ uglify :-
     'SOMA-STATE.owl',
     'SOMA-SAY.owl',
     'SOMA-PROC.owl'
+    'SOMA-NEEM.owl'
   ],
   forall(
     member([OutFile,Ontologies], [
