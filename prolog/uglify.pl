@@ -62,7 +62,7 @@ uglify :-
     'SOMA-OBJ.owl',
     'SOMA-STATE.owl',
     'SOMA-SAY.owl',
-    'SOMA-PROC.owl'
+    'SOMA-PROC.owl',
     'SOMA-NEEM.owl'
   ],
   forall(
