@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="http://www.ease-crc.org/ont/SOMA-ELAN.owl#"
      xml:base="http://www.ease-crc.org/ont/SOMA-ELAN.owl"
-     xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
     <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA-ELAN.owl">
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
     </owl:Ontology>
@@ -57,6 +58,154 @@
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ELAN.owl#expectedParticipants -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA-ELAN.owl#expectedParticipants">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>Records the expected number of participants in a description associated to some event, usually a social gathering such as a meal.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ELAN.owl#isFormalEvent -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA-ELAN.owl#isFormalEvent">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:comment>Records the formality level in a description associated to some event, usually a social gathering such as a meal.
+
+The association between the Description and the Event can be direct (the Description is about the Event itself) but it can also be indirect in various ways. A typical example of the latter is where the Description is a Goal for a Task to prepare for the Event in question, as when the Goal of a TableSetting task would record the formality level of a meal, which will occur at some point after the task completes.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ELAN.owl#HumanActivityRecording -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ELAN.owl#HumanActivityRecording">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RecordedEpisode"/>
+        <rdfs:comment>An episode in which one or more human beings perform an activity and are recorded doing so.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForBreakfast -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForBreakfast">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal"/>
+        <rdfs:comment>Describes a goal to prepare a table or dining area for a breakfast.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForDinner -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForDinner">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal"/>
+        <rdfs:comment>Describes a goal to prepare a table or dining area for a dinner.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForLunch -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForLunch">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal"/>
+        <rdfs:comment>Describes a goal to prepare a table or dining area for a lunch.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-ELAN.owl#expectedParticipants"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-ELAN.owl#isFormalEvent"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A description of a goal to prepare for serving a meal by setting a table.
+
+The meal will have a number of expected participants and a level of formality.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ELAN.owl#TableSetting -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ELAN.owl#TableSetting">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Arranging"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskDefinedIn"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The task to prepare a table for a meal.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Arranging -->
+
+    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Arranging">
+        <SOMA:ELANName>construction-arrange-objects</SOMA:ELANName>
+        <SOMA:ELANUsageGuideline>A task involving the arrangement of a collection of objects in a particular way.</SOMA:ELANUsageGuideline>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
     // Annotations
     //
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -73,10 +222,6 @@
     <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AreaSurveying">
         <SOMA:ELANUsageGuideline>Visually survey an area, for objects or potential object positions.</SOMA:ELANUsageGuideline>
         <SOMA:ELANName>perception-survey-area</SOMA:ELANName>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Arranging">
-        <SOMA:ELANUsageGuideline>A task involving the arrangement of a collection of objects in a particular way.</SOMA:ELANUsageGuideline>
-        <SOMA:ELANName>construction-arrange-objects</SOMA:ELANName>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Assembling">
         <SOMA:ELANName>construction-assembly</SOMA:ELANName>
@@ -309,5 +454,5 @@
 
 
 
-<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
 
