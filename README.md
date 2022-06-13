@@ -48,6 +48,7 @@ Our extensions mainly focus on characterizing different aspects of activities th
         Some SOMA entities, e.g., <code>KynoDinamicData</code>, have been decided to be too specific for the basic SOMA ontology. These have been moved to <code>SOMA NEEM</code>, which is of course part of the collapsed SOMA version
     </details>
 *   Feat: Added mising labels to various concepts and roles
+*   Feat: Metadata for Episodes, e.g., to represent a temporal context or a table setting
 *   Feat: Protégé-setup for offline development
     <details>
         <summary>Details</summary>
@@ -76,6 +77,7 @@ Our extensions mainly focus on characterizing different aspects of activities th
                         Added missing english labels
                     </li>
                 </ul>
+            </li>
         </ul>
     </details>
 ### 1.2.0
