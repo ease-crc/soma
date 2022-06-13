@@ -9,10 +9,10 @@
      xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl">
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-STATE.owl"/>
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
-        <owl:imports rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
     </owl:Ontology>
     
 
@@ -400,6 +400,7 @@ CommunicationTopic can only classify a Social object that participates in an Act
 Note that classifies here is used in the plays-role sense. This isn&apos;t to say that the social object, ie the information exchanged in the communication, is an instance of the topic. Rather, the topic role refers to what the information is about.
 
 For example, if the topic of a communication is flowers, this does not mean the words themselves are flowers, merely that, in some sense, they are about flowers.</rdfs:comment>
+        <rdfs:label xml:lang="en">Communication topic</rdfs:label>
     </owl:Class>
     
 
@@ -438,7 +439,6 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Delivering">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Actuating"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Closing"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Fetching"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Lifting"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Opening"/>
@@ -524,8 +524,6 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Fetching">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PhysicalAcquiring"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Closing"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Delivering"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Lifting"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Opening"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Pulling"/>
@@ -597,9 +595,6 @@ Induction is often described as a move from many &quot;specifics&quot; (swan A i
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Lifting">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Actuating"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Closing"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Delivering"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Fetching"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Opening"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Pulling"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Pushing"/>
@@ -790,10 +785,6 @@ One could argue Mental actions are all Physical actions, because anything the Ag
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Opening">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Actuating"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Closing"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Delivering"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Fetching"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Lifting"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Pulling"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Pushing"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Squeezing"/>
@@ -963,11 +954,6 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Pulling">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Actuating"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Closing"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Delivering"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Fetching"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Lifting"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Opening"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Pushing"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Squeezing"/>
         <rdfs:comment>A task in which an Agent moves an object in a direction loosely from the object&apos;s center of mass towards the contact point between agent and object.</rdfs:comment>
@@ -979,12 +965,6 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Pushing">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Actuating"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Closing"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Delivering"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Fetching"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Lifting"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Opening"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Pulling"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Squeezing"/>
         <rdfs:comment>A task in which an Agent moves an object in a direction loosely from the the contact point between agent and object towards object&apos;s center of mass. todo: define subclass &apos;PushingOver&apos;? Would we expect two distinct contacts with the same surface then?</rdfs:comment>
     </owl:Class>
@@ -1134,6 +1114,7 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SituationTransition">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
         <rdfs:comment>A transition between two situations, usually brought about by the Action of some Agent.</rdfs:comment>
+        <rdfs:label xml:lang="en">Situation transition</rdfs:label>
     </owl:Class>
     
 
@@ -1151,13 +1132,6 @@ Simulation does not commit itself to state accuracy: the initial state of the si
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Squeezing">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Actuating"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Closing"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Delivering"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Fetching"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Lifting"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Opening"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Pulling"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Pushing"/>
         <rdfs:comment>A task in which an Agent applies pressure to an object they have in their grasp.</rdfs:comment>
     </owl:Class>
     
@@ -1249,6 +1223,7 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudTopic">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTopic"/>
         <rdfs:comment>A topic relevant for a think-aloud communication.</rdfs:comment>
+        <rdfs:label xml:lang="en">Think aloud topic</rdfs:label>
     </owl:Class>
     
 
@@ -1295,7 +1270,14 @@ The main use case for this is to represent expectations that are not met, e.g. u
 Because of open world semantics of DL, the default assumption for a Situation individual with no &quot;manifests in&quot; relations is simply that we don&apos;t know yet whether that Situation is manifested and if so by what Event.
 
 As such, an explicit assertion is needed to make a Situation a nonmanifested one: either declare that individual&apos;s type NonmanifestedSituation, or assert that it has 0 manifestsIn relations.</rdfs:comment>
+        <rdfs:label xml:lang="en">Nonmanifested situation</rdfs:label>
     </owl:Class>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#LinguisticObject -->
+
+    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#LinguisticObject"/>
     
 
 
