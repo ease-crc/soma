@@ -1176,21 +1176,6 @@ Such an event does NOT fall under the definition of Accident here. An example of
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#KinoDynamicData -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#KinoDynamicData">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isAbout"/>
-                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>An InformationObject containing data about how a physical object is put together such that its parts may move relative to each other, and what the physical characteristics of those parts are.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Masterful -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Masterful">
@@ -1213,30 +1198,6 @@ Such an event does NOT fall under the definition of Accident here. An example of
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#TechnicalDiagnosis"/>
         <rdfs:comment>A functional diagnosis of an organism.</rdfs:comment>
         <rdfs:label>Medical diagnosis</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#MeshShapeData -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MeshShapeData">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isAbout"/>
-                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>An InformationObject containing data about the geometry of a physical object.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#MotionData -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MotionData">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
-        <rdfs:comment>An information object containing data about the motion of some subject(s) and possibly also the motions of the objects they interact with, typically captured via motion tracking systems.</rdfs:comment>
     </owl:Class>
     
 
@@ -1376,15 +1337,6 @@ The difference between states and processes is that states are, in addition, hom
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#VideoData -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#VideoData">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
-        <rdfs:comment>An information object containing data for audio-visual modalities.</rdfs:comment>
-    </owl:Class>
-    
-
-
     <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action -->
 
     <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action">
@@ -1395,25 +1347,6 @@ The difference between states and processes is that states are, in addition, hom
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>The EASE view: an Action is an Event in which an Agent executes some Task, typically defined by a Workflow, towards the achievement of some Goal.</rdfs:comment>
-    </rdf:Description>
-    
-
-
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject -->
-
-    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject">
-        <rdfs:comment>In SOMA-compliant systems, the way to use InformationObjects to specify extra data about an individual entity is to employ the &apos;is about&apos; and &apos;expresses&apos; properties (or their inverses &apos;is reference of&apos; and &apos;is expressed by&apos;) and to supply a persistent identifier for a realization of the InformationObject.
-
-As a prototypical example, consider an individual called Action_XYZ, about which we have some data for which the meaning is described by Description_ABC. The data would be an individual InformationObject_DEF, and the following property assertions would hold:
-
-InformationObject_DEF &apos;is about&apos; Action_XYZ
-InformationObject_DEF expresses Description_ABC
-
-
-Usually, an individual InformationObject would be connected to (at least) an InformationRealization individual. For example, suppose there is such an InformationRealization individual, InformationRealization_123. Then, this individual will have data properties describing its format and persistent identifier
-
-InformationRealization_123 hasPersistentIdentifier &apos;doi&apos;
-InformationRealization_123 hasDataFormat &apos;urdf&apos;</rdfs:comment>
     </rdf:Description>
     
 
@@ -1491,6 +1424,20 @@ InformationRealization_123 hasDataFormat &apos;urdf&apos;</rdfs:comment>
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject">
+        <rdfs:comment>In SOMA-compliant systems, the way to use InformationObjects to specify extra data about an individual entity is to employ the &apos;is about&apos; and &apos;expresses&apos; properties (or their inverses &apos;is reference of&apos; and &apos;is expressed by&apos;) and to supply a persistent identifier for a realization of the InformationObject.
+
+As a prototypical example, consider an individual called Action_XYZ, about which we have some data for which the meaning is described by Description_ABC. The data would be an individual InformationObject_DEF, and the following property assertions would hold:
+
+InformationObject_DEF &apos;is about&apos; Action_XYZ
+InformationObject_DEF expresses Description_ABC
+
+
+Usually, an individual InformationObject would be connected to (at least) an InformationRealization individual. For example, suppose there is such an InformationRealization individual, InformationRealization_123. Then, this individual will have data properties describing its format and persistent identifier
+
+InformationRealization_123 hasPersistentIdentifier &apos;doi&apos;
+InformationRealization_123 hasDataFormat &apos;urdf&apos;</rdfs:comment>
+    </rdf:Description>
     <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#realizesSelfInformation">
         <rdfs:label xml:lang="en">realizes self information</rdfs:label>
     </rdf:Description>
