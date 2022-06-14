@@ -25,6 +25,9 @@
     
 
 
+   
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#UsageGuideline -->
 
     <owl:AnnotationProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#UsageGuideline">
@@ -599,6 +602,18 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#includesRecord -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#includesRecord">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isReferenceOf"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isRecordIncludedBy"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+        <rdfs:comment>A relationship indicating that an Event has been recorded by an InformationObject</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#isSituationIncludedIn -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isSituationIncludedIn">
@@ -704,6 +719,17 @@ Sub-properties are used to distinct between different cases of event endpoint re
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">o</symbol>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic relation between any entities that also implies ordering, e.g. &quot;she has worked into the night&quot;.</rdfs:comment>
         <rdfs:label>overlapped on</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isRecordIncludedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isRecordIncludedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isAbout"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:comment>A relationship indicating that an InformationObject is a recording of an Event.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -972,6 +998,20 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#HumanActivityRecording -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#HumanActivityRecording">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RecordedEpisode"/>
+        <rdfs:comment>An episode in which one or more human beings perform an activity and are recorded doing so.</rdfs:comment>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#HumanActivityRecording"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
+        <owl:annotatedTarget rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RecordedEpisode"/>
+    </owl:Axiom>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Accident -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Accident">
@@ -1167,6 +1207,21 @@ Such an event does NOT fall under the definition of Accident here. An example of
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Question">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role played by some entity that carries meaning, where this meaning is a query of some sort.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#RecordedEpisode -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RecordedEpisode">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Episode"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#includesRecord"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An episode which has been recorded.</rdfs:comment>
     </owl:Class>
     
 
