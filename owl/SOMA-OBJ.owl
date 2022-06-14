@@ -1648,6 +1648,28 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
     </owl:Class>
     
 
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#Pourable -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Pourable">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Disposition"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affordsBearer"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#PouredObjecct"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The disposition of an object (the barrier) which makes it able to be poured into or onto other objects. For example a liquid is pourable into a container.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#PouredObjecct -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#PouredObjecct">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Patient"/>
+        <rdfs:comment>An object being poured into or onto some other object.</rdfs:comment>
+    </owl:Class>
+
 
     <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#PrismaticJoint -->
 
@@ -1681,6 +1703,28 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Revolute joint</rdfs:label>
     </owl:Class>
 
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#Storage -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Storage">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Enclosing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#StoredObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The disposition of an object (the container) to store other objects by enclosing them to prevent their free movement.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#StoredObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#StoredObject">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#EnclosedObject"/>
+        <rdfs:comment>An object being stored into some other object, usually inside a container.</rdfs:comment>
+    </owl:Class>
 
 
     <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#ArtificialAgent -->
