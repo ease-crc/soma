@@ -1391,7 +1391,59 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#CanCut -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#CanCut">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Variability"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affordsBearer"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Cutter"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#CutObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The disposition of an object (the tool) to cut other objects. Such as a knife has cutting ability to cut a cucumber into pieces.</rdfs:comment>
+    </owl:Class>
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#CutObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#CutObject">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AlteredObject"/>
+        <rdfs:comment>An object being cut down into pieces.</rdfs:comment>
+    </owl:Class>
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#Cutable -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Cutable">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Disposition"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affordsBearer"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#CutObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Cutter"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The disposition of an object (the barrier) which makes it able to be cut down (into pieces) usually by some other object with role as a Cutter. Such as a cucumber is cutable by a knife.</rdfs:comment>
+    </owl:Class>
     
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#Cutter -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Cutter">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Tool"/>
+        <rdfs:comment>A role to classify an object used to cut other objects. Usually should poses sharpness as a quality. Execptions are not considered in this context. Such as a wind, water, or other natural agents cutting(eroding) the rocks.</rdfs:comment>
+    </owl:Class>
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#FunctionalPart -->
 
