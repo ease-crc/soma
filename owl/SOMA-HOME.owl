@@ -188,6 +188,12 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl#Kitchen">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Room"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Containment"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A designated room to perform the task of cooking</rdfs:comment>
     </owl:Class>
     
@@ -234,6 +240,28 @@
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl#Oven">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Appliance"/>
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Containment"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
+                <owl:someValuesFrom>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger"/>
+                        <owl:someValuesFrom>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#BakedGood"/>
+                            </owl:Restriction>
+                        </owl:someValuesFrom>
+                    </owl:Restriction>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An appliance with an enclosed compartment that exposes food to heat</rdfs:comment>
     </owl:Class>
     
@@ -408,6 +436,12 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl#TrashContainer">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Containment"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An item designed to hold trash</rdfs:comment>
     </owl:Class>
     
@@ -492,6 +526,12 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#BoxShape -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#BoxShape"/>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Bread -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Bread">
@@ -525,6 +565,12 @@
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Compartment">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
     </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Containment -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Containment"/>
     
 
 
@@ -880,6 +926,12 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Room -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Room"/>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#RoomSurface -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RoomSurface">
@@ -926,6 +978,12 @@
         </rdfs:subClassOf>
         <rdfs:comment>An appliance for cooking or heating.</rdfs:comment>
     </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Surface -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Surface"/>
     
 
 
