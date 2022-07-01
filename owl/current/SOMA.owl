@@ -1588,10 +1588,10 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
   <rdfs:range>
     <rdfs:Datatype>
       <owl:unionOf rdf:parseType="Collection">
-        <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#float"/>
-        <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#double"/>
-        <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#string"/>
         <rdf:Description rdf:about="#array_double"/>
+        <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#string"/>
       </owl:unionOf>
     </rdfs:Datatype>
   </rdfs:range>
@@ -1813,6 +1813,7 @@ Such an event does NOT fall under the definition of Accident here. An example of
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
   <rdfs:comment>idea: steps in workflows assert that they are defined by action execution plans.</rdfs:comment>
   <rdfs:comment>links role and parameter fillers to e.g. slots in a data structure</rdfs:comment>
+  <rdfs:label xml:lang="en">Action execution plan</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Status">
@@ -1964,6 +1965,7 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
   <rdfs:comment>A role classifying an Agent responsible for performing an Action.
 
 The entity playing an AgentRole is endowed with sentience and the capacity to deliberately choose actions in pursuit of goals. This distinguishes Agents from other causes that could bring an event about.</rdfs:comment>
+  <rdfs:label xml:lang="en">Agent role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
@@ -1973,6 +1975,7 @@ The entity playing an AgentRole is endowed with sentience and the capacity to de
   <rdfs:comment>A role classifying objects that are responsible in bringing about an event.
 
 The paradigmatic example is the Agent performing an Action -- the Agent is the effective cause of the Action it performs. However, not all objects causing events are agents.</rdfs:comment>
+  <rdfs:label xml:lang="en">Causative role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Agonist">
@@ -2051,6 +2054,7 @@ The paradigmatic example is the Agent performing an Action -- the Agent is the e
 
 <owl:Class rdf:about="#AlteredObject">
   <rdfs:subClassOf rdf:resource="#Patient"/>
+  <rdfs:label xml:lang="en">Altered object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Amateurish">
@@ -2191,6 +2195,7 @@ There can be non-physical artificial agents such as software programs but they a
 
 <owl:Class rdf:about="#AvoidedObject">
   <rdfs:subClassOf rdf:resource="#Patient"/>
+  <rdfs:label xml:lang="en">Avoided object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Avoiding">
@@ -2226,11 +2231,13 @@ There can be non-physical artificial agents such as software programs but they a
 <owl:Class rdf:about="#BeneficiaryRole">
   <rdfs:subClassOf rdf:resource="#GoalRole"/>
   <rdfs:comment>A role classifying an agent for whose benefit an action is performed.</rdfs:comment>
+  <rdfs:label xml:lang="en">Beneficiary role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#GoalRole">
   <rdfs:subClassOf rdf:resource="#EventAdjacentRole"/>
   <rdfs:comment>A role classifying objects that constitute the goal of an action.</rdfs:comment>
+  <rdfs:label xml:lang="en">Goal role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Binding">
@@ -2309,6 +2316,7 @@ There is a further, orthogonal distinction made between:
 -- that the filler of a role is a particular entity (RoleFillerBindings). This is typically the case when the filler of the role may be one of a few constants, as is the case with the execution status of a robot task.
 
 TODO: for the robot workflows we are likely to need at the start, testing equality of fillers is enough. In the future, we may want to replace that with unifiability of fillers.</rdfs:comment>
+  <rdfs:label xml:lang="en">Counterfactual binding</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#FactualBinding">
@@ -2317,11 +2325,13 @@ TODO: for the robot workflows we are likely to need at the start, testing equali
 
 -- task- or workflow-defined roles share fillers (RoleRoleBindings). Example, the instrument of a cutting task may be the actee of a grasping task;
 -- task- or workflow-defined roles are filled by a particular entity (RoleFillerBindings). This is typically the case when roles, and especially parameters, can be assigned to constants. Example, the waiting time to cook soft eggs is 3 minutes.</rdfs:comment>
+  <rdfs:label xml:lang="en">Factial binding</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#RoleFillerBinding">
   <rdfs:subClassOf rdf:resource="#Binding"/>
   <owl:disjointWith rdf:resource="#RoleRoleBinding"/>
+  <rdfs:label xml:lang="en">Role filler binding</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#RoleRoleBinding">
@@ -2339,6 +2349,7 @@ TODO: for the robot workflows we are likely to need at the start, testing equali
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#Binding"/>
+  <rdfs:label xml:lang="en">Role role binding</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
@@ -2366,6 +2377,7 @@ TODO: for the robot workflows we are likely to need at the start, testing equali
 
 <owl:Class rdf:about="#BlockedObject">
   <rdfs:subClassOf rdf:resource="#Patient"/>
+  <rdfs:label xml:lang="en">Blocked object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#BodyMovement">
@@ -2504,10 +2516,13 @@ Note that sometimes the shape as actually used for some purpose may be displaced
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role filled by a description of some action or process that brings about a motion.
 
 As an example, consider the utterance "the tennisman served the ball by hitting it with the racket." In this utterance, the filler of the CausalEventRole is expressed by the "by hitting it with the racket" constituent.</rdfs:comment>
+  <rdfs:label xml:lang="en">Causal event role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#EventAdjacentRole">
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+  <rdfs:label xml:lang="en">Event adjacent role</rdfs:label>
+  <rdfs:label xml:lang="en">Thematic role</rdfs:label>
   <rdfs:comment>A role classifying a participant in an event.
 
 In linguistics, this is also known as a thematic role.</rdfs:comment>
@@ -2641,6 +2656,7 @@ In some sense any process that results in entities being created or destroyed mi
 
 <owl:Class rdf:about="#CleanlinessRegion">
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+  <rdfs:label xml:lang="en">Cleanliness region</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Cleanliness">
@@ -2677,7 +2693,6 @@ In some sense any process that results in entities being created or destroyed mi
 </owl:Class>
 
 <owl:Class rdf:about="#Delivering">
-  <owl:disjointWith rdf:resource="#Closing"/>
   <owl:disjointWith rdf:resource="#Fetching"/>
   <owl:disjointWith rdf:resource="#Lifting"/>
   <owl:disjointWith rdf:resource="#Opening"/>
@@ -2689,8 +2704,6 @@ In some sense any process that results in entities being created or destroyed mi
 </owl:Class>
 
 <owl:Class rdf:about="#Fetching">
-  <owl:disjointWith rdf:resource="#Closing"/>
-  <owl:disjointWith rdf:resource="#Delivering"/>
   <owl:disjointWith rdf:resource="#Lifting"/>
   <owl:disjointWith rdf:resource="#Opening"/>
   <owl:disjointWith rdf:resource="#Pulling"/>
@@ -2701,9 +2714,6 @@ In some sense any process that results in entities being created or destroyed mi
 </owl:Class>
 
 <owl:Class rdf:about="#Lifting">
-  <owl:disjointWith rdf:resource="#Closing"/>
-  <owl:disjointWith rdf:resource="#Delivering"/>
-  <owl:disjointWith rdf:resource="#Fetching"/>
   <owl:disjointWith rdf:resource="#Opening"/>
   <owl:disjointWith rdf:resource="#Pulling"/>
   <owl:disjointWith rdf:resource="#Pushing"/>
@@ -2712,10 +2722,6 @@ In some sense any process that results in entities being created or destroyed mi
 </owl:Class>
 
 <owl:Class rdf:about="#Opening">
-  <owl:disjointWith rdf:resource="#Closing"/>
-  <owl:disjointWith rdf:resource="#Delivering"/>
-  <owl:disjointWith rdf:resource="#Fetching"/>
-  <owl:disjointWith rdf:resource="#Lifting"/>
   <owl:disjointWith rdf:resource="#Pulling"/>
   <owl:disjointWith rdf:resource="#Pushing"/>
   <owl:disjointWith rdf:resource="#Squeezing"/>
@@ -2724,11 +2730,6 @@ In some sense any process that results in entities being created or destroyed mi
 </owl:Class>
 
 <owl:Class rdf:about="#Pulling">
-  <owl:disjointWith rdf:resource="#Closing"/>
-  <owl:disjointWith rdf:resource="#Delivering"/>
-  <owl:disjointWith rdf:resource="#Fetching"/>
-  <owl:disjointWith rdf:resource="#Lifting"/>
-  <owl:disjointWith rdf:resource="#Opening"/>
   <owl:disjointWith rdf:resource="#Pushing"/>
   <owl:disjointWith rdf:resource="#Squeezing"/>
   <rdfs:subClassOf rdf:resource="#Actuating"/>
@@ -2736,25 +2737,12 @@ In some sense any process that results in entities being created or destroyed mi
 </owl:Class>
 
 <owl:Class rdf:about="#Pushing">
-  <owl:disjointWith rdf:resource="#Closing"/>
-  <owl:disjointWith rdf:resource="#Delivering"/>
-  <owl:disjointWith rdf:resource="#Fetching"/>
-  <owl:disjointWith rdf:resource="#Lifting"/>
-  <owl:disjointWith rdf:resource="#Opening"/>
-  <owl:disjointWith rdf:resource="#Pulling"/>
-  <owl:disjointWith rdf:resource="#Squeezing"/>
   <rdfs:subClassOf rdf:resource="#Actuating"/>
+  <owl:disjointWith rdf:resource="#Squeezing"/>
   <rdfs:comment>A task in which an Agent moves an object in a direction loosely from the the contact point between agent and object towards object's center of mass. todo: define subclass 'PushingOver'? Would we expect two distinct contacts with the same surface then?</rdfs:comment>
 </owl:Class>
 
 <owl:Class rdf:about="#Squeezing">
-  <owl:disjointWith rdf:resource="#Closing"/>
-  <owl:disjointWith rdf:resource="#Delivering"/>
-  <owl:disjointWith rdf:resource="#Fetching"/>
-  <owl:disjointWith rdf:resource="#Lifting"/>
-  <owl:disjointWith rdf:resource="#Opening"/>
-  <owl:disjointWith rdf:resource="#Pulling"/>
-  <owl:disjointWith rdf:resource="#Pushing"/>
   <rdfs:subClassOf rdf:resource="#Actuating"/>
   <rdfs:comment>A task in which an Agent applies pressure to an object they have in their grasp.</rdfs:comment>
 </owl:Class>
@@ -2837,10 +2825,12 @@ In some sense any process that results in entities being created or destroyed mi
 <owl:Class rdf:about="#CommitedObject">
   <rdfs:subClassOf rdf:resource="#ConnectedObject"/>
   <rdfs:comment>An object committed to a bigger whole. After being committed, the object does not exist anymore in its old form.</rdfs:comment>
+  <rdfs:label xml:lang="en">Commited object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#ConnectedObject">
   <rdfs:subClassOf rdf:resource="#Patient"/>
+  <rdfs:label xml:lang="en">Connected object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#CommunicationAction">
@@ -2917,6 +2907,7 @@ CommunicationTopic can only classify a Social object that participates in an Act
 Note that classifies here is used in the plays-role sense. This isn't to say that the social object, ie the information exchanged in the communication, is an instance of the topic. Rather, the topic role refers to what the information is about.
 
 For example, if the topic of a communication is flowers, this does not mean the words themselves are flowers, merely that, in some sense, they are about flowers.</rdfs:comment>
+  <rdfs:label xml:lang="en">Communication topic</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#ResourceRole">
@@ -2926,6 +2917,7 @@ For example, if the topic of a communication is flowers, this does not mean the 
 Resources are usually not agentive; a different set of roles classifies the agentive participants in actions. Likewise, typically resources do not play causative or goal roles for the event.
 
 Resources are often consumed by their participation in an event, but this need not always be the case. An instrument and capital are examples of resources that are reusable.</rdfs:comment>
+  <rdfs:label xml:lang="en">Resource role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Composing">
@@ -2986,6 +2978,7 @@ The condition is a conjunction of CounterfactualBindings. These bindings may be 
 
 An empty conjunction of CounterfactualBindings is assumed to be True.</rdfs:comment>
   <rdfs:comment>Note: in RobotWorkflows, Tasks typically may have several possible successors, to be selected based on condition-testing.</rdfs:comment>
+  <rdfs:label xml:lang="en">Conditional succedence</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Succedence">
@@ -3132,6 +3125,7 @@ The second issue relates to what is "outside". The state is a configuration of s
 <owl:Class rdf:about="#IncludedObject">
   <rdfs:subClassOf rdf:resource="#Patient"/>
   <rdfs:comment>An object that is contained in something. This is meant very general and includes, e.g., elements contained in a set, or things that are spatially contained within the boundaries of some object.</rdfs:comment>
+  <rdfs:label xml:lang="en">Included object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#ContainmentState">
@@ -3250,6 +3244,7 @@ Adopted from GUM-4-space (Bateman et al. 2010).</rdfs:comment>
 
 <owl:Class rdf:about="#CoveredObject">
   <rdfs:subClassOf rdf:resource="#BlockedObject"/>
+  <rdfs:label xml:lang="en">Covered object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#CoverageTheory">
@@ -3314,6 +3309,7 @@ They maintain their role however as representations able to drive a simulation, 
 
 <owl:Class rdf:about="#CreatedObject">
   <rdfs:subClassOf rdf:resource="#Patient"/>
+  <rdfs:label xml:lang="en">Created object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Creation">
@@ -3344,6 +3340,7 @@ Note, most of the physical Entities we will be considering here are in fact arra
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
   <rdfs:comment>A point in three dimensional space, given as translation in a reference coordinate system, and an orientation of a coordinate system centered at that point relative to the reference coordinate system.</rdfs:comment>
+  <rdfs:label xml:lang="en">6D pose</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#DPosition">
@@ -3355,6 +3352,7 @@ Note, most of the physical Entities we will be considering here are in fact arra
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
+  <rdfs:label xml:lang="en">3D position</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#DeductiveReasoning">
@@ -3405,6 +3403,7 @@ A soft slab of clay deforming under its own weight on Earth would still count as
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#AlteredObject"/>
+  <rdfs:label xml:lang="en">Shaped object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#FluidFlow">
@@ -3423,6 +3422,7 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
 <owl:Class rdf:about="#DependentPlace">
   <rdfs:subClassOf rdf:resource="#Feature"/>
   <rdfs:comment>A feature that is not part of its host, like a hole in a piece of cheese.</rdfs:comment>
+  <rdfs:label xml:lang="en">Dependent place</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Feature">
@@ -3453,6 +3453,7 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
 
 <owl:Class rdf:about="#DepositedObject">
   <rdfs:subClassOf rdf:resource="#Patient"/>
+  <rdfs:label xml:lang="en">Deposited object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Deposition">
@@ -3533,6 +3534,7 @@ An issue to highlight here is the maintenance of constitution. Fluids-- gases in
 
 <owl:Class rdf:about="#DestroyedObject">
   <rdfs:subClassOf rdf:resource="#Patient"/>
+  <rdfs:label xml:lang="en">Destroyed object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Destruction">
@@ -3550,6 +3552,7 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
 
 <owl:Class rdf:about="#DetectedObject">
   <rdfs:subClassOf rdf:resource="#Patient"/>
+  <rdfs:label xml:lang="en">Detected object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#DeviceState">
@@ -3567,14 +3570,17 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
       </owl:unionOf>
     </owl:Class>
   </owl:equivalentClass>
+  <rdfs:label xml:lang="en">Device state range</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#DeviceTurnedOff">
   <rdfs:subClassOf rdf:resource="#DeviceStateRange"/>
+  <rdfs:label xml:lang="en">Device turned off</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#DeviceTurnedOn">
   <rdfs:subClassOf rdf:resource="#DeviceStateRange"/>
+  <rdfs:label xml:lang="en">Device turned on</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Dicing">
@@ -3703,6 +3709,7 @@ Because each instance of an ESTSchemaTheory refers to a single object, ESTSchema
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role that requires of its filler simply to exist, unlike other roles that may demand e.g. agentive or instrumental participation in some executable schema or plan (AgentRole and Instrument respectively).
 
 The intention behind such a simple role is to have a way to represent, in a schematic formalism used to describe some scene, that an object is present. In particular, the schema used to convey this information is the ESTSchemaTheory, which has ExistingObjectRole as its sole defined role.</rdfs:comment>
+  <rdfs:label xml:lang="en">Existing object role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Effort">
@@ -3713,6 +3720,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
 <owl:Class rdf:about="#EnclosedObject">
   <rdfs:subClassOf rdf:resource="#IncludedObject"/>
   <rdfs:comment>An object included within the spatial boundaries of another object.</rdfs:comment>
+  <rdfs:label xml:lang="en">Enclosed object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Enclosing">
@@ -3790,15 +3798,18 @@ Note that such theories are useful both when analyzing an actual linguistic prod
 <owl:Class rdf:about="#RelationAdjacentRole">
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
   <rdfs:comment>A role classifying an object participating in some relation, e.g. a participant in a spatial relation or a linguistic fragment in a rhetorical relation to another.</rdfs:comment>
+  <rdfs:label xml:lang="en">Relation adjacent role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#ExperiencerRole">
   <rdfs:subClassOf rdf:resource="#AgentRole"/>
   <rdfs:comment>A role used in frame semantics to classify agents performing perception actions, or being the subjects affected by some biological process.</rdfs:comment>
+  <rdfs:label xml:lang="en">Experiencer role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#ExtractedObject">
   <rdfs:subClassOf rdf:resource="#Patient"/>
+  <rdfs:label xml:lang="en">Extracted object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#PhysicalQuality">
@@ -3820,6 +3831,7 @@ Note that such theories are useful both when analyzing an actual linguistic prod
 
 <owl:Class rdf:about="#FailedAttempt">
   <rdfs:subClassOf rdf:resource="#Unsuccessfulness"/>
+  <rdfs:label xml:lang="en">Failed attempt</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Unsuccessfulness">
@@ -3829,6 +3841,7 @@ Note that such theories are useful both when analyzing an actual linguistic prod
 
 <owl:Class rdf:about="#FaultySoftware">
   <rdfs:subClassOf rdf:resource="#SoftwareDiagnosis"/>
+  <rdfs:label xml:lang="en">Faulty software</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#SoftwareDiagnosis">
@@ -3882,16 +3895,16 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
   </rdfs:subClassOf>
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onClass rdf:resource="#JointState"/>
-      <owl:onProperty rdf:resource="#hasJointState"/>
-      <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+      <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+      <owl:onProperty rdf:resource="#hasParentLink"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf>
     <owl:Restriction>
-      <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-      <owl:onProperty rdf:resource="#hasParentLink"/>
-      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+      <owl:onClass rdf:resource="#JointState"/>
+      <owl:onProperty rdf:resource="#hasJointState"/>
+      <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalBody"/>
@@ -3956,6 +3969,7 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
     </owl:Restriction>
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#AlteredObject"/>
+  <rdfs:label xml:lang="en">Moved object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Foolishness">
@@ -4010,6 +4024,7 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#SpatialRelationRole"/>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the object with primary focal prominence in a spatial or spatio-temporal schema. Terminological variants that appear in the literature on cognitive linguistics include Figure (Talmy 1983) and Trajector (Langacker 1986).</rdfs:comment>
+  <rdfs:label xml:lang="en">Locatum role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#RelatumRole">
@@ -4021,6 +4036,7 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="#SpatialRelationRole"/>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the reference object in a spatial or spatio-temporal schema, i.e. the object with secondary focal prominence. Terminological variants: Ground (Talmy 1983), Landmark (Langacker 1986).</rdfs:comment>
+  <rdfs:label xml:lang="en">Relatum role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#GetTaskParameter">
@@ -4160,6 +4176,7 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Relation"/>
   <rdfs:comment>The relation between an individual quality and a region.</rdfs:comment>
   <rdfs:comment>todo(DB): added for NEEMs (quale change), but not sure yet about it...</rdfs:comment>
+  <rdfs:label xml:lang="en">Has quality region</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Head">
@@ -4212,6 +4229,7 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
 
 <owl:Class rdf:about="#RestrictedObject">
   <rdfs:subClassOf rdf:resource="#BlockedObject"/>
+  <rdfs:label xml:lang="en">Restricted object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#StateTransition">
@@ -4241,6 +4259,7 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
   <rdfs:comment>A transition between two states brought about by the Action of some Agent.</rdfs:comment>
+  <rdfs:label xml:lang="en">State transition</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Inability">
@@ -4251,6 +4270,7 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
 <owl:Class rdf:about="#IncompatibleSoftware">
   <rdfs:subClassOf rdf:resource="#SoftwareDiagnosis"/>
   <rdfs:comment>A description of a situation where two software systems are incompatible with each other.</rdfs:comment>
+  <rdfs:label xml:lang="en">Incompatible software</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#InductiveReasoning">
@@ -4267,6 +4287,7 @@ Induction is often described as a move from many "specifics" (swan A is white, s
 
 <owl:Class rdf:about="#InsertedObject">
   <rdfs:subClassOf rdf:resource="#EnclosedObject"/>
+  <rdfs:label xml:lang="en">Inserted object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Insertion">
@@ -4407,6 +4428,7 @@ Posture changes may take place as part of other actions, for example turning whe
 
 <owl:Class rdf:about="#LinkedObject">
   <rdfs:subClassOf rdf:resource="#ConnectedObject"/>
+  <rdfs:label xml:lang="en">Linked object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#LinkageState">
@@ -4440,11 +4462,13 @@ Posture changes may take place as part of other actions, for example turning whe
 <owl:Class rdf:about="#SpatioTemporalRole">
   <rdfs:subClassOf rdf:resource="#EventAdjacentRole"/>
   <rdfs:comment>Roles that classify entities which locate an event or object in space and time.</rdfs:comment>
+  <rdfs:label xml:lang="en">Spatio-temporal role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#SpatialRelationRole">
   <rdfs:subClassOf rdf:resource="#RelationAdjacentRole"/>
   <rdfs:comment>Roles classifying entities participating in some spatial relation.</rdfs:comment>
+  <rdfs:label xml:lang="en">Spatial relation role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#LookingAt">
@@ -4565,6 +4589,7 @@ One could argue Mental actions are all Physical actions, because anything the Ag
 
 <owl:Class rdf:about="#ThinkAloudTopic">
   <rdfs:subClassOf rdf:resource="#CommunicationTopic"/>
+  <rdfs:label xml:lang="en">Think aloud topic</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Mixing">
@@ -4635,6 +4660,7 @@ The main use case for this is to represent expectations that are not met, e.g. u
 Because of open world semantics of DL, the default assumption for a Situation individual with no "manifests in" relations is simply that we don't know yet whether that Situation is manifested and if so by what Event.
 
 As such, an explicit assertion is needed to make a Situation a nonmanifested one: either declare that individual's type NonmanifestedSituation, or assert that it has 0 manifestsIn relations.</rdfs:comment>
+  <rdfs:label xml:lang="en">Nonmanifested situation</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Orienting">
@@ -4660,6 +4686,7 @@ As such, an explicit assertion is needed to make a Situation a nonmanifested one
 <owl:Class rdf:about="#PathRole">
   <rdfs:subClassOf rdf:resource="#SpatioTemporalRole"/>
   <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role that classifies the path of a motion.</rdfs:comment>
+  <rdfs:label xml:lang="en">Path role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#PhaseTransition">
@@ -4707,6 +4734,7 @@ In all these cases, the metaphor points to the existence of several regions of q
 <owl:Class rdf:about="#PhysicalExistence">
   <rdfs:subClassOf rdf:resource="#PhysicalState"/>
   <rdfs:comment>A State in which an Entity is said to exist in the physical world.</rdfs:comment>
+  <rdfs:label xml:lang="en">Physical Existince</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#PhysicalState">
@@ -4910,6 +4938,7 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
 <owl:Class rdf:about="#QualityTransition">
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
   <rdfs:comment>todo(DB): added for NEEMs (quale change), but not sure yet about it...</rdfs:comment>
+  <rdfs:label xml:lang="en">Quality transition</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Query">
@@ -4958,6 +4987,7 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
 <owl:Class rdf:about="#RecipientRole">
   <rdfs:subClassOf rdf:resource="#BeneficiaryRole"/>
   <rdfs:comment>A role which classifies an agent who receives an object modified or created by an action.</rdfs:comment>
+  <rdfs:label xml:lang="en">Recipent role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#RedColor">
@@ -4967,6 +4997,7 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
 <owl:Class rdf:about="#RelevantPart">
   <rdfs:subClassOf rdf:resource="#Feature"/>
   <rdfs:comment>Features that are relevant parts of their host, like a bump or an edge.</rdfs:comment>
+  <rdfs:label xml:lang="en">Relevant part</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Remembering">
@@ -4985,6 +5016,7 @@ As an example, a kind of Abductive reasoning would fit here: reconstruction, in 
 <owl:Class rdf:about="#ResultRole">
   <rdfs:subClassOf rdf:resource="#GoalRole"/>
   <rdfs:comment>A role classifying the object that is the outcome of a creation or modification action or process.</rdfs:comment>
+  <rdfs:label xml:lang="en">Result role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#RevoluteJoint">
@@ -5006,6 +5038,7 @@ As an example, a kind of Abductive reasoning would fit here: reconstruction, in 
 
 <owl:Class rdf:about="#RoomSurface">
   <rdfs:subClassOf rdf:resource="#Surface"/>
+  <rdfs:label xml:lang="en">Room surface</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Surface">
@@ -5036,6 +5069,7 @@ As an example, a kind of Abductive reasoning would fit here: reconstruction, in 
 
 <owl:Class rdf:about="#SelectedObject">
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+  <rdfs:label xml:lang="en">Selected object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#SelectingItem">
@@ -5143,6 +5177,7 @@ Simulation does not commit itself to state accuracy: the initial state of the si
 <owl:Class rdf:about="#SituationTransition">
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
   <rdfs:comment>A transition between two situations, usually brought about by the Action of some Agent.</rdfs:comment>
+  <rdfs:label xml:lang="en">Situation transition</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Size">
@@ -5193,6 +5228,7 @@ Note also that the DUL SocialAgent class is not an appropriate restriction howev
 <owl:Class rdf:about="#SourceMaterialRole">
   <rdfs:subClassOf rdf:resource="#ResourceRole"/>
   <rdfs:comment>A role classifying a substance or object that enters a process of transformation intended to create some other object.</rdfs:comment>
+  <rdfs:label xml:lang="en">Source material role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#SphereShape">
@@ -5220,6 +5256,7 @@ Note also that the DUL SocialAgent class is not an appropriate restriction howev
 <owl:Class rdf:about="#StimulusRole">
   <rdfs:subClassOf rdf:resource="#CausativeRole"/>
   <rdfs:comment>A role classifying an object that is perceived by some agent and thus triggers some reaction (e.g., a perception event).</rdfs:comment>
+  <rdfs:label xml:lang="en">Stimulus role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#StructuralDesign">
@@ -5244,6 +5281,7 @@ Note also that the DUL SocialAgent class is not an appropriate restriction howev
   </rdfs:subClassOf>
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow"/>
   <rdfs:comment>An elementary workflow consisting in the invocation of one single task. It is used as a descriptive context inside of which factual bindings are valid between the task's arguments and other entities (such as the "local variables" of a larger workflow).</rdfs:comment>
+  <rdfs:label xml:lang="en">Task invocation</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#SuccessDiagnosis">
@@ -5298,6 +5336,7 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
 
 <owl:Class rdf:about="#SupportedObject">
   <rdfs:subClassOf rdf:resource="#ConnectedObject"/>
+  <rdfs:label xml:lang="en">Supported object</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Tapping">
@@ -5330,6 +5369,7 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
 
 <owl:Class rdf:about="#TemperatureRegion">
   <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
+  <rdfs:label xml:lang="en">Temperature region</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Tempering">
@@ -5406,6 +5446,7 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
 <owl:Class rdf:about="#TimeRole">
   <rdfs:subClassOf rdf:resource="#SpatioTemporalRole"/>
   <rdfs:comment>A role filled by a description of the location in time and/or duration of an event or object.</rdfs:comment>
+  <rdfs:label xml:lang="en">Time role</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#Tool">
@@ -5445,6 +5486,7 @@ It is also possible that a Transient transitionsBack to the initial object. An e
 <owl:Class rdf:about="#UnavailableSoftware">
   <rdfs:subClassOf rdf:resource="#SoftwareDiagnosis"/>
   <rdfs:comment>A description of a situation where some software dependency is not available.</rdfs:comment>
+  <rdfs:label xml:lang="en">Unavailable software</rdfs:label>
 </owl:Class>
 
 <owl:Class rdf:about="#VideoData">
@@ -5455,6 +5497,8 @@ It is also possible that a Transient transitionsBack to the initial object. An e
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
 
 <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
+
+<owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Query"/>
 
 <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action">
   <rdfs:subClassOf>
@@ -5735,8 +5779,8 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
   <owl:annotatedSource>
     <owl:Restriction>
       <owl:someValuesFrom rdf:resource="#NonmanifestedSituation"/>
-      <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
       <owl:onProperty rdf:resource="#hasTerminalSituation"/>
+      <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
     </owl:Restriction>
   </owl:annotatedSource>
   <rdfs:comment>If something is a terminal situation then it must be a manifested situation (regardless of whether it was expected or not).</rdfs:comment>
@@ -5770,9 +5814,9 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
   <owl:annotatedTarget rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
   <owl:annotatedSource>
     <owl:Restriction>
-      <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
       <owl:onProperty rdf:resource="#hasInitialSituation"/>
       <owl:someValuesFrom rdf:resource="#NonmanifestedSituation"/>
+      <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
     </owl:Restriction>
   </owl:annotatedSource>
   <rdfs:comment>If something is an initial situation of some transition, then it must manifest.</rdfs:comment>
@@ -5783,7 +5827,6 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
   <owl:annotatedTarget rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
   <owl:annotatedSource>
     <owl:Class>
-      <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
       <owl:intersectionOf rdf:parseType="Collection">
         <owl:Restriction>
           <owl:onProperty rdf:resource="#manifestsIn"/>
@@ -5794,6 +5837,7 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
           <owl:someValuesFrom rdf:resource="#NonmanifestedSituation"/>
         </owl:Restriction>
       </owl:intersectionOf>
+      <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
     </owl:Class>
   </owl:annotatedSource>
   <rdfs:comment>If a precondition is not met then a Situation cannot manifest.</rdfs:comment>
@@ -5811,13 +5855,13 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
           <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         </owl:Restriction>
         <owl:Restriction>
+          <owl:onProperty rdf:resource="#prevents"/>
           <owl:someValuesFrom>
             <owl:Restriction>
               <owl:onProperty rdf:resource="#manifestsIn"/>
               <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
             </owl:Restriction>
           </owl:someValuesFrom>
-          <owl:onProperty rdf:resource="#prevents"/>
         </owl:Restriction>
       </owl:intersectionOf>
       <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
@@ -5858,13 +5902,6 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
   <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
   <owl:annotatedSource>
     <owl:Class>
-      <owl:intersectionOf rdf:parseType="Collection">
-        <rdf:Description rdf:about="#SituationTransition"/>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="#manifestsIn"/>
-          <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-        </owl:Restriction>
-      </owl:intersectionOf>
       <rdfs:subClassOf>
         <owl:Class>
           <owl:intersectionOf rdf:parseType="Collection">
@@ -5879,6 +5916,13 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
           </owl:intersectionOf>
         </owl:Class>
       </rdfs:subClassOf>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#SituationTransition"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#manifestsIn"/>
+          <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
     </owl:Class>
   </owl:annotatedSource>
   <owl:annotatedTarget>
