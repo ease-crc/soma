@@ -92,7 +92,7 @@ uglify1(OutFile, Ontologies) :-
       ease_load(GlobalPath,ease)
   )),
   %%%
-  atomic_list_concat([Basepath, '/build'], BUILD_Path),
+  atomic_list_concat([Basepath, '/build/owl/current'], BUILD_Path),
   ( exists_directory(BUILD_Path)
   -> true
   ;  make_directory(BUILD_Path)
