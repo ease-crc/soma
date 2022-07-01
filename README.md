@@ -59,7 +59,7 @@ Our extensions mainly focus on characterizing different aspects of activities th
         <summary>Details</summary>
         <ul>
             <li>
-                Reason: <code>DUL</code>is unreliable (e.g., down for a whole week and no one can open <code>SOMA</code>)
+                Reason: <code>DUL</code> is unreliable (e.g., down for a whole week and no one can open <code>SOMA</code>)
             </li>
             <li>
                 As a side effect, we can make changes to <code>DUL</code>, if necessary (yes, we will be very careful)
