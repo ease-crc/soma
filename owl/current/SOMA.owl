@@ -5754,14 +5754,14 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
   <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
   <owl:annotatedSource>
     <owl:Restriction>
-      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+      <owl:onProperty rdf:resource="#hasTerminalSituation"/>
       <rdfs:subClassOf>
         <owl:Restriction>
           <owl:onProperty rdf:resource="#manifestsIn"/>
           <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         </owl:Restriction>
       </rdfs:subClassOf>
-      <owl:onProperty rdf:resource="#hasTerminalSituation"/>
+      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
     </owl:Restriction>
   </owl:annotatedSource>
   <owl:annotatedTarget>
@@ -5790,13 +5790,13 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
   <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
   <owl:annotatedSource>
     <owl:Restriction>
-      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
       <rdfs:subClassOf>
         <owl:Restriction>
           <owl:onProperty rdf:resource="#manifestsIn"/>
           <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         </owl:Restriction>
       </rdfs:subClassOf>
+      <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
       <owl:onProperty rdf:resource="#hasInitialSituation"/>
     </owl:Restriction>
   </owl:annotatedSource>
@@ -5814,8 +5814,8 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
   <owl:annotatedTarget rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
   <owl:annotatedSource>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="#hasInitialSituation"/>
       <owl:someValuesFrom rdf:resource="#NonmanifestedSituation"/>
+      <owl:onProperty rdf:resource="#hasInitialSituation"/>
       <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
     </owl:Restriction>
   </owl:annotatedSource>
@@ -5855,13 +5855,13 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
           <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         </owl:Restriction>
         <owl:Restriction>
-          <owl:onProperty rdf:resource="#prevents"/>
           <owl:someValuesFrom>
             <owl:Restriction>
               <owl:onProperty rdf:resource="#manifestsIn"/>
               <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
             </owl:Restriction>
           </owl:someValuesFrom>
+          <owl:onProperty rdf:resource="#prevents"/>
         </owl:Restriction>
       </owl:intersectionOf>
       <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
@@ -5874,6 +5874,12 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
   <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
   <owl:annotatedSource>
     <owl:Class>
+      <rdfs:subClassOf>
+        <owl:Restriction>
+          <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
+        </owl:Restriction>
+      </rdfs:subClassOf>
       <owl:intersectionOf rdf:parseType="Collection">
         <rdf:Description rdf:about="#SituationTransition"/>
         <owl:Restriction>
@@ -5881,12 +5887,6 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
           <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         </owl:Restriction>
       </owl:intersectionOf>
-      <rdfs:subClassOf>
-        <owl:Restriction>
-          <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
-        </owl:Restriction>
-      </rdfs:subClassOf>
     </owl:Class>
   </owl:annotatedSource>
   <owl:annotatedTarget>
@@ -5902,6 +5902,13 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
   <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
   <owl:annotatedSource>
     <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#SituationTransition"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#manifestsIn"/>
+          <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
       <rdfs:subClassOf>
         <owl:Class>
           <owl:intersectionOf rdf:parseType="Collection">
@@ -5910,19 +5917,12 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
               <owl:onProperty rdf:resource="#hasInitialSituation"/>
             </owl:Restriction>
             <owl:Restriction>
-              <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
               <owl:onProperty rdf:resource="#hasTerminalSituation"/>
+              <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
             </owl:Restriction>
           </owl:intersectionOf>
         </owl:Class>
       </rdfs:subClassOf>
-      <owl:intersectionOf rdf:parseType="Collection">
-        <rdf:Description rdf:about="#SituationTransition"/>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="#manifestsIn"/>
-          <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-        </owl:Restriction>
-      </owl:intersectionOf>
     </owl:Class>
   </owl:annotatedSource>
   <owl:annotatedTarget>
@@ -5933,8 +5933,8 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
           <owl:onProperty rdf:resource="#hasInitialSituation"/>
         </owl:Restriction>
         <owl:Restriction>
-          <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
           <owl:onProperty rdf:resource="#hasTerminalSituation"/>
+          <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
         </owl:Restriction>
       </owl:intersectionOf>
     </owl:Class>
