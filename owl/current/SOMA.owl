@@ -5711,13 +5711,13 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
   <owl:annotatedSource>
     <owl:Restriction>
       <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-      <owl:onProperty rdf:resource="#hasTerminalSituation"/>
       <rdfs:subClassOf>
         <owl:Restriction>
           <owl:onProperty rdf:resource="#manifestsIn"/>
           <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         </owl:Restriction>
       </rdfs:subClassOf>
+      <owl:onProperty rdf:resource="#hasTerminalSituation"/>
     </owl:Restriction>
   </owl:annotatedSource>
   <owl:annotatedTarget>
@@ -5747,13 +5747,13 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
   <owl:annotatedSource>
     <owl:Restriction>
       <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-      <owl:onProperty rdf:resource="#hasInitialSituation"/>
       <rdfs:subClassOf>
         <owl:Restriction>
           <owl:onProperty rdf:resource="#manifestsIn"/>
           <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         </owl:Restriction>
       </rdfs:subClassOf>
+      <owl:onProperty rdf:resource="#hasInitialSituation"/>
     </owl:Restriction>
   </owl:annotatedSource>
   <owl:annotatedTarget>
@@ -5770,9 +5770,9 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
   <owl:annotatedTarget rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
   <owl:annotatedSource>
     <owl:Restriction>
-      <owl:someValuesFrom rdf:resource="#NonmanifestedSituation"/>
       <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
       <owl:onProperty rdf:resource="#hasInitialSituation"/>
+      <owl:someValuesFrom rdf:resource="#NonmanifestedSituation"/>
     </owl:Restriction>
   </owl:annotatedSource>
   <rdfs:comment>If something is an initial situation of some transition, then it must manifest.</rdfs:comment>
@@ -5783,17 +5783,17 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
   <owl:annotatedTarget rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
   <owl:annotatedSource>
     <owl:Class>
+      <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
       <owl:intersectionOf rdf:parseType="Collection">
         <owl:Restriction>
           <owl:onProperty rdf:resource="#manifestsIn"/>
           <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         </owl:Restriction>
         <owl:Restriction>
-          <owl:someValuesFrom rdf:resource="#NonmanifestedSituation"/>
           <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition"/>
+          <owl:someValuesFrom rdf:resource="#NonmanifestedSituation"/>
         </owl:Restriction>
       </owl:intersectionOf>
-      <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
     </owl:Class>
   </owl:annotatedSource>
   <rdfs:comment>If a precondition is not met then a Situation cannot manifest.</rdfs:comment>
@@ -5811,13 +5811,13 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
           <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         </owl:Restriction>
         <owl:Restriction>
-          <owl:onProperty rdf:resource="#prevents"/>
           <owl:someValuesFrom>
             <owl:Restriction>
               <owl:onProperty rdf:resource="#manifestsIn"/>
               <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
             </owl:Restriction>
           </owl:someValuesFrom>
+          <owl:onProperty rdf:resource="#prevents"/>
         </owl:Restriction>
       </owl:intersectionOf>
       <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
@@ -5830,12 +5830,6 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
   <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
   <owl:annotatedSource>
     <owl:Class>
-      <rdfs:subClassOf>
-        <owl:Restriction>
-          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
-          <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-        </owl:Restriction>
-      </rdfs:subClassOf>
       <owl:intersectionOf rdf:parseType="Collection">
         <rdf:Description rdf:about="#SituationTransition"/>
         <owl:Restriction>
@@ -5843,12 +5837,18 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
           <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         </owl:Restriction>
       </owl:intersectionOf>
+      <rdfs:subClassOf>
+        <owl:Restriction>
+          <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+          <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
+        </owl:Restriction>
+      </rdfs:subClassOf>
     </owl:Class>
   </owl:annotatedSource>
   <owl:annotatedTarget>
     <owl:Restriction>
-      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
       <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+      <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
     </owl:Restriction>
   </owl:annotatedTarget>
   <rdfs:comment>A SituationTransition that manifests in some Event also includes an Action. (NOTE (MP): Typically, the Event manifesting it would be that included Action actually so perhaps we can just require that manifestations of SituationTransitions be Actions?)</rdfs:comment>
@@ -5858,20 +5858,6 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
   <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
   <owl:annotatedSource>
     <owl:Class>
-      <rdfs:subClassOf>
-        <owl:Class>
-          <owl:intersectionOf rdf:parseType="Collection">
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#hasInitialSituation"/>
-              <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-            </owl:Restriction>
-            <owl:Restriction>
-              <owl:onProperty rdf:resource="#hasTerminalSituation"/>
-              <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-            </owl:Restriction>
-          </owl:intersectionOf>
-        </owl:Class>
-      </rdfs:subClassOf>
       <owl:intersectionOf rdf:parseType="Collection">
         <rdf:Description rdf:about="#SituationTransition"/>
         <owl:Restriction>
@@ -5879,18 +5865,32 @@ InformationRealization_123 hasDataFormat 'urdf'</rdfs:comment>
           <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         </owl:Restriction>
       </owl:intersectionOf>
+      <rdfs:subClassOf>
+        <owl:Class>
+          <owl:intersectionOf rdf:parseType="Collection">
+            <owl:Restriction>
+              <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+              <owl:onProperty rdf:resource="#hasInitialSituation"/>
+            </owl:Restriction>
+            <owl:Restriction>
+              <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+              <owl:onProperty rdf:resource="#hasTerminalSituation"/>
+            </owl:Restriction>
+          </owl:intersectionOf>
+        </owl:Class>
+      </rdfs:subClassOf>
     </owl:Class>
   </owl:annotatedSource>
   <owl:annotatedTarget>
     <owl:Class>
       <owl:intersectionOf rdf:parseType="Collection">
         <owl:Restriction>
-          <owl:onProperty rdf:resource="#hasInitialSituation"/>
           <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+          <owl:onProperty rdf:resource="#hasInitialSituation"/>
         </owl:Restriction>
         <owl:Restriction>
-          <owl:onProperty rdf:resource="#hasTerminalSituation"/>
           <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+          <owl:onProperty rdf:resource="#hasTerminalSituation"/>
         </owl:Restriction>
       </owl:intersectionOf>
     </owl:Class>
