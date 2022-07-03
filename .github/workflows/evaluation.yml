@@ -27,7 +27,7 @@ jobs:
 
       - name: Create directories
         run: |
-              mkdir -p $GITHUB_WORKSPACE/build/owl/current &&
+              mkdir -p $GITHUB_WORKSPACE/build/owl &&
               mkdir mkdir -p $GITHUB_WORKSPACE/build/files
 
       - name: Compile
@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: SOMA OWL
-          path: ./build/owl/current/SOMA-HOME.owl
+          path: ./build/owl/SOMA-HOME.owl
   
   pitfalls:
     name: OOPS
@@ -55,13 +55,13 @@ jobs:
 
       - name: Create directories
         run: |
-              mkdir -p $GITHUB_WORKSPACE/build/owl/current &&
+              mkdir -p $GITHUB_WORKSPACE/build/owl &&
               mkdir mkdir -p $GITHUB_WORKSPACE/build/files
 
       - uses: actions/download-artifact@v1
         with:
           name: SOMA OWL
-          path: ./build/owl/current/
+          path: ./build/owl/
       
       - name: Setup Python
         uses: actions/setup-python@v2
@@ -72,7 +72,7 @@ jobs:
           sudo pip install requests
 
       - name: Find pitfalls
-        run: sudo python ./scripts/oops.py $GITHUB_WORKSPACE/build/owl/current/SOMA-HOME.owl $GITHUB_WORKSPACE/build/files
+        run: sudo python ./scripts/oops.py $GITHUB_WORKSPACE/build/owl/SOMA-HOME.owl $GITHUB_WORKSPACE/build/files
 
       - name: Generate annotations
         run: sudo python ./scripts/oops-github.py $GITHUB_WORKSPACE/build/files/oops.xml
@@ -97,7 +97,7 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: SOMA OWL
-          path: ./build/owl/current
+          path: ./build/owl
 
       - name: Download DUL
         run: wget http://www.ease-crc.org/ont/DUL.owl -O ./build/DUL.owl

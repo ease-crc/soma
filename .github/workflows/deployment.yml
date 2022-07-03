@@ -25,7 +25,7 @@ jobs:
 
       - name: Create directories
         run: |
-              mkdir -p $GITHUB_WORKSPACE/build/owl/current &&
+              mkdir -p $GITHUB_WORKSPACE/build/owl &&
               mkdir mkdir -p $GITHUB_WORKSPACE/build/files
 
       - name: Compile current
@@ -51,13 +51,13 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: SOMA Ontology
-          path: ./build/owl/current/SOMA.owl
+          path: ./build/owl/SOMA.owl
 
       - name: Upload SOMA-HOME
         uses: actions/upload-artifact@v1
         with:
           name: SOMA-HOME Ontology
-          path: ./build/owl/current/SOMA-HOME.owl
+          path: ./build/owl/SOMA-HOME.owl
 
       - name: Upload DUL
         uses: actions/upload-artifact@v1
@@ -66,10 +66,10 @@ jobs:
           path: ./owl/DUL.owl
 
       - name: Copy all OWL files to be deployed
-        run: sudo cp -n ./owl/*.owl $GITHUB_WORKSPACE/build/owl/current
+        run: sudo cp -n ./owl/*.owl $GITHUB_WORKSPACE/build/owl
 
       - name: Metrics
-        run: sudo ./scripts/OntoMetrics.sh $GITHUB_WORKSPACE/build/owl/current/SOMA.owl $GITHUB_WORKSPACE/build/files
+        run: sudo ./scripts/OntoMetrics.sh $GITHUB_WORKSPACE/build/owl/SOMA.owl $GITHUB_WORKSPACE/build/files
 
       - name: Upload Metrics
         uses: actions/upload-artifact@v1
@@ -100,8 +100,8 @@ jobs:
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: build/owl/current/
-          TARGET_FOLDER: /owl/current
+          FOLDER: build/owl/
+          TARGET_FOLDER: /owl/
 
       - name: Deploy tag
         uses: JamesIves/github-pages-deploy-action@releases/v3
@@ -109,7 +109,7 @@ jobs:
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: build/owl/current/
+          FOLDER: build/owl/
           TARGET_FOLDER: owl/${{ github.event.release.tag_name }}
           #TARGET_FOLDER: owl/${{ GITHUB_REF/refs\/tags\// }}
           #TARGET_FOLDER: owl/${{ GITHUB_REF#refs/tags/ }}
