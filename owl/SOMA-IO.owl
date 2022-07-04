@@ -51,6 +51,30 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isDesignFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isDesignFor">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+        <rdfs:comment>A special relation between a Design and a DesignedArtifcat, to indicate that the Design describes a way to construct the DesignedArtifact.</rdfs:comment>
+        <rdfs:label>is design for</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isDesignedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isDesignedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
+        <rdfs:comment xml:lang="en">A special relation between a Design and a Designed Artifcat, to indicate that the Designed Artifact is described by the Design.</rdfs:comment>
+        <rdfs:label xml:lang="en">is designed by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#isEncodedBy -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isEncodedBy">
@@ -710,7 +734,33 @@ From Wikipedia: https://en.wikipedia.org/wiki/Ontology_(information_science)</rd
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Software -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Software">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FileConfiguration"/>
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
+        <rdfs:label xml:lang="en">Software</rdfs:label>
+        <rdfs:label xml:lang="en">We see Software as the Design of a DesignedTool: the running instance of said Software. Software as a design also follows the Function-Behaviour-Structure model:
+
+The Function is the purpose or problem solving embodied by the Software Instance, e.g., sorting a list.
+
+The Behaviour are the algoirthms used by the Software Instance, e.g., Bubble Sort.
+
+The Structure is the organization of files, classes, objects and method calls of the program code.</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#SoftwareAgent -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwareAgent">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwareInstance"/>
+                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialAgent"/>
+        <rdfs:comment>Any Software Instance with agentive features.</rdfs:comment>
+        <rdfs:label>Software agent</rdfs:label>
     </owl:Class>
     
 
@@ -727,7 +777,13 @@ From Wikipedia: https://en.wikipedia.org/wiki/Ontology_(information_science)</rd
     <!-- http://www.ease-crc.org/ont/SOMA.owl#SoftwareInstance -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwareInstance">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialAgent"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedTool"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isDesignedBy"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Software"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:label xml:lang="en">Software Instance</rdfs:label>
     </owl:Class>
     
@@ -738,6 +794,20 @@ From Wikipedia: https://en.wikipedia.org/wiki/Ontology_(information_science)</rd
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwareLibrary">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Software"/>
         <rdfs:label xml:lang="en">Software Library</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Software_Configuration -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Software_Configuration">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Configuration"/>
+        <rdfs:label xml:lang="en">Software Configuration</rdfs:label>
+        <rdfs:label xml:lang="en">The part-whole relationship of Software and its components. Every Software has (at least 1) such configuration that exactly describes all Resources that make up the software (i.e., that are needed for the Software to function).
+We support seperate views:
+1. The Software Configuration describes all the necessary files, in which it should also be a File Configuration
+2. It describes a Software Suit, e.g., &apos;Open Office&apos; consists of Writer, Calc, Impress etc. Note that thus. Software can consist of other Software - this pattern may also be useful when describing Software Components, e.g., that some Software relies on a Database Software.
+3. It describes not the files, but their content (the program code), which can also be seen as the part-whole relationship if one abstracts away from the files.</rdfs:label>
     </owl:Class>
     
 

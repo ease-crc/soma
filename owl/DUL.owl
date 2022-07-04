@@ -1935,6 +1935,18 @@ Ordering on subparameters can be created by using or specializing the object pro
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Actor -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Actor">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+        <rdfs:comment xml:lang="en">An Actor is any object that has some capability of action and communicability, but not necessary with agentive features. For example, a Software Instance, e.g., a Server, can be seen as an actor with regard to its capability to communicate and respond to queries, but does not hold agentive feautures (Some Software Instances may be agents, though, e.g., a Chatbot with some level of independent decision making).
+
+In that sense, Actors can also be part of Agents, i.e., a Software Component that is a part of some Software Agent, but does not hold agentive features on its own - this could be a Database, a REST API, etc.</rdfs:comment>
+        <rdfs:label xml:lang="en">Actor</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Abstract -->
 
     <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Abstract">
@@ -1956,7 +1968,7 @@ Ordering on subparameters can be created by using or specializing the object pro
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Actor"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -1975,9 +1987,12 @@ Ordering on subparameters can be created by using or specializing the object pro
     <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent -->
 
     <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Actor"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Additional comment: a computational agent can be considered as a PhysicalAgent that realizes a certain class of algorithms (that can be considered as instances of InformationObject) that allow to obtain some behaviors that are considered typical of agents in general. For an ontology of computational objects based on DOLCE see e.g. http://www.loa-cnr.it/COS/COS.owl, and http://www.loa-cnr.it/KCO/KCO.owl.</rdfs:comment>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Any agentive Object , either physical (e.g. a whale, a robot, an oak), or social (e.g. a corporation, an institution, a community).</rdfs:comment>
+        <rdfs:comment>The following properties differentiate an Agent from an Actor:
+
+Agents are goal-directed entities that are able to monitor their environment to select and perform efficient means-ends actions that are available in a given situation to achieve an intended goal. Agency, therefore, implies the ability to perceive and to change the environment of the agent. Crucially, it also entails intentionality to represent the goal-state in the future, equifinal variability to be able to achieve the intended goal-state with different actions in different contexts, and rationality of actions in relation to their goal to produce the most efficient action available (Source: https://en.wikipedia.org/wiki/Agency_(psychology)).</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl"/>
         <rdfs:label xml:lang="en">Agent</rdfs:label>
     </owl:Class>
@@ -3046,7 +3061,6 @@ If used in a transformation pattern for n-ary relations, the designer should tak
 
     <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialAgent">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#actsThrough"/>
