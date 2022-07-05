@@ -72,7 +72,7 @@ def as_html(titles, results):
     sections = []
     for k in sorted(results.keys()):
         sets = results[k]
-        if not sets:
+        if (not sets) or (not sets[0]):
             issues = '<p>No issues detected.</p>'
         else:
             inners = list(inner.format(inneritem.join(sorted(s))) for s in sets)
@@ -92,7 +92,7 @@ def as_text(titles, results):
     sections = []
     for k in sorted(results.keys()):
         sets = results[k]
-        if not sets:
+        if (not sets) or (not sets[0]):
             issues = 'No issues detected.\n'
         else:
             inners = list(inner.format(inneritem.join(sorted(s))) for s in sets)
