@@ -93,17 +93,15 @@ jobs:
         run: wget http://www.ease-crc.org/ont/DUL.owl -O ./build/DUL.owl
 
       - name: Konclude
-        uses: ./.github/actions/Konclude
-        with:
-          args: classification -i ./build/SOMA-HOME.owl -o ./konclude.output
+        run: docker run -v $PWD/build:/data --rm konclude/konclude classify -i /data/SOMA-HOME.owl -o /data/konclude.output
 
       - name: Print Konclude output
-        run: cat ./konclude.output
+        run: cat ./build/konclude.output
         if: always()
 
       - name: Evaluate Konclude output
         if: success()
         uses: docker://python:3.7.6-slim
         with:
-          args: python ./scripts/konclude_test.py -o ./owl/konclude.html ./konclude.output
+          args: python ./scripts/konclude_test.py -o ./owl/konclude.html ./build/konclude.output
 
