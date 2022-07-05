@@ -14,7 +14,7 @@ Our extensions mainly focus on characterizing different aspects of activities th
 
 ## Release Notes
 
-### 2.0.0
+### Upcoming (expected version is 2.0.0)
 *   BREAKING CHANGE: Removal of `IOLite`
     <details>
         <summary>Details</summary>
@@ -84,7 +84,7 @@ Our extensions mainly focus on characterizing different aspects of activities th
 *   Base release for starting the changelog! Yay, now you get information why stuff might break!
     <details>
         <summary>Details</summary>
-        The SOMA ontologies can now be accessed via a version IRI, e.g., <a href="INSERT VERSION IRI EXAMPLE HERE">INSERT_VERSION_IRI_EXAMPLE_HERE</a>. These are guaranteed to stay the way they are. The basic ontology IRI, e.g., <a href="http://www.ease-crc.org/ont/SOMA.owl">http://www.ease-crc.org/ont/SOMA.owl</a>, now refers to the newest version that is available (not neccessary associated to a stable release)
+        The SOMA ontologies can now be accessed via a version IRI, e.g., <a href="INSERT VERSION IRI EXAMPLE HERE">INSERT_VERSION_IRI_EXAMPLE_HERE</a>. These are guaranteed to stay the way they are. The basic ontology IRI, e.g., <a href="http://www.ease-crc.org/ont/SOMA.owl">http://www.ease-crc.org/ont/SOMA.owl</a>, now refers to the latest version that is available (not neccessary associated to a stable release), and is referred to "Upcoming" at the top!
     </details>
 
 
