@@ -78,7 +78,7 @@ uglify1(OutFile, Ontologies) :-
   rdf_assert(EASE_UGLY,rdf:type,owl:'Ontology',ease),
   % assert owl:versionInfo
   % TODO: assert more version information (e.g. a description, diff to last version, ..)
-  (  getenv('SOMA_VERSION', VersionString)
+  (  getenv('INPUT_SOMA_VERSION', VersionString)
   -> true
   ;  VersionString=current
   ),
