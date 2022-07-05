@@ -85,16 +85,16 @@ jobs:
       - name: Copy NEEM Handbook
         run: sudo cp $GITHUB_WORKSPACE/docs/NEEM-handbook/main.pdf $GITHUB_WORKSPACE/build/files/NEEM-Handbook.pdf
       
-      - name: Deploy files
+      - name: Deploy files current
         uses: JamesIves/github-pages-deploy-action@releases/v3
         if: github.ref == 'refs/heads/master'
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
           FOLDER: build/files
-          TARGET_FOLDER: /files
+          TARGET_FOLDER: /files/current
 
-      - name: Deploy current
+      - name: Deploy owl current
         uses: JamesIves/github-pages-deploy-action@releases/v3
         if: github.ref == 'refs/heads/master'
         with:
@@ -103,7 +103,7 @@ jobs:
           FOLDER: build/owl/current/
           TARGET_FOLDER: /owl/current
 
-      - name: Deploy tag
+      - name: Deploy owl tag
         uses: JamesIves/github-pages-deploy-action@releases/v3
         if: startsWith(github.ref, 'refs/tags/')
         with:
@@ -111,6 +111,17 @@ jobs:
           BRANCH: gh-pages
           FOLDER: build/owl/current/
           TARGET_FOLDER: owl/${{ github.event.release.tag_name }}
+          #TARGET_FOLDER: owl/${{ GITHUB_REF/refs\/tags\// }}
+          #TARGET_FOLDER: owl/${{ GITHUB_REF#refs/tags/ }}
+
+      - name: Deploy files tag
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build/files/
+          TARGET_FOLDER: files/${{ github.event.release.tag_name }}
           #TARGET_FOLDER: owl/${{ GITHUB_REF/refs\/tags\// }}
           #TARGET_FOLDER: owl/${{ GITHUB_REF#refs/tags/ }}
 
