@@ -8,7 +8,7 @@ import owlready2
 def convert():
     owl_file_names = ['SOMA.owl', 'SOMA-HOME.owl']
     for owl_file_name in owl_file_names:
-        ease_ugly = Path(__file__).parent.parent / 'build' / owl_file_name
+        ease_ugly = Path(__file__).parent.parent / 'build/owl/current' / owl_file_name
         if not ease_ugly.exists():
             print('Generating rdf')
             command = 'swipl -f prolog/uglify.pl -t uglify'.split()
