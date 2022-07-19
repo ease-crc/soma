@@ -23,6 +23,11 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Create directories
+        run: |
+              mkdir -p $GITHUB_WORKSPACE/build/owl/current &&
+              mkdir mkdir -p $GITHUB_WORKSPACE/build/files
+
       - name: Compile current
         if: startsWith(github.ref, 'refs/tags/') != true
         uses: docker://swipl:8.0.3
@@ -46,13 +51,13 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: SOMA Ontology
-          path: ./build/SOMA.owl
+          path: ./build/owl/current/SOMA.owl
 
       - name: Upload SOMA-HOME
         uses: actions/upload-artifact@v1
         with:
           name: SOMA-HOME Ontology
-          path: ./build/SOMA-HOME.owl
+          path: ./build/owl/current/SOMA-HOME.owl
 
       - name: Upload DUL
         uses: actions/upload-artifact@v1
@@ -60,17 +65,17 @@ jobs:
           name: DUL Ontology
           path: ./owl/DUL.owl
 
-      - name: Copy DUL
-        run: sudo cp ./owl/DUL.owl $GITHUB_WORKSPACE/build/DUL.owl
+      - name: Copy all OWL files to be deployed
+        run: sudo cp -n ./owl/*.owl $GITHUB_WORKSPACE/build/owl/current
 
       - name: Metrics
-        run: sudo ./scripts/OntoMetrics.sh $GITHUB_WORKSPACE/build/SOMA.owl $GITHUB_WORKSPACE/build
+        run: sudo ./scripts/OntoMetrics.sh $GITHUB_WORKSPACE/build/owl/current/SOMA.owl $GITHUB_WORKSPACE/build/files
 
       - name: Upload Metrics
         uses: actions/upload-artifact@v1
         with:
           name: Metrics
-          path: ./build/metrics.json
+          path: ./build/files/metrics.json
       
       - name: Compile NEEM Handbook
         uses: docker://blang/latex:ubuntu
@@ -78,25 +83,45 @@ jobs:
           args: make -f ./docs/NEEM-handbook/Makefile
       
       - name: Copy NEEM Handbook
-        run: sudo cp $GITHUB_WORKSPACE/docs/NEEM-handbook/main.pdf $GITHUB_WORKSPACE/build/NEEM-Handbook.pdf
+        run: sudo cp $GITHUB_WORKSPACE/docs/NEEM-handbook/main.pdf $GITHUB_WORKSPACE/build/files/NEEM-Handbook.pdf
       
-      - name: Deploy current
+      - name: Deploy files current
         uses: JamesIves/github-pages-deploy-action@releases/v3
         if: github.ref == 'refs/heads/master'
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: build
-          TARGET_FOLDER: owl/current
+          FOLDER: build/files
+          TARGET_FOLDER: /files/current
 
-      - name: Deploy tag
+      - name: Deploy owl current
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        if: github.ref == 'refs/heads/master'
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build/owl/current/
+          TARGET_FOLDER: /owl/current
+
+      - name: Deploy owl tag
         uses: JamesIves/github-pages-deploy-action@releases/v3
         if: startsWith(github.ref, 'refs/tags/')
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: build
+          FOLDER: build/owl/current/
           TARGET_FOLDER: owl/${{ github.event.release.tag_name }}
+          #TARGET_FOLDER: owl/${{ GITHUB_REF/refs\/tags\// }}
+          #TARGET_FOLDER: owl/${{ GITHUB_REF#refs/tags/ }}
+
+      - name: Deploy files tag
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build/files/
+          TARGET_FOLDER: files/${{ github.event.release.tag_name }}
           #TARGET_FOLDER: owl/${{ GITHUB_REF/refs\/tags\// }}
           #TARGET_FOLDER: owl/${{ GITHUB_REF#refs/tags/ }}
 
