@@ -210,6 +210,14 @@ Source: https://en.wikipedia.org/wiki/Archive_file#Archive_formats</rdfs:comment
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Classifier -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Classifier">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#StatisticalReasoner"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Client-Server_Specification -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Client-Server_Specification">
@@ -287,6 +295,17 @@ Source: https://en.wikipedia.org/wiki/Archive_file#Archive_formats</rdfs:comment
 
 From Wikipedia: https://en.wikipedia.org/wiki/Computer_language</rdfs:comment>
         <rdfs:label xml:lang="en">Computer Language</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Database -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Database">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SoftwareRole"/>
+        <rdfs:comment xml:lang="en">A Database is a Software that organizes a collection of data stored and and allows for access, usually via some query engine.
+
+Source: https://en.wikipedia.org/wiki/Database</rdfs:comment>
     </owl:Class>
     
 
@@ -472,6 +491,16 @@ From Wikipedia: https://en.wikipedia.org/wiki/File_format</rdfs:comment>
 
 From Wikipedia: https://en.wikipedia.org/wiki/Formal_language</rdfs:comment>
         <rdfs:label xml:lang="en">Formal Language</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#GraphDatabase -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#GraphDatabase">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Database"/>
+        <rdfs:comment xml:lang="en">A Graph Database is a Database that uses graph structures for semantic queries with nodes, edges, and properties to represent and store data.</rdfs:comment>
+        <rdfs:label xml:lang="en">Graph database</rdfs:label>
     </owl:Class>
     
 
@@ -717,6 +746,42 @@ From Wikipedia: https://en.wikipedia.org/wiki/Ontology_(information_science)</rd
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#QueryEngine -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#QueryEngine">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SoftwareRole"/>
+        <rdfs:comment xml:lang="en">A Query Engine is a Software that can answer some queries.</rdfs:comment>
+        <rdfs:label xml:lang="en">Query engine</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Reasoner -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Reasoner">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SoftwareRole"/>
+        <rdfs:comment xml:lang="en">A Reasoner is some Software that can infer new, implicit knowlegde from explicitly stated knowledge.
+
+This definition is broad and we consider any System fitting the above description as reasoners. For example, the following can be seen as Reasoners:
+* A simulation, where the explicit knowledge corresponds to the initial situation, and the implicit knowlegde corresponds to the situation that is derived from that by simulating some unfolding processes.
+* A machine learning algorithm, e.g., an image classifier: The explicit knowledge is the visual content of a picture (even down to the pixel), the implicit knowledge is the derived classification.
+* A logic based rule engine, where initial facts are the explicit knowledge, and derived facts are the implicit knowledge.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#RelationalDatabase -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RelationalDatabase">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Database"/>
+        <rdfs:comment xml:lang="en">A Relational Database is a Database based on the relational model of data, which organizes data into one or more tables (or &quot;relations&quot;) of columns and rows, with a unique key identifying each row.
+
+Source: https://en.wikipedia.org/wiki/Relational_database</rdfs:comment>
+        <rdfs:label xml:lang="en">Relational database</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#ServerRole -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ServerRole">
@@ -728,6 +793,16 @@ From Wikipedia: https://en.wikipedia.org/wiki/Ontology_(information_science)</rd
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:label xml:lang="en">Server role</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Simulation_Reasoner -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Simulation_Reasoner">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Reasoner"/>
+        <rdfs:label xml:lang="en">A Simulation-based Reasoner is a simulation that is used as a reasoner, where the explicit knowledge corresponds to the initial situation, and the implicit knowlegde corresponds to the situation that is derived from that by simulating some unfolding processes.</rdfs:label>
+        <rdfs:label xml:lang="en">Simulation-based reasoner</rdfs:label>
     </owl:Class>
     
 
@@ -843,6 +918,15 @@ We support seperate views:
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#StatisticalReasoner -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#StatisticalReasoner">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Reasoner"/>
+        <rdfs:label xml:lang="en">Statistical reasoner</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Structured_Text -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Structured_Text">
@@ -859,6 +943,18 @@ We support seperate views:
         </owl:equivalentClass>
         <rdfs:comment xml:lang="en">Any Text that adheres to some rules that are in any way more specific than natural language and that cannot be made sense of without knowing said rules.</rdfs:comment>
         <rdfs:label xml:lang="en">Structured Text</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#SymbolicReasoner -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SymbolicReasoner">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Reasoner"/>
+        <rdfs:comment xml:lang="en">A Symbolic Reasoner, is a piece of software able to infer logical consequences from a set of asserted facts or axioms.
+
+Source: https://en.wikipedia.org/wiki/Semantic_reasoner</rdfs:comment>
+        <rdfs:label xml:lang="en">Symbolic reasoner</rdfs:label>
     </owl:Class>
     
 
@@ -896,6 +992,16 @@ One may define Text as anything that can be made sense of, including e.g., Speec
 However, the argument can be made that Speech or Paintings are not considered Text as they cannot be EXACTLY realized by a symbolic writing system: Speech may loose punctuation, Paintings their original appearance.
 On the other hand, this might not be true as both could be encoded in a binary format that can be interpreted using a language (eg., mp3, png).</rdfs:comment>
         <rdfs:label xml:lang="en">Text</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Triplestore -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Triplestore">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#GraphDatabase"/>
+        <rdfs:comment xml:lang="en">A Triplestore or RDF store is a purpose-built database for the storage and retrieval of triples through semantic queries.</rdfs:comment>
+        <rdfs:label xml:lang="en">Triplestore</rdfs:label>
     </owl:Class>
     
 
