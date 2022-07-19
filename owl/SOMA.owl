@@ -25,9 +25,6 @@
     
 
 
-   
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#UsageGuideline -->
 
     <owl:AnnotationProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#UsageGuideline">
@@ -401,6 +398,18 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#includesRecord -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#includesRecord">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isReferenceOf"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isRecordIncludedBy"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+        <rdfs:comment>A relationship indicating that an Event has been recorded by an InformationObject</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#includesSituation -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#includesSituation">
@@ -602,14 +611,13 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#includesRecord -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isRecordIncludedBy -->
 
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#includesRecord">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isReferenceOf"/>
-        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isRecordIncludedBy"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
-        <rdfs:comment>A relationship indicating that an Event has been recorded by an InformationObject</rdfs:comment>
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isRecordIncludedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isAbout"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:comment>A relationship indicating that an InformationObject is a recording of an Event.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -719,17 +727,6 @@ Sub-properties are used to distinct between different cases of event endpoint re
         <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">o</symbol>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic relation between any entities that also implies ordering, e.g. &quot;she has worked into the night&quot;.</rdfs:comment>
         <rdfs:label>overlapped on</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#isRecordIncludedBy -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isRecordIncludedBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isAbout"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-        <rdfs:comment>A relationship indicating that an InformationObject is a recording of an Event.</rdfs:comment>
     </owl:ObjectProperty>
     
 
@@ -998,20 +995,6 @@ Sub-properties are used to distinct between different cases of event endpoint re
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#HumanActivityRecording -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#HumanActivityRecording">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RecordedEpisode"/>
-        <rdfs:comment>An episode in which one or more human beings perform an activity and are recorded doing so.</rdfs:comment>
-    </owl:Class>
-    <owl:Axiom>
-        <owl:annotatedSource rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#HumanActivityRecording"/>
-        <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RecordedEpisode"/>
-    </owl:Axiom>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Accident -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Accident">
@@ -1093,6 +1076,16 @@ Such an event does NOT fall under the definition of Accident here. An example of
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#DesignedTool -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedTool">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+        <rdfs:comment>An item designed to enable some action, in which it will play an instrumental role.</rdfs:comment>
+        <rdfs:label>Designed tool</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#DexterityDiagnosis -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DexterityDiagnosis">
@@ -1160,6 +1153,15 @@ Such an event does NOT fall under the definition of Accident here. An example of
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#HumanActivityRecording -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#HumanActivityRecording">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RecordedEpisode"/>
+        <rdfs:comment>An episode in which one or more human beings perform an activity and are recorded doing so.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Inability -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Inability">
@@ -1176,6 +1178,8 @@ Such an event does NOT fall under the definition of Accident here. An example of
         <rdfs:comment>A description of a situation with a goal that is impossible to achieve in some situational context.</rdfs:comment>
     </owl:Class>
     
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Masterful -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Masterful">
@@ -1335,7 +1339,8 @@ The difference between states and processes is that states are, in addition, hom
         <rdfs:comment>A description of a situation with a goal that was not or not fully achieved by some system.</rdfs:comment>
     </owl:Class>
     
-    
+
+
     <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action -->
 
     <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action">
@@ -1346,6 +1351,25 @@ The difference between states and processes is that states are, in addition, hom
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>The EASE view: an Action is an Event in which an Agent executes some Task, typically defined by a Workflow, towards the achievement of some Goal.</rdfs:comment>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject -->
+
+    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject">
+        <rdfs:comment>In SOMA-compliant systems, the way to use InformationObjects to specify extra data about an individual entity is to employ the &apos;is about&apos; and &apos;expresses&apos; properties (or their inverses &apos;is reference of&apos; and &apos;is expressed by&apos;) and to supply a persistent identifier for a realization of the InformationObject.
+
+As a prototypical example, consider an individual called Action_XYZ, about which we have some data for which the meaning is described by Description_ABC. The data would be an individual InformationObject_DEF, and the following property assertions would hold:
+
+InformationObject_DEF &apos;is about&apos; Action_XYZ
+InformationObject_DEF expresses Description_ABC
+
+
+Usually, an individual InformationObject would be connected to (at least) an InformationRealization individual. For example, suppose there is such an InformationRealization individual, InformationRealization_123. Then, this individual will have data properties describing its format and persistent identifier
+
+InformationRealization_123 hasPersistentIdentifier &apos;doi&apos;
+InformationRealization_123 hasDataFormat &apos;urdf&apos;</rdfs:comment>
     </rdf:Description>
     
 
@@ -1423,20 +1447,6 @@ InformationRealization_123 hasDataFormat &apos;urdf&apos;</rdfs:comment>
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject">
-        <rdfs:comment>In SOMA-compliant systems, the way to use InformationObjects to specify extra data about an individual entity is to employ the &apos;is about&apos; and &apos;expresses&apos; properties (or their inverses &apos;is reference of&apos; and &apos;is expressed by&apos;) and to supply a persistent identifier for a realization of the InformationObject.
-
-As a prototypical example, consider an individual called Action_XYZ, about which we have some data for which the meaning is described by Description_ABC. The data would be an individual InformationObject_DEF, and the following property assertions would hold:
-
-InformationObject_DEF &apos;is about&apos; Action_XYZ
-InformationObject_DEF expresses Description_ABC
-
-
-Usually, an individual InformationObject would be connected to (at least) an InformationRealization individual. For example, suppose there is such an InformationRealization individual, InformationRealization_123. Then, this individual will have data properties describing its format and persistent identifier
-
-InformationRealization_123 hasPersistentIdentifier &apos;doi&apos;
-InformationRealization_123 hasDataFormat &apos;urdf&apos;</rdfs:comment>
-    </rdf:Description>
     <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#realizesSelfInformation">
         <rdfs:label xml:lang="en">realizes self information</rdfs:label>
     </rdf:Description>
