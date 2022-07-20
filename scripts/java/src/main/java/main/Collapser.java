@@ -50,8 +50,8 @@ public class Collapser implements CommandLineRunner {
 			collapsed.addAxioms(toCollapse.get().axioms(Imports.INCLUDED));
 
 			LOGGER.info("Saving collapsed {} to {} ", collapseConfig.ontology(),
-			            collapseConfig.out().toFile().getCanonicalFile());
-			collapsed.saveOntology(IRI.create(collapseConfig.out().toUri()));
+			            collapseConfig.outPath().toFile().getCanonicalFile());
+			collapsed.saveOntology(IRI.create(collapseConfig.outPath().toUri()));
 		}
 	}
 
