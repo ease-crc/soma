@@ -60,7 +60,7 @@ public class Collapser implements CommandLineRunner {
             collapsed.getOWLOntologyManager().applyChange(new AddOntologyAnnotation(collapsed, versionAnnotation));
 
             LOGGER.info("Saving collapsed {} to {} ", collapseConfig.ontology(),
-                    collapseConfig.outPath().toFile().getCanonicalFile());
+                    IRI.create(collapseConfig.outPath().toUri()));
             collapsed.saveOntology(IRI.create(collapseConfig.outPath().toUri()));
         }
     }
