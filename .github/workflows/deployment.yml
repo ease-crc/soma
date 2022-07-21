@@ -68,14 +68,14 @@ jobs:
       - name: Copy all OWL files to be deployed
         run: sudo cp -n ./owl/*.owl $GITHUB_WORKSPACE/build/owl/current
 
-      - name: Metrics
-        run: sudo ./scripts/OntoMetrics.sh $GITHUB_WORKSPACE/build/owl/current/SOMA.owl $GITHUB_WORKSPACE/build/files
+#      - name: Metrics
+#        run: sudo ./scripts/OntoMetrics.sh $GITHUB_WORKSPACE/build/owl/current/SOMA.owl $GITHUB_WORKSPACE/build/files
 
-      - name: Upload Metrics
-        uses: actions/upload-artifact@v1
-        with:
-          name: Metrics
-          path: ./build/files/metrics.json
+#      - name: Upload Metrics
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: Metrics
+#          path: ./build/files/metrics.json
       
       - name: Compile NEEM Handbook
         uses: docker://blang/latex:ubuntu
