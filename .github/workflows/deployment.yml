@@ -23,6 +23,13 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '18'
+          cache: 'maven'
+
       - name: Create directories
         run: |
               mkdir -p $GITHUB_WORKSPACE/build/owl/current &&
@@ -30,17 +37,15 @@ jobs:
 
       - name: Compile current
         if: startsWith(github.ref, 'refs/tags/') != true
-        uses: docker://swipl:8.0.3
         with:
           SOMA_VERSION: current
-          args: swipl -f prolog/uglify.pl -t uglify
+          args: mvn spring-boot:run -f scripts/java/pom.xml
 
       - name: Compile tag
         if: startsWith(github.ref, 'refs/tags/')
-        uses: docker://swipl:8.0.3
         with:
           SOMA_VERSION: ${{ github.event.release.tag_name }}
-          args: swipl -f prolog/uglify.pl -t uglify
+          args: mvn spring-boot:run -f scripts/java/pom.xml
 
       - name: Convert
         uses: ./.github/actions/convert
