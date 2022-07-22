@@ -12,7 +12,7 @@ def oops(owl_file):
 	content = f.read()
 	f.close()
 	#
-	xml_content = """
+	xml_content = ("""
     <?xml version="1.0" encoding="UTF-8"?>
     <OOPSRequest>
       <OntologyUrl></OntologyUrl>
@@ -22,7 +22,7 @@ def oops(owl_file):
           <Pitfalls>2,3,4,5,6,7,8,10,11,12,13,19,20,21,22,25,25,26,27,28,29</Pitfalls>
           <OutputFormat>XML</OutputFormat>
     </OOPSRequest>
-	""" % content
+	""" % content).encode("UTF-8")
 	headers = {'Content-Type': 'application/xml',
 	           'Connection': 'Keep-Alive'
 	}
