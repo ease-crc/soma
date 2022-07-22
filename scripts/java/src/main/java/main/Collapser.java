@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Priority;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -53,7 +55,7 @@ public class Collapser implements CommandLineRunner {
 		final var collapsed = collapseManager.createOntology(requestedIRI);
 
 		LOGGER.info("Collapsing {}", collapseConfig.ontology());
-		collapsed.addAxioms(toCollapse.axioms(Imports.INCLUDED));
+		addAxioms(collapsed, toCollapse, collapseConfig.except());
 
 		LOGGER.info("Adding versionInfo to {}", collapseConfig.ontology());
 		final var df = OWLManager.getOWLDataFactory();
@@ -63,6 +65,27 @@ public class Collapser implements CommandLineRunner {
 		LOGGER.info("Saving collapsed {} to {} ", collapseConfig.ontology(),
 		            IRI.create(collapseConfig.outPath().toUri()));
 		collapsed.saveOntology(IRI.create(collapseConfig.outPath().toUri()));
+	}
+
+	private static void addAxioms(final OWLOntology collapsed, final OWLOntology toCollapse,
+	                              final Collection<String> except) {
+		if (CollectionUtils.isEmpty(except)) {
+			LOGGER.info("No exceptions that should be imported instead of being merged");
+			// easy way, might also be faster
+			collapsed.addAxioms(toCollapse.axioms(Imports.INCLUDED));
+			return;
+		}
+		// hard way
+		toCollapse.imports().forEach(next -> {
+			if (CollapseConfig.containsReferenceOf(except, next)) {
+				final var iri = next.getOntologyID().getOntologyIRI().get();
+				LOGGER.info("{} will be imported instead of merged", iri);
+				collapsed.applyChange(
+						new AddImport(collapsed, OWLManager.getOWLDataFactory().getOWLImportsDeclaration(iri)));
+			} else {
+				collapsed.addAxioms(next.axioms(Imports.EXCLUDED));
+			}
+		});
 	}
 
 	private static IRI getRequestedIRI(final CollapseConfig collapseConfig, final HasOntologyID toCollapse) {
