@@ -7,19 +7,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Priority;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Supplier;
 
 @Component
-@Priority(Integer.MAX_VALUE - 1)
-public class Collapser implements CommandLineRunner {
+public class Collapser implements CIRunnable {
 
 	/**
 	 * {@link Logger} of this class.
@@ -40,8 +37,7 @@ public class Collapser implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(final String... args)
-			throws OWLOntologyStorageException, OWLOntologyCreationException, IOException {
+	public void run() throws OWLOntologyCreationException, IOException, OWLOntologyStorageException {
 		for (final var collapseConfig : ontologyConfig.toCollapse()) {
 			collapse(collapseConfig);
 		}

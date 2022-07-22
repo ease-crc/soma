@@ -1,52 +1,50 @@
 package main;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
-import org.semanticweb.owlapi.model.*;
+import org.semanticweb.owlapi.model.AddOntologyAnnotation;
+import org.semanticweb.owlapi.model.OWLOntology;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Priority;
-
 @Component
-@Priority(1)
-public class VersionInfoAdder implements CommandLineRunner {
+public class VersionInfoAdder implements CIRunnable {
 
 
-    /**
-     * {@link Logger} of this class.
-     */
-    private static final Logger LOGGER = LoggerFactory.getLogger(VersionInfoAdder.class);
+	/**
+	 * {@link Logger} of this class.
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(VersionInfoAdder.class);
 
-    private final OntologyManager ontologyManager;
-
-    @Value("${versionInfo}")
-    private String versionInfo;
-
-    @Autowired
-    public VersionInfoAdder(final OntologyManager ontologyManager) {
-        this.ontologyManager = ontologyManager;
-    }
+	private final OntologyManager ontologyManager;
 
 
-    @Override
-    public void run(final String... args) {
-        for (final OWLOntology ontology : ontologyManager.getOntologyManager().getOntologies()) {
-            addVersionInfo(ontology, versionInfo);
-        }
-    }
+	private final String versionInfo;
 
-    private static void addVersionInfo(final OWLOntology ontology, String version) {
+	@Autowired
+	public VersionInfoAdder(final OntologyManager ontologyManager, @Value("${versionInfo}") final String versionInfo) {
+		this.ontologyManager = ontologyManager;
+		this.versionInfo = versionInfo;
+	}
 
-        final var df = OWLManager.getOWLDataFactory();
-        final var versionAnnotation = df.getOWLAnnotation(df.getOWLVersionInfo(), df.getOWLLiteral(version));
-        ontology.getOWLOntologyManager().applyChange(new AddOntologyAnnotation(ontology, versionAnnotation));
 
-        LOGGER.info("Added versionInfo {} to {}", version, ontology.getOntologyID().getOntologyIRI());
-    }
+	@Override
+	public void run() {
+		for (final OWLOntology ontology : ontologyManager.getOntologyManager().getOntologies()) {
+			addVersionInfo(ontology, versionInfo);
+		}
+	}
+
+	private static void addVersionInfo(final OWLOntology ontology, final String version) {
+
+		final var df = OWLManager.getOWLDataFactory();
+		final var versionAnnotation = df.getOWLAnnotation(df.getOWLVersionInfo(), df.getOWLLiteral(version));
+		ontology.getOWLOntologyManager().applyChange(new AddOntologyAnnotation(ontology, versionAnnotation));
+
+		LOGGER.info("Added versionInfo {} to {}", version, ontology.getOntologyID().getOntologyIRI());
+	}
 
 
 }

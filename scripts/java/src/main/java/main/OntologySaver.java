@@ -5,14 +5,10 @@ import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Priority;
-
 @Component
-@Priority(Integer.MAX_VALUE - 1)
-public class OntologySaver implements CommandLineRunner {
+public class OntologySaver implements CIRunnable {
 
 	/**
 	 * {@link Logger} of this class.
@@ -26,7 +22,7 @@ public class OntologySaver implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(final String... args) throws OWLOntologyStorageException {
+	public void run() throws OWLOntologyStorageException {
 		for (final OWLOntology ontology : ontologyManager.getOntologyManager().getOntologies()) {
 			LOGGER.info("Saving {}", ontology.getOntologyID().getOntologyIRI().map(Object::toString)
 			                                 .orElseGet(() -> "unnamed ontology"));

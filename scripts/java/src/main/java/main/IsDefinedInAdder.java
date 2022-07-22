@@ -9,16 +9,13 @@ import org.semanticweb.owlapi.model.parameters.ChangeApplied;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Priority;
 import java.util.Collection;
 import java.util.HashSet;
 
 @Component
-@Priority(0)
-public class IsDefinedInAdder implements CommandLineRunner {
+public class IsDefinedInAdder implements CIRunnable {
 
 	/**
 	 * {@link Logger} of this class.
@@ -34,7 +31,7 @@ public class IsDefinedInAdder implements CommandLineRunner {
 
 
 	@Override
-	public void run(final String... args) {
+	public void run() {
 		for (final OWLOntology ontology : ontologyManager.getOntologyManager().getOntologies()) {
 			addIsDefinedIn(ontology);
 		}
