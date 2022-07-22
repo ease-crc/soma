@@ -1,140 +1,88 @@
-<?xml version="1.0"?>
-<rdf:RDF xmlns="http://www.ease-crc.org/ont/SOMA.owl#"
-     xml:base="http://www.ease-crc.org/ont/SOMA.owl"
-     xmlns:dc="http://purl.org/dc/elements/1.1/"
-     xmlns:owl="http://www.w3.org/2002/07/owl#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-    <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA-IO.owl">
-        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
-    </owl:Ontology>
-    
+Prefix(:=<http://www.ease-crc.org/ont/SOMA.owl#>)
+Prefix(dc:=<http://purl.org/dc/elements/1.1/>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(SOMA:=<http://www.ease-crc.org/ont/SOMA.owl#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
 
 
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Classes
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
+Ontology(<http://www.ease-crc.org/ont/SOMA-IO.owl>
+Import(<http://www.ease-crc.org/ont/SOMA.owl>)
 
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#ComputationalAgent -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ComputationalAgent">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwareImplementation"/>
-                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:comment>An agent that is implemented in software.</rdfs:comment>
-        <rdfs:label>Computational agent</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#DigitalData -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DigitalData">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource"/>
-        <rdfs:comment>An information realization of quantitative data.</rdfs:comment>
-        <rdfs:label>Digital data</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#DigitalObject -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DigitalObject">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource"/>
-        <rdfs:comment>An information realization with object character. e.g. a software agent etc.</rdfs:comment>
-        <rdfs:label>Digital object</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#FaultySoftware -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FaultySoftware">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SoftwareDiagnosis"/>
-        <rdfs:comment>A description of a situation where some software has a bug.</rdfs:comment>
-        <rdfs:label xml:lang="en">Faulty software</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#IncompatibleSoftware -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#IncompatibleSoftware">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SoftwareDiagnosis"/>
-        <rdfs:comment>A description of a situation where two software systems are incompatible with each other.</rdfs:comment>
-        <rdfs:label xml:lang="en">Incompatible software</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#SoftwareImplementation -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwareImplementation">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DigitalObject"/>
-        <rdfs:comment>An information realization in form of a executable computer program.</rdfs:comment>
-        <rdfs:label>Software implementation</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#SoftwarePackage -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwarePackage">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DigitalObject"/>
-        <rdfs:comment>A structured archive of software that also often contains data needed to run the software, and scripts to build and configure the software.</rdfs:comment>
-        <rdfs:label>Software package</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#SoftwareType -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwareType">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SoftwareImplementation"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A concept that classifies software objects.</rdfs:comment>
-        <rdfs:label>Software type</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#UnavailableSoftware -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#UnavailableSoftware">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SoftwareDiagnosis"/>
-        <rdfs:comment>A description of a situation where some software dependency is not available.</rdfs:comment>
-        <rdfs:label xml:lang="en">Unavailable software</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource -->
-
-    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource"/>
-</rdf:RDF>
+Declaration(Class(SOMA:ComputationalAgent))
+Declaration(Class(SOMA:DigitalData))
+Declaration(Class(SOMA:DigitalObject))
+Declaration(Class(SOMA:FaultySoftware))
+Declaration(Class(SOMA:IncompatibleSoftware))
+Declaration(Class(SOMA:SoftwareImplementation))
+Declaration(Class(SOMA:SoftwarePackage))
+Declaration(Class(SOMA:SoftwareType))
+Declaration(Class(SOMA:UnavailableSoftware))
+Declaration(Class(<http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource>))
 
 
 
-<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+############################
+#   Classes
+############################
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#ComputationalAgent> (Computational agent)
+
+AnnotationAssertion(rdfs:comment SOMA:ComputationalAgent "An agent that is implemented in software.")
+AnnotationAssertion(rdfs:label SOMA:ComputationalAgent "Computational agent")
+EquivalentClasses(SOMA:ComputationalAgent ObjectIntersectionOf(SOMA:SoftwareImplementation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>))
+
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#DigitalData> (Digital data)
+
+AnnotationAssertion(rdfs:comment SOMA:DigitalData "An information realization of quantitative data.")
+AnnotationAssertion(rdfs:label SOMA:DigitalData "Digital data")
+SubClassOf(SOMA:DigitalData <http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource>)
+
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#DigitalObject> (Digital object)
+
+AnnotationAssertion(rdfs:comment SOMA:DigitalObject "An information realization with object character. e.g. a software agent etc.")
+AnnotationAssertion(rdfs:label SOMA:DigitalObject "Digital object")
+SubClassOf(SOMA:DigitalObject <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object>)
+SubClassOf(SOMA:DigitalObject <http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource>)
+
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#FaultySoftware> (Faulty software)
+
+AnnotationAssertion(rdfs:comment SOMA:FaultySoftware "A description of a situation where some software has a bug.")
+AnnotationAssertion(rdfs:label SOMA:FaultySoftware "Faulty software"@en)
+SubClassOf(SOMA:FaultySoftware SOMA:SoftwareDiagnosis)
+
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#IncompatibleSoftware> (Incompatible software)
+
+AnnotationAssertion(rdfs:comment SOMA:IncompatibleSoftware "A description of a situation where two software systems are incompatible with each other.")
+AnnotationAssertion(rdfs:label SOMA:IncompatibleSoftware "Incompatible software"@en)
+SubClassOf(SOMA:IncompatibleSoftware SOMA:SoftwareDiagnosis)
+
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#SoftwareImplementation> (Software implementation)
+
+AnnotationAssertion(rdfs:comment SOMA:SoftwareImplementation "An information realization in form of a executable computer program.")
+AnnotationAssertion(rdfs:label SOMA:SoftwareImplementation "Software implementation")
+SubClassOf(SOMA:SoftwareImplementation SOMA:DigitalObject)
+
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#SoftwarePackage> (Software package)
+
+AnnotationAssertion(rdfs:comment SOMA:SoftwarePackage "A structured archive of software that also often contains data needed to run the software, and scripts to build and configure the software.")
+AnnotationAssertion(rdfs:label SOMA:SoftwarePackage "Software package")
+SubClassOf(SOMA:SoftwarePackage SOMA:DigitalObject)
+
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#SoftwareType> (Software type)
+
+AnnotationAssertion(rdfs:comment SOMA:SoftwareType "A concept that classifies software objects.")
+AnnotationAssertion(rdfs:label SOMA:SoftwareType "Software type")
+SubClassOf(SOMA:SoftwareType <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>)
+SubClassOf(SOMA:SoftwareType ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> SOMA:SoftwareImplementation))
+
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#UnavailableSoftware> (Unavailable software)
+
+AnnotationAssertion(rdfs:comment SOMA:UnavailableSoftware "A description of a situation where some software dependency is not available.")
+AnnotationAssertion(rdfs:label SOMA:UnavailableSoftware "Unavailable software"@en)
+SubClassOf(SOMA:UnavailableSoftware SOMA:SoftwareDiagnosis)
+
+
+)

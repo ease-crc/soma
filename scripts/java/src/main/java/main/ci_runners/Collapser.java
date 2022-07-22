@@ -1,5 +1,8 @@
-package main;
+package main.ci_runners;
 
+import main.OntologyManager;
+import main.config.CollapseConfig;
+import main.config.OntologyConfig;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.model.parameters.Imports;

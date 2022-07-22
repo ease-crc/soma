@@ -1,101 +1,66 @@
-<?xml version="1.0"?>
-<rdf:RDF xmlns="http://www.ease-crc.org/ont/SOMA.owl#"
-     xml:base="http://www.ease-crc.org/ont/SOMA.owl"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:owl="http://www.w3.org/2002/07/owl#"
-     xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#">
-    <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA-Allen.owl">
-        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
-    </owl:Ontology>
-    
+Prefix(:=<http://www.ease-crc.org/ont/SOMA.owl#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(SOMA:=<http://www.ease-crc.org/ont/SOMA.owl#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
 
 
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Object Properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
+Ontology(<http://www.ease-crc.org/ont/SOMA-Allen.owl>
+Import(<http://www.ease-crc.org/ont/SOMA.owl>)
 
-    
+Declaration(ObjectProperty(SOMA:after))
+Declaration(ObjectProperty(SOMA:before))
+Declaration(ObjectProperty(SOMA:contains))
+Declaration(ObjectProperty(SOMA:during))
+Declaration(ObjectProperty(SOMA:finishedBy))
+Declaration(ObjectProperty(SOMA:finishes))
+Declaration(ObjectProperty(SOMA:startedBy))
+Declaration(ObjectProperty(SOMA:starts))
+############################
+#   Object Properties
+############################
 
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#after> (<http://www.ease-crc.org/ont/SOMA.owl#after>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#after -->
+AsymmetricObjectProperty(SOMA:after)
+IrreflexiveObjectProperty(SOMA:after)
 
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#after">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
-    </owl:ObjectProperty>
-    
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#before> (<http://www.ease-crc.org/ont/SOMA.owl#before>)
 
+AsymmetricObjectProperty(SOMA:before)
+IrreflexiveObjectProperty(SOMA:before)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#before -->
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#contains> (<http://www.ease-crc.org/ont/SOMA.owl#contains>)
 
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#before">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
-    </owl:ObjectProperty>
-    
+AsymmetricObjectProperty(SOMA:contains)
+IrreflexiveObjectProperty(SOMA:contains)
 
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#during> (<http://www.ease-crc.org/ont/SOMA.owl#during>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#contains -->
+AsymmetricObjectProperty(SOMA:during)
+IrreflexiveObjectProperty(SOMA:during)
 
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#contains">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
-    </owl:ObjectProperty>
-    
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#finishedBy> (finished by)
 
+AsymmetricObjectProperty(SOMA:finishedBy)
+IrreflexiveObjectProperty(SOMA:finishedBy)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#during -->
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#finishes> (<http://www.ease-crc.org/ont/SOMA.owl#finishes>)
 
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#during">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
-    </owl:ObjectProperty>
-    
+AsymmetricObjectProperty(SOMA:finishes)
+IrreflexiveObjectProperty(SOMA:finishes)
 
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#startedBy> (started by)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#finishedBy -->
+AsymmetricObjectProperty(SOMA:startedBy)
+IrreflexiveObjectProperty(SOMA:startedBy)
 
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#finishedBy">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
-    </owl:ObjectProperty>
-    
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#starts> (<http://www.ease-crc.org/ont/SOMA.owl#starts>)
 
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#finishes -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#finishes">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
-    </owl:ObjectProperty>
-    
+AsymmetricObjectProperty(SOMA:starts)
+IrreflexiveObjectProperty(SOMA:starts)
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#startedBy -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#startedBy">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#starts -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#starts">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
-    </owl:ObjectProperty>
-</rdf:RDF>
-
-
-
-<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
-
+)

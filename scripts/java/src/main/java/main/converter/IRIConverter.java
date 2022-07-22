@@ -1,4 +1,4 @@
-package main;
+package main.converter;
 
 import org.jetbrains.annotations.NotNull;
 import org.semanticweb.owlapi.model.IRI;

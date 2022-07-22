@@ -1,11 +1,13 @@
 package main;
 
+import main.config.CollapseConfig;
+import main.config.OntologyConfig;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @SpringBootApplication
-@EnableConfigurationProperties({CollapseConfig.class,OntologyConfig.class})
+@EnableConfigurationProperties({CollapseConfig.class, OntologyConfig.class})
 public class Application {
 
 	public static void main(final String... args) {

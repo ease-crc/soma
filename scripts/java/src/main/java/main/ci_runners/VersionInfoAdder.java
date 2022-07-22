@@ -1,5 +1,6 @@
-package main;
+package main.ci_runners;
 
+import main.OntologyManager;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AddOntologyAnnotation;
 import org.semanticweb.owlapi.model.OWLOntology;

@@ -1,4 +1,4 @@
-package main;
+package main.ci_runners;
 
 public interface CIRunnable {
 

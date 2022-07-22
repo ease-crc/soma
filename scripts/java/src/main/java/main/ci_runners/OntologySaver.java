@@ -1,5 +1,7 @@
-package main;
+package main.ci_runners;
 
+import main.OntologyManager;
+import main.config.OntologyConfig;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.slf4j.Logger;
@@ -15,10 +17,12 @@ public class OntologySaver implements CIRunnable {
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(OntologySaver.class);
 	private final OntologyManager ontologyManager;
+	private final OntologyConfig ontologyConfig;
 
 	@Autowired
-	public OntologySaver(final OntologyManager ontologyManager) {
+	public OntologySaver(final OntologyManager ontologyManager, final OntologyConfig ontologyConfig) {
 		this.ontologyManager = ontologyManager;
+		this.ontologyConfig = ontologyConfig;
 	}
 
 	@Override
@@ -26,7 +30,11 @@ public class OntologySaver implements CIRunnable {
 		for (final OWLOntology ontology : ontologyManager.getOntologyManager().getOntologies()) {
 			LOGGER.info("Saving {}", ontology.getOntologyID().getOntologyIRI().map(Object::toString)
 			                                 .orElseGet(() -> "unnamed ontology"));
-			ontology.saveOntology();
+			if (ontologyConfig.format() == null) {
+				ontology.saveOntology();
+			} else {
+				ontology.saveOntology(ontologyConfig.format());
+			}
 		}
 	}
 }
