@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Priority;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 @Component
@@ -25,15 +26,15 @@ public class Collapser implements CommandLineRunner {
 	private final OntologyManager ontologyManager;
 	private final OntologyConfig ontologyConfig;
 	private final OWLOntologyManager collapseManager;
-
-	@Value("${versionInfo}")
-	private String versionInfo;
+	private final String versionInfo;
 
 	@Autowired
-	public Collapser(final OntologyManager ontologyManager, final OntologyConfig ontologyConfig) {
+	public Collapser(final OntologyManager ontologyManager, final OntologyConfig ontologyConfig,
+	                 @Value("${versionInfo}") final String versionInfo) {
 		this.ontologyManager = ontologyManager;
 		this.ontologyConfig = ontologyConfig;
 		collapseManager = OWLManager.createOWLOntologyManager();
+		this.versionInfo = versionInfo;
 	}
 
 	@Override
@@ -65,8 +66,8 @@ public class Collapser implements CommandLineRunner {
 	}
 
 	private static IRI getRequestedIRI(final CollapseConfig collapseConfig, final HasOntologyID toCollapse) {
-		return collapseConfig.newIRI().or(() -> toCollapse.getOntologyID().getOntologyIRI())
-		                     .orElseThrow(exceptionSupplier("No requested IRI: " + collapseConfig));
+		return Optional.ofNullable(collapseConfig.newIri()).or(() -> toCollapse.getOntologyID().getOntologyIRI())
+		               .orElseThrow(exceptionSupplier("No requested IRI: " + collapseConfig));
 	}
 
 	private OWLOntology getReferencedOntology(final CollapseConfig collapseConfig) {
