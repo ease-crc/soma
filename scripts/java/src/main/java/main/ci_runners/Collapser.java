@@ -16,7 +16,9 @@ import org.springframework.util.CollectionUtils;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 @Component
 public class Collapser implements CIRunnable {
@@ -75,16 +77,28 @@ public class Collapser implements CIRunnable {
 			return;
 		}
 		// hard way
-		toCollapse.imports().forEach(next -> {
-			if (CollapseConfig.containsReferenceOf(except, next)) {
-				final var iri = next.getOntologyID().getOntologyIRI().get();
-				LOGGER.info("{} will be imported instead of merged", iri);
-				collapsed.applyChange(
-						new AddImport(collapsed, OWLManager.getOWLDataFactory().getOWLImportsDeclaration(iri)));
-			} else {
-				collapsed.addAxioms(next.axioms(Imports.EXCLUDED));
-			}
+		final Set<OWLOntology> importingImports = toCollapse.imports()
+		                                                    .filter(next -> CollapseConfig.containsReferenceOf(except,
+		                                                                                                       next))
+		                                                    .collect(Collectors.toSet());
+
+		final Set<OWLOntology> transitiveImports = importingImports.stream().flatMap(OWLOntology::imports)
+		                                                           .collect(Collectors.toSet());
+
+		final Set<OWLOntology> mergingImports =
+				toCollapse.imports().filter(next -> !(importingImports.contains(next) ||
+				transitiveImports.contains(next))).collect(Collectors.toSet());
+		mergingImports.add(toCollapse);
+
+		importingImports.forEach(next -> {
+			final var iri = next.getOntologyID().getOntologyIRI().get();
+			LOGGER.info("{} will be imported instead of merged", iri);
+			collapsed.applyChange(
+					new AddImport(collapsed, OWLManager.getOWLDataFactory().getOWLImportsDeclaration(iri)));
 		});
+
+		mergingImports.forEach(next -> collapsed.addAxioms(next.axioms(Imports.EXCLUDED)));
+
 	}
 
 	private static IRI getRequestedIRI(final CollapseConfig collapseConfig, final HasOntologyID toCollapse) {
