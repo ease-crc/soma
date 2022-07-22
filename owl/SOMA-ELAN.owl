@@ -1,222 +1,793 @@
-Prefix(:=<http://www.ease-crc.org/ont/SOMA-ELAN.owl/>)
-Prefix(dc:=<http://purl.org/dc/elements/1.1/>)
-Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
-Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
-Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
-Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
-Prefix(SOMA:=<http://www.ease-crc.org/ont/SOMA.owl#>)
-Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.ease-crc.org/ont/SOMA-ELAN.owl"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.ease-crc.org/ont/SOMA-ELAN.owl">
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Import>http://www.ease-crc.org/ont/SOMA-ACT.owl</Import>
+    <Declaration>
+        <Class IRI="#PrepareForBreakfast"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PrepareForDinner"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PrepareForLunch"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PrepareForMeal"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SettingTheTable"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#expectedNumberOfPeople"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#formalityLevel"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#UsageGuideline"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#nickname"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#PrepareForBreakfast"/>
+        <Class IRI="#PrepareForMeal"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PrepareForDinner"/>
+        <Class IRI="#PrepareForMeal"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PrepareForLunch"/>
+        <Class IRI="#PrepareForMeal"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PrepareForMeal"/>
+        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PrepareForMeal"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#expectedNumberOfPeople"/>
+            <Datatype abbreviatedIRI="xsd:integer"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PrepareForMeal"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="#formalityLevel"/>
+            <Datatype abbreviatedIRI="xsd:boolean"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SettingTheTable"/>
+        <Class IRI="http://www.ease-crc.org/ont/SOMA.owl#Arranging"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SettingTheTable"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskDefinedIn"/>
+            <Class IRI="#PrepareForMeal"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#expectedNumberOfPeople"/>
+        <DataProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#formalityLevel"/>
+        <DataProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
+    </SubDataPropertyOf>
+    <DataPropertyDomain>
+        <DataProperty IRI="#expectedNumberOfPeople"/>
+        <ObjectIntersectionOf>
+            <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
+                <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#formalityLevel"/>
+        <ObjectIntersectionOf>
+            <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
+                <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#expectedNumberOfPeople"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#formalityLevel"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#PrepareForBreakfast</IRI>
+        <Literal>Describes a goal to prepare a table or dining area for a breakfast.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#PrepareForDinner</IRI>
+        <Literal>Describes a goal to prepare a table or dining area for a dinner.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#PrepareForLunch</IRI>
+        <Literal>Describes a goal to prepare a table or dining area for a lunch.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#PrepareForMeal</IRI>
+        <Literal>A description of a goal to prepare for serving a meal by setting a table.
+
+The meal will have a number of expected participants and a level of formality.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#SettingTheTable</IRI>
+        <Literal>The task to prepare a table for a meal.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#expectedNumberOfPeople</IRI>
+        <Literal>Used by the description of a task that classifies some event, usually a social gathering such as a meal, or by a description of a task to prepare for such an event, to record the number of people expected to participate.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#formalityLevel</IRI>
+        <Literal>Records the formality level in a description associated to some event, usually a social gathering such as a meal.
+
+The association between the Description and the Event can be direct (the Description is about the Event itself) but it can also be indirect in various ways. A typical example of the latter is where the Description is a Goal for a Task to prepare for the Event in question, as when the Goal of a SettingTheTable task would record the formality level of a meal, which will occur at some point after the task completes.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Actuating</IRI>
+        <Literal>move-object</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Actuating</IRI>
+        <Literal>Superconcept for the Agent moving some (usually, but not always, grasped) object; use more specific labels where appropriate.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Approaching</IRI>
+        <Literal>move-body-walk-to</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Approaching</IRI>
+        <Literal>walk (to a location, or in a direction)</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#AreaSurveying</IRI>
+        <Literal>perception-survey-area</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#AreaSurveying</IRI>
+        <Literal>Visually survey an area, for objects or potential object positions.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Arranging</IRI>
+        <Literal>construction-arrange-objects</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Arranging</IRI>
+        <Literal>A task involving the arrangement of a collection of objects in a particular way.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Assembling</IRI>
+        <Literal>construction-assembly</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Assembling</IRI>
+        <Literal>A task involving the putting together of objects to form an assembly, usually in a way in which these objects can be recovered.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#BodyMovement</IRI>
+        <Literal>move-body-general</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#BodyMovement</IRI>
+        <Literal>The Agent moves its body in some way. Use more specific labels where appropriate.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Catching</IRI>
+        <Literal>move-object-catch</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Catching</IRI>
+        <Literal>Agent intercepts and arrests the motion of an object.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Closing</IRI>
+        <Literal>move-object-close</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Closing</IRI>
+        <Literal>Move an object so that it no longer exposes an interior surface.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Constructing</IRI>
+        <Literal>construction-general</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Constructing</IRI>
+        <Literal>Superconcept for tasks requiring the creation of some object (including an arrangement or collection of objects); use more specific labels where appropriate</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Cutting</IRI>
+        <Literal>object-modification-cutting</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Cutting</IRI>
+        <Literal>A task that requires some object to be cut into pieces. The cut is often irreversible.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Dicing</IRI>
+        <Literal>object-modification-dicing</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Dicing</IRI>
+        <Literal>A task that requires an object to be (at least partially) cut into slices.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Distancing</IRI>
+        <Literal>move-body-walk-backaway</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Distancing</IRI>
+        <Literal>walk (away from a location, in a direction)</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Dropping</IRI>
+        <Literal>move-object-drop</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Dropping</IRI>
+        <Literal>Agent undoes whatever functional control they have on an object, but without imparting significant momentum to it, and allows the object to fall under the influence of gravity.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ELANName</IRI>
+        <Literal>If present, used by the controlled vocabulary generation script to create a vocabulary entry. By default, the concept name itself is used for the vocabulary entry.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline</IRI>
+        <Literal>Provides a short description, similar to a definition, of a controlled vocabulary entry for ELAN.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#EndEffectorPositioning</IRI>
+        <Literal>manipulation-hand-positioning</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#EndEffectorPositioning</IRI>
+        <Literal>Superconcept for the Agent moving their arm(s) to positioning their hand/end effector; use more specific labels where appropriate.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#GraspTransfer</IRI>
+        <Literal>move-hand-grasp-transfer</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#GraspTransfer</IRI>
+        <Literal>have grasped an object with one hand, now grasp it with the other and release it from the first</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Grasping</IRI>
+        <Literal>manipulation-grasp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Grasping</IRI>
+        <Literal>Agent grasps an object.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#HeadMovement</IRI>
+        <Literal>move-head</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#HeadMovement</IRI>
+        <Literal>Superconcept for the Agent moving their head; use more specific labels where appropriate.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#HeadTurning</IRI>
+        <Literal>move-head-turn</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#HeadTurning</IRI>
+        <Literal>Turn head (e.g. for visual search).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Holding</IRI>
+        <Literal>move-object-hold</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Holding</IRI>
+        <Literal>Have grasped an object with hand, and move it while held.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Leaning</IRI>
+        <Literal>move-body-lean</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Leaning</IRI>
+        <Literal>move, bending, with torso in a specific direction</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Lifting</IRI>
+        <Literal>move-object-lift</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Lifting</IRI>
+        <Literal>Having grasped an object with their hand, the agent now lifts it from the supporting surface.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Locomotion</IRI>
+        <Literal>move-body-locomotion</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Locomotion</IRI>
+        <Literal>Superconcept for the Agent moving around; use more specific labels where appropriate.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#LookingFor</IRI>
+        <Literal>perception-search-for-object</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#LookingFor</IRI>
+        <Literal>The agent searches, usually visually, for the location, or a possible new location, of an object</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Lowering</IRI>
+        <Literal>move-object-lower</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Lowering</IRI>
+        <Literal>The agent lowers a, usually held in hand(s), object.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Manipulating</IRI>
+        <Literal>manipulation-general</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Manipulating</IRI>
+        <Literal>These are Actions in which the Agent exerts or prepares to exert some influence over some other participant Phyiscal Objects by way of its prehensile body parts (usually, hands).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionEvaluationTopic</IRI>
+        <Literal>ta-meta-cognition-evaluation</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionEvaluationTopic</IRI>
+        <Literal>an agent analyzes and describes the process by which they evaluate whether/to what a extent a goal was reached</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionMemoryTopic</IRI>
+        <Literal>ta-meta-cognition-memory</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionMemoryTopic</IRI>
+        <Literal>an agent describes how and/or why they (failed to) memorize something</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionPlanningTopic</IRI>
+        <Literal>ta-meta-cognition-planning</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionPlanningTopic</IRI>
+        <Literal>an agent analyzes and describes the process they use to plan their behavior</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionTopic</IRI>
+        <Literal>ta-meta-cognition</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionTopic</IRI>
+        <Literal>Superconcept for cases where the agent describes the results of analyzing their own thought processes; use more specific labels where appropriate.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Mixing</IRI>
+        <Literal>construction-mixing</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Mixing</IRI>
+        <Literal>A task involving the putting together of several objects, which are thereafter not recoverable.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ModifyingPhysicalObject</IRI>
+        <Literal>object-modification-general</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ModifyingPhysicalObject</IRI>
+        <Literal>Superconcept for tasks involving the changing of the state some object(s) is/are in; use more specific labels where appropriate.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#MovingAway</IRI>
+        <Literal>move-body-walk-backaway</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#MovingAway</IRI>
+        <Literal>walk (away from a location, in a direction)</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Opening</IRI>
+        <Literal>move-object-open</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Opening</IRI>
+        <Literal>Move an object so as to expose an interior surface.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Orienting</IRI>
+        <Literal>move-object-orient</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Orienting</IRI>
+        <Literal>Move object to re-orient it in place on an area, or while holding.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Perceiving</IRI>
+        <Literal>perception-general</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Perceiving</IRI>
+        <Literal>Superconcept for perception tasks. Use more specific levels where appropriate.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#PhysicalAcquiring</IRI>
+        <Literal>physically-acquire-object</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#PhysicalAcquiring</IRI>
+        <Literal>Superconcept for tasks requiring that an object be put in such a physical state so that it is usable/available for other tasks.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#PhysicalAction</IRI>
+        <Literal>Superconcept for the Agent doing something with their hands/end effectors; use more specific labels where appropriate.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#PickingUp</IRI>
+        <Literal>move-object-pick-up</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#PickingUp</IRI>
+        <Literal>Agent grasps an object and removes it from its previous location.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Positioning</IRI>
+        <Literal>move-object-positioning</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Positioning</IRI>
+        <Literal>Move an object so that it has a particular pose.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#PosturalMoving</IRI>
+        <Literal>move-body-posture</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#PosturalMoving</IRI>
+        <Literal>Superconcept for motions where the Agent changes posture; use more specific labels where appropriate.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Pushing</IRI>
+        <Literal>move-object-push</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Pushing</IRI>
+        <Literal>Superconcept for the Agent exerting force on an object to push it; use more specific labels where appropriate.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#PushingAway</IRI>
+        <Literal>move-object-push-away</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#PushingAway</IRI>
+        <Literal>Agent exerts force on an object to move it away from themselves.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#PushingDown</IRI>
+        <Literal>move-object-push-down</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#PushingDown</IRI>
+        <Literal>Exert force on an object to move it in some functionally meaningful direction, such as pushing down a button (even when the actual direction the button was pushed in was up).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#PuttingDown</IRI>
+        <Literal>manipulation-put-down</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#PuttingDown</IRI>
+        <Literal>Agent releases their grasp on an object, but only after positioning it so that it is supported and won&apos;t fall.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Reaching</IRI>
+        <Literal>move-hand+arm-reach</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Reaching</IRI>
+        <Literal>Reach arm out to prepare to grasp with hand.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Releasing</IRI>
+        <Literal>manipulation-release</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Releasing</IRI>
+        <Literal>Agent releases grasp on an object.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Retracting</IRI>
+        <Literal>move-hand+arm-retract</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Retracting</IRI>
+        <Literal>Draw in arm and hand toward body, and away from some object or location.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Slicing</IRI>
+        <Literal>object-modification-slicing</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Slicing</IRI>
+        <Literal>A task that requires an object to be (at least partially) cut into approximately cubic pieces.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Squeezing</IRI>
+        <Literal>move-object-squeeze</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Squeezing</IRI>
+        <Literal>Exert compressive force on a (usually, but not always, grasped) object.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Standing</IRI>
+        <Literal>move-body-stand</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Standing</IRI>
+        <Literal>stand (at a location)</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudActionTopic</IRI>
+        <Literal>ta-actions</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudActionTopic</IRI>
+        <Literal>an agent describes what they are currently doing</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudGeneralKnowledgeTopic</IRI>
+        <Literal>ta-knowledge-general</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudGeneralKnowledgeTopic</IRI>
+        <Literal>an agent makes a statement of general knowledge, as opposed to knowledge specific to the immediate environment they are in</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudKnowledgeTopic</IRI>
+        <Literal>ta-knowledge</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudKnowledgeTopic</IRI>
+        <Literal>Superconcept for when an agent makes a statement of knowledge of something not immediately perceivable; use more specific labels where appropriate.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudObstructionTopic</IRI>
+        <Literal>ta-issues</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudObstructionTopic</IRI>
+        <Literal>an agent describes what prevents them from undertaking some action</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudOpinionTopic</IRI>
+        <Literal>ta-opinions</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudOpinionTopic</IRI>
+        <Literal>an agent makes a statement of opinion</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudPerceptionTopic</IRI>
+        <Literal>ta-perception</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudPerceptionTopic</IRI>
+        <Literal>an agent describes what they perceive</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudPlanTopic</IRI>
+        <Literal>ta-plans</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudPlanTopic</IRI>
+        <Literal>an agent describes their current plan</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudSceneKnowledgeTopic</IRI>
+        <Literal>ta-knowledge-scene</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudSceneKnowledgeTopic</IRI>
+        <Literal>an agent makes a statement that they know something about the environment they are in, which they cannot at that moment perceive directly (but they may have perceived it earlier)</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Throwing</IRI>
+        <Literal>move-object-throw</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Throwing</IRI>
+        <Literal>Using its arm(s), an agent imparts momentum to a held object then releases it.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Transporting</IRI>
+        <Literal>transport-object</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Transporting</IRI>
+        <Literal>A task that requires chaging the location of an object.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Turning</IRI>
+        <Literal>move-body-turn</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <IRI>http://www.ease-crc.org/ont/SOMA.owl#Turning</IRI>
+        <Literal>move own body, turn</Literal>
+    </AnnotationAssertion>
+    <SubAnnotationPropertyOf>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANName"/>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#nickname"/>
+    </SubAnnotationPropertyOf>
+    <SubAnnotationPropertyOf>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline"/>
+        <AnnotationProperty IRI="http://www.ease-crc.org/ont/SOMA.owl#UsageGuideline"/>
+    </SubAnnotationPropertyOf>
+</Ontology>
 
 
-Ontology(<http://www.ease-crc.org/ont/SOMA-ELAN.owl>
-Import(<http://www.ease-crc.org/ont/SOMA-ACT.owl>)
 
-Declaration(Class(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForBreakfast>))
-Declaration(Class(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForDinner>))
-Declaration(Class(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForLunch>))
-Declaration(Class(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal>))
-Declaration(Class(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#SettingTheTable>))
-Declaration(DataProperty(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#expectedNumberOfPeople>))
-Declaration(DataProperty(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#formalityLevel>))
-Declaration(AnnotationProperty(SOMA:ELANName))
-Declaration(AnnotationProperty(SOMA:ELANUsageGuideline))
-Declaration(AnnotationProperty(SOMA:UsageGuideline))
-Declaration(AnnotationProperty(SOMA:nickname))
-############################
-#   Annotation Properties
-############################
-
-# Annotation Property: <http://www.ease-crc.org/ont/SOMA.owl#ELANName> (<http://www.ease-crc.org/ont/SOMA.owl#ELANName>)
-
-AnnotationAssertion(rdfs:comment SOMA:ELANName "If present, used by the controlled vocabulary generation script to create a vocabulary entry. By default, the concept name itself is used for the vocabulary entry.")
-SubAnnotationPropertyOf(SOMA:ELANName SOMA:nickname)
-
-# Annotation Property: <http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline> (<http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline>)
-
-AnnotationAssertion(rdfs:comment SOMA:ELANUsageGuideline "Provides a short description, similar to a definition, of a controlled vocabulary entry for ELAN.")
-SubAnnotationPropertyOf(SOMA:ELANUsageGuideline SOMA:UsageGuideline)
+<!-- Generated by the OWL API (version 5.1.20.2022-02-19T16:38:31Z) https://github.com/owlcs/owlapi/ -->
 
 
-
-############################
-#   Data Properties
-############################
-
-# Data Property: <http://www.ease-crc.org/ont/SOMA-ELAN.owl#expectedNumberOfPeople> (<http://www.ease-crc.org/ont/SOMA-ELAN.owl#expectedNumberOfPeople>)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-ELAN.owl#expectedNumberOfPeople> "Used by the description of a task that classifies some event, usually a social gathering such as a meal, or by a description of a task to prepare for such an event, to record the number of people expected to participate.")
-SubDataPropertyOf(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#expectedNumberOfPeople> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue>)
-DataPropertyDomain(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#expectedNumberOfPeople> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)))
-DataPropertyRange(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#expectedNumberOfPeople> xsd:integer)
-
-# Data Property: <http://www.ease-crc.org/ont/SOMA-ELAN.owl#formalityLevel> (<http://www.ease-crc.org/ont/SOMA-ELAN.owl#formalityLevel>)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-ELAN.owl#formalityLevel> "Records the formality level in a description associated to some event, usually a social gathering such as a meal.
-
-The association between the Description and the Event can be direct (the Description is about the Event itself) but it can also be indirect in various ways. A typical example of the latter is where the Description is a Goal for a Task to prepare for the Event in question, as when the Goal of a SettingTheTable task would record the formality level of a meal, which will occur at some point after the task completes.")
-SubDataPropertyOf(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#formalityLevel> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue>)
-DataPropertyDomain(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#formalityLevel> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)))
-DataPropertyRange(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#formalityLevel> xsd:string)
-
-
-
-############################
-#   Classes
-############################
-
-# Class: <http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForBreakfast> (<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForBreakfast>)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForBreakfast> "Describes a goal to prepare a table or dining area for a breakfast.")
-SubClassOf(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForBreakfast> <http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal>)
-
-# Class: <http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForDinner> (<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForDinner>)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForDinner> "Describes a goal to prepare a table or dining area for a dinner.")
-SubClassOf(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForDinner> <http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal>)
-
-# Class: <http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForLunch> (<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForLunch>)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForLunch> "Describes a goal to prepare a table or dining area for a lunch.")
-SubClassOf(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForLunch> <http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal>)
-
-# Class: <http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal> (<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal>)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal> "A description of a goal to prepare for serving a meal by setting a table.
-
-The meal will have a number of expected participants and a level of formality.")
-SubClassOf(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal>)
-SubClassOf(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal> DataSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#expectedNumberOfPeople> xsd:integer))
-SubClassOf(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal> DataSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#formalityLevel> xsd:boolean))
-
-# Class: <http://www.ease-crc.org/ont/SOMA-ELAN.owl#SettingTheTable> (<http://www.ease-crc.org/ont/SOMA-ELAN.owl#SettingTheTable>)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-ELAN.owl#SettingTheTable> "The task to prepare a table for a meal.")
-SubClassOf(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#SettingTheTable> SOMA:Arranging)
-SubClassOf(<http://www.ease-crc.org/ont/SOMA-ELAN.owl#SettingTheTable> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskDefinedIn> <http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal>))
-
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Arranging> (<http://www.ease-crc.org/ont/SOMA.owl#Arranging>)
-
-AnnotationAssertion(SOMA:ELANName SOMA:Arranging "construction-arrange-objects")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Arranging "A task involving the arrangement of a collection of objects in a particular way.")
-
-
-AnnotationAssertion(SOMA:ELANName SOMA:Actuating "move-object")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Actuating "Superconcept for the Agent moving some (usually, but not always, grasped) object; use more specific labels where appropriate.")
-AnnotationAssertion(SOMA:ELANName SOMA:Approaching "move-body-walk-to")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Approaching "walk (to a location, or in a direction)")
-AnnotationAssertion(SOMA:ELANName SOMA:AreaSurveying "perception-survey-area")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:AreaSurveying "Visually survey an area, for objects or potential object positions.")
-AnnotationAssertion(SOMA:ELANName SOMA:Assembling "construction-assembly")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Assembling "A task involving the putting together of objects to form an assembly, usually in a way in which these objects can be recovered.")
-AnnotationAssertion(SOMA:ELANName SOMA:BodyMovement "move-body-general")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:BodyMovement "The Agent moves its body in some way. Use more specific labels where appropriate.")
-AnnotationAssertion(SOMA:ELANName SOMA:Catching "move-object-catch")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Catching "Agent intercepts and arrests the motion of an object.")
-AnnotationAssertion(SOMA:ELANName SOMA:Closing "move-object-close")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Closing "Move an object so that it no longer exposes an interior surface.")
-AnnotationAssertion(SOMA:ELANName SOMA:Constructing "construction-general")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Constructing "Superconcept for tasks requiring the creation of some object (including an arrangement or collection of objects); use more specific labels where appropriate")
-AnnotationAssertion(SOMA:ELANName SOMA:Cutting "object-modification-cutting")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Cutting "A task that requires some object to be cut into pieces. The cut is often irreversible.")
-AnnotationAssertion(SOMA:ELANName SOMA:Dicing "object-modification-dicing")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Dicing "A task that requires an object to be (at least partially) cut into slices.")
-AnnotationAssertion(SOMA:ELANName SOMA:Distancing "move-body-walk-backaway")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Distancing "walk (away from a location, in a direction)")
-AnnotationAssertion(SOMA:ELANName SOMA:Dropping "move-object-drop")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Dropping "Agent undoes whatever functional control they have on an object, but without imparting significant momentum to it, and allows the object to fall under the influence of gravity.")
-AnnotationAssertion(SOMA:ELANName SOMA:EndEffectorPositioning "manipulation-hand-positioning")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:EndEffectorPositioning "Superconcept for the Agent moving their arm(s) to positioning their hand/end effector; use more specific labels where appropriate.")
-AnnotationAssertion(SOMA:ELANName SOMA:GraspTransfer "move-hand-grasp-transfer")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:GraspTransfer "have grasped an object with one hand, now grasp it with the other and release it from the first")
-AnnotationAssertion(SOMA:ELANName SOMA:Grasping "manipulation-grasp")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Grasping "Agent grasps an object.")
-AnnotationAssertion(SOMA:ELANName SOMA:HeadMovement "move-head")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:HeadMovement "Superconcept for the Agent moving their head; use more specific labels where appropriate.")
-AnnotationAssertion(SOMA:ELANName SOMA:HeadTurning "move-head-turn")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:HeadTurning "Turn head (e.g. for visual search).")
-AnnotationAssertion(SOMA:ELANName SOMA:Holding "move-object-hold")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Holding "Have grasped an object with hand, and move it while held.")
-AnnotationAssertion(SOMA:ELANName SOMA:Leaning "move-body-lean")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Leaning "move, bending, with torso in a specific direction")
-AnnotationAssertion(SOMA:ELANName SOMA:Lifting "move-object-lift")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Lifting "Having grasped an object with their hand, the agent now lifts it from the supporting surface.")
-AnnotationAssertion(SOMA:ELANName SOMA:Locomotion "move-body-locomotion")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Locomotion "Superconcept for the Agent moving around; use more specific labels where appropriate.")
-AnnotationAssertion(SOMA:ELANName SOMA:LookingFor "perception-search-for-object")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:LookingFor "The agent searches, usually visually, for the location, or a possible new location, of an object")
-AnnotationAssertion(SOMA:ELANName SOMA:Lowering "move-object-lower")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Lowering "The agent lowers a, usually held in hand(s), object.")
-AnnotationAssertion(SOMA:ELANName SOMA:Manipulating "manipulation-general")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Manipulating "These are Actions in which the Agent exerts or prepares to exert some influence over some other participant Phyiscal Objects by way of its prehensile body parts (usually, hands).")
-AnnotationAssertion(SOMA:ELANName SOMA:MetaCognitionEvaluationTopic "ta-meta-cognition-evaluation")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:MetaCognitionEvaluationTopic "an agent analyzes and describes the process by which they evaluate whether/to what a extent a goal was reached")
-AnnotationAssertion(SOMA:ELANName SOMA:MetaCognitionMemoryTopic "ta-meta-cognition-memory")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:MetaCognitionMemoryTopic "an agent describes how and/or why they (failed to) memorize something")
-AnnotationAssertion(SOMA:ELANName SOMA:MetaCognitionPlanningTopic "ta-meta-cognition-planning")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:MetaCognitionPlanningTopic "an agent analyzes and describes the process they use to plan their behavior")
-AnnotationAssertion(SOMA:ELANName SOMA:MetaCognitionTopic "ta-meta-cognition")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:MetaCognitionTopic "Superconcept for cases where the agent describes the results of analyzing their own thought processes; use more specific labels where appropriate.")
-AnnotationAssertion(SOMA:ELANName SOMA:Mixing "construction-mixing")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Mixing "A task involving the putting together of several objects, which are thereafter not recoverable.")
-AnnotationAssertion(SOMA:ELANName SOMA:ModifyingPhysicalObject "object-modification-general")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ModifyingPhysicalObject "Superconcept for tasks involving the changing of the state some object(s) is/are in; use more specific labels where appropriate.")
-AnnotationAssertion(SOMA:ELANName SOMA:MovingAway "move-body-walk-backaway")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:MovingAway "walk (away from a location, in a direction)")
-AnnotationAssertion(SOMA:ELANName SOMA:Opening "move-object-open")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Opening "Move an object so as to expose an interior surface.")
-AnnotationAssertion(SOMA:ELANName SOMA:Orienting "move-object-orient")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Orienting "Move object to re-orient it in place on an area, or while holding.")
-AnnotationAssertion(SOMA:ELANName SOMA:Perceiving "perception-general")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Perceiving "Superconcept for perception tasks. Use more specific levels where appropriate.")
-AnnotationAssertion(SOMA:ELANName SOMA:PhysicalAcquiring "physically-acquire-object")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:PhysicalAcquiring "Superconcept for tasks requiring that an object be put in such a physical state so that it is usable/available for other tasks.")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:PhysicalAction "Superconcept for the Agent doing something with their hands/end effectors; use more specific labels where appropriate.")
-AnnotationAssertion(SOMA:ELANName SOMA:PickingUp "move-object-pick-up")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:PickingUp "Agent grasps an object and removes it from its previous location.")
-AnnotationAssertion(SOMA:ELANName SOMA:Positioning "move-object-positioning")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Positioning "Move an object so that it has a particular pose.")
-AnnotationAssertion(SOMA:ELANName SOMA:PosturalMoving "move-body-posture")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:PosturalMoving "Superconcept for motions where the Agent changes posture; use more specific labels where appropriate.")
-AnnotationAssertion(SOMA:ELANName SOMA:Pushing "move-object-push")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Pushing "Superconcept for the Agent exerting force on an object to push it; use more specific labels where appropriate.")
-AnnotationAssertion(SOMA:ELANName SOMA:PushingAway "move-object-push-away")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:PushingAway "Agent exerts force on an object to move it away from themselves.")
-AnnotationAssertion(SOMA:ELANName SOMA:PushingDown "move-object-push-down")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:PushingDown "Exert force on an object to move it in some functionally meaningful direction, such as pushing down a button (even when the actual direction the button was pushed in was up).")
-AnnotationAssertion(SOMA:ELANName SOMA:PuttingDown "manipulation-put-down")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:PuttingDown "Agent releases their grasp on an object, but only after positioning it so that it is supported and won't fall.")
-AnnotationAssertion(SOMA:ELANName SOMA:Reaching "move-hand+arm-reach")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Reaching "Reach arm out to prepare to grasp with hand.")
-AnnotationAssertion(SOMA:ELANName SOMA:Releasing "manipulation-release")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Releasing "Agent releases grasp on an object.")
-AnnotationAssertion(SOMA:ELANName SOMA:Retracting "move-hand+arm-retract")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Retracting "Draw in arm and hand toward body, and away from some object or location.")
-AnnotationAssertion(SOMA:ELANName SOMA:Slicing "object-modification-slicing")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Slicing "A task that requires an object to be (at least partially) cut into approximately cubic pieces.")
-AnnotationAssertion(SOMA:ELANName SOMA:Squeezing "move-object-squeeze")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Squeezing "Exert compressive force on a (usually, but not always, grasped) object.")
-AnnotationAssertion(SOMA:ELANName SOMA:Standing "move-body-stand")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Standing "stand (at a location)")
-AnnotationAssertion(SOMA:ELANName SOMA:ThinkAloudActionTopic "ta-actions")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ThinkAloudActionTopic "an agent describes what they are currently doing")
-AnnotationAssertion(SOMA:ELANName SOMA:ThinkAloudGeneralKnowledgeTopic "ta-knowledge-general")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ThinkAloudGeneralKnowledgeTopic "an agent makes a statement of general knowledge, as opposed to knowledge specific to the immediate environment they are in")
-AnnotationAssertion(SOMA:ELANName SOMA:ThinkAloudKnowledgeTopic "ta-knowledge")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ThinkAloudKnowledgeTopic "Superconcept for when an agent makes a statement of knowledge of something not immediately perceivable; use more specific labels where appropriate.")
-AnnotationAssertion(SOMA:ELANName SOMA:ThinkAloudObstructionTopic "ta-issues")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ThinkAloudObstructionTopic "an agent describes what prevents them from undertaking some action")
-AnnotationAssertion(SOMA:ELANName SOMA:ThinkAloudOpinionTopic "ta-opinions")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ThinkAloudOpinionTopic "an agent makes a statement of opinion")
-AnnotationAssertion(SOMA:ELANName SOMA:ThinkAloudPerceptionTopic "ta-perception")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ThinkAloudPerceptionTopic "an agent describes what they perceive")
-AnnotationAssertion(SOMA:ELANName SOMA:ThinkAloudPlanTopic "ta-plans")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ThinkAloudPlanTopic "an agent describes their current plan")
-AnnotationAssertion(SOMA:ELANName SOMA:ThinkAloudSceneKnowledgeTopic "ta-knowledge-scene")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ThinkAloudSceneKnowledgeTopic "an agent makes a statement that they know something about the environment they are in, which they cannot at that moment perceive directly (but they may have perceived it earlier)")
-AnnotationAssertion(SOMA:ELANName SOMA:Throwing "move-object-throw")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Throwing "Using its arm(s), an agent imparts momentum to a held object then releases it.")
-AnnotationAssertion(SOMA:ELANName SOMA:Transporting "transport-object")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Transporting "A task that requires chaging the location of an object.")
-AnnotationAssertion(SOMA:ELANName SOMA:Turning "move-body-turn")
-AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Turning "move own body, turn")
-)
