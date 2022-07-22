@@ -1,9 +1,7 @@
 package main;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
-import org.semanticweb.owlapi.change.SetOntologyIDData;
 import org.semanticweb.owlapi.model.*;
-import org.semanticweb.owlapi.model.parameters.ChangeApplied;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +10,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Priority;
-import java.util.Collection;
-import java.util.HashSet;
 
 @Component
 @Priority(1)
-public class versionInfoAdder implements CommandLineRunner {
+public class VersionInfoAdder implements CommandLineRunner {
 
 
     /**
      * {@link Logger} of this class.
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(versionInfoAdder.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(VersionInfoAdder.class);
 
     private final OntologyManager ontologyManager;
 
@@ -31,7 +27,7 @@ public class versionInfoAdder implements CommandLineRunner {
     private String versionInfo;
 
     @Autowired
-    public versionInfoAdder(final OntologyManager ontologyManager) {
+    public VersionInfoAdder(final OntologyManager ontologyManager) {
         this.ontologyManager = ontologyManager;
     }
 
