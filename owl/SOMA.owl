@@ -1,2290 +1,1372 @@
 <?xml version="1.0"?>
-<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+<rdf:RDF xmlns="http://www.ease-crc.org/ont/SOMA.owl#"
      xml:base="http://www.ease-crc.org/ont/SOMA.owl"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     ontologyIRI="http://www.ease-crc.org/ont/SOMA.owl">
-    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
-    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
-    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
-    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
-    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
-    <Import>http://www.ease-crc.org/ont/DUL.owl</Import>
-    <Declaration>
-        <Class IRI="#Accident"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ActionExecutionPlan"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Amateurish"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Answer"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#BehavioralDiagnosis"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Clumsiness"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#DexterityDiagnosis"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Episode"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#FailedAttempt"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Fluid"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Foolishness"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#FunctionalDiagnosis"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#HardwareDiagnosis"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#HumanActivityRecording"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Inability"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Infeasibility"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Masterful"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#MedicalDiagnosis"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Question"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#RecordedEpisode"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Reification"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Sluggishness"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#SoftwareDiagnosis"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#State"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Status"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#SuccessDiagnosis"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Successfulness"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#TechnicalDiagnosis"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Threshold"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#Unsuccessfulness"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#after"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#before"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#causesTransition"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#coOccurs"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#contains"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#containsEvent"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#during"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#finishedBy"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#finishes"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#firstMember"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#hasGoal"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#hasInitialState"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#hasInputParameter"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#hasOutputParameter"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#hasPhase"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#hasPhysicalComponent"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#hasSoftwareAgent"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#hasStatus"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#hasTerminalState"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#includesConcept"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#includesRecord"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#includesSituation"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#involvesArtifact"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#involvesPlace"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isArtifactInvolvedIn"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isCausedByEvent"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isConceptIncludedIn"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isContainedIn"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isInitialStateOf"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isInputParameterFor"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isInputRoleOf"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isOccurrenceOf"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isOccurringIn"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isOutputParameterFor"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isOutputRoleOf"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isPlaceInvolvedIn"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isPlanFor"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isRecordIncludedBy"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isSituationIncludedIn"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isTaskOfInputRole"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isTaskOfOutputRole"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#isTerminalStateOf"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#meets"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#metBy"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#overlappedBy"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#overlappedOn"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#simultaneous"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#startedBy"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#starts"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasDataFormat"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasEventBegin"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasEventEnd"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasEventTime"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasIntervalBegin"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasIntervalEnd"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasIntervalTime"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasNameString"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#hasPersistentIdentifier"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#isReificationOf"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#RDFType"/>
-    </Declaration>
-    <Declaration>
-        <AnnotationProperty IRI="#UsageGuideline"/>
-    </Declaration>
-    <Declaration>
-        <AnnotationProperty IRI="#nickname"/>
-    </Declaration>
-    <Declaration>
-        <AnnotationProperty IRI="#symbol"/>
-    </Declaration>
-    <Declaration>
-        <Datatype IRI="#array_boolean"/>
-    </Declaration>
-    <Declaration>
-        <Datatype IRI="#array_double"/>
-    </Declaration>
-    <Declaration>
-        <Datatype IRI="#array_float"/>
-    </Declaration>
-    <Declaration>
-        <Datatype IRI="#array_int"/>
-    </Declaration>
-    <Declaration>
-        <Datatype IRI="#array_string"/>
-    </Declaration>
-    <Declaration>
-        <Datatype IRI="#array_uint"/>
-    </Declaration>
-    <SubClassOf>
-        <Class IRI="#Accident"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ActionExecutionPlan"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ActionExecutionPlan"/>
-        <ObjectAllValuesFrom>
-            <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask"/>
-            <ObjectSomeValuesFrom>
-                <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameter"/>
-                <Class IRI="#Status"/>
-            </ObjectSomeValuesFrom>
-        </ObjectAllValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Amateurish"/>
-        <Class IRI="#DexterityDiagnosis"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Answer"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#BehavioralDiagnosis"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Diagnosis"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#BehavioralDiagnosis"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
-            <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
-        </ObjectSomeValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Clumsiness"/>
-        <Class IRI="#Amateurish"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#DexterityDiagnosis"/>
-        <Class IRI="#BehavioralDiagnosis"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Episode"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#FailedAttempt"/>
-        <Class IRI="#Unsuccessfulness"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Fluid"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Foolishness"/>
-        <Class IRI="#Amateurish"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#FunctionalDiagnosis"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Diagnosis"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#HardwareDiagnosis"/>
-        <Class IRI="#TechnicalDiagnosis"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#HumanActivityRecording"/>
-        <Class IRI="#RecordedEpisode"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Inability"/>
-        <Class IRI="#Unsuccessfulness"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Infeasibility"/>
-        <Class IRI="#Unsuccessfulness"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Masterful"/>
-        <Class IRI="#DexterityDiagnosis"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#MedicalDiagnosis"/>
-        <Class IRI="#FunctionalDiagnosis"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#MedicalDiagnosis"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
-            <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Organism"/>
-        </ObjectSomeValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Question"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#RecordedEpisode"/>
-        <Class IRI="#Episode"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#RecordedEpisode"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#includesRecord"/>
-            <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
-        </ObjectSomeValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Reification"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Reification"/>
-        <DataExactCardinality cardinality="1">
-            <DataProperty IRI="#isReificationOf"/>
-            <Datatype abbreviatedIRI="xsd:anyURI"/>
-        </DataExactCardinality>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Sluggishness"/>
-        <Class IRI="#Amateurish"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#SoftwareDiagnosis"/>
-        <Class IRI="#TechnicalDiagnosis"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#State"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Status"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#SuccessDiagnosis"/>
-        <Class IRI="#BehavioralDiagnosis"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Successfulness"/>
-        <Class IRI="#SuccessDiagnosis"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#TechnicalDiagnosis"/>
-        <Class IRI="#FunctionalDiagnosis"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#TechnicalDiagnosis"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
-            <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-        </ObjectSomeValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Threshold"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#Unsuccessfulness"/>
-        <Class IRI="#SuccessDiagnosis"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-        <ObjectAllValuesFrom>
-            <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#executesTask"/>
-            <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-        </ObjectAllValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationRealization"/>
-        <DataSomeValuesFrom>
-            <DataProperty IRI="#hasPersistentIdentifier"/>
-            <Datatype abbreviatedIRI="xsd:string"/>
-        </DataSomeValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationRealization"/>
-        <DataExactCardinality cardinality="1">
-            <DataProperty IRI="#hasDataFormat"/>
-            <Datatype abbreviatedIRI="xsd:string"/>
-        </DataExactCardinality>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
-        <ObjectSomeValuesFrom>
-            <ObjectProperty IRI="#isPlanFor"/>
-            <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-        </ObjectSomeValuesFrom>
-    </SubClassOf>
-    <DisjointClasses>
-        <Class IRI="#Accident"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-    </DisjointClasses>
-    <DisjointClasses>
-        <Class IRI="#Amateurish"/>
-        <Class IRI="#Masterful"/>
-    </DisjointClasses>
-    <DisjointClasses>
-        <Class IRI="#MedicalDiagnosis"/>
-        <Class IRI="#TechnicalDiagnosis"/>
-    </DisjointClasses>
-    <DisjointClasses>
-        <Class IRI="#Successfulness"/>
-        <Class IRI="#Unsuccessfulness"/>
-    </DisjointClasses>
-    <ClassAssertion>
-        <Class IRI="#Reification"/>
-        <NamedIndividual IRI="#RDFType"/>
-    </ClassAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#isReificationOf"/>
-        <NamedIndividual IRI="#RDFType"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#anyURI">http://www.w3.org/2001/XMLSchema#type</Literal>
-    </DataPropertyAssertion>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#after"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#follows"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#before"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#causesTransition"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isEventIncludedIn"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#coOccurs"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#contains"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#containsEvent"/>
-        <ObjectProperty IRI="#coOccurs"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#containsEvent"/>
-        <ObjectProperty IRI="#contains"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#during"/>
-        <ObjectProperty IRI="#coOccurs"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#during"/>
-        <ObjectProperty IRI="#isContainedIn"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#finishedBy"/>
-        <ObjectProperty IRI="#coOccurs"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#finishes"/>
-        <ObjectProperty IRI="#coOccurs"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#firstMember"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasMember"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#hasGoal"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#hasInitialState"/>
-        <ObjectProperty IRI="#includesSituation"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#hasInputParameter"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameter"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#hasOutputParameter"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameter"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#hasPhase"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#hasPhysicalComponent"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#hasSoftwareAgent"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#hasStatus"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#hasTerminalState"/>
-        <ObjectProperty IRI="#includesSituation"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#includesConcept"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesObject"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#includesRecord"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isReferenceOf"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#includesSituation"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isSettingFor"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#involvesArtifact"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#involvesPlace"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isArtifactInvolvedIn"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isCausedByEvent"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isConceptIncludedIn"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isObjectIncludedIn"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isContainedIn"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isInitialStateOf"/>
-        <ObjectProperty IRI="#isSituationIncludedIn"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isInputParameterFor"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParameterFor"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isInputRoleOf"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isOccurrenceOf"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isOccurringIn"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isOutputParameterFor"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParameterFor"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isOutputRoleOf"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isPlaceInvolvedIn"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isPlanFor"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isRecordIncludedBy"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isAbout"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isSituationIncludedIn"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasSetting"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isTaskOfInputRole"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isTaskOfOutputRole"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#isTerminalStateOf"/>
-        <ObjectProperty IRI="#isSituationIncludedIn"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#meets"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#directlyPrecedes"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#metBy"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#directlyFollows"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#overlappedBy"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#overlappedOn"/>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#simultaneous"/>
-        <ObjectProperty IRI="#coOccurs"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#startedBy"/>
-        <ObjectProperty IRI="#coOccurs"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="#starts"/>
-        <ObjectProperty IRI="#coOccurs"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#executesTask"/>
-        <ObjectProperty IRI="#isOccurrenceOf"/>
-    </SubObjectPropertyOf>
-    <SubObjectPropertyOf>
-        <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExecutedIn"/>
-        <ObjectProperty IRI="#isOccurringIn"/>
-    </SubObjectPropertyOf>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#after"/>
-        <ObjectProperty IRI="#before"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#causesTransition"/>
-        <ObjectProperty IRI="#isCausedByEvent"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#contains"/>
-        <ObjectProperty IRI="#isContainedIn"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#containsEvent"/>
-        <ObjectProperty IRI="#during"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#finishedBy"/>
-        <ObjectProperty IRI="#finishes"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#hasInitialState"/>
-        <ObjectProperty IRI="#isInitialStateOf"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#hasInputParameter"/>
-        <ObjectProperty IRI="#isInputParameterFor"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#hasOutputParameter"/>
-        <ObjectProperty IRI="#isOutputParameterFor"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#hasTerminalState"/>
-        <ObjectProperty IRI="#isTerminalStateOf"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#includesConcept"/>
-        <ObjectProperty IRI="#isConceptIncludedIn"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#includesRecord"/>
-        <ObjectProperty IRI="#isRecordIncludedBy"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#includesSituation"/>
-        <ObjectProperty IRI="#isSituationIncludedIn"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#involvesArtifact"/>
-        <ObjectProperty IRI="#isArtifactInvolvedIn"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#involvesPlace"/>
-        <ObjectProperty IRI="#isPlaceInvolvedIn"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#isInputRoleOf"/>
-        <ObjectProperty IRI="#isTaskOfInputRole"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#isOccurrenceOf"/>
-        <ObjectProperty IRI="#isOccurringIn"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#isOutputRoleOf"/>
-        <ObjectProperty IRI="#isTaskOfOutputRole"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#meets"/>
-        <ObjectProperty IRI="#metBy"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#overlappedBy"/>
-        <ObjectProperty IRI="#overlappedOn"/>
-    </InverseObjectProperties>
-    <InverseObjectProperties>
-        <ObjectProperty IRI="#startedBy"/>
-        <ObjectProperty IRI="#starts"/>
-    </InverseObjectProperties>
-    <SymmetricObjectProperty>
-        <ObjectProperty IRI="#coOccurs"/>
-    </SymmetricObjectProperty>
-    <SymmetricObjectProperty>
-        <ObjectProperty IRI="#simultaneous"/>
-    </SymmetricObjectProperty>
-    <AsymmetricObjectProperty>
-        <ObjectProperty IRI="#meets"/>
-    </AsymmetricObjectProperty>
-    <AsymmetricObjectProperty>
-        <ObjectProperty IRI="#metBy"/>
-    </AsymmetricObjectProperty>
-    <AsymmetricObjectProperty>
-        <ObjectProperty IRI="#overlappedBy"/>
-    </AsymmetricObjectProperty>
-    <AsymmetricObjectProperty>
-        <ObjectProperty IRI="#overlappedOn"/>
-    </AsymmetricObjectProperty>
-    <TransitiveObjectProperty>
-        <ObjectProperty IRI="#after"/>
-    </TransitiveObjectProperty>
-    <TransitiveObjectProperty>
-        <ObjectProperty IRI="#before"/>
-    </TransitiveObjectProperty>
-    <TransitiveObjectProperty>
-        <ObjectProperty IRI="#containsEvent"/>
-    </TransitiveObjectProperty>
-    <TransitiveObjectProperty>
-        <ObjectProperty IRI="#during"/>
-    </TransitiveObjectProperty>
-    <TransitiveObjectProperty>
-        <ObjectProperty IRI="#finishedBy"/>
-    </TransitiveObjectProperty>
-    <TransitiveObjectProperty>
-        <ObjectProperty IRI="#finishes"/>
-    </TransitiveObjectProperty>
-    <TransitiveObjectProperty>
-        <ObjectProperty IRI="#simultaneous"/>
-    </TransitiveObjectProperty>
-    <TransitiveObjectProperty>
-        <ObjectProperty IRI="#startedBy"/>
-    </TransitiveObjectProperty>
-    <TransitiveObjectProperty>
-        <ObjectProperty IRI="#starts"/>
-    </TransitiveObjectProperty>
-    <IrreflexiveObjectProperty>
-        <ObjectProperty IRI="#meets"/>
-    </IrreflexiveObjectProperty>
-    <IrreflexiveObjectProperty>
-        <ObjectProperty IRI="#metBy"/>
-    </IrreflexiveObjectProperty>
-    <IrreflexiveObjectProperty>
-        <ObjectProperty IRI="#overlappedBy"/>
-    </IrreflexiveObjectProperty>
-    <IrreflexiveObjectProperty>
-        <ObjectProperty IRI="#overlappedOn"/>
-    </IrreflexiveObjectProperty>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#after"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#before"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#causesTransition"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#coOccurs"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#contains"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#containsEvent"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#during"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#finishedBy"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#finishes"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#firstMember"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Collection"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasGoal"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasInitialState"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasInputParameter"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasOutputParameter"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasPhase"/>
-        <ObjectUnionOf>
-            <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
-            <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process"/>
-        </ObjectUnionOf>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasPhysicalComponent"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasSoftwareAgent"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasTerminalState"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#includesConcept"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#includesRecord"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#includesSituation"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#involvesArtifact"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#involvesPlace"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isArtifactInvolvedIn"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isCausedByEvent"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isConceptIncludedIn"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isContainedIn"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isInitialStateOf"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isInputParameterFor"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isInputRoleOf"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isOccurrenceOf"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isOccurringIn"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isOutputParameterFor"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isOutputRoleOf"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isPlaceInvolvedIn"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalPlace"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isPlanFor"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isRecordIncludedBy"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isSituationIncludedIn"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isTaskOfInputRole"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isTaskOfOutputRole"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#isTerminalStateOf"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#meets"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#metBy"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#overlappedBy"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#overlappedOn"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#simultaneous"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#startedBy"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#starts"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#after"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#before"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#causesTransition"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#coOccurs"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#contains"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#containsEvent"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#during"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#finishedBy"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#finishes"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#firstMember"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasGoal"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasInitialState"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasInputParameter"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasOutputParameter"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasPhase"/>
-        <ObjectUnionOf>
-            <Class IRI="#State"/>
-            <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process"/>
-        </ObjectUnionOf>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasPhysicalComponent"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasSoftwareAgent"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasTerminalState"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#includesConcept"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#includesRecord"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#includesSituation"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#involvesArtifact"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#involvesPlace"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalPlace"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isArtifactInvolvedIn"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isCausedByEvent"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isConceptIncludedIn"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isContainedIn"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isInitialStateOf"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isInputParameterFor"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isInputRoleOf"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isOccurrenceOf"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isOccurringIn"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isOutputParameterFor"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isOutputRoleOf"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isPlaceInvolvedIn"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isPlanFor"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isRecordIncludedBy"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isSituationIncludedIn"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isTaskOfInputRole"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isTaskOfOutputRole"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#isTerminalStateOf"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#meets"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#metBy"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#overlappedBy"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#overlappedOn"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#simultaneous"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#startedBy"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#starts"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </ObjectPropertyRange>
-    <SubDataPropertyOf>
-        <DataProperty IRI="#hasDataFormat"/>
-        <DataProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
-    </SubDataPropertyOf>
-    <SubDataPropertyOf>
-        <DataProperty IRI="#hasEventBegin"/>
-        <DataProperty IRI="#hasEventTime"/>
-    </SubDataPropertyOf>
-    <SubDataPropertyOf>
-        <DataProperty IRI="#hasEventEnd"/>
-        <DataProperty IRI="#hasEventTime"/>
-    </SubDataPropertyOf>
-    <SubDataPropertyOf>
-        <DataProperty IRI="#hasEventTime"/>
-        <DataProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
-    </SubDataPropertyOf>
-    <SubDataPropertyOf>
-        <DataProperty IRI="#hasIntervalBegin"/>
-        <DataProperty IRI="#hasIntervalTime"/>
-    </SubDataPropertyOf>
-    <SubDataPropertyOf>
-        <DataProperty IRI="#hasIntervalEnd"/>
-        <DataProperty IRI="#hasIntervalTime"/>
-    </SubDataPropertyOf>
-    <SubDataPropertyOf>
-        <DataProperty IRI="#hasIntervalTime"/>
-        <DataProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
-    </SubDataPropertyOf>
-    <SubDataPropertyOf>
-        <DataProperty IRI="#hasNameString"/>
-        <DataProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
-    </SubDataPropertyOf>
-    <SubDataPropertyOf>
-        <DataProperty IRI="#hasPersistentIdentifier"/>
-        <DataProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
-    </SubDataPropertyOf>
-    <SubDataPropertyOf>
-        <DataProperty IRI="#isReificationOf"/>
-        <DataProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
-    </SubDataPropertyOf>
-    <DataPropertyDomain>
-        <DataProperty IRI="#hasDataFormat"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationRealization"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#hasEventBegin"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#hasEventEnd"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#hasEventTime"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#hasIntervalBegin"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#TimeInterval"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#hasIntervalEnd"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#TimeInterval"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#hasIntervalTime"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#TimeInterval"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#hasNameString"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#hasPersistentIdentifier"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationRealization"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#isReificationOf"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#hasDataFormat"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#hasEventBegin"/>
-        <Datatype abbreviatedIRI="xsd:double"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#hasEventEnd"/>
-        <Datatype abbreviatedIRI="xsd:double"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#hasEventTime"/>
-        <Datatype abbreviatedIRI="xsd:double"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#hasIntervalBegin"/>
-        <Datatype abbreviatedIRI="xsd:float"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#hasIntervalEnd"/>
-        <Datatype abbreviatedIRI="xsd:float"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#hasIntervalTime"/>
-        <Datatype abbreviatedIRI="xsd:float"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#hasNameString"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#hasPersistentIdentifier"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#isReificationOf"/>
-        <Datatype abbreviatedIRI="xsd:anyURI"/>
-    </DataPropertyRange>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Accident</IRI>
-        <Literal>An Event for which causes are unknown and/or considered irrelevant. This is true also for &quot;final causes&quot; (that is, intentions) of Agents participating in the Accident: it is not the intentions of these Agents to bring about the Accident.
+     xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA.owl">
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/DUL.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+   
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#UsageGuideline -->
+
+    <owl:AnnotationProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#UsageGuideline">
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Provides a definition, or usage guideline, aimed at a particular community of the ontology&apos;s users. The community is identified by the subproperty of UsageGuideline.
+
+A style recommendation for usage guidelines is that they should be brief. In contrast to usual concept annotations that can, and should be detailed about the reasons behind modelling decisions, usage guidelines are simply meant to answer questions about when it is appropriate to use a concept, and they must be a practical, easy to query and understand resource.</rdfs:comment>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#nickname -->
+
+    <owl:AnnotationProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#nickname">
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Similar to rdfs:label, but without GUI or reasoner impact in Protege; avoiding Protege problems is why this is not a label subproperty. Nicknames are used by particular software working with the ontology as a way to give community-specific names to concepts. Communities are identified by the subproperty of nickname.</rdfs:comment>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#symbol -->
+
+    <owl:AnnotationProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#symbol">
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An annotation property which should be used to record by what symbols or abbreviations, if any, some relation or entity is known in scientific literature.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#array_boolean -->
+
+    <rdfs:Datatype rdf:about="http://www.ease-crc.org/ont/SOMA.owl#array_boolean">
+        <owl:equivalentClass rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </rdfs:Datatype>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#array_double -->
+
+    <rdfs:Datatype rdf:about="http://www.ease-crc.org/ont/SOMA.owl#array_double">
+        <owl:equivalentClass rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </rdfs:Datatype>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#array_float -->
+
+    <rdfs:Datatype rdf:about="http://www.ease-crc.org/ont/SOMA.owl#array_float">
+        <owl:equivalentClass rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </rdfs:Datatype>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#array_int -->
+
+    <rdfs:Datatype rdf:about="http://www.ease-crc.org/ont/SOMA.owl#array_int">
+        <owl:equivalentClass rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </rdfs:Datatype>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#array_string -->
+
+    <rdfs:Datatype rdf:about="http://www.ease-crc.org/ont/SOMA.owl#array_string">
+        <owl:equivalentClass rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </rdfs:Datatype>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#array_uint -->
+
+    <rdfs:Datatype rdf:about="http://www.ease-crc.org/ont/SOMA.owl#array_uint">
+        <owl:equivalentClass rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </rdfs:Datatype>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#after -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#after">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#follows"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#before"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&gt;</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between entities, expressing a &apos;sequence&apos; schema where one of the entities strictly ends before the other one.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#before -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#before">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&lt;</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between entities, expressing a &apos;sequence&apos; schema where one of the entities strictly ends before the other one.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#causesTransition -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#causesTransition">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isEventIncludedIn"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isCausedByEvent"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A Transition between two Situations is always the result of some Event, and the causesTransition relation should be used to record the causal relation from the Event to the Transition.</rdfs:comment>
+        <rdfs:label>causes transition</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#coOccurs -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#coOccurs">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic relation between any events that also implies that one event is temporally contained in the other.
+
+Sub-properties are used to distinct between different cases of event endpoint relations that hold for different types of co-occurance.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">co occurs</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#contains -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#contains">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isContainedIn"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic relation asserting containment, understood in a very broad sense, by one Entity of another. The relation is defined with domain and range of maximum generality, as it is possible to construe containment to apply between Events, between Objects, between Qualities and so on. Care should be taken when using it that the construal of containment makes sense and is useful. If a clearer relation expresses the connection between two Entities, use that relation instead. For example, rather than saying an Event contains an Object, it is probably better to say the Event has that Object as a participant. More specific versions of this relation exist, e.g. containsEvent, so it is likely that there will be few situations where it should be used itself. However, by acting as a superproperty to several relations, it captures a core similarity between these and enables taxonomy-based similarity metrics.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#containsEvent -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#containsEvent">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#coOccurs"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#contains"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#during"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">di</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A contains event B` means that A strictly starts before, and ends after B, i.e. B is wholly contained in A.</rdfs:comment>
+        <rdfs:label>contains event</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#during -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#during">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#coOccurs"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isContainedIn"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">d</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A during B` means that B strictly starts before, and ends after A, i.e. A is wholly contained in B.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#finishedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#finishedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#coOccurs"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#finishes"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fi</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A finishes B` means that A ends exactly where B ends, and that B strictly starts before A.  As in &quot;I finish my day by taking a shower&quot;.</rdfs:comment>
+        <rdfs:label xml:lang="en">finished by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#finishes -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#finishes">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#coOccurs"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">f</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A finishes B` means that A ends exactly where B ends, and that B strictly starts before A.  As in &quot;I finish my day by taking a shower&quot;.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#firstMember -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#firstMember">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasMember"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Collection"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between a collection and a member of it that is least according to some ordering. This ordering can be arbitrary, i.e. the order in which Entities are recorded in the Collection.</rdfs:comment>
+        <rdfs:label xml:lang="en">first member</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasGoal -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasGoal">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from an Entity to a Goal it pursues. Agents can pursue Goals, and Tasks are also construed as pursuing Goals.</rdfs:comment>
+        <rdfs:label xml:lang="en">has goal</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasInitialState -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasInitialState">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#includesSituation"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isInitialStateOf"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation which connects a Transition to the Situation it starts from.</rdfs:comment>
+        <rdfs:label>has initial state</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasInputParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasInputParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameter"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isInputParameterFor"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+        <rdfs:comment>A relation between a Task and one of its input parameters.</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from an EventType (typically, a Task) and a parameter describing some state of affairs before the event classified by the EventType takes place, and which contributes towards that event happening.</rdfs:comment>
+        <rdfs:label>has input parameter</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasOutputParameter -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasOutputParameter">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameter"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isOutputParameterFor"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+        <rdfs:comment>A relation between a Task and one of its output parameters.</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from an EventType (typically a Task) to a Parameter describing an outcome of the event classified by the EventType.</rdfs:comment>
+        <rdfs:label>has output parameter</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasPhase -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasPhase">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#State"/>
+                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation used to describe the structure of an Action or Process in terms of phases, i.e. subprocesses and states that occur during its unfolding.</rdfs:comment>
+        <rdfs:label>has phase</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation used to describe the structure of a PhysicalObject in terms of physical components, i.e. what other PhysicalObjects are components of it.</rdfs:comment>
+        <rdfs:label>has physical component</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasSoftwareAgent -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasSoftwareAgent">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from an Event and the SoftwareAgent responsible for making that Event happen.</rdfs:comment>
+        <rdfs:label>has software agent</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasStatus -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasStatus">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from an Entity to a Quality that is indicative of the Entity&apos;s state, e.g. if it is a device, its state of operation.</rdfs:comment>
+        <rdfs:label>has status</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasTerminalState -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasTerminalState">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#includesSituation"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isTerminalStateOf"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from a Transition to the Situation it ends in.</rdfs:comment>
+        <rdfs:label>has terminal state</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#includesConcept -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#includesConcept">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesObject"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isConceptIncludedIn"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation recording that a Situation has a Concept as participant in some sort of role.</rdfs:comment>
+        <rdfs:label>includes concept</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#includesSituation -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#includesSituation">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isSettingFor"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isSituationIncludedIn"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation recording that a Situation has a (sub) Situation as participant in some role.</rdfs:comment>
+        <rdfs:label>includes situation</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#involvesArtifact -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#involvesArtifact">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isArtifactInvolvedIn"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Artifact participation.</rdfs:comment>
+        <rdfs:label>involves artifact</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#involvesPlace -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#involvesPlace">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isPlaceInvolvedIn"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalPlace"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation recording that an Event makes some use of a PhysicalPlace. Typically this place is where the Event is located.</rdfs:comment>
+        <rdfs:label>involves place</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isArtifactInvolvedIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isArtifactInvolvedIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Artifact participation.</rdfs:comment>
+        <rdfs:label>is artifact involved in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isCausedByEvent -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isCausedByEvent">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation recording that a Transition is the result of some Event.</rdfs:comment>
+        <rdfs:label>is caused by event</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isConceptIncludedIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isConceptIncludedIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isObjectIncludedIn"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation recording that a Concept participates in a Situation in some way.</rdfs:comment>
+        <rdfs:label>is concept included in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isContainedIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isContainedIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The inverse of the contains relation. See the contains relation for details.</rdfs:comment>
+        <rdfs:label>is contained in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isInitialStateOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isInitialStateOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isSituationIncludedIn"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation recording that a Situation was where a Transition began.</rdfs:comment>
+        <rdfs:label>is initial state of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isInputParameterFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isInputParameterFor">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParameterFor"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
+        <rdfs:comment>A relation between a Task and one of its input parameters.</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from a Parameter to an EventType (typically, a Task). The parameter describes some state of affairs that precedes and will contribute to the event classified by the EventType.</rdfs:comment>
+        <rdfs:label>is input parameter for</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isInputRoleOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isInputRoleOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isTaskOfInputRole"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+        <rdfs:comment>A relation between an input roles and its Task.</rdfs:comment>
+        <rdfs:label xml:lang="en">is input role of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isOccurrenceOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isOccurrenceOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isOccurringIn"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between an event and an event type, e.g. &apos;taking the cup from the table&apos; is an occurence of the motion &apos;approaching&apos;.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is occurence of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isOccurringIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isOccurringIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between an event and an event type, e.g. &apos;taking the cup from the table&apos; is an occurence of the motion &apos;approaching&apos;.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is occurring in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isOutputParameterFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isOutputParameterFor">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParameterFor"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
+        <rdfs:comment>A relation between a Task and one of its output parameters.</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from a Parameter to an EventType (typically, a Task). The parameter describes an outcome of the event classified by the EventType.</rdfs:comment>
+        <rdfs:label>is output parameter for</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isOutputRoleOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isOutputRoleOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isTaskOfOutputRole"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+        <rdfs:comment>A relation between an output roles and its Task.</rdfs:comment>
+        <rdfs:label xml:lang="en">is output role of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isPlaceInvolvedIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isPlaceInvolvedIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalPlace"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation recording that a PhysicalPlace is involved in some Event; typically, this is where the Event is located.</rdfs:comment>
+        <rdfs:label>is place involved in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isPlanFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isPlanFor">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+        <rdfs:comment>A special relation between a Plan and a Task, to indicate that the Plan describes a way to achieve the Task.</rdfs:comment>
+        <rdfs:label xml:lang="en">is plan for</rdfs:label>
+        <rdfs:seeAlso>Note that DUL already says Plans can define Tasks, but that relation is used differently: a Plan defines a Task because it contains it as a step.</rdfs:seeAlso>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#includesRecord -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#includesRecord">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isReferenceOf"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isRecordIncludedBy"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+        <rdfs:comment>A relationship indicating that an Event has been recorded by an InformationObject</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isSituationIncludedIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isSituationIncludedIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasSetting"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation recording that a Situation participates in another in some role, or can be considered as a subsituation of the other.</rdfs:comment>
+        <rdfs:label>is situation included in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isTaskOfInputRole -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isTaskOfInputRole">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>A relation between a Task and one of its input roles.</rdfs:comment>
+        <rdfs:label xml:lang="en">is task of input role</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isTaskOfOutputRole -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isTaskOfOutputRole">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>A relation between a Task and one of its output roles.</rdfs:comment>
+        <rdfs:label xml:lang="en">is task of output role</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isTerminalStateOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isTerminalStateOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isSituationIncludedIn"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation recording that a Situation was where a Transition ended.</rdfs:comment>
+        <rdfs:label>is terminal state of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#meets -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#meets">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#directlyPrecedes"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#metBy"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">m</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between entities, expressing a &apos;sequence&apos; schema where one of the entities exactly ends where the other entity starts.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#metBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#metBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#directlyFollows"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">mi</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between entities, expressing a &apos;sequence&apos; schema where one of the entities exactly ends where the other entity starts.</rdfs:comment>
+        <rdfs:label xml:lang="en">met by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#overlappedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#overlappedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#overlappedOn"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">oi</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic relation between any entities that also implies ordering, e.g. &quot;she has worked into the night&quot;.</rdfs:comment>
+        <rdfs:label>overlapped by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#overlappedOn -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#overlappedOn">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">o</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A schematic relation between any entities that also implies ordering, e.g. &quot;she has worked into the night&quot;.</rdfs:comment>
+        <rdfs:label>overlapped on</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isRecordIncludedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isRecordIncludedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isAbout"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:comment>A relationship indicating that an InformationObject is a recording of an Event.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#simultaneous -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#simultaneous">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#coOccurs"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">=</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A simultaneous B` means that A strictly starts and ends at the same time instant as B, i.e. their temporal extend is equal.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#startedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#startedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#coOccurs"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#starts"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">si</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A starts B` means that A starts exactly where B starts, and that A strictly ends before B. As in &quot;I start my day with a coffee&quot;.</rdfs:comment>
+        <rdfs:label xml:lang="en">started by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#starts -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#starts">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#coOccurs"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <symbol rdf:datatype="http://www.w3.org/2001/XMLSchema#string">s</symbol>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">`A starts B` means that A starts exactly where B starts, and that A strictly ends before B. As in &quot;I start my day with a coffee&quot;.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith -->
+
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#executesTask -->
+
+    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#executesTask">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isOccurrenceOf"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent -->
+
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent -->
+
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart -->
+
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant -->
+
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality -->
+
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion -->
+
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent -->
+
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExecutedIn -->
+
+    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExecutedIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isOccurringIn"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasDataFormat -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasDataFormat">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationRealization"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>A property linking an InformationRealization to a string specifying a format name, e.g. URDF or STL.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasEventBegin -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasEventBegin">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasEventTime"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation recording when an Event started. In this case, we think of the Event as something unfolding over some span of time.</rdfs:comment>
+        <rdfs:label>has event begin</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasEventEnd -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasEventEnd">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasEventTime"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation recording when an Event ended. In this case, we think of the Event as something unfolding over some span of time.</rdfs:comment>
+        <rdfs:label>has event end</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasEventTime -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasEventTime">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Superproperty of hasEventBegin and hasEventEnd, records that an Event happened, or was happening, at a particular time. Using the subproperties captures the richer semantics of that time relative to the event. Using only this superproperty may be appropriate when the Event is construed to take place at a single instant of time.</rdfs:comment>
+        <rdfs:label>has event time</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasIntervalBegin -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasIntervalBegin">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasIntervalTime"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#TimeInterval"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation recording when some TimeInterval started.</rdfs:comment>
+        <rdfs:label>has interval begin</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasIntervalEnd -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasIntervalEnd">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasIntervalTime"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#TimeInterval"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation recording when a TimeInterval ended.</rdfs:comment>
+        <rdfs:label>has interval end</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasIntervalTime -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasIntervalTime">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#TimeInterval"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Superproperty of relations used to connect moments in time to a TimeInterval.</rdfs:comment>
+        <rdfs:label>has interval time</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasNameString -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasNameString">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation recording some identifier associated to an Entity.</rdfs:comment>
+        <rdfs:label>has name string</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasPersistentIdentifier -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasPersistentIdentifier">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationRealization"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>A property linking an InformationRealization to a persistent identifier such as a DOI, which can then be used to obtain an address at which the realization (i.e. digital file) can be retrieved.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isReificationOf -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isReificationOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An auxiliary property that is used to generate object individuals, called reifications, from any other Entity, e.g. from relations, classes, data types. These reifications can then be used in DL axioms as any other named individual.</rdfs:comment>
+        <rdfs:label>is reification of</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue -->
+
+    <owl:DatatypeProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#HumanActivityRecording -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#HumanActivityRecording">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RecordedEpisode"/>
+        <rdfs:comment>An episode in which one or more human beings perform an activity and are recorded doing so.</rdfs:comment>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#HumanActivityRecording"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
+        <owl:annotatedTarget rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RecordedEpisode"/>
+    </owl:Axiom>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Accident -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Accident">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <owl:disjointWith rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+        <rdfs:comment>An Event for which causes are unknown and/or considered irrelevant. This is true also for &quot;final causes&quot; (that is, intentions) of Agents participating in the Accident: it is not the intentions of these Agents to bring about the Accident.
 
 Note a distinction between this definition and some informal, everyday uses of &quot;accident&quot; which require a causal structure and responsibility to be ascertained. An accident, in the informal sense, may require an explanation as to who made a mistake in bringing about the event; a &quot;traffic accident&quot;, where we want to know who&apos;s responsible, is an example of this.
 
-Such an event does NOT fall under the definition of Accident here. An example of Accident would be a fair coin landing Heads: the causal chain for why this exact face landed is not important, all that matters is the brute fact that the coin landed Heads.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Accident</IRI>
-        <Literal>also think about &quot;mistakes&quot;: (Mihai:) yes, but consider whether those might qualify as Situations. Likewise for Accidents, actually.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#ActionExecutionPlan</IRI>
-        <Literal>idea: steps in workflows assert that they are defined by action execution plans.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#ActionExecutionPlan</IRI>
-        <Literal>links role and parameter fillers to e.g. slots in a data structure</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#ActionExecutionPlan</IRI>
-        <Literal xml:lang="en">Action execution plan</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Amateurish</IRI>
-        <Literal>A description of amateurish behavior.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Answer</IRI>
-        <Literal>A role that is played by an entity answering some query.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#BehavioralDiagnosis</IRI>
-        <Literal>A diagnosis of how a system interacts with its world.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#BehavioralDiagnosis</IRI>
-        <Literal>Behavioral diagnosis</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Clumsiness</IRI>
-        <Literal>A description of clumsy behavior.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#DexterityDiagnosis</IRI>
-        <Literal>A description of the dexterity of a system, possibly in comparison to another system.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#DexterityDiagnosis</IRI>
-        <Literal>Dexterity diagnosis</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Episode</IRI>
-        <Literal></Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#FailedAttempt</IRI>
-        <Literal>A description of a failed attempt to achieve some goal.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#FailedAttempt</IRI>
-        <Literal xml:lang="en">Failed attempt</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Fluid</IRI>
-        <Literal>A substance with a consistency such that it can flow or diffuse.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Foolishness</IRI>
-        <Literal>A description of foolish behavior.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#FunctionalDiagnosis</IRI>
-        <Literal>An internal diagnosis of a system.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#FunctionalDiagnosis</IRI>
-        <Literal>Functional diagnosis</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#HardwareDiagnosis</IRI>
-        <Literal>A diagnosis of the hardware of a system.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#HardwareDiagnosis</IRI>
-        <Literal>Hardware diagnosis</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#HumanActivityRecording</IRI>
-        <Literal>An episode in which one or more human beings perform an activity and are recorded doing so.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Inability</IRI>
-        <Literal>A description of a situation with a goal that some system is unable to achieve.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Infeasibility</IRI>
-        <Literal>A description of a situation with a goal that is impossible to achieve in some situational context.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Masterful</IRI>
-        <Literal>A description of masterful behavior.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#MedicalDiagnosis</IRI>
-        <Literal>A functional diagnosis of an organism.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#MedicalDiagnosis</IRI>
-        <Literal>Medical diagnosis</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Question</IRI>
-        <Literal>A role played by some entity that carries meaning, where this meaning is a query of some sort.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#RecordedEpisode</IRI>
-        <Literal>An episode which has been recorded.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Reification</IRI>
-        <Literal>A description that *describes* a formal entity.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Sluggishness</IRI>
-        <Literal>A description of sluggish behavior.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#SoftwareDiagnosis</IRI>
-        <Literal>A diagnosis of the software of a system.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#SoftwareDiagnosis</IRI>
-        <Literal>Software diagnosis</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#State</IRI>
-        <Literal>States are stative and homeomeric events.
+Such an event does NOT fall under the definition of Accident here. An example of Accident would be a fair coin landing Heads: the causal chain for why this exact face landed is not important, all that matters is the brute fact that the coin landed Heads.</rdfs:comment>
+        <rdfs:comment>also think about &quot;mistakes&quot;: (Mihai:) yes, but consider whether those might qualify as Situations. Likewise for Accidents, actually.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#ActionExecutionPlan -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ActionExecutionPlan">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask"/>
+                <owl:allValuesFrom>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameter"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Status"/>
+                    </owl:Restriction>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>idea: steps in workflows assert that they are defined by action execution plans.</rdfs:comment>
+        <rdfs:comment>links role and parameter fillers to e.g. slots in a data structure</rdfs:comment>
+        <rdfs:label xml:lang="en">Action execution plan</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Amateurish -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Amateurish">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DexterityDiagnosis"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Masterful"/>
+        <rdfs:comment>A description of amateurish behavior.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Answer -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Answer">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role that is played by an entity answering some query.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#BehavioralDiagnosis -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#BehavioralDiagnosis">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Diagnosis"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A diagnosis of how a system interacts with its world.</rdfs:comment>
+        <rdfs:label>Behavioral diagnosis</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Clumsiness -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Clumsiness">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Amateurish"/>
+        <rdfs:comment>A description of clumsy behavior.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#DexterityDiagnosis -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DexterityDiagnosis">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#BehavioralDiagnosis"/>
+        <rdfs:comment>A description of the dexterity of a system, possibly in comparison to another system.</rdfs:comment>
+        <rdfs:label>Dexterity diagnosis</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Episode -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Episode">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#FailedAttempt -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FailedAttempt">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Unsuccessfulness"/>
+        <rdfs:comment>A description of a failed attempt to achieve some goal.</rdfs:comment>
+        <rdfs:label xml:lang="en">Failed attempt</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Fluid -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Fluid">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A substance with a consistency such that it can flow or diffuse.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Foolishness -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Foolishness">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Amateurish"/>
+        <rdfs:comment>A description of foolish behavior.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#FunctionalDiagnosis -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FunctionalDiagnosis">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Diagnosis"/>
+        <rdfs:comment>An internal diagnosis of a system.</rdfs:comment>
+        <rdfs:label>Functional diagnosis</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#HardwareDiagnosis -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#HardwareDiagnosis">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#TechnicalDiagnosis"/>
+        <rdfs:comment>A diagnosis of the hardware of a system.</rdfs:comment>
+        <rdfs:label>Hardware diagnosis</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Inability -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Inability">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Unsuccessfulness"/>
+        <rdfs:comment>A description of a situation with a goal that some system is unable to achieve.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Infeasibility -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Infeasibility">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Unsuccessfulness"/>
+        <rdfs:comment>A description of a situation with a goal that is impossible to achieve in some situational context.</rdfs:comment>
+    </owl:Class>
+    
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Masterful -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Masterful">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DexterityDiagnosis"/>
+        <rdfs:comment>A description of masterful behavior.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#MedicalDiagnosis -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MedicalDiagnosis">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FunctionalDiagnosis"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Organism"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#TechnicalDiagnosis"/>
+        <rdfs:comment>A functional diagnosis of an organism.</rdfs:comment>
+        <rdfs:label>Medical diagnosis</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Question -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Question">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role played by some entity that carries meaning, where this meaning is a query of some sort.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#RecordedEpisode -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RecordedEpisode">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Episode"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#includesRecord"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An episode which has been recorded.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Reification -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Reification">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isReificationOf"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A description that *describes* a formal entity.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Sluggishness -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Sluggishness">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Amateurish"/>
+        <rdfs:comment>A description of sluggish behavior.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#SoftwareDiagnosis -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwareDiagnosis">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#TechnicalDiagnosis"/>
+        <rdfs:comment>A diagnosis of the software of a system.</rdfs:comment>
+        <rdfs:label>Software diagnosis</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#State -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#State">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:comment>States are stative and homeomeric events.
 
 For stative events, the mereological sum of two instances has the same type as both instances. This is, for example, the state of sitting on a chair, or the process of a pendulum swinging around.
 
-The difference between states and processes is that states are, in addition, homeomeric, and processes are not.  This means that, when considering time slices  of an event, for states, these time slices always have the same type as the state, but for processes this is not the case.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Status</IRI>
-        <Literal>A role that can be played by some parameter which indicates the state of affairs of some entity, e.g. a flag describing the outcome of an action in terms of success or failure, or an indicator of whether a device is turned on or off.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#SuccessDiagnosis</IRI>
-        <Literal>A diagnosis of the fullfilment of a goal that motivates the behavior of a system.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#SuccessDiagnosis</IRI>
-        <Literal>Success diagnosis</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Successfulness</IRI>
-        <Literal>A description of a situation with a goal that was achieved by some system.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#TechnicalDiagnosis</IRI>
-        <Literal>A functional diagnosis of a technical system.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#TechnicalDiagnosis</IRI>
-        <Literal>Technical diagnosis</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Threshold</IRI>
-        <Literal>A role played by a parameter which indicates some value that, when crossed, triggers some condition.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#Unsuccessfulness</IRI>
-        <Literal>A description of a situation with a goal that was not or not fully achieved by some system.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#UsageGuideline</IRI>
-        <Literal>Provides a definition, or usage guideline, aimed at a particular community of the ontology&apos;s users. The community is identified by the subproperty of UsageGuideline.
+The difference between states and processes is that states are, in addition, homeomeric, and processes are not.  This means that, when considering time slices  of an event, for states, these time slices always have the same type as the state, but for processes this is not the case.</rdfs:comment>
+    </owl:Class>
+    
 
-A style recommendation for usage guidelines is that they should be brief. In contrast to usual concept annotations that can, and should be detailed about the reasons behind modelling decisions, usage guidelines are simply meant to answer questions about when it is appropriate to use a concept, and they must be a practical, easy to query and understand resource.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty IRI="#symbol"/>
-        <IRI>#after</IRI>
-        <Literal>&gt;</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#after</IRI>
-        <Literal>A relation between entities, expressing a &apos;sequence&apos; schema where one of the entities strictly ends before the other one.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty IRI="#symbol"/>
-        <IRI>#before</IRI>
-        <Literal>&lt;</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#before</IRI>
-        <Literal>A relation between entities, expressing a &apos;sequence&apos; schema where one of the entities strictly ends before the other one.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#causesTransition</IRI>
-        <Literal>A Transition between two Situations is always the result of some Event, and the causesTransition relation should be used to record the causal relation from the Event to the Transition.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#causesTransition</IRI>
-        <Literal>causes transition</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#coOccurs</IRI>
-        <Literal>A schematic relation between any events that also implies that one event is temporally contained in the other.
 
-Sub-properties are used to distinct between different cases of event endpoint relations that hold for different types of co-occurance.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#coOccurs</IRI>
-        <Literal>co occurs</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#contains</IRI>
-        <Literal>A schematic relation asserting containment, understood in a very broad sense, by one Entity of another. The relation is defined with domain and range of maximum generality, as it is possible to construe containment to apply between Events, between Objects, between Qualities and so on. Care should be taken when using it that the construal of containment makes sense and is useful. If a clearer relation expresses the connection between two Entities, use that relation instead. For example, rather than saying an Event contains an Object, it is probably better to say the Event has that Object as a participant. More specific versions of this relation exist, e.g. containsEvent, so it is likely that there will be few situations where it should be used itself. However, by acting as a superproperty to several relations, it captures a core similarity between these and enables taxonomy-based similarity metrics.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty IRI="#symbol"/>
-        <IRI>#containsEvent</IRI>
-        <Literal>di</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#containsEvent</IRI>
-        <Literal>`A contains event B` means that A strictly starts before, and ends after B, i.e. B is wholly contained in A.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#containsEvent</IRI>
-        <Literal>contains event</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty IRI="#symbol"/>
-        <IRI>#during</IRI>
-        <Literal>d</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#during</IRI>
-        <Literal>`A during B` means that B strictly starts before, and ends after A, i.e. A is wholly contained in B.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty IRI="#symbol"/>
-        <IRI>#finishedBy</IRI>
-        <Literal>fi</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#finishedBy</IRI>
-        <Literal>`A finishes B` means that A ends exactly where B ends, and that B strictly starts before A.  As in &quot;I finish my day by taking a shower&quot;.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#finishedBy</IRI>
-        <Literal xml:lang="en">finished by</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty IRI="#symbol"/>
-        <IRI>#finishes</IRI>
-        <Literal>f</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#finishes</IRI>
-        <Literal>`A finishes B` means that A ends exactly where B ends, and that B strictly starts before A.  As in &quot;I finish my day by taking a shower&quot;.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#firstMember</IRI>
-        <Literal>A relation between a collection and a member of it that is least according to some ordering. This ordering can be arbitrary, i.e. the order in which Entities are recorded in the Collection.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#firstMember</IRI>
-        <Literal xml:lang="en">first member</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasDataFormat</IRI>
-        <Literal>A property linking an InformationRealization to a string specifying a format name, e.g. URDF or STL.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasEventBegin</IRI>
-        <Literal>A relation recording when an Event started. In this case, we think of the Event as something unfolding over some span of time.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#hasEventBegin</IRI>
-        <Literal>has event begin</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasEventEnd</IRI>
-        <Literal>A relation recording when an Event ended. In this case, we think of the Event as something unfolding over some span of time.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#hasEventEnd</IRI>
-        <Literal>has event end</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasEventTime</IRI>
-        <Literal>Superproperty of hasEventBegin and hasEventEnd, records that an Event happened, or was happening, at a particular time. Using the subproperties captures the richer semantics of that time relative to the event. Using only this superproperty may be appropriate when the Event is construed to take place at a single instant of time.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#hasEventTime</IRI>
-        <Literal>has event time</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasGoal</IRI>
-        <Literal>A relation from an Entity to a Goal it pursues. Agents can pursue Goals, and Tasks are also construed as pursuing Goals.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#hasGoal</IRI>
-        <Literal xml:lang="en">has goal</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasInitialState</IRI>
-        <Literal>A relation which connects a Transition to the Situation it starts from.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#hasInitialState</IRI>
-        <Literal>has initial state</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasInputParameter</IRI>
-        <Literal>A relation between a Task and one of its input parameters.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasInputParameter</IRI>
-        <Literal>A relation from an EventType (typically, a Task) and a parameter describing some state of affairs before the event classified by the EventType takes place, and which contributes towards that event happening.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#hasInputParameter</IRI>
-        <Literal>has input parameter</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasIntervalBegin</IRI>
-        <Literal>A relation recording when some TimeInterval started.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#hasIntervalBegin</IRI>
-        <Literal>has interval begin</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasIntervalEnd</IRI>
-        <Literal>A relation recording when a TimeInterval ended.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#hasIntervalEnd</IRI>
-        <Literal>has interval end</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasIntervalTime</IRI>
-        <Literal>Superproperty of relations used to connect moments in time to a TimeInterval.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#hasIntervalTime</IRI>
-        <Literal>has interval time</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasNameString</IRI>
-        <Literal>A relation recording some identifier associated to an Entity.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#hasNameString</IRI>
-        <Literal>has name string</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasOutputParameter</IRI>
-        <Literal>A relation between a Task and one of its output parameters.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasOutputParameter</IRI>
-        <Literal>A relation from an EventType (typically a Task) to a Parameter describing an outcome of the event classified by the EventType.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#hasOutputParameter</IRI>
-        <Literal>has output parameter</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasPersistentIdentifier</IRI>
-        <Literal>A property linking an InformationRealization to a persistent identifier such as a DOI, which can then be used to obtain an address at which the realization (i.e. digital file) can be retrieved.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasPhase</IRI>
-        <Literal>A relation used to describe the structure of an Action or Process in terms of phases, i.e. subprocesses and states that occur during its unfolding.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#hasPhase</IRI>
-        <Literal>has phase</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasPhysicalComponent</IRI>
-        <Literal>A relation used to describe the structure of a PhysicalObject in terms of physical components, i.e. what other PhysicalObjects are components of it.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#hasPhysicalComponent</IRI>
-        <Literal>has physical component</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasSoftwareAgent</IRI>
-        <Literal>A relation from an Event and the SoftwareAgent responsible for making that Event happen.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#hasSoftwareAgent</IRI>
-        <Literal>has software agent</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasStatus</IRI>
-        <Literal>A relation from an Entity to a Quality that is indicative of the Entity&apos;s state, e.g. if it is a device, its state of operation.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#hasStatus</IRI>
-        <Literal>has status</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#hasTerminalState</IRI>
-        <Literal>A relation from a Transition to the Situation it ends in.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#hasTerminalState</IRI>
-        <Literal>has terminal state</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#includesConcept</IRI>
-        <Literal>A relation recording that a Situation has a Concept as participant in some sort of role.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#includesConcept</IRI>
-        <Literal>includes concept</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#includesRecord</IRI>
-        <Literal>A relationship indicating that an Event has been recorded by an InformationObject</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#includesSituation</IRI>
-        <Literal>A relation recording that a Situation has a (sub) Situation as participant in some role.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#includesSituation</IRI>
-        <Literal>includes situation</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#involvesArtifact</IRI>
-        <Literal>Artifact participation.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#involvesArtifact</IRI>
-        <Literal>involves artifact</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#involvesPlace</IRI>
-        <Literal>A relation recording that an Event makes some use of a PhysicalPlace. Typically this place is where the Event is located.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#involvesPlace</IRI>
-        <Literal>involves place</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isArtifactInvolvedIn</IRI>
-        <Literal>Artifact participation.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isArtifactInvolvedIn</IRI>
-        <Literal>is artifact involved in</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isCausedByEvent</IRI>
-        <Literal>A relation recording that a Transition is the result of some Event.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isCausedByEvent</IRI>
-        <Literal>is caused by event</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isConceptIncludedIn</IRI>
-        <Literal>A relation recording that a Concept participates in a Situation in some way.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isConceptIncludedIn</IRI>
-        <Literal>is concept included in</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isContainedIn</IRI>
-        <Literal>The inverse of the contains relation. See the contains relation for details.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isContainedIn</IRI>
-        <Literal>is contained in</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isInitialStateOf</IRI>
-        <Literal>A relation recording that a Situation was where a Transition began.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isInitialStateOf</IRI>
-        <Literal>is initial state of</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isInputParameterFor</IRI>
-        <Literal>A relation between a Task and one of its input parameters.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isInputParameterFor</IRI>
-        <Literal>A relation from a Parameter to an EventType (typically, a Task). The parameter describes some state of affairs that precedes and will contribute to the event classified by the EventType.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isInputParameterFor</IRI>
-        <Literal>is input parameter for</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isInputRoleOf</IRI>
-        <Literal>A relation between an input roles and its Task.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isInputRoleOf</IRI>
-        <Literal xml:lang="en">is input role of</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isOccurrenceOf</IRI>
-        <Literal>A relation between an event and an event type, e.g. &apos;taking the cup from the table&apos; is an occurence of the motion &apos;approaching&apos;.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isOccurrenceOf</IRI>
-        <Literal>is occurence of</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isOccurringIn</IRI>
-        <Literal>A relation between an event and an event type, e.g. &apos;taking the cup from the table&apos; is an occurence of the motion &apos;approaching&apos;.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isOccurringIn</IRI>
-        <Literal>is occurring in</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isOutputParameterFor</IRI>
-        <Literal>A relation between a Task and one of its output parameters.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isOutputParameterFor</IRI>
-        <Literal>A relation from a Parameter to an EventType (typically, a Task). The parameter describes an outcome of the event classified by the EventType.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isOutputParameterFor</IRI>
-        <Literal>is output parameter for</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isOutputRoleOf</IRI>
-        <Literal>A relation between an output roles and its Task.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isOutputRoleOf</IRI>
-        <Literal xml:lang="en">is output role of</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isPlaceInvolvedIn</IRI>
-        <Literal>A relation recording that a PhysicalPlace is involved in some Event; typically, this is where the Event is located.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isPlaceInvolvedIn</IRI>
-        <Literal>is place involved in</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isPlanFor</IRI>
-        <Literal>A special relation between a Plan and a Task, to indicate that the Plan describes a way to achieve the Task.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isPlanFor</IRI>
-        <Literal xml:lang="en">is plan for</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
-        <IRI>#isPlanFor</IRI>
-        <Literal>Note that DUL already says Plans can define Tasks, but that relation is used differently: a Plan defines a Task because it contains it as a step.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isRecordIncludedBy</IRI>
-        <Literal>A relationship indicating that an InformationObject is a recording of an Event.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isReificationOf</IRI>
-        <Literal>An auxiliary property that is used to generate object individuals, called reifications, from any other Entity, e.g. from relations, classes, data types. These reifications can then be used in DL axioms as any other named individual.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isReificationOf</IRI>
-        <Literal>is reification of</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isSituationIncludedIn</IRI>
-        <Literal>A relation recording that a Situation participates in another in some role, or can be considered as a subsituation of the other.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isSituationIncludedIn</IRI>
-        <Literal>is situation included in</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isTaskOfInputRole</IRI>
-        <Literal>A relation between a Task and one of its input roles.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isTaskOfInputRole</IRI>
-        <Literal xml:lang="en">is task of input role</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isTaskOfOutputRole</IRI>
-        <Literal>A relation between a Task and one of its output roles.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isTaskOfOutputRole</IRI>
-        <Literal xml:lang="en">is task of output role</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#isTerminalStateOf</IRI>
-        <Literal>A relation recording that a Situation was where a Transition ended.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#isTerminalStateOf</IRI>
-        <Literal>is terminal state of</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty IRI="#symbol"/>
-        <IRI>#meets</IRI>
-        <Literal>m</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#meets</IRI>
-        <Literal>A relation between entities, expressing a &apos;sequence&apos; schema where one of the entities exactly ends where the other entity starts.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty IRI="#symbol"/>
-        <IRI>#metBy</IRI>
-        <Literal>mi</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#metBy</IRI>
-        <Literal>A relation between entities, expressing a &apos;sequence&apos; schema where one of the entities exactly ends where the other entity starts.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#metBy</IRI>
-        <Literal xml:lang="en">met by</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#nickname</IRI>
-        <Literal>Similar to rdfs:label, but without GUI or reasoner impact in Protege; avoiding Protege problems is why this is not a label subproperty. Nicknames are used by particular software working with the ontology as a way to give community-specific names to concepts. Communities are identified by the subproperty of nickname.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty IRI="#symbol"/>
-        <IRI>#overlappedBy</IRI>
-        <Literal>oi</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#overlappedBy</IRI>
-        <Literal>A schematic relation between any entities that also implies ordering, e.g. &quot;she has worked into the night&quot;.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#overlappedBy</IRI>
-        <Literal>overlapped by</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty IRI="#symbol"/>
-        <IRI>#overlappedOn</IRI>
-        <Literal>o</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#overlappedOn</IRI>
-        <Literal>A schematic relation between any entities that also implies ordering, e.g. &quot;she has worked into the night&quot;.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#overlappedOn</IRI>
-        <Literal>overlapped on</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty IRI="#symbol"/>
-        <IRI>#simultaneous</IRI>
-        <Literal>=</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#simultaneous</IRI>
-        <Literal>`A simultaneous B` means that A strictly starts and ends at the same time instant as B, i.e. their temporal extend is equal.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty IRI="#symbol"/>
-        <IRI>#startedBy</IRI>
-        <Literal>si</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#startedBy</IRI>
-        <Literal>`A starts B` means that A starts exactly where B starts, and that A strictly ends before B. As in &quot;I start my day with a coffee&quot;.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>#startedBy</IRI>
-        <Literal xml:lang="en">started by</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty IRI="#symbol"/>
-        <IRI>#starts</IRI>
-        <Literal>s</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#starts</IRI>
-        <Literal>`A starts B` means that A starts exactly where B starts, and that A strictly ends before B. As in &quot;I start my day with a coffee&quot;.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>#symbol</IRI>
-        <Literal>An annotation property which should be used to record by what symbols or abbreviations, if any, some relation or entity is known in scientific literature.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action</IRI>
-        <Literal>The EASE view: an Action is an Event in which an Agent executes some Task, typically defined by a Workflow, towards the achievement of some Goal.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject</IRI>
-        <Literal>In SOMA-compliant systems, the way to use InformationObjects to specify extra data about an individual entity is to employ the &apos;is about&apos; and &apos;expresses&apos; properties (or their inverses &apos;is reference of&apos; and &apos;is expressed by&apos;) and to supply a persistent identifier for a realization of the InformationObject.
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Status -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Status">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role that can be played by some parameter which indicates the state of affairs of some entity, e.g. a flag describing the outcome of an action in terms of success or failure, or an indicator of whether a device is turned on or off.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#SuccessDiagnosis -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SuccessDiagnosis">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#BehavioralDiagnosis"/>
+        <rdfs:comment>A diagnosis of the fullfilment of a goal that motivates the behavior of a system.</rdfs:comment>
+        <rdfs:label>Success diagnosis</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Successfulness -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Successfulness">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SuccessDiagnosis"/>
+        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Unsuccessfulness"/>
+        <rdfs:comment>A description of a situation with a goal that was achieved by some system.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#TechnicalDiagnosis -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#TechnicalDiagnosis">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FunctionalDiagnosis"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A functional diagnosis of a technical system.</rdfs:comment>
+        <rdfs:label>Technical diagnosis</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Threshold -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Threshold">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role played by a parameter which indicates some value that, when crossed, triggers some condition.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Unsuccessfulness -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Unsuccessfulness">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SuccessDiagnosis"/>
+        <rdfs:comment>A description of a situation with a goal that was not or not fully achieved by some system.</rdfs:comment>
+    </owl:Class>
+    
+    
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action -->
+
+    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#executesTask"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The EASE view: an Action is an Event in which an Agent executes some Task, typically defined by a Workflow, towards the achievement of some Goal.</rdfs:comment>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationRealization -->
+
+    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationRealization">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasPersistentIdentifier"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDataFormat"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>In SOMA-compliant systems, the way to use InformationObjects to specify extra data about an individual entity is to employ the &apos;is about&apos; and &apos;expresses&apos; properties (or their inverses &apos;is reference of&apos; and &apos;is expressed by&apos;) and to supply a persistent identifier for a realization of the InformationObject.
 
 As a prototypical example, consider an individual called Action_XYZ, about which we have some data for which the meaning is described by Description_ABC. The data would be an individual InformationObject_DEF, and the following property assertions would hold:
 
@@ -2295,12 +1377,54 @@ InformationObject_DEF expresses Description_ABC
 Usually, an individual InformationObject would be connected to (at least) an InformationRealization individual. For example, suppose there is such an InformationRealization individual, InformationRealization_123. Then, this individual will have data properties describing its format and persistent identifier
 
 InformationRealization_123 hasPersistentIdentifier &apos;doi&apos;
-InformationRealization_123 hasDataFormat &apos;urdf&apos;</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationRealization</IRI>
-        <Literal>In SOMA-compliant systems, the way to use InformationObjects to specify extra data about an individual entity is to employ the &apos;is about&apos; and &apos;expresses&apos; properties (or their inverses &apos;is reference of&apos; and &apos;is expressed by&apos;) and to supply a persistent identifier for a realization of the InformationObject.
+InformationRealization_123 hasDataFormat &apos;urdf&apos;</rdfs:comment>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan -->
+
+    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isPlanFor"/>
+                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#RDFType -->
+
+    <owl:NamedIndividual rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RDFType">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Reification"/>
+        <isReificationOf rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://www.w3.org/2001/XMLSchema#type</isReificationOf>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject">
+        <rdfs:comment>In SOMA-compliant systems, the way to use InformationObjects to specify extra data about an individual entity is to employ the &apos;is about&apos; and &apos;expresses&apos; properties (or their inverses &apos;is reference of&apos; and &apos;is expressed by&apos;) and to supply a persistent identifier for a realization of the InformationObject.
 
 As a prototypical example, consider an individual called Action_XYZ, about which we have some data for which the meaning is described by Description_ABC. The data would be an individual InformationObject_DEF, and the following property assertions would hold:
 
@@ -2311,45 +1435,14 @@ InformationObject_DEF expresses Description_ABC
 Usually, an individual InformationObject would be connected to (at least) an InformationRealization individual. For example, suppose there is such an InformationRealization individual, InformationRealization_123. Then, this individual will have data properties describing its format and persistent identifier
 
 InformationRealization_123 hasPersistentIdentifier &apos;doi&apos;
-InformationRealization_123 hasDataFormat &apos;urdf&apos;</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#realizesSelfInformation</IRI>
-        <Literal xml:lang="en">realizes self information</Literal>
-    </AnnotationAssertion>
-    <AnnotationPropertyRange>
-        <AnnotationProperty IRI="#symbol"/>
-        <AbbreviatedIRI>xsd:string</AbbreviatedIRI>
-    </AnnotationPropertyRange>
-    <DatatypeDefinition>
-        <Datatype IRI="#array_boolean"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DatatypeDefinition>
-    <DatatypeDefinition>
-        <Datatype IRI="#array_double"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DatatypeDefinition>
-    <DatatypeDefinition>
-        <Datatype IRI="#array_float"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DatatypeDefinition>
-    <DatatypeDefinition>
-        <Datatype IRI="#array_int"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DatatypeDefinition>
-    <DatatypeDefinition>
-        <Datatype IRI="#array_string"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DatatypeDefinition>
-    <DatatypeDefinition>
-        <Datatype IRI="#array_uint"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DatatypeDefinition>
-</Ontology>
+InformationRealization_123 hasDataFormat &apos;urdf&apos;</rdfs:comment>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#realizesSelfInformation">
+        <rdfs:label xml:lang="en">realizes self information</rdfs:label>
+    </rdf:Description>
+</rdf:RDF>
 
 
 
-<!-- Generated by the OWL API (version 5.1.20.2022-02-19T16:38:31Z) https://github.com/owlcs/owlapi/ -->
-
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
 

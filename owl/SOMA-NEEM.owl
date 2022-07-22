@@ -1,86 +1,72 @@
 <?xml version="1.0"?>
-<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+<rdf:RDF xmlns="http://www.ease-crc.org/ont/SOMA-NEEM.owl#"
      xml:base="http://www.ease-crc.org/ont/SOMA-NEEM.owl"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     ontologyIRI="http://www.ease-crc.org/ont/SOMA-NEEM.owl">
-    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
-    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
-    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
-    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
-    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
-    <Import>http://www.ease-crc.org/ont/SOMA.owl</Import>
-    <Declaration>
-        <Class IRI="http://www.ease-crc.org/ont/SOMA.owl#KinoDynamicData"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="http://www.ease-crc.org/ont/SOMA.owl#MeshShapeData"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="http://www.ease-crc.org/ont/SOMA.owl#VideoData"/>
-    </Declaration>
-    <SubClassOf>
-        <Class IRI="http://www.ease-crc.org/ont/SOMA.owl#KinoDynamicData"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://www.ease-crc.org/ont/SOMA.owl#KinoDynamicData"/>
-        <ObjectAllValuesFrom>
-            <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isAbout"/>
-            <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-        </ObjectAllValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://www.ease-crc.org/ont/SOMA.owl#MeshShapeData"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://www.ease-crc.org/ont/SOMA.owl#MeshShapeData"/>
-        <ObjectAllValuesFrom>
-            <ObjectProperty IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isAbout"/>
-            <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-        </ObjectAllValuesFrom>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="http://www.ease-crc.org/ont/SOMA.owl#VideoData"/>
-        <Class IRI="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
-    </SubClassOf>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>http://www.ease-crc.org/ont/SOMA.owl#KinoDynamicData</IRI>
-        <Literal>An InformationObject containing data about how a physical object is put together such that its parts may move relative to each other, and what the physical characteristics of those parts are.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>http://www.ease-crc.org/ont/SOMA.owl#KinoDynamicData</IRI>
-        <Literal xml:lang="en">Kino-dynamic data</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>http://www.ease-crc.org/ont/SOMA.owl#MeshShapeData</IRI>
-        <Literal>An InformationObject containing data about the geometry of a physical object.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>http://www.ease-crc.org/ont/SOMA.owl#MeshShapeData</IRI>
-        <Literal xml:lang="en">Mesh-shape data</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
-        <IRI>http://www.ease-crc.org/ont/SOMA.owl#VideoData</IRI>
-        <Literal>An information object containing data for audio-visual modalities.</Literal>
-    </AnnotationAssertion>
-    <AnnotationAssertion>
-        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
-        <IRI>http://www.ease-crc.org/ont/SOMA.owl#VideoData</IRI>
-        <Literal xml:lang="en">Video data</Literal>
-    </AnnotationAssertion>
-</Ontology>
+     xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA-NEEM.owl">
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#KinoDynamicData -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#KinoDynamicData">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isAbout"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>An InformationObject containing data about how a physical object is put together such that its parts may move relative to each other, and what the physical characteristics of those parts are.</rdfs:comment>
+        <rdfs:label xml:lang="en">Kino-dynamic data</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#MeshShapeData -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MeshShapeData">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isAbout"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>An InformationObject containing data about the geometry of a physical object.</rdfs:comment>
+        <rdfs:label xml:lang="en">Mesh-shape data</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#VideoData -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#VideoData">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+        <rdfs:comment>An information object containing data for audio-visual modalities.</rdfs:comment>
+        <rdfs:label xml:lang="en">Video data</rdfs:label>
+    </owl:Class>
+</rdf:RDF>
 
 
 
-<!-- Generated by the OWL API (version 5.1.20.2022-02-19T16:38:31Z) https://github.com/owlcs/owlapi/ -->
-
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
 
