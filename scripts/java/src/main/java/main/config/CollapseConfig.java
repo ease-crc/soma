@@ -1,4 +1,4 @@
-package main;
+package main.config;
 
 import org.semanticweb.owlapi.model.HasOntologyID;
 import org.semanticweb.owlapi.model.IRI;
