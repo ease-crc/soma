@@ -1,11 +1,11 @@
 ontology:
-  directory: ../../owl/
-  format: XML
-  to-collapse:
+  directory: ../../owl/ # where to load the ontologies from
+  format: rdf_xml # which format to use (optional - if not given, the default format will be used). Possible Values: xml, owl_xml, functional, manchester (the latter is not recommended because GCIs will get lost). Parameter is not case sensitive.
+  to-collapse: # which ontologies to collapse
     - ontology: SOMA-All
       out-path: ../../build/owl/current/SOMA.owl
-      except: DUL
-      new-iri: https://ease-crc.github.io/soma/owl/current/SOMA.owl
+      except: DUL # Optional, which ontologies should not be merged but still be imported
+      new-iri: https://ease-crc.github.io/soma/owl/current/SOMA.owl # Optional, if the IRI of the collapsed version should be different from the original
     - ontology: SOMA-HOME
       out-path: ../../build/owl/current/SOMA-HOME.owl
       except: DUL
