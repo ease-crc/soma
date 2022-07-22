@@ -15,7 +15,6 @@ import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
@@ -82,13 +81,13 @@ public class Collapser implements CIRunnable {
 		                                                    .filter(next -> CollapseConfig.containsReferenceOf(except,
 		                                                                                                       next))
 		                                                    .collect(Collectors.toSet());
-		importingImports.forEach(next -> System.out.println(next.getOntologyID().getOntologyIRI()));
 
 		final Set<OWLOntology> transitiveImports = importingImports.stream().flatMap(OWLOntology::imports)
 		                                                           .collect(Collectors.toSet());
-		final Set<OWLOntology> mergingImports = new HashSet<>();
-		toCollapse.imports().filter(next -> !(importingImports.contains(next) || transitiveImports.contains(next)))
-		          .collect(Collectors.toSet()).forEach(mergingImports::add);
+
+		final Set<OWLOntology> mergingImports =
+				toCollapse.imports().filter(next -> !(importingImports.contains(next) ||
+				transitiveImports.contains(next))).collect(Collectors.toSet());
 		mergingImports.add(toCollapse);
 
 		importingImports.forEach(next -> {
