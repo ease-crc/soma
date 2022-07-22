@@ -25,16 +25,22 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '18'
+          cache: 'maven'
+
       - name: Create directories
         run: |
               mkdir -p $GITHUB_WORKSPACE/build/owl/current &&
               mkdir mkdir -p $GITHUB_WORKSPACE/build/files
 
       - name: Compile
-        uses: docker://swipl:8.0.3
-        with:
-          SOMA_VERSION: current
-          args: swipl -f prolog/uglify.pl -t uglify
+        run: |
+          mvn spring-boot:run -f scripts/java/pom.xml \
+             -Dspring-boot.run.arguments="--versionInfo=current"
 
       - name: Upload OWL file
         uses: actions/upload-artifact@v1
