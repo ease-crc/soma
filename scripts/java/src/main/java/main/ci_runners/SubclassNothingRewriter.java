@@ -19,7 +19,7 @@ public class SubclassNothingRewriter implements CIRunnable {
 	 * {@link Logger} of this class.
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(SubclassNothingRewriter.class);
-
+	private static final OWLDataFactory df = OWLManager.getOWLDataFactory();
 	private final OntologyManager ontologyManager;
 
 	@Autowired
@@ -30,11 +30,12 @@ public class SubclassNothingRewriter implements CIRunnable {
 
 	@Override
 	public void run() {
-		ontologyManager.getOntologyManager().getOntologies().forEach(this::rewriteGCIs);
+		ontologyManager.getOntologyManager().getOntologies().forEach(SubclassNothingRewriter::rewriteGCIs);
 	}
 
-	private void rewriteGCIs(final OWLOntology ontology) {
-		final var iri = ontology.getOntologyID().getOntologyIRI().get();
+	private static void rewriteGCIs(final OWLOntology ontology) {
+		@SuppressWarnings("OptionalGetWithoutIsPresent") final var iri = ontology.getOntologyID().getOntologyIRI()
+		                                                                         .get();
 		final var gcis = ontology.getGeneralClassAxioms();
 		if (gcis.isEmpty()) {
 			return;
@@ -53,22 +54,38 @@ public class SubclassNothingRewriter implements CIRunnable {
 
 	}
 
+	@SuppressWarnings("ChainOfInstanceofChecks")
 	private static Optional<OWLAxiom> rewrite(final OWLAxiom gci) {
-		final var df = OWLManager.getOWLDataFactory();
 		if (gci instanceof OWLSubClassOfAxiom subClassOfAxiom) {
 			if (!subClassOfAxiom.getSuperClass().isOWLNothing()) {
 				return Optional.empty();
 			}
 			if (subClassOfAxiom.getSubClass() instanceof OWLObjectIntersectionOf intersection) {
-				return Optional.of(df.getOWLDisjointClassesAxiom(intersection.operands(), gci.getAnnotations()));
+				return rewriteIntersectionSubclassNothing(intersection);
 			}
 			if (subClassOfAxiom.getSubClass() instanceof OWLObjectSomeValuesFrom someValuesFrom) {
-				return Optional.of(df.getOWLObjectPropertyRangeAxiom(someValuesFrom.getProperty(),
-				                                                     df.getOWLObjectComplementOf(
-						                                                     someValuesFrom.getFiller()),
-				                                                     gci.getAnnotations()));
+				final var rewriting = df.getOWLObjectPropertyRangeAxiom(someValuesFrom.getProperty(),
+				                                                        df.getOWLObjectComplementOf(
+						                                                        someValuesFrom.getFiller()),
+				                                                        gci.getAnnotations());
+				return Optional.of(rewriting);
 			}
 		}
 		return Optional.empty();
+	}
+
+	private static Optional<OWLAxiom> rewriteIntersectionSubclassNothing(final OWLObjectIntersectionOf intersection) {
+		var atomicClass = intersection.operands().filter(AsOWLClass::isOWLClass).findAny();
+		if (atomicClass.isEmpty()) {
+			atomicClass = intersection.operands().findFirst();
+		}
+		if (atomicClass.isEmpty()) {
+			throw new IllegalArgumentException("Corrupted GCI:" + intersection + " subclass of owl:Nothing");
+		}
+
+		final OWLClassExpression finalAtomicClass = atomicClass.get();
+		final var rewriting = df.getOWLEquivalentClassesAxiom(finalAtomicClass, df.getOWLObjectComplementOf(
+				df.getOWLObjectIntersectionOf(intersection.operands().filter(next -> !next.equals(finalAtomicClass)))));
+		return Optional.of(rewriting);
 	}
 }
