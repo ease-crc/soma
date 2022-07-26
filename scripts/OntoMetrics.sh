@@ -7,22 +7,13 @@ BASEDIR=$(dirname "$0")
 # The local OWL file
 OWL_FILE="$1"
 # The server URL
-HOST="http://opi.informatik.uni-rostock.de/api"
+HOST="http://opi.informatik.uni-rostock.de/api?url"
 
 echo "${BASEDIR}"
 
 # the web-service return HTML with a link to XML data
-echo "fetching result from https://ontometrics.informatik.uni-rostock.de"
-echo "@${OWL_FILE}"
-curl ${HOST} \
-	-H 'Server: Apache/2.4.38 (Debian)' \
-	-H 'saved: true' \
-	-H 'Content-Type: application/xml' \
-	-H 'Vary: Accept-Encoding' \
-	-H 'Content-Encoding: gzip' \
-	-H 'Keep-Alive: timeout=5, max=100' \
-	-H 'Connection: keep-alive' \
-	--data "@${OWL_FILE}"  > $2/metrics.xml
+echo "fetching result from ${HOST}=${OWL_FILE}"
+curl -X ${HOST}=${OWL_FILE}  > $2/metrics.xml
 
 # convert to JSON
 echo "writing metrics.json"
