@@ -20,10 +20,13 @@ public class CIRunner implements CommandLineRunner {
 	@Autowired
 	private OntologySaver ontologySaver;
 
+	@Autowired
+	private SubclassNothingRewriter gciRewriter;
+
 
 	@Override
 	public void run(final String... args) throws Exception {
-		final CIRunnable[] toRun = {isDefinedInAdder, versionInfoAdder, collapser, ontologySaver};
+		final CIRunnable[] toRun = {gciRewriter, isDefinedInAdder, versionInfoAdder, collapser, ontologySaver};
 		for (final var next : toRun) {
 			next.run();
 		}

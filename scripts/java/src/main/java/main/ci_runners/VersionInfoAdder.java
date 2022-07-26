@@ -8,11 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
+@Lazy
 public class VersionInfoAdder implements CIRunnable {
-
 
 	/**
 	 * {@link Logger} of this class.
@@ -20,7 +21,6 @@ public class VersionInfoAdder implements CIRunnable {
 	private static final Logger LOGGER = LoggerFactory.getLogger(VersionInfoAdder.class);
 
 	private final OntologyManager ontologyManager;
-
 
 	private final String versionInfo;
 
