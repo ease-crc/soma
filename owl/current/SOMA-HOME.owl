@@ -1155,9 +1155,19 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
         <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SituationTransition"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+        <rdfs:range rdf:nodeID="genid20"/>
         <rdfs:comment>A relation between SituationTransitions and Situations, which identifies the Situation the transition starts from.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
     </owl:ObjectProperty>
+    <owl:Class rdf:nodeID="genid20">
+        <owl:complementOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation"/>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasInitialSituation"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#range"/>
+        <owl:annotatedTarget rdf:nodeID="genid20"/>
+        <rdfs:comment>If something is an initial situation of some transition, then it must manifest.</rdfs:comment>
+    </owl:Axiom>
     
 
 
@@ -1528,9 +1538,19 @@ Only RoleFillerBindings can have general Entities as fillers. RoleRoleBindings c
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#IrreflexiveProperty"/>
         <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SituationTransition"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+        <rdfs:range rdf:nodeID="genid38"/>
         <rdfs:comment>A relation between SituationTransitions and Situations, which identifies the Situation the transition ends at.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
     </owl:ObjectProperty>
+    <owl:Class rdf:nodeID="genid38">
+        <owl:complementOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation"/>
+    </owl:Class>
+    <owl:Axiom>
+        <owl:annotatedSource rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasTerminalSituation"/>
+        <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#range"/>
+        <owl:annotatedTarget rdf:nodeID="genid38"/>
+        <rdfs:comment>If something is a terminal situation then it must be a manifested situation (regardless of whether it was expected or not).</rdfs:comment>
+    </owl:Axiom>
     
 
 
@@ -11241,6 +11261,29 @@ InformationRealization_123 hasDataFormat &apos;urdf&apos;</rdfs:comment>
 
 
     <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation">
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:complementOf>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/prevents"/>
+                                <owl:someValuesFrom>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
+                                        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+                                    </owl:Restriction>
+                                </owl:someValuesFrom>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:complementOf>
+            </owl:Class>
+        </rdfs:subClassOf>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
     </owl:Class>
     
@@ -11494,14 +11537,14 @@ InformationRealization_123 hasDataFormat &apos;urdf&apos;</rdfs:comment>
                         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
-                <rdfs:subClassOf rdf:nodeID="genid422"/>
+                <rdfs:subClassOf rdf:nodeID="genid433"/>
             </owl:Class>
         </owl:annotatedSource>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid422"/>
+        <owl:annotatedTarget rdf:nodeID="genid433"/>
         <rdfs:comment>If a SituationTransition manifests in some Event, then it also has an initial Situation and a terminal one.</rdfs:comment>
     </owl:Axiom>
-    <owl:Class rdf:nodeID="genid422">
+    <owl:Class rdf:nodeID="genid433">
         <owl:intersectionOf rdf:parseType="Collection">
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasInitialSituation"/>
@@ -11523,88 +11566,30 @@ InformationRealization_123 hasDataFormat &apos;urdf&apos;</rdfs:comment>
                         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
-                <rdfs:subClassOf rdf:nodeID="genid432"/>
+                <rdfs:subClassOf rdf:nodeID="genid443"/>
             </owl:Class>
         </owl:annotatedSource>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid432"/>
+        <owl:annotatedTarget rdf:nodeID="genid443"/>
         <rdfs:comment>A SituationTransition that manifests in some Event also includes an Action. (NOTE (MP): Typically, the Event manifesting it would be that included Action actually so perhaps we can just require that manifestations of SituationTransitions be Actions?)</rdfs:comment>
     </owl:Axiom>
-    <owl:Restriction rdf:nodeID="genid432">
+    <owl:Restriction rdf:nodeID="genid443">
         <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
     </owl:Restriction>
     <owl:Axiom>
         <owl:annotatedSource>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-                    </owl:Restriction>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/prevents"/>
-                        <owl:someValuesFrom>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-                            </owl:Restriction>
-                        </owl:someValuesFrom>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-                <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
-            </owl:Class>
-        </owl:annotatedSource>
-        <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
-        <rdfs:comment>By definition, there can be no prevention relation between Situations that manifest in Events. If Situation X prevents Y, then either X manifests and Y does not, or Y manifests and X does not (interpret as: X would have prevented Y from manifesting if X had manifested), or none of X and Y manifests in any Event.</rdfs:comment>
-    </owl:Axiom>
-    <owl:Axiom>
-        <owl:annotatedSource>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-                    </owl:Restriction>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-                <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
-            </owl:Class>
-        </owl:annotatedSource>
-        <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
-        <rdfs:comment>If a precondition is not met then a Situation cannot manifest.</rdfs:comment>
-    </owl:Axiom>
-    <owl:Axiom>
-        <owl:annotatedSource>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasInitialSituation"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation"/>
-                <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
-            </owl:Restriction>
-        </owl:annotatedSource>
-        <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
-        <rdfs:comment>If something is an initial situation of some transition, then it must manifest.</rdfs:comment>
-    </owl:Axiom>
-    <owl:Axiom>
-        <owl:annotatedSource>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasInitialSituation"/>
                 <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-                <rdfs:subClassOf rdf:nodeID="genid451"/>
+                <rdfs:subClassOf rdf:nodeID="genid446"/>
             </owl:Restriction>
         </owl:annotatedSource>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid451"/>
+        <owl:annotatedTarget rdf:nodeID="genid446"/>
         <rdfs:comment>If a transition has an initial situation then it also has a manifestation.</rdfs:comment>
     </owl:Axiom>
-    <owl:Restriction rdf:nodeID="genid451">
+    <owl:Restriction rdf:nodeID="genid446">
         <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
     </owl:Restriction>
@@ -11612,29 +11597,35 @@ InformationRealization_123 hasDataFormat &apos;urdf&apos;</rdfs:comment>
         <owl:annotatedSource>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasTerminalSituation"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation"/>
-                <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
-            </owl:Restriction>
-        </owl:annotatedSource>
-        <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
-        <rdfs:comment>If something is a terminal situation then it must be a manifested situation (regardless of whether it was expected or not).</rdfs:comment>
-    </owl:Axiom>
-    <owl:Axiom>
-        <owl:annotatedSource>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasTerminalSituation"/>
                 <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-                <rdfs:subClassOf rdf:nodeID="genid456"/>
+                <rdfs:subClassOf rdf:nodeID="genid449"/>
             </owl:Restriction>
         </owl:annotatedSource>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid456"/>
+        <owl:annotatedTarget rdf:nodeID="genid449"/>
         <rdfs:comment>If a transition has a terminal situation then it also has a manifestation.</rdfs:comment>
     </owl:Axiom>
-    <owl:Restriction rdf:nodeID="genid456">
+    <owl:Restriction rdf:nodeID="genid449">
         <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+    </owl:Restriction>
+    <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
+        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:complementOf>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:complementOf>
+            </owl:Class>
+        </rdfs:subClassOf>
     </owl:Restriction>
 </rdf:RDF>
 
