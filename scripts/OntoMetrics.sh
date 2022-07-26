@@ -13,7 +13,7 @@ echo "${BASEDIR}"
 
 # the web-service return HTML with a link to XML data
 echo "fetching result from ${HOST}=${OWL_FILE}"
-curl -X ${HOST}=${OWL_FILE}  > $2/metrics.xml
+curl ${HOST}=${OWL_FILE}  > $2/metrics.xml
 
 # convert to JSON
 echo "writing metrics.json"
