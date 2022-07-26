@@ -84,7 +84,7 @@ public class SubclassNothingRewriter implements CIRunnable {
 		}
 
 		final OWLClassExpression finalAtomicClass = atomicClass.get();
-		final var rewriting = df.getOWLEquivalentClassesAxiom(finalAtomicClass, df.getOWLObjectComplementOf(
+		final var rewriting = df.getOWLSubClassOfAxiom(finalAtomicClass, df.getOWLObjectComplementOf(
 				df.getOWLObjectIntersectionOf(intersection.operands().filter(next -> !next.equals(finalAtomicClass)))));
 		return Optional.of(rewriting);
 	}
