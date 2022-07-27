@@ -1,6 +1,10 @@
 package main;
 
 import main.config.OntologyConfig;
+import org.jgrapht.Graph;
+import org.jgrapht.alg.connectivity.GabowStrongConnectivityInspector;
+import org.jgrapht.graph.DefaultDirectedGraph;
+import org.jgrapht.graph.DefaultEdge;
 import org.protege.xmlcatalog.owlapi.XMLCatalogIRIMapper;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
@@ -16,6 +20,7 @@ import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.stream.Stream;
 
 /**
  * Class to manage the resources that are associated with an {@link OWLOntology}.
@@ -74,5 +79,30 @@ public class OntologyManager {
 
 	public OWLOntologyManager getOntologyManager() {
 		return ontologyManager;
+	}
+
+	/**
+	 * @return A {@link Stream} of a subset of the managed {@link OWLOntology}s such that their imports include all
+	 * managed ontologies
+	 */
+	public Stream<OWLOntology> mainOntologies() {
+		// condensate import structure to strongly connected components
+		final var condensation = new GabowStrongConnectivityInspector<>(graphOfImportStructure()).getCondensation();
+
+		// get roots of condensation
+		//noinspection OptionalGetWithoutIsPresent
+		return condensation.vertexSet().stream().filter(key -> condensation.incomingEdgesOf(key).isEmpty())
+		                   .map(next -> next.vertexSet().stream().findAny().get());
+	}
+
+	/**
+	 * @return A {@link Graph} with all managed {@link OWLOntology}s as vertices and edges from o1 to o2 if o1 imports
+	 * o2
+	 */
+	public Graph<OWLOntology, DefaultEdge> graphOfImportStructure() {
+		final DefaultDirectedGraph<OWLOntology, DefaultEdge> graph = new DefaultDirectedGraph<>(DefaultEdge.class);
+		ontologyManager.ontologies().forEach(graph::addVertex);
+		ontologyManager.ontologies().forEach(next -> next.getDirectImports().forEach(imp -> graph.addEdge(next, imp)));
+		return graph;
 	}
 }
