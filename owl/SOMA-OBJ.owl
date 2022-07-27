@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="http://www.ease-crc.org/ont/SOMA-OBJ.owl#"
      xml:base="http://www.ease-crc.org/ont/SOMA-OBJ.owl"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl">
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
@@ -89,19 +90,6 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#isMassAttributeOf -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isMassAttributeOf">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
-        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasMassAttribute"/>
-        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#MassAttribute"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between physical objects and their mass.</rdfs:comment>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is mass attribute of</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasNetForce -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasNetForce">
@@ -125,7 +113,7 @@
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates a joint to the link it connects which is closer to the root of the kinematic chain.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has parent link</rdfs:label>
     </owl:ObjectProperty>
-
+    
 
 
     <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasRootLink -->
@@ -198,7 +186,20 @@
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates an object to its kinematic components.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is link of</rdfs:label>
     </owl:ObjectProperty>
+    
 
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#isMassAttributeOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#isMassAttributeOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasMassAttribute"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#MassAttribute"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between physical objects and their mass.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is mass attribute of</rdfs:label>
+    </owl:ObjectProperty>
+    
 
 
     <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#isNetForceOf -->
@@ -234,6 +235,7 @@
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Relates an object to kinematic components at the root of the kinematic chain.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">is root link of</rdfs:label>
     </owl:ObjectProperty>
+    
 
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#affordanceDefines -->
@@ -1023,6 +1025,7 @@
         <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Transient"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
         <rdfs:comment>A property which relates a Transient to an Object it both changes from and changes into. This is useful to model objects which, through participation in a process, transform themselves so that an ontological reclassification is necessary, however this transformation is reversible and at the end of the process the objects revert to their previous kind. An example of this is catalysts in chemistry.</rdfs:comment>
+        <rdfs:label xml:lang="en">transitions back</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -1034,6 +1037,7 @@
         <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Transient"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
         <rdfs:comment>A property which relates a Transient to an Object it changes from. This is useful to model objects which, through participation in a process, transform themselves so that an ontological reclassification is necessary. An example of this is dough undergoing the Maillard reaction through baking.</rdfs:comment>
+        <rdfs:label xml:lang="en">transitions from</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -1045,6 +1049,7 @@
         <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Transient"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object"/>
         <rdfs:comment>A property which relates a Transient to an Object it changes into. This is useful to model objects which, through participation in a process, transform themselves so that an ontological reclassification is necessary. An example of this is baked dough eventually becoming bread by completing a baking process.</rdfs:comment>
+        <rdfs:label xml:lang="en">transitions to</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -1068,6 +1073,7 @@
     //
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
+
     
 
 
@@ -1080,7 +1086,6 @@
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A value that quantifies a force given in Newton.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has force value</rdfs:label>
     </owl:DatatypeProperty>
-
     
 
 
@@ -1177,7 +1182,7 @@
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The maximum velocity of a joint given in m/s (prismatic joints) or rad/s (hinged joints).</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has joint velocity limit</rdfs:label>
     </owl:DatatypeProperty>
-
+    
 
 
     <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasShapeScale -->
@@ -1201,8 +1206,8 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
     <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasColorValue">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
         <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ColorRegion"/>
-        <rdfs:label>has color value</rdfs:label>
         <rdfs:comment>Associates a ColorRegion to numerical data describing the color.</rdfs:comment>
+        <rdfs:label>has color value</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -1225,8 +1230,8 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>has file path</rdfs:label>
         <rdfs:comment>Associates an entity to some file containing data about it. For example, can be used to describe physical objects via a mesh file.</rdfs:comment>
+        <rdfs:label>has file path</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -1249,8 +1254,8 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
         <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasColorValue"/>
         <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ColorRegion"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>has hsv value</rdfs:label>
         <rdfs:comment>Associates a ColorRegion to numerical data describing the color. This data uses the Hue-Saturation-Value color space.</rdfs:comment>
+        <rdfs:label>has hsv value</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -1297,8 +1302,8 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
         <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasSpaceParameter"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has position data</rdfs:label>
         <rdfs:comment>Associates a spatial region to a position.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has position data</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -1309,8 +1314,8 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
         <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasColorValue"/>
         <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ColorRegion"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>has rgb value</rdfs:label>
         <rdfs:comment>Associates a ColorRegion to numerical data describing the color. This data uses the Red-Green-Blue color space.</rdfs:comment>
+        <rdfs:label>has rgb value</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -1333,8 +1338,8 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
         <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasSpaceParameter"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:label>has reference frame</rdfs:label>
         <rdfs:comment>Gives the name associated to the local coordinate frame of a SpaceRegion.</rdfs:comment>
+        <rdfs:label>has reference frame</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -1347,10 +1352,10 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
         <rdfs:range>
             <rdfs:Datatype>
                 <owl:unionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#float"/>
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#array_double"/>
                     <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#double"/>
+                    <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#float"/>
                     <rdf:Description rdf:about="http://www.w3.org/2001/XMLSchema#string"/>
-                    <rdf:Description rdf:about= "http://www.ease-crc.org/ont/SOMA.owl#array_double"/>
                 </owl:unionOf>
             </rdfs:Datatype>
         </rdfs:range>
@@ -1365,8 +1370,8 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
     <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasSpaceParameter">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion"/>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has space parameter</rdfs:label>
         <rdfs:comment>Associates a SpaceRegion to some parameter value describing it. This is a fairly generic property, and to capture the semantics of the information associated to the SpaceRegion, its more specific subproperties should be used.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">has space parameter</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -1393,25 +1398,15 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
 
     
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#FunctionalPart -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FunctionalPart">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalBody"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isComponentOf"/>
-                <owl:allValuesFrom>
-                    <owl:Class>
-                        <owl:unionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-                        </owl:unionOf>
-                    </owl:Class>
-                </owl:allValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>Parts of an agent or an artifact are considered as functional parts.</rdfs:comment>
-        <rdfs:label>Functional part</rdfs:label>
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#ArtificialAgent -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#ArtificialAgent">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
+        <rdfs:comment>A physical object with artificial characteristics, which can perform actions to achieve desired goals, and typically has sensors and/or actuators.
+
+There can be non-physical artificial agents such as software programs but they are not considered here in the scope of artificial agent.</rdfs:comment>
+        <rdfs:label>Artificial agent</rdfs:label>
     </owl:Class>
     
 
@@ -1444,6 +1439,16 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#FloatingJoint -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#FloatingJoint">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#MovableJoint"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A joint that allows motion for all 6 degrees of freedom.</rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Floating joint</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#ForceAttribute -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#ForceAttribute">
@@ -1457,16 +1462,6 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
         </rdfs:subClassOf>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The value of a force dynamical characteristic. An example is the force exerted on another object when pushing it.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Force attribute</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#FloatingJoint -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#FloatingJoint">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#MovableJoint"/>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A joint that allows motion for all 6 degrees of freedom.</rdfs:comment>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Floating joint</rdfs:label>
     </owl:Class>
     
 
@@ -1502,16 +1497,16 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointState"/>
-                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointState"/>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasParentLink"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasParentLink"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasJointState"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#JointState"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An object that is used to articulate links in a kinematic structure.</rdfs:comment>
@@ -1611,7 +1606,7 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A sliding joint that slides along an axis, and has a limited range specified by the upper and lower limits.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Prismatic joint</rdfs:label>
     </owl:Class>
-
+    
 
 
     <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#RevoluteJoint -->
@@ -1627,18 +1622,6 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
         </rdfs:subClassOf>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A hinge joint that rotates along an axis and has a limited range specified by the upper and lower limits.</rdfs:comment>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Revolute joint</rdfs:label>
-    </owl:Class>
-
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#ArtificialAgent -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#ArtificialAgent">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
-        <rdfs:comment>A physical object with artificial characteristics, which can perform actions to achieve desired goals, and typically has sensors and/or actuators.
-
-There can be non-physical artificial agents such as software programs but they are not considered here in the scope of artificial agent.</rdfs:comment>
-        <rdfs:label>Artificial agent</rdfs:label>
     </owl:Class>
     
 
@@ -1713,6 +1696,7 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
         <rdfs:comment>A role classifying an Agent responsible for performing an Action.
 
 The entity playing an AgentRole is endowed with sentience and the capacity to deliberately choose actions in pursuit of goals. This distinguishes Agents from other causes that could bring an event about.</rdfs:comment>
+        <rdfs:label xml:lang="en">Agent role</rdfs:label>
     </owl:Class>
     
 
@@ -1722,6 +1706,7 @@ The entity playing an AgentRole is endowed with sentience and the capacity to de
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AlteredObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Patient"/>
         <rdfs:comment>An object undergoing modifications.</rdfs:comment>
+        <rdfs:label xml:lang="en">Altered object</rdfs:label>
     </owl:Class>
     
 
@@ -1742,26 +1727,6 @@ The entity playing an AgentRole is endowed with sentience and the capacity to de
         <rdfs:comment>A limb used to reach for objects.</rdfs:comment>
     </owl:Class>
     
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Head -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Head">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FunctionalPart"/>
-        <rdfs:comment>A functional part of the body responsible for carrying high bandwidth sensors, i.e., camera.</rdfs:comment>
-    </owl:Class>
-    
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Finger -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Finger">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Limb"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPartOf"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Hand"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A limb used for grasping objects.</rdfs:comment>
-    </owl:Class>
-    
 
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#AvoidedObject -->
@@ -1769,6 +1734,7 @@ The entity playing an AgentRole is endowed with sentience and the capacity to de
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AvoidedObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Patient"/>
         <rdfs:comment>An object that is avoided.</rdfs:comment>
+        <rdfs:label xml:lang="en">Avoided object</rdfs:label>
     </owl:Class>
     
 
@@ -1787,6 +1753,7 @@ The entity playing an AgentRole is endowed with sentience and the capacity to de
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#BeneficiaryRole">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#GoalRole"/>
         <rdfs:comment>A role classifying an agent for whose benefit an action is performed.</rdfs:comment>
+        <rdfs:label xml:lang="en">Beneficiary role</rdfs:label>
     </owl:Class>
     
 
@@ -1817,6 +1784,7 @@ The entity playing an AgentRole is endowed with sentience and the capacity to de
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#BlockedObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Patient"/>
         <rdfs:comment>An object that is blocked from accessing something.</rdfs:comment>
+        <rdfs:label xml:lang="en">Blocked object</rdfs:label>
     </owl:Class>
     
 
@@ -1868,6 +1836,7 @@ The entity playing an AgentRole is endowed with sentience and the capacity to de
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role filled by a description of some action or process that brings about a motion.
 
 As an example, consider the utterance &quot;the tennisman served the ball by hitting it with the racket.&quot; In this utterance, the filler of the CausalEventRole is expressed by the &quot;by hitting it with the racket&quot; constituent.</rdfs:comment>
+        <rdfs:label xml:lang="en">Causal event role</rdfs:label>
     </owl:Class>
     
 
@@ -1879,6 +1848,7 @@ As an example, consider the utterance &quot;the tennisman served the ball by hit
         <rdfs:comment>A role classifying objects that are responsible in bringing about an event.
 
 The paradigmatic example is the Agent performing an Action -- the Agent is the effective cause of the Action it performs. However, not all objects causing events are agents.</rdfs:comment>
+        <rdfs:label xml:lang="en">Causative role</rdfs:label>
     </owl:Class>
     
 
@@ -1935,6 +1905,7 @@ The paradigmatic example is the Agent performing an Action -- the Agent is the e
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CleanlinessRegion">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
         <rdfs:comment>Encodes the cleanliness of an object.</rdfs:comment>
+        <rdfs:label xml:lang="en">Cleanliness region</rdfs:label>
     </owl:Class>
     
 
@@ -1982,6 +1953,7 @@ The paradigmatic example is the Agent performing an Action -- the Agent is the e
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CommitedObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ConnectedObject"/>
         <rdfs:comment>An object committed to a bigger whole. After being committed, the object does not exist anymore in its old form.</rdfs:comment>
+        <rdfs:label xml:lang="en">Commited object</rdfs:label>
     </owl:Class>
     
 
@@ -2006,6 +1978,7 @@ The paradigmatic example is the Agent performing an Action -- the Agent is the e
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ConnectedObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Patient"/>
         <rdfs:comment>An object that is combined with another object.</rdfs:comment>
+        <rdfs:label xml:lang="en">Connected object</rdfs:label>
     </owl:Class>
     
 
@@ -2107,6 +2080,7 @@ The paradigmatic example is the Agent performing an Action -- the Agent is the e
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CoveredObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#BlockedObject"/>
         <rdfs:comment>An object that is covered.</rdfs:comment>
+        <rdfs:label xml:lang="en">Covered object</rdfs:label>
     </owl:Class>
     
 
@@ -2116,6 +2090,7 @@ The paradigmatic example is the Agent performing an Action -- the Agent is the e
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CreatedObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Patient"/>
         <rdfs:comment>An object that is created.</rdfs:comment>
+        <rdfs:label xml:lang="en">Created object</rdfs:label>
     </owl:Class>
     
 
@@ -2148,6 +2123,7 @@ The paradigmatic example is the Agent performing an Action -- the Agent is the e
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DependentPlace">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Feature"/>
         <rdfs:comment>A feature that is not part of its host, like a hole in a piece of cheese.</rdfs:comment>
+        <rdfs:label xml:lang="en">Dependent place</rdfs:label>
     </owl:Class>
     
 
@@ -2166,6 +2142,7 @@ The paradigmatic example is the Agent performing an Action -- the Agent is the e
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DepositedObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Patient"/>
         <rdfs:comment>An object placed ontop of another one.</rdfs:comment>
+        <rdfs:label xml:lang="en">Deposited object</rdfs:label>
     </owl:Class>
     
 
@@ -2258,6 +2235,7 @@ The paradigmatic example is the Agent performing an Action -- the Agent is the e
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DestroyedObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Patient"/>
         <rdfs:comment>An object that is detroyed.</rdfs:comment>
+        <rdfs:label xml:lang="en">Destroyed object</rdfs:label>
     </owl:Class>
     
 
@@ -2267,6 +2245,7 @@ The paradigmatic example is the Agent performing an Action -- the Agent is the e
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DetectedObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Patient"/>
         <rdfs:comment>An object that is detected.</rdfs:comment>
+        <rdfs:label xml:lang="en">Detected object</rdfs:label>
     </owl:Class>
     
 
@@ -2293,6 +2272,7 @@ The paradigmatic example is the Agent performing an Action -- the Agent is the e
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
         <rdfs:comment>This class defines the values that a device state can take.</rdfs:comment>
+        <rdfs:label xml:lang="en">Device state range</rdfs:label>
     </owl:Class>
     
 
@@ -2302,6 +2282,7 @@ The paradigmatic example is the Agent performing an Action -- the Agent is the e
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DeviceTurnedOff">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DeviceStateRange"/>
         <rdfs:comment>A value indicating a device is not in operation.</rdfs:comment>
+        <rdfs:label xml:lang="en">Device turned off</rdfs:label>
     </owl:Class>
     
 
@@ -2311,6 +2292,7 @@ The paradigmatic example is the Agent performing an Action -- the Agent is the e
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DeviceTurnedOn">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DeviceStateRange"/>
         <rdfs:comment>A value indicating a device is in operation.</rdfs:comment>
+        <rdfs:label xml:lang="en">Device turned on</rdfs:label>
     </owl:Class>
     
 
@@ -2383,6 +2365,7 @@ The paradigmatic example is the Agent performing an Action -- the Agent is the e
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#EnclosedObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#IncludedObject"/>
         <rdfs:comment>An object included within the spatial boundaries of another object.</rdfs:comment>
+        <rdfs:label xml:lang="en">Enclosed object</rdfs:label>
     </owl:Class>
     
 
@@ -2409,6 +2392,8 @@ The paradigmatic example is the Agent performing an Action -- the Agent is the e
         <rdfs:comment>A role classifying a participant in an event.
 
 In linguistics, this is also known as a thematic role.</rdfs:comment>
+        <rdfs:label xml:lang="en">Event adjacent role</rdfs:label>
+        <rdfs:label xml:lang="en">Thematic role</rdfs:label>
     </owl:Class>
     
 
@@ -2426,6 +2411,7 @@ In linguistics, this is also known as a thematic role.</rdfs:comment>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role that requires of its filler simply to exist, unlike other roles that may demand e.g. agentive or instrumental participation in some executable schema or plan (AgentRole and Instrument respectively).
 
 The intention behind such a simple role is to have a way to represent, in a schematic formalism used to describe some scene, that an object is present. In particular, the schema used to convey this information is the ESTSchemaTheory, which has ExistingObjectRole as its sole defined role.</rdfs:comment>
+        <rdfs:label xml:lang="en">Existing object role</rdfs:label>
     </owl:Class>
     
 
@@ -2435,6 +2421,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ExperiencerRole">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AgentRole"/>
         <rdfs:comment>A role used in frame semantics to classify agents performing perception actions, or being the subjects affected by some biological process.</rdfs:comment>
+        <rdfs:label xml:lang="en">Experiencer role</rdfs:label>
     </owl:Class>
     
 
@@ -2444,6 +2431,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ExtractedObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Patient"/>
         <rdfs:comment>An object that is removed from a container or system.</rdfs:comment>
+        <rdfs:label xml:lang="en">Extracted object</rdfs:label>
     </owl:Class>
     
 
@@ -2483,6 +2471,21 @@ The intention behind such a simple role is to have a way to represent, in a sche
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Finger -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Finger">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Limb"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPartOf"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Hand"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A limb used for grasping objects.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#FrictionAttribute -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FrictionAttribute">
@@ -2509,18 +2512,45 @@ The intention behind such a simple role is to have a way to represent, in a sche
     </owl:Class>
     
 
-	<!-- http://www.ease-crc.org/ont/SOMA.owl#Graspability -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Graspability">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Disposition"/>
-        <rdfs:comment>The disposition of an object (e.g. the handle) to afford grasping the object.</rdfs:comment>
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#FunctionalPart -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FunctionalPart">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalBody"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isComponentOf"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>Parts of an agent or an artifact are considered as functional parts.</rdfs:comment>
+        <rdfs:label>Functional part</rdfs:label>
     </owl:Class>
+    
+
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#GoalRole -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#GoalRole">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#EventAdjacentRole"/>
         <rdfs:comment>A role classifying objects that constitute the goal of an action.</rdfs:comment>
+        <rdfs:label xml:lang="en">Goal role</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Graspability -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Graspability">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Disposition"/>
+        <rdfs:comment>The disposition of an object (e.g. the handle) to afford grasping the object.</rdfs:comment>
     </owl:Class>
     
 
@@ -2577,6 +2607,15 @@ The intention behind such a simple role is to have a way to represent, in a sche
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Head -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Head">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FunctionalPart"/>
+        <rdfs:comment>A functional part of the body responsible for carrying high bandwidth sensors, i.e., camera.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Impediment -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Impediment">
@@ -2603,6 +2642,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#IncludedObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Patient"/>
         <rdfs:comment>An object that is contained in something. This is meant very general and includes, e.g., elements contained in a set, or things that are spatially contained within the boundaries of some object.</rdfs:comment>
+        <rdfs:label xml:lang="en">Included object</rdfs:label>
     </owl:Class>
     
 
@@ -2612,6 +2652,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#InsertedObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#EnclosedObject"/>
         <rdfs:comment>An object inserted into another object.</rdfs:comment>
+        <rdfs:label xml:lang="en">Inserted object</rdfs:label>
     </owl:Class>
     
 
@@ -2721,6 +2762,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#LinkedObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ConnectedObject"/>
         <rdfs:comment>An object that is linked to some other object.</rdfs:comment>
+        <rdfs:label xml:lang="en">Linked object</rdfs:label>
     </owl:Class>
     
 
@@ -2766,6 +2808,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the object with primary focal prominence in a spatial or spatio-temporal schema. Terminological variants that appear in the literature on cognitive linguistics include Figure (Talmy 1983) and Trajector (Langacker 1986).</rdfs:comment>
+        <rdfs:label xml:lang="en">Locatum role</rdfs:label>
     </owl:Class>
     
 
@@ -2847,6 +2890,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>An object undergoing location change.</rdfs:comment>
+        <rdfs:label xml:lang="en">Moved object</rdfs:label>
     </owl:Class>
     
 
@@ -2874,6 +2918,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PathRole">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SpatioTemporalRole"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role that classifies the path of a motion.</rdfs:comment>
+        <rdfs:label xml:lang="en">Path role</rdfs:label>
     </owl:Class>
     
 
@@ -2901,8 +2946,8 @@ The intention behind such a simple role is to have a way to represent, in a sche
                 <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label>Physical effector</rdfs:label>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A functional part belonging to an Agent and which allows that Agent to act upon its surroundings.</rdfs:comment>
+        <rdfs:label>Physical effector</rdfs:label>
     </owl:Class>
     
 
@@ -2989,6 +3034,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#QualityTransition">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition"/>
         <rdfs:comment>todo(DB): added for NEEMs (quale change), but not sure yet about it...</rdfs:comment>
+        <rdfs:label xml:lang="en">Quality transition</rdfs:label>
     </owl:Class>
     
 
@@ -2998,6 +3044,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RecipientRole">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#BeneficiaryRole"/>
         <rdfs:comment>A role which classifies an agent who receives an object modified or created by an action.</rdfs:comment>
+        <rdfs:label xml:lang="en">Recipent role</rdfs:label>
     </owl:Class>
     
 
@@ -3017,6 +3064,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RelationAdjacentRole">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
         <rdfs:comment>A role classifying an object participating in some relation, e.g. a participant in a spatial relation or a linguistic fragment in a rhetorical relation to another.</rdfs:comment>
+        <rdfs:label xml:lang="en">Relation adjacent role</rdfs:label>
     </owl:Class>
     
 
@@ -3032,6 +3080,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Denotes the reference object in a spatial or spatio-temporal schema, i.e. the object with secondary focal prominence. Terminological variants: Ground (Talmy 1983), Landmark (Langacker 1986).</rdfs:comment>
+        <rdfs:label xml:lang="en">Relatum role</rdfs:label>
     </owl:Class>
     
 
@@ -3041,6 +3090,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RelevantPart">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Feature"/>
         <rdfs:comment>Features that are relevant parts of their host, like a bump or an edge.</rdfs:comment>
+        <rdfs:label xml:lang="en">Relevant part</rdfs:label>
     </owl:Class>
     
 
@@ -3054,6 +3104,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
 Resources are usually not agentive; a different set of roles classifies the agentive participants in actions. Likewise, typically resources do not play causative or goal roles for the event.
 
 Resources are often consumed by their participation in an event, but this need not always be the case. An instrument and capital are examples of resources that are reusable.</rdfs:comment>
+        <rdfs:label xml:lang="en">Resource role</rdfs:label>
     </owl:Class>
     
 
@@ -3063,6 +3114,7 @@ Resources are often consumed by their participation in an event, but this need n
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RestrictedObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#BlockedObject"/>
         <rdfs:comment>An object with restrictions to access something.</rdfs:comment>
+        <rdfs:label xml:lang="en">Restricted object</rdfs:label>
     </owl:Class>
     
 
@@ -3081,6 +3133,7 @@ Resources are often consumed by their participation in an event, but this need n
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ResultRole">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#GoalRole"/>
         <rdfs:comment>A role classifying the object that is the outcome of a creation or modification action or process.</rdfs:comment>
+        <rdfs:label xml:lang="en">Result role</rdfs:label>
     </owl:Class>
     
 
@@ -3099,6 +3152,7 @@ Resources are often consumed by their participation in an event, but this need n
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RoomSurface">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Surface"/>
         <rdfs:comment>The surface of a room.</rdfs:comment>
+        <rdfs:label xml:lang="en">Room surface</rdfs:label>
     </owl:Class>
     
 
@@ -3108,6 +3162,7 @@ Resources are often consumed by their participation in an event, but this need n
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SelectedObject">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
         <rdfs:comment>An object chosen as the result of some selection task.</rdfs:comment>
+        <rdfs:label xml:lang="en">Selected object</rdfs:label>
     </owl:Class>
     
 
@@ -3188,6 +3243,7 @@ Note that sometimes the shape as actually used for some purpose may be displaced
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>An object undergoing shape change.</rdfs:comment>
+        <rdfs:label xml:lang="en">Shaped object</rdfs:label>
     </owl:Class>
     
 
@@ -3277,6 +3333,7 @@ Note that sometimes the shape as actually used for some purpose may be displaced
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SourceMaterialRole">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ResourceRole"/>
         <rdfs:comment>A role classifying a substance or object that enters a process of transformation intended to create some other object.</rdfs:comment>
+        <rdfs:label xml:lang="en">Source material role</rdfs:label>
     </owl:Class>
     
 
@@ -3286,6 +3343,7 @@ Note that sometimes the shape as actually used for some purpose may be displaced
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SpatialRelationRole">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RelationAdjacentRole"/>
         <rdfs:comment>Roles classifying entities participating in some spatial relation.</rdfs:comment>
+        <rdfs:label xml:lang="en">Spatial relation role</rdfs:label>
     </owl:Class>
     
 
@@ -3295,6 +3353,7 @@ Note that sometimes the shape as actually used for some purpose may be displaced
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SpatioTemporalRole">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#EventAdjacentRole"/>
         <rdfs:comment>Roles that classify entities which locate an event or object in space and time.</rdfs:comment>
+        <rdfs:label xml:lang="en">Spatio-temporal role</rdfs:label>
     </owl:Class>
     
 
@@ -3331,6 +3390,7 @@ Note that sometimes the shape as actually used for some purpose may be displaced
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#StimulusRole">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CausativeRole"/>
         <rdfs:comment>A role classifying an object that is perceived by some agent and thus triggers some reaction (e.g., a perception event).</rdfs:comment>
+        <rdfs:label xml:lang="en">Stimulus role</rdfs:label>
     </owl:Class>
     
 
@@ -3351,6 +3411,7 @@ Note that sometimes the shape as actually used for some purpose may be displaced
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SupportedObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ConnectedObject"/>
         <rdfs:comment>An object that is supported by some supporter.</rdfs:comment>
+        <rdfs:label xml:lang="en">Supported object</rdfs:label>
     </owl:Class>
     
 
@@ -3399,6 +3460,7 @@ Note that sometimes the shape as actually used for some purpose may be displaced
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#TemperatureRegion">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
         <rdfs:comment>Encodes the temperature of an object.</rdfs:comment>
+        <rdfs:label xml:lang="en">Temperature region</rdfs:label>
     </owl:Class>
     
 
@@ -3428,6 +3490,7 @@ Note that sometimes the shape as actually used for some purpose may be displaced
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#TimeRole">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SpatioTemporalRole"/>
         <rdfs:comment>A role filled by a description of the location in time and/or duration of an event or object.</rdfs:comment>
+        <rdfs:label xml:lang="en">Time role</rdfs:label>
     </owl:Class>
     
 
@@ -3497,6 +3560,7 @@ It is also possible that a Transient transitionsBack to the initial object. An e
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>A point in three dimensional space, given as translation.</rdfs:comment>
+        <rdfs:label xml:lang="en">3D position</rdfs:label>
     </owl:Class>
     
 
@@ -3513,6 +3577,7 @@ It is also possible that a Transient transitionsBack to the initial object. An e
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>A point in three dimensional space, given as translation in a reference coordinate system, and an orientation of a coordinate system centered at that point relative to the reference coordinate system.</rdfs:comment>
+        <rdfs:label xml:lang="en">6D pose</rdfs:label>
     </owl:Class>
     
 
@@ -3542,5 +3607,5 @@ It is also possible that a Transient transitionsBack to the initial object. An e
 
 
 
-<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
 
