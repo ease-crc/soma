@@ -173,7 +173,7 @@ def xml2json(xmlstring, options, strip_ns=1, strip=1):
 
     """Convert an XML string into a JSON string."""
 
-    elem = ET.fromstring(xmlstring)
+    elem = ET.fromstring(xmlstring.replace('\n',''))
     return elem2json(elem, options, strip_ns=strip_ns, strip=strip)
 
 
