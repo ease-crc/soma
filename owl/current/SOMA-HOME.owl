@@ -4195,6 +4195,29 @@ There can be non-physical artificial agents such as software programs but they a
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#CanCut -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#CanCut">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Variability"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affordsBearer"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Cutter"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#CutObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The disposition of an object (the tool) to cut other objects. Such as a knife has cutting ability to cut a cucumber into pieces.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#ContinuousJoint -->
 
 
@@ -4203,6 +4226,51 @@ There can be non-physical artificial agents such as software programs but they a
         <rdfs:comment>A continuous hinge joint that rotates around an axis and has no upper and lower limits.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
         <rdfs:label>Continuous joint</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#CutObject -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#CutObject">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AlteredObject"/>
+        <rdfs:comment>An object being cut down into pieces.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#Cuttability -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Cuttability">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Disposition"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affordsBearer"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#CutObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Cutter"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The disposition of an object (the barrier) which makes it able to be cut down (into pieces) usually by some other object with role as a Cutter. Such as a cucumber has cuttability disposition which can be cut by a knife.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#Cutter -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Cutter">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Tool"/>
+        <rdfs:comment>A role to classify an object used to cut other objects. Usually should poses sharpness as a quality. Execptions are not considered in this context. Such as a wind, water, or other natural agents cutting(eroding) the rocks.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
     </owl:Class>
     
 
@@ -4398,6 +4466,34 @@ There can be non-physical artificial agents such as software programs but they a
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#Pourable -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Pourable">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Disposition"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affordsBearer"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#PouredObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The disposition of a fluid or substance which makes it possible to pour it out of a container and into or onto other objects.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#PouredObject -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#PouredObject">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Patient"/>
+        <rdfs:comment>An object being poured into or onto some other object. A role of some fluid or substance that is the patient of pouring task.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#PrismaticJoint -->
 
 
@@ -4432,6 +4528,34 @@ There can be non-physical artificial agents such as software programs but they a
         <rdfs:comment>A hinge joint that rotates along an axis and has a limited range specified by the upper and lower limits.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
         <rdfs:label>Revolute joint</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#Storage -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Storage">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Enclosing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#StoredObject"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The disposition of an object (the container) to store other objects. Storage of an object would facilitate several objectives; such as to store objects in a safe or usual place, to prevent the substances e.g. prevention of milk going bad by storing them in a refrigrator.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#StoredObject -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#StoredObject">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#EnclosedObject"/>
+        <rdfs:comment>An object being stored into some other object, usually inside a container.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
     </owl:Class>
     
 
@@ -11537,14 +11661,14 @@ InformationRealization_123 hasDataFormat &apos;urdf&apos;</rdfs:comment>
                         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
-                <rdfs:subClassOf rdf:nodeID="genid433"/>
+                <rdfs:subClassOf rdf:nodeID="genid439"/>
             </owl:Class>
         </owl:annotatedSource>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid433"/>
+        <owl:annotatedTarget rdf:nodeID="genid439"/>
         <rdfs:comment>If a SituationTransition manifests in some Event, then it also has an initial Situation and a terminal one.</rdfs:comment>
     </owl:Axiom>
-    <owl:Class rdf:nodeID="genid433">
+    <owl:Class rdf:nodeID="genid439">
         <owl:intersectionOf rdf:parseType="Collection">
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasInitialSituation"/>
@@ -11566,14 +11690,14 @@ InformationRealization_123 hasDataFormat &apos;urdf&apos;</rdfs:comment>
                         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
-                <rdfs:subClassOf rdf:nodeID="genid443"/>
+                <rdfs:subClassOf rdf:nodeID="genid449"/>
             </owl:Class>
         </owl:annotatedSource>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid443"/>
+        <owl:annotatedTarget rdf:nodeID="genid449"/>
         <rdfs:comment>A SituationTransition that manifests in some Event also includes an Action. (NOTE (MP): Typically, the Event manifesting it would be that included Action actually so perhaps we can just require that manifestations of SituationTransitions be Actions?)</rdfs:comment>
     </owl:Axiom>
-    <owl:Restriction rdf:nodeID="genid443">
+    <owl:Restriction rdf:nodeID="genid449">
         <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
     </owl:Restriction>
@@ -11582,14 +11706,14 @@ InformationRealization_123 hasDataFormat &apos;urdf&apos;</rdfs:comment>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasInitialSituation"/>
                 <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-                <rdfs:subClassOf rdf:nodeID="genid446"/>
+                <rdfs:subClassOf rdf:nodeID="genid452"/>
             </owl:Restriction>
         </owl:annotatedSource>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid446"/>
+        <owl:annotatedTarget rdf:nodeID="genid452"/>
         <rdfs:comment>If a transition has an initial situation then it also has a manifestation.</rdfs:comment>
     </owl:Axiom>
-    <owl:Restriction rdf:nodeID="genid446">
+    <owl:Restriction rdf:nodeID="genid452">
         <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
     </owl:Restriction>
@@ -11598,14 +11722,14 @@ InformationRealization_123 hasDataFormat &apos;urdf&apos;</rdfs:comment>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasTerminalSituation"/>
                 <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-                <rdfs:subClassOf rdf:nodeID="genid449"/>
+                <rdfs:subClassOf rdf:nodeID="genid455"/>
             </owl:Restriction>
         </owl:annotatedSource>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid449"/>
+        <owl:annotatedTarget rdf:nodeID="genid455"/>
         <rdfs:comment>If a transition has a terminal situation then it also has a manifestation.</rdfs:comment>
     </owl:Axiom>
-    <owl:Restriction rdf:nodeID="genid449">
+    <owl:Restriction rdf:nodeID="genid455">
         <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
     </owl:Restriction>
