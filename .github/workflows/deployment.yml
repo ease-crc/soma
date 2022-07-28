@@ -23,6 +23,13 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '18'
+          cache: 'maven'
+
       - name: Create directories
         run: |
               mkdir -p $GITHUB_WORKSPACE/build/owl/current &&
@@ -30,22 +37,15 @@ jobs:
 
       - name: Compile current
         if: startsWith(github.ref, 'refs/tags/') != true
-        uses: docker://swipl:8.0.3
-        with:
-          SOMA_VERSION: current
-          args: swipl -f prolog/uglify.pl -t uglify
+        run: |
+          mvn spring-boot:run -f scripts/java/pom.xml \
+             -Dspring-boot.run.arguments="--versionInfo=current"
 
       - name: Compile tag
         if: startsWith(github.ref, 'refs/tags/')
-        uses: docker://swipl:8.0.3
-        with:
-          SOMA_VERSION: ${{ github.event.release.tag_name }}
-          args: swipl -f prolog/uglify.pl -t uglify
-
-      - name: Convert
-        uses: ./.github/actions/convert
-        with:
-          args: python3 ./scripts/uglify_ease_as_owl.py
+        run: |
+          mvn spring-boot:run -f scripts/java/pom.xml \
+             -Dspring-boot.run.arguments="--versionInfo=${{ github.event.release.tag_name }}"
 
       - name: Upload SOMA
         uses: actions/upload-artifact@v1
@@ -67,15 +67,6 @@ jobs:
 
       - name: Copy all OWL files to be deployed
         run: sudo cp -n ./owl/*.owl $GITHUB_WORKSPACE/build/owl/current
-
-      - name: Metrics
-        run: sudo ./scripts/OntoMetrics.sh $GITHUB_WORKSPACE/build/owl/current/SOMA.owl $GITHUB_WORKSPACE/build/files
-
-      - name: Upload Metrics
-        uses: actions/upload-artifact@v1
-        with:
-          name: Metrics
-          path: ./build/files/metrics.json
       
       - name: Compile NEEM Handbook
         uses: docker://blang/latex:ubuntu
@@ -113,6 +104,37 @@ jobs:
           TARGET_FOLDER: owl/${{ github.event.release.tag_name }}
           #TARGET_FOLDER: owl/${{ GITHUB_REF/refs\/tags\// }}
           #TARGET_FOLDER: owl/${{ GITHUB_REF#refs/tags/ }}
+
+      # Metrics have to be created after the deployment step, because 
+      # OntoMetrics only allows POST with an URI at the moment
+      - name: Metrics
+        if: github.ref == 'refs/heads/master'
+        run: |
+          sudo ./scripts/OntoMetrics.sh \
+          https://raw.githubusercontent.com/ease-crc/soma/gh-pages/owl/current/SOMA.owl \
+          $GITHUB_WORKSPACE/build/files
+
+      - name: Metrics
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          sudo ./scripts/OntoMetrics.sh \
+          https://raw.githubusercontent.com/ease-crc/soma/gh-pages/owl/${{ github.event.release.tag_name }}/SOMA.owl \
+          $GITHUB_WORKSPACE/build/files
+
+      - name: Upload Metrics
+        uses: actions/upload-artifact@v1
+        with:
+          name: Metrics
+          path: ./build/files/metrics.json
+
+      - name: Deploy files current
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        if: github.ref == 'refs/heads/master'
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build/files
+          TARGET_FOLDER: /files/current
 
       - name: Deploy files tag
         uses: JamesIves/github-pages-deploy-action@releases/v3
