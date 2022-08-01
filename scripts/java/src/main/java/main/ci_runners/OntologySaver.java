@@ -1,36 +1,42 @@
-package main;
+package main.ci_runners;
 
+import main.OntologyManager;
+import main.config.OntologyConfig;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyStorageException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Priority;
-
 @Component
-@Priority(Integer.MAX_VALUE - 1)
-public class OntologySaver implements CommandLineRunner {
+@Lazy
+public class OntologySaver implements CIRunnable {
 
 	/**
 	 * {@link Logger} of this class.
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(OntologySaver.class);
 	private final OntologyManager ontologyManager;
+	private final OntologyConfig ontologyConfig;
 
 	@Autowired
-	public OntologySaver(final OntologyManager ontologyManager) {
+	public OntologySaver(final OntologyManager ontologyManager, final OntologyConfig ontologyConfig) {
 		this.ontologyManager = ontologyManager;
+		this.ontologyConfig = ontologyConfig;
 	}
 
 	@Override
-	public void run(final String... args) throws OWLOntologyStorageException {
+	public void run() throws OWLOntologyStorageException {
 		for (final OWLOntology ontology : ontologyManager.getOntologyManager().getOntologies()) {
 			LOGGER.info("Saving {}", ontology.getOntologyID().getOntologyIRI().map(Object::toString)
 			                                 .orElseGet(() -> "unnamed ontology"));
-			ontology.saveOntology();
+			if (ontologyConfig.format() == null) {
+				ontology.saveOntology();
+			} else {
+				ontology.saveOntology(ontologyConfig.format());
+			}
 		}
 	}
 }

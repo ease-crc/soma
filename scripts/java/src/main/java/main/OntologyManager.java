@@ -1,5 +1,6 @@
 package main;
 
+import main.config.OntologyConfig;
 import org.protege.xmlcatalog.owlapi.XMLCatalogIRIMapper;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;

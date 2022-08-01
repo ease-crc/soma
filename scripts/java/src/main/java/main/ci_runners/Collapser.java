@@ -1,5 +1,8 @@
-package main;
+package main.ci_runners;
 
+import main.OntologyManager;
+import main.config.CollapseConfig;
+import main.config.OntologyConfig;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.model.parameters.Imports;
@@ -7,19 +10,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Priority;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 @Component
-@Priority(Integer.MAX_VALUE - 1)
-public class Collapser implements CommandLineRunner {
+@Lazy
+public class Collapser implements CIRunnable {
 
 	/**
 	 * {@link Logger} of this class.
@@ -40,8 +44,7 @@ public class Collapser implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(final String... args)
-			throws OWLOntologyStorageException, OWLOntologyCreationException, IOException {
+	public void run() throws OWLOntologyCreationException, IOException, OWLOntologyStorageException {
 		for (final var collapseConfig : ontologyConfig.toCollapse()) {
 			collapse(collapseConfig);
 		}
@@ -76,16 +79,28 @@ public class Collapser implements CommandLineRunner {
 			return;
 		}
 		// hard way
-		toCollapse.imports().forEach(next -> {
-			if (CollapseConfig.containsReferenceOf(except, next)) {
-				final var iri = next.getOntologyID().getOntologyIRI().get();
-				LOGGER.info("{} will be imported instead of merged", iri);
-				collapsed.applyChange(
-						new AddImport(collapsed, OWLManager.getOWLDataFactory().getOWLImportsDeclaration(iri)));
-			} else {
-				collapsed.addAxioms(next.axioms(Imports.EXCLUDED));
-			}
+		final Set<OWLOntology> importingImports = toCollapse.imports()
+		                                                    .filter(next -> CollapseConfig.containsReferenceOf(except,
+		                                                                                                       next))
+		                                                    .collect(Collectors.toSet());
+
+		final Set<OWLOntology> transitiveImports = importingImports.stream().flatMap(OWLOntology::imports)
+		                                                           .collect(Collectors.toSet());
+
+		final Set<OWLOntology> mergingImports =
+				toCollapse.imports().filter(next -> !(importingImports.contains(next) ||
+				transitiveImports.contains(next))).collect(Collectors.toSet());
+		mergingImports.add(toCollapse);
+
+		importingImports.forEach(next -> {
+			final var iri = next.getOntologyID().getOntologyIRI().get();
+			LOGGER.info("{} will be imported instead of merged", iri);
+			collapsed.applyChange(
+					new AddImport(collapsed, OWLManager.getOWLDataFactory().getOWLImportsDeclaration(iri)));
 		});
+
+		mergingImports.forEach(next -> collapsed.addAxioms(next.axioms(Imports.EXCLUDED)));
+
 	}
 
 	private static IRI getRequestedIRI(final CollapseConfig collapseConfig, final HasOntologyID toCollapse) {
