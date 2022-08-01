@@ -210,6 +210,16 @@ Source: https://en.wikipedia.org/wiki/Archive_file#Archive_formats</rdfs:comment
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#ArtificialAgent -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ArtificialAgent">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
+        <rdfs:comment xml:lang="en">Any constructed agent with physical embodiment that has intentions on its own, e.g., a robot.</rdfs:comment>
+        <rdfs:label xml:lang="en">Artificial agent</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Classifier -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Classifier">
@@ -307,6 +317,12 @@ From Wikipedia: https://en.wikipedia.org/wiki/Computer_language</rdfs:comment>
 
 Source: https://en.wikipedia.org/wiki/Database</rdfs:comment>
     </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#DesignedTool -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedTool"/>
     
 
 
@@ -423,14 +439,6 @@ Source: https://en.wikipedia.org/wiki/Database</rdfs:comment>
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:label xml:lang="en">Executable Software</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Execution -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Execution">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process"/>
     </owl:Class>
     
 
@@ -823,43 +831,35 @@ The Structure is the organization of files, classes, objects and method calls of
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#SoftwareAgent -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwareAgent">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwareInstance"/>
-                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialAgent"/>
-        <rdfs:comment>Any Software Instance with agentive features.</rdfs:comment>
-        <rdfs:label>Software agent</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#SoftwareExecution -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwareExecution">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Execution"/>
-        <rdfs:label xml:lang="en">Software Execution</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#SoftwareInstance -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwareInstance">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedTool"/>
         <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isDesignedBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Software"/>
-            </owl:Restriction>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedTool"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isDesignedBy"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Software"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialAgent"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#actsFor"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">A Software instance is an entity to represent the agent that emerges from and while executing software: Some object, that can perform actions and communicate via some interfaces.
+In this view, we see the of an Agent required intentionality its intentionality as bestowed upon the Software instance from the agents who started the program or gave an input (e.g., via a mouse click) to achieve some goal.
+
+Another apporach might be to not model this entity at all and only see Execution of Software as a Process (see, e.g., https://en.wikipedia.org/wiki/Execution_(computing)). However, this would complicate modeling communication between running Software processes.</rdfs:comment>
         <rdfs:label xml:lang="en">Software Instance</rdfs:label>
     </owl:Class>
     
@@ -1013,6 +1013,16 @@ On the other hand, this might not be true as both could be encoded in a binary f
         <rdfs:comment>A description of a situation where some software dependency is not available.</rdfs:comment>
         <rdfs:label xml:lang="en">Unavailable software</rdfs:label>
     </owl:Class>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent -->
+
+    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent">
+        <rdfs:comment xml:lang="en">Generally, agents are goal-directed entities that are able to monitor their environment to select and perform efficient means-ends actions that are available in a given situation to achieve an intended goal. Agency, therefore, implies the ability to perceive and to change the environment of the agent. Crucially, it also entails intentionality to represent the goal-state in the future, equifinal variability to be able to achieve the intended goal-state with different actions in different contexts, and rationality of actions in relation to their goal to produce the most efficient action available (Source: https://en.wikipedia.org/wiki/Agency_(psychology)).
+
+While we follow this definition, we do so loosely: We do not require the intentionality to be sourced by the agent. E.g., a running computer program (see Software instance) can be seen as an actor and therefore participate in Actions, e.g. some Communication Action, while its intentionality has been bestowed upon it from the agents who started the program or gave an input (e.g., via a mouse click) to achieve some goal.</rdfs:comment>
+    </rdf:Description>
 </rdf:RDF>
 
 
