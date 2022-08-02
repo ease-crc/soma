@@ -21,17 +21,23 @@ import java.util.stream.Collectors;
 public class PropertyListExporter implements CIRunnable {
 
 	private static final Logger logger = LoggerFactory.getLogger(PropertyListExporter.class);
+
 	private final Path path;
 	private final OntologyManager ontologyManager;
 
 	@Autowired
-	public PropertyListExporter(final OntologyManager ontologyManager, @Value("${propertyListPath}") final Path path) {
+	public PropertyListExporter(final OntologyManager ontologyManager,
+	                            @Value("${propertyListPath#{null}}") final Path path) {
 		this.path = path;
 		this.ontologyManager = ontologyManager;
 	}
 
 	@Override
 	public void run() throws IOException {
+		if (path == null) {
+			logger.info("CL argument 'propertyListPath' not given. Skipping export of properties.");
+			return;
+		}
 		for (final OWLOntology owlOntology : ontologyManager.mainOntologies().collect(Collectors.toSet())) {
 			exportProperties(owlOntology);
 		}
