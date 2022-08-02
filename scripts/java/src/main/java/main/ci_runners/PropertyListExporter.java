@@ -41,7 +41,7 @@ public class PropertyListExporter implements CIRunnable {
 		@SuppressWarnings("OptionalGetWithoutIsPresent") String fileName = ontology.getOntologyID().getOntologyIRI()
 		                                                                           .get().getShortForm();
 		fileName = fileName.substring(0, fileName.length() - 5);
-		if (!path.toFile().mkdirs()) {
+		if (!path.toFile().exists() && !path.toFile().mkdirs()) {
 			throw new IOException("Could not create dir " + path.toAbsolutePath());
 		}
 		logger.info("Writing object- and dataProperties of {} to {}_[object,data]Properties", fileName,
