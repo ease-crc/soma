@@ -27,7 +27,7 @@ public class PropertyListExporter implements CIRunnable {
 
 	@Autowired
 	public PropertyListExporter(final OntologyManager ontologyManager,
-	                            @Value("${propertyListPath#{null}}") final Path path) {
+	                            @Value("${propertyListPath:#{null}}") final Path path) {
 		this.path = path;
 		this.ontologyManager = ontologyManager;
 	}
