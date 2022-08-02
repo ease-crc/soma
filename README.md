@@ -12,6 +12,11 @@ SOMA is fully implemented in form of an OWL ontology which is based on the DOLCE
 [DUL](http://www.ontologydesignpatterns.org/ont/dul/DUL.owl) is a carefully designed upper-level ontology that seeks to model general categories underlying human cognition without making any discipline-specific assumptions.
 Our extensions mainly focus on characterizing different aspects of activities that were not considered sufficiently in DUL for the scope of autonomous robotics.
 
+## Release Notes
+
+You can find the list of historic, current and upcoming SOMA versions here: [Release_Notes.md](RELEASE_NOTES.md)
+
+
 ## Further Information
 
 SOMA-related papers, releases, metrics, and some tools can be accessed on the [SOMA Project Website](https://ease-crc.github.io/soma/)
