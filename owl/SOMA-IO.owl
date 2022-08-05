@@ -139,30 +139,6 @@ From Wikipedia: https://en.wikipedia.org/wiki/Algorithm</rdfs:comment>
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Archive -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Archive">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Structured_Text"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FileConfiguration"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isGivenMeaningBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ArchiveFormat"/>
-            </owl:Restriction>
-        </owl:equivalentClass>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#ArchiveFile -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ArchiveFile">
@@ -172,7 +148,7 @@ From Wikipedia: https://en.wikipedia.org/wiki/Algorithm</rdfs:comment>
                     <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Digital_File"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#realizes"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Archive"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ArchiveText"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -193,13 +169,41 @@ Source: https://en.wikipedia.org/wiki/Archive_file</rdfs:comment>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#givesMeaningTo"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Archive"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ArchiveText"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">An Archive Format is the file format of an archive file.
 
 Source: https://en.wikipedia.org/wiki/Archive_file#Archive_formats</rdfs:comment>
         <rdfs:label xml:lang="en">Archive Format</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#ArchiveText -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ArchiveText">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Structured_Text"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FileConfiguration"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isGivenMeaningBy"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ArchiveFormat"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:comment xml:lang="en">An Archive is a Structured Text that is composed of one or more Structured Texts along with metadata. Archives are used to collect multiple texts together into a single text for easier portability and storage as Archive Files, or simply to compress text to use less storage space as Computer Files. Archive often store directory structures, error detection and correction information, arbitrary comments, and sometimes use built-in encryption.
+
+Source: https://en.wikipedia.org/wiki/Archive_file</rdfs:comment>
+        <rdfs:label xml:lang="en">Archive Text</rdfs:label>
     </owl:Class>
     
 
