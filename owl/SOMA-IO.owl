@@ -30,7 +30,6 @@
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#encodes">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
-        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isEncodedBy"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
@@ -56,10 +55,11 @@
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isDesignFor">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isDesignedBy"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-        <rdfs:comment>A special relation between a Design and a DesignedArtifcat, to indicate that the Design describes a way to construct the DesignedArtifact.</rdfs:comment>
-        <rdfs:label>is design for</rdfs:label>
+        <rdfs:comment xml:lang="en">A special relation between a Design and a DesignedArtifact, to indicate that the Design describes a way to construct the DesignedArtifact.</rdfs:comment>
+        <rdfs:label xml:lang="en">is design for</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -70,18 +70,8 @@
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
-        <rdfs:comment xml:lang="en">A special relation between a Design and a Designed Artifcat, to indicate that the Designed Artifact is described by the Design.</rdfs:comment>
+        <rdfs:comment xml:lang="en">A special relation between a Design and a Designed Artifact, to indicate that the Designed Artifact is described by the Design.</rdfs:comment>
         <rdfs:label xml:lang="en">is designed by</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#isEncodedBy -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isEncodedBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
-        <rdfs:comment xml:lang="en">The relation between two Information Objects that have the same meaning, but are formatted differently. E.g., a text written in UTF-8 is encoded by a text in a natural writing system (letters) and vice versa.</rdfs:comment>
-        <rdfs:label xml:lang="en">is encoded By</rdfs:label>
     </owl:ObjectProperty>
     
 
