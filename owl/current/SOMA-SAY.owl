@@ -263,7 +263,7 @@ Let xA, xP be objects filling the agent, patient roles of this schema. Then one 
 
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ClausalObject">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#Phrase"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Phrase"/>
         <rdfs:comment>A clause is a phrase containing a subject and a predicate.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-SAY.owl"/>
         <rdfs:label>Clausal object</rdfs:label>
@@ -563,6 +563,13 @@ For SOMA, whereas the focus of executable schematic theories is to describe how 
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#InformationObject -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#InformationObject"/>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Instrument -->
 
 
@@ -582,6 +589,17 @@ For SOMA, whereas the focus of executable schematic theories is to describe how 
 Note that in a semantic sense such clauses always request information, but in a pragmatic sense they can be used to convey commands or requests for action, such as e.g. &quot;can you close the door?&quot; The question is not just a request for information about ability, but a request to perform a task.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-SAY.owl"/>
         <rdfs:label>Interrogative clause</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationObject"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-SAY.owl"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl"/>
     </owl:Class>
     
 
@@ -639,6 +657,17 @@ We additionally require a Locutionary Act to be performed by an Agent, not an Ac
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Patient">
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-SAY.owl"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Phrase -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Phrase">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-SAY.owl"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl"/>
     </owl:Class>
     
 
@@ -850,26 +879,6 @@ This is also known as FunctionalControlExternal in GUM (Bateman et al. 2010).
 Let xL, xR be objects filling the locatum, relatum roles of this schema. Then one can infer that xL isSupportedBy xR.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-SAY.owl"/>
         <rdfs:label xml:lang="en">Support theory</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#LinguisticObject -->
-
-
-    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#LinguisticObject">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
-        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-SAY.owl"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#Phrase -->
-
-
-    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#Phrase">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#LinguisticObject"/>
-        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-SAY.owl"/>
     </owl:Class>
 </rdf:RDF>
 
