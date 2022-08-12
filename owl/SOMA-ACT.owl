@@ -13,6 +13,11 @@
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-STATE.owl"/>
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
+        <rdfs:comment>SOMA-ACT.owl defines concepts related to actions, i.e. to events driven by some agent participant that executes a task.
+
+This module is chiefly concerned with defining a taxonomy of tasks, including roles and role filler restrictions for these tasks. While this taxonomy contains some fairly general-purpose concepts, it is focused on the robotics domain.
+
+Also defined here are execution state regions, i.e. flags with which to label the status of the execution of an action in terms of whether it is unfolding or completed, and if completed whether completed successfully or not.</rdfs:comment>
     </owl:Ontology>
     
 
@@ -329,7 +334,7 @@ For Manipulating, it is the movement of the hand(s) and the change in functional
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#LinguisticObject"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">An action in which an Agent uses some actuator for communication purposes.</rdfs:comment>
@@ -1302,10 +1307,11 @@ As such, an explicit assertion is needed to make a Situation a nonmanifested one
     
 
 
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#LinguisticObject -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject -->
 
-    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#LinguisticObject">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl"/>
         <rdfs:label xml:lang="en">Linguistic object</rdfs:label>
     </owl:Class>
     

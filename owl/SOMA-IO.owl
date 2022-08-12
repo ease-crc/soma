@@ -11,6 +11,9 @@
     <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA-IO.owl">
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
+        <rdfs:comment>SOMA-IO.owl defines concepts related to software modules and their interaction.
+
+The concepts defined here are fairly general and cover such topics as interface specifications and communication. Some more specific concepts for the knowledge representation domain are also defined, such as Database and various kinds of reasoners.</rdfs:comment>
     </owl:Ontology>
     
 
@@ -30,7 +33,6 @@
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#encodes">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
-        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isEncodedBy"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
@@ -56,10 +58,11 @@
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isDesignFor">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isDesignedBy"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-        <rdfs:comment>A special relation between a Design and a DesignedArtifcat, to indicate that the Design describes a way to construct the DesignedArtifact.</rdfs:comment>
-        <rdfs:label>is design for</rdfs:label>
+        <rdfs:comment xml:lang="en">A special relation between a Design and a DesignedArtifact, to indicate that the Design describes a way to construct the DesignedArtifact.</rdfs:comment>
+        <rdfs:label xml:lang="en">is design for</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -70,18 +73,8 @@
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
-        <rdfs:comment xml:lang="en">A special relation between a Design and a Designed Artifcat, to indicate that the Designed Artifact is described by the Design.</rdfs:comment>
+        <rdfs:comment xml:lang="en">A special relation between a Design and a Designed Artifact, to indicate that the Designed Artifact is described by the Design.</rdfs:comment>
         <rdfs:label xml:lang="en">is designed by</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#isEncodedBy -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isEncodedBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
-        <rdfs:comment xml:lang="en">The relation between two Information Objects that have the same meaning, but are formatted differently. E.g., a text written in UTF-8 is encoded by a text in a natural writing system (letters) and vice versa.</rdfs:comment>
-        <rdfs:label xml:lang="en">is encoded By</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -129,6 +122,9 @@
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#API_Specification">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InterfaceSpecification"/>
+        <rdfs:comment xml:lang="en">An application programming interface (API) is a way for two or more computer programs to communicate with each other. It is a type of software interface, offering a service to other pieces of software. A document or standard that describes how to build or use an API is called an API specification.
+
+Source: https://en.wikipedia.org/wiki/API</rdfs:comment>
         <rdfs:label xml:lang="en">API Specification</rdfs:label>
     </owl:Class>
     
@@ -146,30 +142,6 @@ From Wikipedia: https://en.wikipedia.org/wiki/Algorithm</rdfs:comment>
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Archive -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Archive">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Structured_Text"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FileConfiguration"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isGivenMeaningBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ArchiveFormat"/>
-            </owl:Restriction>
-        </owl:equivalentClass>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#ArchiveFile -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ArchiveFile">
@@ -179,7 +151,7 @@ From Wikipedia: https://en.wikipedia.org/wiki/Algorithm</rdfs:comment>
                     <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Digital_File"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#realizes"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Archive"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ArchiveText"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -200,13 +172,41 @@ Source: https://en.wikipedia.org/wiki/Archive_file</rdfs:comment>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#givesMeaningTo"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Archive"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ArchiveText"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">An Archive Format is the file format of an archive file.
 
 Source: https://en.wikipedia.org/wiki/Archive_file#Archive_formats</rdfs:comment>
         <rdfs:label xml:lang="en">Archive Format</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#ArchiveText -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ArchiveText">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Structured_Text"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FileConfiguration"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isGivenMeaningBy"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ArchiveFormat"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:comment xml:lang="en">An Archive is a Structured Text that is composed of one or more Structured Texts along with metadata. Archives are used to collect multiple texts together into a single text for easier portability and storage as Archive Files, or simply to compress text to use less storage space as Computer Files. Archive often store directory structures, error detection and correction information, arbitrary comments, and sometimes use built-in encryption.
+
+Source: https://en.wikipedia.org/wiki/Archive_file</rdfs:comment>
+        <rdfs:label xml:lang="en">Archive Text</rdfs:label>
     </owl:Class>
     
 
@@ -225,6 +225,7 @@ Source: https://en.wikipedia.org/wiki/Archive_file#Archive_formats</rdfs:comment
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Classifier">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#StatisticalReasoner"/>
+        <rdfs:label xml:lang="en">Classifier</rdfs:label>
     </owl:Class>
     
 
@@ -247,6 +248,11 @@ Source: https://en.wikipedia.org/wiki/Archive_file#Archive_formats</rdfs:comment
                 </owl:intersectionOf>
             </owl:Class>
         </rdfs:subClassOf>
+        <rdfs:label xml:lang="en">An API Secification that describes the well known Client-Server pattern:
+
+The Client-server model is a distributed application structure that partitions tasks or workloads between the providers of a resource or service, called servers, and service requesters, called clients Often clients and servers communicate over a computer network on separate hardware, but both client and server may reside in the same system. A server host runs one or more server programs, which share their resources with clients. A client usually does not share any of its resources, but it requests content or service from a server. Clients, therefore, initiate communication sessions with servers, which await incoming requests. Examples of computer applications that use the client-server model are email, network printing, and the World Wide Web.
+
+Source: https://en.wikipedia.org/wiki/Client%E2%80%93server_model</rdfs:label>
         <rdfs:label xml:lang="en">Client-Server Specification</rdfs:label>
     </owl:Class>
     
@@ -262,14 +268,29 @@ Source: https://en.wikipedia.org/wiki/Archive_file#Archive_formats</rdfs:comment
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Client-Server_Specification"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">The Client-server model is a distributed application structure that partitions tasks or workloads between the providers of a resource or service, called servers, and service requesters, called clients Often clients and servers communicate over a computer network on separate hardware, but both client and server may reside in the same system. A server host runs one or more server programs, which share their resources with clients. A client usually does not share any of its resources, but it requests content or service from a server. Clients, therefore, initiate communication sessions with servers, which await incoming requests. Examples of computer applications that use the client-server model are email, network printing, and the World Wide Web.
+
+Source: https://en.wikipedia.org/wiki/Client%E2%80%93server_model</rdfs:comment>
         <rdfs:label xml:lang="en">Client role</rdfs:label>
     </owl:Class>
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Computer_Code -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Computer_Language -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Computer_Code">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Computer_Language">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FormalLanguage"/>
+        <rdfs:comment xml:lang="en">A computer language is a formal language used in communication with a computer.
+
+From Wikipedia: https://en.wikipedia.org/wiki/Computer_language</rdfs:comment>
+        <rdfs:label xml:lang="en">Computer Language</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Computer_Program -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Computer_Program">
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -294,18 +315,6 @@ Source: https://en.wikipedia.org/wiki/Archive_file#Archive_formats</rdfs:comment
         </owl:equivalentClass>
         <rdfs:comment xml:lang="en">The Program itself (the specific set of instruction in a Programming Language), not the file that it is contained in nor the implemented algorithm!</rdfs:comment>
         <rdfs:label xml:lang="en">Computer Program</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Computer_Language -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Computer_Language">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#FormalLanguage"/>
-        <rdfs:comment xml:lang="en">A computer language is a formal language used in communication with a computer.
-
-From Wikipedia: https://en.wikipedia.org/wiki/Computer_language</rdfs:comment>
-        <rdfs:label xml:lang="en">Computer Language</rdfs:label>
     </owl:Class>
     
 
@@ -372,25 +381,6 @@ Source: https://en.wikipedia.org/wiki/Database</rdfs:comment>
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Executable -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Executable">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Computer_Code"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isGivenMeaningBy"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ExecutableFormat"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Computer_Code"/>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#ExecutableFile -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ExecutableFile">
@@ -400,11 +390,14 @@ Source: https://en.wikipedia.org/wiki/Database</rdfs:comment>
                     <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Digital_File"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#realizes"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Executable"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Executable_Code"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
+        <rdfs:comment xml:lang="en">An Executable File, sometimes simply referred to as an executable or binary, causes a computer &quot;to perform indicated tasks according to encoded instructions&quot;, as opposed to a data file that must be interpreted (parsed) by a program to be meaningful.
+
+The exact interpretation depends upon the use. &quot;Instructions&quot; is traditionally taken to mean machine code instructions for a physical CPU. In some contexts, a file containing scripting instructions (such as bytecode) may also be considered executable.</rdfs:comment>
         <rdfs:label xml:lang="en">Executable File</rdfs:label>
     </owl:Class>
     
@@ -417,9 +410,10 @@ Source: https://en.wikipedia.org/wiki/Database</rdfs:comment>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#givesMeaningTo"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Executable"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Executable_Code"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">An Executable Format is a File Format that allows computers to directly execute the content. Examples are MZ (DOS) or COFF.</rdfs:comment>
         <rdfs:label xml:lang="en">Executable Format</rdfs:label>
     </owl:Class>
     
@@ -439,7 +433,29 @@ Source: https://en.wikipedia.org/wiki/Database</rdfs:comment>
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
+        <rdfs:comment xml:lang="en">Executable Software is Software that can directly be executed, in comparison to a Software Library, which might only contain functionality via interfaces, but offers no execution entry point.</rdfs:comment>
         <rdfs:label xml:lang="en">Executable Software</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Executable_Code -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Executable_Code">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Computer_Program"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isGivenMeaningBy"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ExecutableFormat"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Computer_Program"/>
+        <rdfs:comment xml:lang="en">Executable Code is Code that when compiled / interpreted, has some clear entrance point and can be executed. Note the difference to an Executable File, which is the file that contains such (compiled) code.</rdfs:comment>
+        <rdfs:label xml:lang="en">Executable Code</rdfs:label>
     </owl:Class>
     
 
@@ -524,6 +540,9 @@ From Wikipedia: https://en.wikipedia.org/wiki/Formal_language</rdfs:comment>
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PluginSpecification"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">In the Plug-in-Host pattern, a Host application provides services which the Plug-in can use, including a way for Plug-ins to register themselves with the Host application and a protocol for the exchange of data withPplug-ins. Plug-ins depend on the services provided by the host application and do not usually work by themselves. Conversely, the host application operates independently of the plug-ins, making it possible for end-users to add and update plug-ins dynamically without needing to make changes to the host application.
+
+Source: https://en.wikipedia.org/wiki/Plug-in_(computing)</rdfs:comment>
         <rdfs:label xml:lang="en">Host role</rdfs:label>
     </owl:Class>
     
@@ -578,7 +597,7 @@ From Wikipedia: https://en.wikipedia.org/wiki/Formal_language</rdfs:comment>
     <!-- http://www.ease-crc.org/ont/SOMA.owl#InterfaceSpecification -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#InterfaceSpecification">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Norm"/>
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design"/>
         <rdfs:comment xml:lang="en">The Specification of an Interface between software, computer hardware, peripheral devices, humans and combinations of these.
 
 Source: https://en.wikipedia.org/wiki/Interface_(computing)</rdfs:comment>
@@ -591,6 +610,7 @@ Source: https://en.wikipedia.org/wiki/Interface_(computing)</rdfs:comment>
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#KnowledgeRepresentationLanguage">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Computer_Language"/>
+        <rdfs:comment xml:lang="en">A Knowledge Representation Language is a Language with fixed semantics and syntax to describe some knowledge. Examples are JSON and the different OWL Profiles.</rdfs:comment>
         <rdfs:label xml:lang="en">Knowledge Representation Language</rdfs:label>
     </owl:Class>
     
@@ -696,6 +716,9 @@ From Wikipedia: https://en.wikipedia.org/wiki/Ontology_(information_science)</rd
                 <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Ontology"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">An Ontology Language is a Knowledge Representation Language to describe knowledge about properties of a subject area and how they are related, by defining a set of concepts and categories that represent the subject using logic. Examples are the different OWL Profiles.
+
+Source: https://en.wikipedia.org/wiki/Ontology_(information_science)</rdfs:comment>
         <rdfs:label xml:lang="en">Ontology Language</rdfs:label>
     </owl:Class>
     
@@ -711,6 +734,9 @@ From Wikipedia: https://en.wikipedia.org/wiki/Ontology_(information_science)</rd
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PluginSpecification"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">In the Plug-in-Host pattern, a Host application provides services which the Plug-in can use, including a way for Plug-ins to register themselves with the Host application and a protocol for the exchange of data withPplug-ins. Plug-ins depend on the services provided by the host application and do not usually work by themselves. Conversely, the host application operates independently of the plug-ins, making it possible for end-users to add and update plug-ins dynamically without needing to make changes to the host application.
+
+Source: https://en.wikipedia.org/wiki/Plug-in_(computing)</rdfs:comment>
         <rdfs:label xml:lang="en">Plugin role</rdfs:label>
     </owl:Class>
     
@@ -734,6 +760,7 @@ From Wikipedia: https://en.wikipedia.org/wiki/Ontology_(information_science)</rd
                 </owl:intersectionOf>
             </owl:Class>
         </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">The Specification of a Plugin interface defines how a Host and a Plug-in function together and exchange information.</rdfs:comment>
         <rdfs:label xml:lang="en">Plugin Specification</rdfs:label>
     </owl:Class>
     
@@ -746,7 +773,7 @@ From Wikipedia: https://en.wikipedia.org/wiki/Ontology_(information_science)</rd
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#givesMeaningTo"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Computer_Code"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Computer_Program"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">Any Programming Language, including both human-readable like Java and non-human-readable languages like binary machine code.</rdfs:comment>
@@ -801,6 +828,9 @@ Source: https://en.wikipedia.org/wiki/Relational_database</rdfs:comment>
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Client-Server_Specification"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">The Client-server model is a distributed application structure that partitions tasks or workloads between the providers of a resource or service, called servers, and service requesters, called clients Often clients and servers communicate over a computer network on separate hardware, but both client and server may reside in the same system. A server host runs one or more server programs, which share their resources with clients. A client usually does not share any of its resources, but it requests content or service from a server. Clients, therefore, initiate communication sessions with servers, which await incoming requests. Examples of computer applications that use the client-server model are email, network printing, and the World Wide Web.
+
+Source: https://en.wikipedia.org/wiki/Client%E2%80%93server_model</rdfs:comment>
         <rdfs:label xml:lang="en">Server role</rdfs:label>
     </owl:Class>
     
@@ -879,6 +909,13 @@ Another apporach might be to not model this entity at all and only see Execution
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoftwareRole">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Software"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">A Software Role is a Role applying to only Software and encoding the purpose of the Software: Its Role within Interface Patterns (e.g. Client vs. Server), its functionality (e.g. Database vs. Comnputer Game), and so on.</rdfs:comment>
         <rdfs:label xml:lang="en">Software role</rdfs:label>
     </owl:Class>
     
@@ -904,7 +941,7 @@ We support seperate views:
         <owl:equivalentClass>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Computer_Code"/>
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Computer_Program"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isGivenMeaningBy"/>
                         <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Human-readable_Programming_Language"/>
@@ -912,7 +949,7 @@ We support seperate views:
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Computer_Code"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Computer_Program"/>
         <rdfs:comment xml:lang="en">The Source Code itself (the specific set of instruction in a human-readable Programming Language), not the file that it is contained in nor the implemented algorithm!</rdfs:comment>
         <rdfs:label xml:lang="en">Source Code</rdfs:label>
     </owl:Class>
@@ -923,6 +960,7 @@ We support seperate views:
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#StatisticalReasoner">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Reasoner"/>
+        <rdfs:label xml:lang="en">A Statistical Reasoner is a Reasoner that uses statistical or stochastical data to infer implicit information from explicit information. Examples are Hidden Markov Models and Neural Networks.</rdfs:label>
         <rdfs:label xml:lang="en">Statistical reasoner</rdfs:label>
     </owl:Class>
     
