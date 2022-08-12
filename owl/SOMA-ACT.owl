@@ -33,6 +33,63 @@ Also defined here are execution state regions, i.e. flags with which to label th
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#causes -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#causes">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:label xml:lang="en">Simple relationship between two actions to express that the object (the reaction) would not have occured if it were not for the subject (the cause), e.g., a Communication Action classified as an Querying Task causes another Communication Task classified as an Answering Task and the latter would not have occured without the former. An example without Agents involved would be some domino stone would not have toppled without the first one toppling.
+
+When Agents are involved, the relation might be seen as an abstraction of the execution of some plan that arises from changing the agents goal that is due to perceiving the cause. However, currently it is unclear how to model such a pattern and therefore not included in SOMA.
+
+This relation is seen as transitive.</rdfs:label>
+        <rdfs:label xml:lang="en">causes</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#directlyCauses -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#directlyCauses">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl#causes"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl#isDirectReactionTo"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:comment xml:lang="en">Non-transitive version of &quot;causes&quot;.</rdfs:comment>
+        <rdfs:label xml:lang="en">directly causes</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#isDirectReactionTo -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#isDirectReactionTo">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl#isReactionTo"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:comment xml:lang="en">Non-transitive version of &quot;is reaction to&quot;.</rdfs:comment>
+        <rdfs:label xml:lang="en">is direct reaction to</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#isReactionTo -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#isReactionTo">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#follows"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+        <rdfs:comment xml:lang="en">Simple relationship between two actions to express that the subject (the reaction) would not have occured if it were not for the object (the cause), e.g., a Communication Action classified as an Answering Task is a reaction to another Communication Task classified as a Query Task and would not have occured without the other. An example without Agents involved would be some domino stone would not have toppled without the first one toppling.
+
+When Agents are involved, the relation might be seen as an abstraction of the execution of some plan that arises from changing the agents goal that is due to perceiving the cause. However, currently it is unclear how to model such a pattern and therefore not included in SOMA.
+
+This relation is seen as transitive.</rdfs:comment>
+        <rdfs:label>is reaction to</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#hasAction -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasAction">
@@ -338,7 +395,7 @@ For Manipulating, it is the movement of the hand(s) and the change in functional
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">An action in which an Agent uses some actuator for communication purposes.</rdfs:comment>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Communication action</rdfs:label>
+        <rdfs:label xml:lang="en">Locutionary action</rdfs:label>
     </owl:Class>
     
 
@@ -620,6 +677,16 @@ Induction is often described as a move from many &quot;specifics&quot; (swan A i
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Pushing"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Squeezing"/>
         <rdfs:comment>todo: how to distinguish from e.g. &apos;pushing from the table&apos;</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl"/>
+        <rdfs:label xml:lang="en">Linguistic object</rdfs:label>
     </owl:Class>
     
 
@@ -1303,16 +1370,6 @@ Because of open world semantics of DL, the default assumption for a Situation in
 
 As such, an explicit assertion is needed to make a Situation a nonmanifested one: either declare that individual&apos;s type NonmanifestedSituation, or assert that it has 0 manifestsIn relations.</rdfs:comment>
         <rdfs:label xml:lang="en">Nonmanifested situation</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
-        <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl"/>
-        <rdfs:label xml:lang="en">Linguistic object</rdfs:label>
     </owl:Class>
     
 
