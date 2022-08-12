@@ -291,6 +291,15 @@ For Manipulating, it is the movement of the hand(s) and the change in functional
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Answer -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Answer">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role that is played by an entity answering some query.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#AreaSurveying -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AreaSurveying">
@@ -789,6 +798,30 @@ One could argue Mental actions are all Physical actions, because anything the Ag
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Message -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Message">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Item"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationRealization"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label xml:lang="en">A message is a discrete unit of communication intended by the source for consumption by some recipient or group of recipients.
+
+Source: https://en.wikipedia.org/wiki/Message</rdfs:label>
+        <rdfs:label xml:lang="en">Message</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionEvaluationTopic -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionEvaluationTopic">
@@ -1095,6 +1128,40 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#QueryTask -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#QueryTask">
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Message"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Receiver"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Sender"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Question -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Question">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role played by some entity that carries meaning, where this meaning is a query of some sort.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Reaching -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Reaching">
@@ -1118,6 +1185,12 @@ Any of the Abductive/Deductive/Inductive triad can be further affected by the Mo
 
 Note, this classification has nothing to do with reasoning domain (e.g. SpatialReasoning, TemporalReasoning, ...) and merely with techniques/logical-mathematical underpinnings.</rdfs:comment>
     </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Receiver -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Receiver"/>
     
 
 
@@ -1183,6 +1256,12 @@ As an example, a kind of Abductive reasoning would fit here: reconstruction, in 
         <rdfs:comment>A task in which an Agent selects some object to use for a subsequent task.</rdfs:comment>
         <rdfs:label xml:lang="en">Selecting item</rdfs:label>
     </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Sender -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Sender"/>
     
 
 
