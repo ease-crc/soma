@@ -302,7 +302,7 @@ For Manipulating, it is the movement of the hand(s) and the change in functional
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Answer -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Answer">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Message"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role that is played by an entity answering some query.</rdfs:comment>
     </owl:Class>
     
@@ -447,6 +447,24 @@ For Manipulating, it is the movement of the hand(s) and the change in functional
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Message"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Receiver"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Sender"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
@@ -864,7 +882,7 @@ One could argue Mental actions are all Physical actions, because anything the Ag
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Item"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask"/>
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask"/>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -1192,24 +1210,6 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#QueryTask">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask"/>
-        <rdfs:subClassOf>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Message"/>
-                    </owl:Restriction>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Receiver"/>
-                    </owl:Restriction>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Sender"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </rdfs:subClassOf>
         <rdfs:comment>A communication act intended to elicit some information from the listener.</rdfs:comment>
         <rdfs:label xml:lang="en">Query task</rdfs:label>
     </owl:Class>
@@ -1219,7 +1219,7 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Question -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Question">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Message"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role played by some entity that carries meaning, where this meaning is a query of some sort.</rdfs:comment>
     </owl:Class>
     
@@ -1257,7 +1257,7 @@ Note, this classification has nothing to do with reasoning domain (e.g. SpatialR
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AgentRole"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask"/>
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask"/>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -1336,7 +1336,7 @@ As an example, a kind of Abductive reasoning would fit here: reconstruction, in 
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AgentRole"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask"/>
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask"/>
             </owl:Restriction>
         </rdfs:subClassOf>
