@@ -90,6 +90,18 @@ This relation is seen as transitive.</rdfs:comment>
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#answers -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#answers">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#relatesToAnotherRole"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Message"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Message"/>
+        <rdfs:label>The relation between an answering message and the message it answers.</rdfs:label>
+        <rdfs:label>answers</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#hasAction -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasAction">
@@ -98,6 +110,16 @@ This relation is seen as transitive.</rdfs:comment>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
         <rdfs:comment>A relation from an Action to a component Action.</rdfs:comment>
         <rdfs:label>has action</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasAnswer -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasAnswer">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#relatesToAnotherRole"/>
+        <rdfs:comment>The relation between a message and its answer.</rdfs:comment>
+        <rdfs:label>has answer</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -145,7 +167,11 @@ This relation is seen as transitive.</rdfs:comment>
     <!-- http://www.ease-crc.org/ont/SOMA.owl#isAskedBy -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isAskedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
         <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#QueryingTask"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation from a Query to the Agent who asks it.</rdfs:comment>
+        <rdfs:label>is asked by</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -182,6 +208,19 @@ This relation is seen as transitive.</rdfs:comment>
         <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SituationTransition"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A relation between SituationTransitions and Situations, which identifies the Situation the transition ends at.</rdfs:comment>
         <rdfs:label xml:lang="en">is terminal situation of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#relatesToAnotherRole -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#relatesToAnotherRole">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment>Simple top-level property for relations between two roles.</rdfs:comment>
+        <rdfs:label>relates to another role</rdfs:label>
     </owl:ObjectProperty>
     
 
