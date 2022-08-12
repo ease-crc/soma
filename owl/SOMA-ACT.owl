@@ -142,14 +142,6 @@ This relation is seen as transitive.</rdfs:comment>
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#isAskedBy -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isAskedBy">
-        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#QueryTask"/>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#isInitialSituationOf -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isInitialSituationOf">
@@ -664,12 +656,6 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask"/>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Imagining -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Imagining">
@@ -688,12 +674,6 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
 Induction is often described as a move from many &quot;specifics&quot; (swan A is white, swan B is white, swan C is white, ...) to the &quot;general&quot; (all swans are white).</rdfs:comment>
         <rdfs:label xml:lang="en">Inductive resoning</rdfs:label>
     </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#InterrogativeClause -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#InterrogativeClause"/>
     
 
 
@@ -1151,7 +1131,6 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
     <!-- http://www.ease-crc.org/ont/SOMA.owl#QueryTask -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#QueryTask">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask"/>
         <rdfs:subClassOf>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
@@ -1170,19 +1149,6 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
                 </owl:intersectionOf>
             </owl:Class>
         </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                <owl:allValuesFrom>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InterrogativeClause"/>
-                    </owl:Restriction>
-                </owl:allValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A communication act intended to elicit some information from the listener.</rdfs:comment>
-        <rdfs:label xml:lang="en">Query task</rdfs:label>
     </owl:Class>
     
 
@@ -1224,15 +1190,7 @@ Note, this classification has nothing to do with reasoning domain (e.g. SpatialR
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Receiver -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Receiver">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AgentRole"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Receiver"/>
     
 
 
@@ -1303,15 +1261,7 @@ As an example, a kind of Abductive reasoning would fit here: reconstruction, in 
 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Sender -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Sender">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AgentRole"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Sender"/>
     
 
 
