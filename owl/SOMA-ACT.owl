@@ -269,6 +269,15 @@ This relation is seen as transitive.</rdfs:comment>
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#AnswerTask -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#AnswerTask">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AssertionTask"/>
+        <rdfs:label xml:lang="en">Answer task</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#AbductiveReasoning -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AbductiveReasoning">
@@ -341,6 +350,8 @@ For Manipulating, it is the movement of the hand(s) and the change in functional
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AssertionTask">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask"/>
+        <rdfs:comment>A communication act intended to change what the listener believes to be true in some context. Often, assertions are of facts about the real world, but this need not be the case. Assertions can communicate what someone believes, or refer to a world that is entirely fictional. In all these cases however, assertions are intended to update the listener&apos;s model (of the real world, or of the speaker&apos;s beliefs, or of the fictional world etc.).</rdfs:comment>
+        <rdfs:label xml:lang="en">Assertion task</rdfs:label>
     </owl:Class>
     
 
@@ -384,6 +395,22 @@ For Manipulating, it is the movement of the hand(s) and the change in functional
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Channel -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Channel">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PathRole"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">A Channel in a Communication Task is the path of travel by a Message, e.g., via WLAN, air (in the case of a Message classifying soundwaves) or a telephone cable.</rdfs:comment>
+        <rdfs:label xml:lang="en">Channel</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#CheckingObjectPresence -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CheckingObjectPresence">
@@ -414,6 +441,8 @@ For Manipulating, it is the movement of the hand(s) and the change in functional
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CommandTask">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask"/>
+        <rdfs:comment>A communication act intended to get the listener to perform some action.</rdfs:comment>
+        <rdfs:label xml:lang="en">Command task</rdfs:label>
     </owl:Class>
     
 
@@ -451,6 +480,10 @@ For Manipulating, it is the movement of the hand(s) and the change in functional
         <rdfs:subClassOf>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Channel"/>
+                    </owl:Restriction>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
                         <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Message"/>
