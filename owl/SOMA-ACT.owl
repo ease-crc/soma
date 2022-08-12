@@ -303,7 +303,8 @@ For Manipulating, it is the movement of the hand(s) and the change in functional
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Answer">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Message"/>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role that is played by an entity answering some query.</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role that is played by an Information Realization answering some query.</rdfs:comment>
+        <rdfs:label>Answer</rdfs:label>
     </owl:Class>
     
 
@@ -724,7 +725,7 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
                 </owl:intersectionOf>
             </owl:Class>
         </rdfs:subClassOf>
-        <rdfs:comment xml:lang="en">A task which is executed by a Locution action: A Llocution is what was said and meant, Illocution is what was done.
+        <rdfs:comment xml:lang="en">A task which is executed by a Locution action: A Locution is what was said and meant, Illocution is what was done.
 
 When somebody says &quot;Is there any salt?&quot; at the dinner table, the illocutionary act is a request: &quot;please give me some salt&quot; even though the locutionary act (the literal sentence) was to ask a question about the presence of salt.
 
@@ -892,9 +893,9 @@ One could argue Mental actions are all Physical actions, because anything the Ag
                 <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationRealization"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:label xml:lang="en">A message is a discrete unit of communication intended by the source for consumption by some recipient or group of recipients.
+        <rdfs:comment xml:lang="en">A message is a discrete unit of communication intended by the source for consumption by some recipient or group of recipients (Source: https://en.wikipedia.org/wiki/Message).
 
-Source: https://en.wikipedia.org/wiki/Message</rdfs:label>
+Note that the Role Message classifies the Information Realization, not the content.</rdfs:comment>
         <rdfs:label xml:lang="en">Message</rdfs:label>
     </owl:Class>
     
@@ -1206,21 +1207,22 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#QueryTask -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Query -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#QueryTask">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask"/>
-        <rdfs:comment>A communication act intended to elicit some information from the listener.</rdfs:comment>
-        <rdfs:label xml:lang="en">Query task</rdfs:label>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Query">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Message"/>
+        <rdfs:comment xml:lang="en">A role played by some Information Realization that carries meaning, where this meaning is a query of some sort.</rdfs:comment>
+        <rdfs:label xml:lang="en">Query</rdfs:label>
     </owl:Class>
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Question -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#QueryTask -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Question">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Message"/>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A role played by some entity that carries meaning, where this meaning is a query of some sort.</rdfs:comment>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#QueryTask">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask"/>
+        <rdfs:comment>An Illocutionary act where the Sender of the Message does so to trigger the Receiver to return some information that is specified within the content of the Message.</rdfs:comment>
+        <rdfs:label xml:lang="en">Query task</rdfs:label>
     </owl:Class>
     
 
@@ -1261,6 +1263,8 @@ Note, this classification has nothing to do with reasoning domain (e.g. SpatialR
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">The role played by an Agent in a Communication Task that perceives and interpretes some incoming Message.</rdfs:comment>
+        <rdfs:label xml:lang="en">Receiver</rdfs:label>
     </owl:Class>
     
 
@@ -1340,6 +1344,8 @@ As an example, a kind of Abductive reasoning would fit here: reconstruction, in 
                 <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">The Role played by an Agent in a Communication Task that emits some Information Realization with the purpose of percipience by some Receiver.</rdfs:comment>
+        <rdfs:label xml:lang="en">Sender</rdfs:label>
     </owl:Class>
     
 
