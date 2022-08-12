@@ -519,7 +519,33 @@ Note that in a semantic sense such clauses always request information, but in a 
     </owl:Class>
     
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject -->
 
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject">
+        <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#LocutionaryAction -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#LocutionaryAction">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CommunicationAction"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:comment xml:lang="en">A Locutionary Act is the performance of an utterance (source: https://en.wikipedia.org/wiki/Locutionary_act).
+
+We additionally require a Locutionary Act to be performed by an Agent, not an Actor - this is what sets it apart from a Communication Action.</rdfs:comment>
+        <rdfs:label xml:lang="en">Locutionary action</rdfs:label>
+    </owl:Class>
     <!-- http://www.ease-crc.org/ont/SOMA.owl#MixingTheory -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MixingTheory">
@@ -545,6 +571,15 @@ Note that in a semantic sense such clauses always request information, but in a 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Patient -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Patient"/>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Phrase -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Phrase">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl"/>
+    </owl:Class>
     
 
 
@@ -736,24 +771,6 @@ This is also known as FunctionalControlExternal in GUM (Bateman et al. 2010).
 
 Let xL, xR be objects filling the locatum, relatum roles of this schema. Then one can infer that xL isSupportedBy xR.</rdfs:comment>
         <rdfs:label xml:lang="en">Support theory</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationObject"/>
-        <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Phrase -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Phrase">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject"/>
-        <rdfs:isDefinedBy rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl"/>
     </owl:Class>
 </rdf:RDF>
 
