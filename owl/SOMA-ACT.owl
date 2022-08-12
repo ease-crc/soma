@@ -145,7 +145,7 @@ This relation is seen as transitive.</rdfs:comment>
     <!-- http://www.ease-crc.org/ont/SOMA.owl#isAskedBy -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isAskedBy">
-        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#QueryTask"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#QueryingTask"/>
     </owl:ObjectProperty>
     
 
@@ -269,11 +269,49 @@ This relation is seen as transitive.</rdfs:comment>
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#AnswerTask -->
+    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#AnsweringTask -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#AnswerTask">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AssertionTask"/>
-        <rdfs:label xml:lang="en">Answer task</rdfs:label>
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#AnsweringTask">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl#isReactionTo"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommandingTask"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:comment xml:lang="en">An Illocutionary act where the Sender emits some Message to the Receiver as a reaction to some previous Communication task where the Roles where switched, i.e., the Sender (Receiver) of the Answering task has been the Sender (Sender) for the cause.</rdfs:comment>
+        <rdfs:label xml:lang="en">Answering task</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#QueryAnsweringTask -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#QueryAnsweringTask">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#AnsweringTask"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl#isReactionTo"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#QueryingTask"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:comment xml:lang="en">An Answering task that is the reaction to some Query answering task.
+
+In a lot of cases, such a task is also an Assertion task, e.g., in the following discourse:
+
+&quot;How will the weather be tomorrow?&quot;
+&quot;It is going to rain in the morning.&quot;
+
+However, sometimes this might be not the case, e.g., with counterquestions.</rdfs:comment>
+        <rdfs:label>Query answering task</rdfs:label>
     </owl:Class>
     
 
@@ -437,12 +475,12 @@ For Manipulating, it is the movement of the hand(s) and the change in functional
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#CommandTask -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#CommandingTask -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CommandTask">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CommandingTask">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask"/>
-        <rdfs:comment xml:lang="en">An Illocutionary act where the Sender emits some Message with the intent to get the Receiver to perform some action.</rdfs:comment>
-        <rdfs:label xml:lang="en">Command task</rdfs:label>
+        <rdfs:comment xml:lang="en">An Illocutionary act where the Sender emits some Message with the intent to cause the Receiver to perform some action.</rdfs:comment>
+        <rdfs:label xml:lang="en">Commanding task</rdfs:label>
     </owl:Class>
     
 
@@ -1250,12 +1288,12 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#QueryTask -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#QueryingTask -->
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#QueryTask">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#QueryingTask">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask"/>
         <rdfs:comment>An Illocutionary act where the Sender of the Message does so to trigger the Receiver to return some information that is specified within the content of the Message.</rdfs:comment>
-        <rdfs:label xml:lang="en">Query task</rdfs:label>
+        <rdfs:label xml:lang="en">Querying task</rdfs:label>
     </owl:Class>
     
 
