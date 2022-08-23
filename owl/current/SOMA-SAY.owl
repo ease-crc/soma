@@ -127,20 +127,6 @@ In particular, it defines concepts related to linguistic acts and structures of 
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#isAskedBy -->
-
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isAskedBy">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent"/>
-        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#QueryTask"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-        <rdfs:comment>A relation from a Query to the Agent who asks it.</rdfs:comment>
-        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-SAY.owl"/>
-        <rdfs:label>is asked by</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#isCoveredByObject -->
 
 
@@ -198,8 +184,7 @@ In particular, it defines concepts related to linguistic acts and structures of 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#AssertionTask -->
 
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AssertionTask">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask"/>
+    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AssertionTask">
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
@@ -211,10 +196,7 @@ In particular, it defines concepts related to linguistic acts and structures of 
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>A communication act intended to change what the listener believes to be true in some context. Often, assertions are of facts about the real world, but this need not be the case. Assertions can communicate what someone believes, or refer to a world that is entirely fictional. In all these cases however, assertions are intended to update the listener&apos;s model (of the real world, or of the speaker&apos;s beliefs, or of the fictional world etc.).</rdfs:comment>
-        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-SAY.owl"/>
-        <rdfs:label xml:lang="en">Assertion task</rdfs:label>
-    </owl:Class>
+    </rdf:Description>
     
 
 
@@ -274,11 +256,10 @@ Let xA, xP be objects filling the agent, patient roles of this schema. Then one 
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#CommandTask -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#CommandingTask -->
 
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CommandTask">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask"/>
+    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CommandingTask">
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
@@ -290,10 +271,7 @@ Let xA, xP be objects filling the agent, patient roles of this schema. Then one 
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>A communication act intended to get the listener to perform some action.</rdfs:comment>
-        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-SAY.owl"/>
-        <rdfs:label xml:lang="en">Command task</rdfs:label>
-    </owl:Class>
+    </rdf:Description>
     
 
 
@@ -478,50 +456,6 @@ They maintain their role however as representations able to drive a simulation, 
 Adopted from GUM-4-space (Bateman et al. 2010).</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-SAY.owl"/>
         <rdfs:label xml:lang="en">Functional spatial schema theory</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask">
-        <rdfs:subClassOf>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                        <owl:allValuesFrom>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
-                                <owl:allValuesFrom>
-                                    <owl:Class>
-                                        <owl:unionOf rdf:parseType="Collection">
-                                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-                                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject"/>
-                                        </owl:unionOf>
-                                    </owl:Class>
-                                </owl:allValuesFrom>
-                            </owl:Restriction>
-                        </owl:allValuesFrom>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#LocutionaryAction"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment xml:lang="en">A task which is executed by a Locution action: A Llocution is what was said and meant, Illocution is what was done.
-
-When somebody says &quot;Is there any salt?&quot; at the dinner table, the illocutionary act is a request: &quot;please give me some salt&quot; even though the locutionary act (the literal sentence) was to ask a question about the presence of salt.
-
-Source: https://en.wikipedia.org/wiki/Illocutionary_act</rdfs:comment>
-        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-SAY.owl"/>
-        <rdfs:label xml:lang="en">Illocutionary act</rdfs:label>
     </owl:Class>
     
 
@@ -723,11 +657,10 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#QueryTask -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#QueryingTask -->
 
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#QueryTask">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask"/>
+    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#QueryingTask">
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
@@ -739,10 +672,7 @@ Let xL, xR be objects filling the locatum, relatum roles of this schema. Then on
                 </owl:allValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>A communication act intended to elicit some information from the listener.</rdfs:comment>
-        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-SAY.owl"/>
-        <rdfs:label xml:lang="en">Query task</rdfs:label>
-    </owl:Class>
+    </rdf:Description>
     
 
 

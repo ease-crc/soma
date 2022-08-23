@@ -9,7 +9,9 @@
      xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA-IO.owl">
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-SAY.owl"/>
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
         <rdfs:comment>SOMA-IO.owl defines concepts related to software modules and their interaction.
 
@@ -57,6 +59,15 @@ The concepts defined here are fairly general and cover such topics as interface 
         <rdfs:label xml:lang="en">The relation between a System and Information Object that is given meaning to by said system, e.g., a Language might give meaning to some word, sentence, text, etc., but without the knowledge of said System (Language), the text will not make sense to a reader.</rdfs:label>
         <rdfs:label xml:lang="en">gives meaning to</rdfs:label>
     </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasSoftwareAgent -->
+
+
+    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasSoftwareAgent">
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SoftwareInstance"/>
+    </rdf:Description>
     
 
 
@@ -351,7 +362,7 @@ From Wikipedia: https://en.wikipedia.org/wiki/Computer_language</rdfs:comment>
         </owl:equivalentClass>
         <rdfs:comment xml:lang="en">The Program itself (the specific set of instruction in a Programming Language), not the file that it is contained in nor the implemented algorithm!</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-IO.owl"/>
-        <rdfs:label xml:lang="en">Computer Program</rdfs:label>
+        <rdfs:label xml:lang="en">Computer program</rdfs:label>
     </owl:Class>
     
 
@@ -580,6 +591,18 @@ From Wikipedia: https://en.wikipedia.org/wiki/Formal_language</rdfs:comment>
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#GraphQueryLanguage -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#GraphQueryLanguage">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#QueryLanguage"/>
+        <rdfs:comment xml:lang="en">A Query Language that is designed for communication with some Graph Database.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-IO.owl"/>
+        <rdfs:label xml:lang="en">Graph query language</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#HostRole -->
 
 
@@ -749,7 +772,7 @@ From Wikipedia: https://en.wikipedia.org/wiki/Natural_language</rdfs:comment>
         </owl:equivalentClass>
         <rdfs:comment xml:lang="en">A Text in a Natural Language.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-IO.owl"/>
-        <rdfs:label xml:lang="en">Natural Language Text</rdfs:label>
+        <rdfs:label xml:lang="en">Natural language text</rdfs:label>
     </owl:Class>
     
 
@@ -857,7 +880,7 @@ Source: https://en.wikipedia.org/wiki/Plug-in_(computing)</rdfs:comment>
         </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">Any Programming Language, including both human-readable like Java and non-human-readable languages like binary machine code.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-IO.owl"/>
-        <rdfs:label xml:lang="en">Programming Language</rdfs:label>
+        <rdfs:label xml:lang="en">Programming language</rdfs:label>
     </owl:Class>
     
 
@@ -870,6 +893,20 @@ Source: https://en.wikipedia.org/wiki/Plug-in_(computing)</rdfs:comment>
         <rdfs:comment xml:lang="en">A Query Engine is a Software that can answer some queries.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-IO.owl"/>
         <rdfs:label xml:lang="en">Query engine</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#QueryLanguage -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#QueryLanguage">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Computer_Language"/>
+        <rdfs:comment xml:lang="en">Query languages, are Computer languages used to make queries in databases and information systems (Source: https://en.wikipedia.org/wiki/Query_language).
+
+Note that despite their name, Query languages typically come with syntax and semantic to not only ask for information, but also provide them, e.g., via SQL Update. In that sense, the term &quot;query&quot; from above refers to any formal object of information exchange with a database.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-IO.owl"/>
+        <rdfs:label xml:lang="en">Query language</rdfs:label>
     </owl:Class>
     
 
@@ -900,6 +937,18 @@ This definition is broad and we consider any System fitting the above descriptio
 Source: https://en.wikipedia.org/wiki/Relational_database</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-IO.owl"/>
         <rdfs:label xml:lang="en">Relational database</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#RelationalQueryLanguage -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RelationalQueryLanguage">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#QueryLanguage"/>
+        <rdfs:comment xml:lang="en">A Query Language that is designed for communication with some Relational Database.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-IO.owl"/>
+        <rdfs:label xml:lang="en">Relational query language</rdfs:label>
     </owl:Class>
     
 
@@ -985,7 +1034,7 @@ In this view, we see the of an Agent required intentionality its intentionality 
 
 Another apporach might be to not model this entity at all and only see Execution of Software as a Process (see, e.g., https://en.wikipedia.org/wiki/Execution_(computing)). However, this would complicate modeling communication between running Software processes.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-IO.owl"/>
-        <rdfs:label xml:lang="en">Software Instance</rdfs:label>
+        <rdfs:label xml:lang="en">Software instance</rdfs:label>
     </owl:Class>
     
 
@@ -1053,7 +1102,7 @@ We support seperate views:
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Computer_Program"/>
         <rdfs:comment xml:lang="en">The Source Code itself (the specific set of instruction in a human-readable Programming Language), not the file that it is contained in nor the implemented algorithm!</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-IO.owl"/>
-        <rdfs:label xml:lang="en">Source Code</rdfs:label>
+        <rdfs:label xml:lang="en">Source code</rdfs:label>
     </owl:Class>
     
 
@@ -1087,7 +1136,7 @@ We support seperate views:
         </owl:equivalentClass>
         <rdfs:comment xml:lang="en">Any Text that adheres to some rules that are in any way more specific than natural language and that cannot be made sense of without knowing said rules.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-IO.owl"/>
-        <rdfs:label xml:lang="en">Structured Text</rdfs:label>
+        <rdfs:label xml:lang="en">Structured text</rdfs:label>
     </owl:Class>
     
 
