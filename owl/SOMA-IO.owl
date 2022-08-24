@@ -56,6 +56,14 @@ The concepts defined here are fairly general and cover such topics as interface 
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasSoftwareAgent -->
+
+    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasSoftwareAgent">
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SoftwareInstance"/>
+    </rdf:Description>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#isDesignFor -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isDesignFor">
@@ -219,22 +227,6 @@ Source: https://en.wikipedia.org/wiki/Archive_file</rdfs:comment>
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
         <rdfs:comment xml:lang="en">Any constructed agent with physical embodiment that has intentions on its own, e.g., a robot.</rdfs:comment>
         <rdfs:label xml:lang="en">Artificial agent</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Channel -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Channel">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PathRole"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment xml:lang="en">A Channel in a Communication Task is the path of travel by a Message, e.g., via WLAN, air (in the case of a Message encoded as sound) or a telephone cable.</rdfs:comment>
-        <rdfs:label xml:lang="en">Channel</rdfs:label>
     </owl:Class>
     
 
@@ -674,30 +666,6 @@ From Wikipedia: https://en.wikipedia.org/wiki/Markup_language</rdfs:comment>
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Message -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Message">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Item"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationRealization"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:label xml:lang="en">A message is a discrete unit of communication intended by the source for consumption by some recipient or group of recipients.
-
-Source: https://en.wikipedia.org/wiki/Message</rdfs:label>
-        <rdfs:label xml:lang="en">Message</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Natural_Language -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Natural_Language">
@@ -870,20 +838,6 @@ This definition is broad and we consider any System fitting the above descriptio
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Receiver -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Receiver">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AgentRole"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#RelationalDatabase -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RelationalDatabase">
@@ -902,20 +856,6 @@ Source: https://en.wikipedia.org/wiki/Relational_database</rdfs:comment>
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#QueryLanguage"/>
         <rdfs:comment xml:lang="en">A Query Language that is designed for communication with some Relational Database.</rdfs:comment>
         <rdfs:label xml:lang="en">Relational query language</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Sender -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Sender">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AgentRole"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
     </owl:Class>
     
 

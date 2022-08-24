@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <rdf:RDF xmlns="http://www.ease-crc.org/ont/SOMA-HOME.owl#"
      xml:base="http://www.ease-crc.org/ont/SOMA-HOME.owl"
-     xmlns:dc="http://purl.org/dc/elements/1.1/"
-     xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
      xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
     <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl">
         <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-ALL.owl"/>
         <rdfs:comment>SOMA-HOME defines the concepts that are specific to home, e.g. kitchen environment, household items.</rdfs:comment>
@@ -41,6 +41,30 @@
     <!-- http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent"/>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasShapeRegion -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasShapeRegion"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies -->
+
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality -->
+
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf"/>
     
 
 
@@ -102,6 +126,19 @@
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl#CerealBox">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-HOME.owl#Box"/>
         <rdfs:comment>A box which holds, or at least is intended to usually hold, cereal flakes.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-HOME.owl#ClosingDisposition -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl#ClosingDisposition">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Linkage"/>
+        <rdfs:comment>The disposition of an object to connect with some other, so that a region of space becomes fully enclosed by the object and separate from the exterior. 
+
+Often this connection is between parts of the same object.
+
+Because of the existence of a separation between some interior and exterior space regions, objects that can close are also objects that can contain.</rdfs:comment>
     </owl:Class>
     
 
@@ -184,6 +221,21 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA-HOME.owl#Kitchen -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl#Kitchen">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Room"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Containment"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A designated room to perform the task of cooking.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA-HOME.owl#KitchenKnife -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl#KitchenKnife">
@@ -216,6 +268,22 @@
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl#NutellaJar">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-HOME.owl#Jar"/>
         <rdfs:comment>A jar which holds, or at least is intended to usually hold, Nutella.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-HOME.owl#Oven -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl#Oven">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Appliance"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA-HOME.owl#TemperingByHeating"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An appliance with an enclosed compartment that exposes food to heat</rdfs:comment>
     </owl:Class>
     
 
@@ -385,6 +453,33 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA-HOME.owl#TemperingByCooling -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl#TemperingByCooling">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Tempering"/>
+        <rdfs:comment>A disposition of an object to change others by removing heat energy from them.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-HOME.owl#TemperingByHeating -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl#TemperingByHeating">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Tempering"/>
+        <rdfs:comment>A disposition of an object to change others by applying heat energy to them.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-HOME.owl#TrashContainer -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl#TrashContainer">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">An item designed to hold trash. Typically equipped with a mechanism to close or open it, to prevent smells from the trash from propagating out and insects and other pests to get in.</rdfs:comment>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA-HOME.owl#WaterBottle -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl#WaterBottle">
@@ -464,6 +559,12 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#BoxShape -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#BoxShape"/>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Bread -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Bread">
@@ -497,6 +598,12 @@
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Compartment">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
     </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Containment -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Containment"/>
     
 
 
@@ -775,6 +882,12 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Linkage -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Linkage"/>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Pack -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Pack">
@@ -852,6 +965,12 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Room -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Room"/>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#RoomSurface -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RoomSurface">
@@ -901,6 +1020,12 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Surface -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Surface"/>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Table -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Table">
@@ -918,6 +1043,12 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Tempering -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Tempering"/>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Wall -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Wall">
@@ -927,12 +1058,24 @@
     
 
 
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact -->
+
+    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+    
+
+
     <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedSubstance -->
 
     <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedSubstance"/>
+    
+
+
+    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance -->
+
+    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
 </rdf:RDF>
 
 
 
-<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
 
