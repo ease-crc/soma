@@ -40,11 +40,12 @@ public class SubclassNothingRewriter implements CIRunnable {
 		if (gcis.isEmpty()) {
 			return;
 		}
-		LOGGER.info("Rewriting the following GCIs from ontology {}", iri);
+		LOGGER.info("Attempting to rewrite the following GCIs from ontology {}", iri);
 
 		gcis.forEach(next -> {
 			final Optional<OWLAxiom> rewritten = rewrite(next);
 			if (rewritten.isEmpty()) {
+				LOGGER.info("Unable to rewrite {}", next);
 				return;
 			}
 			LOGGER.info("Rewrote {} to {}", next, rewritten.get());
