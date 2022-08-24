@@ -1,0 +1,125 @@
+name: Evaluation
+on:
+  push:
+    paths:
+      - '**'
+      - '!docs/**'
+  pull_request:
+    paths:
+      - '**'
+      - '!docs/**'
+  release:
+    types: [created]
+    paths:
+      - '**'
+      - '!docs/**'
+
+jobs:
+  compile:
+    name: Compile SOMA
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '18'
+          cache: 'maven'
+
+      - name: Create directories
+        run: |
+              mkdir -p $GITHUB_WORKSPACE/build/owl/current &&
+              mkdir mkdir -p $GITHUB_WORKSPACE/build/files
+
+      - name: Compile
+        run: |
+          mvn spring-boot:run -f scripts/java/pom.xml \
+             -Dspring-boot.run.arguments="--versionInfo=current"
+
+      - name: Upload OWL file
+        uses: actions/upload-artifact@v1
+        with:
+          name: SOMA OWL
+          path: ./build/owl/current/SOMA-HOME.owl
+  
+  pitfalls:
+    name: OOPS
+    runs-on: ubuntu-latest
+    needs: compile
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Create directories
+        run: |
+              mkdir -p $GITHUB_WORKSPACE/build/owl/current &&
+              mkdir mkdir -p $GITHUB_WORKSPACE/build/files
+
+      - uses: actions/download-artifact@v1
+        with:
+          name: SOMA OWL
+          path: ./build/owl/current/
+      
+      - name: Setup Python
+        uses: actions/setup-python@v2
+      
+      - name: Install python dependencies
+        run: |
+          sudo python -m pip install --upgrade pip
+          sudo pip install requests
+
+      - name: Find pitfalls
+        run: sudo python ./scripts/oops.py $GITHUB_WORKSPACE/build/owl/current/SOMA-HOME.owl $GITHUB_WORKSPACE/build/files
+
+      - name: Generate annotations
+        run: sudo python ./scripts/oops-github.py $GITHUB_WORKSPACE/build/files/oops.xml
+
+      - name: Upload pitfalls
+        uses: actions/upload-artifact@v1
+        with:
+          name: OOPS Results
+          path: ./build/files/oops.xml
+  
+  consistency:
+    name: HermiT
+    runs-on: ubuntu-latest
+    needs: compile
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - uses: actions/download-artifact@v1
+        with:
+          name: SOMA OWL
+          path: ./build/owl/current
+
+      - name: Download DUL
+        run: wget http://www.ease-crc.org/ont/DUL.owl -O ./build/DUL.owl
+
+      - name: HermiT
+        uses: ./.github/actions/hermit
+        with:
+          args: ./build/DUL.owl ./build/SOMA-HOME.owl
+
+      - name: Print HermiT output
+        run: cat ./hermit.output
+        if: always()
+
+      - name: Evaluate HermiT output
+        if: success()
+        uses: docker://python:3.7.6-slim
+        with:
+          args: python ./scripts/hermit_test.py -o ./owl/hermit.html ./hermit.output
+

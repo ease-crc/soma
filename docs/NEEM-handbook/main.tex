@@ -1,0 +1,319 @@
+\documentclass{svmult}
+
+\usepackage{mathptmx}       % selects Times Roman as basic font
+\usepackage{helvet}         % selects Helvetica as sans-serif font
+\usepackage{courier}        % selects Courier as typewriter font
+\usepackage{type1cm}        % activate if the above 3 fonts are
+                            % not available on your system
+\usepackage[numbers]{natbib}
+%
+\usepackage{makeidx}         % allows index generation
+\usepackage{graphicx}        % standard LaTeX graphics tool
+                             % when including figure files
+\usepackage{multicol}        % used for the two-column index
+\usepackage[bottom]{footmisc}% places footnotes at page bottom
+\usepackage{listings}
+\usepackage{color}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{footmisc}
+\usepackage{import}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{lipsum}
+
+\usepackage{capt-of}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{watermark} % titlepage image
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\usepackage[parfill]{parskip}
+%\usepackage[nottoc]{tocbibind}
+\usepackage{tocloft}
+\usepackage[disable]{todonotes}
+
+\usepackage{microtype} % Improves spacing
+\usepackage{fancyhdr} 
+\fancyhead[L]{\rightmark}
+\fancyhead[R]{\leftmark} 
+\usepackage[toc,page]{appendix}
+ 
+
+\usetikzlibrary{shapes.misc, shapes.geometric, arrows, positioning, calc, decorations.markings}
+\tikzset{
+  query/.style={draw=blue!10,thick,fill=blue!2,inner sep=.15cm},
+  answer/.style={rectangle,draw=black!10,fill=gray!4},
+  icon/.style={circle,thick,fill=blue!20,draw=blue!30,inner sep=.05cm,font=\bfseries},
+  data/.style={draw=easeblue!30,thick,fill=easeblue!10,inner sep=.15cm},
+  owlclass/.style={draw=easeblue!40,fill=easeblue!10,text=easeblue,font=\bf,minimum width=2.5cm},
+  owlclass_f/.style={owlclass,text width=2.0cm,minimum width=2.0cm,text badly centered},
+  relation/.style={thick,-latex,black,font=\it\scriptsize},
+  relationxl/.style={relation,bend right=20},
+  relationxr/.style={relation,bend left=-20},
+}
+\pgfdeclarelayer{back}
+\pgfdeclarelayer{front}
+\pgfsetlayers{back,main,front}
+
+\lstdefinelanguage[OWL]{XML} {morekeywords={Individual,ObjectProperty,Types,Facts,Class,SubClassOf,Domain,Range,SubPropertyOf,EquivalentTo}}
+\lstdefinestyle{OWL}    {language=[OWL]XML,    lineskip=0.2ex, fontadjust=true, basicstyle={\scriptsize \nopagebreak[4]}}
+\lstdefinestyle{Prolog} {language=Prolog, lineskip=0.2ex, fontadjust=true, basicstyle={\scriptsize \nopagebreak[4]}, commentstyle=\scriptsize,
+    morekeywords={entity, occurs, holds, show, append, forall, findall, member}}
+
+\graphicspath{img}
+
+\lstdefinestyle{lispcode}{
+	backgroundcolor=\color{lightgray},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{white},
+	stringstyle=\color{purple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\definecolor{ease_lightblue}{HTML}{D4E5EF}
+\definecolor{ease_darkblue}{HTML}{144F78}
+\colorlet{easeblue}{ease_darkblue}
+\colorlet{robotblue}{ease_darkblue}
+
+% json data display 
+\colorlet{json_punctuation}{red!60!black}
+\definecolor{json_background}{HTML}{EEEEEE}
+\definecolor{json_delim}{RGB}{20,105,176}
+\colorlet{json_numb}{magenta!60!black}
+
+\lstdefinelanguage{json}{
+	basicstyle=\normalfont\ttfamily,
+	numbers=left,
+	numberstyle=\scriptsize,
+	stepnumber=1,
+	numbersep=8pt,
+	showstringspaces=false,
+	breaklines=true,
+	frame=lines,
+	backgroundcolor=\color{json_background},
+	literate=
+	*{0}{{{\color{json_numb}0}}}{1}
+	{1}{{{\color{json_numb}1}}}{1}
+	{2}{{{\color{json_numb}2}}}{1}
+	{3}{{{\color{json_numb}3}}}{1}
+	{4}{{{\color{json_numb}4}}}{1}
+	{5}{{{\color{json_numb}5}}}{1}
+	{6}{{{\color{json_numb}6}}}{1}
+	{7}{{{\color{json_numb}7}}}{1}
+	{8}{{{\color{json_numb}8}}}{1}
+	{9}{{{\color{json_numb}9}}}{1}
+	{:}{{{\color{json_punctuation}{:}}}}{1}
+	{,}{{{\color{json_punctuation}{,}}}}{1}
+	{\{}{{{\color{json_delim}{\{}}}}{1}
+	{\}}{{{\color{json_delim}{\}}}}}{1}
+	{[}{{{\color{json_delim}{[}}}}{1}
+	{]}{{{\color{json_delim}{]}}}}{1},
+}
+
+%\newcommand{\todo}[1]{\textcolor{red}{\textbf{TODO}: #1}}
+%\lstdefinelanguage[OWL]{XML} {morekeywords={Individual,ObjectProperty,Types,Facts,Class,SubClassOf,Domain,Range,SubPropertyOf,EquivalentTo}}
+%\lstdefinestyle{OWL}    {language=[OWL]XML,    lineskip=0.2ex, fontadjust=true, basicstyle={\scriptsize \nopagebreak[4]}}
+%\lstdefinestyle{Prolog} {language=Prolog, lineskip=0.2ex, fontadjust=true, basicstyle={\scriptsize \nopagebreak[4]}, commentstyle=\scriptsize,
+%    morekeywords={entity, occurs, holds, show, append, forall, findall, member}}
+
+\title*{NEEM Handbook}
+\author{
+   Michael Beetz,
+   Daniel Be{\ss}ler,
+   Sebastian Koralewski,
+   Mihai Pomarlan,
+   Abhijit Vyas,
+   Alina Hawkin,
+   Kaviya Dhanabalachandran,
+   Sascha Jongebloed
+}
+\authorrunning{Beetz et al.}
+\institute{CRC Everyday Activity Science and Engineering (EASE)\\ University Bremen, Am Fallturm 1, 28359 Bremen\\ \texttt{ai-office@cs.uni-bremen.de}}
+\thiswatermark{
+ \centering
+ \put(0,-630){\includegraphics[width=12cm]{img/NarrativesStory.png}}
+ \put(340,-10){\includegraphics[width=4.0cm]{img/ease-logo.pdf}}}
+
+\renewcommand\thesection{\thechapter.\arabic{section}}
+
+% TODO: use current SOMA version?
+\newcommand{\neemversion}{1.0~}
+\newcommand{\neemexp}{NEEM-experience~}
+\newcommand{\neemexps}{NEEM-experiences~}
+\newcommand{\neemnar}{NEEM-narrative~}
+\newcommand{\neembak}{NEEM-background~}
+\newcommand{\neem}{NEEM~}
+\newcommand{\neems}{NEEMs~}
+\newcommand{\neemhub}{NEEM-hub~}
+\newcommand{\tf}{tf~}
+\newcommand{\openease}{openEASE~}
+\newcommand{\ease}{EASE~}
+\newcommand{\mongodb}{MongoDB~}
+\newcommand{\cram}{CRAM~}
+\newcommand{\knowrob}{KnowRob~}
+\newcommand{\owl}{OWL~}
+\newcommand{\pr}{PR2~}
+\newcommand{\qudt}{Qudt~}
+\newcommand{\boxy}{Boxy~}
+\newcommand{\eg}{e.g.~}
+\newcommand{\ros}{ROS~}
+\newcommand{\soma}{SOMA~}
+\newcommand{\dul}{DUL~}
+\newcommand{\easeOwl}{EASE.owl~}
+\newcommand{\easeAct}{EASE-ACT.owl~}
+\newcommand{\easeObj}{EASE-OBJ.owl~}
+\newcommand{\cramOwl}{cram\_failures.owl}
+\newcommand{\cramentitytoreplace}[1]{\textless #1\textgreater}
+\newcommand{\cramloggerpackage}{"cram-cloud-logger"~}
+\newcommand{\owlClass}[1]{\textit{#1}}
+\newcommand{\owlPredicate}[1]{\textit{#1}}
+\newcommand{\f}{\mkern-2mu f\mkern-3mu}
+\newcommand{\abox}{\mathcal{A}}
+\newcommand{\tbox}{\mathcal{T}}
+\newcommand{\concept}[1]{\emph{#1}}
+\newcommand{\relation}[1]{\emph{#1}}
+
+\makeatletter
+\newcommand{\chapterauthor}[1]{%
+  {\parindent0pt\vspace*{-25pt}%
+  \linespread{1.1}\large\scshape#1%
+  \par\nobreak\vspace*{35pt}}
+  \@afterheading%
+}
+\makeatother
+
+\renewcommand\tabularxcolumn[1]{m{#1}}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+% % % % % % % % % % % % % % % % % % % % % % % %
+% % % Prelude
+% % % % % % % % % % % % % % % % % % % % % % % %
+\newcommand{\givenODPNAME}{}
+\newcommand{\givenODPINTENT}{}
+\newcommand{\givenODPDEFINEDIN}{}
+\newcommand{\givenODPGRAPHIC}{}
+\newcommand{\givenODPEXAMPLES}{}
+\newcommand{\givenODPQUESTION}{}
+\newcommand{\ODPINTENT}[1]     {\renewcommand{\givenODPINTENT}{#1}}
+\newcommand{\ODPDEFINEDIN}[1]  {\renewcommand{\givenODPDEFINEDIN}{#1}}
+\newcommand{\ODPGRAPHIC}[1]    {\renewcommand{\givenODPGRAPHIC}{#1}}
+\newcommand{\ODPEXAMPLES}[1]   {\renewcommand{\givenODPEXAMPLES}{#1}}
+\newcommand{\ODPQUESTION}[1]   {\renewcommand{\givenODPQUESTION}{#1}}
+\newcommand{\OPDinit}{
+  \renewcommand{\givenODPINTENT}{REQUIRED!}
+  \renewcommand{\givenODPDEFINEDIN}{REQUIRED!}
+  \renewcommand{\givenODPGRAPHIC}{REQUIRED!}
+  \renewcommand{\givenODPQUESTION}{}
+  \renewcommand{\givenODPEXAMPLES}{}
+  \renewcommand{\labelitemi}{$\mathbf{\sqsubseteq}$}
+}
+
+\newenvironment{ODP}[1]{
+\OPDinit
+\renewcommand{\givenODPNAME}{#1}
+}{
+%\givenODPDESCRIPTION
+%\begin{figure}[htb!]
+\vspace{0.2cm}
+\begin{minipage}{0.55\textwidth}
+\fcolorbox{easeblue!40}{easeblue!10}{\begin{tabular}{ p{1.8cm} p{4.2cm} }
+%\toprule
+% {\it\bf Name}                 & \emph{\givenODPNAME} \\
+{\noindent\color{easeblue}\it\bf Intent}               & \givenODPINTENT \\
+{\noindent\color{easeblue}\it\bf Competency Questions} & \emph{\givenODPQUESTION} \\
+{\noindent\color{easeblue}\it\bf Defined in}           & \givenODPDEFINEDIN \\
+%\bottomrule
+\end{tabular}}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+\begin{center}
+\givenODPGRAPHIC
+\end{center}
+\end{minipage}
+\\[0.4cm]
+\fcolorbox{easeblue!40}{easeblue!10}{
+	\begin{minipage}{0.96\textwidth}
+		\begin{tabular}{p{4.4cm}p{6.7cm}}
+		{\noindent\color{easeblue}\it\bf Expression}  &
+		{\noindent\color{easeblue}\it\bf Meaning} \\
+		\givenODPEXAMPLES
+		\end{tabular}
+	\end{minipage}
+}
+%\caption{\emph{The Representation of \givenODPNAME}.}
+%\end{figure}
+\vspace{0.2cm}
+}
+
+\setcounter{tocdepth}{3}
+
+\begin{document}
+\let\oldaddcontentsline\addcontentsline
+\def\addcontentsline#1#2#3{}
+\maketitle
+\def\addcontentsline#1#2#3{\oldaddcontentsline{#1}{#2}{#3}}
+
+\begin{abstract}
+The Collaborative Research Center \ease is an interdisciplinary research initiative at the University of Bremen that attempts to advance our understanding of how human-scale manipulation tasks can be mastered by robotic agents.
+The challenge is that the same task needs to be executed by the robot in different ways depending on, for example, what tools are available, and how the environment is shaped.
+The key to solve this issue is \emph{generalization}.
+However, the robot needs to know more then what step it needs to execute next -- it further needs to decide on how the next step is carried out through motions of its body, and interactions with its environment.
+In this document, we will describe how these types of information are represented in the \ease system, how such data-sets are acquired, and how they are stored, maintained, and curated using a centralized web-service.
+The goal of this effort is to establish representations and infrastructure for a shared experience storage with annotated data-sets of agents performing everyday activities,
+and to use these data-sets as ground truth data to find generalizations that do not abstract away from movements, and naive physics.
+\end{abstract}
+
+\cleardoublepage
+\tableofcontents
+
+\pagenumbering{arabic}
+\setcounter{page}{0}
+\cleardoublepage
+\input{content/intro/intro}
+%\input{content/requirements/requirements}
+%\input{content/representation/representation}
+
+\setcounter{section}{0}
+\input{content/representation/neem-background}
+
+\setcounter{section}{0}
+\input{content/representation/neem-narrative/neem-narrative}
+
+\setcounter{section}{0}
+\input{content/representation/neem-experience/neem-experience}
+
+\setcounter{section}{0}
+\input{content/neem-hub/neem-hub}
+
+\setcounter{section}{0}
+\input{content/acquisition/acquisition}
+
+
+\setcounter{section}{0}
+\input{content/initial-checklist/initial-checklist}
+%\input{content/application/application}
+%\input{content/future-work/future-work}
+
+\setcounter{section}{0}
+\input{content/appendix/appendix.tex}
+
+\cleardoublepage
+\bibliography{neem}
+\bibliographystyle{plain}
+
+%\setcounter{section}{0}
+%\input{content/appendix/appendix}
+\end{document}

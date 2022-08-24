@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://knowrob.org/kb/elan-map.owl#"
+         xml:base="http://knowrob.org/kb/elan-map.owl"
+         xmlns:srdl2="http://knowrob.org/kb/srdl2.owl#"
+         xmlns:srdl2-cap="http://knowrob.org/kb/srdl2-cap.owl#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:urdf="http://knowrob.org/kb/urdf.owl#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:qudt-unit="http://qudt.org/vocab/unit#"
+         xmlns:iai-Player="http://knowrob.org/kb/elan-map.owl#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:soma="http://www.ease-crc.org/ont/SOMA.owl#"
+         xmlns:xml="http://www.w3.org/XML/1998/namespace"
+         xmlns:srdl2-comp="http://knowrob.org/kb/srdl2-comp.owl#"
+         xmlns:knowrob="http://knowrob.org/kb/knowrob.owl#"
+         xmlns:dul="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#">
+    <owl:Ontology rdf:about="http://knowrob.org/kb/elan-map.owl">
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA.owl"/>
+    </owl:Ontology>
+
+    <!--
+    /////////////// 
+    //
+    // Classes
+    //
+    ////////////// 
+     -->
+
+
+
+    <!--
+    //////////////
+    //
+    // Individuals
+    //
+    //////////////
+     -->
+
+
+    <!-- http://knowrob.org/kb/elan-map.owl#map_1 -->
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/elan-map.owl#map_1">
+        <rdf:type rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">floor</urdf:hasBaseLinkName>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/elan-map.owl#table1_1"/>
+        <dul:hasComponent rdf:resource="http://knowrob.org/kb/elan-map.owl#table2_1"/>
+        <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">table1</urdf:hasEndLinkName>
+         <urdf:hasEndLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">table2</urdf:hasEndLinkName>	
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/elan-map.owl#table1_1">
+        <rdf:type rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">table1</urdf:hasBaseLinkName>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/elan-map.owl#table2_1">
+        <rdf:type rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+        <urdf:hasBaseLinkName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">table2</urdf:hasBaseLinkName>
+    </owl:NamedIndividual>
+ 
+ 	<!-- Individuals for kinematics information -->
+	<owl:NamedIndividual rdf:about="http://knowrob.org/kb/Kitchen-clash-agent.owl#InformationObject_KFLDFGHj">
+        <rdf:type rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#KinoDynamicData"/>
+        <dul:isAbout rdf:resource="http://knowrob.org/kb/elan-map.owl#map_1"/>
+    </owl:NamedIndividual>
+
+    <owl:NamedIndividual rdf:about="http://knowrob.org/kb/Kitchen-clash-agent.owl#InformationRealization_1RTUPDFG">
+        <rdf:type rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl#DigitalResource"/>
+        <dul:realizes rdf:resource="http://knowrob.org/kb/Kitchen-clash-agent.owl#InformationObject_KFLDFGHj"/>
+        <soma:hasPersistentIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ElanMap</soma:hasPersistentIdentifier>
+        <soma:hasDataFormat rdf:datatype="http://www.w3.org/2001/XMLSchema#string">URDF</soma:hasDataFormat>
+    </owl:NamedIndividual>
+     
+	 
+</rdf:RDF>

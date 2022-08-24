@@ -1,0 +1,152 @@
+name: Deployment
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '**'
+  release:
+    branches:
+      - master
+    types: [created]
+    paths:
+      - '**'
+
+jobs:
+  deployment:
+    name: Deployment
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '18'
+          cache: 'maven'
+
+      - name: Create directories
+        run: |
+              mkdir -p $GITHUB_WORKSPACE/build/owl/current &&
+              mkdir mkdir -p $GITHUB_WORKSPACE/build/files
+
+      - name: Compile current
+        if: startsWith(github.ref, 'refs/tags/') != true
+        run: |
+          mvn spring-boot:run -f scripts/java/pom.xml \
+             -Dspring-boot.run.arguments="--versionInfo=current"
+
+      - name: Compile tag
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          mvn spring-boot:run -f scripts/java/pom.xml \
+             -Dspring-boot.run.arguments="--versionInfo=${{ github.event.release.tag_name }}"
+
+      - name: Upload SOMA
+        uses: actions/upload-artifact@v1
+        with:
+          name: SOMA Ontology
+          path: ./build/owl/current/SOMA.owl
+
+      - name: Upload SOMA-HOME
+        uses: actions/upload-artifact@v1
+        with:
+          name: SOMA-HOME Ontology
+          path: ./build/owl/current/SOMA-HOME.owl
+
+      - name: Upload DUL
+        uses: actions/upload-artifact@v1
+        with:
+          name: DUL Ontology
+          path: ./owl/DUL.owl
+
+      - name: Copy all OWL files to be deployed
+        run: sudo cp -n ./owl/*.owl $GITHUB_WORKSPACE/build/owl/current
+      
+      - name: Compile NEEM Handbook
+        uses: docker://blang/latex:ubuntu
+        with:
+          args: make -f ./docs/NEEM-handbook/Makefile
+      
+      - name: Copy NEEM Handbook
+        run: sudo cp $GITHUB_WORKSPACE/docs/NEEM-handbook/main.pdf $GITHUB_WORKSPACE/build/files/NEEM-Handbook.pdf
+      
+      - name: Deploy files current
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        if: github.ref == 'refs/heads/master'
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build/files
+          TARGET_FOLDER: /files/current
+
+      - name: Deploy owl current
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        if: github.ref == 'refs/heads/master'
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build/owl/current/
+          TARGET_FOLDER: /owl/current
+
+      - name: Deploy owl tag
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build/owl/current/
+          TARGET_FOLDER: owl/${{ github.event.release.tag_name }}
+          #TARGET_FOLDER: owl/${{ GITHUB_REF/refs\/tags\// }}
+          #TARGET_FOLDER: owl/${{ GITHUB_REF#refs/tags/ }}
+
+      # Metrics have to be created after the deployment step, because 
+      # OntoMetrics only allows POST with an URI at the moment
+      - name: Metrics
+        if: github.ref == 'refs/heads/master'
+        run: |
+          sudo ./scripts/OntoMetrics.sh \
+          https://raw.githubusercontent.com/ease-crc/soma/gh-pages/owl/current/SOMA.owl \
+          $GITHUB_WORKSPACE/build/files
+
+      - name: Metrics
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          sudo ./scripts/OntoMetrics.sh \
+          https://raw.githubusercontent.com/ease-crc/soma/gh-pages/owl/${{ github.event.release.tag_name }}/SOMA.owl \
+          $GITHUB_WORKSPACE/build/files
+
+      - name: Upload Metrics
+        uses: actions/upload-artifact@v1
+        with:
+          name: Metrics
+          path: ./build/files/metrics.json
+
+      - name: Deploy files current
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        if: github.ref == 'refs/heads/master'
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build/files
+          TARGET_FOLDER: /files/current
+
+      - name: Deploy files tag
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build/files/
+          TARGET_FOLDER: files/${{ github.event.release.tag_name }}
+          #TARGET_FOLDER: owl/${{ GITHUB_REF/refs\/tags\// }}
+          #TARGET_FOLDER: owl/${{ GITHUB_REF#refs/tags/ }}
+
+      - name: Deploy failure
+        if: failure()
+        run: echo Deployment failed. If the other steps succeeded, maybe no ACCESS_TOKEN was set?

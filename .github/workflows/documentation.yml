@@ -1,0 +1,57 @@
+name: Documentation
+on:
+  push:
+    paths:
+      - 'owl/**'
+      - 'docs/**'
+      - '.github/**'
+
+jobs:
+  vocabulary:
+    name: SOMA Vocabulary
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./docs/vocab/
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        
+      - name: Copy
+        run: |
+          cp ./Makefile ../../
+          cp ./SOMA-vocabulary.tex ../../
+          cp ./owl_reader.py ../../
+        
+      - name: Build
+        uses: ./.github/actions/pythonlatex
+        with: 
+          args: make
+        
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: SOMA Vocabulary
+          path: ./SOMA-vocabulary.pdf
+
+  handbook:
+    name: NEEM Handbook
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Build
+        uses: docker://blang/latex:ubuntu
+        with:
+          args: make -f ./docs/NEEM-handbook/Makefile
+
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          name: NEEM Handbook
+          path: ./docs/NEEM-handbook/main.pdf
