@@ -10,7 +10,7 @@
                 Reason: incompatible with <code>DUL-v32</code>
             </li>
             <li>
-                Note: Some important concepts, e.g. <code>IOLite#DigitalResource</code>, are still referenced in the taxonomy for backwards-compatibility. If you are missing any crucial concepts/roles, let us know
+                Note: Some important concepts, e.g. <code>IOLite#LinguisticObject</code>, have been renamed to <code>SOMA#LinguisticObject</code>. If you are missing any crucial concepts/roles, let us know
             </li>
             <li>
                 Ongoing effort to create a model of CRAM (see next point) will replace some of the IOLite taxonomy at some point
