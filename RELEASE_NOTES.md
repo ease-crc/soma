@@ -1,6 +1,6 @@
 # Release Notes
 
-## Upcoming (expected version is 2.0.0)
+## 2.0.0
 ### Braking changes
 *   Removal of `IOLite`
     <details>
