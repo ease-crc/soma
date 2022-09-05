@@ -46,37 +46,6 @@ We do not argue here that one of these approaches is better -- they seem equally
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#definesEventType -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#definesEventType"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#definesExecutor -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#definesExecutor">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
-        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl#isExecutorDefinedIn"/>
-        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Affordance"/>
-        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-        <rdfs:comment xml:lang="en">Relates a task-defining affordance to the role of the Agent executing the task when the affordance is manifested.</rdfs:comment>
-        <rdfs:label xml:lang="en">defines executor</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#isExecutorDefinedIn -->
-
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#isExecutorDefinedIn">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRoleDefinedIn"/>
-        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
-        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Affordance"/>
-        <rdfs:comment xml:lang="en">Relates a task-defining affordance to the role of the Agent executing the task when the affordance is manifested.</rdfs:comment>
-        <rdfs:label xml:lang="en">is executor defined in</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasChildLink -->
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasChildLink">
@@ -426,6 +395,25 @@ We do not argue here that one of these approaches is better -- they seem equally
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
         <rdfs:comment>Relates an affordance which is a relation between a bearer and a trigger, to the role of the bearer when the affordance is manifested.</rdfs:comment>
         <rdfs:label>defines bearer</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#definesEventType -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#definesEventType"/>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#definesExecutor -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#definesExecutor">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isExecutorDefinedIn"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Affordance"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:comment xml:lang="en">Relates a task-defining affordance to the role of the Agent executing the task when the affordance is manifested.</rdfs:comment>
+        <rdfs:label xml:lang="en">defines executor</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -795,6 +783,18 @@ We do not argue here that one of these approaches is better -- they seem equally
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Effector participation.</rdfs:comment>
         <rdfs:label>is effector involved in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isExecutorDefinedIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isExecutorDefinedIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRoleDefinedIn"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Affordance"/>
+        <rdfs:comment xml:lang="en">Relates a task-defining affordance to the role of the Agent executing the task when the affordance is manifested.</rdfs:comment>
+        <rdfs:label xml:lang="en">is executor defined in</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -1856,7 +1856,7 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
         <rdfs:comment>A role classifying an Agent responsible for performing an Action.
 
 The entity playing an AgentRole is endowed with sentience and the capacity to deliberately choose actions in pursuit of goals. This distinguishes Agents from other causes that could bring an event about.</rdfs:comment>
-        <rdfs:label xml:lang="en">Agent role</rdfs:label>
+        <rdfs:label xml:lang="en">Executor role</rdfs:label>
     </owl:Class>
     
 
@@ -2486,14 +2486,14 @@ The paradigmatic example is the Agent performing an Action -- the Agent is the e
                         <owl:intersectionOf rdf:parseType="Collection">
                             <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Affordance"/>
                             <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl#definesEventType"/>
-                                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
-                            </owl:Restriction>
-                            <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#definesBearer"/>
                                 <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
                                 <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role"/>
+                            </owl:Restriction>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#definesEventType"/>
+                                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                                <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType"/>
                             </owl:Restriction>
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#definesTrigger"/>
