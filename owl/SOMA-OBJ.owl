@@ -32,12 +32,18 @@ This is related to a design decision between \"primacy of objects\" and \"primac
 
 We do not argue here that one of these approaches is better -- they seem equally powerful in terms of what they can express. Our decision for primacy of objects is merely an aesthetic choice based on what seemed more intuitive.")
 
+Declaration(Class(:AcousticPerceptionCapability))
 Declaration(Class(:ArtificialAgent))
+Declaration(Class(:AuditorySensoryComponent))
+Declaration(Class(:Camera))
 Declaration(Class(:CanCut))
+Declaration(Class(:Capability))
 Declaration(Class(:ContinuousJoint))
 Declaration(Class(:CutObject))
 Declaration(Class(:Cuttability))
 Declaration(Class(:Cutter))
+Declaration(Class(:Ear))
+Declaration(Class(:Eye))
 Declaration(Class(:FixedJoint))
 Declaration(Class(:FloatingJoint))
 Declaration(Class(:ForceAttribute))
@@ -45,8 +51,11 @@ Declaration(Class(:HingeJoint))
 Declaration(Class(:Joint))
 Declaration(Class(:JointLimit))
 Declaration(Class(:JointState))
+Declaration(Class(:Microphone))
 Declaration(Class(:MovableJoint))
 Declaration(Class(:NetForce))
+Declaration(Class(:PerceptionCapability))
+Declaration(Class(:PerceptionComponent))
 Declaration(Class(:PlanarJoint))
 Declaration(Class(:Pourable))
 Declaration(Class(:PouredObject))
@@ -54,6 +63,8 @@ Declaration(Class(:PrismaticJoint))
 Declaration(Class(:RevoluteJoint))
 Declaration(Class(:Storage))
 Declaration(Class(:StoredObject))
+Declaration(Class(:VisualPerceptionCapability))
+Declaration(Class(:VisualSensoryComponent))
 Declaration(Class(SOMA:Accessor))
 Declaration(Class(SOMA:AestheticDesign))
 Declaration(Class(SOMA:Affordance))
@@ -202,6 +213,7 @@ Declaration(ObjectProperty(:hasLink))
 Declaration(ObjectProperty(:hasNetForce))
 Declaration(ObjectProperty(:hasParentLink))
 Declaration(ObjectProperty(:hasRootLink))
+Declaration(ObjectProperty(:hasCapability))
 Declaration(ObjectProperty(:isChildLinkOf))
 Declaration(ObjectProperty(:isEndLinkOf))
 Declaration(ObjectProperty(:isJointLimitOf))
@@ -374,6 +386,14 @@ SubObjectPropertyOf(:hasRootLink :hasLink)
 InverseObjectProperties(:hasRootLink :isRootLinkOf)
 ObjectPropertyDomain(:hasRootLink <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 ObjectPropertyRange(:hasRootLink <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
+
+# Object Property: :hasCapability (has capability)
+
+AnnotationAssertion(rdfs:comment :hasCapability "Associates an agent to one of its capabilities.")
+AnnotationAssertion(rdfs:label :hasCapability "has capability")
+SubObjectPropertyOf(:hasCapability SOMA:hasDisposition)
+ObjectPropertyDomain(:hasCapability <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object>)
+ObjectPropertyRange(:hasCapability :Capability)
 
 # Object Property: <http://www.ease-crc.org/ont/SOMA-OBJ.owl#isChildLinkOf> (is child link of)
 
@@ -1166,6 +1186,11 @@ DataPropertyRange(SOMA:hasWidth xsd:float)
 #   Classes
 ############################
 
+# Class: :AcousticPerceptionCapability (:AcousticPerceptionCapability)
+
+AnnotationAssertion(rdfs:comment :AcousticPerceptionCapability "The ability of the agent by which it can listen to the world around it, usually with auditory apparatus.")
+SubClassOf(:AcousticPerceptionCapability :PerceptionCapability)
+
 # Class: <http://www.ease-crc.org/ont/SOMA-OBJ.owl#ArtificialAgent> (Artificial agent)
 
 AnnotationAssertion(rdfs:comment :ArtificialAgent "A physical object with artificial characteristics, which can perform actions to achieve desired goals, and typically has sensors and/or actuators.
@@ -1174,12 +1199,27 @@ There can be non-physical artificial agents such as software programs but they a
 AnnotationAssertion(rdfs:label :ArtificialAgent "Artificial agent")
 SubClassOf(:ArtificialAgent <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent>)
 
+# Class: :AuditorySensoryComponent (:AuditorySensoryComponent)
+
+SubClassOf(:AuditorySensoryComponent :PerceptionComponent)
+SubClassOf(:AuditorySensoryComponent ObjectSomeValuesFrom(:hasCapability :AcousticPerceptionCapability))
+
+# Class: :Camera (:Camera)
+
+AnnotationAssertion(rdfs:comment :Camera "A device used for the perceiving the environment in the form of visual images or video signals.")
+SubClassOf(:Camera :VisualSensoryComponent)
+
 # Class: <http://www.ease-crc.org/ont/SOMA-OBJ.owl#CanCut> (<http://www.ease-crc.org/ont/SOMA-OBJ.owl#CanCut>)
 
 AnnotationAssertion(rdfs:comment :CanCut "The disposition of an object (the tool) to cut other objects. Such as a knife has cutting ability to cut a cucumber into pieces.")
 SubClassOf(:CanCut SOMA:Variability)
 SubClassOf(:CanCut ObjectAllValuesFrom(SOMA:affordsBearer :Cutter))
 SubClassOf(:CanCut ObjectAllValuesFrom(SOMA:affordsTrigger :CutObject))
+
+# Class: :Capability (:Capability)
+
+AnnotationAssertion(rdfs:comment :Capability "The special type of disposition of an agent whick makes it able to perform certain tasks.")
+SubClassOf(:Capability SOMA:Disposition)
 
 # Class: <http://www.ease-crc.org/ont/SOMA-OBJ.owl#ContinuousJoint> (Continuous joint)
 
@@ -1203,6 +1243,16 @@ SubClassOf(:Cuttability ObjectAllValuesFrom(SOMA:affordsTrigger :Cutter))
 
 AnnotationAssertion(rdfs:comment :Cutter "A role to classify an object used to cut other objects. Usually should poses sharpness as a quality. Execptions are not considered in this context. Such as a wind, water, or other natural agents cutting(eroding) the rocks.")
 SubClassOf(:Cutter SOMA:Tool)
+
+# Class: :Ear (:Ear)
+
+AnnotationAssertion(rdfs:comment :Ear "An orgen responsible for audio perception in natural agents.")
+SubClassOf(:Ear :AuditorySensoryComponent)
+
+# Class: :Eye (:Eye)
+
+AnnotationAssertion(rdfs:comment :Eye "An orgen responsible for visual perception in natural agents.")
+SubClassOf(:Eye :VisualSensoryComponent)
 
 # Class: <http://www.ease-crc.org/ont/SOMA-OBJ.owl#FixedJoint> (Fixed joint)
 
@@ -1255,6 +1305,11 @@ SubClassOf(:JointState DataExactCardinality(1 :hasJointPosition xsd:double))
 SubClassOf(:JointState DataExactCardinality(1 :hasJointVelocity xsd:double))
 SubClassOf(:JointState DataMaxCardinality(1 :hasJointEffort xsd:double))
 
+# Class: :Microphone (:Microphone)
+
+AnnotationAssertion(rdfs:comment :Microphone "A device used for the perceiving the environment in the form of audio signals.")
+SubClassOf(:Microphone :AuditorySensoryComponent)
+
 # Class: <http://www.ease-crc.org/ont/SOMA-OBJ.owl#MovableJoint> (Movable joint)
 
 AnnotationAssertion(rdfs:comment :MovableJoint "A joint where the two connected links can move relative to each other in some dimension.")
@@ -1267,6 +1322,16 @@ SubClassOf(:MovableJoint ObjectExactCardinality(1 :hasJointState :JointState))
 AnnotationAssertion(rdfs:comment :NetForce "The accumulated force acting upon an object.")
 AnnotationAssertion(rdfs:label :NetForce "Net force")
 SubClassOf(:NetForce :ForceAttribute)
+
+# Class: :PerceptionCapability (:PerceptionCapability)
+
+AnnotationAssertion(rdfs:comment :PerceptionCapability "The ability of the agent by which it can perceive the world around it.")
+SubClassOf(:PerceptionCapability :Capability)
+SubClassOf(:PerceptionCapability ObjectSomeValuesFrom(SOMA:affordsBearer SOMA:ExperiencerRole))
+
+# Class: :PerceptionComponent (:PerceptionComponent)
+
+SubClassOf(:PerceptionComponent SOMA:FunctionalPart)
 
 # Class: <http://www.ease-crc.org/ont/SOMA-OBJ.owl#PlanarJoint> (Planar joint)
 
@@ -1309,6 +1374,16 @@ SubClassOf(:Storage ObjectAllValuesFrom(SOMA:affordsTrigger :StoredObject))
 
 AnnotationAssertion(rdfs:comment :StoredObject "An object being stored into some other object, usually inside a container.")
 SubClassOf(:StoredObject SOMA:EnclosedObject)
+
+# Class: :VisualPerceptionCapability (:VisualPerceptionCapability)
+
+AnnotationAssertion(rdfs:comment :VisualPerceptionCapability "The ability of the agent by which it can see the world around it, usually with visual apparatus.")
+SubClassOf(:VisualPerceptionCapability :PerceptionCapability)
+
+# Class: :VisualSensoryComponent (:VisualSensoryComponent)
+
+SubClassOf(:VisualSensoryComponent :PerceptionComponent)
+SubClassOf(:VisualSensoryComponent ObjectSomeValuesFrom(:hasCapability :VisualPerceptionCapability))
 
 # Class: <http://www.ease-crc.org/ont/SOMA.owl#Accessor> (<http://www.ease-crc.org/ont/SOMA.owl#Accessor>)
 
