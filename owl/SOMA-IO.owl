@@ -22,10 +22,10 @@ Declaration(Class(SOMA:Algorithm))
 Declaration(Class(SOMA:ArchiveFile))
 Declaration(Class(SOMA:ArchiveFormat))
 Declaration(Class(SOMA:ArchiveText))
-Declaration(Class(SOMA:ArtificialAgent))
 Declaration(Class(SOMA:Classifier))
 Declaration(Class(SOMA:Client-Server_Specification))
 Declaration(Class(SOMA:ClientRole))
+Declaration(Class(SOMA:CognitiveAgent))
 Declaration(Class(SOMA:Computer_Language))
 Declaration(Class(SOMA:Computer_Program))
 Declaration(Class(SOMA:Database))
@@ -71,6 +71,7 @@ Declaration(Class(SOMA:Software_Configuration))
 Declaration(Class(SOMA:Source_Code))
 Declaration(Class(SOMA:StatisticalReasoner))
 Declaration(Class(SOMA:Structured_Text))
+Declaration(Class(SOMA:SubCognitiveAgent))
 Declaration(Class(SOMA:SymbolicReasoner))
 Declaration(Class(SOMA:System))
 Declaration(Class(SOMA:Text))
@@ -109,19 +110,19 @@ ObjectPropertyRange(SOMA:hasSoftwareAgent SOMA:SoftwareInstance)
 
 # Object Property: SOMA:isDesignFor (is design for)
 
-AnnotationAssertion(rdfs:comment SOMA:isDesignFor "A special relation between a Design and a DesignedArtifact, to indicate that the Design describes a way to construct the DesignedArtifact."@en)
+AnnotationAssertion(rdfs:comment SOMA:isDesignFor "A special relation between a Design and an Object, to indicate that the Design describes a way to construct the Object."@en)
 AnnotationAssertion(rdfs:label SOMA:isDesignFor "is design for"@en)
 SubObjectPropertyOf(SOMA:isDesignFor <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes>)
 InverseObjectProperties(SOMA:isDesignFor SOMA:isDesignedBy)
 ObjectPropertyDomain(SOMA:isDesignFor <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design>)
-ObjectPropertyRange(SOMA:isDesignFor <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact>)
+ObjectPropertyRange(SOMA:isDesignFor <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object>)
 
 # Object Property: SOMA:isDesignedBy (is designed by)
 
-AnnotationAssertion(rdfs:comment SOMA:isDesignedBy "A special relation between a Design and a Designed Artifact, to indicate that the Designed Artifact is described by the Design."@en)
+AnnotationAssertion(rdfs:comment SOMA:isDesignedBy "A special relation between a Design and an Object, to indicate that the Object is described by the Design."@en)
 AnnotationAssertion(rdfs:label SOMA:isDesignedBy "is designed by"@en)
 SubObjectPropertyOf(SOMA:isDesignedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy>)
-ObjectPropertyDomain(SOMA:isDesignedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact>)
+ObjectPropertyDomain(SOMA:isDesignedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object>)
 ObjectPropertyRange(SOMA:isDesignedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design>)
 
 # Object Property: SOMA:isGivenMeaningBy (is given meaning by)
@@ -190,12 +191,6 @@ AnnotationAssertion(rdfs:label SOMA:ArchiveText "Archive Text"@en)
 EquivalentClasses(SOMA:ArchiveText ObjectIntersectionOf(SOMA:Structured_Text ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses> SOMA:FileConfiguration)))
 EquivalentClasses(SOMA:ArchiveText ObjectSomeValuesFrom(SOMA:isGivenMeaningBy SOMA:ArchiveFormat))
 
-# Class: SOMA:ArtificialAgent (Artificial agent)
-
-AnnotationAssertion(rdfs:comment SOMA:ArtificialAgent "Any constructed agent with physical embodiment that has intentions on its own, e.g., a robot."@en)
-AnnotationAssertion(rdfs:label SOMA:ArtificialAgent "Artificial agent"@en)
-SubClassOf(SOMA:ArtificialAgent <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent>)
-
 # Class: SOMA:Classifier (Classifier)
 
 AnnotationAssertion(rdfs:label SOMA:Classifier "Classifier"@en)
@@ -220,6 +215,13 @@ Source: https://en.wikipedia.org/wiki/Client%E2%80%93server_model"@en)
 AnnotationAssertion(rdfs:label SOMA:ClientRole "Client role"@en)
 SubClassOf(SOMA:ClientRole SOMA:InterfaceComponentRole)
 SubClassOf(SOMA:ClientRole ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn> SOMA:Client-Server_Specification))
+
+# Class: SOMA:CognitiveAgent (cognitive agent)
+
+AnnotationAssertion(rdfs:comment SOMA:CognitiveAgent "An agent that is capable to act on its own, in contrast to sub-cognitive Agents, that need to have their intentionality bestowed upon some other agent."@en)
+AnnotationAssertion(rdfs:label SOMA:CognitiveAgent "cognitive agent"@en)
+SubClassOf(SOMA:CognitiveAgent <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>)
+DisjointClasses(SOMA:CognitiveAgent SOMA:SubCognitiveAgent)
 
 # Class: SOMA:Computer_Language (Computer Language)
 
@@ -509,8 +511,8 @@ In this view, we see the of an Agent required intentionality its intentionality 
 
 Another apporach might be to not model this entity at all and only see Execution of Software as a Process (see, e.g., https://en.wikipedia.org/wiki/Execution_(computing)). However, this would complicate modeling communication between running Software processes."@en)
 AnnotationAssertion(rdfs:label SOMA:SoftwareInstance "Software instance"@en)
-SubClassOf(SOMA:SoftwareInstance ObjectIntersectionOf(SOMA:DesignedTool ObjectSomeValuesFrom(SOMA:isDesignedBy SOMA:Software)))
 SubClassOf(SOMA:SoftwareInstance ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialAgent> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#actsFor> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>)))
+SubClassOf(SOMA:SoftwareInstance ObjectSomeValuesFrom(SOMA:isDesignedBy SOMA:Software))
 
 # Class: SOMA:SoftwareLibrary (Software Library)
 
@@ -553,6 +555,12 @@ SubClassOf(SOMA:StatisticalReasoner SOMA:Reasoner)
 AnnotationAssertion(rdfs:comment SOMA:Structured_Text "Any Text that adheres to some rules that are in any way more specific than natural language and that cannot be made sense of without knowing said rules."@en)
 AnnotationAssertion(rdfs:label SOMA:Structured_Text "Structured text"@en)
 EquivalentClasses(SOMA:Structured_Text ObjectIntersectionOf(SOMA:Text ObjectSomeValuesFrom(SOMA:isGivenMeaningBy SOMA:FormalLanguage)))
+
+# Class: SOMA:SubCognitiveAgent (Sub-cognitive agent)
+
+AnnotationAssertion(rdfs:comment SOMA:SubCognitiveAgent "An agent that is not capable to act on its own, i.e., that is reactive. Its intentionality needs to be bestowed upon from some other agent, that it acts for."@en)
+AnnotationAssertion(rdfs:label SOMA:SubCognitiveAgent "Sub-cognitive agent"@en)
+SubClassOf(SOMA:SubCognitiveAgent <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>)
 
 # Class: SOMA:SymbolicReasoner (Symbolic reasoner)
 
