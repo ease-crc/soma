@@ -799,6 +799,17 @@ For example, if the topic of a communication is flowers, this does not mean the 
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Conclusion -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Conclusion">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CreatedObject"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Knowledge"/>
+        <rdfs:comment>An object that is derived from some premise using some inference rules.</rdfs:comment>
+        <rdfs:label>Conclusions</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Constructing -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Constructing">
@@ -932,15 +943,6 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region"/>
         <rdfs:comment>A region containing labels that describe different states in the evolution/completion of a task execution.</rdfs:comment>
         <rdfs:label>Execution state region</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#ExplicitKnowledge -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ExplicitKnowledge">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Knowledge"/>
-        <rdfs:label>Explicit knowledge</rdfs:label>
     </owl:Class>
     
 
@@ -1079,16 +1081,8 @@ Induction is often described as a move from many &quot;specifics&quot; (swan A i
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#InferenceRules">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Knowledge"/>
+        <rdfs:comment>The role of an object that is used to derive a conclusion from some premises.</rdfs:comment>
         <rdfs:label>Inference rules</rdfs:label>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#InferredKnowledge -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#InferredKnowledge">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Knowledge"/>
-        <rdfs:label>Inferred knowledge</rdfs:label>
     </owl:Class>
     
 
@@ -1167,6 +1161,16 @@ The difference to Remembering is that for this Task, we are concerned with knowl
 
 An example is learning new knowledge.</rdfs:comment>
         <rdfs:label xml:lang="en">Information storage</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Instructions -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Instructions">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Item"/>
+        <rdfs:comment>The role of a plan to follow during an execution task.</rdfs:comment>
+        <rdfs:label>Instructions</rdfs:label>
     </owl:Class>
     
 
@@ -1361,6 +1365,7 @@ Note that the Role Message classifies the Information Realization, not the conte
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionEvaluationTopic">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionTopic"/>
         <rdfs:comment>A topic used while an Agent describes its own cognitive processes and acions to evaluate them according to some metric.</rdfs:comment>
+        <rdfs:label>Meta cognition evaluation topic</rdfs:label>
     </owl:Class>
     
 
@@ -1370,6 +1375,7 @@ Note that the Role Message classifies the Information Realization, not the conte
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionMemoryTopic">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionTopic"/>
         <rdfs:comment>A topic used while an Agent describes its own cognitive processes and actions, and which covers descriptions of what memories are involved in them.</rdfs:comment>
+        <rdfs:label>Meta cognition memory topic</rdfs:label>
     </owl:Class>
     
 
@@ -1379,6 +1385,7 @@ Note that the Role Message classifies the Information Realization, not the conte
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionPlanningTopic">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionTopic"/>
         <rdfs:comment>A topic used while an Agent describes the planning it does for its own cognitive processes and actions.</rdfs:comment>
+        <rdfs:label>Meta cognition planning topic</rdfs:label>
     </owl:Class>
     
 
@@ -1388,6 +1395,26 @@ Note that the Role Message classifies the Information Realization, not the conte
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionTopic">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudTopic"/>
         <rdfs:comment>A topic for a description that an Agent might make of its own cognitive processes and actions.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#MetacognitiveControlling -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MetacognitiveControlling">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#MentalTask"/>
+        <rdfs:comment>The concious or subconcious task to control the own mental processes, e.g., evaluating them and instructing the own mind to shift attention.</rdfs:comment>
+        <rdfs:label>Metacognitive controlling</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#MetacognitiveMonitoring -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MetacognitiveMonitoring">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Introspecting"/>
+        <rdfs:comment>The task to label the processes and states of the own mind, e.g., to interprete the feeling of knowing an information but not being able to retrieve it at the moment as a tip-of-the-tongue event.</rdfs:comment>
+        <rdfs:label>Metacognitive monitoring</rdfs:label>
     </owl:Class>
     
 
@@ -1600,6 +1627,16 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Premise -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Premise">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Knowledge"/>
+        <rdfs:comment>The role of an object that is used to infer some conclusion via some inference rules.</rdfs:comment>
+        <rdfs:label>Premises</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Proprioceiving -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Proprioceiving">
@@ -1761,7 +1798,7 @@ Note, this classification has nothing to do with reasoning domain (e.g. SpatialR
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Receiver -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Receiver">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AgentRole"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Performer_role"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask"/>
@@ -1863,7 +1900,7 @@ As an example, a kind of Abductive reasoning would fit here: reconstruction, in 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Sender -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Sender">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AgentRole"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Performer_role"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask"/>
@@ -1940,6 +1977,7 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudActionTopic">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudTopic"/>
         <rdfs:comment>A topic used when an Agent states what they are doing.</rdfs:comment>
+        <rdfs:label>Think aloud action topic</rdfs:label>
     </owl:Class>
     
 
@@ -1949,6 +1987,7 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudGeneralKnowledgeTopic">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudKnowledgeTopic"/>
         <rdfs:comment>A topic used when an Agent states general knowledge they have.</rdfs:comment>
+        <rdfs:label>Think aloud general knowledge topic</rdfs:label>
     </owl:Class>
     
 
@@ -1958,6 +1997,7 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudKnowledgeTopic">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudTopic"/>
         <rdfs:comment>A topic used when an Agent states some item of knowledge. This knowledge can be general, or specific to the environment and task at hand.</rdfs:comment>
+        <rdfs:label>Think aloud knowledge topic</rdfs:label>
     </owl:Class>
     
 
@@ -1967,6 +2007,7 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudObstructionTopic">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudTopic"/>
         <rdfs:comment>A topic used when an Agent describes some state of affairs that prevents them from performing an action.</rdfs:comment>
+        <rdfs:label>Think aloud obstruction topic</rdfs:label>
     </owl:Class>
     
 
@@ -1976,6 +2017,7 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudOpinionTopic">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudTopic"/>
         <rdfs:comment>A topic used when an Agent expresses an opinion about the action they perform or the environment they are in.</rdfs:comment>
+        <rdfs:label>Think aloud opinion topic</rdfs:label>
     </owl:Class>
     
 
@@ -1985,6 +2027,7 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudPerceptionTopic">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudTopic"/>
         <rdfs:comment>A topic used when an Agent describes what they currently perceive.</rdfs:comment>
+        <rdfs:label>Think aloud perception topic</rdfs:label>
     </owl:Class>
     
 
@@ -1994,6 +2037,7 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudPlanTopic">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudTopic"/>
         <rdfs:comment>A topic used when an Agent describes what they intend to do. Note, this is not about describing the process through which this plan was constructed; that is covered by the MetaCognitionPlanningTopic.</rdfs:comment>
+        <rdfs:label>Think aloud plan topic</rdfs:label>
     </owl:Class>
     
 
@@ -2003,6 +2047,7 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudSceneKnowledgeTopic">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudKnowledgeTopic"/>
         <rdfs:comment>A topic used when an Agent describes what they know about their environment, including knowledge of world states that they do not currently perceive.</rdfs:comment>
+        <rdfs:label>Think aloud scene knowledge topic</rdfs:label>
     </owl:Class>
     
 

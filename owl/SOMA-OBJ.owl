@@ -1474,6 +1474,7 @@ There can be non-physical artificial agents such as software programs but they a
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#CutObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AlteredObject"/>
         <rdfs:comment>An object being cut down into pieces.</rdfs:comment>
+        <rdfs:label>Cut object</rdfs:label>
     </owl:Class>
     
 
@@ -1699,6 +1700,7 @@ There can be non-physical artificial agents such as software programs but they a
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#PouredObject">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Patient"/>
         <rdfs:comment>An object being poured into or onto some other object. A role of some fluid or substance that is the patient of pouring task.</rdfs:comment>
+        <rdfs:label>Poured object</rdfs:label>
     </owl:Class>
     
 
@@ -1814,24 +1816,6 @@ Aesthetics is the philosophical study of beauty and taste. The term stems from t
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment>A relation between an object (the bearer) and others (the triggers) that describes the disposition of the bearer to be involved in an action execution that also involves some trigger object.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#AgentRole -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AgentRole">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CausativeRole"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A role classifying an Agent responsible for performing an Action.
-
-The entity playing an AgentRole is endowed with sentience and the capacity to deliberately choose actions in pursuit of goals. This distinguishes Agents from other causes that could bring an event about.</rdfs:comment>
-        <rdfs:label xml:lang="en">Executor role</rdfs:label>
     </owl:Class>
     
 
@@ -2554,7 +2538,7 @@ The intention behind such a simple role is to have a way to represent, in a sche
     <!-- http://www.ease-crc.org/ont/SOMA.owl#ExperiencerRole -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ExperiencerRole">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AgentRole"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Performer_role"/>
         <rdfs:comment>A role used in frame semantics to classify agents performing perception actions, or being the subjects affected by some biological process.</rdfs:comment>
         <rdfs:label xml:lang="en">Experiencer role</rdfs:label>
     </owl:Class>
@@ -3063,6 +3047,24 @@ The intention behind such a simple role is to have a way to represent, in a sche
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Patient">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#EventAdjacentRole"/>
         <rdfs:comment>A role classifying an object that undergoes/is the primary object affected by the event.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Performer_role -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Performer_role">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CausativeRole"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A role classifying an Agent responsible for performing an Action.
+
+The entity playing an AgentRole is endowed with sentience and the capacity to deliberately choose actions in pursuit of goals. This distinguishes Agents from other causes that could bring an event about.</rdfs:comment>
+        <rdfs:label xml:lang="en">Performer role</rdfs:label>
     </owl:Class>
     
 
