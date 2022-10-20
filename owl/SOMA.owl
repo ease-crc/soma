@@ -35,15 +35,19 @@ Declaration(Class(SOMA:Masterful))
 Declaration(Class(SOMA:MedicalDiagnosis))
 Declaration(Class(SOMA:RecordedEpisode))
 Declaration(Class(SOMA:Reification))
+Declaration(Class(SOMA:Scene))
 Declaration(Class(SOMA:Sluggishness))
 Declaration(Class(SOMA:SoftwareDiagnosis))
 Declaration(Class(SOMA:State))
+Declaration(Class(SOMA:StateTransition))
 Declaration(Class(SOMA:Status))
 Declaration(Class(SOMA:SuccessDiagnosis))
 Declaration(Class(SOMA:Successfulness))
 Declaration(Class(SOMA:TechnicalDiagnosis))
 Declaration(Class(SOMA:Threshold))
 Declaration(Class(SOMA:Unsuccessfulness))
+Declaration(ObjectProperty(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf>))
+Declaration(ObjectProperty(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isTerminalSceneOf>))
 Declaration(ObjectProperty(SOMA:after))
 Declaration(ObjectProperty(SOMA:before))
 Declaration(ObjectProperty(SOMA:causesTransition))
@@ -55,6 +59,7 @@ Declaration(ObjectProperty(SOMA:finishedBy))
 Declaration(ObjectProperty(SOMA:finishes))
 Declaration(ObjectProperty(SOMA:firstMember))
 Declaration(ObjectProperty(SOMA:hasGoal))
+Declaration(ObjectProperty(SOMA:hasInitialScene))
 Declaration(ObjectProperty(SOMA:hasInitialState))
 Declaration(ObjectProperty(SOMA:hasInputParameter))
 Declaration(ObjectProperty(SOMA:hasOutputParameter))
@@ -62,6 +67,7 @@ Declaration(ObjectProperty(SOMA:hasPhase))
 Declaration(ObjectProperty(SOMA:hasPhysicalComponent))
 Declaration(ObjectProperty(SOMA:hasSoftwareAgent))
 Declaration(ObjectProperty(SOMA:hasStatus))
+Declaration(ObjectProperty(SOMA:hasTerminalScene))
 Declaration(ObjectProperty(SOMA:hasTerminalState))
 Declaration(ObjectProperty(SOMA:includesConcept))
 Declaration(ObjectProperty(SOMA:includesRecord))
@@ -147,6 +153,24 @@ AnnotationPropertyRange(SOMA:symbol xsd:string)
 ############################
 #   Object Properties
 ############################
+
+# Object Property: <http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf> (is initial scene of)
+
+AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf> "A relation between StateTransitions and Scenes, which identifies the scene the transition starts from.")
+AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf> "is initial scene of")
+SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isObjectIncludedIn>)
+InverseObjectProperties(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf> SOMA:hasInitialScene)
+ObjectPropertyDomain(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf> SOMA:Scene)
+ObjectPropertyRange(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf> SOMA:StateTransition)
+
+# Object Property: <http://www.ease-crc.org/ont/SOMA-SAY.owl#isTerminalSceneOf> (is terminal scene of)
+
+AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-SAY.owl#isTerminalSceneOf> "A relation between StateTransitions and Scenes, which identifies the scene the transition is expected to end at.")
+AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA-SAY.owl#isTerminalSceneOf> "is terminal scene of")
+SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isTerminalSceneOf> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isObjectIncludedIn>)
+InverseObjectProperties(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isTerminalSceneOf> SOMA:hasTerminalScene)
+ObjectPropertyDomain(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isTerminalSceneOf> SOMA:Scene)
+ObjectPropertyRange(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isTerminalSceneOf> SOMA:StateTransition)
 
 # Object Property: SOMA:after (SOMA:after)
 
@@ -253,6 +277,16 @@ SubObjectPropertyOf(SOMA:hasGoal <http://www.ontologydesignpatterns.org/ont/dul/
 ObjectPropertyDomain(SOMA:hasGoal <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity>)
 ObjectPropertyRange(SOMA:hasGoal <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal>)
 
+# Object Property: SOMA:hasInitialScene (has initial scene)
+
+AnnotationAssertion(rdfs:comment SOMA:hasInitialScene "A relation between StateTransitions and Scenes, which identifies the scene the transition starts from.")
+AnnotationAssertion(rdfs:label SOMA:hasInitialScene "has initial scene")
+SubObjectPropertyOf(SOMA:hasInitialScene <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesObject>)
+AsymmetricObjectProperty(SOMA:hasInitialScene)
+IrreflexiveObjectProperty(SOMA:hasInitialScene)
+ObjectPropertyDomain(SOMA:hasInitialScene SOMA:StateTransition)
+ObjectPropertyRange(SOMA:hasInitialScene SOMA:Scene)
+
 # Object Property: SOMA:hasInitialState (has initial state)
 
 AnnotationAssertion(rdfs:comment SOMA:hasInitialState "A relation which connects a Transition to the Situation it starts from.")
@@ -310,6 +344,16 @@ ObjectPropertyDomain(SOMA:hasSoftwareAgent <http://www.ontologydesignpatterns.or
 AnnotationAssertion(rdfs:comment SOMA:hasStatus "A relation from an Entity to a Quality that is indicative of the Entity's state, e.g. if it is a device, its state of operation.")
 AnnotationAssertion(rdfs:label SOMA:hasStatus "has status")
 SubObjectPropertyOf(SOMA:hasStatus <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality>)
+
+# Object Property: SOMA:hasTerminalScene (has terminal scene)
+
+AnnotationAssertion(rdfs:comment SOMA:hasTerminalScene "A relation between StateTransitions and Scenes, which identifies the scene the transition is expected to end at.")
+AnnotationAssertion(rdfs:label SOMA:hasTerminalScene "has terminal scene")
+SubObjectPropertyOf(SOMA:hasTerminalScene <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesObject>)
+AsymmetricObjectProperty(SOMA:hasTerminalScene)
+IrreflexiveObjectProperty(SOMA:hasTerminalScene)
+ObjectPropertyDomain(SOMA:hasTerminalScene SOMA:StateTransition)
+ObjectPropertyRange(SOMA:hasTerminalScene SOMA:Scene)
 
 # Object Property: SOMA:hasTerminalState (has terminal state)
 
@@ -848,6 +892,11 @@ For stative events, the mereological sum of two instances has the same type as b
 
 The difference between states and processes is that states are, in addition, homeomeric, and processes are not.  This means that, when considering time slices  of an event, for states, these time slices always have the same type as the state, but for processes this is not the case.")
 SubClassOf(SOMA:State <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
+
+# Class: SOMA:StateTransition (State transition)
+
+SubClassOf(SOMA:StateTransition ObjectSomeValuesFrom(SOMA:hasInitialScene SOMA:Scene))
+SubClassOf(SOMA:StateTransition ObjectSomeValuesFrom(SOMA:hasTerminalScene SOMA:Scene))
 
 # Class: SOMA:Status (SOMA:Status)
 

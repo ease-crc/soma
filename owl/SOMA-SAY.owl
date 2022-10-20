@@ -42,11 +42,7 @@ Declaration(Class(SOMA:SourcePathGoalTheory))
 Declaration(Class(SOMA:State))
 Declaration(Class(SOMA:StateTransition))
 Declaration(Class(SOMA:SupportTheory))
-Declaration(ObjectProperty(:isInitialSceneOf))
-Declaration(ObjectProperty(:isTerminalSceneOf))
 Declaration(ObjectProperty(SOMA:coversObject))
-Declaration(ObjectProperty(SOMA:hasInitialScene))
-Declaration(ObjectProperty(SOMA:hasTerminalScene))
 Declaration(ObjectProperty(SOMA:interactsWith))
 Declaration(ObjectProperty(SOMA:isAnsweredBy))
 Declaration(ObjectProperty(SOMA:isCoveredByObject))
@@ -57,22 +53,6 @@ Declaration(ObjectProperty(SOMA:movesObject))
 #   Object Properties
 ############################
 
-# Object Property: :isInitialSceneOf (:isInitialSceneOf)
-
-AnnotationAssertion(rdfs:comment :isInitialSceneOf "A relation between StateTransitions and Scenes, which identifies the scene the transition starts from.")
-SubObjectPropertyOf(:isInitialSceneOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isObjectIncludedIn>)
-InverseObjectProperties(:isInitialSceneOf SOMA:hasInitialScene)
-ObjectPropertyDomain(:isInitialSceneOf SOMA:Scene)
-ObjectPropertyRange(:isInitialSceneOf SOMA:StateTransition)
-
-# Object Property: :isTerminalSceneOf (:isTerminalSceneOf)
-
-AnnotationAssertion(rdfs:comment :isTerminalSceneOf "A relation between StateTransitions and Scenes, which identifies the scene the transition is expected to end at.")
-SubObjectPropertyOf(:isTerminalSceneOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isObjectIncludedIn>)
-InverseObjectProperties(:isTerminalSceneOf SOMA:hasTerminalScene)
-ObjectPropertyDomain(:isTerminalSceneOf SOMA:Scene)
-ObjectPropertyRange(:isTerminalSceneOf SOMA:StateTransition)
-
 # Object Property: SOMA:coversObject (SOMA:coversObject)
 
 AnnotationAssertion(rdfs:comment SOMA:coversObject "A relationship from an object (the coverer) that blocks access to another or its interior (the coveree).")
@@ -82,24 +62,6 @@ AsymmetricObjectProperty(SOMA:coversObject)
 IrreflexiveObjectProperty(SOMA:coversObject)
 ObjectPropertyDomain(SOMA:coversObject <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 ObjectPropertyRange(SOMA:coversObject <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
-
-# Object Property: SOMA:hasInitialScene (SOMA:hasInitialScene)
-
-AnnotationAssertion(rdfs:comment SOMA:hasInitialScene "A relation between StateTransitions and Scenes, which identifies the scene the transition starts from.")
-SubObjectPropertyOf(SOMA:hasInitialScene <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesObject>)
-AsymmetricObjectProperty(SOMA:hasInitialScene)
-IrreflexiveObjectProperty(SOMA:hasInitialScene)
-ObjectPropertyDomain(SOMA:hasInitialScene SOMA:StateTransition)
-ObjectPropertyRange(SOMA:hasInitialScene SOMA:Scene)
-
-# Object Property: SOMA:hasTerminalScene (SOMA:hasTerminalScene)
-
-AnnotationAssertion(rdfs:comment SOMA:hasTerminalScene "A relation between StateTransitions and Scenes, which identifies the scene the transition is expected to end at.")
-SubObjectPropertyOf(SOMA:hasTerminalScene <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesObject>)
-AsymmetricObjectProperty(SOMA:hasTerminalScene)
-IrreflexiveObjectProperty(SOMA:hasTerminalScene)
-ObjectPropertyDomain(SOMA:hasTerminalScene SOMA:StateTransition)
-ObjectPropertyRange(SOMA:hasTerminalScene SOMA:Scene)
 
 # Object Property: SOMA:isAnsweredBy (is answered by)
 
@@ -363,8 +325,6 @@ SubClassOf(SOMA:SourcePathGoalTheory ObjectSomeValuesFrom(<http://www.ontologyde
 AnnotationAssertion(rdfs:comment SOMA:StateTransition "A transition between two states brought about by the Action of some Agent.")
 AnnotationAssertion(rdfs:label SOMA:StateTransition "State transition"@en)
 SubClassOf(SOMA:StateTransition <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition>)
-SubClassOf(SOMA:StateTransition ObjectSomeValuesFrom(SOMA:hasInitialScene SOMA:Scene))
-SubClassOf(SOMA:StateTransition ObjectSomeValuesFrom(SOMA:hasTerminalScene SOMA:Scene))
 SubClassOf(SOMA:StateTransition ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>))
 SubClassOf(SOMA:StateTransition ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#satisfies> SOMA:ImageSchemaTheory))
 
