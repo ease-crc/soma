@@ -832,7 +832,7 @@ For example, if the topic of a communication is flowers, this does not mean the 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Deciding -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Deciding">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationDeriving"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DerivingInformation"/>
         <rdfs:isDefinedBy xml:lang="en">A mental task in where an agent makes some decision, that is, selecting some Information object; usually on the basis of others.</rdfs:isDefinedBy>
         <rdfs:label xml:lang="en">Deciding</rdfs:label>
     </owl:Class>
@@ -862,6 +862,29 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Pushing"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Squeezing"/>
         <rdfs:comment>A task in which an Agent brings an item that the Agent already carries to a specified target.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#DerivingInformation -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DerivingInformation">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationAcquisition"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isTaskOfInputRole"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Conclusion"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isTaskOfOutputRole"/>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Premise"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:label>Deriving information</rdfs:label>
     </owl:Class>
     
 
@@ -897,7 +920,7 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Dreaming -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Dreaming">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationDeriving"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DerivingInformation"/>
         <rdfs:comment>Any form of re-processing episodic memories for long-term memory by natural or aritifical agents.</rdfs:comment>
     </owl:Class>
     
@@ -1106,7 +1129,14 @@ Induction is often described as a move from many &quot;specifics&quot; (swan A i
                     <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MentalTask"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isTaskOfOutputRole"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+                        <owl:someValuesFrom>
+                            <owl:Class>
+                                <owl:intersectionOf rdf:parseType="Collection">
+                                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CreatedObject"/>
+                                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Knowledge"/>
+                                </owl:intersectionOf>
+                            </owl:Class>
+                        </owl:someValuesFrom>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -1120,15 +1150,6 @@ Examples include recalling knowledge or inferring some information from other in
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#InformationDeriving -->
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#InformationDeriving">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationAcquisition"/>
-        <rdfs:label>Information deriving</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://www.ease-crc.org/ont/SOMA.owl#InformationDismissal -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#InformationDismissal">
@@ -1136,7 +1157,14 @@ Examples include recalling knowledge or inferring some information from other in
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isTaskOfInputRole"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DestroyedObject"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Knowledge"/>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">A mental task in which the executing agent dismisses some information.
@@ -1174,7 +1202,14 @@ The difference to Remembering is that for this Task, we are concerned with knowl
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isTaskOfInputRole"/>
-                <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA-OBJ.owl#StoredObject"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Knowledge"/>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">A mental task in which the executing agent persists some information for later recall, if necessary.
@@ -1198,7 +1233,7 @@ An example is learning new knowledge.</rdfs:comment>
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Interpreting -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Interpreting">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationDeriving"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DerivingInformation"/>
         <rdfs:comment xml:lang="en">A task in which an Agent interpretes some information, e.g., makes sense of some incoming message or its visible surroundings.</rdfs:comment>
         <rdfs:label xml:lang="en">Interpreting</rdfs:label>
     </owl:Class>
@@ -1542,7 +1577,14 @@ Note that the Role Message classifies the Information Realization, not the conte
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Perceiving -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Perceiving">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PhysicalTask"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#InformationAcquisition"/>
+                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PhysicalTask"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
         <rdfs:comment>A task in which the Agent gathers and interprets sensor information about its surroundings.</rdfs:comment>
     </owl:Class>
     
@@ -1685,7 +1727,7 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Prospecting -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Prospecting">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationDeriving"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DerivingInformation"/>
         <rdfs:comment>A Mental task in which an Agent endeavours to construct a representation of a future state of affairs of the world it is embodied in.</rdfs:comment>
     </owl:Class>
     
@@ -1818,7 +1860,7 @@ However, sometimes this might be not the case, e.g., with counterquestions.</rdf
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Reasoning -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Reasoning">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationDeriving"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DerivingInformation"/>
         <rdfs:comment>A Mental task in which an Agent endeavours to obtain new knowledge from knowledge it already possesses.</rdfs:comment>
         <rdfs:comment>todo: a taxonomy of reasoning is not trivial. Classical theory distinguishes Deductive, Inductive, and with a stretch Abductive reasoning. However, modern practice distinguishes other categories that overlap with these, e.g. Probabilistic and Non-monotonic.
 
