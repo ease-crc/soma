@@ -25,17 +25,28 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Compile
-        uses: docker://swipl:8.0.3
+      - name: Setup Java
+        uses: actions/setup-java@v3
         with:
-          SOMA_VERSION: current
-          args: swipl -f prolog/uglify.pl -t uglify
+          distribution: 'temurin'
+          java-version: '18'
+          cache: 'maven'
+
+      - name: Create directories
+        run: |
+              mkdir -p $GITHUB_WORKSPACE/build/owl/current &&
+              mkdir mkdir -p $GITHUB_WORKSPACE/build/files
+
+      - name: Compile
+        run: |
+          mvn spring-boot:run -f scripts/java/pom.xml \
+             -Dspring-boot.run.arguments="--versionInfo=current"
 
       - name: Upload OWL file
         uses: actions/upload-artifact@v1
         with:
           name: SOMA OWL
-          path: ./build/SOMA-HOME.owl
+          path: ./build/owl/current/SOMA-HOME.owl
   
   pitfalls:
     name: OOPS
@@ -48,10 +59,15 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Create directories
+        run: |
+              mkdir -p $GITHUB_WORKSPACE/build/owl/current &&
+              mkdir mkdir -p $GITHUB_WORKSPACE/build/files
+
       - uses: actions/download-artifact@v1
         with:
           name: SOMA OWL
-          path: ./build
+          path: ./build/owl/current/
       
       - name: Setup Python
         uses: actions/setup-python@v2
@@ -62,21 +78,20 @@ jobs:
           sudo pip install requests
 
       - name: Find pitfalls
-        run: sudo python ./scripts/oops.py $GITHUB_WORKSPACE/build/SOMA-HOME.owl $GITHUB_WORKSPACE/build
+        run: sudo python ./scripts/oops.py $GITHUB_WORKSPACE/build/owl/current/SOMA-HOME.owl $GITHUB_WORKSPACE/build/files
 
       - name: Generate annotations
-        run: sudo python ./scripts/oops-github.py $GITHUB_WORKSPACE/build/oops.xml
+        run: sudo python ./scripts/oops-github.py $GITHUB_WORKSPACE/build/files/oops.xml
 
       - name: Upload pitfalls
         uses: actions/upload-artifact@v1
         with:
           name: OOPS Results
-          path: ./build/oops.xml
+          path: ./build/files/oops.xml
   
   consistency:
     name: Konclude
     runs-on: ubuntu-latest
-    needs: compile
 
     steps:
       - name: Checkout
@@ -84,26 +99,29 @@ jobs:
         with:
           fetch-depth: 1
 
-      - uses: actions/download-artifact@v1
+      - name: Setup Java
+        uses: actions/setup-java@v3
         with:
-          name: SOMA OWL
-          path: ./build
+          distribution: 'temurin'
+          java-version: '18'
+          cache: 'maven'
 
-      - name: Download DUL
-        run: wget http://www.ease-crc.org/ont/DUL.owl -O ./build/DUL.owl
+      - name: Compile
+        run: |
+          mvn spring-boot:run -f scripts/java/pom.xml \
+             -Dspring-boot.run.arguments="--versionInfo=current \
+             --propertyListPath=$PWD/properties"
 
       - name: Konclude
-        uses: ./.github/actions/Konclude
-        with:
-          args: classification -i ./build/SOMA-HOME.owl -o ./konclude.output
+        run: docker run -v $PWD/build:/data --rm konclude/konclude classify -i /data/SOMA-HOME.owl -o /data/konclude.output
 
       - name: Print Konclude output
-        run: cat ./konclude.output
+        run: cat ./build/konclude.output
         if: always()
 
       - name: Evaluate Konclude output
         if: success()
         uses: docker://python:3.7.6-slim
         with:
-          args: python ./scripts/konclude_test.py -k ./.github/actions/Konclude -s ./build/SOMA-HOME.owl -o ./owl/konclude.html ./konclude.output
+          args: python ./scripts/konclude_test.py -k ./.github/actions/Konclude -s ./build/SOMA-HOME.owl -o ./owl/konclude.html ./build/konclude.output
 
