@@ -570,7 +570,7 @@ For Manipulating, it is the movement of the hand(s) and the change in functional
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AttentionShift">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#MentalTask"/>
         <rdfs:comment xml:lang="en">A mental task in which the executing Agent shifts his attention from some Information to another.</rdfs:comment>
-        <rdfs:label xml:lang="en">Attention shift</rdfs:label>
+        <rdfs:label xml:lang="en">Attention shifting</rdfs:label>
     </owl:Class>
     
 
@@ -832,7 +832,7 @@ For example, if the topic of a communication is flowers, this does not mean the 
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Deciding -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Deciding">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationAcquisition"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationDeriving"/>
         <rdfs:isDefinedBy xml:lang="en">A mental task in where an agent makes some decision, that is, selecting some Information object; usually on the basis of others.</rdfs:isDefinedBy>
         <rdfs:label xml:lang="en">Deciding</rdfs:label>
     </owl:Class>
@@ -897,7 +897,7 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Dreaming -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Dreaming">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationAcquisition"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationDeriving"/>
         <rdfs:comment>Any form of re-processing episodic memories for long-term memory by natural or aritifical agents.</rdfs:comment>
     </owl:Class>
     
@@ -957,6 +957,16 @@ Deduction is often explained as starting from the &quot;general&quot; (some prop
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Pushing"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Squeezing"/>
         <rdfs:comment>A task in which an Agent retrieves an object from a particular location, which puts the object under the Agent&apos;s control, who can now e.g. transport the object somewhere else; this task may include repositioning the Agent to better reach the object. Note that while in normal linguistic use fetch can mean transport, we use it here to refer only to (a part of) the first stage of transport.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Focusing -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Focusing">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AttentionShift"/>
+        <rdfs:comment>The mental task to center the attention to some subject.</rdfs:comment>
+        <rdfs:label>Focusing</rdfs:label>
     </owl:Class>
     
 
@@ -1102,9 +1112,19 @@ Induction is often described as a move from many &quot;specifics&quot; (swan A i
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:comment xml:lang="en">A mental task in which the executing agent acquires some information that was not immediately available to it before.
+A synonym might be &quot;Thinking&quot;.
 
 Examples include recalling knowledge or inferring some information from other information.</rdfs:comment>
         <rdfs:label xml:lang="en">Information acquisition</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#InformationDeriving -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#InformationDeriving">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationAcquisition"/>
+        <rdfs:label>Information deriving</rdfs:label>
     </owl:Class>
     
 
@@ -1178,7 +1198,7 @@ An example is learning new knowledge.</rdfs:comment>
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Interpreting -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Interpreting">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationAcquisition"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationDeriving"/>
         <rdfs:comment xml:lang="en">A task in which an Agent interpretes some information, e.g., makes sense of some incoming message or its visible surroundings.</rdfs:comment>
         <rdfs:label xml:lang="en">Interpreting</rdfs:label>
     </owl:Class>
@@ -1199,6 +1219,28 @@ An example is learning new knowledge.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Knowledge">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Item"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Labeling -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Labeling">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Interpreting"/>
+        <rdfs:label>A task in which an agent annotates some objects with names, e.g., labeling the feeling of a tip-of-the-tongue event as such.</rdfs:label>
+        <rdfs:label>Labeling</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Learning -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Learning">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationStorage"/>
+        <rdfs:comment>The mental task of storing information for later use.
+
+This is more general than memorizing, as the later only captures declarative knowledge.</rdfs:comment>
+        <rdfs:label>Learning</rdfs:label>
     </owl:Class>
     
 
@@ -1286,8 +1328,8 @@ Note: we employ Manipulating here in its literal, original sense, of using hands
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Memorizing -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Memorizing">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationStorage"/>
-        <rdfs:comment xml:lang="en">A mental task in which an Agent saves some information for later retrieval.
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Learning"/>
+        <rdfs:comment xml:lang="en">An atomic mental task in which an Agent saves some (declarative) information for later retrieval.
 
 Examples include a student learning vocabularies or a computer saving some information to a database.</rdfs:comment>
         <rdfs:label xml:lang="en">Memorizing</rdfs:label>
@@ -1585,14 +1627,7 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Planning -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Planning">
-        <rdfs:subClassOf>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Deciding"/>
-                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Prospecting"/>
-                </owl:intersectionOf>
-            </owl:Class>
-        </rdfs:subClassOf>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Deciding"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf"/>
@@ -1623,6 +1658,7 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Prediction">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Prospecting"/>
         <rdfs:comment>A Mental task in which the Agent endeavours to construct a representation of a future state of the world. Prediction commits itself to some degree of accuracy: the Agent believes that eventually something similar to the predicted state will come to pass.</rdfs:comment>
+        <rdfs:label>Predicting</rdfs:label>
     </owl:Class>
     
 
@@ -1649,7 +1685,7 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Prospecting -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Prospecting">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationAcquisition"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationDeriving"/>
         <rdfs:comment>A Mental task in which an Agent endeavours to construct a representation of a future state of affairs of the world it is embodied in.</rdfs:comment>
     </owl:Class>
     
@@ -1782,7 +1818,7 @@ However, sometimes this might be not the case, e.g., with counterquestions.</rdf
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Reasoning -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Reasoning">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationAcquisition"/>
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#InformationDeriving"/>
         <rdfs:comment>A Mental task in which an Agent endeavours to obtain new knowledge from knowledge it already possesses.</rdfs:comment>
         <rdfs:comment>todo: a taxonomy of reasoning is not trivial. Classical theory distinguishes Deductive, Inductive, and with a stretch Abductive reasoning. However, modern practice distinguishes other categories that overlap with these, e.g. Probabilistic and Non-monotonic.
 
