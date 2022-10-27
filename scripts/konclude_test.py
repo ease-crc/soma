@@ -85,7 +85,7 @@ def main():
 
     objProps = []
     if '' != args.propertyListPath:
-        objProps = [x.strip() for x in open(args.propertyListPath).read().splitlines() if x.strip()]
+        objProps = [x.strip().strip('<>') for x in open(args.propertyListPath).read().splitlines() if x.strip()]
     if objProps:
         query2objectProperty, queryOwl = makeObjectPropertyQueryFile(objProps, args.somaPath)
         nullQueries = runKonclude(queryOwl, args.koncludePath)
