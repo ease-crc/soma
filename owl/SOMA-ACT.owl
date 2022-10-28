@@ -255,7 +255,7 @@ ObjectPropertyRange(SOMA:hasExecutionState SOMA:ExecutionStateRegion)
 
 AnnotationAssertion(rdfs:comment SOMA:hasInitialSituation "A relation between SituationTransitions and Situations, which identifies the Situation the transition starts from.")
 AnnotationAssertion(rdfs:label SOMA:hasInitialSituation "has initial situation"@en)
-SubObjectPropertyOf(SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesObject>)
+SubObjectPropertyOf(SOMA:hasInitialSituation SOMA:hasInitialState)
 InverseObjectProperties(SOMA:hasInitialSituation SOMA:isInitialSituationOf)
 AsymmetricObjectProperty(SOMA:hasInitialSituation)
 IrreflexiveObjectProperty(SOMA:hasInitialSituation)
@@ -266,7 +266,7 @@ ObjectPropertyRange(SOMA:hasInitialSituation <http://www.ontologydesignpatterns.
 
 AnnotationAssertion(rdfs:comment SOMA:hasTerminalSituation "A relation between SituationTransitions and Situations, which identifies the Situation the transition ends at.")
 AnnotationAssertion(rdfs:label SOMA:hasTerminalSituation "has terminal situation"@en)
-SubObjectPropertyOf(SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesObject>)
+SubObjectPropertyOf(SOMA:hasTerminalSituation SOMA:hasTerminalState)
 InverseObjectProperties(SOMA:hasTerminalSituation SOMA:isTerminalSituationOf)
 AsymmetricObjectProperty(SOMA:hasTerminalSituation)
 IrreflexiveObjectProperty(SOMA:hasTerminalSituation)
@@ -303,7 +303,7 @@ ObjectPropertyRange(SOMA:isEventTypeDefinedIn <http://www.ontologydesignpatterns
 
 AnnotationAssertion(rdfs:comment SOMA:isInitialSituationOf "A relation between SituationTransitions and Situations, which identifies the Situation the transition starts from."^^xsd:string)
 AnnotationAssertion(rdfs:label SOMA:isInitialSituationOf "is initial situation of"@en)
-SubObjectPropertyOf(SOMA:isInitialSituationOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isObjectIncludedIn>)
+SubObjectPropertyOf(SOMA:isInitialSituationOf SOMA:isInitialStateOf)
 ObjectPropertyDomain(SOMA:isInitialSituationOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 ObjectPropertyRange(SOMA:isInitialSituationOf SOMA:SituationTransition)
 
@@ -341,7 +341,7 @@ ObjectPropertyRange(SOMA:isReplacedBy SOMA:State)
 
 AnnotationAssertion(rdfs:comment SOMA:isTerminalSituationOf "A relation between SituationTransitions and Situations, which identifies the Situation the transition ends at."^^xsd:string)
 AnnotationAssertion(rdfs:label SOMA:isTerminalSituationOf "is terminal situation of"@en)
-SubObjectPropertyOf(SOMA:isTerminalSituationOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isObjectIncludedIn>)
+SubObjectPropertyOf(SOMA:isTerminalSituationOf SOMA:isTerminalStateOf)
 ObjectPropertyDomain(SOMA:isTerminalSituationOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 ObjectPropertyRange(SOMA:isTerminalSituationOf SOMA:SituationTransition)
 
@@ -385,6 +385,8 @@ AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA.owl/hasExpect
 AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> "has expected terminal situation"@en)
 SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> SOMA:hasTerminalSituation)
 SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPostcondition>)
+ObjectPropertyDomain(<http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> SOMA:SituationTransition)
+ObjectPropertyRange(<http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 
 # Object Property: <http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> (has required initial situation)
 
@@ -392,6 +394,8 @@ AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA.owl/hasRequir
 AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> "has required initial situation"@en)
 SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> SOMA:hasInitialSituation)
 SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition>)
+ObjectPropertyDomain(<http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> SOMA:SituationTransition)
+ObjectPropertyRange(<http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 
 # Object Property: <http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> (manifests in)
 
