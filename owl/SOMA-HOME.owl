@@ -9,11 +9,14 @@ Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
 
 
 Ontology(<http://www.ease-crc.org/ont/SOMA-HOME.owl>
-Import(<http://www.ease-crc.org/ont/SOMA.owl>)
+Import(<http://www.ease-crc.org/ont/SOMA-ALL.owl>)
 Annotation(rdfs:comment "SOMA-HOME defines the concepts that are specific to home, e.g. kitchen environment, household items.")
 
+Declaration(Class(<http://www.ease-crc.org/ont/SOMA-HOME.owl#AffordsBeingSitOn>))
 Declaration(Class(<http://www.ease-crc.org/ont/SOMA-HOME.owl#Armchair>))
 Declaration(Class(<http://www.ease-crc.org/ont/SOMA-HOME.owl#BedsideTable>))
+Declaration(Class(<http://www.ease-crc.org/ont/SOMA-HOME.owl#CanBeSatOn>))
+Declaration(Class(<http://www.ease-crc.org/ont/SOMA-HOME.owl#CanSit>))
 Declaration(Class(<http://www.ease-crc.org/ont/SOMA-HOME.owl#CeramicCooktop>))
 Declaration(Class(<http://www.ease-crc.org/ont/SOMA-HOME.owl#CoffeeTable>))
 Declaration(Class(<http://www.ease-crc.org/ont/SOMA-HOME.owl#CoilCooktop>))
@@ -25,10 +28,16 @@ Declaration(Class(<http://www.ease-crc.org/ont/SOMA-HOME.owl#InductionCooktop>))
 Declaration(Class(<http://www.ease-crc.org/ont/SOMA-HOME.owl#KitchenCabinet>))
 Declaration(Class(<http://www.ease-crc.org/ont/SOMA-HOME.owl#KitchenUnit>))
 Declaration(Class(<http://www.ease-crc.org/ont/SOMA-HOME.owl#Sink>))
+Declaration(Class(<http://www.ease-crc.org/ont/SOMA-HOME.owl#Sitting>))
+Declaration(Class(<http://www.ease-crc.org/ont/SOMA-HOME.owl#SittingDestination>))
 Declaration(Class(<http://www.ease-crc.org/ont/SOMA-HOME.owl#Sofa>))
 Declaration(Class(<http://www.ease-crc.org/ont/SOMA-HOME.owl#Tap>))
 Declaration(Class(<http://www.ease-crc.org/ont/SOMA-HOME.owl#Wardrobe>))
+Declaration(Class(<http://www.ease-crc.org/ont/SOMA-OBJ.owl#Capability>))
+Declaration(Class(SOMA:Affordance))
+Declaration(Class(SOMA:AgentRole))
 Declaration(Class(SOMA:Appliance))
+Declaration(Class(SOMA:AssumingPose))
 Declaration(Class(SOMA:BakedGood))
 Declaration(Class(SOMA:Blade))
 Declaration(Class(SOMA:Bottle))
@@ -52,6 +61,7 @@ Declaration(Class(SOMA:Cup))
 Declaration(Class(SOMA:Cupboard))
 Declaration(Class(SOMA:Cutlery))
 Declaration(Class(SOMA:CuttingTool))
+Declaration(Class(SOMA:Deposition))
 Declaration(Class(SOMA:DesignedComponent))
 Declaration(Class(SOMA:DesignedContainer))
 Declaration(Class(SOMA:DesignedFurniture))
@@ -59,6 +69,7 @@ Declaration(Class(SOMA:DesignedHandle))
 Declaration(Class(SOMA:DesignedSpade))
 Declaration(Class(SOMA:DesignedTool))
 Declaration(Class(SOMA:DessertFork))
+Declaration(Class(SOMA:Destination))
 Declaration(Class(SOMA:DinnerPlate))
 Declaration(Class(SOMA:Dish))
 Declaration(Class(SOMA:Dishwasher))
@@ -126,11 +137,16 @@ Declaration(Class(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Designe
 Declaration(Class(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedSubstance>))
 Declaration(Class(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance>))
 Declaration(ObjectProperty(SOMA:affordsTrigger))
+Declaration(ObjectProperty(SOMA:definesBearer))
+Declaration(ObjectProperty(SOMA:definesTrigger))
 Declaration(ObjectProperty(SOMA:hasDisposition))
 Declaration(ObjectProperty(SOMA:hasPhysicalComponent))
 Declaration(ObjectProperty(SOMA:hasShapeRegion))
 Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies>))
+Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask>))
+Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes>))
 Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality>))
+Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy>))
 Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf>))
 
 
@@ -138,6 +154,15 @@ Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.ow
 ############################
 #   Classes
 ############################
+
+# Class: <http://www.ease-crc.org/ont/SOMA-HOME.owl#AffordsBeingSitOn> (<http://www.ease-crc.org/ont/SOMA-HOME.owl#AffordsBeingSitOn>)
+
+AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-HOME.owl#AffordsBeingSitOn> "A reified relation between a furniture-like object (the bearer), the sitting task it affords, and an agent that can assume a sitting pose (trigger).")
+SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#AffordsBeingSitOn> SOMA:Affordance)
+SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#AffordsBeingSitOn> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes> <http://www.ease-crc.org/ont/SOMA-HOME.owl#CanBeSatOn>))
+SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#AffordsBeingSitOn> ObjectAllValuesFrom(SOMA:definesBearer <http://www.ease-crc.org/ont/SOMA-HOME.owl#SittingDestination>))
+SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#AffordsBeingSitOn> ObjectAllValuesFrom(SOMA:definesTrigger ObjectIntersectionOf(SOMA:AgentRole ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectSomeValuesFrom(SOMA:hasDisposition <http://www.ease-crc.org/ont/SOMA-HOME.owl#CanSit>)))))
+SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#AffordsBeingSitOn> ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask> <http://www.ease-crc.org/ont/SOMA-HOME.owl#Sitting>))
 
 # Class: <http://www.ease-crc.org/ont/SOMA-HOME.owl#Armchair> (<http://www.ease-crc.org/ont/SOMA-HOME.owl#Armchair>)
 
@@ -148,6 +173,17 @@ SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#Armchair> <http://www.ease
 
 AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-HOME.owl#BedsideTable> "A small table typically located next to a bed.")
 SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#BedsideTable> SOMA:Table)
+
+# Class: <http://www.ease-crc.org/ont/SOMA-HOME.owl#CanBeSatOn> (<http://www.ease-crc.org/ont/SOMA-HOME.owl#CanBeSatOn>)
+
+AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-HOME.owl#CanBeSatOn> "The disposition to support an agent being in a sitting pose. Typically provided by chairs, stools, etc.")
+SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#CanBeSatOn> SOMA:Deposition)
+SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#CanBeSatOn> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy> <http://www.ease-crc.org/ont/SOMA-HOME.owl#AffordsBeingSitOn>))
+
+# Class: <http://www.ease-crc.org/ont/SOMA-HOME.owl#CanSit> (<http://www.ease-crc.org/ont/SOMA-HOME.owl#CanSit>)
+
+AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-HOME.owl#CanSit> "The capability of an agent to assume a sitting pose.")
+SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#CanSit> <http://www.ease-crc.org/ont/SOMA-OBJ.owl#Capability>)
 
 # Class: <http://www.ease-crc.org/ont/SOMA-HOME.owl#CeramicCooktop> (<http://www.ease-crc.org/ont/SOMA-HOME.owl#CeramicCooktop>)
 
@@ -173,6 +209,7 @@ SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#Cooktop> SOMA:DesignedComp
 
 AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-HOME.owl#DesignedChair> "A piece of furniture designed for one person to sit on.")
 SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#DesignedChair> SOMA:DesignedFurniture)
+SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#DesignedChair> ObjectExactCardinality(1 SOMA:hasDisposition <http://www.ease-crc.org/ont/SOMA-HOME.owl#CanBeSatOn>))
 
 # Class: <http://www.ease-crc.org/ont/SOMA-HOME.owl#ElectricCooktop> (<http://www.ease-crc.org/ont/SOMA-HOME.owl#ElectricCooktop>)
 
@@ -196,6 +233,7 @@ SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#KitchenCabinet> SOMA:Cupbo
 
 # Class: <http://www.ease-crc.org/ont/SOMA-HOME.owl#KitchenUnit> (<http://www.ease-crc.org/ont/SOMA-HOME.owl#KitchenUnit>)
 
+AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-HOME.owl#KitchenUnit> "A piece of a fitted furniture typically containing cupboards, a sink, and an oven.")
 SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#KitchenUnit> SOMA:DesignedFurniture)
 
 # Class: <http://www.ease-crc.org/ont/SOMA-HOME.owl#Sink> (<http://www.ease-crc.org/ont/SOMA-HOME.owl#Sink>)
@@ -203,10 +241,22 @@ SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#KitchenUnit> SOMA:Designed
 AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-HOME.owl#Sink> "A large bowl used to direct the flow of liquid into a drain, typically has a tap used to fill the sink with water, and a plug used to block the drain.")
 SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#Sink> SOMA:DesignedComponent)
 
+# Class: <http://www.ease-crc.org/ont/SOMA-HOME.owl#Sitting> (<http://www.ease-crc.org/ont/SOMA-HOME.owl#Sitting>)
+
+AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-HOME.owl#Sitting> "A task where an agents assumes a sitting pose.")
+SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#Sitting> SOMA:AssumingPose)
+
+# Class: <http://www.ease-crc.org/ont/SOMA-HOME.owl#SittingDestination> (<http://www.ease-crc.org/ont/SOMA-HOME.owl#SittingDestination>)
+
+AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-HOME.owl#SittingDestination> "The destination of an agent assuming a sitting pose. Typically a chair or stool would fill this role.")
+SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#SittingDestination> SOMA:Destination)
+SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#SittingDestination> ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectSomeValuesFrom(SOMA:hasDisposition <http://www.ease-crc.org/ont/SOMA-HOME.owl#CanBeSatOn>)))
+
 # Class: <http://www.ease-crc.org/ont/SOMA-HOME.owl#Sofa> (<http://www.ease-crc.org/ont/SOMA-HOME.owl#Sofa>)
 
 AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-HOME.owl#Sofa> "A comfortable seat for two or more people to sit on.")
 SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#Sofa> SOMA:DesignedFurniture)
+SubClassOf(<http://www.ease-crc.org/ont/SOMA-HOME.owl#Sofa> ObjectExactCardinality(1 SOMA:hasDisposition <http://www.ease-crc.org/ont/SOMA-HOME.owl#CanBeSatOn>))
 
 # Class: <http://www.ease-crc.org/ont/SOMA-HOME.owl#Tap> (<http://www.ease-crc.org/ont/SOMA-HOME.owl#Tap>)
 
