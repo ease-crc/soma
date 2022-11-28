@@ -356,16 +356,19 @@ EquivalentClasses(:AnsweringTask ObjectSomeValuesFrom(<http://www.ontologydesign
 
 AnnotationAssertion(rdfs:comment :Cleaning "This task in which an agent restores all the objects to their destined locations, wiping a specific object"^^xsd:string)
 SubClassOf(:Cleaning SOMA:ModifyingPhysicalObject)
+SubClassOf(:Cleaning ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Purification))
 
 # Class: :Flipping (:Flipping)
 
 AnnotationAssertion(rdfs:comment :Flipping "The task in which the agent turns an object over by using a tool or by manipulating"^^xsd:string)
 SubClassOf(:Flipping SOMA:Actuating)
+SubClassOf(:Flipping ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Shifting))
 
 # Class: :Pouring (:Pouring)
 
 AnnotationAssertion(rdfs:comment :Pouring "A task in which an agent lets liquid substance to flow out of an object. The agent has a kinematic control over the object."^^xsd:string)
 SubClassOf(:Pouring SOMA:Actuating)
+SubClassOf(:Pouring ObjectSomeValuesFrom(SOMA:isTaskAffordedBy <http://www.ease-crc.org/ont/SOMA-OBJ.owl#Pourable>))
 
 # Class: :PouringInto (Pouring into)
 
@@ -402,6 +405,7 @@ SubClassOf(:Serving ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/o
 
 AnnotationAssertion(rdfs:comment :Stirring "A task in which an agent dissolves small particles like sugar or salt in fluid"^^xsd:string)
 SubClassOf(:Stirring SOMA:Mixing)
+SubClassOf(:Stirring ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Composing))
 
 # Class: SOMA:AbductiveReasoning (Abductive reasoning)
 
@@ -566,6 +570,7 @@ SubClassOf(SOMA:DeductiveReasoning SOMA:Reasoning)
 
 AnnotationAssertion(rdfs:comment SOMA:Delivering "A task in which an Agent brings an item that the Agent already carries to a specified target.")
 SubClassOf(SOMA:Delivering SOMA:Actuating)
+SubClassOf(SOMA:Delivering ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Shifting))
 DisjointClasses(SOMA:Delivering SOMA:Fetching)
 DisjointClasses(SOMA:Delivering SOMA:Lifting)
 DisjointClasses(SOMA:Delivering SOMA:Opening)
