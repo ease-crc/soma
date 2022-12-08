@@ -20,7 +20,14 @@ This module is chiefly concerned with defining a taxonomy of tasks, including ro
 Also defined here are execution state regions, i.e. flags with which to label the status of the execution of an action in terms of whether it is unfolding or completed, and if completed whether completed successfully or not.")
 
 Declaration(Class(:AnsweringTask))
+Declaration(Class(:Cleaning))
+Declaration(Class(:Flipping))
+Declaration(Class(:Pouring))
+Declaration(Class(:PouringInto))
+Declaration(Class(:PouringOnto))
 Declaration(Class(:QueryAnsweringTask))
+Declaration(Class(:Serving))
+Declaration(Class(:Stirring))
 Declaration(Class(SOMA:AbductiveReasoning))
 Declaration(Class(SOMA:Actuating))
 Declaration(Class(SOMA:Answer))
@@ -45,6 +52,7 @@ Declaration(Class(SOMA:Cutting))
 Declaration(Class(SOMA:DeductiveReasoning))
 Declaration(Class(SOMA:Delivering))
 Declaration(Class(SOMA:Dicing))
+Declaration(Class(SOMA:Dish))
 Declaration(Class(SOMA:Distancing))
 Declaration(Class(SOMA:Dreaming))
 Declaration(Class(SOMA:Dropping))
@@ -155,11 +163,7 @@ Declaration(NamedIndividual(SOMA:ExecutionState_Succeeded))
 #   Object Properties
 ############################
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA-ACT.owl#causes> (Simple relationship between two actions to express that the object (the reaction) would not have occured if it were not for the subject (the cause), e.g., a Communication Action classified as an Querying Task causes another Communication Task classified as an Answering Task and the latter would not have occured without the former. An example without Agents involved would be some domino stone would not have toppled without the first one toppling.
-# 
-# When Agents are involved, the relation might be seen as an abstraction of the execution of some plan that arises from changing the agents goal that is due to perceiving the cause. However, currently it is unclear how to model such a pattern and therefore not included in SOMA.
-# 
-# This relation is seen as transitive.)
+# Object Property: :causes (causes)
 
 AnnotationAssertion(rdfs:label :causes "Simple relationship between two actions to express that the object (the reaction) would not have occured if it were not for the subject (the cause), e.g., a Communication Action classified as an Querying Task causes another Communication Task classified as an Answering Task and the latter would not have occured without the former. An example without Agents involved would be some domino stone would not have toppled without the first one toppling.
 
@@ -170,7 +174,7 @@ AnnotationAssertion(rdfs:label :causes "causes"@en)
 SubObjectPropertyOf(:causes <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes>)
 TransitiveObjectProperty(:causes)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA-ACT.owl#directlyCauses> (directly causes)
+# Object Property: :directlyCauses (directly causes)
 
 AnnotationAssertion(rdfs:comment :directlyCauses "Non-transitive version of \"causes\"."@en)
 AnnotationAssertion(rdfs:label :directlyCauses "directly causes"@en)
@@ -179,7 +183,7 @@ InverseObjectProperties(:directlyCauses :isDirectReactionTo)
 ObjectPropertyDomain(:directlyCauses <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 ObjectPropertyRange(:directlyCauses <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA-ACT.owl#isDirectReactionTo> (is direct reaction to)
+# Object Property: :isDirectReactionTo (is direct reaction to)
 
 AnnotationAssertion(rdfs:comment :isDirectReactionTo "Non-transitive version of \"is reaction to\"."@en)
 AnnotationAssertion(rdfs:label :isDirectReactionTo "is direct reaction to"@en)
@@ -187,7 +191,7 @@ SubObjectPropertyOf(:isDirectReactionTo :isReactionTo)
 ObjectPropertyDomain(:isDirectReactionTo <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 ObjectPropertyRange(:isDirectReactionTo <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA-ACT.owl#isReactionTo> (is reaction to)
+# Object Property: :isReactionTo (is reaction to)
 
 AnnotationAssertion(rdfs:comment :isReactionTo "Simple relationship between two actions to express that the subject (the reaction) would not have occured if it were not for the object (the cause), e.g., a Communication Action classified as an Answering Task is a reaction to another Communication Task classified as a Query Task and would not have occured without the other. An example without Agents involved would be some domino stone would not have toppled without the first one toppling.
 
@@ -200,7 +204,7 @@ TransitiveObjectProperty(:isReactionTo)
 ObjectPropertyDomain(:isReactionTo <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 ObjectPropertyRange(:isReactionTo <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#answers> (The relation between an answering message and the message it answers.)
+# Object Property: SOMA:answers (answers)
 
 AnnotationAssertion(rdfs:label SOMA:answers "The relation between an answering message and the message it answers.")
 AnnotationAssertion(rdfs:label SOMA:answers "answers")
@@ -208,7 +212,7 @@ SubObjectPropertyOf(SOMA:answers SOMA:relatesToAnotherRole)
 ObjectPropertyDomain(SOMA:answers SOMA:Message)
 ObjectPropertyRange(SOMA:answers SOMA:Message)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#hasAction> (has action)
+# Object Property: SOMA:hasAction (has action)
 
 AnnotationAssertion(rdfs:comment SOMA:hasAction "A relation from an Action to a component Action.")
 AnnotationAssertion(rdfs:label SOMA:hasAction "has action")
@@ -216,13 +220,13 @@ SubObjectPropertyOf(SOMA:hasAction <http://www.ontologydesignpatterns.org/ont/du
 ObjectPropertyDomain(SOMA:hasAction <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>)
 ObjectPropertyRange(SOMA:hasAction <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#hasAnswer> (has answer)
+# Object Property: SOMA:hasAnswer (has answer)
 
 AnnotationAssertion(rdfs:comment SOMA:hasAnswer "The relation between a message and its answer.")
 AnnotationAssertion(rdfs:label SOMA:hasAnswer "has answer")
 SubObjectPropertyOf(SOMA:hasAnswer SOMA:relatesToAnotherRole)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#hasExecutionState> (has execution state)
+# Object Property: SOMA:hasExecutionState (has execution state)
 
 AnnotationAssertion(rdfs:comment SOMA:hasExecutionState "A relation from an Action to its execution state.")
 AnnotationAssertion(rdfs:label SOMA:hasExecutionState "has execution state")
@@ -230,7 +234,7 @@ SubObjectPropertyOf(SOMA:hasExecutionState <http://www.ontologydesignpatterns.or
 ObjectPropertyDomain(SOMA:hasExecutionState <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>)
 ObjectPropertyRange(SOMA:hasExecutionState SOMA:ExecutionStateRegion)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#hasInitialSituation> (<http://www.ease-crc.org/ont/SOMA.owl#hasInitialSituation>)
+# Object Property: SOMA:hasInitialSituation (SOMA:hasInitialSituation)
 
 AnnotationAssertion(rdfs:comment SOMA:hasInitialSituation "A relation between SituationTransitions and Situations, which identifies the Situation the transition starts from.")
 SubObjectPropertyOf(SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesObject>)
@@ -240,7 +244,7 @@ IrreflexiveObjectProperty(SOMA:hasInitialSituation)
 ObjectPropertyDomain(SOMA:hasInitialSituation SOMA:SituationTransition)
 ObjectPropertyRange(SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#hasTerminalSituation> (<http://www.ease-crc.org/ont/SOMA.owl#hasTerminalSituation>)
+# Object Property: SOMA:hasTerminalSituation (SOMA:hasTerminalSituation)
 
 AnnotationAssertion(rdfs:comment SOMA:hasTerminalSituation "A relation between SituationTransitions and Situations, which identifies the Situation the transition ends at.")
 SubObjectPropertyOf(SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesObject>)
@@ -250,7 +254,7 @@ IrreflexiveObjectProperty(SOMA:hasTerminalSituation)
 ObjectPropertyDomain(SOMA:hasTerminalSituation SOMA:SituationTransition)
 ObjectPropertyRange(SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#isAskedBy> (is asked by)
+# Object Property: SOMA:isAskedBy (is asked by)
 
 AnnotationAssertion(rdfs:comment SOMA:isAskedBy "A relation from a Query to the Agent who asks it.")
 AnnotationAssertion(rdfs:label SOMA:isAskedBy "is asked by")
@@ -258,7 +262,7 @@ SubObjectPropertyOf(SOMA:isAskedBy <http://www.ontologydesignpatterns.org/ont/du
 ObjectPropertyDomain(SOMA:isAskedBy SOMA:QueryingTask)
 ObjectPropertyRange(SOMA:isAskedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#isInitialSituationOf> (is initial situation of)
+# Object Property: SOMA:isInitialSituationOf (is initial situation of)
 
 AnnotationAssertion(rdfs:comment SOMA:isInitialSituationOf "A relation between SituationTransitions and Situations, which identifies the Situation the transition starts from.")
 AnnotationAssertion(rdfs:label SOMA:isInitialSituationOf "is initial situation of"@en)
@@ -266,7 +270,7 @@ SubObjectPropertyOf(SOMA:isInitialSituationOf <http://www.ontologydesignpatterns
 ObjectPropertyDomain(SOMA:isInitialSituationOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 ObjectPropertyRange(SOMA:isInitialSituationOf SOMA:SituationTransition)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#isPerformedBy> (is performed by)
+# Object Property: SOMA:isPerformedBy (is performed by)
 
 AnnotationAssertion(rdfs:comment SOMA:isPerformedBy "A relation from an Action to the Agent who performs it.")
 AnnotationAssertion(rdfs:label SOMA:isPerformedBy "is performed by")
@@ -274,7 +278,7 @@ SubObjectPropertyOf(SOMA:isPerformedBy <http://www.ontologydesignpatterns.org/on
 ObjectPropertyDomain(SOMA:isPerformedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>)
 ObjectPropertyRange(SOMA:isPerformedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#isTerminalSituationOf> (is terminal situation of)
+# Object Property: SOMA:isTerminalSituationOf (is terminal situation of)
 
 AnnotationAssertion(rdfs:comment SOMA:isTerminalSituationOf "A relation between SituationTransitions and Situations, which identifies the Situation the transition ends at.")
 AnnotationAssertion(rdfs:label SOMA:isTerminalSituationOf "is terminal situation of"@en)
@@ -282,7 +286,7 @@ SubObjectPropertyOf(SOMA:isTerminalSituationOf <http://www.ontologydesignpattern
 ObjectPropertyDomain(SOMA:isTerminalSituationOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 ObjectPropertyRange(SOMA:isTerminalSituationOf SOMA:SituationTransition)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#relatesToAnotherRole> (relates to another role)
+# Object Property: SOMA:relatesToAnotherRole (relates to another role)
 
 AnnotationAssertion(rdfs:comment SOMA:relatesToAnotherRole "Simple top-level property for relations between two roles.")
 AnnotationAssertion(rdfs:label SOMA:relatesToAnotherRole "relates to another role")
@@ -341,14 +345,44 @@ AnnotationAssertion(rdfs:comment <http://www.ontologydesignpatterns.org/ont/dul/
 #   Classes
 ############################
 
-# Class: <http://www.ease-crc.org/ont/SOMA-ACT.owl#AnsweringTask> (Answering task)
+# Class: :AnsweringTask (Answering task)
 
 AnnotationAssertion(rdfs:comment :AnsweringTask "An Illocutionary act where the Sender emits some Message to the Receiver as a reaction to some previous Communication task where the Roles where switched, i.e., the Sender (Receiver) of the Answering task has been the Sender (Sender) for the cause."@en)
 AnnotationAssertion(rdfs:label :AnsweringTask "Answering task"@en)
 EquivalentClasses(:AnsweringTask ObjectIntersectionOf(SOMA:IllocutionaryTask ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectAllValuesFrom(:isReactionTo ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy> SOMA:CommandingTask)))))
 EquivalentClasses(:AnsweringTask ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf> SOMA:Answer))
 
-# Class: <http://www.ease-crc.org/ont/SOMA-ACT.owl#QueryAnsweringTask> (Query answering task)
+# Class: :Cleaning (:Cleaning)
+
+AnnotationAssertion(rdfs:comment :Cleaning "This task in which an agent restores all the objects to their destined locations, wiping a specific object"^^xsd:string)
+SubClassOf(:Cleaning SOMA:ModifyingPhysicalObject)
+SubClassOf(:Cleaning ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Purification))
+
+# Class: :Flipping (:Flipping)
+
+AnnotationAssertion(rdfs:comment :Flipping "The task in which the agent turns an object over by using a tool or by manipulating"^^xsd:string)
+SubClassOf(:Flipping SOMA:Actuating)
+SubClassOf(:Flipping ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Shifting))
+
+# Class: :Pouring (:Pouring)
+
+AnnotationAssertion(rdfs:comment :Pouring "A task in which an agent lets liquid substance to flow out of an object. The agent has a kinematic control over the object."^^xsd:string)
+SubClassOf(:Pouring SOMA:Actuating)
+SubClassOf(:Pouring ObjectSomeValuesFrom(SOMA:isTaskAffordedBy <http://www.ease-crc.org/ont/SOMA-OBJ.owl#Pourable>))
+
+# Class: :PouringInto (Pouring into)
+
+AnnotationAssertion(rdfs:comment :PouringInto "The task in which the agent pours the substance into another object."^^xsd:string)
+AnnotationAssertion(rdfs:label :PouringInto "Pouring into"^^xsd:string)
+SubClassOf(:PouringInto :Pouring)
+
+# Class: :PouringOnto (Pouring onto)
+
+AnnotationAssertion(rdfs:comment :PouringOnto "The task in which an agent pours the substance on top of an object"^^xsd:string)
+AnnotationAssertion(rdfs:label :PouringOnto "Pouring onto"^^xsd:string)
+SubClassOf(:PouringOnto :Pouring)
+
+# Class: :QueryAnsweringTask (Query answering task)
 
 AnnotationAssertion(rdfs:comment :QueryAnsweringTask "An Answering task that is the reaction to some Query answering task.
 
@@ -361,13 +395,25 @@ However, sometimes this might be not the case, e.g., with counterquestions."@en)
 AnnotationAssertion(rdfs:label :QueryAnsweringTask "Query answering task")
 EquivalentClasses(:QueryAnsweringTask ObjectIntersectionOf(:AnsweringTask ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectAllValuesFrom(:isReactionTo ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy> SOMA:QueryingTask)))))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#AbductiveReasoning> (Abductive reasoning)
+# Class: :Serving (:Serving)
+
+AnnotationAssertion(rdfs:comment :Serving "The task in which the agent delivers an object to a physical agent"^^xsd:string)
+SubClassOf(:Serving SOMA:Delivering)
+SubClassOf(:Serving ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action> ObjectUnionOf(ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent>) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)))))
+
+# Class: :Stirring (:Stirring)
+
+AnnotationAssertion(rdfs:comment :Stirring "A task in which an agent dissolves small particles like sugar or salt in fluid"^^xsd:string)
+SubClassOf(:Stirring SOMA:Mixing)
+SubClassOf(:Stirring ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Composing))
+
+# Class: SOMA:AbductiveReasoning (Abductive reasoning)
 
 AnnotationAssertion(rdfs:comment SOMA:AbductiveReasoning "A task in which the Agent proceeds from some set of statements about a world, and attempts to obtain an explanation for these statements. This explanation is often an inferred cause, such as a final cause or intention. Further, it is often required that there be some guarantees that the explanation produced by AbductiveReasoning have some desirable property, such as being the simplest or most likely given the set of statements to explain.")
 AnnotationAssertion(rdfs:label SOMA:AbductiveReasoning "Abductive reasoning"@en)
 SubClassOf(SOMA:AbductiveReasoning SOMA:Reasoning)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Actuating> (<http://www.ease-crc.org/ont/SOMA.owl#Actuating>)
+# Class: SOMA:Actuating (SOMA:Actuating)
 
 AnnotationAssertion(rdfs:comment SOMA:Actuating "Tasks where the goal is to move an object.
 
@@ -383,71 +429,71 @@ For Manipulating, it is the movement of the hand(s) and the change in functional
 AnnotationAssertion(rdfs:comment SOMA:Actuating "todo: think about use of tools. force events are generated between artifacts then. also not only the tool would be the 'salient artifact' here.")
 SubClassOf(SOMA:Actuating SOMA:PhysicalTask)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Answer> (Answer)
+# Class: SOMA:Answer (Answer)
 
 AnnotationAssertion(rdfs:comment SOMA:Answer "A role that is played by an Information Realization answering some query.")
 AnnotationAssertion(rdfs:label SOMA:Answer "Answer")
 SubClassOf(SOMA:Answer SOMA:Message)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#AreaSurveying> (Area surveying)
+# Class: SOMA:AreaSurveying (Area surveying)
 
 AnnotationAssertion(rdfs:comment SOMA:AreaSurveying "A task in which an Agent uses its perception apparatus to gain information about some location.")
 AnnotationAssertion(rdfs:label SOMA:AreaSurveying "Area surveying"@en)
 SubClassOf(SOMA:AreaSurveying SOMA:Perceiving)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Arranging> (<http://www.ease-crc.org/ont/SOMA.owl#Arranging>)
+# Class: SOMA:Arranging (SOMA:Arranging)
 
 AnnotationAssertion(rdfs:comment SOMA:Arranging "A task in which an Agent places a collection of objects at some set of relative poses to each other.")
 SubClassOf(SOMA:Arranging SOMA:Constructing)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Assembling> (<http://www.ease-crc.org/ont/SOMA.owl#Assembling>)
+# Class: SOMA:Assembling (SOMA:Assembling)
 
 AnnotationAssertion(rdfs:comment SOMA:Assembling "A task in which an Agent connects some objects such that they form a cohesive whole, and which also imposes constraints on the objects' relative motions. Often, the objects that make up an assemblage can also be separated again.")
 SubClassOf(SOMA:Assembling SOMA:Constructing)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#AssertionTask> (Assertion task)
+# Class: SOMA:AssertionTask (Assertion task)
 
 AnnotationAssertion(rdfs:comment SOMA:AssertionTask "An Illocutionary Act where the Sender emits some Message with the intent to change what the Receiver believes to be true in some context. Often, assertions are of facts about the real world, but this need not be the case. Assertions can communicate what someone believes, or refer to a world that is entirely fictional. In all these cases however, assertions are intended to update the listener's model (of the real world, or of the speaker's beliefs, or of the fictional world etc.)."@en)
 AnnotationAssertion(rdfs:label SOMA:AssertionTask "Assertion task"@en)
 SubClassOf(SOMA:AssertionTask SOMA:IllocutionaryTask)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#AssumingArmPose> (Assuming arm pose)
+# Class: SOMA:AssumingArmPose (Assuming arm pose)
 
 AnnotationAssertion(rdfs:comment SOMA:AssumingArmPose "A task by which an Agent arranges one/some/all of its arms according to some configuration.")
 AnnotationAssertion(rdfs:label SOMA:AssumingArmPose "Assuming arm pose"@en)
 SubClassOf(SOMA:AssumingArmPose SOMA:AssumingPose)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#AssumingPose> (Assuming pose)
+# Class: SOMA:AssumingPose (Assuming pose)
 
 AnnotationAssertion(rdfs:comment SOMA:AssumingPose "A task by which an Agent arranges its body, or part of it, according to some configuration.")
 AnnotationAssertion(rdfs:label SOMA:AssumingPose "Assuming pose"@en)
 SubClassOf(SOMA:AssumingPose SOMA:PhysicalTask)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Avoiding> (<http://www.ease-crc.org/ont/SOMA.owl#Avoiding>)
+# Class: SOMA:Avoiding (SOMA:Avoiding)
 
 AnnotationAssertion(rdfs:comment SOMA:Avoiding "A task in which an Agent moves so as to not enter or pass through a location.")
 SubClassOf(SOMA:Avoiding SOMA:Navigating)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Catching> (<http://www.ease-crc.org/ont/SOMA.owl#Catching>)
+# Class: SOMA:Catching (SOMA:Catching)
 
 AnnotationAssertion(rdfs:comment SOMA:Catching "A task by which an Agent stops a moving object and gains kinematic control over it, usually by grasping.")
 SubClassOf(SOMA:Catching SOMA:Actuating)
 DisjointClasses(SOMA:Catching SOMA:PickingUp)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Channel> (Channel)
+# Class: SOMA:Channel (Channel)
 
 AnnotationAssertion(rdfs:comment SOMA:Channel "A Channel in a Communication Task is the path of travel by a Message, e.g., via WLAN, air (in the case of a Message classifying soundwaves) or a telephone cable."@en)
 AnnotationAssertion(rdfs:label SOMA:Channel "Channel"@en)
 SubClassOf(SOMA:Channel SOMA:PathRole)
 SubClassOf(SOMA:Channel ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask> SOMA:CommunicationTask))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#CheckingObjectPresence> (Checking object presence)
+# Class: SOMA:CheckingObjectPresence (Checking object presence)
 
 AnnotationAssertion(rdfs:comment SOMA:CheckingObjectPresence "A task by which an Agent uses its sensors to check for the presence of a specific object and to obtain some other information about it, e.g. pose.")
 AnnotationAssertion(rdfs:label SOMA:CheckingObjectPresence "Checking object presence"@en)
 SubClassOf(SOMA:CheckingObjectPresence SOMA:Perceiving)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Closing> (<http://www.ease-crc.org/ont/SOMA.owl#Closing>)
+# Class: SOMA:Closing (SOMA:Closing)
 
 AnnotationAssertion(rdfs:comment SOMA:Closing "A task in which an Agent manipulates a container so as to block access to its interior.")
 SubClassOf(SOMA:Closing SOMA:Actuating)
@@ -459,26 +505,26 @@ DisjointClasses(SOMA:Closing SOMA:Pulling)
 DisjointClasses(SOMA:Closing SOMA:Pushing)
 DisjointClasses(SOMA:Closing SOMA:Squeezing)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#CommandingTask> (Commanding task)
+# Class: SOMA:CommandingTask (Commanding task)
 
 AnnotationAssertion(rdfs:comment SOMA:CommandingTask "An Illocutionary act where the Sender emits some Message with the intent to cause the Receiver to perform some action."@en)
 AnnotationAssertion(rdfs:label SOMA:CommandingTask "Commanding task"@en)
 SubClassOf(SOMA:CommandingTask SOMA:IllocutionaryTask)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#CommunicationAction> (Locutionary action)
+# Class: SOMA:CommunicationAction (Locutionary action)
 
 AnnotationAssertion(rdfs:comment SOMA:CommunicationAction "An action in which an Agent uses some actuator for communication purposes."@en)
 AnnotationAssertion(rdfs:label SOMA:CommunicationAction "Locutionary action"@en)
 SubClassOf(SOMA:CommunicationAction <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>)
 SubClassOf(SOMA:CommunicationAction ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> SOMA:LinguisticObject))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#CommunicationReport> (Communication report)
+# Class: SOMA:CommunicationReport (Communication report)
 
 AnnotationAssertion(rdfs:comment SOMA:CommunicationReport "A task in which an Agent endeavors to describe truthfully some state of affairs.")
 AnnotationAssertion(rdfs:label SOMA:CommunicationReport "Communication report"@en)
 SubClassOf(SOMA:CommunicationReport SOMA:CommunicationTask)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#CommunicationTask> (Communication task)
+# Class: SOMA:CommunicationTask (Communication task)
 
 AnnotationAssertion(rdfs:comment SOMA:CommunicationTask "A Task in which two or more Agents exchange information. A CommunicationTask classifies only Events that have only Agents and Social objects as participants.
 
@@ -488,7 +534,7 @@ SubClassOf(SOMA:CommunicationTask <http://www.ontologydesignpatterns.org/ont/dul
 SubClassOf(SOMA:CommunicationTask ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf> SOMA:Channel) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf> SOMA:Message) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf> SOMA:Receiver) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf> SOMA:Sender)))
 SubClassOf(SOMA:CommunicationTask ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> ObjectUnionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject>))))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#CommunicationTopic> (Communication topic)
+# Class: SOMA:CommunicationTopic (Communication topic)
 
 AnnotationAssertion(rdfs:comment SOMA:CommunicationTopic "A role that appears in communication tasks, and indicates what the communication is about.
 
@@ -501,18 +547,18 @@ AnnotationAssertion(rdfs:label SOMA:CommunicationTopic "Communication topic"@en)
 SubClassOf(SOMA:CommunicationTopic SOMA:ResourceRole)
 SubClassOf(SOMA:CommunicationTopic ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isClassifiedBy> SOMA:CommunicationTask)))))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Constructing> (<http://www.ease-crc.org/ont/SOMA.owl#Constructing>)
+# Class: SOMA:Constructing (SOMA:Constructing)
 
 AnnotationAssertion(rdfs:comment SOMA:Constructing "A task in which an Agent creates a new object.")
 SubClassOf(SOMA:Constructing SOMA:PhysicalTask)
 DisjointClasses(SOMA:Constructing SOMA:ModifyingPhysicalObject)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Cutting> (<http://www.ease-crc.org/ont/SOMA.owl#Cutting>)
+# Class: SOMA:Cutting (SOMA:Cutting)
 
 AnnotationAssertion(rdfs:comment SOMA:Cutting "The goal of this task is to separate one or more pieces from some target object by means of cutting into its constituent material. Unlike a disassembly, a cut is usually not easily reversible.")
 SubClassOf(SOMA:Cutting SOMA:ModifyingPhysicalObject)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#DeductiveReasoning> (Deductive reasoning)
+# Class: SOMA:DeductiveReasoning (Deductive reasoning)
 
 AnnotationAssertion(rdfs:comment SOMA:DeductiveReasoning "A task in which the Agent, using general logical principles that it considers logically valid, applied to premises that it considers logically true, arrives at conclusions that it considers logically certain.
 
@@ -520,10 +566,11 @@ Deduction is often explained as starting from the \"general\" (some property X i
 AnnotationAssertion(rdfs:label SOMA:DeductiveReasoning "Deductive reasoning"@en)
 SubClassOf(SOMA:DeductiveReasoning SOMA:Reasoning)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Delivering> (<http://www.ease-crc.org/ont/SOMA.owl#Delivering>)
+# Class: SOMA:Delivering (SOMA:Delivering)
 
 AnnotationAssertion(rdfs:comment SOMA:Delivering "A task in which an Agent brings an item that the Agent already carries to a specified target.")
 SubClassOf(SOMA:Delivering SOMA:Actuating)
+SubClassOf(SOMA:Delivering ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Shifting))
 DisjointClasses(SOMA:Delivering SOMA:Fetching)
 DisjointClasses(SOMA:Delivering SOMA:Lifting)
 DisjointClasses(SOMA:Delivering SOMA:Opening)
@@ -531,22 +578,22 @@ DisjointClasses(SOMA:Delivering SOMA:Pulling)
 DisjointClasses(SOMA:Delivering SOMA:Pushing)
 DisjointClasses(SOMA:Delivering SOMA:Squeezing)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Dicing> (<http://www.ease-crc.org/ont/SOMA.owl#Dicing>)
+# Class: SOMA:Dicing (SOMA:Dicing)
 
 AnnotationAssertion(rdfs:comment SOMA:Dicing "A particular kind of cutting where the goal is to produce small pieces out of some object or material. Unlike slices, the pieces to be obtained do not have one or two dimensions being more prominent than others. \"Dice\", the pieces dicing results in, are approximately cubic.")
 SubClassOf(SOMA:Dicing SOMA:Cutting)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Distancing> (<http://www.ease-crc.org/ont/SOMA.owl#Distancing>)
+# Class: SOMA:Distancing (SOMA:Distancing)
 
 AnnotationAssertion(rdfs:comment SOMA:Distancing "A task in which an Agent increases its distance from some location.")
 SubClassOf(SOMA:Distancing SOMA:Navigating)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Dreaming> (<http://www.ease-crc.org/ont/SOMA.owl#Dreaming>)
+# Class: SOMA:Dreaming (SOMA:Dreaming)
 
 AnnotationAssertion(rdfs:comment SOMA:Dreaming "Any form of re-processing episodic memories for long-term memory by natural or aritifical agents.")
 SubClassOf(SOMA:Dreaming SOMA:MentalTask)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Dropping> (<http://www.ease-crc.org/ont/SOMA.owl#Dropping>)
+# Class: SOMA:Dropping (SOMA:Dropping)
 
 AnnotationAssertion(rdfs:comment SOMA:Dropping "The dropped object falls mainly under the influence of gravity. However, an agent may also drop something during navigation. The difference to 'Throwing' is that there is no 'Limb motion' which is a constitiuent of the action.
 
@@ -554,20 +601,20 @@ AnnotationAssertion(rdfs:comment SOMA:Dropping "The dropped object falls mainly 
 SubClassOf(SOMA:Dropping SOMA:Actuating)
 DisjointClasses(SOMA:Dropping SOMA:Placing)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#EndEffectorPositioning> (End effector positioning)
+# Class: SOMA:EndEffectorPositioning (End effector positioning)
 
 AnnotationAssertion(rdfs:comment SOMA:EndEffectorPositioning "A task in which an Agent places its end effectors at particular poses.")
 AnnotationAssertion(rdfs:label SOMA:EndEffectorPositioning "End effector positioning"@en)
 SubClassOf(SOMA:EndEffectorPositioning SOMA:Manipulating)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ExecutionStateRegion> (Execution state region)
+# Class: SOMA:ExecutionStateRegion (Execution state region)
 
 AnnotationAssertion(rdfs:comment SOMA:ExecutionStateRegion "A region containing labels that describe different states in the evolution/completion of a task execution.")
 AnnotationAssertion(rdfs:label SOMA:ExecutionStateRegion "Execution state region")
 EquivalentClasses(SOMA:ExecutionStateRegion ObjectOneOf(SOMA:ExecutionState_Active SOMA:ExecutionState_Cancelled SOMA:ExecutionState_Failed SOMA:ExecutionState_Paused SOMA:ExecutionState_Pending SOMA:ExecutionState_Succeeded))
 SubClassOf(SOMA:ExecutionStateRegion <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region>)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Fetching> (<http://www.ease-crc.org/ont/SOMA.owl#Fetching>)
+# Class: SOMA:Fetching (SOMA:Fetching)
 
 AnnotationAssertion(rdfs:comment SOMA:Fetching "A task in which an Agent retrieves an object from a particular location, which puts the object under the Agent's control, who can now e.g. transport the object somewhere else; this task may include repositioning the Agent to better reach the object. Note that while in normal linguistic use fetch can mean transport, we use it here to refer only to (a part of) the first stage of transport.")
 SubClassOf(SOMA:Fetching SOMA:PhysicalAcquiring)
@@ -577,30 +624,30 @@ DisjointClasses(SOMA:Fetching SOMA:Pulling)
 DisjointClasses(SOMA:Fetching SOMA:Pushing)
 DisjointClasses(SOMA:Fetching SOMA:Squeezing)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#GetTaskParameter> (Get task parameter)
+# Class: SOMA:GetTaskParameter (Get task parameter)
 
 AnnotationAssertion(rdfs:comment SOMA:GetTaskParameter "A task in which an Agent computes some parameter relevant for another task.")
 AnnotationAssertion(rdfs:label SOMA:GetTaskParameter "Get task parameter"@en)
 SubClassOf(SOMA:GetTaskParameter SOMA:MentalTask)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#GraspTransfer> (Grasp transfer)
+# Class: SOMA:GraspTransfer (Grasp transfer)
 
 AnnotationAssertion(rdfs:comment SOMA:GraspTransfer "A task in which an Agent switches which of its end effectors holds an object.")
 AnnotationAssertion(rdfs:label SOMA:GraspTransfer "Grasp transfer"@en)
 SubClassOf(SOMA:GraspTransfer SOMA:Grasping)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Grasping> (<http://www.ease-crc.org/ont/SOMA.owl#Grasping>)
+# Class: SOMA:Grasping (SOMA:Grasping)
 
 AnnotationAssertion(rdfs:comment SOMA:Grasping "A task in which an Agent uses its end effectors to grasp an object, thus gaining kinematic control over it.")
 SubClassOf(SOMA:Grasping SOMA:Manipulating)
 DisjointClasses(SOMA:Grasping SOMA:Releasing)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Holding> (<http://www.ease-crc.org/ont/SOMA.owl#Holding>)
+# Class: SOMA:Holding (SOMA:Holding)
 
 AnnotationAssertion(rdfs:comment SOMA:Holding "A task by which an Agent keeps an object over which it has kinematic control, typically via grasping, at some specified pose.")
 SubClassOf(SOMA:Holding SOMA:Manipulating)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#IllocutionaryTask> (Illocutionary act)
+# Class: SOMA:IllocutionaryTask (Illocutionary act)
 
 AnnotationAssertion(rdfs:comment SOMA:IllocutionaryTask "A task which is executed by a Locution action: A Locution is what was said and meant, Illocution is what was done.
 
@@ -610,12 +657,12 @@ Source: https://en.wikipedia.org/wiki/Illocutionary_act"@en)
 AnnotationAssertion(rdfs:label SOMA:IllocutionaryTask "Illocutionary act"@en)
 SubClassOf(SOMA:IllocutionaryTask ObjectIntersectionOf(SOMA:CommunicationTask ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> ObjectUnionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject>)))))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Imagining> (<http://www.ease-crc.org/ont/SOMA.owl#Imagining>)
+# Class: SOMA:Imagining (SOMA:Imagining)
 
 AnnotationAssertion(rdfs:comment SOMA:Imagining "A Mental task in which the Agent constructs a mental representation of a possible world. An Agent performing an Imagining activity does not aim to construct a representation that aspires to be faithful to some past, present, or future state of affairs of the actual world it is embodied in.")
 SubClassOf(SOMA:Imagining SOMA:MentalTask)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#InductiveReasoning> (Inductive resoning)
+# Class: SOMA:InductiveReasoning (Inductive resoning)
 
 AnnotationAssertion(rdfs:comment SOMA:InductiveReasoning "A task in which the Agent endeavors to accumulate confidence in some general statement about the world, by gathering instances in which this general statement appears to apply. Note that perfect confidence can never be guaranteed by induction.
 
@@ -623,7 +670,7 @@ Induction is often described as a move from many \"specifics\" (swan A is white,
 AnnotationAssertion(rdfs:label SOMA:InductiveReasoning "Inductive resoning"@en)
 SubClassOf(SOMA:InductiveReasoning SOMA:Reasoning)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Lifting> (<http://www.ease-crc.org/ont/SOMA.owl#Lifting>)
+# Class: SOMA:Lifting (SOMA:Lifting)
 
 AnnotationAssertion(rdfs:comment SOMA:Lifting "todo: how to distinguish from e.g. 'pushing from the table'")
 SubClassOf(SOMA:Lifting SOMA:Actuating)
@@ -632,29 +679,29 @@ DisjointClasses(SOMA:Lifting SOMA:Pulling)
 DisjointClasses(SOMA:Lifting SOMA:Pushing)
 DisjointClasses(SOMA:Lifting SOMA:Squeezing)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#LinguisticObject> (Linguistic object)
+# Class: SOMA:LinguisticObject (Linguistic object)
 
 AnnotationAssertion(rdfs:isDefinedBy SOMA:LinguisticObject <http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl>)
 AnnotationAssertion(rdfs:label SOMA:LinguisticObject "Linguistic object"@en)
 SubClassOf(SOMA:LinguisticObject <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject>)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#LookingAt> (<http://www.ease-crc.org/ont/SOMA.owl#LookingAt>)
+# Class: SOMA:LookingAt (SOMA:LookingAt)
 
 AnnotationAssertion(rdfs:comment SOMA:LookingAt "better: Gazing")
 SubClassOf(SOMA:LookingAt SOMA:PhysicalTask)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#LookingFor> (Looking for)
+# Class: SOMA:LookingFor (Looking for)
 
 AnnotationAssertion(rdfs:comment SOMA:LookingFor "A task by which an Agent uses its perception apparatus to check for the presence of an object in some specified area.")
 AnnotationAssertion(rdfs:label SOMA:LookingFor "Looking for"@en)
 SubClassOf(SOMA:LookingFor SOMA:Perceiving)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Lowering> (<http://www.ease-crc.org/ont/SOMA.owl#Lowering>)
+# Class: SOMA:Lowering (SOMA:Lowering)
 
 AnnotationAssertion(rdfs:comment SOMA:Lowering "A task in which an Agent reduces the elevation at which they hold an item.")
 SubClassOf(SOMA:Lowering SOMA:Actuating)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Manipulating> (<http://www.ease-crc.org/ont/SOMA.owl#Manipulating>)
+# Class: SOMA:Manipulating (SOMA:Manipulating)
 
 AnnotationAssertion(rdfs:comment SOMA:Manipulating "Tasks where the goal is to move the prehensile effectors, ie. hands, of an agent so as to achieve some spatial or functional relation with some manipulated object. 
 
@@ -674,7 +721,7 @@ Note: we employ Manipulating here in its literal, original sense, of using hands
 SubClassOf(SOMA:Manipulating SOMA:PhysicalTask)
 SubClassOf(SOMA:Manipulating ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> SOMA:PhysicalAction))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#MentalAction> (Mental action)
+# Class: SOMA:MentalAction (Mental action)
 
 AnnotationAssertion(rdfs:comment SOMA:MentalAction "An Event construed as the Agent participant affecting Entities that are representations of actual or potential Entities or Events in the physical world in which the Agent is embodied. These representations are maintained by the Agent participant in the 'Mental action' event.
 
@@ -683,14 +730,14 @@ AnnotationAssertion(rdfs:label SOMA:MentalAction "Mental action")
 SubClassOf(SOMA:MentalAction <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>)
 SubClassOf(SOMA:MentalAction ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> ObjectUnionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject>)))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#MentalTask> (Mental task)
+# Class: SOMA:MentalTask (Mental task)
 
 AnnotationAssertion(rdfs:comment SOMA:MentalTask "A Task classifying some MentalAction, that is, an Action through which an Agent manipulates representations stored in its own cognition.")
 AnnotationAssertion(rdfs:label SOMA:MentalTask "Mental task"@en)
 SubClassOf(SOMA:MentalTask <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
 SubClassOf(SOMA:MentalTask ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> SOMA:MentalAction))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Message> (Message)
+# Class: SOMA:Message (Message)
 
 AnnotationAssertion(rdfs:comment SOMA:Message "A message is a discrete unit of communication intended by the source for consumption by some recipient or group of recipients (Source: https://en.wikipedia.org/wiki/Message).
 
@@ -700,54 +747,54 @@ SubClassOf(SOMA:Message SOMA:Item)
 SubClassOf(SOMA:Message ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask> SOMA:CommunicationTask))
 SubClassOf(SOMA:Message ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationRealization>))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionEvaluationTopic> (<http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionEvaluationTopic>)
+# Class: SOMA:MetaCognitionEvaluationTopic (SOMA:MetaCognitionEvaluationTopic)
 
 AnnotationAssertion(rdfs:comment SOMA:MetaCognitionEvaluationTopic "A topic used while an Agent describes its own cognitive processes and acions to evaluate them according to some metric.")
 SubClassOf(SOMA:MetaCognitionEvaluationTopic SOMA:MetaCognitionTopic)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionMemoryTopic> (<http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionMemoryTopic>)
+# Class: SOMA:MetaCognitionMemoryTopic (SOMA:MetaCognitionMemoryTopic)
 
 AnnotationAssertion(rdfs:comment SOMA:MetaCognitionMemoryTopic "A topic used while an Agent describes its own cognitive processes and actions, and which covers descriptions of what memories are involved in them.")
 SubClassOf(SOMA:MetaCognitionMemoryTopic SOMA:MetaCognitionTopic)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionPlanningTopic> (<http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionPlanningTopic>)
+# Class: SOMA:MetaCognitionPlanningTopic (SOMA:MetaCognitionPlanningTopic)
 
 AnnotationAssertion(rdfs:comment SOMA:MetaCognitionPlanningTopic "A topic used while an Agent describes the planning it does for its own cognitive processes and actions.")
 SubClassOf(SOMA:MetaCognitionPlanningTopic SOMA:MetaCognitionTopic)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionTopic> (<http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionTopic>)
+# Class: SOMA:MetaCognitionTopic (SOMA:MetaCognitionTopic)
 
 AnnotationAssertion(rdfs:comment SOMA:MetaCognitionTopic "A topic for a description that an Agent might make of its own cognitive processes and actions.")
 SubClassOf(SOMA:MetaCognitionTopic SOMA:ThinkAloudTopic)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Mixing> (<http://www.ease-crc.org/ont/SOMA.owl#Mixing>)
+# Class: SOMA:Mixing (SOMA:Mixing)
 
 AnnotationAssertion(rdfs:comment SOMA:Mixing "A task by which an Agent combines several entities, such that the combination is difficult or in practice impossible to reverse.")
 SubClassOf(SOMA:Mixing SOMA:Constructing)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ModifyingPhysicalObject> (Modifying physical object)
+# Class: SOMA:ModifyingPhysicalObject (Modifying physical object)
 
 AnnotationAssertion(rdfs:comment SOMA:ModifyingPhysicalObject "Superconcept for tasks that involve affecting some state that an object is in (e.g. where it is located), without creating or destroying the object.")
 AnnotationAssertion(rdfs:label SOMA:ModifyingPhysicalObject "Modifying physical object"@en)
 SubClassOf(SOMA:ModifyingPhysicalObject SOMA:PhysicalTask)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#MonitoringJointState> (Monitoring joint state)
+# Class: SOMA:MonitoringJointState (Monitoring joint state)
 
 AnnotationAssertion(rdfs:comment SOMA:MonitoringJointState "A task in which the Agent keeps track of the physical state of its joints, e.g. their positions, velocities, efforts.")
 AnnotationAssertion(rdfs:label SOMA:MonitoringJointState "Monitoring joint state"@en)
 SubClassOf(SOMA:MonitoringJointState SOMA:Proprioceiving)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#MovingTo> (<http://www.ease-crc.org/ont/SOMA.owl#MovingTo>)
+# Class: SOMA:MovingTo (SOMA:MovingTo)
 
 AnnotationAssertion(rdfs:comment SOMA:MovingTo "A task in which an Agent moves towards a location.")
 SubClassOf(SOMA:MovingTo SOMA:Navigating)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Navigating> (<http://www.ease-crc.org/ont/SOMA.owl#Navigating>)
+# Class: SOMA:Navigating (SOMA:Navigating)
 
 AnnotationAssertion(rdfs:comment SOMA:Navigating "A task in which an Agent moves through space so as to arrive at some location, follow some path, or increase its distance from some location or other entity. Often, navigation involves finding paths around obstacles and forbidden areas.")
 SubClassOf(SOMA:Navigating SOMA:PhysicalTask)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Opening> (<http://www.ease-crc.org/ont/SOMA.owl#Opening>)
+# Class: SOMA:Opening (SOMA:Opening)
 
 AnnotationAssertion(rdfs:comment SOMA:Opening "A task in which an Agent manipulates a container so as to expose its interior.")
 SubClassOf(SOMA:Opening SOMA:Actuating)
@@ -755,23 +802,23 @@ DisjointClasses(SOMA:Opening SOMA:Pulling)
 DisjointClasses(SOMA:Opening SOMA:Pushing)
 DisjointClasses(SOMA:Opening SOMA:Squeezing)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Orienting> (<http://www.ease-crc.org/ont/SOMA.owl#Orienting>)
+# Class: SOMA:Orienting (SOMA:Orienting)
 
 AnnotationAssertion(rdfs:comment SOMA:Orienting "A task in which an Agent adjusts the orientation of an object.")
 SubClassOf(SOMA:Orienting SOMA:Positioning)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ParkingArms> (Parking arms)
+# Class: SOMA:ParkingArms (Parking arms)
 
 AnnotationAssertion(rdfs:comment SOMA:ParkingArms "A task by which an Agent arranges its arms in such a way so as to minimize opportunities for collision while moving through the environment.")
 AnnotationAssertion(rdfs:label SOMA:ParkingArms "Parking arms"@en)
 SubClassOf(SOMA:ParkingArms SOMA:AssumingArmPose)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Perceiving> (<http://www.ease-crc.org/ont/SOMA.owl#Perceiving>)
+# Class: SOMA:Perceiving (SOMA:Perceiving)
 
 AnnotationAssertion(rdfs:comment SOMA:Perceiving "A task in which the Agent gathers and interprets sensor information about its surroundings.")
 SubClassOf(SOMA:Perceiving SOMA:PhysicalTask)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PhysicalAcquiring> (Physical acquiring)
+# Class: SOMA:PhysicalAcquiring (Physical acquiring)
 
 AnnotationAssertion(rdfs:comment SOMA:PhysicalAcquiring "The goal of this task is to make some object usable for other tasks, by possibly changing its physical state. Usually, it overlaps some task that describes the manner in which an object is obtained.
 
@@ -781,106 +828,106 @@ Note that buying an object is NOT PhysicalAcquiring. Buying, or ownership transf
 AnnotationAssertion(rdfs:label SOMA:PhysicalAcquiring "Physical acquiring"@en)
 SubClassOf(SOMA:PhysicalAcquiring SOMA:ModifyingPhysicalObject)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PhysicalAction> (Physical action)
+# Class: SOMA:PhysicalAction (Physical action)
 
 AnnotationAssertion(rdfs:comment SOMA:PhysicalAction "An action performed by an agent by using its body in some way to interact with the physical world, e.g., through manipulation of objects, or by changing the posture.")
 AnnotationAssertion(rdfs:label SOMA:PhysicalAction "Physical action")
 SubClassOf(SOMA:PhysicalAction <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PhysicalTask> (Physical task)
+# Class: SOMA:PhysicalTask (Physical task)
 
 AnnotationAssertion(rdfs:comment SOMA:PhysicalTask "A task in which a PhysicalAgent affects some physical object.")
 AnnotationAssertion(rdfs:label SOMA:PhysicalTask "Physical task"@en)
 SubClassOf(SOMA:PhysicalTask <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
 SubClassOf(SOMA:PhysicalTask ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action> ObjectUnionOf(ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent>) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)))))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PickingUp> (<http://www.ease-crc.org/ont/SOMA.owl#PickingUp>)
+# Class: SOMA:PickingUp (SOMA:PickingUp)
 
 AnnotationAssertion(rdfs:comment SOMA:PickingUp "A task in which the Agent uses one or more of its grippers to grasp a usually stationary object.")
 SubClassOf(SOMA:PickingUp SOMA:Manipulating)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Placing> (<http://www.ease-crc.org/ont/SOMA.owl#Placing>)
+# Class: SOMA:Placing (SOMA:Placing)
 
 AnnotationAssertion(rdfs:comment SOMA:Placing "Distinguished from Positioning in that this task is more about placing an object at a functionally specified location (e.g., place the cup on the table) as opposed to positioning an object at a location defined by coordinates or a region of coordinates (position the cup at xyz).")
 SubClassOf(SOMA:Placing SOMA:PhysicalTask)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Planning> (<http://www.ease-crc.org/ont/SOMA.owl#Planning>)
+# Class: SOMA:Planning (SOMA:Planning)
 
 AnnotationAssertion(rdfs:comment SOMA:Planning "A Mental task in which the Agent endeavours to create a sequence of actions for itself which, if followed, will bring about a particular state of affairs in the world. This particular state of affairs is known to the agent and is often called the goal state of the planning action. Planning commits itself to feasibility: the Agent attempts to find a sequence of actions that it believes it will actually be able to perform.")
 SubClassOf(SOMA:Planning SOMA:Prospecting)
 SubClassOf(SOMA:Planning ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan>)))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Positioning> (<http://www.ease-crc.org/ont/SOMA.owl#Positioning>)
+# Class: SOMA:Positioning (SOMA:Positioning)
 
 AnnotationAssertion(rdfs:comment SOMA:Positioning "A task in which an Agent places an object at a particular position.")
 SubClassOf(SOMA:Positioning SOMA:Actuating)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Prediction> (<http://www.ease-crc.org/ont/SOMA.owl#Prediction>)
+# Class: SOMA:Prediction (SOMA:Prediction)
 
 AnnotationAssertion(rdfs:comment SOMA:Prediction "A Mental task in which the Agent endeavours to construct a representation of a future state of the world. Prediction commits itself to some degree of accuracy: the Agent believes that eventually something similar to the predicted state will come to pass.")
 SubClassOf(SOMA:Prediction SOMA:Prospecting)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Proprioceiving> (<http://www.ease-crc.org/ont/SOMA.owl#Proprioceiving>)
+# Class: SOMA:Proprioceiving (SOMA:Proprioceiving)
 
 AnnotationAssertion(rdfs:comment SOMA:Proprioceiving "A task in which the Agent gathers and interprets sensor information about itself.")
 SubClassOf(SOMA:Proprioceiving SOMA:PhysicalTask)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Prospecting> (<http://www.ease-crc.org/ont/SOMA.owl#Prospecting>)
+# Class: SOMA:Prospecting (SOMA:Prospecting)
 
 AnnotationAssertion(rdfs:comment SOMA:Prospecting "A Mental task in which an Agent endeavours to construct a representation of a future state of affairs of the world it is embodied in.")
 SubClassOf(SOMA:Prospecting SOMA:MentalTask)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Pulling> (<http://www.ease-crc.org/ont/SOMA.owl#Pulling>)
+# Class: SOMA:Pulling (SOMA:Pulling)
 
 AnnotationAssertion(rdfs:comment SOMA:Pulling "A task in which an Agent moves an object in a direction loosely from the object's center of mass towards the contact point between agent and object.")
 SubClassOf(SOMA:Pulling SOMA:Actuating)
 DisjointClasses(SOMA:Pulling SOMA:Pushing)
 DisjointClasses(SOMA:Pulling SOMA:Squeezing)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Pushing> (<http://www.ease-crc.org/ont/SOMA.owl#Pushing>)
+# Class: SOMA:Pushing (SOMA:Pushing)
 
 AnnotationAssertion(rdfs:comment SOMA:Pushing "A task in which an Agent moves an object in a direction loosely from the the contact point between agent and object towards object's center of mass. todo: define subclass 'PushingOver'? Would we expect two distinct contacts with the same surface then?")
 SubClassOf(SOMA:Pushing SOMA:Actuating)
 DisjointClasses(SOMA:Pushing SOMA:Squeezing)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PushingAway> (Pushing away)
+# Class: SOMA:PushingAway (Pushing away)
 
 AnnotationAssertion(rdfs:comment SOMA:PushingAway "A task in which an Agent pushes an object in front of themselves.")
 AnnotationAssertion(rdfs:label SOMA:PushingAway "Pushing away"@en)
 SubClassOf(SOMA:PushingAway SOMA:Pushing)
 DisjointClasses(SOMA:PushingAway SOMA:PushingDown)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PushingDown> (Pushing down)
+# Class: SOMA:PushingDown (Pushing down)
 
 AnnotationAssertion(rdfs:comment SOMA:PushingDown "A task in which an Agent pushes an object downwards.")
 AnnotationAssertion(rdfs:label SOMA:PushingDown "Pushing down"@en)
 SubClassOf(SOMA:PushingDown SOMA:Pushing)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PuttingDown> (<http://www.ease-crc.org/ont/SOMA.owl#PuttingDown>)
+# Class: SOMA:PuttingDown (SOMA:PuttingDown)
 
 AnnotationAssertion(rdfs:comment SOMA:PuttingDown "A task in which an Agent puts down an object they have kinematic control over, e.g. a grasped object.")
 SubClassOf(SOMA:PuttingDown SOMA:Manipulating)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Query> (Query)
+# Class: SOMA:Query (Query)
 
 AnnotationAssertion(rdfs:comment SOMA:Query "A role played by some Information Realization that carries meaning, where this meaning is a query of some sort."@en)
 AnnotationAssertion(rdfs:label SOMA:Query "Query"@en)
 SubClassOf(SOMA:Query SOMA:Message)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#QueryingTask> (Querying task)
+# Class: SOMA:QueryingTask (Querying task)
 
 AnnotationAssertion(rdfs:comment SOMA:QueryingTask "An Illocutionary act where the Sender of the Message does so to trigger the Receiver to return some information that is specified within the content of the Message.")
 AnnotationAssertion(rdfs:label SOMA:QueryingTask "Querying task"@en)
 SubClassOf(SOMA:QueryingTask SOMA:IllocutionaryTask)
 SubClassOf(SOMA:QueryingTask ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf> SOMA:Query))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Reaching> (<http://www.ease-crc.org/ont/SOMA.owl#Reaching>)
+# Class: SOMA:Reaching (SOMA:Reaching)
 
 AnnotationAssertion(rdfs:comment SOMA:Reaching "A task in which an Agent moves one or more of its arms towards a location or object.")
 SubClassOf(SOMA:Reaching SOMA:EndEffectorPositioning)
 DisjointClasses(SOMA:Reaching SOMA:Retracting)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Reasoning> (<http://www.ease-crc.org/ont/SOMA.owl#Reasoning>)
+# Class: SOMA:Reasoning (SOMA:Reasoning)
 
 AnnotationAssertion(rdfs:comment SOMA:Reasoning "A Mental task in which an Agent endeavours to obtain new knowledge from knowledge it already possesses.")
 AnnotationAssertion(rdfs:comment SOMA:Reasoning "todo: a taxonomy of reasoning is not trivial. Classical theory distinguishes Deductive, Inductive, and with a stretch Abductive reasoning. However, modern practice distinguishes other categories that overlap with these, e.g. Probabilistic and Non-monotonic.
@@ -892,29 +939,29 @@ Any of the Abductive/Deductive/Inductive triad can be further affected by the Mo
 Note, this classification has nothing to do with reasoning domain (e.g. SpatialReasoning, TemporalReasoning, ...) and merely with techniques/logical-mathematical underpinnings.")
 SubClassOf(SOMA:Reasoning SOMA:MentalTask)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Receiver> (Receiver)
+# Class: SOMA:Receiver (Receiver)
 
 AnnotationAssertion(rdfs:comment SOMA:Receiver "The role played by an Agent in a Communication Task that perceives and interpretes some incoming Message."@en)
 AnnotationAssertion(rdfs:label SOMA:Receiver "Receiver"@en)
 SubClassOf(SOMA:Receiver SOMA:AgentRole)
 SubClassOf(SOMA:Receiver ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask> SOMA:CommunicationTask))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Releasing> (<http://www.ease-crc.org/ont/SOMA.owl#Releasing>)
+# Class: SOMA:Releasing (SOMA:Releasing)
 
 AnnotationAssertion(rdfs:comment SOMA:Releasing "A task in which an agent relinquishes its kinematic control over an object, typically by releasing it from its grasp.")
 SubClassOf(SOMA:Releasing SOMA:Manipulating)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Remembering> (<http://www.ease-crc.org/ont/SOMA.owl#Remembering>)
+# Class: SOMA:Remembering (SOMA:Remembering)
 
 AnnotationAssertion(rdfs:comment SOMA:Remembering "A Mental task in which the Agent endeavours to recall a record of a previous state of affairs in the world. The Agent must have witnessed this state of affairs in order to record it. Remembering commits itself to accuracy: the Agent attempts to reconstruct as accurate a record as it can. Note, this does not mean the Agent will communicate the recollection accurately.")
 SubClassOf(SOMA:Remembering SOMA:Retrospecting)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Retracting> (<http://www.ease-crc.org/ont/SOMA.owl#Retracting>)
+# Class: SOMA:Retracting (SOMA:Retracting)
 
 AnnotationAssertion(rdfs:comment SOMA:Retracting "A task in which an Agent moves its arms away from a location.")
 SubClassOf(SOMA:Retracting SOMA:EndEffectorPositioning)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Retrospecting> (<http://www.ease-crc.org/ont/SOMA.owl#Retrospecting>)
+# Class: SOMA:Retrospecting (SOMA:Retrospecting)
 
 AnnotationAssertion(rdfs:comment SOMA:Retrospecting "A Mental task in which an Agent endeavors to construct a representation of a past state of affairs of the world it is embodied in.")
 AnnotationAssertion(rdfs:comment SOMA:Retrospecting "Done by analogy with Prospecting. Currently mono-subcategory, but perhaps we might find more.
@@ -922,108 +969,108 @@ AnnotationAssertion(rdfs:comment SOMA:Retrospecting "Done by analogy with Prospe
 As an example, a kind of Abductive reasoning would fit here: reconstruction, in which the agent attempts to create a representation of a past state of affairs which the agent has not actually observed, based on traces and clues surviving to the present.")
 SubClassOf(SOMA:Retrospecting SOMA:MentalTask)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#SelectingItem> (Selecting item)
+# Class: SOMA:SelectingItem (Selecting item)
 
 AnnotationAssertion(rdfs:comment SOMA:SelectingItem "A task in which an Agent selects some object to use for a subsequent task.")
 AnnotationAssertion(rdfs:label SOMA:SelectingItem "Selecting item"@en)
 SubClassOf(SOMA:SelectingItem SOMA:GetTaskParameter)
 SubClassOf(SOMA:SelectingItem ObjectSomeValuesFrom(SOMA:isTaskOfOutputRole ObjectIntersectionOf(SOMA:SelectedObject ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>))))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Sender> (Sender)
+# Class: SOMA:Sender (Sender)
 
 AnnotationAssertion(rdfs:comment SOMA:Sender "The Role played by an Agent in a Communication Task that emits some Information Realization with the purpose of percipience by some Receiver."@en)
 AnnotationAssertion(rdfs:label SOMA:Sender "Sender"@en)
 SubClassOf(SOMA:Sender SOMA:AgentRole)
 SubClassOf(SOMA:Sender ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask> SOMA:CommunicationTask))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#SettingGripper> (Setting gripper)
+# Class: SOMA:SettingGripper (Setting gripper)
 
 AnnotationAssertion(rdfs:comment SOMA:SettingGripper "A task by which an Agent arranges one/some/all of its grippers in some configuration.")
 AnnotationAssertion(rdfs:label SOMA:SettingGripper "Setting gripper"@en)
 SubClassOf(SOMA:SettingGripper SOMA:AssumingPose)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Simulating> (<http://www.ease-crc.org/ont/SOMA.owl#Simulating>)
+# Class: SOMA:Simulating (SOMA:Simulating)
 
 AnnotationAssertion(rdfs:comment SOMA:Simulating "A Mental task in which the Agent endeavours to create representations of a sequence of states of affairs in the world. Simulation commits itself to some degree of transition accuracy: supposing the actual state of the world was the initial state of the simulation, the world state and simulation state should evolve to some degree similarly.
 
 Simulation does not commit itself to state accuracy: the initial state of the simulation is not constrained to be faithful to the actual state of the world in which the Agent is embodied. Counterfactual simulation (\"what would happen if--?\") is possible.")
 SubClassOf(SOMA:Simulating SOMA:Prospecting)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#SituationTransition> (Situation transition)
+# Class: SOMA:SituationTransition (Situation transition)
 
 AnnotationAssertion(rdfs:comment SOMA:SituationTransition "A transition between two situations, usually brought about by the Action of some Agent.")
 AnnotationAssertion(rdfs:label SOMA:SituationTransition "Situation transition"@en)
 SubClassOf(SOMA:SituationTransition <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition>)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Slicing> (<http://www.ease-crc.org/ont/SOMA.owl#Slicing>)
+# Class: SOMA:Slicing (SOMA:Slicing)
 
 AnnotationAssertion(rdfs:comment SOMA:Slicing "A particular kind of cutting where the goal is to produce slices from some solid object.")
 SubClassOf(SOMA:Slicing SOMA:Cutting)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Squeezing> (<http://www.ease-crc.org/ont/SOMA.owl#Squeezing>)
+# Class: SOMA:Squeezing (SOMA:Squeezing)
 
 AnnotationAssertion(rdfs:comment SOMA:Squeezing "A task in which an Agent applies pressure to an object they have in their grasp.")
 SubClassOf(SOMA:Squeezing SOMA:Actuating)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ThinkAloud> (Think-aloud)
+# Class: SOMA:ThinkAloud (Think-aloud)
 
 AnnotationAssertion(rdfs:comment SOMA:ThinkAloud "A task in which an Agent, while in the course of performing some other task(s), reports on their own decision processes that guide this other task(s) for the benefit of an outside observer.")
 AnnotationAssertion(rdfs:label SOMA:ThinkAloud "Think-aloud"@en)
 SubClassOf(SOMA:ThinkAloud SOMA:CommunicationReport)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudActionTopic> (<http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudActionTopic>)
+# Class: SOMA:ThinkAloudActionTopic (SOMA:ThinkAloudActionTopic)
 
 AnnotationAssertion(rdfs:comment SOMA:ThinkAloudActionTopic "A topic used when an Agent states what they are doing.")
 SubClassOf(SOMA:ThinkAloudActionTopic SOMA:ThinkAloudTopic)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudGeneralKnowledgeTopic> (<http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudGeneralKnowledgeTopic>)
+# Class: SOMA:ThinkAloudGeneralKnowledgeTopic (SOMA:ThinkAloudGeneralKnowledgeTopic)
 
 AnnotationAssertion(rdfs:comment SOMA:ThinkAloudGeneralKnowledgeTopic "A topic used when an Agent states general knowledge they have.")
 SubClassOf(SOMA:ThinkAloudGeneralKnowledgeTopic SOMA:ThinkAloudKnowledgeTopic)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudKnowledgeTopic> (<http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudKnowledgeTopic>)
+# Class: SOMA:ThinkAloudKnowledgeTopic (SOMA:ThinkAloudKnowledgeTopic)
 
 AnnotationAssertion(rdfs:comment SOMA:ThinkAloudKnowledgeTopic "A topic used when an Agent states some item of knowledge. This knowledge can be general, or specific to the environment and task at hand.")
 SubClassOf(SOMA:ThinkAloudKnowledgeTopic SOMA:ThinkAloudTopic)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudObstructionTopic> (<http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudObstructionTopic>)
+# Class: SOMA:ThinkAloudObstructionTopic (SOMA:ThinkAloudObstructionTopic)
 
 AnnotationAssertion(rdfs:comment SOMA:ThinkAloudObstructionTopic "A topic used when an Agent describes some state of affairs that prevents them from performing an action.")
 SubClassOf(SOMA:ThinkAloudObstructionTopic SOMA:ThinkAloudTopic)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudOpinionTopic> (<http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudOpinionTopic>)
+# Class: SOMA:ThinkAloudOpinionTopic (SOMA:ThinkAloudOpinionTopic)
 
 AnnotationAssertion(rdfs:comment SOMA:ThinkAloudOpinionTopic "A topic used when an Agent expresses an opinion about the action they perform or the environment they are in.")
 SubClassOf(SOMA:ThinkAloudOpinionTopic SOMA:ThinkAloudTopic)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudPerceptionTopic> (<http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudPerceptionTopic>)
+# Class: SOMA:ThinkAloudPerceptionTopic (SOMA:ThinkAloudPerceptionTopic)
 
 AnnotationAssertion(rdfs:comment SOMA:ThinkAloudPerceptionTopic "A topic used when an Agent describes what they currently perceive.")
 SubClassOf(SOMA:ThinkAloudPerceptionTopic SOMA:ThinkAloudTopic)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudPlanTopic> (<http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudPlanTopic>)
+# Class: SOMA:ThinkAloudPlanTopic (SOMA:ThinkAloudPlanTopic)
 
 AnnotationAssertion(rdfs:comment SOMA:ThinkAloudPlanTopic "A topic used when an Agent describes what they intend to do. Note, this is not about describing the process through which this plan was constructed; that is covered by the MetaCognitionPlanningTopic.")
 SubClassOf(SOMA:ThinkAloudPlanTopic SOMA:ThinkAloudTopic)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudSceneKnowledgeTopic> (<http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudSceneKnowledgeTopic>)
+# Class: SOMA:ThinkAloudSceneKnowledgeTopic (SOMA:ThinkAloudSceneKnowledgeTopic)
 
 AnnotationAssertion(rdfs:comment SOMA:ThinkAloudSceneKnowledgeTopic "A topic used when an Agent describes what they know about their environment, including knowledge of world states that they do not currently perceive.")
 SubClassOf(SOMA:ThinkAloudSceneKnowledgeTopic SOMA:ThinkAloudKnowledgeTopic)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudTopic> (Think aloud topic)
+# Class: SOMA:ThinkAloudTopic (Think aloud topic)
 
 AnnotationAssertion(rdfs:comment SOMA:ThinkAloudTopic "A topic relevant for a think-aloud communication.")
 AnnotationAssertion(rdfs:label SOMA:ThinkAloudTopic "Think aloud topic"@en)
 SubClassOf(SOMA:ThinkAloudTopic SOMA:CommunicationTopic)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Throwing> (<http://www.ease-crc.org/ont/SOMA.owl#Throwing>)
+# Class: SOMA:Throwing (SOMA:Throwing)
 
 AnnotationAssertion(rdfs:comment SOMA:Throwing "A task in which an Agent imparts momentum to an object before releasing it so that it flies for some distance unsupported.")
 SubClassOf(SOMA:Throwing SOMA:Actuating)
 SubClassOf(SOMA:Throwing SOMA:Manipulating)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Transporting> (<http://www.ease-crc.org/ont/SOMA.owl#Transporting>)
+# Class: SOMA:Transporting (SOMA:Transporting)
 
 AnnotationAssertion(rdfs:comment SOMA:Transporting "A task by which an Agent carries an item from a source to a destination location.")
 SubClassOf(SOMA:Transporting SOMA:ModifyingPhysicalObject)
@@ -1046,32 +1093,32 @@ SubClassOf(<http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation> <http:/
 #   Named Individuals
 ############################
 
-# Individual: <http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Active> (<http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Active>)
+# Individual: SOMA:ExecutionState_Active (SOMA:ExecutionState_Active)
 
 AnnotationAssertion(rdfs:comment SOMA:ExecutionState_Active "The execution state of an ongoing activity.")
 ClassAssertion(SOMA:ExecutionStateRegion SOMA:ExecutionState_Active)
 
-# Individual: <http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Cancelled> (<http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Cancelled>)
+# Individual: SOMA:ExecutionState_Cancelled (SOMA:ExecutionState_Cancelled)
 
 AnnotationAssertion(rdfs:comment SOMA:ExecutionState_Cancelled "The execution state of a cancelled activity.")
 ClassAssertion(SOMA:ExecutionStateRegion SOMA:ExecutionState_Cancelled)
 
-# Individual: <http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Failed> (<http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Failed>)
+# Individual: SOMA:ExecutionState_Failed (SOMA:ExecutionState_Failed)
 
 AnnotationAssertion(rdfs:comment SOMA:ExecutionState_Failed "The execution state of a failed activity.")
 ClassAssertion(SOMA:ExecutionStateRegion SOMA:ExecutionState_Failed)
 
-# Individual: <http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Paused> (<http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Paused>)
+# Individual: SOMA:ExecutionState_Paused (SOMA:ExecutionState_Paused)
 
 AnnotationAssertion(rdfs:comment SOMA:ExecutionState_Paused "The execution state of a paused activity.")
 ClassAssertion(SOMA:ExecutionStateRegion SOMA:ExecutionState_Paused)
 
-# Individual: <http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Pending> (<http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Pending>)
+# Individual: SOMA:ExecutionState_Pending (SOMA:ExecutionState_Pending)
 
 AnnotationAssertion(rdfs:comment SOMA:ExecutionState_Pending "The execution state of a pending activity.")
 ClassAssertion(SOMA:ExecutionStateRegion SOMA:ExecutionState_Pending)
 
-# Individual: <http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Succeeded> (<http://www.ease-crc.org/ont/SOMA.owl#ExecutionState_Succeeded>)
+# Individual: SOMA:ExecutionState_Succeeded (SOMA:ExecutionState_Succeeded)
 
 AnnotationAssertion(rdfs:comment SOMA:ExecutionState_Succeeded "The execution state of a succeeded activity.")
 ClassAssertion(SOMA:ExecutionStateRegion SOMA:ExecutionState_Succeeded)
