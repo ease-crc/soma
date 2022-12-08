@@ -2736,6 +2736,81 @@ In robotics, it is not uncommon to encounter shapes that are flipped compared to
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#Cleaning -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#Cleaning">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ModifyingPhysicalObject"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isTaskAffordedBy"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Purification"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>This task in which an agent restores all the objects to their destined locations, wiping a specific object</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#Flipping -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#Flipping">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Actuating"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isTaskAffordedBy"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Shifting"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The task in which the agent turns an object over by using a tool or by manipulating</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#Pouring -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#Pouring">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Actuating"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isTaskAffordedBy"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl#Pourable"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A task in which an agent lets liquid substance to flow out of an object. The agent has a kinematic control over the object.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#PouringInto -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#PouringInto">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl#Pouring"/>
+        <rdfs:comment>The task in which the agent pours the substance into another object.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
+        <rdfs:label>Pouring into</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#PouringOnto -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#PouringOnto">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl#Pouring"/>
+        <rdfs:comment>The task in which an agent pours the substance on top of an object</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
+        <rdfs:label>Pouring onto</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#QueryAnsweringTask -->
 
 
@@ -2771,6 +2846,58 @@ In a lot of cases, such a task is also an Assertion task, e.g., in the following
 However, sometimes this might be not the case, e.g., with counterquestions.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
         <rdfs:label>Query answering task</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#Serving -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#Serving">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Delivering"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
+                            <owl:Class>
+                                <owl:unionOf rdf:parseType="Collection">
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                                        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent"/>
+                                    </owl:Restriction>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant"/>
+                                        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject"/>
+                                    </owl:Restriction>
+                                </owl:unionOf>
+                            </owl:Class>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>The task in which the agent delivers an object to a physical agent</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA-ACT.owl#Stirring -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA-ACT.owl#Stirring">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Mixing"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isTaskAffordedBy"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Composing"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A task in which an agent dissolves small particles like sugar or salt in fluid</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
     </owl:Class>
     
 
@@ -5479,6 +5606,12 @@ A soft slab of clay deforming under its own weight on Earth would still count as
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Delivering">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Actuating"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isTaskAffordedBy"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Shifting"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Fetching"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Lifting"/>
         <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Opening"/>
@@ -5785,31 +5918,31 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Digital_File">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationRealization"/>
-        <rdfs:subClassOf rdf:nodeID="genid243"/>
-        <rdfs:subClassOf rdf:nodeID="genid245"/>
+        <rdfs:subClassOf rdf:nodeID="genid257"/>
+        <rdfs:subClassOf rdf:nodeID="genid259"/>
         <rdfs:comment xml:lang="en">Any file that exists as a digital resource (but not its content), e.g., a text file actually laying on some hard drive, but not the contained text.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-IO.owl"/>
         <rdfs:label xml:lang="en">Computer File</rdfs:label>
         <rdfs:label xml:lang="en">Digital File</rdfs:label>
     </owl:Class>
-    <owl:Restriction rdf:nodeID="genid243">
+    <owl:Restriction rdf:nodeID="genid257">
         <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#realizes"/>
         <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Structured_Text"/>
     </owl:Restriction>
-    <owl:Restriction rdf:nodeID="genid245">
+    <owl:Restriction rdf:nodeID="genid259">
         <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasNameString"/>
         <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:Restriction>
     <owl:Axiom>
         <owl:annotatedSource rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Digital_File"/>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid243"/>
+        <owl:annotatedTarget rdf:nodeID="genid257"/>
         <rdfs:comment xml:lang="en">The file content.</rdfs:comment>
     </owl:Axiom>
     <owl:Axiom>
         <owl:annotatedSource rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Digital_File"/>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid245"/>
+        <owl:annotatedTarget rdf:nodeID="genid259"/>
         <rdfs:comment xml:lang="en">The path of the file on a computer system.</rdfs:comment>
     </owl:Axiom>
     
@@ -5855,6 +5988,7 @@ Note, most of the physical Entities we are concerned with are actually arrangeme
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Dish">
         <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-HOME.owl"/>
     </owl:Class>
     
@@ -11599,14 +11733,14 @@ While we follow this definition, we do so loosely: We do not require the intenti
                         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
-                <rdfs:subClassOf rdf:nodeID="genid553"/>
+                <rdfs:subClassOf rdf:nodeID="genid567"/>
             </owl:Class>
         </owl:annotatedSource>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid553"/>
+        <owl:annotatedTarget rdf:nodeID="genid567"/>
         <rdfs:comment>If a SituationTransition manifests in some Event, then it also has an initial Situation and a terminal one.</rdfs:comment>
     </owl:Axiom>
-    <owl:Class rdf:nodeID="genid553">
+    <owl:Class rdf:nodeID="genid567">
         <owl:intersectionOf rdf:parseType="Collection">
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasInitialSituation"/>
@@ -11628,14 +11762,14 @@ While we follow this definition, we do so loosely: We do not require the intenti
                         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
-                <rdfs:subClassOf rdf:nodeID="genid563"/>
+                <rdfs:subClassOf rdf:nodeID="genid577"/>
             </owl:Class>
         </owl:annotatedSource>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid563"/>
+        <owl:annotatedTarget rdf:nodeID="genid577"/>
         <rdfs:comment>A SituationTransition that manifests in some Event also includes an Action. (NOTE (MP): Typically, the Event manifesting it would be that included Action actually so perhaps we can just require that manifestations of SituationTransitions be Actions?)</rdfs:comment>
     </owl:Axiom>
-    <owl:Restriction rdf:nodeID="genid563">
+    <owl:Restriction rdf:nodeID="genid577">
         <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
     </owl:Restriction>
@@ -11644,14 +11778,14 @@ While we follow this definition, we do so loosely: We do not require the intenti
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasInitialSituation"/>
                 <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-                <rdfs:subClassOf rdf:nodeID="genid566"/>
+                <rdfs:subClassOf rdf:nodeID="genid580"/>
             </owl:Restriction>
         </owl:annotatedSource>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid566"/>
+        <owl:annotatedTarget rdf:nodeID="genid580"/>
         <rdfs:comment>If a transition has an initial situation then it also has a manifestation.</rdfs:comment>
     </owl:Axiom>
-    <owl:Restriction rdf:nodeID="genid566">
+    <owl:Restriction rdf:nodeID="genid580">
         <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
     </owl:Restriction>
@@ -11660,14 +11794,14 @@ While we follow this definition, we do so loosely: We do not require the intenti
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasTerminalSituation"/>
                 <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-                <rdfs:subClassOf rdf:nodeID="genid569"/>
+                <rdfs:subClassOf rdf:nodeID="genid583"/>
             </owl:Restriction>
         </owl:annotatedSource>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid569"/>
+        <owl:annotatedTarget rdf:nodeID="genid583"/>
         <rdfs:comment>If a transition has a terminal situation then it also has a manifestation.</rdfs:comment>
     </owl:Axiom>
-    <owl:Restriction rdf:nodeID="genid569">
+    <owl:Restriction rdf:nodeID="genid583">
         <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
     </owl:Restriction>
