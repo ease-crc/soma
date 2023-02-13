@@ -34,6 +34,7 @@ We do not argue here that one of these approaches is better -- they seem equally
 
 Declaration(Class(:ArtificialAgent))
 Declaration(Class(:CanCut))
+Declaration(Class(:Capability))
 Declaration(Class(:ContinuousJoint))
 Declaration(Class(:CutObject))
 Declaration(Class(:Cuttability))
@@ -491,6 +492,7 @@ InverseObjectProperties(SOMA:affordsConcept SOMA:isConceptAffordedBy)
 ObjectPropertyDomain(SOMA:affordsConcept SOMA:Disposition)
 ObjectPropertyRange(SOMA:affordsConcept <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept>)
 
+
 # Object Property: SOMA:affordsPerformer (affords performer)
 
 AnnotationAssertion(rdfs:comment SOMA:affordsPerformer "Relates a disposition to the performer role defined by the affordance describing the disposition."@en)
@@ -771,14 +773,6 @@ SubObjectPropertyOf(SOMA:isEffectorInvolvedIn <http://www.ontologydesignpatterns
 ObjectPropertyDomain(SOMA:isEffectorInvolvedIn SOMA:PhysicalEffector)
 ObjectPropertyRange(SOMA:isEffectorInvolvedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 
-# Object Property: SOMA:isExecutorDefinedIn (is executor defined in)
-
-AnnotationAssertion(rdfs:comment SOMA:isExecutorDefinedIn "Relates a task-defining affordance to the role of the Agent executing the task when the affordance is manifested."@en)
-AnnotationAssertion(rdfs:label SOMA:isExecutorDefinedIn "is executor defined in"@en)
-SubObjectPropertyOf(SOMA:isExecutorDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRoleDefinedIn>)
-ObjectPropertyDomain(SOMA:isExecutorDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>)
-ObjectPropertyRange(SOMA:isExecutorDefinedIn SOMA:Affordance)
-
 # Object Property: SOMA:isFeatureOf (is feature of)
 
 AnnotationAssertion(rdfs:comment SOMA:isFeatureOf "Associates a feature to the physical object it belongs to.")
@@ -829,6 +823,7 @@ AnnotationAssertion(rdfs:label SOMA:isParameterDefinedIn "is parameter defined i
 SubObjectPropertyOf(SOMA:isParameterDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn>)
 ObjectPropertyDomain(SOMA:isParameterDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter>)
 ObjectPropertyRange(SOMA:isParameterDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description>)
+
 
 # Object Property: SOMA:isPerformerAffordedBy (is performer afforded by)
 
@@ -1212,6 +1207,11 @@ SubClassOf(:CanCut SOMA:Variability)
 SubClassOf(:CanCut ObjectAllValuesFrom(SOMA:affordsBearer :Cutter))
 SubClassOf(:CanCut ObjectAllValuesFrom(SOMA:affordsTrigger :CutObject))
 
+# Class: :Capability (:Capability)
+
+AnnotationAssertion(rdfs:comment :Capability "The disposition of an agent to bring about certain effects, and to achieve certain goals.")
+SubClassOf(:Capability SOMA:Disposition)
+
 # Class: :ContinuousJoint (Continuous joint)
 
 AnnotationAssertion(rdfs:comment :ContinuousJoint "A continuous hinge joint that rotates around an axis and has no upper and lower limits."^^xsd:string)
@@ -1364,6 +1364,15 @@ SubClassOf(SOMA:Affordance ObjectAllValuesFrom(<http://www.ontologydesignpattern
 SubClassOf(SOMA:Affordance ObjectExactCardinality(1 SOMA:definesBearer <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>))
 SubClassOf(SOMA:Affordance ObjectExactCardinality(1 SOMA:definesTrigger <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>))
 SubClassOf(SOMA:Affordance ObjectExactCardinality(1 <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>))
+
+# Class: SOMA:AgentRole (Agent role)
+
+AnnotationAssertion(rdfs:comment SOMA:AgentRole "A role classifying an Agent responsible for performing an Action.
+
+The entity playing an AgentRole is endowed with sentience and the capacity to deliberately choose actions in pursuit of goals. This distinguishes Agents from other causes that could bring an event about.")
+AnnotationAssertion(rdfs:label SOMA:AgentRole "Agent role"@en)
+SubClassOf(SOMA:AgentRole SOMA:CausativeRole)
+SubClassOf(SOMA:AgentRole ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>))
 
 # Class: SOMA:AlteredObject (Altered object)
 
@@ -1929,6 +1938,7 @@ SubClassOf(SOMA:PathRole SOMA:SpatioTemporalRole)
 
 AnnotationAssertion(rdfs:comment SOMA:Patient "A role classifying an object that undergoes/is the primary object affected by the event.")
 SubClassOf(SOMA:Patient SOMA:EventAdjacentRole)
+
 
 # Class: SOMA:PerformerRole (Performer role)
 

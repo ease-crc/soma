@@ -35,6 +35,7 @@ Declaration(Class(SOMA:Capability))
 Declaration(Class(SOMA:Catching))
 Declaration(Class(SOMA:Channel))
 Declaration(Class(SOMA:CheckingObjectPresence))
+Declaration(Class(SOMA:Cleaning))
 Declaration(Class(SOMA:Closing))
 Declaration(Class(SOMA:CommandingTask))
 Declaration(Class(SOMA:CommunicationAction))
@@ -50,12 +51,14 @@ Declaration(Class(SOMA:Delivering))
 Declaration(Class(SOMA:DerivingInformation))
 Declaration(Class(SOMA:Dicing))
 Declaration(Class(SOMA:Discourse))
+Declaration(Class(SOMA:Dish))
 Declaration(Class(SOMA:Distancing))
 Declaration(Class(SOMA:Dreaming))
 Declaration(Class(SOMA:Dropping))
 Declaration(Class(SOMA:EndEffectorPositioning))
 Declaration(Class(SOMA:ExecutionStateRegion))
 Declaration(Class(SOMA:Fetching))
+Declaration(Class(SOMA:Flipping))
 Declaration(Class(SOMA:Focusing))
 Declaration(Class(SOMA:ForgettingIncorrectInformation))
 Declaration(Class(SOMA:ForgettingIrrelevantInformation))
@@ -109,6 +112,9 @@ Declaration(Class(SOMA:PickingUp))
 Declaration(Class(SOMA:Placing))
 Declaration(Class(SOMA:Planning))
 Declaration(Class(SOMA:Positioning))
+Declaration(Class(SOMA:Pouring))
+Declaration(Class(SOMA:PouringInto))
+Declaration(Class(SOMA:PouringOnto))
 Declaration(Class(SOMA:Prediction))
 Declaration(Class(SOMA:Premise))
 Declaration(Class(SOMA:Proprioceiving))
@@ -132,11 +138,13 @@ Declaration(Class(SOMA:Retrospecting))
 Declaration(Class(SOMA:SelectingItem))
 Declaration(Class(SOMA:SelfReflection))
 Declaration(Class(SOMA:Sender))
+Declaration(Class(SOMA:Serving))
 Declaration(Class(SOMA:SettingGripper))
 Declaration(Class(SOMA:Simulating))
 Declaration(Class(SOMA:SituationTransition))
 Declaration(Class(SOMA:Slicing))
 Declaration(Class(SOMA:Squeezing))
+Declaration(Class(SOMA:Stirring))
 Declaration(Class(SOMA:ThinkAloud))
 Declaration(Class(SOMA:ThinkAloudActionTopic))
 Declaration(Class(SOMA:ThinkAloudGeneralKnowledgeTopic))
@@ -200,6 +208,7 @@ ObjectPropertyRange(SOMA:answers SOMA:Message)
 
 # Object Property: SOMA:causes (causes)
 
+
 AnnotationAssertion(rdfs:label SOMA:causes "Simple relationship between two actions to express that the object (the reaction) would not have occured if it were not for the subject (the cause), e.g., a Communication Action classified as an Querying Task causes another Communication Task classified as an Answering Task and the latter would not have occured without the former. An example without Agents involved would be some domino stone would not have toppled without the first one toppling.
 
 When Agents are involved, the relation might be seen as an abstraction of the execution of some plan that arises from changing the agents goal that is due to perceiving the cause. However, currently it is unclear how to model such a pattern and therefore not included in SOMA.
@@ -210,7 +219,6 @@ SubObjectPropertyOf(SOMA:causes <http://www.ontologydesignpatterns.org/ont/dul/D
 TransitiveObjectProperty(SOMA:causes)
 
 # Object Property: SOMA:definesEventType (defines event type)
-
 AnnotationAssertion(rdfs:label SOMA:definesEventType "A relation between a description and an event type, e.g. an Affordance of an object to be cut with a knife describes that event.
 
 The distinction to defines task is necessary to let Dispositions and Affordances not only describe which tasks might be afforded by objects, but also whihc processes (where there is no agent). For example, the fall of a knife from a shelf slicing a loaf of bread on impact is , in the absence of an executing agent, not a task but merely a process, the possibility of which is nevertheless described by the dispositions of the knife and the loaf."@en)
@@ -228,6 +236,7 @@ SubObjectPropertyOf(SOMA:directlyCauses SOMA:causes)
 InverseObjectProperties(SOMA:directlyCauses SOMA:isDirectReactionTo)
 ObjectPropertyDomain(SOMA:directlyCauses <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 ObjectPropertyRange(SOMA:directlyCauses <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
+
 
 # Object Property: SOMA:hasAction (has action)
 
@@ -541,6 +550,7 @@ SubClassOf(SOMA:AttentionShift SOMA:MentalTask)
 AnnotationAssertion(rdfs:comment SOMA:Avoiding "A task in which an Agent moves so as to not enter or pass through a location.")
 SubClassOf(SOMA:Avoiding SOMA:Navigating)
 
+
 # Class: SOMA:Capability (SOMA:Capability)
 
 AnnotationAssertion(rdfs:comment SOMA:Capability "Capability")
@@ -566,6 +576,12 @@ SubClassOf(SOMA:Channel ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.
 AnnotationAssertion(rdfs:comment SOMA:CheckingObjectPresence "A task by which an Agent uses its sensors to check for the presence of a specific object and to obtain some other information about it, e.g. pose.")
 AnnotationAssertion(rdfs:label SOMA:CheckingObjectPresence "Checking object presence"@en)
 SubClassOf(SOMA:CheckingObjectPresence SOMA:Perceiving)
+
+# Class: SOMA:Cleaning (SOMA:Cleaning)
+
+AnnotationAssertion(rdfs:comment :Cleaning "This task in which an agent restores all the objects to their destined locations, wiping a specific object"^^xsd:string)
+SubClassOf(:Cleaning SOMA:ModifyingPhysicalObject)
+SubClassOf(:Cleaning ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Purification))
 
 # Class: SOMA:Closing (SOMA:Closing)
 
@@ -639,6 +655,7 @@ DisjointClasses(SOMA:Constructing SOMA:ModifyingPhysicalObject)
 AnnotationAssertion(rdfs:comment SOMA:Cutting "The goal of this task is to separate one or more pieces from some target object by means of cutting into its constituent material. Unlike a disassembly, a cut is usually not easily reversible.")
 SubClassOf(SOMA:Cutting SOMA:ModifyingPhysicalObject)
 
+
 # Class: SOMA:Deciding (Deciding)
 
 AnnotationAssertion(rdfs:isDefinedBy SOMA:Deciding "A mental task in where an agent makes some decision, that is, selecting some Information object; usually on the basis of others."@en)
@@ -657,6 +674,7 @@ SubClassOf(SOMA:DeductiveReasoning SOMA:Reasoning)
 
 AnnotationAssertion(rdfs:comment SOMA:Delivering "A task in which an Agent brings an item that the Agent already carries to a specified target.")
 SubClassOf(SOMA:Delivering SOMA:Actuating)
+SubClassOf(SOMA:Delivering ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Shifting))
 DisjointClasses(SOMA:Delivering SOMA:Fetching)
 DisjointClasses(SOMA:Delivering SOMA:Lifting)
 DisjointClasses(SOMA:Delivering SOMA:Opening)
@@ -721,6 +739,12 @@ DisjointClasses(SOMA:Fetching SOMA:Opening)
 DisjointClasses(SOMA:Fetching SOMA:Pulling)
 DisjointClasses(SOMA:Fetching SOMA:Pushing)
 DisjointClasses(SOMA:Fetching SOMA:Squeezing)
+
+# Class: SOMA:Flipping (:Flipping)
+
+AnnotationAssertion(rdfs:comment :Flipping "The task in which the agent turns an object over by using a tool or by manipulating"^^xsd:string)
+SubClassOf(:Flipping SOMA:Actuating)
+SubClassOf(:Flipping ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Shifting))
 
 # Class: SOMA:Focusing (Focusing)
 
@@ -1081,6 +1105,24 @@ SubClassOf(SOMA:Planning ObjectSomeValuesFrom(<http://www.ontologydesignpatterns
 AnnotationAssertion(rdfs:comment SOMA:Positioning "A task in which an Agent places an object at a particular position.")
 SubClassOf(SOMA:Positioning SOMA:Actuating)
 
+# Class: SOMA:Pouring (:Pouring)
+
+AnnotationAssertion(rdfs:comment :Pouring "A task in which an agent lets liquid substance to flow out of an object. The agent has a kinematic control over the object."^^xsd:string)
+SubClassOf(:Pouring SOMA:Actuating)
+SubClassOf(:Pouring ObjectSomeValuesFrom(SOMA:isTaskAffordedBy <http://www.ease-crc.org/ont/SOMA-OBJ.owl#Pourable>))
+
+# Class: SOMA:PouringInto (Pouring into)
+
+AnnotationAssertion(rdfs:comment :PouringInto "The task in which the agent pours the substance into another object."^^xsd:string)
+AnnotationAssertion(rdfs:label :PouringInto "Pouring into"^^xsd:string)
+SubClassOf(:PouringInto :Pouring)
+
+# Class: SOMA:PouringOnto (Pouring onto)
+
+AnnotationAssertion(rdfs:comment :PouringOnto "The task in which an agent pours the substance on top of an object"^^xsd:string)
+AnnotationAssertion(rdfs:label :PouringOnto "Pouring onto"^^xsd:string)
+SubClassOf(:PouringOnto :Pouring)
+
 # Class: SOMA:Prediction (Predicting)
 
 AnnotationAssertion(rdfs:comment SOMA:Prediction "A Mental task in which the Agent endeavours to construct a representation of a future state of the world. Prediction commits itself to some degree of accuracy: the Agent believes that eventually something similar to the predicted state will come to pass.")
@@ -1238,6 +1280,12 @@ AnnotationAssertion(rdfs:label SOMA:Sender "Sender"@en)
 SubClassOf(SOMA:Sender SOMA:PerformerRole)
 SubClassOf(SOMA:Sender ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask> SOMA:CommunicationTask))
 
+# Class: SOMA:Serving (:Serving)
+
+AnnotationAssertion(rdfs:comment :Serving "The task in which the agent delivers an object to a physical agent"^^xsd:string)
+SubClassOf(:Serving SOMA:Delivering)
+SubClassOf(:Serving ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action> ObjectUnionOf(ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent>) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)))))
+
 # Class: SOMA:SettingGripper (Setting gripper)
 
 AnnotationAssertion(rdfs:comment SOMA:SettingGripper "A task by which an Agent arranges one/some/all of its grippers in some configuration.")
@@ -1267,11 +1315,18 @@ SubClassOf(SOMA:Slicing SOMA:Cutting)
 AnnotationAssertion(rdfs:comment SOMA:Squeezing "A task in which an Agent applies pressure to an object they have in their grasp.")
 SubClassOf(SOMA:Squeezing SOMA:Actuating)
 
+# Class: SOMA:Stirring (:Stirring)
+
+AnnotationAssertion(rdfs:comment :Stirring "A task in which an agent dissolves small particles like sugar or salt in fluid"^^xsd:string)
+SubClassOf(:Stirring SOMA:Mixing)
+SubClassOf(:Stirring ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Composing))
+
 # Class: SOMA:ThinkAloud (Think-aloud)
 
 AnnotationAssertion(rdfs:comment SOMA:ThinkAloud "A task in which an Agent, while in the course of performing some other task(s), reports on their own decision processes that guide this other task(s) for the benefit of an outside observer.")
 AnnotationAssertion(rdfs:label SOMA:ThinkAloud "Think-aloud"@en)
 SubClassOf(SOMA:ThinkAloud SOMA:CommunicationReport)
+
 
 # Class: SOMA:ThinkAloudActionTopic (Think aloud action topic)
 

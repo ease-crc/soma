@@ -1,7 +1,8 @@
 # Release Notes
 
-## Upcoming (expected version is 2.0.0)
-*   BREAKING CHANGE: Removal of `IOLite`
+## 2.0.0
+### Braking changes
+*   Removal of `IOLite`
     <details>
         <summary>Details</summary>
         <ul>
@@ -9,14 +10,14 @@
                 Reason: incompatible with <code>DUL-v32</code>
             </li>
             <li>
-                Note: Some important concepts, e.g. <code>IOLite#DigitalResource</code>, are still referenced in the taxonomy for backwards-compatibility. If you are missing any crucial concepts/roles, let us know
+                Note: Some important concepts, e.g. <code>IOLite#LinguisticObject</code>, have been renamed to <code>SOMA#LinguisticObject</code>. If you are missing any crucial concepts/roles, let us know
             </li>
             <li>
                 Ongoing effort to create a model of CRAM (see next point) will replace some of the IOLite taxonomy at some point
             </li>
         </ul>
     </details>
-*   BREAKING CHANGE: Complete and still ongoing remodeling of `SOMA-IO`
+*   Complete and still ongoing remodeling of `SOMA-IO`
     <details>
         <summary>Details</summary>
         <ul>
@@ -26,21 +27,34 @@
             <li>
                 Note: Removal/resorting of various concepts and roles. To the best of our knowledge, these should not have been in use anyway - please let us know if you are missing anything
             </li>
+            <li>
+                Contains classes and properties to model general software architecture (including algorithms, formal languages, interfaces and compatibility, types of software & running software instances)
+            </li>
         </ul>
     </details>
-*   BREAKING CHANGE: New ontology in the import structure: `SOMA NEEM`
+*   New ontology in the import structure: `SOMA NEEM`
     <details>
         <summary>Details</summary>
         Some SOMA entities, e.g., <code>KynoDinamicData</code>, have been decided to be too specific for the basic SOMA ontology. These have been moved to <code>SOMA NEEM</code>, which is of course part of the collapsed SOMA version
     </details>
-*   Feat: Added mising labels to various concepts and roles
-*   Feat: Metadata for Episodes, e.g., to represent a temporal context or a table setting
-*   Feat: Protégé-setup for offline development
+### New Features
+*   Introduced causal relations between `Action`s (see the property `causes`)
+*   Introduced `Action`s modeling communication between `Agent`s
+*   Introduced concepts for kitchen, ovens and trash containers in `SOMA HOME`
+*   Introduced metadata for episodes, e.g., to represent a temporal context or a table setting
+*   Added mising labels to various concepts and roles
+*   To all SOMA ontology files, we added comments that explain their respective domain
+*   Protégé-setup for offline development
     <details>
         <summary>Details</summary>
         When opening SOMA locally from the cloned repository, Protégé will follow the IRI redirects in the catalog file from the same folder. There, we redirected the imports from the online version to the local version. This allows offline editing, while not changing anything when opening the ontologies via the IRI elsewhere
     </details>
-*   Feat: We now host and use our own, modified copy of `DUL`
+*   Switch to functional syntax (internally)
+    <details>
+        <summary>Details</summary>
+        We switched to the owl functional syntax format for the files <em>in git only</em> to support better readability when reviewing changes. The ontologies will still be published in the rdf xml format (as in all previous versions).  
+    </details>
+*   We now host and use our own, modified copy of `DUL`
     <details>
         <summary>Details</summary>
         <ul>
