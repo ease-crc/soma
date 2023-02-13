@@ -160,12 +160,14 @@ Declaration(ObjectProperty(SOMA:hasExecutionState))
 Declaration(ObjectProperty(SOMA:hasInitialSituation))
 Declaration(ObjectProperty(SOMA:hasTerminalSituation))
 Declaration(ObjectProperty(SOMA:isAskedBy))
+Declaration(ObjectProperty(SOMA:isCreatedOutputOf))
 Declaration(ObjectProperty(SOMA:isDirectReactionTo))
 Declaration(ObjectProperty(SOMA:isEventTypeDefinedIn))
 Declaration(ObjectProperty(SOMA:isInitialSituationOf))
 Declaration(ObjectProperty(SOMA:isPerformedBy))
 Declaration(ObjectProperty(SOMA:isReactionTo))
 Declaration(ObjectProperty(SOMA:isReplacedBy))
+Declaration(ObjectProperty(SOMA:isTaskOfCreatedRole))
 Declaration(ObjectProperty(SOMA:isTerminalSituationOf))
 Declaration(ObjectProperty(SOMA:isTerminatedBy))
 Declaration(ObjectProperty(SOMA:relatesToAnotherRole))
@@ -281,6 +283,15 @@ SubObjectPropertyOf(SOMA:isAskedBy <http://www.ontologydesignpatterns.org/ont/du
 ObjectPropertyDomain(SOMA:isAskedBy SOMA:QueryingTask)
 ObjectPropertyRange(SOMA:isAskedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>)
 
+# Object Property: SOMA:isCreatedOutputOf (is created output of)
+
+AnnotationAssertion(rdfs:comment SOMA:isCreatedOutputOf "A relation between a created output role and its Task. The difference to isOutputRoleOf is that the latter is also applicable, e.g., for Deciding between objects, where the selected object is not created, but still an outcome of that task.")
+AnnotationAssertion(rdfs:label SOMA:isCreatedOutputOf "is created output of")
+SubObjectPropertyOf(SOMA:isCreatedOutputOf SOMA:isOutputRoleOf)
+InverseObjectProperties(SOMA:isCreatedOutputOf SOMA:isTaskOfCreatedRole)
+ObjectPropertyDomain(SOMA:isCreatedOutputOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>)
+ObjectPropertyRange(SOMA:isCreatedOutputOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
+
 # Object Property: SOMA:isDirectReactionTo (is direct reaction to)
 
 AnnotationAssertion(rdfs:comment SOMA:isDirectReactionTo "Non-transitive version of \"is reaction to\"."@en)
@@ -336,6 +347,14 @@ SubObjectPropertyOf(SOMA:isReplacedBy SOMA:before)
 InverseObjectProperties(SOMA:isReplacedBy SOMA:replaces)
 ObjectPropertyDomain(SOMA:isReplacedBy SOMA:State)
 ObjectPropertyRange(SOMA:isReplacedBy SOMA:State)
+
+# Object Property: SOMA:isTaskOfCreatedRole (is task of created role)
+
+AnnotationAssertion(rdfs:comment SOMA:isTaskOfCreatedRole "A relation between a Task and one of its output roles. The difference to IsTaskOfOutputRole is that the latter is also applicable, e.g., for Deciding between objects, where the selected object is not created, but still an outcome of that task.")
+AnnotationAssertion(rdfs:label SOMA:isTaskOfCreatedRole "is task of created role")
+SubObjectPropertyOf(SOMA:isTaskOfCreatedRole SOMA:isTaskOfOutputRole)
+ObjectPropertyDomain(SOMA:isTaskOfCreatedRole <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
+ObjectPropertyRange(SOMA:isTaskOfCreatedRole <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>)
 
 # Object Property: SOMA:isTerminalSituationOf (is terminal situation of)
 
@@ -1380,4 +1399,5 @@ SubObjectPropertyOf(ObjectPropertyChain(SOMA:causesTransition SOMA:hasInitialSit
 SubObjectPropertyOf(ObjectPropertyChain(SOMA:causesTransition SOMA:hasTerminalScene <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>) SOMA:directlyCauses)
 SubObjectPropertyOf(ObjectPropertyChain(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent> SOMA:hasInitialSituation SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>) SOMA:isReplacedBy)
 SubObjectPropertyOf(ObjectPropertyChain(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent> SOMA:hasTerminalSituation SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>) SOMA:replaces)
+SubObjectPropertyOf(ObjectPropertyChain(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRealizedBy> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRole> SOMA:isInputRoleOf SOMA:isTaskOfCreatedRole <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRoleOf> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#realizes>) SOMA:directlyDerivedFrom)
 )

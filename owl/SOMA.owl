@@ -80,7 +80,6 @@ Declaration(ObjectProperty(SOMA:isArtifactInvolvedIn))
 Declaration(ObjectProperty(SOMA:isCausedByEvent))
 Declaration(ObjectProperty(SOMA:isConceptIncludedIn))
 Declaration(ObjectProperty(SOMA:isContainedIn))
-Declaration(ObjectProperty(SOMA:isCreatedOutputOf))
 Declaration(ObjectProperty(SOMA:isDirectSourceFor))
 Declaration(ObjectProperty(SOMA:isInitialStateOf))
 Declaration(ObjectProperty(SOMA:isInputParameterFor))
@@ -94,7 +93,6 @@ Declaration(ObjectProperty(SOMA:isPlanFor))
 Declaration(ObjectProperty(SOMA:isRecordIncludedBy))
 Declaration(ObjectProperty(SOMA:isSituationIncludedIn))
 Declaration(ObjectProperty(SOMA:isSourceFor))
-Declaration(ObjectProperty(SOMA:isTaskOfCreatedRole))
 Declaration(ObjectProperty(SOMA:isTaskOfInputRole))
 Declaration(ObjectProperty(SOMA:isTaskOfOutputRole))
 Declaration(ObjectProperty(SOMA:isTerminalStateOf))
@@ -463,14 +461,6 @@ SubObjectPropertyOf(SOMA:isContainedIn <http://www.ontologydesignpatterns.org/on
 ObjectPropertyDomain(SOMA:isContainedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity>)
 ObjectPropertyRange(SOMA:isContainedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity>)
 
-# Object Property: SOMA:isCreatedOutputOf (is created output of)
-
-AnnotationAssertion(rdfs:comment SOMA:isCreatedOutputOf "A relation between a created output role and its Task. The difference to isOutputRoleOf is that the latter is also applicable, e.g., for Deciding between objects, where the selected object is not created, but still an outcome of that task.")
-AnnotationAssertion(rdfs:label SOMA:isCreatedOutputOf "is created output of")
-SubObjectPropertyOf(SOMA:isCreatedOutputOf SOMA:isOutputRoleOf)
-ObjectPropertyDomain(SOMA:isCreatedOutputOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>)
-ObjectPropertyRange(SOMA:isCreatedOutputOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
-
 # Object Property: SOMA:isDirectSourceFor (is direct source for)
 
 AnnotationAssertion(rdfs:comment SOMA:isDirectSourceFor "The (transitive) relation between an information object and another which was derived from the former.")
@@ -576,12 +566,6 @@ AnnotationAssertion(rdfs:comment SOMA:isSourceFor "The (transitive) relation bet
 AnnotationAssertion(rdfs:label SOMA:isSourceFor "is source for")
 SubObjectPropertyOf(SOMA:isSourceFor <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith>)
 TransitiveObjectProperty(SOMA:isSourceFor)
-
-# Object Property: SOMA:isTaskOfCreatedRole (is task of created role)
-
-AnnotationAssertion(rdfs:comment SOMA:isTaskOfCreatedRole "A relation between a Task and one of its output roles. The difference to IsTaskOfOutputRole is that the latter is also applicable, e.g., for Deciding between objects, where the selected object is not created, but still an outcome of that task.")
-AnnotationAssertion(rdfs:label SOMA:isTaskOfCreatedRole "is task of created role")
-SubObjectPropertyOf(SOMA:isTaskOfCreatedRole SOMA:isTaskOfOutputRole)
 
 # Object Property: SOMA:isTaskOfInputRole (is task of input role)
 
@@ -1034,6 +1018,5 @@ ClassAssertion(SOMA:Reification SOMA:RDFType)
 DataPropertyAssertion(SOMA:isReificationOf SOMA:RDFType "http://www.w3.org/2001/XMLSchema#type"^^xsd:anyURI)
 
 
-SubObjectPropertyOf(ObjectPropertyChain(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRealizedBy> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRole> SOMA:isInputRoleOf SOMA:isTaskOfCreatedRole <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRoleOf> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#realizes>) SOMA:directlyDerivedFrom)
 AnnotationAssertion(rdfs:label <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#realizesSelfInformation> "realizes self information"@en)
 )
