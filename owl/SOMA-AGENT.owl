@@ -129,6 +129,44 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Predilection -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Predilection">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialRelation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+                <owl:allValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Preference"/>
+                            <owl:Class>
+                                <owl:intersectionOf rdf:parseType="Collection">
+                                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Order"/>
+                                    <owl:Restriction>
+                                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#orders"/>
+                                        <owl:allValuesFrom>
+                                            <owl:Restriction>
+                                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasMember"/>
+                                                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+                                            </owl:Restriction>
+                                        </owl:allValuesFrom>
+                                    </owl:Restriction>
+                                </owl:intersectionOf>
+                            </owl:Class>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>Predilection</rdfs:label>
+        <rdfs:label xml:lang="en">The relation between a &apos;Preference&apos; and the &apos;Order&apos; that the &apos;Preference&apos; defines over Situations.
+
+For the complete model, see &apos;Preference&apos;.</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Preference -->
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Preference">
@@ -139,9 +177,11 @@
                 <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment xml:lang="en">A Preference is a Quality of an Agent that orders Situations by some heuristic based on the happiness, satisfaction, gratification, morality, enjoyment, and utility (see alse https://en.wikipedia.org/wiki/Preference) they provide to their bearing Agent.
+        <rdfs:comment xml:lang="en">A &apos;Preference&apos; is a &apos;Quality&apos; of an &apos;Agent&apos; that orders &apos;Situation&apos;s by some heuristic based on the happiness, satisfaction, gratification, morality, enjoyment, and utility (see alse https://en.wikipedia.org/wiki/Preference) they provide to their bearing Agent.
 
-That a Preference orders Situations might be unintuitive, but makes the model very general. A few examples:
+The pattern is as follows: A &apos;Preference&apos; &apos;is described by&apos; a &apos;Predilection&apos;, which also &apos;describes&apos; an &apos;Order&apos; that &apos;orders&apos; &apos;Order item&apos;s that contain only &apos;Situation&apos;s. The &apos;Situation&apos;s then are modeled according to what the preference entails.
+
+That a &apos;Preference&apos; orders &apos;Situation&apos;s might be unintuitive, but makes the model very general. A few examples:
 
 Example 1
 
