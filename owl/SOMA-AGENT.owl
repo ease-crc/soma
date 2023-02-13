@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.ease-crc.org/ont/SOMA-AGENT.owl#"
+     xml:base="http://www.ease-crc.org/ont/SOMA-AGENT.owl"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA-AGENT.owl">
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-IO.owl"/>
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-OBJ.owl"/>
+        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-STATE.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isOrderedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isOrderedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#orders"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderItem"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Order"/>
+        <rdfs:comment xml:lang="en">The relation between an &apos;Order item&apos; and the &apos;Order&apos; that sorts them (via the relations &apos;precedes&apos; and &apos;follows&apos;)</rdfs:comment>
+        <rdfs:label xml:lang="en">is ordered by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#orders -->
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#orders">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Order"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderItem"/>
+        <rdfs:comment xml:lang="en">The relation between an &apos;Order&apos; and the sorted &apos;Order item&apos; (sorted via the relations &apos;precedes&apos; and &apos;follows&apos; between the &apos;Order item&apos;s)</rdfs:comment>
+        <rdfs:label xml:lang="en">orders</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Choice -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Choice">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ResultRole"/>
+        <rdfs:comment xml:lang="en">The output of a, e.g, Selecting Task.</rdfs:comment>
+        <rdfs:label xml:lang="en">Choice</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Option -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Option">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ResourceRole"/>
+        <rdfs:comment xml:lang="en">The Role of objects that are used, e.g., in Selecting Tasks.</rdfs:comment>
+        <rdfs:label xml:lang="en">Option</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Order -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Order">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#FormalEntity"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#orders"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderItem"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">An &apos;Order&apos; sorts two or more &apos;Order item&apos;s via the relations &apos;precedes&apos; and &apos;follows&apos;.</rdfs:comment>
+        <rdfs:label xml:lang="en">Order</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#OrderItem -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#OrderItem">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Singleton"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#follows"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderItem"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderItem"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isOrderedBy"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Order"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">A &apos;Singleton&apos; of an entity that &apos;is ordered by&apos; some &apos;Order&apos;. An &apos;Order item&apos; can only &apos;precede&apos; or &apos;follow&apos; another &apos;Order item&apos;, encoding the sortation of the entities contained within the &apos;Order items&apos;. Different &apos;Order&apos;s need to use different &apos;Order item&apos;s.</rdfs:comment>
+        <rdfs:label xml:lang="en">Order item</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Preference -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Preference">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SocialQuality"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasQuale"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Order"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#orders"/>
+                                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf"/>
+                <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">A Preference is a Quality of an Agent that orders Situations by some heuristic based on the happiness, satisfaction, gratification, morality, enjoyment, and utility (see alse https://en.wikipedia.org/wiki/Preference) they provide to their bearing Agent.
+
+That a Preference orders Situations might be unintuitive, but makes the model very general. A few examples:
+
+Example 1
+
+&quot;Peter likes coffee and dislikes tea&quot;.
+Here, between different hypothetical situations where he plays the role of a performer in a drinking task, Peter prefers the situations in which role of the drunken object is played by some coffee (vs. some tea). Note that the coffe and tea are hypothetical objects as well and could, for example, be represented via reified Concepts.
+
+Example 2
+
+&quot;Would you like this pot of coffee, or this pot of tea, Peter?&quot;
+Here, as opposed to Example 1, the pot of coffee and the pot of tea are not hypothetical, but concrete.
+
+Example 3
+
+&quot;Would you like this pot of coffee, or should I brew you some tea?&quot;
+Here, the pot of coffee is concrete and the tea is not.
+
+Example 4
+
+Situations are not restricted to Tasks; other event types are possible as well.
+For example, Peter might prefer the Containment State of a tiger being inside a cage vs. the Containment State of the tiger being outside of the cage.</rdfs:comment>
+        <rdfs:label xml:lang="en">Preference</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#PreferenceRegion -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PreferenceRegion">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObjectAttribute"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Preference"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">The &apos;Region&apos; of &apos;Preference&apos;s, containing all possible &apos;Order&apos;s between all possible &apos;Situation&apos;s.</rdfs:comment>
+        <rdfs:label xml:lang="en">Preference region</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Selecting -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Selecting">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Deciding"/>
+        <rdfs:comment xml:lang="en">A Task where an Agent decides between two or more options.</rdfs:comment>
+        <rdfs:label xml:lang="en">Selecting</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#Singleton -->
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Singleton">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Set"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasMember"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:comment>A &apos;Set&apos; that contains exactly one member.</rdfs:comment>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
