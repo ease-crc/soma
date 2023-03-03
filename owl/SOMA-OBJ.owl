@@ -58,7 +58,6 @@ Declaration(Class(:StoredObject))
 Declaration(Class(SOMA:Accessor))
 Declaration(Class(SOMA:AestheticDesign))
 Declaration(Class(SOMA:Affordance))
-Declaration(Class(SOMA:AgentRole))
 Declaration(Class(SOMA:AlteredObject))
 Declaration(Class(SOMA:Appliance))
 Declaration(Class(SOMA:Arm))
@@ -109,6 +108,7 @@ Declaration(Class(SOMA:Effort))
 Declaration(Class(SOMA:EnclosedObject))
 Declaration(Class(SOMA:Enclosing))
 Declaration(Class(SOMA:EventAdjacentRole))
+Declaration(Class(SOMA:ExcludedObject))
 Declaration(Class(SOMA:ExistingObjectRole))
 Declaration(Class(SOMA:ExperiencerRole))
 Declaration(Class(SOMA:ExtractedObject))
@@ -148,6 +148,7 @@ Declaration(Class(SOMA:Obstacle))
 Declaration(Class(SOMA:Origin))
 Declaration(Class(SOMA:PathRole))
 Declaration(Class(SOMA:Patient))
+Declaration(Class(SOMA:PerformerRole))
 Declaration(Class(SOMA:PhysicalEffector))
 Declaration(Class(SOMA:PhysicalQuality))
 Declaration(Class(SOMA:PrehensileEffector))
@@ -159,6 +160,7 @@ Declaration(Class(SOMA:RedColor))
 Declaration(Class(SOMA:RelationAdjacentRole))
 Declaration(Class(SOMA:RelatumRole))
 Declaration(Class(SOMA:RelevantPart))
+Declaration(Class(SOMA:RemovedObject))
 Declaration(Class(SOMA:ResourceRole))
 Declaration(Class(SOMA:RestrictedObject))
 Declaration(Class(SOMA:Restrictor))
@@ -216,18 +218,20 @@ Declaration(ObjectProperty(SOMA:affordanceDefines))
 Declaration(ObjectProperty(SOMA:affordanceDefinesTask))
 Declaration(ObjectProperty(SOMA:affordsBearer))
 Declaration(ObjectProperty(SOMA:affordsConcept))
+Declaration(ObjectProperty(SOMA:affordsPerformer))
 Declaration(ObjectProperty(SOMA:affordsSetpoint))
 Declaration(ObjectProperty(SOMA:affordsTask))
 Declaration(ObjectProperty(SOMA:affordsTrigger))
 Declaration(ObjectProperty(SOMA:containsObject))
 Declaration(ObjectProperty(SOMA:definesBearer))
+Declaration(ObjectProperty(SOMA:definesEventType))
 Declaration(ObjectProperty(SOMA:definesParameter))
+Declaration(ObjectProperty(SOMA:definesPerformer))
 Declaration(ObjectProperty(SOMA:definesSetpoint))
 Declaration(ObjectProperty(SOMA:definesTrigger))
 Declaration(ObjectProperty(SOMA:describesQuality))
 Declaration(ObjectProperty(SOMA:hasAlterationResult))
 Declaration(ObjectProperty(SOMA:hasColor))
-Declaration(ObjectProperty(SOMA:hasDesign))
 Declaration(ObjectProperty(SOMA:hasDisposition))
 Declaration(ObjectProperty(SOMA:hasFeature))
 Declaration(ObjectProperty(SOMA:hasFrictionAttribute))
@@ -246,15 +250,17 @@ Declaration(ObjectProperty(SOMA:isColorOf))
 Declaration(ObjectProperty(SOMA:isConceptAffordedBy))
 Declaration(ObjectProperty(SOMA:isDefinedInAffordance))
 Declaration(ObjectProperty(SOMA:isDepositOf))
-Declaration(ObjectProperty(SOMA:isDesignOf))
 Declaration(ObjectProperty(SOMA:isDispositionOf))
 Declaration(ObjectProperty(SOMA:isEffectorInvolvedIn))
+Declaration(ObjectProperty(SOMA:isExecutorDefinedIn))
 Declaration(ObjectProperty(SOMA:isFeatureOf))
 Declaration(ObjectProperty(SOMA:isInsideOf))
 Declaration(ObjectProperty(SOMA:isLinkedTo))
 Declaration(ObjectProperty(SOMA:isLocalizationOf))
 Declaration(ObjectProperty(SOMA:isOntopOf))
 Declaration(ObjectProperty(SOMA:isParameterDefinedIn))
+Declaration(ObjectProperty(SOMA:isPerformerAffordedBy))
+Declaration(ObjectProperty(SOMA:isPerformerDefinedIn))
 Declaration(ObjectProperty(SOMA:isPhysicallyContainedIn))
 Declaration(ObjectProperty(SOMA:isQualeOf))
 Declaration(ObjectProperty(SOMA:isQualityDescribedBy))
@@ -306,8 +312,8 @@ Declaration(DataProperty(SOMA:hasWidth))
 
 # Object Property: :hasChildLink (has child link)
 
-AnnotationAssertion(rdfs:comment :hasChildLink "Relates a joint to the link it connects which is closer to the end of the kinematic chain.")
-AnnotationAssertion(rdfs:label :hasChildLink "has child link")
+AnnotationAssertion(rdfs:comment :hasChildLink "Relates a joint to the link it connects which is closer to the end of the kinematic chain."^^xsd:string)
+AnnotationAssertion(rdfs:label :hasChildLink "has child link"^^xsd:string)
 SubObjectPropertyOf(:hasChildLink <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent>)
 InverseObjectProperties(:hasChildLink :isChildLinkOf)
 ObjectPropertyDomain(:hasChildLink :Joint)
@@ -315,8 +321,8 @@ ObjectPropertyRange(:hasChildLink <http://www.ontologydesignpatterns.org/ont/dul
 
 # Object Property: :hasEndLink (has end link)
 
-AnnotationAssertion(rdfs:comment :hasEndLink "Relates an object to kinematic components at the end of the kinematic chain.")
-AnnotationAssertion(rdfs:label :hasEndLink "has end link")
+AnnotationAssertion(rdfs:comment :hasEndLink "Relates an object to kinematic components at the end of the kinematic chain."^^xsd:string)
+AnnotationAssertion(rdfs:label :hasEndLink "has end link"^^xsd:string)
 SubObjectPropertyOf(:hasEndLink :hasLink)
 InverseObjectProperties(:hasEndLink :isEndLinkOf)
 ObjectPropertyDomain(:hasEndLink <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
@@ -324,8 +330,8 @@ ObjectPropertyRange(:hasEndLink <http://www.ontologydesignpatterns.org/ont/dul/D
 
 # Object Property: :hasJointLimit (has joint limit)
 
-AnnotationAssertion(rdfs:comment :hasJointLimit "Relates a joint to its physical limits.")
-AnnotationAssertion(rdfs:label :hasJointLimit "has joint limit")
+AnnotationAssertion(rdfs:comment :hasJointLimit "Relates a joint to its physical limits."^^xsd:string)
+AnnotationAssertion(rdfs:label :hasJointLimit "has joint limit"^^xsd:string)
 SubObjectPropertyOf(:hasJointLimit <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion>)
 InverseObjectProperties(:hasJointLimit :isJointLimitOf)
 ObjectPropertyDomain(:hasJointLimit :Joint)
@@ -333,8 +339,8 @@ ObjectPropertyRange(:hasJointLimit :JointLimit)
 
 # Object Property: :hasJointState (has joint state)
 
-AnnotationAssertion(rdfs:comment :hasJointState "Relates a joint to its state.")
-AnnotationAssertion(rdfs:label :hasJointState "has joint state")
+AnnotationAssertion(rdfs:comment :hasJointState "Relates a joint to its state."^^xsd:string)
+AnnotationAssertion(rdfs:label :hasJointState "has joint state"^^xsd:string)
 SubObjectPropertyOf(:hasJointState <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion>)
 InverseObjectProperties(:hasJointState :isJointStateOf)
 ObjectPropertyDomain(:hasJointState :Joint)
@@ -342,8 +348,8 @@ ObjectPropertyRange(:hasJointState :JointState)
 
 # Object Property: :hasLink (has link)
 
-AnnotationAssertion(rdfs:comment :hasLink "Relates an object to its kinematic components.")
-AnnotationAssertion(rdfs:label :hasLink "has link")
+AnnotationAssertion(rdfs:comment :hasLink "Relates an object to its kinematic components."^^xsd:string)
+AnnotationAssertion(rdfs:label :hasLink "has link"^^xsd:string)
 SubObjectPropertyOf(:hasLink <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasComponent>)
 InverseObjectProperties(:hasLink :isLinkOf)
 ObjectPropertyDomain(:hasLink <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
@@ -351,8 +357,8 @@ ObjectPropertyRange(:hasLink <http://www.ontologydesignpatterns.org/ont/dul/DUL.
 
 # Object Property: :hasNetForce (has net force)
 
-AnnotationAssertion(rdfs:comment :hasNetForce "A relation between a physical object and the total force acting on it.")
-AnnotationAssertion(rdfs:label :hasNetForce "has net force")
+AnnotationAssertion(rdfs:comment :hasNetForce "A relation between a physical object and the total force acting on it."^^xsd:string)
+AnnotationAssertion(rdfs:label :hasNetForce "has net force"^^xsd:string)
 SubObjectPropertyOf(:hasNetForce <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegion>)
 InverseObjectProperties(:hasNetForce :isNetForceOf)
 ObjectPropertyDomain(:hasNetForce <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
@@ -360,8 +366,8 @@ ObjectPropertyRange(:hasNetForce :NetForce)
 
 # Object Property: :hasParentLink (has parent link)
 
-AnnotationAssertion(rdfs:comment :hasParentLink "Relates a joint to the link it connects which is closer to the root of the kinematic chain.")
-AnnotationAssertion(rdfs:label :hasParentLink "has parent link")
+AnnotationAssertion(rdfs:comment :hasParentLink "Relates a joint to the link it connects which is closer to the root of the kinematic chain."^^xsd:string)
+AnnotationAssertion(rdfs:label :hasParentLink "has parent link"^^xsd:string)
 SubObjectPropertyOf(:hasParentLink <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent>)
 InverseObjectProperties(:hasParentLink :isParentLinkOf)
 ObjectPropertyDomain(:hasParentLink :Joint)
@@ -369,8 +375,8 @@ ObjectPropertyRange(:hasParentLink <http://www.ontologydesignpatterns.org/ont/du
 
 # Object Property: :hasRootLink (has root link)
 
-AnnotationAssertion(rdfs:comment :hasRootLink "Relates an object to kinematic components at the root of the kinematic chain.")
-AnnotationAssertion(rdfs:label :hasRootLink "has root link")
+AnnotationAssertion(rdfs:comment :hasRootLink "Relates an object to kinematic components at the root of the kinematic chain."^^xsd:string)
+AnnotationAssertion(rdfs:label :hasRootLink "has root link"^^xsd:string)
 SubObjectPropertyOf(:hasRootLink :hasLink)
 InverseObjectProperties(:hasRootLink :isRootLinkOf)
 ObjectPropertyDomain(:hasRootLink <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
@@ -378,48 +384,48 @@ ObjectPropertyRange(:hasRootLink <http://www.ontologydesignpatterns.org/ont/dul/
 
 # Object Property: :isChildLinkOf (is child link of)
 
-AnnotationAssertion(rdfs:comment :isChildLinkOf "Relates a joint to the link it connects which is closer to the end of the kinematic chain.")
-AnnotationAssertion(rdfs:label :isChildLinkOf "is child link of")
+AnnotationAssertion(rdfs:comment :isChildLinkOf "Relates a joint to the link it connects which is closer to the end of the kinematic chain."^^xsd:string)
+AnnotationAssertion(rdfs:label :isChildLinkOf "is child link of"^^xsd:string)
 SubObjectPropertyOf(:isChildLinkOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isConstituentOf>)
 ObjectPropertyDomain(:isChildLinkOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 ObjectPropertyRange(:isChildLinkOf :Joint)
 
 # Object Property: :isEndLinkOf (is end link of)
 
-AnnotationAssertion(rdfs:comment :isEndLinkOf "Relates an object to kinematic components at the end of the kinematic chain.")
-AnnotationAssertion(rdfs:label :isEndLinkOf "is end link of")
+AnnotationAssertion(rdfs:comment :isEndLinkOf "Relates an object to kinematic components at the end of the kinematic chain."^^xsd:string)
+AnnotationAssertion(rdfs:label :isEndLinkOf "is end link of"^^xsd:string)
 SubObjectPropertyOf(:isEndLinkOf :isLinkOf)
 ObjectPropertyDomain(:isEndLinkOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 ObjectPropertyRange(:isEndLinkOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 
 # Object Property: :isJointLimitOf (is joint limit of)
 
-AnnotationAssertion(rdfs:comment :isJointLimitOf "Relates a joint to its physical limits.")
-AnnotationAssertion(rdfs:label :isJointLimitOf "is joint limit of")
+AnnotationAssertion(rdfs:comment :isJointLimitOf "Relates a joint to its physical limits."^^xsd:string)
+AnnotationAssertion(rdfs:label :isJointLimitOf "is joint limit of"^^xsd:string)
 SubObjectPropertyOf(:isJointLimitOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor>)
 ObjectPropertyDomain(:isJointLimitOf :JointLimit)
 ObjectPropertyRange(:isJointLimitOf :Joint)
 
 # Object Property: :isJointStateOf (is joint state of)
 
-AnnotationAssertion(rdfs:comment :isJointStateOf "Relates a joint to its state.")
-AnnotationAssertion(rdfs:label :isJointStateOf "is joint state of")
+AnnotationAssertion(rdfs:comment :isJointStateOf "Relates a joint to its state."^^xsd:string)
+AnnotationAssertion(rdfs:label :isJointStateOf "is joint state of"^^xsd:string)
 SubObjectPropertyOf(:isJointStateOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor>)
 ObjectPropertyDomain(:isJointStateOf :JointState)
 ObjectPropertyRange(:isJointStateOf :Joint)
 
 # Object Property: :isLinkOf (is link of)
 
-AnnotationAssertion(rdfs:comment :isLinkOf "Relates an object to its kinematic components.")
-AnnotationAssertion(rdfs:label :isLinkOf "is link of")
+AnnotationAssertion(rdfs:comment :isLinkOf "Relates an object to its kinematic components."^^xsd:string)
+AnnotationAssertion(rdfs:label :isLinkOf "is link of"^^xsd:string)
 SubObjectPropertyOf(:isLinkOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isComponentOf>)
 ObjectPropertyDomain(:isLinkOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 ObjectPropertyRange(:isLinkOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 
 # Object Property: :isMassAttributeOf (is mass attribute of)
 
-AnnotationAssertion(rdfs:comment :isMassAttributeOf "A relation between physical objects and their mass.")
-AnnotationAssertion(rdfs:label :isMassAttributeOf "is mass attribute of")
+AnnotationAssertion(rdfs:comment :isMassAttributeOf "A relation between physical objects and their mass."^^xsd:string)
+AnnotationAssertion(rdfs:label :isMassAttributeOf "is mass attribute of"^^xsd:string)
 SubObjectPropertyOf(:isMassAttributeOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor>)
 InverseObjectProperties(:isMassAttributeOf SOMA:hasMassAttribute)
 ObjectPropertyDomain(:isMassAttributeOf SOMA:MassAttribute)
@@ -427,24 +433,24 @@ ObjectPropertyRange(:isMassAttributeOf <http://www.ontologydesignpatterns.org/on
 
 # Object Property: :isNetForceOf (is net force of)
 
-AnnotationAssertion(rdfs:comment :isNetForceOf "A relation between a physical object and the total force acting on it.")
-AnnotationAssertion(rdfs:label :isNetForceOf "is net force of")
+AnnotationAssertion(rdfs:comment :isNetForceOf "A relation between a physical object and the total force acting on it."^^xsd:string)
+AnnotationAssertion(rdfs:label :isNetForceOf "is net force of"^^xsd:string)
 SubObjectPropertyOf(:isNetForceOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor>)
 ObjectPropertyDomain(:isNetForceOf :NetForce)
 ObjectPropertyRange(:isNetForceOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 
 # Object Property: :isParentLinkOf (is parent link of)
 
-AnnotationAssertion(rdfs:comment :isParentLinkOf "Relates a joint to the link it connects which is closer to the root of the kinematic chain.")
-AnnotationAssertion(rdfs:label :isParentLinkOf "is parent link of")
+AnnotationAssertion(rdfs:comment :isParentLinkOf "Relates a joint to the link it connects which is closer to the root of the kinematic chain."^^xsd:string)
+AnnotationAssertion(rdfs:label :isParentLinkOf "is parent link of"^^xsd:string)
 SubObjectPropertyOf(:isParentLinkOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isConstituentOf>)
 ObjectPropertyDomain(:isParentLinkOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 ObjectPropertyRange(:isParentLinkOf :Joint)
 
 # Object Property: :isRootLinkOf (is root link of)
 
-AnnotationAssertion(rdfs:comment :isRootLinkOf "Relates an object to kinematic components at the root of the kinematic chain.")
-AnnotationAssertion(rdfs:label :isRootLinkOf "is root link of")
+AnnotationAssertion(rdfs:comment :isRootLinkOf "Relates an object to kinematic components at the root of the kinematic chain."^^xsd:string)
+AnnotationAssertion(rdfs:label :isRootLinkOf "is root link of"^^xsd:string)
 SubObjectPropertyOf(:isRootLinkOf :isLinkOf)
 ObjectPropertyDomain(:isRootLinkOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 ObjectPropertyRange(:isRootLinkOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
@@ -485,6 +491,16 @@ SubObjectPropertyOf(SOMA:affordsConcept <http://www.ontologydesignpatterns.org/o
 InverseObjectProperties(SOMA:affordsConcept SOMA:isConceptAffordedBy)
 ObjectPropertyDomain(SOMA:affordsConcept SOMA:Disposition)
 ObjectPropertyRange(SOMA:affordsConcept <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept>)
+
+
+# Object Property: SOMA:affordsPerformer (affords performer)
+
+AnnotationAssertion(rdfs:comment SOMA:affordsPerformer "Relates a disposition to the performer role defined by the affordance describing the disposition."@en)
+AnnotationAssertion(rdfs:label SOMA:affordsPerformer "affords performer"@en)
+SubObjectPropertyOf(SOMA:affordsPerformer SOMA:affordsConcept)
+InverseObjectProperties(SOMA:affordsPerformer SOMA:isPerformerAffordedBy)
+ObjectPropertyDomain(SOMA:affordsPerformer SOMA:Disposition)
+ObjectPropertyRange(SOMA:affordsPerformer <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>)
 
 # Object Property: SOMA:affordsSetpoint (affords setpoint)
 
@@ -542,6 +558,15 @@ InverseObjectProperties(SOMA:definesParameter SOMA:isParameterDefinedIn)
 ObjectPropertyDomain(SOMA:definesParameter <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description>)
 ObjectPropertyRange(SOMA:definesParameter <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter>)
 
+# Object Property: SOMA:definesPerformer (defines performer)
+
+AnnotationAssertion(rdfs:comment SOMA:definesPerformer "Relates an affordance which is a relation between a bearer and a trigger, to the role of the performer when the affordance is manifested."@en)
+AnnotationAssertion(rdfs:label SOMA:definesPerformer "defines performer"@en)
+SubObjectPropertyOf(SOMA:definesPerformer <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesRole>)
+InverseObjectProperties(SOMA:definesPerformer SOMA:isPerformerDefinedIn)
+ObjectPropertyDomain(SOMA:definesPerformer SOMA:Affordance)
+ObjectPropertyRange(SOMA:definesPerformer <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>)
+
 # Object Property: SOMA:definesSetpoint (defines setpoint)
 
 AnnotationAssertion(rdfs:comment SOMA:definesSetpoint "Defines the dedicated goal region of a description.")
@@ -586,15 +611,6 @@ SubObjectPropertyOf(SOMA:hasColor <http://www.ontologydesignpatterns.org/ont/dul
 InverseObjectProperties(SOMA:hasColor SOMA:isColorOf)
 ObjectPropertyDomain(SOMA:hasColor <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 ObjectPropertyRange(SOMA:hasColor SOMA:Color)
-
-# Object Property: SOMA:hasDesign (has design)
-
-AnnotationAssertion(rdfs:comment SOMA:hasDesign "Relates an object to the design according to which it was constructed.")
-AnnotationAssertion(rdfs:label SOMA:hasDesign "has design")
-SubObjectPropertyOf(SOMA:hasDesign <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy>)
-InverseObjectProperties(SOMA:hasDesign SOMA:isDesignOf)
-ObjectPropertyDomain(SOMA:hasDesign <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object>)
-ObjectPropertyRange(SOMA:hasDesign <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design>)
 
 # Object Property: SOMA:hasDisposition (has disposition)
 
@@ -677,7 +693,7 @@ ObjectPropertyRange(SOMA:hasSpaceRegion <http://www.ontologydesignpatterns.org/o
 
 # Object Property: SOMA:involvesEffector (involves effector)
 
-AnnotationAssertion(rdfs:comment SOMA:involvesEffector "Effector participation.")
+AnnotationAssertion(rdfs:comment SOMA:involvesEffector "Effector participation."^^xsd:string)
 AnnotationAssertion(rdfs:label SOMA:involvesEffector "involves effector")
 SubObjectPropertyOf(SOMA:involvesEffector <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant>)
 InverseObjectProperties(SOMA:involvesEffector SOMA:isEffectorInvolvedIn)
@@ -741,14 +757,6 @@ InverseObjectProperties(SOMA:isDepositOf SOMA:isOntopOf)
 ObjectPropertyDomain(SOMA:isDepositOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 ObjectPropertyRange(SOMA:isDepositOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 
-# Object Property: SOMA:isDesignOf (is design of)
-
-AnnotationAssertion(rdfs:comment SOMA:isDesignOf "Relates a design to an object that was constructed according to it.")
-AnnotationAssertion(rdfs:label SOMA:isDesignOf "is design of")
-SubObjectPropertyOf(SOMA:isDesignOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes>)
-ObjectPropertyDomain(SOMA:isDesignOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design>)
-ObjectPropertyRange(SOMA:isDesignOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Object>)
-
 # Object Property: SOMA:isDispositionOf (is disposition of)
 
 AnnotationAssertion(rdfs:comment SOMA:isDispositionOf "Associates a disposition quality to the object holding it.")
@@ -759,7 +767,7 @@ ObjectPropertyRange(SOMA:isDispositionOf <http://www.ontologydesignpatterns.org/
 
 # Object Property: SOMA:isEffectorInvolvedIn (is effector involved in)
 
-AnnotationAssertion(rdfs:comment SOMA:isEffectorInvolvedIn "Effector participation.")
+AnnotationAssertion(rdfs:comment SOMA:isEffectorInvolvedIn "Effector participation."^^xsd:string)
 AnnotationAssertion(rdfs:label SOMA:isEffectorInvolvedIn "is effector involved in")
 SubObjectPropertyOf(SOMA:isEffectorInvolvedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn>)
 ObjectPropertyDomain(SOMA:isEffectorInvolvedIn SOMA:PhysicalEffector)
@@ -816,10 +824,27 @@ SubObjectPropertyOf(SOMA:isParameterDefinedIn <http://www.ontologydesignpatterns
 ObjectPropertyDomain(SOMA:isParameterDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter>)
 ObjectPropertyRange(SOMA:isParameterDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description>)
 
+
+# Object Property: SOMA:isPerformerAffordedBy (is performer afforded by)
+
+AnnotationAssertion(rdfs:label SOMA:isPerformerAffordedBy "Relates a disposition to the performer role defined by the affordance describing the disposition."@en)
+AnnotationAssertion(rdfs:label SOMA:isPerformerAffordedBy "is performer afforded by"@en)
+SubObjectPropertyOf(SOMA:isPerformerAffordedBy SOMA:isConceptAffordedBy)
+ObjectPropertyDomain(SOMA:isPerformerAffordedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>)
+ObjectPropertyRange(SOMA:isPerformerAffordedBy SOMA:Disposition)
+
+# Object Property: SOMA:isPerformerDefinedIn (is performer defined in)
+
+AnnotationAssertion(rdfs:comment SOMA:isPerformerDefinedIn "Relates an affordance which is a relation between a bearer and a trigger, to the role of the performer when the affordance is manifested."@en)
+AnnotationAssertion(rdfs:label SOMA:isPerformerDefinedIn "is performer defined in"@en)
+SubObjectPropertyOf(SOMA:isPerformerDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRoleDefinedIn>)
+ObjectPropertyDomain(SOMA:isPerformerDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>)
+ObjectPropertyRange(SOMA:isPerformerDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description>)
+
 # Object Property: SOMA:isPhysicallyContainedIn (is physically contained in)
 
-AnnotationAssertion(rdfs:comment SOMA:isPhysicallyContainedIn "A spatial relation holding between an object (the container), and objects it contains.")
-AnnotationAssertion(rdfs:label SOMA:isPhysicallyContainedIn "is physically contained in")
+AnnotationAssertion(rdfs:comment SOMA:isPhysicallyContainedIn "A spatial relation holding between an object (the container), and objects it contains."^^xsd:string)
+AnnotationAssertion(rdfs:label SOMA:isPhysicallyContainedIn "is physically contained in"^^xsd:string)
 SubObjectPropertyOf(SOMA:isPhysicallyContainedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isLocationOf>)
 ObjectPropertyDomain(SOMA:isPhysicallyContainedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity>)
 ObjectPropertyRange(SOMA:isPhysicallyContainedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity>)
@@ -961,72 +986,72 @@ ObjectPropertyRange(SOMA:transitionsTo <http://www.ontologydesignpatterns.org/on
 
 # Data Property: :hasForceValue (has force value)
 
-AnnotationAssertion(rdfs:comment :hasForceValue "A value that quantifies a force given in Newton.")
-AnnotationAssertion(rdfs:label :hasForceValue "has force value")
+AnnotationAssertion(rdfs:comment :hasForceValue "A value that quantifies a force given in Newton."^^xsd:string)
+AnnotationAssertion(rdfs:label :hasForceValue "has force value"^^xsd:string)
 SubDataPropertyOf(:hasForceValue <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue>)
 DataPropertyDomain(:hasForceValue :ForceAttribute)
 DataPropertyRange(:hasForceValue SOMA:array_double)
 
 # Data Property: :hasJointEffort (has joint effort)
 
-AnnotationAssertion(rdfs:comment :hasJointEffort "The effort applied in a joint given in N (prismatic joint) or N*m (hinged joints).")
-AnnotationAssertion(rdfs:label :hasJointEffort "has joint effort")
+AnnotationAssertion(rdfs:comment :hasJointEffort "The effort applied in a joint given in N (prismatic joint) or N*m (hinged joints)."^^xsd:string)
+AnnotationAssertion(rdfs:label :hasJointEffort "has joint effort"^^xsd:string)
 SubDataPropertyOf(:hasJointEffort :hasJointParameter)
 DataPropertyDomain(:hasJointEffort :JointState)
 DataPropertyRange(:hasJointEffort xsd:double)
 
 # Data Property: :hasJointEffortLimit (has joint effort limit)
 
-AnnotationAssertion(rdfs:comment :hasJointEffortLimit "The maximum effort applied in a joint given in N (prismatic joint) or N*m (hinged joints).")
-AnnotationAssertion(rdfs:label :hasJointEffortLimit "has joint effort limit")
+AnnotationAssertion(rdfs:comment :hasJointEffortLimit "The maximum effort applied in a joint given in N (prismatic joint) or N*m (hinged joints)."^^xsd:string)
+AnnotationAssertion(rdfs:label :hasJointEffortLimit "has joint effort limit"^^xsd:string)
 SubDataPropertyOf(:hasJointEffortLimit :hasJointParameter)
 DataPropertyDomain(:hasJointEffortLimit :JointLimit)
 DataPropertyRange(:hasJointEffortLimit xsd:double)
 
 # Data Property: :hasJointParameter (has joint parameter)
 
-AnnotationAssertion(rdfs:comment :hasJointParameter "Assigns a value for an attribute of a joint.")
-AnnotationAssertion(rdfs:label :hasJointParameter "has joint parameter")
+AnnotationAssertion(rdfs:comment :hasJointParameter "Assigns a value for an attribute of a joint."^^xsd:string)
+AnnotationAssertion(rdfs:label :hasJointParameter "has joint parameter"^^xsd:string)
 SubDataPropertyOf(:hasJointParameter <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue>)
 DataPropertyDomain(:hasJointParameter <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAttribute>)
 DataPropertyRange(:hasJointParameter xsd:double)
 
 # Data Property: :hasJointPosition (has joint position)
 
-AnnotationAssertion(rdfs:comment :hasJointPosition "The position of a joint given in m (prismatic joints) or rad (hinged joints).")
-AnnotationAssertion(rdfs:label :hasJointPosition "has joint position")
+AnnotationAssertion(rdfs:comment :hasJointPosition "The position of a joint given in m (prismatic joints) or rad (hinged joints)."^^xsd:string)
+AnnotationAssertion(rdfs:label :hasJointPosition "has joint position"^^xsd:string)
 SubDataPropertyOf(:hasJointPosition :hasJointParameter)
 DataPropertyDomain(:hasJointPosition :JointState)
 DataPropertyRange(:hasJointPosition xsd:double)
 
 # Data Property: :hasJointPositionMax (has joint position max)
 
-AnnotationAssertion(rdfs:comment :hasJointPositionMax "The maximum position of a joint given in m (prismatic joints) or rad (hinged joints).")
-AnnotationAssertion(rdfs:label :hasJointPositionMax "has joint position max")
+AnnotationAssertion(rdfs:comment :hasJointPositionMax "The maximum position of a joint given in m (prismatic joints) or rad (hinged joints)."^^xsd:string)
+AnnotationAssertion(rdfs:label :hasJointPositionMax "has joint position max"^^xsd:string)
 SubDataPropertyOf(:hasJointPositionMax :hasJointParameter)
 DataPropertyDomain(:hasJointPositionMax :JointLimit)
 DataPropertyRange(:hasJointPositionMax xsd:double)
 
 # Data Property: :hasJointPositionMin (has joint position min)
 
-AnnotationAssertion(rdfs:comment :hasJointPositionMin "The minimum position of a joint given in m (prismatic joints) or rad (hinged joints).")
-AnnotationAssertion(rdfs:label :hasJointPositionMin "has joint position min")
+AnnotationAssertion(rdfs:comment :hasJointPositionMin "The minimum position of a joint given in m (prismatic joints) or rad (hinged joints)."^^xsd:string)
+AnnotationAssertion(rdfs:label :hasJointPositionMin "has joint position min"^^xsd:string)
 SubDataPropertyOf(:hasJointPositionMin :hasJointParameter)
 DataPropertyDomain(:hasJointPositionMin :JointLimit)
 DataPropertyRange(:hasJointPositionMin xsd:double)
 
 # Data Property: :hasJointVelocity (has joint velocity)
 
-AnnotationAssertion(rdfs:comment :hasJointVelocity "The velocity of a joint given in m/s (prismatic joints) or rad/s (hinged joints).")
-AnnotationAssertion(rdfs:label :hasJointVelocity "has joint velocity")
+AnnotationAssertion(rdfs:comment :hasJointVelocity "The velocity of a joint given in m/s (prismatic joints) or rad/s (hinged joints)."^^xsd:string)
+AnnotationAssertion(rdfs:label :hasJointVelocity "has joint velocity"^^xsd:string)
 SubDataPropertyOf(:hasJointVelocity :hasJointParameter)
 DataPropertyDomain(:hasJointVelocity :JointState)
 DataPropertyRange(:hasJointVelocity xsd:double)
 
 # Data Property: :hasJointVelocityLimit (has joint velocity limit)
 
-AnnotationAssertion(rdfs:comment :hasJointVelocityLimit "The maximum velocity of a joint given in m/s (prismatic joints) or rad/s (hinged joints).")
-AnnotationAssertion(rdfs:label :hasJointVelocityLimit "has joint velocity limit")
+AnnotationAssertion(rdfs:comment :hasJointVelocityLimit "The maximum velocity of a joint given in m/s (prismatic joints) or rad/s (hinged joints)."^^xsd:string)
+AnnotationAssertion(rdfs:label :hasJointVelocityLimit "has joint velocity limit"^^xsd:string)
 SubDataPropertyOf(:hasJointVelocityLimit :hasJointParameter)
 DataPropertyDomain(:hasJointVelocityLimit :JointLimit)
 DataPropertyRange(:hasJointVelocityLimit xsd:double)
@@ -1109,7 +1134,7 @@ DataPropertyRange(SOMA:hasMassValue xsd:double)
 # Data Property: SOMA:hasPositionData (has position data)
 
 AnnotationAssertion(rdfs:comment SOMA:hasPositionData "Associates a spatial region to a position.")
-AnnotationAssertion(rdfs:label SOMA:hasPositionData "has position data")
+AnnotationAssertion(rdfs:label SOMA:hasPositionData "has position data"^^xsd:string)
 SubDataPropertyOf(SOMA:hasPositionData SOMA:hasSpaceParameter)
 DataPropertyDomain(SOMA:hasPositionData <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion>)
 DataPropertyRange(SOMA:hasPositionData xsd:string)
@@ -1149,7 +1174,7 @@ DataPropertyRange(SOMA:hasShapeParameter DataUnionOf(SOMA:array_double xsd:doubl
 # Data Property: SOMA:hasSpaceParameter (has space parameter)
 
 AnnotationAssertion(rdfs:comment SOMA:hasSpaceParameter "Associates a SpaceRegion to some parameter value describing it. This is a fairly generic property, and to capture the semantics of the information associated to the SpaceRegion, its more specific subproperties should be used.")
-AnnotationAssertion(rdfs:label SOMA:hasSpaceParameter "has space parameter")
+AnnotationAssertion(rdfs:label SOMA:hasSpaceParameter "has space parameter"^^xsd:string)
 SubDataPropertyOf(SOMA:hasSpaceParameter <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRegionDataValue>)
 DataPropertyDomain(SOMA:hasSpaceParameter <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion>)
 
@@ -1189,13 +1214,14 @@ SubClassOf(:Capability SOMA:Disposition)
 
 # Class: :ContinuousJoint (Continuous joint)
 
-AnnotationAssertion(rdfs:comment :ContinuousJoint "A continuous hinge joint that rotates around an axis and has no upper and lower limits.")
-AnnotationAssertion(rdfs:label :ContinuousJoint "Continuous joint")
+AnnotationAssertion(rdfs:comment :ContinuousJoint "A continuous hinge joint that rotates around an axis and has no upper and lower limits."^^xsd:string)
+AnnotationAssertion(rdfs:label :ContinuousJoint "Continuous joint"^^xsd:string)
 SubClassOf(:ContinuousJoint :HingeJoint)
 
-# Class: :CutObject (:CutObject)
+# Class: :CutObject (Cut object)
 
 AnnotationAssertion(rdfs:comment :CutObject "An object being cut down into pieces.")
+AnnotationAssertion(rdfs:label :CutObject "Cut object")
 SubClassOf(:CutObject SOMA:AlteredObject)
 
 # Class: :Cuttability (:Cuttability)
@@ -1212,34 +1238,34 @@ SubClassOf(:Cutter SOMA:Tool)
 
 # Class: :FixedJoint (Fixed joint)
 
-AnnotationAssertion(rdfs:comment :FixedJoint "A joint that cannot move, designed to fixiate links.")
-AnnotationAssertion(rdfs:label :FixedJoint "Fixed joint")
+AnnotationAssertion(rdfs:comment :FixedJoint "A joint that cannot move, designed to fixiate links."^^xsd:string)
+AnnotationAssertion(rdfs:label :FixedJoint "Fixed joint"^^xsd:string)
 SubClassOf(:FixedJoint :Joint)
 SubClassOf(:FixedJoint ObjectExactCardinality(0 :hasJointState <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity>))
 DisjointClasses(:FixedJoint :MovableJoint)
 
 # Class: :FloatingJoint (Floating joint)
 
-AnnotationAssertion(rdfs:comment :FloatingJoint "A joint that allows motion for all 6 degrees of freedom.")
-AnnotationAssertion(rdfs:label :FloatingJoint "Floating joint")
+AnnotationAssertion(rdfs:comment :FloatingJoint "A joint that allows motion for all 6 degrees of freedom."^^xsd:string)
+AnnotationAssertion(rdfs:label :FloatingJoint "Floating joint"^^xsd:string)
 SubClassOf(:FloatingJoint :MovableJoint)
 
 # Class: :ForceAttribute (Force attribute)
 
-AnnotationAssertion(rdfs:comment :ForceAttribute "The value of a force dynamical characteristic. An example is the force exerted on another object when pushing it.")
-AnnotationAssertion(rdfs:label :ForceAttribute "Force attribute")
+AnnotationAssertion(rdfs:comment :ForceAttribute "The value of a force dynamical characteristic. An example is the force exerted on another object when pushing it."^^xsd:string)
+AnnotationAssertion(rdfs:label :ForceAttribute "Force attribute"^^xsd:string)
 SubClassOf(:ForceAttribute <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAttribute>)
 SubClassOf(:ForceAttribute DataExactCardinality(1 :hasForceValue SOMA:array_double))
 
 # Class: :HingeJoint (Hinge joint)
 
-AnnotationAssertion(rdfs:comment :HingeJoint "A joint that rotates along an axis.")
-AnnotationAssertion(rdfs:label :HingeJoint "Hinge joint")
+AnnotationAssertion(rdfs:comment :HingeJoint "A joint that rotates along an axis."^^xsd:string)
+AnnotationAssertion(rdfs:label :HingeJoint "Hinge joint"^^xsd:string)
 SubClassOf(:HingeJoint :MovableJoint)
 
 # Class: :Joint (:Joint)
 
-AnnotationAssertion(rdfs:comment :Joint "An object that is used to articulate links in a kinematic structure.")
+AnnotationAssertion(rdfs:comment :Joint "An object that is used to articulate links in a kinematic structure."^^xsd:string)
 EquivalentClasses(:Joint ObjectUnionOf(:FixedJoint :MovableJoint))
 SubClassOf(:Joint <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalBody>)
 SubClassOf(:Joint ObjectExactCardinality(1 :hasChildLink <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>))
@@ -1248,14 +1274,14 @@ SubClassOf(:Joint ObjectMaxCardinality(1 :hasJointState :JointState))
 
 # Class: :JointLimit (Joint limit)
 
-AnnotationAssertion(rdfs:comment :JointLimit "The physical limits of a joint.")
-AnnotationAssertion(rdfs:label :JointLimit "Joint limit")
+AnnotationAssertion(rdfs:comment :JointLimit "The physical limits of a joint."^^xsd:string)
+AnnotationAssertion(rdfs:label :JointLimit "Joint limit"^^xsd:string)
 SubClassOf(:JointLimit <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAttribute>)
 
 # Class: :JointState (Joint state)
 
-AnnotationAssertion(rdfs:comment :JointState "The state of a joint in terms of position, velocity of the joint and effort applied to it.")
-AnnotationAssertion(rdfs:label :JointState "Joint state")
+AnnotationAssertion(rdfs:comment :JointState "The state of a joint in terms of position, velocity of the joint and effort applied to it."^^xsd:string)
+AnnotationAssertion(rdfs:label :JointState "Joint state"^^xsd:string)
 SubClassOf(:JointState <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAttribute>)
 SubClassOf(:JointState DataExactCardinality(1 :hasJointPosition xsd:double))
 SubClassOf(:JointState DataExactCardinality(1 :hasJointVelocity xsd:double))
@@ -1263,21 +1289,21 @@ SubClassOf(:JointState DataMaxCardinality(1 :hasJointEffort xsd:double))
 
 # Class: :MovableJoint (Movable joint)
 
-AnnotationAssertion(rdfs:comment :MovableJoint "A joint where the two connected links can move relative to each other in some dimension.")
-AnnotationAssertion(rdfs:label :MovableJoint "Movable joint")
+AnnotationAssertion(rdfs:comment :MovableJoint "A joint where the two connected links can move relative to each other in some dimension."^^xsd:string)
+AnnotationAssertion(rdfs:label :MovableJoint "Movable joint"^^xsd:string)
 SubClassOf(:MovableJoint :Joint)
 SubClassOf(:MovableJoint ObjectExactCardinality(1 :hasJointState :JointState))
 
 # Class: :NetForce (Net force)
 
-AnnotationAssertion(rdfs:comment :NetForce "The accumulated force acting upon an object.")
-AnnotationAssertion(rdfs:label :NetForce "Net force")
+AnnotationAssertion(rdfs:comment :NetForce "The accumulated force acting upon an object."^^xsd:string)
+AnnotationAssertion(rdfs:label :NetForce "Net force"^^xsd:string)
 SubClassOf(:NetForce :ForceAttribute)
 
 # Class: :PlanarJoint (Planar joint)
 
-AnnotationAssertion(rdfs:comment :PlanarJoint "A joint that allows motion in a plane perpendicular to an axis.")
-AnnotationAssertion(rdfs:label :PlanarJoint "Planar joint")
+AnnotationAssertion(rdfs:comment :PlanarJoint "A joint that allows motion in a plane perpendicular to an axis."^^xsd:string)
+AnnotationAssertion(rdfs:label :PlanarJoint "Planar joint"^^xsd:string)
 SubClassOf(:PlanarJoint :MovableJoint)
 
 # Class: :Pourable (:Pourable)
@@ -1286,22 +1312,23 @@ AnnotationAssertion(rdfs:comment :Pourable "The disposition of a fluid or substa
 SubClassOf(:Pourable SOMA:Disposition)
 SubClassOf(:Pourable ObjectAllValuesFrom(SOMA:affordsBearer :PouredObject))
 
-# Class: :PouredObject (:PouredObject)
+# Class: :PouredObject (Poured object)
 
 AnnotationAssertion(rdfs:comment :PouredObject "An object being poured into or onto some other object. A role of some fluid or substance that is the patient of pouring task.")
+AnnotationAssertion(rdfs:label :PouredObject "Poured object")
 SubClassOf(:PouredObject SOMA:Patient)
 
 # Class: :PrismaticJoint (Prismatic joint)
 
-AnnotationAssertion(rdfs:comment :PrismaticJoint "A sliding joint that slides along an axis, and has a limited range specified by the upper and lower limits.")
-AnnotationAssertion(rdfs:label :PrismaticJoint "Prismatic joint")
+AnnotationAssertion(rdfs:comment :PrismaticJoint "A sliding joint that slides along an axis, and has a limited range specified by the upper and lower limits."^^xsd:string)
+AnnotationAssertion(rdfs:label :PrismaticJoint "Prismatic joint"^^xsd:string)
 SubClassOf(:PrismaticJoint :MovableJoint)
 SubClassOf(:PrismaticJoint ObjectExactCardinality(1 :hasJointLimit :JointLimit))
 
 # Class: :RevoluteJoint (Revolute joint)
 
-AnnotationAssertion(rdfs:comment :RevoluteJoint "A hinge joint that rotates along an axis and has a limited range specified by the upper and lower limits.")
-AnnotationAssertion(rdfs:label :RevoluteJoint "Revolute joint")
+AnnotationAssertion(rdfs:comment :RevoluteJoint "A hinge joint that rotates along an axis and has a limited range specified by the upper and lower limits."^^xsd:string)
+AnnotationAssertion(rdfs:label :RevoluteJoint "Revolute joint"^^xsd:string)
 SubClassOf(:RevoluteJoint :HingeJoint)
 SubClassOf(:RevoluteJoint ObjectExactCardinality(1 :hasJointLimit :JointLimit))
 
@@ -1411,7 +1438,7 @@ SubClassOf(SOMA:Capacity SOMA:Intrinsic)
 
 AnnotationAssertion(rdfs:comment SOMA:CausalEventRole "A role filled by a description of some action or process that brings about a motion.
 
-As an example, consider the utterance \"the tennisman served the ball by hitting it with the racket.\" In this utterance, the filler of the CausalEventRole is expressed by the \"by hitting it with the racket\" constituent.")
+As an example, consider the utterance \"the tennisman served the ball by hitting it with the racket.\" In this utterance, the filler of the CausalEventRole is expressed by the \"by hitting it with the racket\" constituent."^^xsd:string)
 AnnotationAssertion(rdfs:label SOMA:CausalEventRole "Causal event role"@en)
 SubClassOf(SOMA:CausalEventRole SOMA:CausativeRole)
 
@@ -1632,11 +1659,11 @@ SubClassOf(SOMA:Dirty SOMA:CleanlinessRegion)
 
 # Class: SOMA:Disposition (SOMA:Disposition)
 
-AnnotationAssertion(rdfs:comment SOMA:Disposition "The tendency of an object (the bearer) to be used to perform certain tasks with others (the triggers).")
+AnnotationAssertion(rdfs:comment SOMA:Disposition "The tendency of an object (the bearer) to make certain events happen with others (the triggers).")
 AnnotationAssertion(rdfs:comment SOMA:Disposition "extrinsic")
 SubClassOf(SOMA:Disposition SOMA:Extrinsic)
 SubClassOf(SOMA:Disposition ObjectExactCardinality(1 <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy> SOMA:Affordance))
-SubClassOf(SOMA:Disposition ObjectExactCardinality(1 <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy> ObjectIntersectionOf(SOMA:Affordance ObjectExactCardinality(1 SOMA:definesBearer <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>) ObjectExactCardinality(1 SOMA:definesTrigger <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>) ObjectExactCardinality(1 <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>))))
+SubClassOf(SOMA:Disposition ObjectExactCardinality(1 <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy> ObjectIntersectionOf(SOMA:Affordance ObjectExactCardinality(1 SOMA:definesBearer <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>) ObjectExactCardinality(1 SOMA:definesEventType <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#EventType>) ObjectExactCardinality(1 SOMA:definesTrigger <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>))))
 
 # Class: SOMA:Effort (SOMA:Effort)
 
@@ -1664,11 +1691,17 @@ AnnotationAssertion(rdfs:label SOMA:EventAdjacentRole "Event adjacent role"@en)
 AnnotationAssertion(rdfs:label SOMA:EventAdjacentRole "Thematic role"@en)
 SubClassOf(SOMA:EventAdjacentRole <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>)
 
+# Class: SOMA:ExcludedObject (Excluded object)
+
+AnnotationAssertion(rdfs:comment SOMA:ExcludedObject "An object that is not contained in something. This is meant very general and includes, e.g., elements excluded from a set, or things that are spatially excluded from the boundaries of some object.")
+AnnotationAssertion(rdfs:label SOMA:ExcludedObject "Excluded object")
+SubClassOf(SOMA:ExcludedObject SOMA:Patient)
+
 # Class: SOMA:ExistingObjectRole (Existing object role)
 
 AnnotationAssertion(rdfs:comment SOMA:ExistingObjectRole "A role that requires of its filler simply to exist, unlike other roles that may demand e.g. agentive or instrumental participation in some executable schema or plan (AgentRole and Instrument respectively).
 
-The intention behind such a simple role is to have a way to represent, in a schematic formalism used to describe some scene, that an object is present. In particular, the schema used to convey this information is the ESTSchemaTheory, which has ExistingObjectRole as its sole defined role.")
+The intention behind such a simple role is to have a way to represent, in a schematic formalism used to describe some scene, that an object is present. In particular, the schema used to convey this information is the ESTSchemaTheory, which has ExistingObjectRole as its sole defined role."^^xsd:string)
 AnnotationAssertion(rdfs:label SOMA:ExistingObjectRole "Existing object role"@en)
 SubClassOf(SOMA:ExistingObjectRole SOMA:RelationAdjacentRole)
 SubClassOf(SOMA:ExistingObjectRole ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>))
@@ -1677,7 +1710,7 @@ SubClassOf(SOMA:ExistingObjectRole ObjectAllValuesFrom(<http://www.ontologydesig
 
 AnnotationAssertion(rdfs:comment SOMA:ExperiencerRole "A role used in frame semantics to classify agents performing perception actions, or being the subjects affected by some biological process.")
 AnnotationAssertion(rdfs:label SOMA:ExperiencerRole "Experiencer role"@en)
-SubClassOf(SOMA:ExperiencerRole SOMA:AgentRole)
+SubClassOf(SOMA:ExperiencerRole SOMA:PerformerRole)
 
 # Class: SOMA:ExtractedObject (Extracted object)
 
@@ -1852,7 +1885,7 @@ SubClassOf(SOMA:Location SOMA:SpatioTemporalRole)
 
 # Class: SOMA:LocatumRole (Locatum role)
 
-AnnotationAssertion(rdfs:comment SOMA:LocatumRole "Denotes the object with primary focal prominence in a spatial or spatio-temporal schema. Terminological variants that appear in the literature on cognitive linguistics include Figure (Talmy 1983) and Trajector (Langacker 1986).")
+AnnotationAssertion(rdfs:comment SOMA:LocatumRole "Denotes the object with primary focal prominence in a spatial or spatio-temporal schema. Terminological variants that appear in the literature on cognitive linguistics include Figure (Talmy 1983) and Trajector (Langacker 1986)."^^xsd:string)
 AnnotationAssertion(rdfs:label SOMA:LocatumRole "Locatum role"@en)
 SubClassOf(SOMA:LocatumRole SOMA:SpatialRelationRole)
 SubClassOf(SOMA:LocatumRole ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>))
@@ -1897,7 +1930,7 @@ SubClassOf(SOMA:Origin SOMA:Location)
 
 # Class: SOMA:PathRole (Path role)
 
-AnnotationAssertion(rdfs:comment SOMA:PathRole "A role that classifies the path of a motion.")
+AnnotationAssertion(rdfs:comment SOMA:PathRole "A role that classifies the path of a motion."^^xsd:string)
 AnnotationAssertion(rdfs:label SOMA:PathRole "Path role"@en)
 SubClassOf(SOMA:PathRole SOMA:SpatioTemporalRole)
 
@@ -1906,9 +1939,19 @@ SubClassOf(SOMA:PathRole SOMA:SpatioTemporalRole)
 AnnotationAssertion(rdfs:comment SOMA:Patient "A role classifying an object that undergoes/is the primary object affected by the event.")
 SubClassOf(SOMA:Patient SOMA:EventAdjacentRole)
 
+
+# Class: SOMA:PerformerRole (Performer role)
+
+AnnotationAssertion(rdfs:comment SOMA:PerformerRole "A role classifying an Agent responsible for performing an Action.
+
+The entity playing an AgentRole is endowed with sentience and the capacity to deliberately choose actions in pursuit of goals. This distinguishes Agents from other causes that could bring an event about.")
+AnnotationAssertion(rdfs:label SOMA:PerformerRole "Performer role"@en)
+SubClassOf(SOMA:PerformerRole SOMA:CausativeRole)
+SubClassOf(SOMA:PerformerRole ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>))
+
 # Class: SOMA:PhysicalEffector (Physical effector)
 
-AnnotationAssertion(rdfs:comment SOMA:PhysicalEffector "A functional part belonging to an Agent and which allows that Agent to act upon its surroundings.")
+AnnotationAssertion(rdfs:comment SOMA:PhysicalEffector "A functional part belonging to an Agent and which allows that Agent to act upon its surroundings."^^xsd:string)
 AnnotationAssertion(rdfs:label SOMA:PhysicalEffector "Physical effector")
 SubClassOf(SOMA:PhysicalEffector SOMA:FunctionalPart)
 SubClassOf(SOMA:PhysicalEffector ObjectSomeValuesFrom(ObjectInverseOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart>) <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent>))
@@ -1964,7 +2007,7 @@ SubClassOf(SOMA:RelationAdjacentRole <http://www.ontologydesignpatterns.org/ont/
 
 # Class: SOMA:RelatumRole (Relatum role)
 
-AnnotationAssertion(rdfs:comment SOMA:RelatumRole "Denotes the reference object in a spatial or spatio-temporal schema, i.e. the object with secondary focal prominence. Terminological variants: Ground (Talmy 1983), Landmark (Langacker 1986).")
+AnnotationAssertion(rdfs:comment SOMA:RelatumRole "Denotes the reference object in a spatial or spatio-temporal schema, i.e. the object with secondary focal prominence. Terminological variants: Ground (Talmy 1983), Landmark (Langacker 1986)."^^xsd:string)
 AnnotationAssertion(rdfs:label SOMA:RelatumRole "Relatum role"@en)
 SubClassOf(SOMA:RelatumRole SOMA:SpatialRelationRole)
 SubClassOf(SOMA:RelatumRole ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>))
@@ -1974,6 +2017,12 @@ SubClassOf(SOMA:RelatumRole ObjectAllValuesFrom(<http://www.ontologydesignpatter
 AnnotationAssertion(rdfs:comment SOMA:RelevantPart "Features that are relevant parts of their host, like a bump or an edge.")
 AnnotationAssertion(rdfs:label SOMA:RelevantPart "Relevant part"@en)
 SubClassOf(SOMA:RelevantPart SOMA:Feature)
+
+# Class: SOMA:RemovedObject (Removed object)
+
+AnnotationAssertion(rdfs:comment SOMA:RemovedObject "An object that is removed from another.")
+AnnotationAssertion(rdfs:label SOMA:RemovedObject "Removed object")
+SubClassOf(SOMA:RemovedObject SOMA:ExcludedObject)
 
 # Class: SOMA:ResourceRole (Resource role)
 
@@ -2206,12 +2255,14 @@ SubClassOf(<http://www.ease-crc.org/ont/SOMA.owl#6DPose> DataExactCardinality(1 
 
 SubObjectPropertyOf(ObjectPropertyChain(SOMA:isBearerDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes>) SOMA:isBearerAffordedBy)
 SubObjectPropertyOf(ObjectPropertyChain(SOMA:isDefinedInAffordance <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes>) SOMA:isConceptAffordedBy)
+SubObjectPropertyOf(ObjectPropertyChain(SOMA:isPerformerDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes>) SOMA:isPerformerAffordedBy)
 SubObjectPropertyOf(ObjectPropertyChain(SOMA:isSetpointDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes>) SOMA:isSetpointAffordedBy)
 SubObjectPropertyOf(ObjectPropertyChain(SOMA:isTaskDefinedInAffordance <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes>) SOMA:isTaskAffordedBy)
 SubObjectPropertyOf(ObjectPropertyChain(SOMA:isTriggerDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes>) SOMA:isTriggerAffordedBy)
 SubObjectPropertyOf(ObjectPropertyChain(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy> SOMA:affordanceDefines) SOMA:affordsConcept)
 SubObjectPropertyOf(ObjectPropertyChain(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy> SOMA:affordanceDefinesTask) SOMA:affordsTask)
 SubObjectPropertyOf(ObjectPropertyChain(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy> SOMA:definesBearer) SOMA:affordsBearer)
+SubObjectPropertyOf(ObjectPropertyChain(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy> SOMA:definesPerformer) SOMA:affordsPerformer)
 SubObjectPropertyOf(ObjectPropertyChain(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy> SOMA:definesSetpoint) SOMA:affordsSetpoint)
 SubObjectPropertyOf(ObjectPropertyChain(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy> SOMA:definesTrigger) SOMA:affordsTrigger)
 )

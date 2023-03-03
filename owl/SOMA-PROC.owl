@@ -111,7 +111,7 @@ Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.ow
 #   Object Properties
 ############################
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#definesProcess> (defines process)
+# Object Property: SOMA:definesProcess (defines process)
 
 AnnotationAssertion(rdfs:comment SOMA:definesProcess "A relation between a description and a process type.")
 AnnotationAssertion(rdfs:label SOMA:definesProcess "defines process")
@@ -120,7 +120,7 @@ InverseObjectProperties(SOMA:definesProcess SOMA:isProcessDefinedIn)
 ObjectPropertyDomain(SOMA:definesProcess <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description>)
 ObjectPropertyRange(SOMA:definesProcess SOMA:ProcessType)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#hasProcessType> (has process type)
+# Object Property: SOMA:hasProcessType (has process type)
 
 AnnotationAssertion(rdfs:comment SOMA:hasProcessType "A relation between roles and process types, e.g. a catalysator is needed to trigger some chemical reaction.")
 AnnotationAssertion(rdfs:label SOMA:hasProcessType "has process type")
@@ -129,7 +129,7 @@ InverseObjectProperties(SOMA:hasProcessType SOMA:isProcessTypeOf)
 ObjectPropertyDomain(SOMA:hasProcessType <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>)
 ObjectPropertyRange(SOMA:hasProcessType SOMA:ProcessType)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#interactsWith> (interacts with)
+# Object Property: SOMA:interactsWith (interacts with)
 
 AnnotationAssertion(rdfs:comment SOMA:interactsWith "A relation between objects that interact with each other.")
 AnnotationAssertion(rdfs:label SOMA:interactsWith "interacts with")
@@ -138,7 +138,7 @@ SymmetricObjectProperty(SOMA:interactsWith)
 ObjectPropertyDomain(SOMA:interactsWith <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 ObjectPropertyRange(SOMA:interactsWith <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#isProcessDefinedIn> (is process defined in)
+# Object Property: SOMA:isProcessDefinedIn (is process defined in)
 
 AnnotationAssertion(rdfs:comment SOMA:isProcessDefinedIn "A relation between a process type and a description that defines it.")
 AnnotationAssertion(rdfs:label SOMA:isProcessDefinedIn "is process defined in")
@@ -146,7 +146,7 @@ SubObjectPropertyOf(SOMA:isProcessDefinedIn <http://www.ontologydesignpatterns.o
 ObjectPropertyDomain(SOMA:isProcessDefinedIn SOMA:ProcessType)
 ObjectPropertyRange(SOMA:isProcessDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#isProcessTypeOf> (is process type of)
+# Object Property: SOMA:isProcessTypeOf (is process type of)
 
 AnnotationAssertion(rdfs:comment SOMA:isProcessTypeOf "A relation between roles and process types, e.g. a catalysator is needed to trigger some chemical reaction.")
 AnnotationAssertion(rdfs:label SOMA:isProcessTypeOf "is process type of")
@@ -154,13 +154,13 @@ SubObjectPropertyOf(SOMA:isProcessTypeOf <http://www.ontologydesignpatterns.org/
 ObjectPropertyDomain(SOMA:isProcessTypeOf SOMA:ProcessType)
 ObjectPropertyRange(SOMA:isProcessTypeOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#isSupportedBy> (is supported by)
+# Object Property: SOMA:isSupportedBy (is supported by)
 
 AnnotationAssertion(rdfs:comment SOMA:isSupportedBy "A relation between an object (the supporter) and another object (the supportee) where the supporter cancels the effect of gravity on the supportee.")
 AnnotationAssertion(rdfs:label SOMA:isSupportedBy "is supported by")
 SubObjectPropertyOf(SOMA:isSupportedBy SOMA:interactsWith)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#supports> (<http://www.ease-crc.org/ont/SOMA.owl#supports>)
+# Object Property: SOMA:supports (SOMA:supports)
 
 AnnotationAssertion(rdfs:comment SOMA:supports "A relation between an object (the supporter) and another object (the supportee) where the supporter cancels the effect of gravity on the supportee.")
 SubObjectPropertyOf(SOMA:supports SOMA:interactsWith)
@@ -171,34 +171,34 @@ SubObjectPropertyOf(SOMA:supports SOMA:interactsWith)
 #   Classes
 ############################
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Agonist> (<http://www.ease-crc.org/ont/SOMA.owl#Agonist>)
+# Class: SOMA:Agonist (SOMA:Agonist)
 
 AnnotationAssertion(rdfs:comment SOMA:Agonist "A role that classifies entities with a tendency to either cause an alteration or to preserve some state.")
 SubClassOf(SOMA:Agonist SOMA:Patient)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Alteration> (<http://www.ease-crc.org/ont/SOMA.owl#Alteration>)
+# Class: SOMA:Alteration (SOMA:Alteration)
 
 AnnotationAssertion(rdfs:comment SOMA:Alteration "A process by which an aspect of some object changes such as ice cream melting in the sun.")
 SubClassOf(SOMA:Alteration SOMA:ProcessType)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#AlterativeInteraction> (Alterative interaction)
+# Class: SOMA:AlterativeInteraction (Alterative interaction)
 
 AnnotationAssertion(rdfs:comment SOMA:AlterativeInteraction "A force interaction where the agonist has the tendency to set another object into motion. An example is 'opening a door' where some object interacts with the door such that it moves out of its frame.")
 AnnotationAssertion(rdfs:label SOMA:AlterativeInteraction "Alterative interaction")
 SubClassOf(SOMA:AlterativeInteraction SOMA:ForceInteraction)
 DisjointClasses(SOMA:AlterativeInteraction SOMA:PreservativeInteraction)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Antagonist> (<http://www.ease-crc.org/ont/SOMA.owl#Antagonist>)
+# Class: SOMA:Antagonist (SOMA:Antagonist)
 
 AnnotationAssertion(rdfs:comment SOMA:Antagonist "A role that classifies entities that are opposed to the tendency of some agonist.")
 SubClassOf(SOMA:Antagonist SOMA:Patient)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Approaching> (<http://www.ease-crc.org/ont/SOMA.owl#Approaching>)
+# Class: SOMA:Approaching (SOMA:Approaching)
 
 AnnotationAssertion(rdfs:comment SOMA:Approaching "A process type to classify motions by which a body approaches some object or location.")
 SubClassOf(SOMA:Approaching SOMA:Locomotion)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#BodyMovement> (<http://www.ease-crc.org/ont/SOMA.owl#BodyMovement>)
+# Class: SOMA:BodyMovement (SOMA:BodyMovement)
 
 AnnotationAssertion(rdfs:comment SOMA:BodyMovement "Motion described in terms of how parts of an Agent's body move.
 
@@ -206,12 +206,12 @@ As such, this concept can be applied only to motions involving some PhysicalAgen
 SubClassOf(SOMA:BodyMovement SOMA:Motion)
 SubClassOf(SOMA:BodyMovement ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectUnionOf(ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent>) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isPartOf> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent>))))))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Boiling> (<http://www.ease-crc.org/ont/SOMA.owl#Boiling>)
+# Class: SOMA:Boiling (SOMA:Boiling)
 
 AnnotationAssertion(rdfs:comment SOMA:Boiling "In each instance of this collection some liquid matter is raised to its boilingPoint and is thereby changed from being in the Liquid-StateOfMatter to being in the Gaseous-StateOfMatter.")
 SubClassOf(SOMA:Boiling SOMA:Vaporizing)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ChemicalProcess> (Chemical process)
+# Class: SOMA:ChemicalProcess (Chemical process)
 
 AnnotationAssertion(rdfs:comment SOMA:ChemicalProcess "A process by which the chemical constituency of an Entity or set of Entities changes.
 
@@ -219,12 +219,12 @@ In some sense any process that results in entities being created or destroyed mi
 AnnotationAssertion(rdfs:label SOMA:ChemicalProcess "Chemical process")
 SubClassOf(SOMA:ChemicalProcess <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process>)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Collision> (<http://www.ease-crc.org/ont/SOMA.owl#Collision>)
+# Class: SOMA:Collision (SOMA:Collision)
 
 AnnotationAssertion(rdfs:comment SOMA:Collision "A contact event of objects bumping into each other such that their movement is affected.")
 SubClassOf(SOMA:Collision SOMA:ProcessType)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Creation> (Creation)
+# Class: SOMA:Creation (Creation)
 
 AnnotationAssertion(rdfs:comment SOMA:Creation "A process by which an Entity is created in the physical world.
 
@@ -233,7 +233,7 @@ AnnotationAssertion(rdfs:label SOMA:Creation "Creation")
 SubClassOf(SOMA:Creation SOMA:ProcessType)
 SubClassOf(SOMA:Creation ObjectSomeValuesFrom(SOMA:isProcessTypeOf SOMA:CreatedObject))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Deformation> (<http://www.ease-crc.org/ont/SOMA.owl#Deformation>)
+# Class: SOMA:Deformation (SOMA:Deformation)
 
 AnnotationAssertion(rdfs:comment SOMA:Deformation "A process by which a physical Entity changes its shape under the influence of some factors outside of the Entity.
 
@@ -244,7 +244,7 @@ SubClassOf(SOMA:Deformation SOMA:Alteration)
 SubClassOf(SOMA:Deformation ObjectExactCardinality(1 SOMA:isProcessTypeOf SOMA:ShapedObject))
 DisjointClasses(SOMA:Deformation SOMA:FluidFlow)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Destruction> (Destruction)
+# Class: SOMA:Destruction (Destruction)
 
 AnnotationAssertion(rdfs:comment SOMA:Destruction "A process by which a physical Entity is destroyed.
 
@@ -253,14 +253,14 @@ AnnotationAssertion(rdfs:label SOMA:Destruction "Destruction")
 SubClassOf(SOMA:Destruction SOMA:ProcessType)
 SubClassOf(SOMA:Destruction ObjectSomeValuesFrom(SOMA:isProcessTypeOf SOMA:DestroyedObject))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#DirectedMotion> (Directed motion)
+# Class: SOMA:DirectedMotion (Directed motion)
 
 AnnotationAssertion(rdfs:comment SOMA:DirectedMotion "A Motion that is considered to be toward a location or along a path. It is not important that the final location or path be the intention of some Agent, but it is considered that the important feature of this Motion is that it has a path and/or destination.")
 AnnotationAssertion(rdfs:label SOMA:DirectedMotion "Directed motion")
 SubClassOf(SOMA:DirectedMotion SOMA:Motion)
 DisjointClasses(SOMA:DirectedMotion SOMA:UndirectedMotion)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Driving> (<http://www.ease-crc.org/ont/SOMA.owl#Driving>)
+# Class: SOMA:Driving (SOMA:Driving)
 
 AnnotationAssertion(rdfs:comment SOMA:Driving "A process type classifying a motion of a body that exists because this body is attached to and controls some other moving body, usually a vehicle.")
 SubClassOf(SOMA:Driving SOMA:Locomotion)
@@ -268,7 +268,7 @@ DisjointClasses(SOMA:Driving SOMA:Flying)
 DisjointClasses(SOMA:Driving SOMA:Swimming)
 DisjointClasses(SOMA:Driving SOMA:Walking)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#FluidFlow> (Fluid flow)
+# Class: SOMA:FluidFlow (Fluid flow)
 
 AnnotationAssertion(rdfs:comment SOMA:FluidFlow "A process by which a fluid moves or is moved from a location to another, but such that it maintains its constitution. A fluid is an Entity made of many smaller Entities, loosely bound to each other.
 
@@ -277,14 +277,14 @@ AnnotationAssertion(rdfs:label SOMA:FluidFlow "Fluid flow")
 SubClassOf(SOMA:FluidFlow SOMA:Motion)
 SubClassOf(SOMA:FluidFlow ObjectSomeValuesFrom(SOMA:isProcessTypeOf SOMA:MovedObject))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Flying> (<http://www.ease-crc.org/ont/SOMA.owl#Flying>)
+# Class: SOMA:Flying (SOMA:Flying)
 
 AnnotationAssertion(rdfs:comment SOMA:Flying "A process type classifying a motion of a body that, through its own power, keeps itself aloft.")
 SubClassOf(SOMA:Flying SOMA:Locomotion)
 DisjointClasses(SOMA:Flying SOMA:Swimming)
 DisjointClasses(SOMA:Flying SOMA:Walking)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ForceInteraction> (Force interaction)
+# Class: SOMA:ForceInteraction (Force interaction)
 
 AnnotationAssertion(rdfs:comment SOMA:ForceInteraction "Classifies events in which two entities interact with each other with a reference to force. One of the entities, the agonist, has a tendency to either set the other entity (the antagonist) into motion, or to keep it still under the influence of some other force. The tendency only manifests in case the agonist is the \"stronger entity\".")
 AnnotationAssertion(rdfs:label SOMA:ForceInteraction "Force interaction")
@@ -294,7 +294,7 @@ SubClassOf(SOMA:ForceInteraction SOMA:ProcessType)
 SubClassOf(SOMA:ForceInteraction ObjectSomeValuesFrom(SOMA:isProcessTypeOf SOMA:Agonist))
 SubClassOf(SOMA:ForceInteraction ObjectSomeValuesFrom(SOMA:isProcessTypeOf SOMA:Antagonist))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#GraspingMotion> (Grasping motion)
+# Class: SOMA:GraspingMotion (Grasping motion)
 
 AnnotationAssertion(rdfs:comment SOMA:GraspingMotion "A process type classifying a motion by which some end effector acquires kinematic control over some other object.")
 AnnotationAssertion(rdfs:label SOMA:GraspingMotion "Grasping motion")
@@ -302,18 +302,18 @@ EquivalentClasses(SOMA:GraspingMotion ObjectUnionOf(SOMA:IntermediateGrasp SOMA:
 SubClassOf(SOMA:GraspingMotion SOMA:PrehensileMotion)
 DisjointClasses(SOMA:GraspingMotion SOMA:ReleasingMotion)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#HeadMovement> (<http://www.ease-crc.org/ont/SOMA.owl#HeadMovement>)
+# Class: SOMA:HeadMovement (SOMA:HeadMovement)
 
 AnnotationAssertion(rdfs:comment SOMA:HeadMovement "The Agent moves a part of their body carrying high-bandwidth sensors such as cameras. The movement of other body parts is not significant.")
 AnnotationAssertion(rdfs:comment SOMA:HeadMovement "todo: (Mihai:) This seems too specific, given the \"Directed\"/\"Undirected motion\" categories.")
 SubClassOf(SOMA:HeadMovement SOMA:BodyMovement)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#HeadTurning> (<http://www.ease-crc.org/ont/SOMA.owl#HeadTurning>)
+# Class: SOMA:HeadTurning (SOMA:HeadTurning)
 
 AnnotationAssertion(rdfs:comment SOMA:HeadTurning "A process type classifying a motion of an Agent's head such that the direction this head faces changes relative to the facing direction of the Agent's body as a whole.")
 SubClassOf(SOMA:HeadTurning SOMA:HeadMovement)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#IntermediateGrasp> (Intermediate grasp)
+# Class: SOMA:IntermediateGrasp (Intermediate grasp)
 
 AnnotationAssertion(rdfs:comment SOMA:IntermediateGrasp "A kind of grasp that acquires kinematic control over the gripped object, but without attempting to achieve either strong holding force nor precision of subsequent movement of the gripped object.")
 AnnotationAssertion(rdfs:label SOMA:IntermediateGrasp "Intermediate grasp")
@@ -321,12 +321,12 @@ SubClassOf(SOMA:IntermediateGrasp SOMA:GraspingMotion)
 DisjointClasses(SOMA:IntermediateGrasp SOMA:PowerGrasp)
 DisjointClasses(SOMA:IntermediateGrasp SOMA:PrecisionGrasp)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Leaning> (<http://www.ease-crc.org/ont/SOMA.owl#Leaning>)
+# Class: SOMA:Leaning (SOMA:Leaning)
 
 AnnotationAssertion(rdfs:comment SOMA:Leaning "An Agent pitches its body in some direction.")
 SubClassOf(SOMA:Leaning SOMA:PosturalMoving)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#LimbMotion> (Limb motion)
+# Class: SOMA:LimbMotion (Limb motion)
 
 AnnotationAssertion(rdfs:comment SOMA:LimbMotion "An Agent moves its limbs in some way.")
 AnnotationAssertion(rdfs:label SOMA:LimbMotion "Limb motion")
@@ -335,7 +335,7 @@ SubClassOf(SOMA:LimbMotion ObjectSomeValuesFrom(SOMA:isProcessTypeOf ObjectInter
 DisjointClasses(SOMA:LimbMotion SOMA:Locomotion)
 DisjointClasses(SOMA:LimbMotion SOMA:PrehensileMotion)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Locomotion> (<http://www.ease-crc.org/ont/SOMA.owl#Locomotion>)
+# Class: SOMA:Locomotion (SOMA:Locomotion)
 
 AnnotationAssertion(rdfs:comment SOMA:Locomotion "Conceptually related to Navigation, but distinguishable from it because of the profile, ie. the focus of the task.
 
@@ -347,18 +347,18 @@ SubClassOf(SOMA:Locomotion SOMA:BodyMovement)
 SubClassOf(SOMA:Locomotion SOMA:DirectedMotion)
 DisjointClasses(SOMA:Locomotion SOMA:PrehensileMotion)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Motion> (<http://www.ease-crc.org/ont/SOMA.owl#Motion>)
+# Class: SOMA:Motion (SOMA:Motion)
 
 AnnotationAssertion(rdfs:comment SOMA:Motion "An EventType that classifies motion Processes.")
 AnnotationAssertion(rdfs:comment SOMA:Motion "Motion type")
 SubClassOf(SOMA:Motion SOMA:ProcessType)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#MovingAway> (<http://www.ease-crc.org/ont/SOMA.owl#MovingAway>)
+# Class: SOMA:MovingAway (SOMA:MovingAway)
 
 AnnotationAssertion(rdfs:comment SOMA:MovingAway "A process type classifying a motion by which some Agent puts distance between itself and another object or location.")
 SubClassOf(SOMA:MovingAway SOMA:Locomotion)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PhaseTransition> (Phase transition)
+# Class: SOMA:PhaseTransition (Phase transition)
 
 AnnotationAssertion(rdfs:comment SOMA:PhaseTransition "An EventType that classifies processes by which matter changes from some distinguishable phase to another. We will use this to refer to the classical phase transitions between Solid, Liquid, Gaseous, Plasma etc. phases.")
 AnnotationAssertion(rdfs:label SOMA:PhaseTransition "Phase transition")
@@ -367,34 +367,34 @@ AnnotationAssertion(rdfs:seeAlso SOMA:PhaseTransition "The phase transition conc
 In all these cases, the metaphor points to the existence of several regions of qualitatively different behavior (unimpeded passage of solid grains vs deadlock in a corridor; problem instances where the answer NO is trivial to prove vs. problem instances where the answer YES is trivial to prove), separated fairly sharply when some quantity reaches a threshold.")
 SubClassOf(SOMA:PhaseTransition SOMA:Alteration)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PhysicsProcess> (Physical process)
+# Class: SOMA:PhysicsProcess (Physical process)
 
 AnnotationAssertion(rdfs:comment SOMA:PhysicsProcess "A process involving physical objects and phenomena which does not change the chemical constituency of the affected objects.")
 AnnotationAssertion(rdfs:label SOMA:PhysicsProcess "Physical process")
 SubClassOf(SOMA:PhysicsProcess <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process>)
 SubClassOf(SOMA:PhysicsProcess ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PosturalMoving> (<http://www.ease-crc.org/ont/SOMA.owl#PosturalMoving>)
+# Class: SOMA:PosturalMoving (SOMA:PosturalMoving)
 
 AnnotationAssertion(rdfs:comment SOMA:PosturalMoving "The Agent changes or takes an overall configuration of its body but is otherwise not significantly affecting other objects nor moving a significant amount from its original location.
 
 Posture changes may take place as part of other actions, for example turning when walking.")
 SubClassOf(SOMA:PosturalMoving SOMA:BodyMovement)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PowerGrasp> (Power grasp)
+# Class: SOMA:PowerGrasp (Power grasp)
 
 AnnotationAssertion(rdfs:comment SOMA:PowerGrasp "An Agent grasps an object, and focuses on obtaining a strong grasping force upon it, resulting in a grasp able to resist significant outside disturbances. This is useful when using tools with which to later exert force on other things, e.g. when hammering nails.")
 AnnotationAssertion(rdfs:label SOMA:PowerGrasp "Power grasp")
 SubClassOf(SOMA:PowerGrasp SOMA:GraspingMotion)
 DisjointClasses(SOMA:PowerGrasp SOMA:PrecisionGrasp)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PrecisionGrasp> (Precision grasp)
+# Class: SOMA:PrecisionGrasp (Precision grasp)
 
 AnnotationAssertion(rdfs:comment SOMA:PrecisionGrasp "An Agent grasps an object, and focuses on obtaining precise kinematic control over it. This is useful for then following precise movements, e.g. when writing.")
 AnnotationAssertion(rdfs:label SOMA:PrecisionGrasp "Precision grasp")
 SubClassOf(SOMA:PrecisionGrasp SOMA:GraspingMotion)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PrehensileMotion> (Prehensile motion)
+# Class: SOMA:PrehensileMotion (Prehensile motion)
 
 AnnotationAssertion(rdfs:comment SOMA:PrehensileMotion "A motion of a prehensile effector.")
 AnnotationAssertion(rdfs:label SOMA:PrehensileMotion "Prehensile motion")
@@ -402,20 +402,20 @@ EquivalentClasses(SOMA:PrehensileMotion ObjectUnionOf(SOMA:GraspingMotion SOMA:R
 SubClassOf(SOMA:PrehensileMotion SOMA:DirectedMotion)
 SubClassOf(SOMA:PrehensileMotion ObjectSomeValuesFrom(SOMA:isProcessTypeOf ObjectIntersectionOf(SOMA:MovedObject ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> SOMA:PrehensileEffector))))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PreservativeInteraction> (Preservative interaction)
+# Class: SOMA:PreservativeInteraction (Preservative interaction)
 
 AnnotationAssertion(rdfs:comment SOMA:PreservativeInteraction "A force interaction where the agonist has a tendency to keep another object still. An example is 'holding a door closed' where some object interacts with the door to neutralize forces that could set the door into motion.")
 AnnotationAssertion(rdfs:label SOMA:PreservativeInteraction "Preservative interaction")
 SubClassOf(SOMA:PreservativeInteraction SOMA:ForceInteraction)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ProcessFlow> (Process flow)
+# Class: SOMA:ProcessFlow (Process flow)
 
 AnnotationAssertion(rdfs:comment SOMA:ProcessFlow "A description that structures a Process.")
 AnnotationAssertion(rdfs:label SOMA:ProcessFlow "Process flow")
 SubClassOf(SOMA:ProcessFlow <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description>)
 SubClassOf(SOMA:ProcessFlow ObjectSomeValuesFrom(SOMA:definesProcess SOMA:ProcessType))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ProcessType> (Process type)
+# Class: SOMA:ProcessType (Process type)
 
 AnnotationAssertion(rdfs:comment SOMA:ProcessType "An EventType that classifies Processes.")
 AnnotationAssertion(rdfs:label SOMA:ProcessType "Process type")
@@ -424,63 +424,63 @@ SubClassOf(SOMA:ProcessType ObjectAllValuesFrom(<http://www.ontologydesignpatter
 SubClassOf(SOMA:ProcessType ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart> SOMA:ProcessType))
 SubClassOf(SOMA:ProcessType ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDefinedIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description>))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Progression> (<http://www.ease-crc.org/ont/SOMA.owl#Progression>)
+# Class: SOMA:Progression (SOMA:Progression)
 
 AnnotationAssertion(rdfs:comment SOMA:Progression "A situation that sattisies a description of how a process evolves over time.")
 EquivalentClasses(SOMA:Progression ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#satisfies> SOMA:ProcessFlow))
 SubClassOf(SOMA:Progression <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ReleasingMotion> (Releasing motion)
+# Class: SOMA:ReleasingMotion (Releasing motion)
 
 AnnotationAssertion(rdfs:comment SOMA:ReleasingMotion "A motion by which a prehensile effector relinquishes kinematic control over an object.")
 AnnotationAssertion(rdfs:label SOMA:ReleasingMotion "Releasing motion")
 SubClassOf(SOMA:ReleasingMotion SOMA:PrehensileMotion)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Rubbing> (<http://www.ease-crc.org/ont/SOMA.owl#Rubbing>)
+# Class: SOMA:Rubbing (SOMA:Rubbing)
 
 AnnotationAssertion(rdfs:comment SOMA:Rubbing "The motion of an object sliding along the surface of another, for example, to clean the surface.")
 SubClassOf(SOMA:Rubbing SOMA:DirectedMotion)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Standing> (<http://www.ease-crc.org/ont/SOMA.owl#Standing>)
+# Class: SOMA:Standing (SOMA:Standing)
 
 AnnotationAssertion(rdfs:comment SOMA:Standing "A motion by which an Agent arranges its body in an upright configuration. Typically, it makes sense to speak of standing for bodies where some limbs are dedicated to moving the whole body while some limbs are used for manipulation of other objects.")
 SubClassOf(SOMA:Standing SOMA:PosturalMoving)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Swimming> (<http://www.ease-crc.org/ont/SOMA.owl#Swimming>)
+# Class: SOMA:Swimming (SOMA:Swimming)
 
 AnnotationAssertion(rdfs:comment SOMA:Swimming "A motion of some body through water. The body provides the power for the motion.")
 SubClassOf(SOMA:Swimming SOMA:Locomotion)
 DisjointClasses(SOMA:Swimming SOMA:Walking)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Tapping> (<http://www.ease-crc.org/ont/SOMA.owl#Tapping>)
+# Class: SOMA:Tapping (SOMA:Tapping)
 
 AnnotationAssertion(rdfs:comment SOMA:Tapping "A motion, usually repeated several times, for example, to probe the surface of an object.")
 SubClassOf(SOMA:Tapping SOMA:DirectedMotion)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Taxis> (<http://www.ease-crc.org/ont/SOMA.owl#Taxis>)
+# Class: SOMA:Taxis (SOMA:Taxis)
 
 AnnotationAssertion(rdfs:comment SOMA:Taxis "An innate behavioural response such as the knee-jerk reflex or the sucking reflex of human infants.")
 SubClassOf(SOMA:Taxis SOMA:BodyMovement)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Turning> (<http://www.ease-crc.org/ont/SOMA.owl#Turning>)
+# Class: SOMA:Turning (SOMA:Turning)
 
 AnnotationAssertion(rdfs:comment SOMA:Turning "A motion by which an agent changes which way their body faces.")
 SubClassOf(SOMA:Turning SOMA:PosturalMoving)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#UndirectedMotion> (Undirected motion)
+# Class: SOMA:UndirectedMotion (Undirected motion)
 
 AnnotationAssertion(rdfs:comment SOMA:UndirectedMotion "A Motion of a physical Entity for which a destination or path are unknown and/or considered irrelevant; the important aspect about this Motion is simply that it occurs, rather than where it is headed or how it proceeds towards it.")
 AnnotationAssertion(rdfs:label SOMA:UndirectedMotion "Undirected motion")
 SubClassOf(SOMA:UndirectedMotion SOMA:Motion)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Vaporizing> (<http://www.ease-crc.org/ont/SOMA.owl#Vaporizing>)
+# Class: SOMA:Vaporizing (SOMA:Vaporizing)
 
 AnnotationAssertion(rdfs:comment SOMA:Vaporizing "Some material transitions from a liquid to a gaseous phase.")
 AnnotationAssertion(rdfs:seeAlso SOMA:Vaporizing "Transitions from a solid to a gaseous phase are usually referred to as Sublimation.")
 SubClassOf(SOMA:Vaporizing SOMA:PhaseTransition)
 SubClassOf(SOMA:Vaporizing ObjectSomeValuesFrom(SOMA:isProcessTypeOf ObjectIntersectionOf(SOMA:AlteredObject ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance>))))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Walking> (<http://www.ease-crc.org/ont/SOMA.owl#Walking>)
+# Class: SOMA:Walking (SOMA:Walking)
 
 AnnotationAssertion(rdfs:comment SOMA:Walking "An agent, under its own power, moves over some solid surface.")
 SubClassOf(SOMA:Walking SOMA:Locomotion)
