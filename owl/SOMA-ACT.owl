@@ -157,6 +157,7 @@ Declaration(Class(SOMA:ThinkAloudTopic))
 Declaration(Class(SOMA:Throwing))
 Declaration(Class(SOMA:Transporting))
 Declaration(Class(<http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation>))
+Declaration(ObjectProperty(SOMA:affects))
 Declaration(ObjectProperty(SOMA:answers))
 Declaration(ObjectProperty(SOMA:causes))
 Declaration(ObjectProperty(SOMA:definesEventType))
@@ -166,6 +167,7 @@ Declaration(ObjectProperty(SOMA:hasAnswer))
 Declaration(ObjectProperty(SOMA:hasExecutionState))
 Declaration(ObjectProperty(SOMA:hasInitialSituation))
 Declaration(ObjectProperty(SOMA:hasTerminalSituation))
+Declaration(ObjectProperty(SOMA:isAffectedBy))
 Declaration(ObjectProperty(SOMA:isAskedBy))
 Declaration(ObjectProperty(SOMA:isCreatedOutputOf))
 Declaration(ObjectProperty(SOMA:isDirectReactionTo))
@@ -196,6 +198,13 @@ Declaration(NamedIndividual(SOMA:ExecutionState_Succeeded))
 #   Object Properties
 ############################
 
+# Object Property: SOMA:affects (affects)
+
+AnnotationAssertion(rdfs:comment SOMA:affects "Simple relationship between two actions to express that a variation in the course or outcome of the the object (the affectee) would have resulted in a variation in the subject (the affector), e.g., a planning task that sets parameters such as goal position affects the subsequently executed pick-and-place task that uses that parameter.")
+AnnotationAssertion(rdfs:label SOMA:affects "affects")
+SubObjectPropertyOf(SOMA:affects <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes>)
+InverseObjectProperties(SOMA:affects SOMA:isAffectedBy)
+
 # Object Property: SOMA:answers (answers)
 
 AnnotationAssertion(rdfs:label SOMA:answers "The relation between an answering message and the message it answers.")
@@ -207,13 +216,14 @@ ObjectPropertyRange(SOMA:answers SOMA:Message)
 
 # Object Property: SOMA:causes (causes)
 
-AnnotationAssertion(rdfs:label SOMA:causes "Simple relationship between two actions to express that the object (the reaction) would not have occured if it were not for the subject (the cause), e.g., a Communication Action classified as an Querying Task causes another Communication Task classified as an Answering Task and the latter would not have occured without the former. An example without Agents involved would be some domino stone would not have toppled without the first one toppling.
+AnnotationAssertion(SOMA:UsageGuideline SOMA:causes "Simple relationship between two actions to express that the object (the reaction) would not have occured if it were not for the subject (the cause), e.g., a Communication Action classified as an Querying Task causes another Communication Task classified as an Answering Task and the latter would not have occured without the former. An example without Agents involved is some domino stone that would not have toppled without the first one toppling.
 
 When Agents are involved, the relation might be seen as an abstraction of the execution of some plan that arises from changing the agents goal that is due to perceiving the cause. However, currently it is unclear how to model such a pattern and therefore not included in SOMA.
 
 This relation is seen as transitive."@en)
 AnnotationAssertion(rdfs:label SOMA:causes "causes"@en)
-SubObjectPropertyOf(SOMA:causes <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes>)
+SubObjectPropertyOf(SOMA:causes SOMA:affects)
+InverseObjectProperties(SOMA:causes SOMA:isReactionTo)
 TransitiveObjectProperty(SOMA:causes)
 
 # Object Property: SOMA:definesEventType (defines event type)
@@ -282,6 +292,12 @@ IrreflexiveObjectProperty(SOMA:hasTerminalSituation)
 ObjectPropertyDomain(SOMA:hasTerminalSituation SOMA:SituationTransition)
 ObjectPropertyRange(SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 
+# Object Property: SOMA:isAffectedBy (is affected by)
+
+AnnotationAssertion(rdfs:comment SOMA:isAffectedBy "Simple relationship between two actions to express that a variation in the course or outcome of the the subject (the affectee) would have resulted in a variation in the object (the affector), e.g., a planning task that sets parameters such as goal position affects the subsequently executed pick-and-place task that uses that parameter.")
+AnnotationAssertion(rdfs:label SOMA:isAffectedBy "is affected by")
+SubObjectPropertyOf(SOMA:isAffectedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#follows>)
+
 # Object Property: SOMA:isAskedBy (is asked by)
 
 AnnotationAssertion(rdfs:comment SOMA:isAskedBy "A relation from a Query to the Agent who asks it."^^xsd:string)
@@ -341,7 +357,7 @@ When Agents are involved, the relation might be seen as an abstraction of the ex
 
 This relation is seen as transitive."@en)
 AnnotationAssertion(rdfs:label SOMA:isReactionTo "is reaction to")
-SubObjectPropertyOf(SOMA:isReactionTo <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#follows>)
+SubObjectPropertyOf(SOMA:isReactionTo SOMA:isAffectedBy)
 TransitiveObjectProperty(SOMA:isReactionTo)
 ObjectPropertyDomain(SOMA:isReactionTo <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 ObjectPropertyRange(SOMA:isReactionTo <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
