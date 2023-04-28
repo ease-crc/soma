@@ -35,6 +35,19 @@ Also defined here are execution state regions, i.e. flags with which to label th
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#affects -->
+
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#affects">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isAffectedBy"/>
+        <rdfs:comment>Simple relationship between two actions to express that a variation in the course or outcome of the subject (the affector) would have resulted in a variation in the object (the affectee), e.g., a planning task that sets parameters such as goal position affects the subsequently executed pick-and-place task that uses that parameter.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
+        <rdfs:label>affects</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#answers -->
 
 
@@ -54,14 +67,15 @@ Also defined here are execution state regions, i.e. flags with which to label th
 
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#causes">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affects"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isReactionTo"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
-        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
-        <rdfs:label xml:lang="en">Simple relationship between two actions to express that the object (the reaction) would not have occured if it were not for the subject (the cause), e.g., a Communication Action classified as an Querying Task causes another Communication Task classified as an Answering Task and the latter would not have occured without the former. An example without Agents involved would be some domino stone would not have toppled without the first one toppling.
+        <SOMA:UsageGuideline xml:lang="en">Simple relationship between two actions to express that the object (the reaction) would not have occured if it were not for the subject (the cause), e.g., a Communication Action classified as an Querying Task causes another Communication Task classified as an Answering Task and the latter would not have occured without the former. An example without Agents involved is some domino stone that would not have toppled without the first one toppling.
 
 When Agents are involved, the relation might be seen as an abstraction of the execution of some plan that arises from changing the agents goal that is due to perceiving the cause. However, currently it is unclear how to model such a pattern and therefore not included in SOMA.
 
-This relation is seen as transitive.</rdfs:label>
+This relation is seen as transitive.</SOMA:UsageGuideline>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
         <rdfs:label xml:lang="en">causes</rdfs:label>
     </owl:ObjectProperty>
     
@@ -200,6 +214,18 @@ The distinction to defines task is necessary to let Dispositions and Affordances
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isAffectedBy -->
+
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isAffectedBy">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#follows"/>
+        <rdfs:comment>Simple relationship between two actions to express that a variation in the course or outcome of the object (the affector) would have resulted in a variation in the subject (the affectee), e.g., a planning task that sets parameters such as goal position affects the subsequently executed pick-and-place task that uses that parameter.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
+        <rdfs:label>is affected by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#isAskedBy -->
 
 
@@ -307,7 +333,7 @@ The distinction to &apos;is task defined in&apos; is necessary to let Dispositio
 
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isReactionTo">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#follows"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isAffectedBy"/>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
         <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
         <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
