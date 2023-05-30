@@ -29,7 +29,7 @@ public class CIRunner implements CommandLineRunner {
 
 	@Override
 	public void run(final String... args) throws Exception {
-		final CIRunnable[] toRun = {gciRewriter, isDefinedInAdder, iriNamespaceRewriter, versionInfoAdder, collapser, ontologySaver};
+		final CIRunnable[] toRun = {iriNamespaceRewriter, gciRewriter, isDefinedInAdder, versionInfoAdder, collapser, ontologySaver};
 		for (final var next : toRun) {
 			next.run();
 		}

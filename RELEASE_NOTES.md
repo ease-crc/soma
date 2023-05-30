@@ -1,5 +1,13 @@
 # Release Notes
 
+## 3.0.0
+### Braking changes
+*   Remove SOMA namespace inconsistencies
+    <details>
+        <summary>Details</summary>
+        Some entities used namespaces other than DUL or SOMA, e.g. SOMA-OBJ or SOMA-ACT, which caused problems for some systems that always expect the SOMA namespace. All SOMA entities are now in the SOMA namespace instead of a sub-namespace.
+    </details>
+
 ## 2.0.0
 ### Braking changes
 *   Removal of `IOLite`
