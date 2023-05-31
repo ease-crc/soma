@@ -90,9 +90,8 @@ jobs:
           path: ./build/files/oops.xml
   
   consistency:
-    name: HermiT
+    name: Konclude
     runs-on: ubuntu-latest
-    needs: compile
 
     steps:
       - name: Checkout
@@ -100,26 +99,29 @@ jobs:
         with:
           fetch-depth: 1
 
-      - uses: actions/download-artifact@v1
+      - name: Setup Java
+        uses: actions/setup-java@v3
         with:
-          name: SOMA OWL
-          path: ./build/owl/current
+          distribution: 'temurin'
+          java-version: '18'
+          cache: 'maven'
 
-      - name: Download DUL
-        run: wget http://www.ease-crc.org/ont/DUL.owl -O ./build/DUL.owl
+      - name: Compile
+        run: |
+          mvn spring-boot:run -f scripts/java/pom.xml \
+             -Dspring-boot.run.arguments="--versionInfo=current \
+             --propertyListPath=$PWD/properties"
 
-      - name: HermiT
-        uses: ./.github/actions/hermit
-        with:
-          args: ./build/DUL.owl ./build/SOMA-HOME.owl
+      - name: Konclude
+        run: docker run -v $PWD/build:/data --rm konclude/konclude classify -i /data/SOMA-HOME.owl -o /data/konclude.output
 
-      - name: Print HermiT output
-        run: cat ./hermit.output
+      - name: Print Konclude output
+        run: cat ./build/konclude.output
         if: always()
 
-      - name: Evaluate HermiT output
+      - name: Evaluate Konclude output
         if: success()
         uses: docker://python:3.7.6-slim
         with:
-          args: python ./scripts/hermit_test.py -o ./owl/hermit.html ./hermit.output
+          args: python ./scripts/konclude_test.py -p $PWD/properties/SOMA-HOM_objectProperties -k ./.github/actions/Konclude -s ./build/SOMA-HOME.owl -o ./owl/konclude.html ./build/konclude.output
 
