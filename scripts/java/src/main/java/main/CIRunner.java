@@ -23,13 +23,13 @@ public class CIRunner implements CommandLineRunner {
 	@Autowired
 	private SubclassNothingRewriter gciRewriter;
 
+	// only use if needed
 	@Autowired
 	private IRINamespaceRewriter iriNamespaceRewriter;
 
-
 	@Override
 	public void run(final String... args) throws Exception {
-		final CIRunnable[] toRun = {iriNamespaceRewriter, gciRewriter, isDefinedInAdder, versionInfoAdder, collapser, ontologySaver};
+		final CIRunnable[] toRun = {gciRewriter, isDefinedInAdder, versionInfoAdder, collapser, ontologySaver};
 		for (final var next : toRun) {
 			next.run();
 		}
