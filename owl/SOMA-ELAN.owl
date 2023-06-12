@@ -1,470 +1,225 @@
-<?xml version="1.0"?>
-<rdf:RDF xmlns="http://www.ease-crc.org/ont/SOMA-ELAN.owl#"
-     xml:base="http://www.ease-crc.org/ont/SOMA-ELAN.owl"
-     xmlns:dc="http://purl.org/dc/elements/1.1/"
-     xmlns:owl="http://www.w3.org/2002/07/owl#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-    <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA-ELAN.owl">
-        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
-        <rdfs:comment>SOMA-ELAN.owl is chiefly concerned with providing a controlled vocabulary for annotations of human activity episodes coming from the area H subprojects of the EASE CRC.
+Prefix(:=<http://www.ease-crc.org/ont/SOMA-ELAN.owl#>)
+Prefix(dc:=<http://purl.org/dc/elements/1.1/>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(SOMA:=<http://www.ease-crc.org/ont/SOMA.owl#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
 
-SOMA-ELAN.owl should at least import SOMA-ACT.owl and therefore indirectly imports all other modules that SOMA-ACT depends on. This is because the controlled vocabulary is defined as alternative labels for concepts defined in the various modules of SOMA.</rdfs:comment>
-    </owl:Ontology>
-    
 
+Ontology(<http://www.ease-crc.org/ont/SOMA-ELAN.owl>
+Import(<http://www.ease-crc.org/ont/SOMA-ACT.owl>)
+Annotation(rdfs:comment "SOMA-ELAN.owl is chiefly concerned with providing a controlled vocabulary for annotations of human activity episodes coming from the area H subprojects of the EASE CRC.
 
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Annotation properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
+SOMA-ELAN.owl should at least import SOMA-ACT.owl and therefore indirectly imports all other modules that SOMA-ACT depends on. This is because the controlled vocabulary is defined as alternative labels for concepts defined in the various modules of SOMA.")
 
+Declaration(Class(SOMA:PrepareForBreakfast))
+Declaration(Class(SOMA:PrepareForDinner))
+Declaration(Class(SOMA:PrepareForLunch))
+Declaration(Class(SOMA:PrepareForMeal))
+Declaration(Class(SOMA:SettingTheTable))
+Declaration(DataProperty(SOMA:expectedNumberOfPeople))
+Declaration(DataProperty(SOMA:formalityLevel))
+Declaration(AnnotationProperty(SOMA:ELANName))
+Declaration(AnnotationProperty(SOMA:ELANUsageGuideline))
+Declaration(AnnotationProperty(SOMA:UsageGuideline))
+Declaration(AnnotationProperty(SOMA:nickname))
+############################
+#   Annotation Properties
+############################
 
-    
+# Annotation Property: <http://www.ease-crc.org/ont/SOMA.owl#ELANName> (<http://www.ease-crc.org/ont/SOMA.owl#ELANName>)
 
+AnnotationAssertion(rdfs:comment SOMA:ELANName "If present, used by the controlled vocabulary generation script to create a vocabulary entry. By default, the concept name itself is used for the vocabulary entry.")
+SubAnnotationPropertyOf(SOMA:ELANName SOMA:nickname)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#ELANName -->
-
-
-    <owl:AnnotationProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ELANName">
-        <rdfs:comment>If present, used by the controlled vocabulary generation script to create a vocabulary entry. By default, the concept name itself is used for the vocabulary entry.</rdfs:comment>
-        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#nickname"/>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline -->
-
-
-    <owl:AnnotationProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline">
-        <rdfs:comment>Provides a short description, similar to a definition, of a controlled vocabulary entry for ELAN.</rdfs:comment>
-        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#UsageGuideline"/>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#UsageGuideline -->
-
-
-    <owl:AnnotationProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#UsageGuideline"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#nickname -->
-
-
-    <owl:AnnotationProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#nickname"/>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Data properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#expectedNumberOfPeople -->
-
-
-    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#expectedNumberOfPeople">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
-        <rdfs:domain>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </rdfs:domain>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
-        <rdfs:comment>Used by the description of a task that classifies some event, usually a social gathering such as a meal, or by a description of a task to prepare for such an event, to record the number of people expected to participate.</rdfs:comment>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#formalityLevel -->
-
-
-    <owl:DatatypeProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#formalityLevel">
-        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue"/>
-        <rdfs:domain>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </rdfs:domain>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-        <rdfs:comment>Records the formality level in a description associated to some event, usually a social gathering such as a meal.
-
-The association between the Description and the Event can be direct (the Description is about the Event itself) but it can also be indirect in various ways. A typical example of the latter is where the Description is a Goal for a Task to prepare for the Event in question, as when the Goal of a SettingTheTable task would record the formality level of a meal, which will occur at some point after the task completes.</rdfs:comment>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Classes
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Arranging -->
-
-
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Arranging">
-        <SOMA:ELANName>construction-arrange-objects</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>A task involving the arrangement of a collection of objects in a particular way.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#PrepareForBreakfast -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PrepareForBreakfast">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PrepareForMeal"/>
-        <rdfs:comment>Describes a goal to prepare a table or dining area for a breakfast.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#PrepareForDinner -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PrepareForDinner">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PrepareForMeal"/>
-        <rdfs:comment>Describes a goal to prepare a table or dining area for a dinner.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#PrepareForLunch -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PrepareForLunch">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PrepareForMeal"/>
-        <rdfs:comment>Describes a goal to prepare a table or dining area for a lunch.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#PrepareForMeal -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PrepareForMeal">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#expectedNumberOfPeople"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#formalityLevel"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A description of a goal to prepare for serving a meal by setting a table.
-
-The meal will have a number of expected participants and a level of formality.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#SettingTheTable -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SettingTheTable">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Arranging"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskDefinedIn"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PrepareForMeal"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>The task to prepare a table for a meal.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Annotations
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Actuating">
-        <SOMA:ELANName>move-object</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Superconcept for the Agent moving some (usually, but not always, grasped) object; use more specific labels where appropriate.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Approaching">
-        <SOMA:ELANName>move-body-walk-to</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>walk (to a location, or in a direction)</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AreaSurveying">
-        <SOMA:ELANName>perception-survey-area</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Visually survey an area, for objects or potential object positions.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Assembling">
-        <SOMA:ELANName>construction-assembly</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>A task involving the putting together of objects to form an assembly, usually in a way in which these objects can be recovered.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#BodyMovement">
-        <SOMA:ELANName>move-body-general</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>The Agent moves its body in some way. Use more specific labels where appropriate.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Catching">
-        <SOMA:ELANName>move-object-catch</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Agent intercepts and arrests the motion of an object.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Closing">
-        <SOMA:ELANName>move-object-close</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Move an object so that it no longer exposes an interior surface.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Constructing">
-        <SOMA:ELANName>construction-general</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Superconcept for tasks requiring the creation of some object (including an arrangement or collection of objects); use more specific labels where appropriate</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Cutting">
-        <SOMA:ELANName>object-modification-cutting</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>A task that requires some object to be cut into pieces. The cut is often irreversible.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Dicing">
-        <SOMA:ELANName>object-modification-dicing</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>A task that requires an object to be (at least partially) cut into slices.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Distancing">
-        <SOMA:ELANName>move-body-walk-backaway</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>walk (away from a location, in a direction)</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Dropping">
-        <SOMA:ELANName>move-object-drop</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Agent undoes whatever functional control they have on an object, but without imparting significant momentum to it, and allows the object to fall under the influence of gravity.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#EndEffectorPositioning">
-        <SOMA:ELANName>manipulation-hand-positioning</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Superconcept for the Agent moving their arm(s) to positioning their hand/end effector; use more specific labels where appropriate.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#GraspTransfer">
-        <SOMA:ELANName>move-hand-grasp-transfer</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>have grasped an object with one hand, now grasp it with the other and release it from the first</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Grasping">
-        <SOMA:ELANName>manipulation-grasp</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Agent grasps an object.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#HeadMovement">
-        <SOMA:ELANName>move-head</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Superconcept for the Agent moving their head; use more specific labels where appropriate.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#HeadTurning">
-        <SOMA:ELANName>move-head-turn</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Turn head (e.g. for visual search).</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Holding">
-        <SOMA:ELANName>move-object-hold</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Have grasped an object with hand, and move it while held.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Leaning">
-        <SOMA:ELANName>move-body-lean</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>move, bending, with torso in a specific direction</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Lifting">
-        <SOMA:ELANName>move-object-lift</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Having grasped an object with their hand, the agent now lifts it from the supporting surface.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Locomotion">
-        <SOMA:ELANName>move-body-locomotion</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Superconcept for the Agent moving around; use more specific labels where appropriate.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#LookingFor">
-        <SOMA:ELANName>perception-search-for-object</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>The agent searches, usually visually, for the location, or a possible new location, of an object</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Lowering">
-        <SOMA:ELANName>move-object-lower</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>The agent lowers a, usually held in hand(s), object.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Manipulating">
-        <SOMA:ELANName>manipulation-general</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>These are Actions in which the Agent exerts or prepares to exert some influence over some other participant Phyiscal Objects by way of its prehensile body parts (usually, hands).</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionEvaluationTopic">
-        <SOMA:ELANName>ta-meta-cognition-evaluation</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>an agent analyzes and describes the process by which they evaluate whether/to what a extent a goal was reached</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionMemoryTopic">
-        <SOMA:ELANName>ta-meta-cognition-memory</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>an agent describes how and/or why they (failed to) memorize something</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionPlanningTopic">
-        <SOMA:ELANName>ta-meta-cognition-planning</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>an agent analyzes and describes the process they use to plan their behavior</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MetaCognitionTopic">
-        <SOMA:ELANName>ta-meta-cognition</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Superconcept for cases where the agent describes the results of analyzing their own thought processes; use more specific labels where appropriate.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Mixing">
-        <SOMA:ELANName>construction-mixing</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>A task involving the putting together of several objects, which are thereafter not recoverable.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ModifyingPhysicalObject">
-        <SOMA:ELANName>object-modification-general</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Superconcept for tasks involving the changing of the state some object(s) is/are in; use more specific labels where appropriate.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MovingAway">
-        <SOMA:ELANName>move-body-walk-backaway</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>walk (away from a location, in a direction)</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Opening">
-        <SOMA:ELANName>move-object-open</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Move an object so as to expose an interior surface.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Orienting">
-        <SOMA:ELANName>move-object-orient</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Move object to re-orient it in place on an area, or while holding.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Perceiving">
-        <SOMA:ELANName>perception-general</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Superconcept for perception tasks. Use more specific levels where appropriate.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PhysicalAcquiring">
-        <SOMA:ELANName>physically-acquire-object</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Superconcept for tasks requiring that an object be put in such a physical state so that it is usable/available for other tasks.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PhysicalAction">
-        <SOMA:ELANUsageGuideline>Superconcept for the Agent doing something with their hands/end effectors; use more specific labels where appropriate.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PickingUp">
-        <SOMA:ELANName>move-object-pick-up</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Agent grasps an object and removes it from its previous location.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Positioning">
-        <SOMA:ELANName>move-object-positioning</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Move an object so that it has a particular pose.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PosturalMoving">
-        <SOMA:ELANName>move-body-posture</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Superconcept for motions where the Agent changes posture; use more specific labels where appropriate.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Pushing">
-        <SOMA:ELANName>move-object-push</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Superconcept for the Agent exerting force on an object to push it; use more specific labels where appropriate.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PushingAway">
-        <SOMA:ELANName>move-object-push-away</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Agent exerts force on an object to move it away from themselves.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PushingDown">
-        <SOMA:ELANName>move-object-push-down</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Exert force on an object to move it in some functionally meaningful direction, such as pushing down a button (even when the actual direction the button was pushed in was up).</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PuttingDown">
-        <SOMA:ELANName>manipulation-put-down</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Agent releases their grasp on an object, but only after positioning it so that it is supported and won&apos;t fall.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Reaching">
-        <SOMA:ELANName>move-hand+arm-reach</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Reach arm out to prepare to grasp with hand.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Releasing">
-        <SOMA:ELANName>manipulation-release</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Agent releases grasp on an object.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Retracting">
-        <SOMA:ELANName>move-hand+arm-retract</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Draw in arm and hand toward body, and away from some object or location.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Slicing">
-        <SOMA:ELANName>object-modification-slicing</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>A task that requires an object to be (at least partially) cut into approximately cubic pieces.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Squeezing">
-        <SOMA:ELANName>move-object-squeeze</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Exert compressive force on a (usually, but not always, grasped) object.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Standing">
-        <SOMA:ELANName>move-body-stand</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>stand (at a location)</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudActionTopic">
-        <SOMA:ELANName>ta-actions</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>an agent describes what they are currently doing</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudGeneralKnowledgeTopic">
-        <SOMA:ELANName>ta-knowledge-general</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>an agent makes a statement of general knowledge, as opposed to knowledge specific to the immediate environment they are in</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudKnowledgeTopic">
-        <SOMA:ELANName>ta-knowledge</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Superconcept for when an agent makes a statement of knowledge of something not immediately perceivable; use more specific labels where appropriate.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudObstructionTopic">
-        <SOMA:ELANName>ta-issues</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>an agent describes what prevents them from undertaking some action</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudOpinionTopic">
-        <SOMA:ELANName>ta-opinions</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>an agent makes a statement of opinion</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudPerceptionTopic">
-        <SOMA:ELANName>ta-perception</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>an agent describes what they perceive</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudPlanTopic">
-        <SOMA:ELANName>ta-plans</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>an agent describes their current plan</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ThinkAloudSceneKnowledgeTopic">
-        <SOMA:ELANName>ta-knowledge-scene</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>an agent makes a statement that they know something about the environment they are in, which they cannot at that moment perceive directly (but they may have perceived it earlier)</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Throwing">
-        <SOMA:ELANName>move-object-throw</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>Using its arm(s), an agent imparts momentum to a held object then releases it.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Transporting">
-        <SOMA:ELANName>transport-object</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>A task that requires chaging the location of an object.</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Turning">
-        <SOMA:ELANName>move-body-turn</SOMA:ELANName>
-        <SOMA:ELANUsageGuideline>move own body, turn</SOMA:ELANUsageGuideline>
-    </rdf:Description>
-</rdf:RDF>
-
-
-
-<!-- Generated by the OWL API (version 5.1.20.2022-02-19T16:38:31Z) https://github.com/owlcs/owlapi/ -->
-
-
+# Annotation Property: <http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline> (<http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline>)
+
+AnnotationAssertion(rdfs:comment SOMA:ELANUsageGuideline "Provides a short description, similar to a definition, of a controlled vocabulary entry for ELAN.")
+SubAnnotationPropertyOf(SOMA:ELANUsageGuideline SOMA:UsageGuideline)
+
+
+
+############################
+#   Data Properties
+############################
+
+# Data Property: <http://www.ease-crc.org/ont/SOMA.owl#expectedNumberOfPeople> (<http://www.ease-crc.org/ont/SOMA.owl#expectedNumberOfPeople>)
+
+AnnotationAssertion(rdfs:comment SOMA:expectedNumberOfPeople "Used by the description of a task that classifies some event, usually a social gathering such as a meal, or by a description of a task to prepare for such an event, to record the number of people expected to participate.")
+SubDataPropertyOf(SOMA:expectedNumberOfPeople <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue>)
+DataPropertyDomain(SOMA:expectedNumberOfPeople ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)))
+DataPropertyRange(SOMA:expectedNumberOfPeople xsd:integer)
+
+# Data Property: <http://www.ease-crc.org/ont/SOMA.owl#formalityLevel> (<http://www.ease-crc.org/ont/SOMA.owl#formalityLevel>)
+
+AnnotationAssertion(rdfs:comment SOMA:formalityLevel "Records the formality level in a description associated to some event, usually a social gathering such as a meal.
+
+The association between the Description and the Event can be direct (the Description is about the Event itself) but it can also be indirect in various ways. A typical example of the latter is where the Description is a Goal for a Task to prepare for the Event in question, as when the Goal of a SettingTheTable task would record the formality level of a meal, which will occur at some point after the task completes.")
+SubDataPropertyOf(SOMA:formalityLevel <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue>)
+DataPropertyDomain(SOMA:formalityLevel ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)))
+DataPropertyRange(SOMA:formalityLevel xsd:string)
+
+
+
+############################
+#   Classes
+############################
+
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Arranging> (<http://www.ease-crc.org/ont/SOMA.owl#Arranging>)
+
+AnnotationAssertion(SOMA:ELANName SOMA:Arranging "construction-arrange-objects")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Arranging "A task involving the arrangement of a collection of objects in a particular way.")
+
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#PrepareForBreakfast> (<http://www.ease-crc.org/ont/SOMA.owl#PrepareForBreakfast>)
+
+AnnotationAssertion(rdfs:comment SOMA:PrepareForBreakfast "Describes a goal to prepare a table or dining area for a breakfast.")
+SubClassOf(SOMA:PrepareForBreakfast SOMA:PrepareForMeal)
+
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#PrepareForDinner> (<http://www.ease-crc.org/ont/SOMA.owl#PrepareForDinner>)
+
+AnnotationAssertion(rdfs:comment SOMA:PrepareForDinner "Describes a goal to prepare a table or dining area for a dinner.")
+SubClassOf(SOMA:PrepareForDinner SOMA:PrepareForMeal)
+
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#PrepareForLunch> (<http://www.ease-crc.org/ont/SOMA.owl#PrepareForLunch>)
+
+AnnotationAssertion(rdfs:comment SOMA:PrepareForLunch "Describes a goal to prepare a table or dining area for a lunch.")
+SubClassOf(SOMA:PrepareForLunch SOMA:PrepareForMeal)
+
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#PrepareForMeal> (<http://www.ease-crc.org/ont/SOMA.owl#PrepareForMeal>)
+
+AnnotationAssertion(rdfs:comment SOMA:PrepareForMeal "A description of a goal to prepare for serving a meal by setting a table.
+
+The meal will have a number of expected participants and a level of formality.")
+SubClassOf(SOMA:PrepareForMeal <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal>)
+SubClassOf(SOMA:PrepareForMeal DataSomeValuesFrom(SOMA:expectedNumberOfPeople xsd:integer))
+SubClassOf(SOMA:PrepareForMeal DataSomeValuesFrom(SOMA:formalityLevel xsd:boolean))
+
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#SettingTheTable> (<http://www.ease-crc.org/ont/SOMA.owl#SettingTheTable>)
+
+AnnotationAssertion(rdfs:comment SOMA:SettingTheTable "The task to prepare a table for a meal.")
+SubClassOf(SOMA:SettingTheTable SOMA:Arranging)
+SubClassOf(SOMA:SettingTheTable ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskDefinedIn> SOMA:PrepareForMeal))
+
+
+AnnotationAssertion(SOMA:ELANName SOMA:Actuating "move-object")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Actuating "Superconcept for the Agent moving some (usually, but not always, grasped) object; use more specific labels where appropriate.")
+AnnotationAssertion(SOMA:ELANName SOMA:Approaching "move-body-walk-to")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Approaching "walk (to a location, or in a direction)")
+AnnotationAssertion(SOMA:ELANName SOMA:AreaSurveying "perception-survey-area")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:AreaSurveying "Visually survey an area, for objects or potential object positions.")
+AnnotationAssertion(SOMA:ELANName SOMA:Assembling "construction-assembly")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Assembling "A task involving the putting together of objects to form an assembly, usually in a way in which these objects can be recovered.")
+AnnotationAssertion(SOMA:ELANName SOMA:BodyMovement "move-body-general")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:BodyMovement "The Agent moves its body in some way. Use more specific labels where appropriate.")
+AnnotationAssertion(SOMA:ELANName SOMA:Catching "move-object-catch")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Catching "Agent intercepts and arrests the motion of an object.")
+AnnotationAssertion(SOMA:ELANName SOMA:Closing "move-object-close")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Closing "Move an object so that it no longer exposes an interior surface.")
+AnnotationAssertion(SOMA:ELANName SOMA:Constructing "construction-general")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Constructing "Superconcept for tasks requiring the creation of some object (including an arrangement or collection of objects); use more specific labels where appropriate")
+AnnotationAssertion(SOMA:ELANName SOMA:Cutting "object-modification-cutting")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Cutting "A task that requires some object to be cut into pieces. The cut is often irreversible.")
+AnnotationAssertion(SOMA:ELANName SOMA:Dicing "object-modification-dicing")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Dicing "A task that requires an object to be (at least partially) cut into slices.")
+AnnotationAssertion(SOMA:ELANName SOMA:Distancing "move-body-walk-backaway")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Distancing "walk (away from a location, in a direction)")
+AnnotationAssertion(SOMA:ELANName SOMA:Dropping "move-object-drop")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Dropping "Agent undoes whatever functional control they have on an object, but without imparting significant momentum to it, and allows the object to fall under the influence of gravity.")
+AnnotationAssertion(SOMA:ELANName SOMA:EndEffectorPositioning "manipulation-hand-positioning")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:EndEffectorPositioning "Superconcept for the Agent moving their arm(s) to positioning their hand/end effector; use more specific labels where appropriate.")
+AnnotationAssertion(SOMA:ELANName SOMA:GraspTransfer "move-hand-grasp-transfer")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:GraspTransfer "have grasped an object with one hand, now grasp it with the other and release it from the first")
+AnnotationAssertion(SOMA:ELANName SOMA:Grasping "manipulation-grasp")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Grasping "Agent grasps an object.")
+AnnotationAssertion(SOMA:ELANName SOMA:HeadMovement "move-head")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:HeadMovement "Superconcept for the Agent moving their head; use more specific labels where appropriate.")
+AnnotationAssertion(SOMA:ELANName SOMA:HeadTurning "move-head-turn")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:HeadTurning "Turn head (e.g. for visual search).")
+AnnotationAssertion(SOMA:ELANName SOMA:Holding "move-object-hold")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Holding "Have grasped an object with hand, and move it while held.")
+AnnotationAssertion(SOMA:ELANName SOMA:Leaning "move-body-lean")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Leaning "move, bending, with torso in a specific direction")
+AnnotationAssertion(SOMA:ELANName SOMA:Lifting "move-object-lift")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Lifting "Having grasped an object with their hand, the agent now lifts it from the supporting surface.")
+AnnotationAssertion(SOMA:ELANName SOMA:Locomotion "move-body-locomotion")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Locomotion "Superconcept for the Agent moving around; use more specific labels where appropriate.")
+AnnotationAssertion(SOMA:ELANName SOMA:LookingFor "perception-search-for-object")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:LookingFor "The agent searches, usually visually, for the location, or a possible new location, of an object")
+AnnotationAssertion(SOMA:ELANName SOMA:Lowering "move-object-lower")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Lowering "The agent lowers a, usually held in hand(s), object.")
+AnnotationAssertion(SOMA:ELANName SOMA:Manipulating "manipulation-general")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Manipulating "These are Actions in which the Agent exerts or prepares to exert some influence over some other participant Phyiscal Objects by way of its prehensile body parts (usually, hands).")
+AnnotationAssertion(SOMA:ELANName SOMA:MetaCognitionEvaluationTopic "ta-meta-cognition-evaluation")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:MetaCognitionEvaluationTopic "an agent analyzes and describes the process by which they evaluate whether/to what a extent a goal was reached")
+AnnotationAssertion(SOMA:ELANName SOMA:MetaCognitionMemoryTopic "ta-meta-cognition-memory")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:MetaCognitionMemoryTopic "an agent describes how and/or why they (failed to) memorize something")
+AnnotationAssertion(SOMA:ELANName SOMA:MetaCognitionPlanningTopic "ta-meta-cognition-planning")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:MetaCognitionPlanningTopic "an agent analyzes and describes the process they use to plan their behavior")
+AnnotationAssertion(SOMA:ELANName SOMA:MetaCognitionTopic "ta-meta-cognition")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:MetaCognitionTopic "Superconcept for cases where the agent describes the results of analyzing their own thought processes; use more specific labels where appropriate.")
+AnnotationAssertion(SOMA:ELANName SOMA:Mixing "construction-mixing")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Mixing "A task involving the putting together of several objects, which are thereafter not recoverable.")
+AnnotationAssertion(SOMA:ELANName SOMA:ModifyingPhysicalObject "object-modification-general")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ModifyingPhysicalObject "Superconcept for tasks involving the changing of the state some object(s) is/are in; use more specific labels where appropriate.")
+AnnotationAssertion(SOMA:ELANName SOMA:MovingAway "move-body-walk-backaway")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:MovingAway "walk (away from a location, in a direction)")
+AnnotationAssertion(SOMA:ELANName SOMA:Opening "move-object-open")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Opening "Move an object so as to expose an interior surface.")
+AnnotationAssertion(SOMA:ELANName SOMA:Orienting "move-object-orient")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Orienting "Move object to re-orient it in place on an area, or while holding.")
+AnnotationAssertion(SOMA:ELANName SOMA:Perceiving "perception-general")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Perceiving "Superconcept for perception tasks. Use more specific levels where appropriate.")
+AnnotationAssertion(SOMA:ELANName SOMA:PhysicalAcquiring "physically-acquire-object")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:PhysicalAcquiring "Superconcept for tasks requiring that an object be put in such a physical state so that it is usable/available for other tasks.")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:PhysicalAction "Superconcept for the Agent doing something with their hands/end effectors; use more specific labels where appropriate.")
+AnnotationAssertion(SOMA:ELANName SOMA:PickingUp "move-object-pick-up")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:PickingUp "Agent grasps an object and removes it from its previous location.")
+AnnotationAssertion(SOMA:ELANName SOMA:Positioning "move-object-positioning")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Positioning "Move an object so that it has a particular pose.")
+AnnotationAssertion(SOMA:ELANName SOMA:PosturalMoving "move-body-posture")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:PosturalMoving "Superconcept for motions where the Agent changes posture; use more specific labels where appropriate.")
+AnnotationAssertion(SOMA:ELANName SOMA:Pushing "move-object-push")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Pushing "Superconcept for the Agent exerting force on an object to push it; use more specific labels where appropriate.")
+AnnotationAssertion(SOMA:ELANName SOMA:PushingAway "move-object-push-away")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:PushingAway "Agent exerts force on an object to move it away from themselves.")
+AnnotationAssertion(SOMA:ELANName SOMA:PushingDown "move-object-push-down")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:PushingDown "Exert force on an object to move it in some functionally meaningful direction, such as pushing down a button (even when the actual direction the button was pushed in was up).")
+AnnotationAssertion(SOMA:ELANName SOMA:PuttingDown "manipulation-put-down")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:PuttingDown "Agent releases their grasp on an object, but only after positioning it so that it is supported and won't fall.")
+AnnotationAssertion(SOMA:ELANName SOMA:Reaching "move-hand+arm-reach")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Reaching "Reach arm out to prepare to grasp with hand.")
+AnnotationAssertion(SOMA:ELANName SOMA:Releasing "manipulation-release")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Releasing "Agent releases grasp on an object.")
+AnnotationAssertion(SOMA:ELANName SOMA:Retracting "move-hand+arm-retract")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Retracting "Draw in arm and hand toward body, and away from some object or location.")
+AnnotationAssertion(SOMA:ELANName SOMA:Slicing "object-modification-slicing")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Slicing "A task that requires an object to be (at least partially) cut into approximately cubic pieces.")
+AnnotationAssertion(SOMA:ELANName SOMA:Squeezing "move-object-squeeze")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Squeezing "Exert compressive force on a (usually, but not always, grasped) object.")
+AnnotationAssertion(SOMA:ELANName SOMA:Standing "move-body-stand")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Standing "stand (at a location)")
+AnnotationAssertion(SOMA:ELANName SOMA:ThinkAloudActionTopic "ta-actions")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ThinkAloudActionTopic "an agent describes what they are currently doing")
+AnnotationAssertion(SOMA:ELANName SOMA:ThinkAloudGeneralKnowledgeTopic "ta-knowledge-general")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ThinkAloudGeneralKnowledgeTopic "an agent makes a statement of general knowledge, as opposed to knowledge specific to the immediate environment they are in")
+AnnotationAssertion(SOMA:ELANName SOMA:ThinkAloudKnowledgeTopic "ta-knowledge")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ThinkAloudKnowledgeTopic "Superconcept for when an agent makes a statement of knowledge of something not immediately perceivable; use more specific labels where appropriate.")
+AnnotationAssertion(SOMA:ELANName SOMA:ThinkAloudObstructionTopic "ta-issues")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ThinkAloudObstructionTopic "an agent describes what prevents them from undertaking some action")
+AnnotationAssertion(SOMA:ELANName SOMA:ThinkAloudOpinionTopic "ta-opinions")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ThinkAloudOpinionTopic "an agent makes a statement of opinion")
+AnnotationAssertion(SOMA:ELANName SOMA:ThinkAloudPerceptionTopic "ta-perception")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ThinkAloudPerceptionTopic "an agent describes what they perceive")
+AnnotationAssertion(SOMA:ELANName SOMA:ThinkAloudPlanTopic "ta-plans")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ThinkAloudPlanTopic "an agent describes their current plan")
+AnnotationAssertion(SOMA:ELANName SOMA:ThinkAloudSceneKnowledgeTopic "ta-knowledge-scene")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:ThinkAloudSceneKnowledgeTopic "an agent makes a statement that they know something about the environment they are in, which they cannot at that moment perceive directly (but they may have perceived it earlier)")
+AnnotationAssertion(SOMA:ELANName SOMA:Throwing "move-object-throw")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Throwing "Using its arm(s), an agent imparts momentum to a held object then releases it.")
+AnnotationAssertion(SOMA:ELANName SOMA:Transporting "transport-object")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Transporting "A task that requires chaging the location of an object.")
+AnnotationAssertion(SOMA:ELANName SOMA:Turning "move-body-turn")
+AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Turning "move own body, turn")
+)

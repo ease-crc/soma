@@ -1,1545 +1,718 @@
-<?xml version="1.0"?>
-<rdf:RDF xmlns="http://www.ease-crc.org/ont/SOMA-HOME.owl#"
-     xml:base="http://www.ease-crc.org/ont/SOMA-HOME.owl"
-     xmlns:dc="http://purl.org/dc/elements/1.1/"
-     xmlns:owl="http://www.w3.org/2002/07/owl#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:SOMA="http://www.ease-crc.org/ont/SOMA.owl#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-    <owl:Ontology rdf:about="http://www.ease-crc.org/ont/SOMA-HOME.owl">
-        <owl:imports rdf:resource="http://www.ease-crc.org/ont/SOMA-ALL.owl"/>
-        <rdfs:comment>SOMA-HOME defines the concepts that are specific to home, e.g. kitchen environment, household items.</rdfs:comment>
-    </owl:Ontology>
-    
+Prefix(:=<http://www.ease-crc.org/ont/SOMA-HOME.owl#>)
+Prefix(dc:=<http://purl.org/dc/elements/1.1/>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(SOMA:=<http://www.ease-crc.org/ont/SOMA.owl#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+
+Ontology(<http://www.ease-crc.org/ont/SOMA-HOME.owl>
+Import(<http://www.ease-crc.org/ont/SOMA-ALL.owl>)
+Annotation(rdfs:comment "SOMA-HOME defines the concepts that are specific to home, e.g. kitchen environment, household items.")
+
+Declaration(Class(SOMA:Affordance))
+Declaration(Class(SOMA:AffordsBeingSitOn))
+Declaration(Class(SOMA:AgentRole))
+Declaration(Class(SOMA:Appliance))
+Declaration(Class(SOMA:Armchair))
+Declaration(Class(SOMA:AssumingPose))
+Declaration(Class(SOMA:BakedGood))
+Declaration(Class(SOMA:BedsideTable))
+Declaration(Class(SOMA:Blade))
+Declaration(Class(SOMA:Bottle))
+Declaration(Class(SOMA:Bowl))
+Declaration(Class(SOMA:Box))
+Declaration(Class(SOMA:BoxShape))
+Declaration(Class(SOMA:Bread))
+Declaration(Class(SOMA:BreadKnife))
+Declaration(Class(SOMA:BreakfastPlate))
+Declaration(Class(SOMA:Building))
+Declaration(Class(SOMA:CanBeSatOn))
+Declaration(Class(SOMA:CanSit))
+Declaration(Class(SOMA:Capability))
+Declaration(Class(SOMA:Carafe))
+Declaration(Class(SOMA:Ceiling))
+Declaration(Class(SOMA:CeramicCooktop))
+Declaration(Class(SOMA:CerealBox))
+Declaration(Class(SOMA:ClosingDisposition))
+Declaration(Class(SOMA:CoffeeCarafe))
+Declaration(Class(SOMA:CoffeeTable))
+Declaration(Class(SOMA:CoilCooktop))
+Declaration(Class(SOMA:Compartment))
+Declaration(Class(SOMA:Containment))
+Declaration(Class(SOMA:Cooktop))
+Declaration(Class(SOMA:Countertop))
+Declaration(Class(SOMA:Crockery))
+Declaration(Class(SOMA:Cup))
+Declaration(Class(SOMA:Cupboard))
+Declaration(Class(SOMA:Cutlery))
+Declaration(Class(SOMA:CuttingTool))
+Declaration(Class(SOMA:Deposition))
+Declaration(Class(SOMA:DesignedChair))
+Declaration(Class(SOMA:DesignedComponent))
+Declaration(Class(SOMA:DesignedContainer))
+Declaration(Class(SOMA:DesignedFurniture))
+Declaration(Class(SOMA:DesignedHandle))
+Declaration(Class(SOMA:DesignedSpade))
+Declaration(Class(SOMA:DesignedTool))
+Declaration(Class(SOMA:DessertFork))
+Declaration(Class(SOMA:Destination))
+Declaration(Class(SOMA:DinnerPlate))
+Declaration(Class(SOMA:Dish))
+Declaration(Class(SOMA:Dishwasher))
+Declaration(Class(SOMA:DishwasherTab))
+Declaration(Class(SOMA:Dispenser))
+Declaration(Class(SOMA:Door))
+Declaration(Class(SOMA:Drawer))
+Declaration(Class(SOMA:ElectricCooktop))
+Declaration(Class(SOMA:Floor))
+Declaration(Class(SOMA:Fork))
+Declaration(Class(SOMA:FreezerCompartment))
+Declaration(Class(SOMA:GasCooktop))
+Declaration(Class(SOMA:Glass))
+Declaration(Class(SOMA:Graspability))
+Declaration(Class(SOMA:Hotplate))
+Declaration(Class(SOMA:InductionCooktop))
+Declaration(Class(SOMA:Insertion))
+Declaration(Class(SOMA:JamJar))
+Declaration(Class(SOMA:Jar))
+Declaration(Class(SOMA:Kitchen))
+Declaration(Class(SOMA:KitchenCabinet))
+Declaration(Class(SOMA:KitchenKnife))
+Declaration(Class(SOMA:KitchenUnit))
+Declaration(Class(SOMA:Knife))
+Declaration(Class(SOMA:Lid))
+Declaration(Class(SOMA:Linkage))
+Declaration(Class(SOMA:MilkBottle))
+Declaration(Class(SOMA:MilkPack))
+Declaration(Class(SOMA:NutellaJar))
+Declaration(Class(SOMA:Oven))
+Declaration(Class(SOMA:Pack))
+Declaration(Class(SOMA:Pan))
+Declaration(Class(SOMA:Pancake))
+Declaration(Class(SOMA:PancakeMix))
+Declaration(Class(SOMA:PastaBowl))
+Declaration(Class(SOMA:PepperShaker))
+Declaration(Class(SOMA:Plate))
+Declaration(Class(SOMA:Pot))
+Declaration(Class(SOMA:Rack))
+Declaration(Class(SOMA:RaspberryJamJar))
+Declaration(Class(SOMA:Refrigerator))
+Declaration(Class(SOMA:Room))
+Declaration(Class(SOMA:RoomSurface))
+Declaration(Class(SOMA:SaladBowl))
+Declaration(Class(SOMA:SaltShaker))
+Declaration(Class(SOMA:Shaker))
+Declaration(Class(SOMA:Shaping))
+Declaration(Class(SOMA:Sink))
+Declaration(Class(SOMA:Sitting))
+Declaration(Class(SOMA:SittingDestination))
+Declaration(Class(SOMA:Sofa))
+Declaration(Class(SOMA:SoupPot))
+Declaration(Class(SOMA:Spatula))
+Declaration(Class(SOMA:Spoon))
+Declaration(Class(SOMA:Stove))
+Declaration(Class(SOMA:SugarDispenser))
+Declaration(Class(SOMA:Surface))
+Declaration(Class(SOMA:Table))
+Declaration(Class(SOMA:TableFork))
+Declaration(Class(SOMA:TableKnife))
+Declaration(Class(SOMA:TableSpoon))
+Declaration(Class(SOMA:Tableware))
+Declaration(Class(SOMA:Tap))
+Declaration(Class(SOMA:TeaSpoon))
+Declaration(Class(SOMA:Tempering))
+Declaration(Class(SOMA:TemperingByCooling))
+Declaration(Class(SOMA:TemperingByHeating))
+Declaration(Class(SOMA:TrashContainer))
+Declaration(Class(SOMA:Wall))
+Declaration(Class(SOMA:Wardrobe))
+Declaration(Class(SOMA:WaterBottle))
+Declaration(Class(SOMA:WaterGlass))
+Declaration(Class(SOMA:WineBottle))
+Declaration(Class(SOMA:WineGlass))
+Declaration(Class(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact>))
+Declaration(Class(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedSubstance>))
+Declaration(Class(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance>))
+Declaration(ObjectProperty(SOMA:affordsTrigger))
+Declaration(ObjectProperty(SOMA:definesBearer))
+Declaration(ObjectProperty(SOMA:definesTrigger))
+Declaration(ObjectProperty(SOMA:hasDisposition))
+Declaration(ObjectProperty(SOMA:hasPhysicalComponent))
+Declaration(ObjectProperty(SOMA:hasShapeRegion))
+Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies>))
+Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask>))
+Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes>))
+Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality>))
+Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy>))
+Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf>))
 
 
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Object Properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
 
+############################
+#   Classes
+############################
 
-    
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#AffordsBeingSitOn> (<http://www.ease-crc.org/ont/SOMA.owl#AffordsBeingSitOn>)
 
+AnnotationAssertion(rdfs:comment SOMA:AffordsBeingSitOn "A reified relation between a furniture-like object (the bearer), the sitting task it affords, and an agent that can assume a sitting pose (trigger).")
+SubClassOf(SOMA:AffordsBeingSitOn SOMA:Affordance)
+SubClassOf(SOMA:AffordsBeingSitOn ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes> SOMA:CanBeSatOn))
+SubClassOf(SOMA:AffordsBeingSitOn ObjectAllValuesFrom(SOMA:definesBearer SOMA:SittingDestination))
+SubClassOf(SOMA:AffordsBeingSitOn ObjectAllValuesFrom(SOMA:definesTrigger ObjectIntersectionOf(SOMA:AgentRole ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectSomeValuesFrom(SOMA:hasDisposition SOMA:CanSit)))))
+SubClassOf(SOMA:AffordsBeingSitOn ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask> SOMA:Sitting))
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger -->
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Appliance> (<http://www.ease-crc.org/ont/SOMA.owl#Appliance>)
 
+SubClassOf(SOMA:Appliance <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact>)
 
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger"/>
-    
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Armchair> (<http://www.ease-crc.org/ont/SOMA.owl#Armchair>)
 
+AnnotationAssertion(rdfs:comment SOMA:Armchair "A more comfortable chair that includes sides to support arms.")
+SubClassOf(SOMA:Armchair SOMA:DesignedChair)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#definesBearer -->
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#BakedGood> (<http://www.ease-crc.org/ont/SOMA.owl#BakedGood>)
 
+SubClassOf(SOMA:BakedGood SOMA:Dish)
 
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#definesBearer"/>
-    
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#BedsideTable> (<http://www.ease-crc.org/ont/SOMA.owl#BedsideTable>)
 
+AnnotationAssertion(rdfs:comment SOMA:BedsideTable "A small table typically located next to a bed.")
+SubClassOf(SOMA:BedsideTable SOMA:Table)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#definesTrigger -->
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Blade> (<http://www.ease-crc.org/ont/SOMA.owl#Blade>)
 
+AnnotationAssertion(rdfs:comment SOMA:Blade "A flat cutting edge of an object used to cut through other objects, such as the blade of a ventilator cutting through the air.")
+SubClassOf(SOMA:Blade SOMA:DesignedComponent)
 
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#definesTrigger"/>
-    
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Bottle> (<http://www.ease-crc.org/ont/SOMA.owl#Bottle>)
 
+AnnotationAssertion(rdfs:comment SOMA:Bottle "A container with a narrow neck used to store fluids.")
+SubClassOf(SOMA:Bottle SOMA:DesignedContainer)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasDisposition -->
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Bowl> (<http://www.ease-crc.org/ont/SOMA.owl#Bowl>)
 
+AnnotationAssertion(rdfs:comment SOMA:Bowl "A round, deep object used to contain food or liquid.")
+SubClassOf(SOMA:Bowl SOMA:Crockery)
 
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
-    
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Box> (<http://www.ease-crc.org/ont/SOMA.owl#Box>)
 
+AnnotationAssertion(rdfs:comment SOMA:Box "A cuboid-shaped container.")
+SubClassOf(SOMA:Box SOMA:DesignedContainer)
+SubClassOf(SOMA:Box ObjectSomeValuesFrom(SOMA:hasShapeRegion SOMA:BoxShape))
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent -->
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Bread> (<http://www.ease-crc.org/ont/SOMA.owl#Bread>)
 
+SubClassOf(SOMA:Bread SOMA:BakedGood)
 
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent"/>
-    
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#BreadKnife> (<http://www.ease-crc.org/ont/SOMA.owl#BreadKnife>)
 
+AnnotationAssertion(rdfs:comment SOMA:BreadKnife "A knife to cut bread.")
+SubClassOf(SOMA:BreadKnife SOMA:KitchenKnife)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasShapeRegion -->
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#BreakfastPlate> (<http://www.ease-crc.org/ont/SOMA.owl#BreakfastPlate>)
 
+AnnotationAssertion(rdfs:comment SOMA:BreakfastPlate "A smaller plate used for serving bread at the dining table with the main meal or to serve breakfast.")
+SubClassOf(SOMA:BreakfastPlate SOMA:Plate)
 
-    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasShapeRegion"/>
-    
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Building> (<http://www.ease-crc.org/ont/SOMA.owl#Building>)
 
+AnnotationAssertion(rdfs:comment SOMA:Building "A structure with a roof and walls.")
+SubClassOf(SOMA:Building SOMA:DesignedContainer)
 
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies -->
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#CanBeSatOn> (<http://www.ease-crc.org/ont/SOMA.owl#CanBeSatOn>)
 
+AnnotationAssertion(rdfs:comment SOMA:CanBeSatOn "The disposition to support an agent being in a sitting pose. Typically provided by chairs, stools, etc.")
+SubClassOf(SOMA:CanBeSatOn SOMA:Deposition)
+SubClassOf(SOMA:CanBeSatOn ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy> SOMA:AffordsBeingSitOn))
 
-    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-    
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#CanSit> (<http://www.ease-crc.org/ont/SOMA.owl#CanSit>)
 
+AnnotationAssertion(rdfs:comment SOMA:CanSit "The capability of an agent to assume a sitting pose.")
+SubClassOf(SOMA:CanSit SOMA:Capability)
 
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask -->
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Carafe> (<http://www.ease-crc.org/ont/SOMA.owl#Carafe>)
 
+AnnotationAssertion(rdfs:comment SOMA:Carafe "A container used to hold and pour some beverage.")
+SubClassOf(SOMA:Carafe SOMA:DesignedContainer)
 
-    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask"/>
-    
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Ceiling> (<http://www.ease-crc.org/ont/SOMA.owl#Ceiling>)
 
+AnnotationAssertion(rdfs:comment SOMA:Ceiling "The upper interior surface of a room.")
+SubClassOf(SOMA:Ceiling SOMA:RoomSurface)
+DisjointClasses(SOMA:Ceiling SOMA:Floor)
+DisjointClasses(SOMA:Ceiling SOMA:Wall)
 
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes -->
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#CeramicCooktop> (<http://www.ease-crc.org/ont/SOMA.owl#CeramicCooktop>)
 
+AnnotationAssertion(rdfs:comment SOMA:CeramicCooktop "A cooktop that uses heated ceramic elements.")
+SubClassOf(SOMA:CeramicCooktop SOMA:ElectricCooktop)
 
-    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
-    
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#CerealBox> (<http://www.ease-crc.org/ont/SOMA.owl#CerealBox>)
 
+AnnotationAssertion(rdfs:comment SOMA:CerealBox "A box which holds, or at least is intended to usually hold, cereal flakes.")
+SubClassOf(SOMA:CerealBox SOMA:Box)
 
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality -->
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#ClosingDisposition> (<http://www.ease-crc.org/ont/SOMA.owl#ClosingDisposition>)
 
-
-    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
-    
-
-
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy -->
-
-
-    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
-    
-
-
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf -->
-
-
-    <owl:ObjectProperty rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf"/>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Classes
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Affordance -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Affordance"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#AffordsBeingSitOn -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AffordsBeingSitOn">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Affordance"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CanBeSatOn"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#definesBearer"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SittingDestination"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#definesTrigger"/>
-                <owl:allValuesFrom>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AgentRole"/>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                                <owl:allValuesFrom>
-                                    <owl:Restriction>
-                                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
-                                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CanSit"/>
-                                    </owl:Restriction>
-                                </owl:allValuesFrom>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
-                </owl:allValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Sitting"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A reified relation between a furniture-like object (the bearer), the sitting task it affords, and an agent that can assume a sitting pose (trigger).</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#AgentRole -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AgentRole"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Appliance -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Appliance">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Armchair -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Armchair">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedChair"/>
-        <rdfs:comment>A more comfortable chair that includes sides to support arms.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#AssumingPose -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#AssumingPose"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#BakedGood -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#BakedGood">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Dish"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#BedsideTable -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#BedsideTable">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Table"/>
-        <rdfs:comment>A small table typically located next to a bed.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Blade -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Blade">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
-        <rdfs:comment>A flat cutting edge of an object used to cut through other objects, such as the blade of a ventilator cutting through the air.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Bottle -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Bottle">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
-        <rdfs:comment>A container with a narrow neck used to store fluids.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Bowl -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Bowl">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Crockery"/>
-        <rdfs:comment>A round, deep object used to contain food or liquid.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Box -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Box">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasShapeRegion"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#BoxShape"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A cuboid-shaped container.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#BoxShape -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#BoxShape"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Bread -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Bread">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#BakedGood"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#BreadKnife -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#BreadKnife">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#KitchenKnife"/>
-        <rdfs:comment>A knife to cut bread.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#BreakfastPlate -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#BreakfastPlate">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Plate"/>
-        <rdfs:comment>A smaller plate used for serving bread at the dining table with the main meal or to serve breakfast.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Building -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Building">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
-        <rdfs:comment>A structure with a roof and walls.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#CanBeSatOn -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CanBeSatOn">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Deposition"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AffordsBeingSitOn"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>The disposition to support an agent being in a sitting pose. Typically provided by chairs, stools, etc.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#CanSit -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CanSit">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Capability"/>
-        <rdfs:comment>The capability of an agent to assume a sitting pose.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Capability -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Capability"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Carafe -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Carafe">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
-        <rdfs:comment>A container used to hold and pour some beverage.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Ceiling -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Ceiling">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RoomSurface"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Floor"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Wall"/>
-        <rdfs:comment>The upper interior surface of a room.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#CeramicCooktop -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CeramicCooktop">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ElectricCooktop"/>
-        <rdfs:comment>A cooktop that uses heated ceramic elements.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#CerealBox -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CerealBox">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Box"/>
-        <rdfs:comment>A box which holds, or at least is intended to usually hold, cereal flakes.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#ClosingDisposition -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ClosingDisposition">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Linkage"/>
-        <rdfs:comment>The disposition of an object to connect with some other, so that a region of space becomes fully enclosed by the object and separate from the exterior. 
+AnnotationAssertion(rdfs:comment SOMA:ClosingDisposition "The disposition of an object to connect with some other, so that a region of space becomes fully enclosed by the object and separate from the exterior. 
 
 Often this connection is between parts of the same object.
 
-Because of the existence of a separation between some interior and exterior space regions, objects that can close are also objects that can contain.</rdfs:comment>
-    </owl:Class>
-    
+Because of the existence of a separation between some interior and exterior space regions, objects that can close are also objects that can contain.")
+SubClassOf(SOMA:ClosingDisposition SOMA:Linkage)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#CoffeeCarafe> (<http://www.ease-crc.org/ont/SOMA.owl#CoffeeCarafe>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#CoffeeCarafe -->
+AnnotationAssertion(rdfs:comment SOMA:CoffeeCarafe "A carafe which holds, or at least is intended to usually hold, coffee.")
+SubClassOf(SOMA:CoffeeCarafe SOMA:Carafe)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#CoffeeTable> (<http://www.ease-crc.org/ont/SOMA.owl#CoffeeTable>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CoffeeCarafe">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Carafe"/>
-        <rdfs:comment>A carafe which holds, or at least is intended to usually hold, coffee.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:CoffeeTable "A small and low table which is typically used as a shelf for small items such as cups, and located in front of a sofa.")
+SubClassOf(SOMA:CoffeeTable SOMA:Table)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#CoilCooktop> (<http://www.ease-crc.org/ont/SOMA.owl#CoilCooktop>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#CoffeeTable -->
+AnnotationAssertion(rdfs:comment SOMA:CoilCooktop "A cooktop that uses heated metal coils.")
+SubClassOf(SOMA:CoilCooktop SOMA:ElectricCooktop)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Compartment> (<http://www.ease-crc.org/ont/SOMA.owl#Compartment>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CoffeeTable">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Table"/>
-        <rdfs:comment>A small and low table which is typically used as a shelf for small items such as cups, and located in front of a sofa.</rdfs:comment>
-    </owl:Class>
-    
+SubClassOf(SOMA:Compartment SOMA:DesignedComponent)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Cooktop> (<http://www.ease-crc.org/ont/SOMA.owl#Cooktop>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#CoilCooktop -->
+AnnotationAssertion(rdfs:comment SOMA:Cooktop "A typically circular surface where food is cooked.")
+SubClassOf(SOMA:Cooktop SOMA:DesignedComponent)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Countertop> (<http://www.ease-crc.org/ont/SOMA.owl#Countertop>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CoilCooktop">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ElectricCooktop"/>
-        <rdfs:comment>A cooktop that uses heated metal coils.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:Countertop "A flat surface for working on.")
+SubClassOf(SOMA:Countertop SOMA:DesignedComponent)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Crockery> (<http://www.ease-crc.org/ont/SOMA.owl#Crockery>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Compartment -->
+AnnotationAssertion(rdfs:comment SOMA:Crockery "An object designed to contain food to store, cook, eat, or serve it.")
+SubClassOf(SOMA:Crockery SOMA:DesignedContainer)
+SubClassOf(SOMA:Crockery SOMA:Tableware)
+SubClassOf(SOMA:Crockery ObjectExactCardinality(1 SOMA:hasDisposition SOMA:Insertion))
+SubClassOf(SOMA:Crockery ObjectExactCardinality(1 SOMA:hasDisposition ObjectIntersectionOf(SOMA:Insertion ObjectAllValuesFrom(SOMA:affordsTrigger ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance>)))))
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Cup> (<http://www.ease-crc.org/ont/SOMA.owl#Cup>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Compartment">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:Cup "A round shaped container used for storing liquid and drinking out of it, typically has  a handle for grasping.")
+SubClassOf(SOMA:Cup SOMA:Crockery)
+SubClassOf(SOMA:Cup ObjectSomeValuesFrom(SOMA:hasPhysicalComponent SOMA:DesignedHandle))
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Cupboard> (<http://www.ease-crc.org/ont/SOMA.owl#Cupboard>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Containment -->
+AnnotationAssertion(rdfs:comment SOMA:Cupboard "A piece of furniture for storing things.")
+SubClassOf(SOMA:Cupboard SOMA:DesignedContainer)
+SubClassOf(SOMA:Cupboard SOMA:DesignedFurniture)
+SubClassOf(SOMA:Cupboard ObjectSomeValuesFrom(SOMA:hasPhysicalComponent SOMA:Rack))
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Cutlery> (<http://www.ease-crc.org/ont/SOMA.owl#Cutlery>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Containment"/>
-    
+SubClassOf(SOMA:Cutlery SOMA:Tableware)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#CuttingTool> (<http://www.ease-crc.org/ont/SOMA.owl#CuttingTool>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Cooktop -->
+SubClassOf(SOMA:CuttingTool SOMA:DesignedTool)
+SubClassOf(SOMA:CuttingTool ObjectSomeValuesFrom(SOMA:hasDisposition SOMA:Shaping))
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#DesignedChair> (<http://www.ease-crc.org/ont/SOMA.owl#DesignedChair>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Cooktop">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
-        <rdfs:comment>A typically circular surface where food is cooked.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:DesignedChair "A piece of furniture designed for one person to sit on.")
+SubClassOf(SOMA:DesignedChair SOMA:DesignedFurniture)
+SubClassOf(SOMA:DesignedChair ObjectExactCardinality(1 SOMA:hasDisposition SOMA:CanBeSatOn))
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent> (Designed component)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Countertop -->
+SubClassOf(SOMA:DesignedComponent <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact>)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer> (Designed container)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Countertop">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
-        <rdfs:comment>A flat surface for working on.</rdfs:comment>
-    </owl:Class>
-    
+SubClassOf(SOMA:DesignedContainer <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact>)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#DesignedFurniture> (Designed furniture)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Crockery -->
+SubClassOf(SOMA:DesignedFurniture <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact>)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#DesignedHandle> (Designed handle)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Crockery">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Tableware"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Insertion"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Insertion"/>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger"/>
-                                <owl:allValuesFrom>
-                                    <owl:Restriction>
-                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                                        <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
-                                    </owl:Restriction>
-                                </owl:allValuesFrom>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
-                </owl:onClass>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>An object designed to contain food to store, cook, eat, or serve it.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:DesignedHandle "An item designed to fit well within a grasping hand, often attached to another item to enhance its manipulability.")
+AnnotationAssertion(rdfs:label SOMA:DesignedHandle "Designed handle")
+SubClassOf(SOMA:DesignedHandle SOMA:DesignedComponent)
+SubClassOf(SOMA:DesignedHandle ObjectSomeValuesFrom(SOMA:hasDisposition SOMA:Graspability))
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#DesignedSpade> (Designed spade)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Cup -->
+AnnotationAssertion(rdfs:comment SOMA:DesignedSpade "A sharp-edged metal blade used for digging or cutting.")
+AnnotationAssertion(rdfs:label SOMA:DesignedSpade "Designed spade")
+SubClassOf(SOMA:DesignedSpade SOMA:DesignedComponent)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#DesignedTool> (Designed tool)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Cup">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Crockery"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedHandle"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A round shaped container used for storing liquid and drinking out of it, typically has  a handle for grasping.</rdfs:comment>
-    </owl:Class>
-    
+SubClassOf(SOMA:DesignedTool <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact>)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#DessertFork> (<http://www.ease-crc.org/ont/SOMA.owl#DessertFork>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Cupboard -->
+AnnotationAssertion(rdfs:comment SOMA:DessertFork "A smallar fork for eating desserts e.g. cake.")
+SubClassOf(SOMA:DessertFork SOMA:Fork)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#DinnerPlate> (<http://www.ease-crc.org/ont/SOMA.owl#DinnerPlate>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Cupboard">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedFurniture"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Rack"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A piece of furniture for storing things.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:DinnerPlate "A regular size plate for eating a main meals.")
+SubClassOf(SOMA:DinnerPlate SOMA:Plate)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Dish> (<http://www.ease-crc.org/ont/SOMA.owl#Dish>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Cutlery -->
+SubClassOf(SOMA:Dish <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact>)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Dishwasher> (<http://www.ease-crc.org/ont/SOMA.owl#Dishwasher>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Cutlery">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Tableware"/>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:Dishwasher "An appliance for washing dishes and cutlery automatically.")
+SubClassOf(SOMA:Dishwasher SOMA:Appliance)
+SubClassOf(SOMA:Dishwasher SOMA:DesignedContainer)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#DishwasherTab> (<http://www.ease-crc.org/ont/SOMA.owl#DishwasherTab>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#CuttingTool -->
+AnnotationAssertion(rdfs:comment SOMA:DishwasherTab "A solid detergent inserted into dishwashers.")
+SubClassOf(SOMA:DishwasherTab <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedSubstance>)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Dispenser> (<http://www.ease-crc.org/ont/SOMA.owl#Dispenser>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CuttingTool">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedTool"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Shaping"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:Dispenser "A small container used to store and serve some flavoring substance for a dish or beverage.")
+SubClassOf(SOMA:Dispenser SOMA:DesignedContainer)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Door> (<http://www.ease-crc.org/ont/SOMA.owl#Door>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Deposition -->
+AnnotationAssertion(rdfs:comment SOMA:Door "A hinged, sliding, or revolving barrier at the entrance to a building, room, or vehicle, or in the frame of a cupboard.")
+SubClassOf(SOMA:Door SOMA:DesignedComponent)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Drawer> (<http://www.ease-crc.org/ont/SOMA.owl#Drawer>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Deposition"/>
-    
+AnnotationAssertion(rdfs:comment SOMA:Drawer "A storage compartment without a lid, made to slide horizontally in and out of a piece of furniture.")
+SubClassOf(SOMA:Drawer SOMA:DesignedComponent)
+SubClassOf(SOMA:Drawer SOMA:DesignedContainer)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#ElectricCooktop> (<http://www.ease-crc.org/ont/SOMA.owl#ElectricCooktop>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#DesignedChair -->
+AnnotationAssertion(rdfs:comment SOMA:ElectricCooktop "A cooktop that uses electricity for heating.")
+SubClassOf(SOMA:ElectricCooktop SOMA:Cooktop)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Floor> (<http://www.ease-crc.org/ont/SOMA.owl#Floor>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedChair">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedFurniture"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CanBeSatOn"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A piece of furniture designed for one person to sit on.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:Floor "The lower interior surface of a room.")
+SubClassOf(SOMA:Floor SOMA:RoomSurface)
+DisjointClasses(SOMA:Floor SOMA:Wall)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Fork> (<http://www.ease-crc.org/ont/SOMA.owl#Fork>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent -->
+AnnotationAssertion(rdfs:comment SOMA:Fork "Cutlery with two or more prongs used for lifting food to the mouth or holding it when cutting.")
+SubClassOf(SOMA:Fork SOMA:Cutlery)
+SubClassOf(SOMA:Fork ObjectSomeValuesFrom(SOMA:hasPhysicalComponent SOMA:DesignedHandle))
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#FreezerCompartment> (<http://www.ease-crc.org/ont/SOMA.owl#FreezerCompartment>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:FreezerCompartment "A freezer compartment used to regulate the temperature of contained objects to a value below zero degree Celsius.")
+SubClassOf(SOMA:FreezerCompartment SOMA:Compartment)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#GasCooktop> (<http://www.ease-crc.org/ont/SOMA.owl#GasCooktop>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer -->
+AnnotationAssertion(rdfs:comment SOMA:GasCooktop "A cooktop that uses burning gas for heating.")
+SubClassOf(SOMA:GasCooktop SOMA:Cooktop)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Glass> (<http://www.ease-crc.org/ont/SOMA.owl#Glass>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:Glass "A container made usually from glass or transparent plastic which is used to hold, typically cold, beverages.")
+SubClassOf(SOMA:Glass SOMA:Crockery)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Hotplate> (<http://www.ease-crc.org/ont/SOMA.owl#Hotplate>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#DesignedFurniture -->
+AnnotationAssertion(rdfs:comment SOMA:Hotplate "A flat heated surface used for cooking food or keeping it hot.")
+SubClassOf(SOMA:Hotplate SOMA:DesignedComponent)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#InductionCooktop> (<http://www.ease-crc.org/ont/SOMA.owl#InductionCooktop>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedFurniture">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:InductionCooktop "A type of cooktop where heat is induced in the cookware. Only special induction cookware can be used with this type of cooktop.")
+SubClassOf(SOMA:InductionCooktop SOMA:ElectricCooktop)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#JamJar> (<http://www.ease-crc.org/ont/SOMA.owl#JamJar>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#DesignedHandle -->
+AnnotationAssertion(rdfs:comment SOMA:JamJar "A jar which holds, or at least is intended to usually hold, jam.")
+SubClassOf(SOMA:JamJar SOMA:Jar)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Jar> (<http://www.ease-crc.org/ont/SOMA.owl#Jar>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedHandle">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Graspability"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>An item designed to fit well within a grasping hand, often attached to another item to enhance its manipulability.</rdfs:comment>
-        <rdfs:label>Designed handle</rdfs:label>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:Jar "A container used for long-term storage of some liquid or viscous dish.")
+SubClassOf(SOMA:Jar SOMA:DesignedContainer)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Kitchen> (<http://www.ease-crc.org/ont/SOMA.owl#Kitchen>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#DesignedSpade -->
+AnnotationAssertion(rdfs:comment SOMA:Kitchen "A designated room to perform the task of cooking.")
+SubClassOf(SOMA:Kitchen SOMA:Room)
+SubClassOf(SOMA:Kitchen ObjectSomeValuesFrom(SOMA:hasDisposition SOMA:Containment))
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#KitchenCabinet> (<http://www.ease-crc.org/ont/SOMA.owl#KitchenCabinet>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedSpade">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
-        <rdfs:comment>A sharp-edged metal blade used for digging or cutting.</rdfs:comment>
-        <rdfs:label>Designed spade</rdfs:label>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:KitchenCabinet "A cupboard designed to be used in kitchen environments.")
+SubClassOf(SOMA:KitchenCabinet SOMA:Cupboard)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#KitchenKnife> (<http://www.ease-crc.org/ont/SOMA.owl#KitchenKnife>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#DesignedTool -->
+AnnotationAssertion(rdfs:comment SOMA:KitchenKnife "A tool designed to be used for kitchen related common tasks. Such as smearing a bread or cutting a cucumber.")
+SubClassOf(SOMA:KitchenKnife SOMA:Knife)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#KitchenUnit> (<http://www.ease-crc.org/ont/SOMA.owl#KitchenUnit>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DesignedTool">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:KitchenUnit "A piece of a fitted furniture typically containing cupboards, a sink, and an oven.")
+SubClassOf(SOMA:KitchenUnit SOMA:DesignedFurniture)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Knife> (<http://www.ease-crc.org/ont/SOMA.owl#Knife>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#DessertFork -->
+AnnotationAssertion(rdfs:comment SOMA:Knife "An instrument composed of a blade fixed into a handle, used for cutting or as a weapon.")
+SubClassOf(SOMA:Knife SOMA:CuttingTool)
+SubClassOf(SOMA:Knife ObjectSomeValuesFrom(SOMA:hasPhysicalComponent SOMA:Blade))
+SubClassOf(SOMA:Knife ObjectSomeValuesFrom(SOMA:hasPhysicalComponent SOMA:DesignedHandle))
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Lid> (<http://www.ease-crc.org/ont/SOMA.owl#Lid>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DessertFork">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Fork"/>
-        <rdfs:comment>A smallar fork for eating desserts e.g. cake.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:Lid "A removable or hinged cover for the top of a container.")
+SubClassOf(SOMA:Lid SOMA:DesignedComponent)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#MilkBottle> (<http://www.ease-crc.org/ont/SOMA.owl#MilkBottle>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Destination -->
+AnnotationAssertion(rdfs:comment SOMA:MilkBottle "A bottle which holds, or at least is intended to usually hold, milk.")
+SubClassOf(SOMA:MilkBottle SOMA:Bottle)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#MilkPack> (<http://www.ease-crc.org/ont/SOMA.owl#MilkPack>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Destination"/>
-    
+AnnotationAssertion(rdfs:comment SOMA:MilkPack "A pack which holds, or at least is intended to usually hold, milk.")
+SubClassOf(SOMA:MilkPack SOMA:Pack)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#NutellaJar> (<http://www.ease-crc.org/ont/SOMA.owl#NutellaJar>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#DinnerPlate -->
+AnnotationAssertion(rdfs:comment SOMA:NutellaJar "A jar which holds, or at least is intended to usually hold, Nutella.")
+SubClassOf(SOMA:NutellaJar SOMA:Jar)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Oven> (<http://www.ease-crc.org/ont/SOMA.owl#Oven>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DinnerPlate">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Plate"/>
-        <rdfs:comment>A regular size plate for eating a main meals.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:Oven "An appliance with an enclosed compartment that exposes food to heat")
+SubClassOf(SOMA:Oven SOMA:Appliance)
+SubClassOf(SOMA:Oven SOMA:DesignedContainer)
+SubClassOf(SOMA:Oven ObjectSomeValuesFrom(SOMA:hasDisposition SOMA:TemperingByHeating))
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Pack> (<http://www.ease-crc.org/ont/SOMA.owl#Pack>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Dish -->
+AnnotationAssertion(rdfs:comment SOMA:Pack "A small cardboard or paper container.")
+SubClassOf(SOMA:Pack SOMA:DesignedContainer)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Pan> (<http://www.ease-crc.org/ont/SOMA.owl#Pan>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Dish">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:Pan "A container used for cooking food.")
+SubClassOf(SOMA:Pan SOMA:Crockery)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Pancake> (<http://www.ease-crc.org/ont/SOMA.owl#Pancake>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Dishwasher -->
+SubClassOf(SOMA:Pancake SOMA:BakedGood)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#PancakeMix> (<http://www.ease-crc.org/ont/SOMA.owl#PancakeMix>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Dishwasher">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Appliance"/>
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
-        <rdfs:comment>An appliance for washing dishes and cutlery automatically.</rdfs:comment>
-    </owl:Class>
-    
+SubClassOf(SOMA:PancakeMix <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedSubstance>)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#PastaBowl> (<http://www.ease-crc.org/ont/SOMA.owl#PastaBowl>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#DishwasherTab -->
+AnnotationAssertion(rdfs:comment SOMA:PastaBowl "A bowl which holds, or at least is intended to usually hold, pasta.")
+SubClassOf(SOMA:PastaBowl SOMA:Bowl)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#PepperShaker> (<http://www.ease-crc.org/ont/SOMA.owl#PepperShaker>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DishwasherTab">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedSubstance"/>
-        <rdfs:comment>A solid detergent inserted into dishwashers.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:PepperShaker "A shaker which holds, or at least is intended to usually hold, pepper.")
+SubClassOf(SOMA:PepperShaker SOMA:Shaker)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Plate> (<http://www.ease-crc.org/ont/SOMA.owl#Plate>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Dispenser -->
+AnnotationAssertion(rdfs:comment SOMA:Plate "A flat and usually circular object from which food is eaten or served.")
+SubClassOf(SOMA:Plate SOMA:Crockery)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Pot> (<http://www.ease-crc.org/ont/SOMA.owl#Pot>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Dispenser">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
-        <rdfs:comment>A small container used to store and serve some flavoring substance for a dish or beverage.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:Pot "A container used for cooking food.")
+SubClassOf(SOMA:Pot SOMA:Crockery)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Rack> (<http://www.ease-crc.org/ont/SOMA.owl#Rack>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Door -->
+AnnotationAssertion(rdfs:comment SOMA:Rack "A frame for holding or storing things.")
+SubClassOf(SOMA:Rack SOMA:DesignedComponent)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#RaspberryJamJar> (<http://www.ease-crc.org/ont/SOMA.owl#RaspberryJamJar>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Door">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
-        <rdfs:comment>A hinged, sliding, or revolving barrier at the entrance to a building, room, or vehicle, or in the frame of a cupboard.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:RaspberryJamJar "A jar which holds, or at least is intended to usually hold, raspberry jam.")
+SubClassOf(SOMA:RaspberryJamJar SOMA:JamJar)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Refrigerator> (<http://www.ease-crc.org/ont/SOMA.owl#Refrigerator>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Drawer -->
+AnnotationAssertion(rdfs:comment SOMA:Refrigerator "An appliance which is artificially kept cool and used to store food and drink.")
+SubClassOf(SOMA:Refrigerator SOMA:Appliance)
+SubClassOf(SOMA:Refrigerator SOMA:DesignedContainer)
+SubClassOf(SOMA:Refrigerator ObjectSomeValuesFrom(SOMA:hasPhysicalComponent SOMA:Door))
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#RoomSurface> (Room surface)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Drawer">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
-        <rdfs:comment>A storage compartment without a lid, made to slide horizontally in and out of a piece of furniture.</rdfs:comment>
-    </owl:Class>
-    
+SubClassOf(SOMA:RoomSurface SOMA:Surface)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#SaladBowl> (<http://www.ease-crc.org/ont/SOMA.owl#SaladBowl>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#ElectricCooktop -->
+AnnotationAssertion(rdfs:comment SOMA:SaladBowl "A bowl which holds, or at least is intended to usually hold, salad.")
+SubClassOf(SOMA:SaladBowl SOMA:Bowl)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#SaltShaker> (<http://www.ease-crc.org/ont/SOMA.owl#SaltShaker>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ElectricCooktop">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Cooktop"/>
-        <rdfs:comment>A cooktop that uses electricity for heating.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:SaltShaker "A shaker which holds, or at least is intended to usually hold, salt.")
+SubClassOf(SOMA:SaltShaker SOMA:Shaker)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Shaker> (<http://www.ease-crc.org/ont/SOMA.owl#Shaker>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Floor -->
+AnnotationAssertion(rdfs:comment SOMA:Shaker "A container used for storing fine grained substances such as salt or paper.")
+SubClassOf(SOMA:Shaker SOMA:DesignedContainer)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Sink> (<http://www.ease-crc.org/ont/SOMA.owl#Sink>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Floor">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RoomSurface"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Wall"/>
-        <rdfs:comment>The lower interior surface of a room.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:Sink "A large bowl used to direct the flow of liquid into a drain, typically has a tap used to fill the sink with water, and a plug used to block the drain.")
+SubClassOf(SOMA:Sink SOMA:DesignedComponent)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Sitting> (<http://www.ease-crc.org/ont/SOMA.owl#Sitting>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Fork -->
+AnnotationAssertion(rdfs:comment SOMA:Sitting "A task where an agents assumes a sitting pose.")
+SubClassOf(SOMA:Sitting SOMA:AssumingPose)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#SittingDestination> (<http://www.ease-crc.org/ont/SOMA.owl#SittingDestination>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Fork">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Cutlery"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedHandle"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>Cutlery with two or more prongs used for lifting food to the mouth or holding it when cutting.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:SittingDestination "The destination of an agent assuming a sitting pose. Typically a chair or stool would fill this role.")
+SubClassOf(SOMA:SittingDestination SOMA:Destination)
+SubClassOf(SOMA:SittingDestination ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectSomeValuesFrom(SOMA:hasDisposition SOMA:CanBeSatOn)))
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Sofa> (<http://www.ease-crc.org/ont/SOMA.owl#Sofa>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#FreezerCompartment -->
+AnnotationAssertion(rdfs:comment SOMA:Sofa "A comfortable seat for two or more people to sit on.")
+SubClassOf(SOMA:Sofa SOMA:DesignedFurniture)
+SubClassOf(SOMA:Sofa ObjectExactCardinality(1 SOMA:hasDisposition SOMA:CanBeSatOn))
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#SoupPot> (<http://www.ease-crc.org/ont/SOMA.owl#SoupPot>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#FreezerCompartment">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Compartment"/>
-        <rdfs:comment>A freezer compartment used to regulate the temperature of contained objects to a value below zero degree Celsius.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:SoupPot "A pot which holds, or at least is intended to usually hold, soup.")
+SubClassOf(SOMA:SoupPot SOMA:Pot)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Spatula> (<http://www.ease-crc.org/ont/SOMA.owl#Spatula>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#GasCooktop -->
+SubClassOf(SOMA:Spatula SOMA:Cutlery)
+SubClassOf(SOMA:Spatula ObjectSomeValuesFrom(SOMA:hasPhysicalComponent SOMA:DesignedHandle))
+SubClassOf(SOMA:Spatula ObjectSomeValuesFrom(SOMA:hasPhysicalComponent SOMA:DesignedSpade))
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Spoon> (<http://www.ease-crc.org/ont/SOMA.owl#Spoon>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#GasCooktop">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Cooktop"/>
-        <rdfs:comment>A cooktop that uses burning gas for heating.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:Spoon "An eating or cooking implement consisting of a small shallow bowl with a relatively long handle.")
+SubClassOf(SOMA:Spoon SOMA:Cutlery)
+SubClassOf(SOMA:Spoon ObjectSomeValuesFrom(SOMA:hasDisposition SOMA:Containment))
+SubClassOf(SOMA:Spoon ObjectSomeValuesFrom(SOMA:hasPhysicalComponent SOMA:Bowl))
+SubClassOf(SOMA:Spoon ObjectSomeValuesFrom(SOMA:hasPhysicalComponent SOMA:DesignedHandle))
+SubClassOf(SOMA:Spoon ObjectExactCardinality(1 SOMA:hasDisposition SOMA:Insertion))
+SubClassOf(SOMA:Spoon ObjectExactCardinality(1 SOMA:hasDisposition ObjectIntersectionOf(SOMA:Insertion ObjectAllValuesFrom(SOMA:affordsTrigger ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance>)))))
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Stove> (<http://www.ease-crc.org/ont/SOMA.owl#Stove>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Glass -->
+AnnotationAssertion(rdfs:comment SOMA:Stove "An appliance for cooking or heating.")
+SubClassOf(SOMA:Stove SOMA:Appliance)
+SubClassOf(SOMA:Stove ObjectSomeValuesFrom(SOMA:hasPhysicalComponent SOMA:Hotplate))
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#SugarDispenser> (<http://www.ease-crc.org/ont/SOMA.owl#SugarDispenser>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Glass">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Crockery"/>
-        <rdfs:comment>A container made usually from glass or transparent plastic which is used to hold, typically cold, beverages.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:SugarDispenser "A dispenser used to hold, or at least is intended to usually hold and serve, sugar.")
+SubClassOf(SOMA:SugarDispenser SOMA:Dispenser)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Table> (<http://www.ease-crc.org/ont/SOMA.owl#Table>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Graspability -->
+AnnotationAssertion(rdfs:comment SOMA:Table "A piece of furniture with a flat top and one or more legs.")
+SubClassOf(SOMA:Table SOMA:DesignedFurniture)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#TableFork> (<http://www.ease-crc.org/ont/SOMA.owl#TableFork>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Graspability"/>
-    
+AnnotationAssertion(rdfs:comment SOMA:TableFork "A regular size fork used for eating meals, e.g. for Spaghetti.")
+SubClassOf(SOMA:TableFork SOMA:Fork)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#TableKnife> (<http://www.ease-crc.org/ont/SOMA.owl#TableKnife>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Hotplate -->
+AnnotationAssertion(rdfs:comment SOMA:TableKnife "A knife used for eating or speading butter on bread.")
+SubClassOf(SOMA:TableKnife SOMA:KitchenKnife)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#TableSpoon> (<http://www.ease-crc.org/ont/SOMA.owl#TableSpoon>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Hotplate">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
-        <rdfs:comment>A flat heated surface used for cooking food or keeping it hot.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:TableSpoon "A spoon usually refered as larger spoon used for serving. However in some regions it is the largest spoon used for eating.")
+SubClassOf(SOMA:TableSpoon SOMA:Spoon)
+DisjointClasses(SOMA:TableSpoon SOMA:TeaSpoon)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Tableware> (<http://www.ease-crc.org/ont/SOMA.owl#Tableware>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#InductionCooktop -->
+SubClassOf(SOMA:Tableware SOMA:DesignedTool)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Tap> (<http://www.ease-crc.org/ont/SOMA.owl#Tap>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#InductionCooktop">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ElectricCooktop"/>
-        <rdfs:comment>A type of cooktop where heat is induced in the cookware. Only special induction cookware can be used with this type of cooktop.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:Tap "A component designed to control the flow of water from a pipe.")
+SubClassOf(SOMA:Tap SOMA:DesignedComponent)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#TeaSpoon> (<http://www.ease-crc.org/ont/SOMA.owl#TeaSpoon>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Insertion -->
+AnnotationAssertion(rdfs:comment SOMA:TeaSpoon "A spoon relatively smaller in size used for string a cup of tea or measuring a volume. Specifically for cooking or medicine purposes, the volume is defined as 5ml.")
+SubClassOf(SOMA:TeaSpoon SOMA:Spoon)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#TemperingByCooling> (<http://www.ease-crc.org/ont/SOMA.owl#TemperingByCooling>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Insertion"/>
-    
+AnnotationAssertion(rdfs:comment SOMA:TemperingByCooling "A disposition of an object to change others by removing heat energy from them.")
+SubClassOf(SOMA:TemperingByCooling SOMA:Tempering)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#TemperingByHeating> (<http://www.ease-crc.org/ont/SOMA.owl#TemperingByHeating>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#JamJar -->
+AnnotationAssertion(rdfs:comment SOMA:TemperingByHeating "A disposition of an object to change others by applying heat energy to them.")
+SubClassOf(SOMA:TemperingByHeating SOMA:Tempering)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#TrashContainer> (<http://www.ease-crc.org/ont/SOMA.owl#TrashContainer>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#JamJar">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Jar"/>
-        <rdfs:comment>A jar which holds, or at least is intended to usually hold, jam.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:TrashContainer "An item designed to hold trash. Typically equipped with a mechanism to close or open it, to prevent smells from the trash from propagating out and insects and other pests to get in.")
+SubClassOf(SOMA:TrashContainer SOMA:DesignedContainer)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Wall> (<http://www.ease-crc.org/ont/SOMA.owl#Wall>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Jar -->
+AnnotationAssertion(rdfs:comment SOMA:Wall "An upright surface of a building or room.")
+SubClassOf(SOMA:Wall SOMA:RoomSurface)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Wardrobe> (<http://www.ease-crc.org/ont/SOMA.owl#Wardrobe>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Jar">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
-        <rdfs:comment>A container used for long-term storage of some liquid or viscous dish.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:Wardrobe "A cupboard which is typically used for hanging clothes.")
+SubClassOf(SOMA:Wardrobe SOMA:Cupboard)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#WaterBottle> (<http://www.ease-crc.org/ont/SOMA.owl#WaterBottle>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Kitchen -->
+AnnotationAssertion(rdfs:comment SOMA:WaterBottle "A bottle which holds, or at least is intended to usually hold, water.")
+SubClassOf(SOMA:WaterBottle SOMA:Bottle)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#WaterGlass> (<http://www.ease-crc.org/ont/SOMA.owl#WaterGlass>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Kitchen">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Room"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Containment"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A designated room to perform the task of cooking.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:WaterGlass "A glass which holds, or at least is intended to usually hold, water. Also affords drinking from it.")
+SubClassOf(SOMA:WaterGlass SOMA:Glass)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#WineBottle> (<http://www.ease-crc.org/ont/SOMA.owl#WineBottle>)
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#KitchenCabinet -->
+AnnotationAssertion(rdfs:comment SOMA:WineBottle "A bottle which holds, or at least is intended to usually hold, wine.")
+SubClassOf(SOMA:WineBottle SOMA:Bottle)
 
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#WineGlass> (<http://www.ease-crc.org/ont/SOMA.owl#WineGlass>)
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#KitchenCabinet">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Cupboard"/>
-        <rdfs:comment>A cupboard designed to be used in kitchen environments.</rdfs:comment>
-    </owl:Class>
-    
+AnnotationAssertion(rdfs:comment SOMA:WineGlass "A glass which holds, or at least is intended to usually hold, wine. Also affords drinking from it.")
+SubClassOf(SOMA:WineGlass SOMA:Glass)
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#KitchenKnife -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#KitchenKnife">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Knife"/>
-        <rdfs:comment>A tool designed to be used for kitchen related common tasks. Such as smearing a bread or cutting a cucumber.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#KitchenUnit -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#KitchenUnit">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedFurniture"/>
-        <rdfs:comment>A piece of a fitted furniture typically containing cupboards, a sink, and an oven.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Knife -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Knife">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CuttingTool"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Blade"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedHandle"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>An instrument composed of a blade fixed into a handle, used for cutting or as a weapon.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Lid -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Lid">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
-        <rdfs:comment>A removable or hinged cover for the top of a container.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Linkage -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Linkage"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#MilkBottle -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MilkBottle">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Bottle"/>
-        <rdfs:comment>A bottle which holds, or at least is intended to usually hold, milk.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#MilkPack -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MilkPack">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Pack"/>
-        <rdfs:comment>A pack which holds, or at least is intended to usually hold, milk.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#NutellaJar -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#NutellaJar">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Jar"/>
-        <rdfs:comment>A jar which holds, or at least is intended to usually hold, Nutella.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Oven -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Oven">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Appliance"/>
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#TemperingByHeating"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>An appliance with an enclosed compartment that exposes food to heat</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Pack -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Pack">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
-        <rdfs:comment>A small cardboard or paper container.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Pan -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Pan">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Crockery"/>
-        <rdfs:comment>A container used for cooking food.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Pancake -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Pancake">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#BakedGood"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#PancakeMix -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PancakeMix">
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedSubstance"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#PastaBowl -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PastaBowl">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Bowl"/>
-        <rdfs:comment>A bowl which holds, or at least is intended to usually hold, pasta.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#PepperShaker -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PepperShaker">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Shaker"/>
-        <rdfs:comment>A shaker which holds, or at least is intended to usually hold, pepper.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Plate -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Plate">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Crockery"/>
-        <rdfs:comment>A flat and usually circular object from which food is eaten or served.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Pot -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Pot">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Crockery"/>
-        <rdfs:comment>A container used for cooking food.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Rack -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Rack">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
-        <rdfs:comment>A frame for holding or storing things.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#RaspberryJamJar -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RaspberryJamJar">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#JamJar"/>
-        <rdfs:comment>A jar which holds, or at least is intended to usually hold, raspberry jam.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Refrigerator -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Refrigerator">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Appliance"/>
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Door"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>An appliance which is artificially kept cool and used to store food and drink.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Room -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Room"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#RoomSurface -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#RoomSurface">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Surface"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#SaladBowl -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SaladBowl">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Bowl"/>
-        <rdfs:comment>A bowl which holds, or at least is intended to usually hold, salad.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#SaltShaker -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SaltShaker">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Shaker"/>
-        <rdfs:comment>A shaker which holds, or at least is intended to usually hold, salt.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Shaker -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Shaker">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
-        <rdfs:comment>A container used for storing fine grained substances such as salt or paper.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Shaping -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Shaping"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Sink -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Sink">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
-        <rdfs:comment>A large bowl used to direct the flow of liquid into a drain, typically has a tap used to fill the sink with water, and a plug used to block the drain.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Sitting -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Sitting">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#AssumingPose"/>
-        <rdfs:comment>A task where an agents assumes a sitting pose.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#SittingDestination -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SittingDestination">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Destination"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                <owl:allValuesFrom>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
-                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CanBeSatOn"/>
-                    </owl:Restriction>
-                </owl:allValuesFrom>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>The destination of an agent assuming a sitting pose. Typically a chair or stool would fill this role.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Sofa -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Sofa">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedFurniture"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#CanBeSatOn"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>A comfortable seat for two or more people to sit on.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#SoupPot -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SoupPot">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Pot"/>
-        <rdfs:comment>A pot which holds, or at least is intended to usually hold, soup.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Spatula -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Spatula">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Cutlery"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedHandle"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedSpade"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Spoon -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Spoon">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Cutlery"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Containment"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Bowl"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedHandle"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Insertion"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasDisposition"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Insertion"/>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#affordsTrigger"/>
-                                <owl:allValuesFrom>
-                                    <owl:Restriction>
-                                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies"/>
-                                        <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
-                                    </owl:Restriction>
-                                </owl:allValuesFrom>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
-                </owl:onClass>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>An eating or cooking implement consisting of a small shallow bowl with a relatively long handle.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Stove -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Stove">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Appliance"/>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasPhysicalComponent"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Hotplate"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:comment>An appliance for cooking or heating.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#SugarDispenser -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#SugarDispenser">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Dispenser"/>
-        <rdfs:comment>A dispenser used to hold, or at least is intended to usually hold and serve, sugar.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Surface -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Surface"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Table -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Table">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedFurniture"/>
-        <rdfs:comment>A piece of furniture with a flat top and one or more legs.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#TableFork -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#TableFork">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Fork"/>
-        <rdfs:comment>A regular size fork used for eating meals, e.g. for Spaghetti.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#TableKnife -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#TableKnife">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#KitchenKnife"/>
-        <rdfs:comment>A knife used for eating or speading butter on bread.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#TableSpoon -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#TableSpoon">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Spoon"/>
-        <owl:disjointWith rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#TeaSpoon"/>
-        <rdfs:comment>A spoon usually refered as larger spoon used for serving. However in some regions it is the largest spoon used for eating.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Tableware -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Tableware">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedTool"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Tap -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Tap">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedComponent"/>
-        <rdfs:comment>A component designed to control the flow of water from a pipe.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#TeaSpoon -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#TeaSpoon">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Spoon"/>
-        <rdfs:comment>A spoon relatively smaller in size used for string a cup of tea or measuring a volume. Specifically for cooking or medicine purposes, the volume is defined as 5ml.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Tempering -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Tempering"/>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#TemperingByCooling -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#TemperingByCooling">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Tempering"/>
-        <rdfs:comment>A disposition of an object to change others by removing heat energy from them.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#TemperingByHeating -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#TemperingByHeating">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Tempering"/>
-        <rdfs:comment>A disposition of an object to change others by applying heat energy to them.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#TrashContainer -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#TrashContainer">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#DesignedContainer"/>
-        <rdfs:comment>An item designed to hold trash. Typically equipped with a mechanism to close or open it, to prevent smells from the trash from propagating out and insects and other pests to get in.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Wall -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Wall">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#RoomSurface"/>
-        <rdfs:comment>An upright surface of a building or room.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#Wardrobe -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Wardrobe">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Cupboard"/>
-        <rdfs:comment>A cupboard which is typically used for hanging clothes.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#WaterBottle -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#WaterBottle">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Bottle"/>
-        <rdfs:comment>A bottle which holds, or at least is intended to usually hold, water.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#WaterGlass -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#WaterGlass">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Glass"/>
-        <rdfs:comment>A glass which holds, or at least is intended to usually hold, water. Also affords drinking from it.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#WineBottle -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#WineBottle">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Bottle"/>
-        <rdfs:comment>A bottle which holds, or at least is intended to usually hold, wine.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#WineGlass -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#WineGlass">
-        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Glass"/>
-        <rdfs:comment>A glass which holds, or at least is intended to usually hold, wine. Also affords drinking from it.</rdfs:comment>
-    </owl:Class>
-    
-
-
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact -->
-
-
-    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact"/>
-    
-
-
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedSubstance -->
-
-
-    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedSubstance"/>
-    
-
-
-    <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance -->
-
-
-    <owl:Class rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance"/>
-</rdf:RDF>
-
-
-
-<!-- Generated by the OWL API (version 5.1.20.2022-02-19T16:38:31Z) https://github.com/owlcs/owlapi/ -->
-
-
+)
