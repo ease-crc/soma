@@ -62,7 +62,7 @@ Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.ow
 #   Object Properties
 ############################
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#hasStateType> (has state type)
+# Object Property: SOMA:hasStateType (has state type)
 
 AnnotationAssertion(rdfs:comment SOMA:hasStateType "A relation between roles and state types, e.g. 'the chair is the supporter of the person sitting on it'.")
 AnnotationAssertion(rdfs:label SOMA:hasStateType "has state type")
@@ -71,7 +71,7 @@ InverseObjectProperties(SOMA:hasStateType SOMA:isStateTypeOf)
 ObjectPropertyDomain(SOMA:hasStateType <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>)
 ObjectPropertyRange(SOMA:hasStateType SOMA:StateType)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#isStateTypeOf> (is state type of)
+# Object Property: SOMA:isStateTypeOf (is state type of)
 
 AnnotationAssertion(rdfs:comment SOMA:isStateTypeOf "A relation between roles and state types, e.g. 'the chair is the supporter of the person sitting on it'.")
 AnnotationAssertion(rdfs:label SOMA:isStateTypeOf "is state type of")
@@ -85,7 +85,7 @@ ObjectPropertyRange(SOMA:isStateTypeOf <http://www.ontologydesignpatterns.org/on
 #   Classes
 ############################
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Configuration> (<http://www.ease-crc.org/ont/SOMA.owl#Configuration>)
+# Class: SOMA:Configuration (SOMA:Configuration)
 
 AnnotationAssertion(rdfs:comment SOMA:Configuration "A description of a State. This includes e.g. what acceptable regions for participant objects of the State might look like.
 A configuration of the world is construed to be stable on its own. Outside disturbances may cause state transitions, and the settling into some other, self-stable configuration.
@@ -98,25 +98,25 @@ The second issue relates to what is \"outside\". The state is a configuration of
 SubClassOf(SOMA:Configuration <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description>)
 SubClassOf(SOMA:Configuration ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes> SOMA:StateType))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ContactState> (Contact state)
+# Class: SOMA:ContactState (Contact state)
 
 AnnotationAssertion(rdfs:comment SOMA:ContactState "Classifies States in which some objects are in contact.")
 AnnotationAssertion(rdfs:label SOMA:ContactState "Contact state"@en)
 SubClassOf(SOMA:ContactState SOMA:StateType)
 SubClassOf(SOMA:ContactState ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectMinCardinality(2 <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Containment> (<http://www.ease-crc.org/ont/SOMA.owl#Containment>)
+# Class: SOMA:Containment (SOMA:Containment)
 
 AnnotationAssertion(rdfs:comment SOMA:Containment "Classifies States in which an object is placed inside another.")
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#ContainmentState> (Containment state)
+# Class: SOMA:ContainmentState (Containment state)
 
 AnnotationAssertion(rdfs:comment SOMA:ContainmentState "Classifies States in which an object is kept inside another object.")
 AnnotationAssertion(rdfs:label SOMA:ContainmentState "Containment state"@en)
 SubClassOf(SOMA:ContainmentState SOMA:FunctionalControl)
 SubClassOf(SOMA:ContainmentState ObjectSomeValuesFrom(SOMA:isStateTypeOf ObjectIntersectionOf(SOMA:Container ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectSomeValuesFrom(SOMA:hasDisposition SOMA:Containment)))))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#FunctionalControl> (Functional state)
+# Class: SOMA:FunctionalControl (Functional state)
 
 AnnotationAssertion(rdfs:comment SOMA:FunctionalControl "Classifies States in which an object restricts the movement of another, at least partially. Usually neither object is construed to be an agent.
 
@@ -126,14 +126,14 @@ SubClassOf(SOMA:FunctionalControl SOMA:StateType)
 SubClassOf(SOMA:FunctionalControl ObjectSomeValuesFrom(SOMA:isStateTypeOf SOMA:Item))
 SubClassOf(SOMA:FunctionalControl ObjectSomeValuesFrom(SOMA:isStateTypeOf SOMA:Restrictor))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#LinkageState> (Linkage state)
+# Class: SOMA:LinkageState (Linkage state)
 
 AnnotationAssertion(rdfs:comment SOMA:LinkageState "Classifies States in which two objects are in a rigid connection, such that the movement of one determines the movement of the other.")
 AnnotationAssertion(rdfs:label SOMA:LinkageState "Linkage state"@en)
 SubClassOf(SOMA:LinkageState SOMA:StateType)
 SubClassOf(SOMA:LinkageState ObjectSomeValuesFrom(SOMA:isStateTypeOf SOMA:LinkedObject))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PhysicalAccessibility> (Physical accessibility)
+# Class: SOMA:PhysicalAccessibility (Physical accessibility)
 
 AnnotationAssertion(rdfs:comment SOMA:PhysicalAccessibility "Classifies States in which an item is placed in a container or protected by a protector, but the placement of the item and container is such that a, usually agentive, accessor may nevertheless reach the item in order to perform a task.")
 AnnotationAssertion(rdfs:label SOMA:PhysicalAccessibility "Physical accessibility"@en)
@@ -141,7 +141,7 @@ SubClassOf(SOMA:PhysicalAccessibility SOMA:StateType)
 SubClassOf(SOMA:PhysicalAccessibility ObjectSomeValuesFrom(SOMA:isStateTypeOf SOMA:Item))
 SubClassOf(SOMA:PhysicalAccessibility ObjectSomeValuesFrom(SOMA:isStateTypeOf SOMA:Restrictor))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PhysicalBlockage> (Physical blockage)
+# Class: SOMA:PhysicalBlockage (Physical blockage)
 
 AnnotationAssertion(rdfs:comment SOMA:PhysicalBlockage "Classifies States in which an object, in general called restrictor, blocks access to an item. A usually agentive accessor, whose access is blocked, may be specified.")
 AnnotationAssertion(rdfs:label SOMA:PhysicalBlockage "Physical blockage"@en)
@@ -149,20 +149,20 @@ SubClassOf(SOMA:PhysicalBlockage SOMA:StateType)
 SubClassOf(SOMA:PhysicalBlockage ObjectSomeValuesFrom(SOMA:isStateTypeOf SOMA:Item))
 SubClassOf(SOMA:PhysicalBlockage ObjectSomeValuesFrom(SOMA:isStateTypeOf SOMA:Restrictor))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PhysicalExistence> (Physical Existince)
+# Class: SOMA:PhysicalExistence (Physical Existince)
 
 AnnotationAssertion(rdfs:comment SOMA:PhysicalExistence "A State in which an Entity is said to exist in the physical world.")
 AnnotationAssertion(rdfs:label SOMA:PhysicalExistence "Physical Existince"@en)
 SubClassOf(SOMA:PhysicalExistence SOMA:PhysicalState)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#PhysicalState> (Physical state)
+# Class: SOMA:PhysicalState (Physical state)
 
 AnnotationAssertion(rdfs:comment SOMA:PhysicalState "A State describing how Entities in the physical world relate to each other.")
 AnnotationAssertion(rdfs:label SOMA:PhysicalState "Physical state")
 SubClassOf(SOMA:PhysicalState SOMA:State)
 SubClassOf(SOMA:PhysicalState ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#SocialState> (Social state)
+# Class: SOMA:SocialState (Social state)
 
 AnnotationAssertion(rdfs:comment SOMA:SocialState "A State which describes how Agents relate to each other.
 
@@ -174,7 +174,7 @@ AnnotationAssertion(rdfs:label SOMA:SocialState "Social state")
 SubClassOf(SOMA:SocialState SOMA:State)
 SubClassOf(SOMA:SocialState ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#StateType> (State type)
+# Class: SOMA:StateType (State type)
 
 AnnotationAssertion(rdfs:comment SOMA:StateType "An EventType that classifies States.")
 AnnotationAssertion(rdfs:label SOMA:StateType "State type"@en)
@@ -182,7 +182,7 @@ SubClassOf(SOMA:StateType <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl
 SubClassOf(SOMA:StateType ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> SOMA:State))
 SubClassOf(SOMA:StateType ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart> SOMA:StateType))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#SupportState> (Support state)
+# Class: SOMA:SupportState (Support state)
 
 AnnotationAssertion(rdfs:comment SOMA:SupportState "Classifies States in which an object is not able to move under gravity because of its placement relative to some other object.")
 AnnotationAssertion(rdfs:label SOMA:SupportState "Support state"@en)
