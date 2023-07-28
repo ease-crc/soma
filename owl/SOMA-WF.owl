@@ -32,9 +32,6 @@ Declaration(Class(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Relatio
 Declaration(Class(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>))
 Declaration(Class(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>))
 Declaration(Class(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow>))
-Declaration(ObjectProperty(:hasPreviousStep))
-Declaration(ObjectProperty(:isFirstStepOf))
-Declaration(ObjectProperty(:isStepOf))
 Declaration(ObjectProperty(SOMA:definesInput))
 Declaration(ObjectProperty(SOMA:definesOutput))
 Declaration(ObjectProperty(SOMA:definesParticipant))
@@ -44,11 +41,14 @@ Declaration(ObjectProperty(SOMA:hasBindingRole))
 Declaration(ObjectProperty(SOMA:hasFirstStep))
 Declaration(ObjectProperty(SOMA:hasNextStep))
 Declaration(ObjectProperty(SOMA:hasPredecessor))
+Declaration(ObjectProperty(SOMA:hasPreviousStep))
 Declaration(ObjectProperty(SOMA:hasStep))
 Declaration(ObjectProperty(SOMA:hasSuccedence))
 Declaration(ObjectProperty(SOMA:hasSuccessor))
 Declaration(ObjectProperty(SOMA:hasTask))
+Declaration(ObjectProperty(SOMA:isFirstStepOf))
 Declaration(ObjectProperty(SOMA:isPlanFor))
+Declaration(ObjectProperty(SOMA:isStepOf))
 Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines>))
 Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes>))
 Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart>))
@@ -60,33 +60,6 @@ Declaration(NamedIndividual(SOMA:FailWFUninterpretableTask))
 ############################
 #   Object Properties
 ############################
-
-# Object Property: :hasPreviousStep (has previous step)
-
-AnnotationAssertion(rdfs:comment :hasPreviousStep "An ordering relation between tasks in some workflow, stating that a task is preceded by another.")
-AnnotationAssertion(rdfs:label :hasPreviousStep "has previous step")
-SubObjectPropertyOf(:hasPreviousStep <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#directlyFollows>)
-InverseObjectProperties(:hasPreviousStep SOMA:hasNextStep)
-ObjectPropertyDomain(:hasPreviousStep <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
-ObjectPropertyRange(:hasPreviousStep <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
-
-# Object Property: :isFirstStepOf (is first step of)
-
-AnnotationAssertion(rdfs:comment :isFirstStepOf "A relation stating that some task is the first one in a workflow.")
-AnnotationAssertion(rdfs:label :isFirstStepOf "is first step of")
-SubObjectPropertyOf(:isFirstStepOf :isStepOf)
-InverseObjectProperties(:isFirstStepOf SOMA:hasFirstStep)
-ObjectPropertyDomain(:isFirstStepOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
-ObjectPropertyRange(:isFirstStepOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow>)
-
-# Object Property: :isStepOf (is step of)
-
-AnnotationAssertion(rdfs:comment :isStepOf "A relation stating that a task is a step in a workflow.")
-AnnotationAssertion(rdfs:label :isStepOf "is step of")
-SubObjectPropertyOf(:isStepOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskDefinedIn>)
-InverseObjectProperties(:isStepOf SOMA:hasStep)
-ObjectPropertyDomain(:isStepOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
-ObjectPropertyRange(:isStepOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow>)
 
 # Object Property: SOMA:definesInput (SOMA:definesInput)
 
@@ -150,6 +123,7 @@ ObjectPropertyRange(SOMA:hasBindingRole ObjectUnionOf(<http://www.ontologydesign
 AnnotationAssertion(rdfs:comment SOMA:hasFirstStep "A relation from a Workflow to its first Task.")
 AnnotationAssertion(rdfs:label SOMA:hasFirstStep "has first step")
 SubObjectPropertyOf(SOMA:hasFirstStep SOMA:hasStep)
+InverseObjectProperties(SOMA:hasFirstStep SOMA:isFirstStepOf)
 ObjectPropertyDomain(SOMA:hasFirstStep <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow>)
 ObjectPropertyRange(SOMA:hasFirstStep <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
 
@@ -158,6 +132,7 @@ ObjectPropertyRange(SOMA:hasFirstStep <http://www.ontologydesignpatterns.org/ont
 AnnotationAssertion(rdfs:comment SOMA:hasNextStep "An ordering relation between tasks in a workflow, saying that a task is followed by another.")
 AnnotationAssertion(rdfs:label SOMA:hasNextStep "has next step")
 SubObjectPropertyOf(SOMA:hasNextStep <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#directlyPrecedes>)
+InverseObjectProperties(SOMA:hasNextStep SOMA:hasPreviousStep)
 ObjectPropertyDomain(SOMA:hasNextStep <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
 ObjectPropertyRange(SOMA:hasNextStep <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
 
@@ -169,11 +144,20 @@ SubObjectPropertyOf(SOMA:hasPredecessor <http://www.ontologydesignpatterns.org/o
 ObjectPropertyDomain(SOMA:hasPredecessor SOMA:Succedence)
 ObjectPropertyRange(SOMA:hasPredecessor <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow>)
 
+# Object Property: SOMA:hasPreviousStep (has previous step)
+
+AnnotationAssertion(rdfs:comment SOMA:hasPreviousStep "An ordering relation between tasks in some workflow, stating that a task is preceded by another.")
+AnnotationAssertion(rdfs:label SOMA:hasPreviousStep "has previous step")
+SubObjectPropertyOf(SOMA:hasPreviousStep <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#directlyFollows>)
+ObjectPropertyDomain(SOMA:hasPreviousStep <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
+ObjectPropertyRange(SOMA:hasPreviousStep <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
+
 # Object Property: SOMA:hasStep (has step)
 
 AnnotationAssertion(rdfs:comment SOMA:hasStep "A relation between a Workflow and a Task it contains.")
 AnnotationAssertion(rdfs:label SOMA:hasStep "has step")
 SubObjectPropertyOf(SOMA:hasStep <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask>)
+InverseObjectProperties(SOMA:hasStep SOMA:isStepOf)
 ObjectPropertyDomain(SOMA:hasStep <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow>)
 ObjectPropertyRange(SOMA:hasStep <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
 
@@ -200,6 +184,22 @@ AnnotationAssertion(rdfs:label SOMA:hasTask "has task"@en)
 SubObjectPropertyOf(SOMA:hasTask <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPart>)
 ObjectPropertyDomain(SOMA:hasTask ObjectUnionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Relation> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow>))
 ObjectPropertyRange(SOMA:hasTask <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
+
+# Object Property: SOMA:isFirstStepOf (is first step of)
+
+AnnotationAssertion(rdfs:comment SOMA:isFirstStepOf "A relation stating that some task is the first one in a workflow.")
+AnnotationAssertion(rdfs:label SOMA:isFirstStepOf "is first step of")
+SubObjectPropertyOf(SOMA:isFirstStepOf SOMA:isStepOf)
+ObjectPropertyDomain(SOMA:isFirstStepOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
+ObjectPropertyRange(SOMA:isFirstStepOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow>)
+
+# Object Property: SOMA:isStepOf (is step of)
+
+AnnotationAssertion(rdfs:comment SOMA:isStepOf "A relation stating that a task is a step in a workflow.")
+AnnotationAssertion(rdfs:label SOMA:isStepOf "is step of")
+SubObjectPropertyOf(SOMA:isStepOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskDefinedIn>)
+ObjectPropertyDomain(SOMA:isStepOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
+ObjectPropertyRange(SOMA:isStepOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Workflow>)
 
 
 ############################

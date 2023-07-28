@@ -46,8 +46,6 @@ Declaration(Class(SOMA:Successfulness))
 Declaration(Class(SOMA:TechnicalDiagnosis))
 Declaration(Class(SOMA:Threshold))
 Declaration(Class(SOMA:Unsuccessfulness))
-Declaration(ObjectProperty(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf>))
-Declaration(ObjectProperty(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isTerminalSceneOf>))
 Declaration(ObjectProperty(SOMA:after))
 Declaration(ObjectProperty(SOMA:before))
 Declaration(ObjectProperty(SOMA:causesTransition))
@@ -81,6 +79,7 @@ Declaration(ObjectProperty(SOMA:isCausedByEvent))
 Declaration(ObjectProperty(SOMA:isConceptIncludedIn))
 Declaration(ObjectProperty(SOMA:isContainedIn))
 Declaration(ObjectProperty(SOMA:isDirectSourceFor))
+Declaration(ObjectProperty(SOMA:isInitialSceneOf))
 Declaration(ObjectProperty(SOMA:isInitialStateOf))
 Declaration(ObjectProperty(SOMA:isInputParameterFor))
 Declaration(ObjectProperty(SOMA:isInputRoleOf))
@@ -95,6 +94,7 @@ Declaration(ObjectProperty(SOMA:isSituationIncludedIn))
 Declaration(ObjectProperty(SOMA:isSourceFor))
 Declaration(ObjectProperty(SOMA:isTaskOfInputRole))
 Declaration(ObjectProperty(SOMA:isTaskOfOutputRole))
+Declaration(ObjectProperty(SOMA:isTerminalSceneOf))
 Declaration(ObjectProperty(SOMA:isTerminalStateOf))
 Declaration(ObjectProperty(SOMA:meets))
 Declaration(ObjectProperty(SOMA:metBy))
@@ -157,24 +157,6 @@ AnnotationPropertyRange(SOMA:symbol xsd:string)
 ############################
 #   Object Properties
 ############################
-
-# Object Property: <http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf> (is initial scene of)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf> "A relation between StateTransitions and Scenes, which identifies the scene the transition starts from.")
-AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf> "is initial scene of")
-SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf> SOMA:isInitialStateOf)
-InverseObjectProperties(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf> SOMA:hasInitialScene)
-ObjectPropertyDomain(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf> SOMA:Scene)
-ObjectPropertyRange(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isInitialSceneOf> SOMA:StateTransition)
-
-# Object Property: <http://www.ease-crc.org/ont/SOMA-SAY.owl#isTerminalSceneOf> (is terminal scene of)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA-SAY.owl#isTerminalSceneOf> "A relation between StateTransitions and Scenes, which identifies the scene the transition is expected to end at.")
-AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA-SAY.owl#isTerminalSceneOf> "is terminal scene of")
-SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isTerminalSceneOf> SOMA:isTerminalStateOf)
-InverseObjectProperties(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isTerminalSceneOf> SOMA:hasTerminalScene)
-ObjectPropertyDomain(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isTerminalSceneOf> SOMA:Scene)
-ObjectPropertyRange(<http://www.ease-crc.org/ont/SOMA-SAY.owl#isTerminalSceneOf> SOMA:StateTransition)
 
 # Object Property: SOMA:after (SOMA:after)
 
@@ -303,6 +285,7 @@ ObjectPropertyRange(SOMA:hasGoal <http://www.ontologydesignpatterns.org/ont/dul/
 AnnotationAssertion(rdfs:comment SOMA:hasInitialScene "A relation between StateTransitions and Scenes, which identifies the scene the transition starts from.")
 AnnotationAssertion(rdfs:label SOMA:hasInitialScene "has initial scene")
 SubObjectPropertyOf(SOMA:hasInitialScene SOMA:hasInitialState)
+InverseObjectProperties(SOMA:hasInitialScene SOMA:isInitialSceneOf)
 AsymmetricObjectProperty(SOMA:hasInitialScene)
 IrreflexiveObjectProperty(SOMA:hasInitialScene)
 ObjectPropertyDomain(SOMA:hasInitialScene SOMA:StateTransition)
@@ -371,6 +354,7 @@ SubObjectPropertyOf(SOMA:hasStatus <http://www.ontologydesignpatterns.org/ont/du
 AnnotationAssertion(rdfs:comment SOMA:hasTerminalScene "A relation between StateTransitions and Scenes, which identifies the scene the transition is expected to end at.")
 AnnotationAssertion(rdfs:label SOMA:hasTerminalScene "has terminal scene")
 SubObjectPropertyOf(SOMA:hasTerminalScene SOMA:hasTerminalState)
+InverseObjectProperties(SOMA:hasTerminalScene SOMA:isTerminalSceneOf)
 AsymmetricObjectProperty(SOMA:hasTerminalScene)
 IrreflexiveObjectProperty(SOMA:hasTerminalScene)
 ObjectPropertyDomain(SOMA:hasTerminalScene SOMA:StateTransition)
@@ -466,6 +450,14 @@ ObjectPropertyRange(SOMA:isContainedIn <http://www.ontologydesignpatterns.org/on
 AnnotationAssertion(rdfs:comment SOMA:isDirectSourceFor "The (transitive) relation between an information object and another which was derived from the former.")
 AnnotationAssertion(rdfs:label SOMA:isDirectSourceFor "is direct source for")
 SubObjectPropertyOf(SOMA:isDirectSourceFor SOMA:isSourceFor)
+
+# Object Property: SOMA:isInitialSceneOf (is initial scene of)
+
+AnnotationAssertion(rdfs:comment SOMA:isInitialSceneOf "A relation between StateTransitions and Scenes, which identifies the scene the transition starts from.")
+AnnotationAssertion(rdfs:label SOMA:isInitialSceneOf "is initial scene of")
+SubObjectPropertyOf(SOMA:isInitialSceneOf SOMA:isInitialStateOf)
+ObjectPropertyDomain(SOMA:isInitialSceneOf SOMA:Scene)
+ObjectPropertyRange(SOMA:isInitialSceneOf SOMA:StateTransition)
 
 # Object Property: SOMA:isInitialStateOf (is initial state of)
 
@@ -582,6 +574,14 @@ AnnotationAssertion(rdfs:label SOMA:isTaskOfOutputRole "is task of output role"@
 SubObjectPropertyOf(SOMA:isTaskOfOutputRole <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf>)
 ObjectPropertyDomain(SOMA:isTaskOfOutputRole <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
 ObjectPropertyRange(SOMA:isTaskOfOutputRole <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>)
+
+# Object Property: SOMA:isTerminalSceneOf (is terminal scene of)
+
+AnnotationAssertion(rdfs:comment SOMA:isTerminalSceneOf "A relation between StateTransitions and Scenes, which identifies the scene the transition is expected to end at.")
+AnnotationAssertion(rdfs:label SOMA:isTerminalSceneOf "is terminal scene of")
+SubObjectPropertyOf(SOMA:isTerminalSceneOf SOMA:isTerminalStateOf)
+ObjectPropertyDomain(SOMA:isTerminalSceneOf SOMA:Scene)
+ObjectPropertyRange(SOMA:isTerminalSceneOf SOMA:StateTransition)
 
 # Object Property: SOMA:isTerminalStateOf (is terminal state of)
 
@@ -927,7 +927,7 @@ For stative events, the mereological sum of two instances has the same type as b
 The difference between states and processes is that states are, in addition, homeomeric, and processes are not.  This means that, when considering time slices  of an event, for states, these time slices always have the same type as the state, but for processes this is not the case.")
 SubClassOf(SOMA:State <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 
-# Class: SOMA:StateTransition (State transition)
+# Class: SOMA:StateTransition (SOMA:StateTransition)
 
 SubClassOf(SOMA:StateTransition ObjectSomeValuesFrom(SOMA:hasInitialScene SOMA:Scene))
 SubClassOf(SOMA:StateTransition ObjectSomeValuesFrom(SOMA:hasTerminalScene SOMA:Scene))

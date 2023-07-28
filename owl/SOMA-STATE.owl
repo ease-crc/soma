@@ -23,12 +23,12 @@ This is related to a design decision as to which should be more fundamental, the
 
 These approaches seem equally expressive, we simply chose what felt more intuitive.")
 
-Declaration(Class(:ContainmentState))
 Declaration(Class(SOMA:Configuration))
 Declaration(Class(SOMA:ConnectedObject))
 Declaration(Class(SOMA:ContactState))
 Declaration(Class(SOMA:Container))
 Declaration(Class(SOMA:Containment))
+Declaration(Class(SOMA:ContainmentState))
 Declaration(Class(SOMA:FunctionalControl))
 Declaration(Class(SOMA:Item))
 Declaration(Class(SOMA:LinkageState))
@@ -85,13 +85,6 @@ ObjectPropertyRange(SOMA:isStateTypeOf <http://www.ontologydesignpatterns.org/on
 #   Classes
 ############################
 
-# Class: :ContainmentState (Containment state)
-
-AnnotationAssertion(rdfs:comment :ContainmentState "Classifies States in which an object is kept inside another object.")
-AnnotationAssertion(rdfs:label :ContainmentState "Containment state"@en)
-SubClassOf(:ContainmentState SOMA:FunctionalControl)
-SubClassOf(:ContainmentState ObjectSomeValuesFrom(SOMA:isStateTypeOf ObjectIntersectionOf(SOMA:Container ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectSomeValuesFrom(SOMA:hasDisposition SOMA:Containment)))))
-
 # Class: SOMA:Configuration (SOMA:Configuration)
 
 AnnotationAssertion(rdfs:comment SOMA:Configuration "A description of a State. This includes e.g. what acceptable regions for participant objects of the State might look like.
@@ -115,6 +108,13 @@ SubClassOf(SOMA:ContactState ObjectAllValuesFrom(<http://www.ontologydesignpatte
 # Class: SOMA:Containment (SOMA:Containment)
 
 AnnotationAssertion(rdfs:comment SOMA:Containment "Classifies States in which an object is placed inside another.")
+
+# Class: SOMA:ContainmentState (Containment state)
+
+AnnotationAssertion(rdfs:comment SOMA:ContainmentState "Classifies States in which an object is kept inside another object.")
+AnnotationAssertion(rdfs:label SOMA:ContainmentState "Containment state"@en)
+SubClassOf(SOMA:ContainmentState SOMA:FunctionalControl)
+SubClassOf(SOMA:ContainmentState ObjectSomeValuesFrom(SOMA:isStateTypeOf ObjectIntersectionOf(SOMA:Container ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectSomeValuesFrom(SOMA:hasDisposition SOMA:Containment)))))
 
 # Class: SOMA:FunctionalControl (Functional state)
 

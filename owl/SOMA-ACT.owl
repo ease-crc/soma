@@ -19,13 +19,6 @@ This module is chiefly concerned with defining a taxonomy of tasks, including ro
 
 Also defined here are execution state regions, i.e. flags with which to label the status of the execution of an action in terms of whether it is unfolding or completed, and if completed whether completed successfully or not.")
 
-Declaration(Class(:Cleaning))
-Declaration(Class(:Flipping))
-Declaration(Class(:Pouring))
-Declaration(Class(:PouringInto))
-Declaration(Class(:PouringOnto))
-Declaration(Class(:Serving))
-Declaration(Class(:Stirring))
 Declaration(Class(SOMA:AbductiveReasoning))
 Declaration(Class(SOMA:Actuating))
 Declaration(Class(SOMA:Answer))
@@ -42,6 +35,7 @@ Declaration(Class(SOMA:Capability))
 Declaration(Class(SOMA:Catching))
 Declaration(Class(SOMA:Channel))
 Declaration(Class(SOMA:CheckingObjectPresence))
+Declaration(Class(SOMA:Cleaning))
 Declaration(Class(SOMA:Closing))
 Declaration(Class(SOMA:CommandingTask))
 Declaration(Class(SOMA:CommunicationAction))
@@ -63,6 +57,7 @@ Declaration(Class(SOMA:Dropping))
 Declaration(Class(SOMA:EndEffectorPositioning))
 Declaration(Class(SOMA:ExecutionStateRegion))
 Declaration(Class(SOMA:Fetching))
+Declaration(Class(SOMA:Flipping))
 Declaration(Class(SOMA:Focusing))
 Declaration(Class(SOMA:ForgettingIncorrectInformation))
 Declaration(Class(SOMA:ForgettingIrrelevantInformation))
@@ -116,6 +111,9 @@ Declaration(Class(SOMA:PickingUp))
 Declaration(Class(SOMA:Placing))
 Declaration(Class(SOMA:Planning))
 Declaration(Class(SOMA:Positioning))
+Declaration(Class(SOMA:Pouring))
+Declaration(Class(SOMA:PouringInto))
+Declaration(Class(SOMA:PouringOnto))
 Declaration(Class(SOMA:Prediction))
 Declaration(Class(SOMA:Premise))
 Declaration(Class(SOMA:Proprioceiving))
@@ -139,11 +137,13 @@ Declaration(Class(SOMA:Retrospecting))
 Declaration(Class(SOMA:SelectingItem))
 Declaration(Class(SOMA:SelfReflection))
 Declaration(Class(SOMA:Sender))
+Declaration(Class(SOMA:Serving))
 Declaration(Class(SOMA:SettingGripper))
 Declaration(Class(SOMA:Simulating))
 Declaration(Class(SOMA:SituationTransition))
 Declaration(Class(SOMA:Slicing))
 Declaration(Class(SOMA:Squeezing))
+Declaration(Class(SOMA:Stirring))
 Declaration(Class(SOMA:ThinkAloud))
 Declaration(Class(SOMA:ThinkAloudActionTopic))
 Declaration(Class(SOMA:ThinkAloudGeneralKnowledgeTopic))
@@ -300,7 +300,7 @@ SubObjectPropertyOf(SOMA:isAffectedBy <http://www.ontologydesignpatterns.org/ont
 
 # Object Property: SOMA:isAskedBy (is asked by)
 
-AnnotationAssertion(rdfs:comment SOMA:isAskedBy "A relation from a Query to the Agent who asks it."^^xsd:string)
+AnnotationAssertion(rdfs:comment SOMA:isAskedBy "A relation from a Query to the Agent who asks it.")
 AnnotationAssertion(rdfs:label SOMA:isAskedBy "is asked by")
 SubObjectPropertyOf(SOMA:isAskedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent>)
 ObjectPropertyDomain(SOMA:isAskedBy SOMA:QueryingTask)
@@ -335,7 +335,7 @@ ObjectPropertyRange(SOMA:isEventTypeDefinedIn <http://www.ontologydesignpatterns
 
 # Object Property: SOMA:isInitialSituationOf (is initial situation of)
 
-AnnotationAssertion(rdfs:comment SOMA:isInitialSituationOf "A relation between SituationTransitions and Situations, which identifies the Situation the transition starts from."^^xsd:string)
+AnnotationAssertion(rdfs:comment SOMA:isInitialSituationOf "A relation between SituationTransitions and Situations, which identifies the Situation the transition starts from.")
 AnnotationAssertion(rdfs:label SOMA:isInitialSituationOf "is initial situation of"@en)
 SubObjectPropertyOf(SOMA:isInitialSituationOf SOMA:isInitialStateOf)
 ObjectPropertyDomain(SOMA:isInitialSituationOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
@@ -381,7 +381,7 @@ ObjectPropertyRange(SOMA:isTaskOfCreatedRole <http://www.ontologydesignpatterns.
 
 # Object Property: SOMA:isTerminalSituationOf (is terminal situation of)
 
-AnnotationAssertion(rdfs:comment SOMA:isTerminalSituationOf "A relation between SituationTransitions and Situations, which identifies the Situation the transition ends at."^^xsd:string)
+AnnotationAssertion(rdfs:comment SOMA:isTerminalSituationOf "A relation between SituationTransitions and Situations, which identifies the Situation the transition ends at.")
 AnnotationAssertion(rdfs:label SOMA:isTerminalSituationOf "is terminal situation of"@en)
 SubObjectPropertyOf(SOMA:isTerminalSituationOf SOMA:isTerminalStateOf)
 ObjectPropertyDomain(SOMA:isTerminalSituationOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
@@ -484,48 +484,6 @@ SubObjectPropertyOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTas
 #   Classes
 ############################
 
-# Class: :Cleaning (:Cleaning)
-
-AnnotationAssertion(rdfs:comment :Cleaning "This task in which an agent restores all the objects to their destined locations, wiping a specific object"^^xsd:string)
-SubClassOf(:Cleaning SOMA:ModifyingPhysicalObject)
-SubClassOf(:Cleaning ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Purification))
-
-# Class: :Flipping (:Flipping)
-
-AnnotationAssertion(rdfs:comment :Flipping "The task in which the agent turns an object over by using a tool or by manipulating"^^xsd:string)
-SubClassOf(:Flipping SOMA:Actuating)
-SubClassOf(:Flipping ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Shifting))
-
-# Class: :Pouring (:Pouring)
-
-AnnotationAssertion(rdfs:comment :Pouring "A task in which an agent lets liquid substance to flow out of an object. The agent has a kinematic control over the object."^^xsd:string)
-SubClassOf(:Pouring SOMA:Actuating)
-SubClassOf(:Pouring ObjectSomeValuesFrom(SOMA:isTaskAffordedBy <http://www.ease-crc.org/ont/SOMA-OBJ.owl#Pourable>))
-
-# Class: :PouringInto (Pouring into)
-
-AnnotationAssertion(rdfs:comment :PouringInto "The task in which the agent pours the substance into another object."^^xsd:string)
-AnnotationAssertion(rdfs:label :PouringInto "Pouring into"^^xsd:string)
-SubClassOf(:PouringInto :Pouring)
-
-# Class: :PouringOnto (Pouring onto)
-
-AnnotationAssertion(rdfs:comment :PouringOnto "The task in which an agent pours the substance on top of an object"^^xsd:string)
-AnnotationAssertion(rdfs:label :PouringOnto "Pouring onto"^^xsd:string)
-SubClassOf(:PouringOnto :Pouring)
-
-# Class: :Serving (:Serving)
-
-AnnotationAssertion(rdfs:comment :Serving "The task in which the agent delivers an object to a physical agent"^^xsd:string)
-SubClassOf(:Serving SOMA:Delivering)
-SubClassOf(:Serving ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action> ObjectUnionOf(ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent>) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)))))
-
-# Class: :Stirring (:Stirring)
-
-AnnotationAssertion(rdfs:comment :Stirring "A task in which an agent dissolves small particles like sugar or salt in fluid"^^xsd:string)
-SubClassOf(:Stirring SOMA:Mixing)
-SubClassOf(:Stirring ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Composing))
-
 # Class: SOMA:AbductiveReasoning (Abductive reasoning)
 
 AnnotationAssertion(rdfs:comment SOMA:AbductiveReasoning "A task in which the Agent proceeds from some set of statements about a world, and attempts to obtain an explanation for these statements. This explanation is often an inferred cause, such as a final cause or intention. Further, it is often required that there be some guarantees that the explanation produced by AbductiveReasoning have some desirable property, such as being the simplest or most likely given the set of statements to explain.")
@@ -550,7 +508,7 @@ SubClassOf(SOMA:Actuating SOMA:PhysicalTask)
 
 # Class: SOMA:Answer (Answer)
 
-AnnotationAssertion(rdfs:comment SOMA:Answer "A role that is played by an Information Realization answering some query."^^xsd:string)
+AnnotationAssertion(rdfs:comment SOMA:Answer "A role that is played by an Information Realization answering some query.")
 AnnotationAssertion(rdfs:label SOMA:Answer "Answer")
 SubClassOf(SOMA:Answer SOMA:Message)
 
@@ -631,6 +589,12 @@ SubClassOf(SOMA:Channel ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.
 AnnotationAssertion(rdfs:comment SOMA:CheckingObjectPresence "A task by which an Agent uses its sensors to check for the presence of a specific object and to obtain some other information about it, e.g. pose.")
 AnnotationAssertion(rdfs:label SOMA:CheckingObjectPresence "Checking object presence"@en)
 SubClassOf(SOMA:CheckingObjectPresence SOMA:Perceiving)
+
+# Class: SOMA:Cleaning (SOMA:Cleaning)
+
+AnnotationAssertion(rdfs:comment SOMA:Cleaning "This task in which an agent restores all the objects to their destined locations, wiping a specific object")
+SubClassOf(SOMA:Cleaning SOMA:ModifyingPhysicalObject)
+SubClassOf(SOMA:Cleaning ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Purification))
 
 # Class: SOMA:Closing (SOMA:Closing)
 
@@ -788,6 +752,12 @@ DisjointClasses(SOMA:Fetching SOMA:Pulling)
 DisjointClasses(SOMA:Fetching SOMA:Pushing)
 DisjointClasses(SOMA:Fetching SOMA:Squeezing)
 
+# Class: SOMA:Flipping (SOMA:Flipping)
+
+AnnotationAssertion(rdfs:comment SOMA:Flipping "The task in which the agent turns an object over by using a tool or by manipulating")
+SubClassOf(SOMA:Flipping SOMA:Actuating)
+SubClassOf(SOMA:Flipping ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Shifting))
+
 # Class: SOMA:Focusing (Focusing)
 
 AnnotationAssertion(rdfs:comment SOMA:Focusing "The mental task to center the attention to some subject.")
@@ -894,7 +864,7 @@ AnnotationAssertion(rdfs:comment SOMA:InformationStorage "A mental task in which
 An example is learning new knowledge."@en)
 AnnotationAssertion(rdfs:label SOMA:InformationStorage "Information storage"@en)
 SubClassOf(SOMA:InformationStorage SOMA:MentalTask)
-SubClassOf(SOMA:InformationStorage ObjectSomeValuesFrom(SOMA:isTaskOfInputRole ObjectIntersectionOf(<http://www.ease-crc.org/ont/SOMA-OBJ.owl#StoredObject> SOMA:Knowledge)))
+SubClassOf(SOMA:InformationStorage ObjectSomeValuesFrom(SOMA:isTaskOfInputRole ObjectIntersectionOf(SOMA:Knowledge SOMA:StoredObject)))
 
 # Class: SOMA:Instructions (Instructions)
 
@@ -1115,8 +1085,8 @@ SubClassOf(SOMA:PhysicalAcquiring SOMA:ModifyingPhysicalObject)
 
 # Class: SOMA:PhysicalAction (Physical action)
 
-AnnotationAssertion(rdfs:comment SOMA:PhysicalAction "An action performed by an agent by using its body in some way to interact with the physical world, e.g., through manipulation of objects, or by changing the posture."^^xsd:string)
-AnnotationAssertion(rdfs:label SOMA:PhysicalAction "Physical action"^^xsd:string)
+AnnotationAssertion(rdfs:comment SOMA:PhysicalAction "An action performed by an agent by using its body in some way to interact with the physical world, e.g., through manipulation of objects, or by changing the posture.")
+AnnotationAssertion(rdfs:label SOMA:PhysicalAction "Physical action")
 SubClassOf(SOMA:PhysicalAction <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>)
 
 # Class: SOMA:PhysicalTask (Physical task)
@@ -1146,6 +1116,24 @@ SubClassOf(SOMA:Planning ObjectSomeValuesFrom(<http://www.ontologydesignpatterns
 
 AnnotationAssertion(rdfs:comment SOMA:Positioning "A task in which an Agent places an object at a particular position.")
 SubClassOf(SOMA:Positioning SOMA:Actuating)
+
+# Class: SOMA:Pouring (SOMA:Pouring)
+
+AnnotationAssertion(rdfs:comment SOMA:Pouring "A task in which an agent lets liquid substance to flow out of an object. The agent has a kinematic control over the object.")
+SubClassOf(SOMA:Pouring SOMA:Actuating)
+SubClassOf(SOMA:Pouring ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Pourable))
+
+# Class: SOMA:PouringInto (Pouring into)
+
+AnnotationAssertion(rdfs:comment SOMA:PouringInto "The task in which the agent pours the substance into another object.")
+AnnotationAssertion(rdfs:label SOMA:PouringInto "Pouring into")
+SubClassOf(SOMA:PouringInto SOMA:Pouring)
+
+# Class: SOMA:PouringOnto (Pouring onto)
+
+AnnotationAssertion(rdfs:comment SOMA:PouringOnto "The task in which an agent pours the substance on top of an object")
+AnnotationAssertion(rdfs:label SOMA:PouringOnto "Pouring onto")
+SubClassOf(SOMA:PouringOnto SOMA:Pouring)
 
 # Class: SOMA:Prediction (Predicting)
 
@@ -1304,6 +1292,12 @@ AnnotationAssertion(rdfs:label SOMA:Sender "Sender"@en)
 SubClassOf(SOMA:Sender SOMA:PerformerRole)
 SubClassOf(SOMA:Sender ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask> SOMA:CommunicationTask))
 
+# Class: SOMA:Serving (SOMA:Serving)
+
+AnnotationAssertion(rdfs:comment SOMA:Serving "The task in which the agent delivers an object to a physical agent")
+SubClassOf(SOMA:Serving SOMA:Delivering)
+SubClassOf(SOMA:Serving ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action> ObjectUnionOf(ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent>) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)))))
+
 # Class: SOMA:SettingGripper (Setting gripper)
 
 AnnotationAssertion(rdfs:comment SOMA:SettingGripper "A task by which an Agent arranges one/some/all of its grippers in some configuration.")
@@ -1332,6 +1326,12 @@ SubClassOf(SOMA:Slicing SOMA:Cutting)
 
 AnnotationAssertion(rdfs:comment SOMA:Squeezing "A task in which an Agent applies pressure to an object they have in their grasp.")
 SubClassOf(SOMA:Squeezing SOMA:Actuating)
+
+# Class: SOMA:Stirring (SOMA:Stirring)
+
+AnnotationAssertion(rdfs:comment SOMA:Stirring "A task in which an agent dissolves small particles like sugar or salt in fluid")
+SubClassOf(SOMA:Stirring SOMA:Mixing)
+SubClassOf(SOMA:Stirring ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Composing))
 
 # Class: SOMA:ThinkAloud (Think-aloud)
 

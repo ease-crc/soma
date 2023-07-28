@@ -14,13 +14,13 @@ Annotation(rdfs:comment "SOMA-ELAN.owl is chiefly concerned with providing a con
 
 SOMA-ELAN.owl should at least import SOMA-ACT.owl and therefore indirectly imports all other modules that SOMA-ACT depends on. This is because the controlled vocabulary is defined as alternative labels for concepts defined in the various modules of SOMA.")
 
-Declaration(Class(:PrepareForBreakfast))
-Declaration(Class(:PrepareForDinner))
-Declaration(Class(:PrepareForLunch))
-Declaration(Class(:PrepareForMeal))
-Declaration(Class(:SettingTheTable))
-Declaration(DataProperty(:expectedNumberOfPeople))
-Declaration(DataProperty(:formalityLevel))
+Declaration(Class(SOMA:PrepareForBreakfast))
+Declaration(Class(SOMA:PrepareForDinner))
+Declaration(Class(SOMA:PrepareForLunch))
+Declaration(Class(SOMA:PrepareForMeal))
+Declaration(Class(SOMA:SettingTheTable))
+Declaration(DataProperty(SOMA:expectedNumberOfPeople))
+Declaration(DataProperty(SOMA:formalityLevel))
 Declaration(AnnotationProperty(SOMA:ELANName))
 Declaration(AnnotationProperty(SOMA:ELANUsageGuideline))
 Declaration(AnnotationProperty(SOMA:UsageGuideline))
@@ -29,12 +29,12 @@ Declaration(AnnotationProperty(SOMA:nickname))
 #   Annotation Properties
 ############################
 
-# Annotation Property: <http://www.ease-crc.org/ont/SOMA.owl#ELANName> (<http://www.ease-crc.org/ont/SOMA.owl#ELANName>)
+# Annotation Property: SOMA:ELANName (SOMA:ELANName)
 
 AnnotationAssertion(rdfs:comment SOMA:ELANName "If present, used by the controlled vocabulary generation script to create a vocabulary entry. By default, the concept name itself is used for the vocabulary entry.")
 SubAnnotationPropertyOf(SOMA:ELANName SOMA:nickname)
 
-# Annotation Property: <http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline> (<http://www.ease-crc.org/ont/SOMA.owl#ELANUsageGuideline>)
+# Annotation Property: SOMA:ELANUsageGuideline (SOMA:ELANUsageGuideline)
 
 AnnotationAssertion(rdfs:comment SOMA:ELANUsageGuideline "Provides a short description, similar to a definition, of a controlled vocabulary entry for ELAN.")
 SubAnnotationPropertyOf(SOMA:ELANUsageGuideline SOMA:UsageGuideline)
@@ -45,21 +45,21 @@ SubAnnotationPropertyOf(SOMA:ELANUsageGuideline SOMA:UsageGuideline)
 #   Data Properties
 ############################
 
-# Data Property: <http://www.ease-crc.org/ont/SOMA-ELAN.owl#expectedNumberOfPeople> (<http://www.ease-crc.org/ont/SOMA-ELAN.owl#expectedNumberOfPeople>)
+# Data Property: SOMA:expectedNumberOfPeople (SOMA:expectedNumberOfPeople)
 
-AnnotationAssertion(rdfs:comment :expectedNumberOfPeople "Used by the description of a task that classifies some event, usually a social gathering such as a meal, or by a description of a task to prepare for such an event, to record the number of people expected to participate.")
-SubDataPropertyOf(:expectedNumberOfPeople <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue>)
-DataPropertyDomain(:expectedNumberOfPeople ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)))
-DataPropertyRange(:expectedNumberOfPeople xsd:integer)
+AnnotationAssertion(rdfs:comment SOMA:expectedNumberOfPeople "Used by the description of a task that classifies some event, usually a social gathering such as a meal, or by a description of a task to prepare for such an event, to record the number of people expected to participate.")
+SubDataPropertyOf(SOMA:expectedNumberOfPeople <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue>)
+DataPropertyDomain(SOMA:expectedNumberOfPeople ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)))
+DataPropertyRange(SOMA:expectedNumberOfPeople xsd:integer)
 
-# Data Property: <http://www.ease-crc.org/ont/SOMA-ELAN.owl#formalityLevel> (<http://www.ease-crc.org/ont/SOMA-ELAN.owl#formalityLevel>)
+# Data Property: SOMA:formalityLevel (SOMA:formalityLevel)
 
-AnnotationAssertion(rdfs:comment :formalityLevel "Records the formality level in a description associated to some event, usually a social gathering such as a meal.
+AnnotationAssertion(rdfs:comment SOMA:formalityLevel "Records the formality level in a description associated to some event, usually a social gathering such as a meal.
 
 The association between the Description and the Event can be direct (the Description is about the Event itself) but it can also be indirect in various ways. A typical example of the latter is where the Description is a Goal for a Task to prepare for the Event in question, as when the Goal of a SettingTheTable task would record the formality level of a meal, which will occur at some point after the task completes.")
-SubDataPropertyOf(:formalityLevel <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue>)
-DataPropertyDomain(:formalityLevel ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)))
-DataPropertyRange(:formalityLevel xsd:string)
+SubDataPropertyOf(SOMA:formalityLevel <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue>)
+DataPropertyDomain(SOMA:formalityLevel ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)))
+DataPropertyRange(SOMA:formalityLevel xsd:string)
 
 
 
@@ -67,40 +67,40 @@ DataPropertyRange(:formalityLevel xsd:string)
 #   Classes
 ############################
 
-# Class: <http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForBreakfast> (<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForBreakfast>)
-
-AnnotationAssertion(rdfs:comment :PrepareForBreakfast "Describes a goal to prepare a table or dining area for a breakfast.")
-SubClassOf(:PrepareForBreakfast :PrepareForMeal)
-
-# Class: <http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForDinner> (<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForDinner>)
-
-AnnotationAssertion(rdfs:comment :PrepareForDinner "Describes a goal to prepare a table or dining area for a dinner.")
-SubClassOf(:PrepareForDinner :PrepareForMeal)
-
-# Class: <http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForLunch> (<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForLunch>)
-
-AnnotationAssertion(rdfs:comment :PrepareForLunch "Describes a goal to prepare a table or dining area for a lunch.")
-SubClassOf(:PrepareForLunch :PrepareForMeal)
-
-# Class: <http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal> (<http://www.ease-crc.org/ont/SOMA-ELAN.owl#PrepareForMeal>)
-
-AnnotationAssertion(rdfs:comment :PrepareForMeal "A description of a goal to prepare for serving a meal by setting a table.
-
-The meal will have a number of expected participants and a level of formality.")
-SubClassOf(:PrepareForMeal <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal>)
-SubClassOf(:PrepareForMeal DataSomeValuesFrom(:expectedNumberOfPeople xsd:integer))
-SubClassOf(:PrepareForMeal DataSomeValuesFrom(:formalityLevel xsd:boolean))
-
-# Class: <http://www.ease-crc.org/ont/SOMA-ELAN.owl#SettingTheTable> (<http://www.ease-crc.org/ont/SOMA-ELAN.owl#SettingTheTable>)
-
-AnnotationAssertion(rdfs:comment :SettingTheTable "The task to prepare a table for a meal.")
-SubClassOf(:SettingTheTable SOMA:Arranging)
-SubClassOf(:SettingTheTable ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskDefinedIn> :PrepareForMeal))
-
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Arranging> (<http://www.ease-crc.org/ont/SOMA.owl#Arranging>)
+# Class: SOMA:Arranging (SOMA:Arranging)
 
 AnnotationAssertion(SOMA:ELANName SOMA:Arranging "construction-arrange-objects")
 AnnotationAssertion(SOMA:ELANUsageGuideline SOMA:Arranging "A task involving the arrangement of a collection of objects in a particular way.")
+
+# Class: SOMA:PrepareForBreakfast (SOMA:PrepareForBreakfast)
+
+AnnotationAssertion(rdfs:comment SOMA:PrepareForBreakfast "Describes a goal to prepare a table or dining area for a breakfast.")
+SubClassOf(SOMA:PrepareForBreakfast SOMA:PrepareForMeal)
+
+# Class: SOMA:PrepareForDinner (SOMA:PrepareForDinner)
+
+AnnotationAssertion(rdfs:comment SOMA:PrepareForDinner "Describes a goal to prepare a table or dining area for a dinner.")
+SubClassOf(SOMA:PrepareForDinner SOMA:PrepareForMeal)
+
+# Class: SOMA:PrepareForLunch (SOMA:PrepareForLunch)
+
+AnnotationAssertion(rdfs:comment SOMA:PrepareForLunch "Describes a goal to prepare a table or dining area for a lunch.")
+SubClassOf(SOMA:PrepareForLunch SOMA:PrepareForMeal)
+
+# Class: SOMA:PrepareForMeal (SOMA:PrepareForMeal)
+
+AnnotationAssertion(rdfs:comment SOMA:PrepareForMeal "A description of a goal to prepare for serving a meal by setting a table.
+
+The meal will have a number of expected participants and a level of formality.")
+SubClassOf(SOMA:PrepareForMeal <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal>)
+SubClassOf(SOMA:PrepareForMeal DataSomeValuesFrom(SOMA:expectedNumberOfPeople xsd:integer))
+SubClassOf(SOMA:PrepareForMeal DataSomeValuesFrom(SOMA:formalityLevel xsd:boolean))
+
+# Class: SOMA:SettingTheTable (SOMA:SettingTheTable)
+
+AnnotationAssertion(rdfs:comment SOMA:SettingTheTable "The task to prepare a table for a meal.")
+SubClassOf(SOMA:SettingTheTable SOMA:Arranging)
+SubClassOf(SOMA:SettingTheTable ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskDefinedIn> SOMA:PrepareForMeal))
 
 
 AnnotationAssertion(SOMA:ELANName SOMA:Actuating "move-object")

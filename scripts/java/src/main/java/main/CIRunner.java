@@ -23,6 +23,9 @@ public class CIRunner implements CommandLineRunner {
 	@Autowired
 	private SubclassNothingRewriter gciRewriter;
 
+	// only use if needed
+	@Autowired
+	private IRINamespaceRewriter iriNamespaceRewriter;
 
 	@Override
 	public void run(final String... args) throws Exception {
