@@ -12,6 +12,14 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Checks for IRIs with inconsistent SOMA namespace.
+ * 
+ * All IRIs related to SOMA should be in the namespace "SOMA". If there are any
+ * IRIs with the namespace "SOMA-X" (e.g. "SOMA-ACT" or "SOMA-OBJ"), this runner
+ * will throw an exception and fail. This will help to prevent accidental usage
+ * of the wrong IRIs.
+ */
 @Component
 @Lazy
 public class IRINamespaceChecker implements CIRunnable {
