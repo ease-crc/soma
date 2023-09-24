@@ -1,15 +1,26 @@
 # Release Notes
 
 ## 3.0.0
-### Braking changes
+### Breaking changes
 *   Remove SOMA namespace inconsistencies
     <details>
         <summary>Details</summary>
         Some entities used namespaces other than DUL or SOMA, e.g. SOMA-OBJ or SOMA-ACT, which caused problems for some systems that always expect the SOMA namespace. All SOMA entities are now in the SOMA namespace instead of a sub-namespace.
     </details>
 
+### New Features
+*   Introduced concepts for introspection
+    <details>
+        <summary>Details</summary>
+        This probably needs some more details, but it adds quite a bit, so I'm not sure how to summerize the most important parts. You could maybe also reference the related paper here, but iirc it is not published yet?
+    </details>
+*   Introduced concepts for kitchen appliances and furniture in `SOMA-HOME`
+*   Introduced `Affordances`, `Depositions`, `Bearer` and `Trigger` in `SOMA-HOME`
+*   Moved different kitchen related action from `knowrob` to `SOMA-ACT`
+*   Introduced a more general version of causes: `affects` (and its inverse `isAffectedBy`)
+
 ## 2.0.0
-### Braking changes
+### Breaking changes
 *   Removal of `IOLite`
     <details>
         <summary>Details</summary>
@@ -50,7 +61,7 @@
 *   Introduced `Action`s modeling communication between `Agent`s
 *   Introduced concepts for kitchen, ovens and trash containers in `SOMA HOME`
 *   Introduced metadata for episodes, e.g., to represent a temporal context or a table setting
-*   Added mising labels to various concepts and roles
+*   Added missing labels to various concepts and roles
 *   To all SOMA ontology files, we added comments that explain their respective domain
 *   Protégé-setup for offline development
     <details>
