@@ -12,12 +12,29 @@
 *   Introduced concepts for introspection
     <details>
         <summary>Details</summary>
-        This probably needs some more details, but it adds quite a bit, so I'm not sure how to summerize the most important parts. You could maybe also reference the related paper here, but iirc it is not published yet?
+        We added various concepts and roles in different SOMA-Files to support, e.g., tracing the metacognitive experiences of CRAM in NEEMs.
+        <ul>
+            <li>
+                Mental task taxonomy
+            </li>
+            <li>
+                Causality relationships
+            </li>
+            <li>
+                Model of Software
+            </li>
+            <li>
+                Small taxonomy of Communication tasks
+            </li>
+            <li>
+                Model of Capabilities
+            </li>
+        </ul>
     </details>
 *   Introduced concepts for kitchen appliances and furniture in `SOMA-HOME`
 *   Introduced `Affordances`, `Depositions`, `Bearer` and `Trigger` in `SOMA-HOME`
 *   Moved different kitchen related action from `knowrob` to `SOMA-ACT`
-*   Introduced a more general version of causes: `affects` (and its inverse `isAffectedBy`)
+*   Introduced a more general version of `causes`: `affects` (and its inverse `isAffectedBy`)
 
 ## 2.0.0
 ### Breaking changes
