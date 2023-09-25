@@ -211,7 +211,7 @@ AnnotationAssertion(rdfs:label SOMA:answers "The relation between an answering m
 AnnotationAssertion(rdfs:label SOMA:answers "answers")
 SubObjectPropertyOf(SOMA:answers SOMA:relatesToAnotherRole)
 InverseObjectProperties(SOMA:answers SOMA:hasAnswer)
-ObjectPropertyDomain(SOMA:answers SOMA:Message)
+ObjectPropertyDomain(SOMA:answers SOMA:Answer)
 ObjectPropertyRange(SOMA:answers SOMA:Message)
 
 # Object Property: SOMA:causes (causes)
@@ -259,7 +259,7 @@ ObjectPropertyRange(SOMA:hasAction <http://www.ontologydesignpatterns.org/ont/du
 AnnotationAssertion(rdfs:comment SOMA:hasAnswer "The relation between a message and its answer.")
 AnnotationAssertion(rdfs:label SOMA:hasAnswer "has answer")
 SubObjectPropertyOf(SOMA:hasAnswer SOMA:relatesToAnotherRole)
-ObjectPropertyDomain(SOMA:hasAnswer SOMA:Answer)
+ObjectPropertyDomain(SOMA:hasAnswer SOMA:Message)
 ObjectPropertyRange(SOMA:hasAnswer SOMA:Answer)
 
 # Object Property: SOMA:hasExecutionState (has execution state)
@@ -1463,7 +1463,7 @@ SubClassOf(Annotation(rdfs:comment "If something is a terminal situation then it
 SubClassOf(Annotation(rdfs:comment "If a transition has a terminal situation then it also has a manifestation.") ObjectSomeValuesFrom(SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>) ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>))
 SubObjectPropertyOf(ObjectPropertyChain(SOMA:causesTransition SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>) SOMA:terminates)
 SubObjectPropertyOf(ObjectPropertyChain(SOMA:causesTransition SOMA:hasTerminalScene <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>) SOMA:directlyCauses)
-SubObjectPropertyOf(ObjectPropertyChain(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent> SOMA:hasInitialSituation SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>) SOMA:isReplacedBy)
-SubObjectPropertyOf(ObjectPropertyChain(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent> SOMA:hasTerminalSituation SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>) SOMA:replaces)
+SubObjectPropertyOf(ObjectPropertyChain(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isEventIncludedIn> SOMA:isInitialSituationOf SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>) SOMA:isReplacedBy)
+SubObjectPropertyOf(ObjectPropertyChain(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isEventIncludedIn> SOMA:isTerminalSituationOf SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>) SOMA:replaces)
 SubObjectPropertyOf(ObjectPropertyChain(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRealizedBy> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasRole> SOMA:isInputRoleOf SOMA:isTaskOfCreatedRole <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRoleOf> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#realizes>) SOMA:isDirectSourceFor)
 )
