@@ -23,7 +23,6 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
@@ -125,15 +124,9 @@ public class ElanCVGenerator implements CIRunnable {
     private OWLClass getClassByIRI(String classIRIString) {
         OWLOntologyManager owlOntologyManager = ontologyManager.getOntologyManager();
         OWLDataFactory dataFactory = owlOntologyManager.getOWLDataFactory();
-
-        // Convert the IRI string to an IRI object
         IRI classIRI = IRI.create(classIRIString);
-
-        // Iterate through the loaded ontologies to find the class
         for (OWLOntology ontology : ontologies) {
-            // Check if the ontology contains the entity with the given IRI
             if (ontology.containsEntityInSignature(classIRI)) {
-                // Retrieve the entity as an OWLClass
                 return dataFactory.getOWLClass(classIRI);
             }
         }
@@ -236,7 +229,6 @@ public class ElanCVGenerator implements CIRunnable {
         }
     }
 
-    // write doc to output stream
     private static void writeXml(Document doc, OutputStream output) throws TransformerException {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
