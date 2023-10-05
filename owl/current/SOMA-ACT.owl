@@ -54,7 +54,7 @@ Also defined here are execution state regions, i.e. flags with which to label th
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#answers">
         <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#relatesToAnotherRole"/>
         <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasAnswer"/>
-        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Message"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Answer"/>
         <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Message"/>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
         <rdfs:label>The relation between an answering message and the message it answers.</rdfs:label>
@@ -137,7 +137,7 @@ The distinction to defines task is necessary to let Dispositions and Affordances
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasAnswer">
         <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#relatesToAnotherRole"/>
-        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Answer"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Message"/>
         <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Answer"/>
         <rdfs:comment>The relation between a message and its answer.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
@@ -357,8 +357,8 @@ This relation is seen as transitive.</rdfs:comment>
         <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#State"/>
         <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#State"/>
         <owl:propertyChainAxiom rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
-            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasInitialSituation"/>
+            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isEventIncludedIn"/>
+            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isInitialSituationOf"/>
             <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasTerminalSituation"/>
             <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
         </owl:propertyChainAxiom>
@@ -435,8 +435,8 @@ This relation is seen as transitive.</rdfs:comment>
         <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#State"/>
         <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#State"/>
         <owl:propertyChainAxiom rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
-            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasTerminalSituation"/>
+            <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isEventIncludedIn"/>
+            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isTerminalSituationOf"/>
             <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasInitialSituation"/>
             <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
         </owl:propertyChainAxiom>
@@ -1420,14 +1420,7 @@ Induction is often described as a move from many &quot;specifics&quot; (swan A i
                     <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MentalTask"/>
                     <owl:Restriction>
                         <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isTaskOfOutputRole"/>
-                        <owl:someValuesFrom>
-                            <owl:Class>
-                                <owl:intersectionOf rdf:parseType="Collection">
-                                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#CreatedObject"/>
-                                    <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Knowledge"/>
-                                </owl:intersectionOf>
-                            </owl:Class>
-                        </owl:someValuesFrom>
+                        <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Knowledge"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
@@ -1453,7 +1446,7 @@ Examples include recalling knowledge or inferring some information from other in
                 <owl:someValuesFrom>
                     <owl:Class>
                         <owl:intersectionOf rdf:parseType="Collection">
-                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#DestroyedObject"/>
+                            <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#ExcludedObject"/>
                             <rdf:Description rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Knowledge"/>
                         </owl:intersectionOf>
                     </owl:Class>
@@ -2874,14 +2867,14 @@ As such, an explicit assertion is needed to make a Situation a nonmanifested one
                         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
-                <rdfs:subClassOf rdf:nodeID="genid167"/>
+                <rdfs:subClassOf rdf:nodeID="genid164"/>
             </owl:Class>
         </owl:annotatedSource>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid167"/>
+        <owl:annotatedTarget rdf:nodeID="genid164"/>
         <rdfs:comment>If a SituationTransition manifests in some Event, then it also has an initial Situation and a terminal one.</rdfs:comment>
     </owl:Axiom>
-    <owl:Class rdf:nodeID="genid167">
+    <owl:Class rdf:nodeID="genid164">
         <owl:intersectionOf rdf:parseType="Collection">
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasInitialSituation"/>
@@ -2903,14 +2896,14 @@ As such, an explicit assertion is needed to make a Situation a nonmanifested one
                         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
                     </owl:Restriction>
                 </owl:intersectionOf>
-                <rdfs:subClassOf rdf:nodeID="genid177"/>
+                <rdfs:subClassOf rdf:nodeID="genid174"/>
             </owl:Class>
         </owl:annotatedSource>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid177"/>
+        <owl:annotatedTarget rdf:nodeID="genid174"/>
         <rdfs:comment>A SituationTransition that manifests in some Event also includes an Action. (NOTE (MP): Typically, the Event manifesting it would be that included Action actually so perhaps we can just require that manifestations of SituationTransitions be Actions?)</rdfs:comment>
     </owl:Axiom>
-    <owl:Restriction rdf:nodeID="genid177">
+    <owl:Restriction rdf:nodeID="genid174">
         <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent"/>
         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action"/>
     </owl:Restriction>
@@ -2919,14 +2912,14 @@ As such, an explicit assertion is needed to make a Situation a nonmanifested one
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasInitialSituation"/>
                 <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-                <rdfs:subClassOf rdf:nodeID="genid180"/>
+                <rdfs:subClassOf rdf:nodeID="genid177"/>
             </owl:Restriction>
         </owl:annotatedSource>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid180"/>
+        <owl:annotatedTarget rdf:nodeID="genid177"/>
         <rdfs:comment>If a transition has an initial situation then it also has a manifestation.</rdfs:comment>
     </owl:Axiom>
-    <owl:Restriction rdf:nodeID="genid180">
+    <owl:Restriction rdf:nodeID="genid177">
         <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
     </owl:Restriction>
@@ -2935,14 +2928,14 @@ As such, an explicit assertion is needed to make a Situation a nonmanifested one
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasTerminalSituation"/>
                 <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-                <rdfs:subClassOf rdf:nodeID="genid183"/>
+                <rdfs:subClassOf rdf:nodeID="genid180"/>
             </owl:Restriction>
         </owl:annotatedSource>
         <owl:annotatedProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
-        <owl:annotatedTarget rdf:nodeID="genid183"/>
+        <owl:annotatedTarget rdf:nodeID="genid180"/>
         <rdfs:comment>If a transition has a terminal situation then it also has a manifestation.</rdfs:comment>
     </owl:Axiom>
-    <owl:Restriction rdf:nodeID="genid183">
+    <owl:Restriction rdf:nodeID="genid180">
         <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
         <owl:someValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
     </owl:Restriction>
