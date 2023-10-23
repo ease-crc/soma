@@ -21,6 +21,7 @@ Declaration(Class(SOMA:Order))
 Declaration(Class(SOMA:OrderItem))
 Declaration(Class(SOMA:Predilection))
 Declaration(Class(SOMA:Preference))
+Declaration(Class(SOMA:PreferenceOrder))
 Declaration(Class(SOMA:PreferenceRegion))
 Declaration(Class(SOMA:Selecting))
 Declaration(Class(SOMA:Singleton))
@@ -82,7 +83,9 @@ SubClassOf(SOMA:OrderItem ObjectAllValuesFrom(<http://www.ontologydesignpatterns
 SubClassOf(SOMA:OrderItem ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes> SOMA:OrderItem))
 SubClassOf(SOMA:OrderItem ObjectExactCardinality(1 SOMA:isOrderedBy SOMA:Order))
 
-# Class: SOMA:Predilection (Predilection)
+# Class: SOMA:Predilection (The relation between a 'Preference' and the 'Order' that the 'Preference' defines over Situations.
+# 
+# For the complete model, see 'Preference'.)
 
 AnnotationAssertion(rdfs:label SOMA:Predilection "Predilection")
 AnnotationAssertion(rdfs:label SOMA:Predilection "The relation between a 'Preference' and the 'Order' that the 'Preference' defines over Situations.
@@ -121,6 +124,15 @@ For example, Peter might prefer the Containment State of a tiger being inside a 
 AnnotationAssertion(rdfs:label SOMA:Preference "Preference"@en)
 SubClassOf(SOMA:Preference SOMA:SocialQuality)
 SubClassOf(SOMA:Preference ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>))
+
+# Class: SOMA:PreferenceOrder (The relation between a 'Preference' and the 'Order' that the 'Preference' defines over Descriptions of Situations.)
+
+AnnotationAssertion(rdfs:label SOMA:PreferenceOrder "The relation between a 'Preference' and the 'Order' that the 'Preference' defines over Descriptions of Situations."@en)
+AnnotationAssertion(rdfs:label SOMA:PreferenceOrder "Preference order")
+SubClassOf(SOMA:PreferenceOrder <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialRelation>)
+SubClassOf(SOMA:PreferenceOrder ObjectSomeValuesFrom(SOMA:orders SOMA:OrderItem))
+SubClassOf(SOMA:PreferenceOrder ObjectAllValuesFrom(SOMA:orders ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasMember> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description>)))
+SubClassOf(SOMA:PreferenceOrder ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes> SOMA:Preference))
 
 # Class: SOMA:PreferenceRegion (Preference region)
 
