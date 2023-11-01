@@ -20,3 +20,11 @@ You can find the list of historic, current and upcoming SOMA versions here: [Rel
 ## Further Information
 
 SOMA-related papers, releases, metrics, and some tools can be accessed on the [SOMA Project Website](https://ease-crc.github.io/soma/)
+
+## Acknowledgements
+
+
+This project has been (partially) supported by 
+
+- the ![German Research Foundation DFG](https://www.dfg.de/en/index.jsp), as part of Collaborative Research Center (Sonderforschungsbereich) 1320 Project-ID 329551904  !["EASE - Everyday Activity Science and Engineering"](http://www.ease-crc.org/) 
+- the European Union's Horizon 2020 research and innovation programme under grant agreement No 951846, as part of the ![MUHAI](https://www.muhai.org/) project.
