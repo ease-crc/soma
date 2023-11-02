@@ -30,17 +30,60 @@
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#encapsulates -->
+
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#encapsulates">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderedElement"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
+        <rdfs:comment xml:lang="en">The relation between an Ordered element&apos; and an &apos;Entity&apos; it contains.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-AGENT.owl"/>
+        <rdfs:label xml:lang="en">encapsulates</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#hasPreference -->
+
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#hasPreference">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isPreferenceOf"/>
+        <rdfs:domain rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Preference"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-AGENT.owl"/>
+        <rdfs:label xml:lang="en">Relates an agent to its preference quality.</rdfs:label>
+        <rdfs:label xml:lang="en">has preference</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#isOrderedBy -->
 
 
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isOrderedBy">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
         <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#orders"/>
-        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderItem"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderedElement"/>
         <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Order"/>
         <rdfs:comment xml:lang="en">The relation between an &apos;Order item&apos; and the &apos;Order&apos; that sorts them (via the relations &apos;precedes&apos; and &apos;follows&apos;)</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-AGENT.owl"/>
         <rdfs:label xml:lang="en">is ordered by</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isPreferenceOf -->
+
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isPreferenceOf">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Preference"/>
+        <rdfs:range rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
+        <rdfs:comment xml:lang="en">Relates a preference quality to the agent the preference belongs to.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-AGENT.owl"/>
+        <rdfs:label xml:lang="en">is preference of</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -51,7 +94,7 @@
     <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#orders">
         <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith"/>
         <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Order"/>
-        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderItem"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderedElement"/>
         <rdfs:comment xml:lang="en">The relation between an &apos;Order&apos; and the sorted &apos;Order item&apos; (sorted via the relations &apos;precedes&apos; and &apos;follows&apos; between the &apos;Order item&apos;s)</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-AGENT.owl"/>
         <rdfs:label xml:lang="en">orders</rdfs:label>
@@ -112,7 +155,7 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#orders"/>
-                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderItem"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderedElement"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">An &apos;Order&apos; sorts two or more &apos;Order item&apos;s via the relations &apos;precedes&apos; and &apos;follows&apos;.</rdfs:comment>
@@ -122,21 +165,21 @@
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl#OrderItem -->
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#OrderedElement -->
 
 
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#OrderItem">
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#OrderedElement">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Singleton"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#follows"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderItem"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderedElement"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes"/>
-                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderItem"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderedElement"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -148,7 +191,7 @@
         </rdfs:subClassOf>
         <rdfs:comment xml:lang="en">A &apos;Singleton&apos; of an entity that &apos;is ordered by&apos; some &apos;Order&apos;. An &apos;Order item&apos; can only &apos;precede&apos; or &apos;follow&apos; another &apos;Order item&apos;, encoding the sortation of the entities contained within the &apos;Order items&apos;. Different &apos;Order&apos;s need to use different &apos;Order item&apos;s.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-AGENT.owl"/>
-        <rdfs:label xml:lang="en">Order item</rdfs:label>
+        <rdfs:label xml:lang="en">Ordered element</rdfs:label>
     </owl:Class>
     
 
@@ -172,7 +215,7 @@
                                         <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#orders"/>
                                         <owl:allValuesFrom>
                                             <owl:Restriction>
-                                                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasMember"/>
+                                                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#encapsulates"/>
                                                 <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
                                             </owl:Restriction>
                                         </owl:allValuesFrom>
@@ -200,7 +243,7 @@ For the complete model, see &apos;Preference&apos;.</rdfs:label>
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#SocialQuality"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf"/>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isPreferenceOf"/>
                 <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent"/>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -231,6 +274,41 @@ Situations are not restricted to Tasks; other event types are possible as well.
 For example, Peter might prefer the Containment State of a tiger being inside a cage vs. the Containment State of the tiger being outside of the cage.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-AGENT.owl"/>
         <rdfs:label xml:lang="en">Preference</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#PreferenceOrder -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#PreferenceOrder">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialRelation"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#orders"/>
+                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#OrderedElement"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#orders"/>
+                <owl:allValuesFrom>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#encapsulates"/>
+                        <owl:allValuesFrom rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+                    </owl:Restriction>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Preference"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-AGENT.owl"/>
+        <rdfs:label xml:lang="en">The relation between a &apos;Preference&apos; and the &apos;Order&apos; that the &apos;Preference&apos; defines over Descriptions of Situations.</rdfs:label>
+        <rdfs:label>Preference order</rdfs:label>
     </owl:Class>
     
 
@@ -274,7 +352,7 @@ For example, Peter might prefer the Containment State of a tiger being inside a 
                 <owl:intersectionOf rdf:parseType="Collection">
                     <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Set"/>
                     <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasMember"/>
+                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#encapsulates"/>
                         <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
                         <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity"/>
                     </owl:Restriction>
