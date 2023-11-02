@@ -18,18 +18,39 @@ Declaration(Class(SOMA:AgentRole))
 Declaration(Class(SOMA:Choice))
 Declaration(Class(SOMA:Option))
 Declaration(Class(SOMA:Order))
-Declaration(Class(SOMA:OrderItem))
+Declaration(Class(SOMA:OrderedElement))
 Declaration(Class(SOMA:Predilection))
 Declaration(Class(SOMA:Preference))
+Declaration(Class(SOMA:PreferenceOrder))
 Declaration(Class(SOMA:PreferenceRegion))
 Declaration(Class(SOMA:Selecting))
 Declaration(Class(SOMA:Singleton))
+Declaration(ObjectProperty(SOMA:encapsulates))
+Declaration(ObjectProperty(SOMA:hasPreference))
 Declaration(ObjectProperty(SOMA:isOrderedBy))
+Declaration(ObjectProperty(SOMA:isPreferenceOf))
 Declaration(ObjectProperty(SOMA:orders))
 
 ############################
 #   Object Properties
 ############################
+
+# Object Property: SOMA:encapsulates (encapsulates)
+
+AnnotationAssertion(rdfs:comment SOMA:encapsulates "The relation between an Ordered element' and an 'Entity' it contains."@en)
+AnnotationAssertion(rdfs:label SOMA:encapsulates "encapsulates"@en)
+SubObjectPropertyOf(SOMA:encapsulates <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith>)
+ObjectPropertyDomain(SOMA:encapsulates SOMA:OrderedElement)
+ObjectPropertyRange(SOMA:encapsulates <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity>)
+
+# Object Property: SOMA:hasPreference (has preference)
+
+AnnotationAssertion(rdfs:label SOMA:hasPreference "Relates an agent to its preference quality."@en)
+AnnotationAssertion(rdfs:label SOMA:hasPreference "has preference"@en)
+SubObjectPropertyOf(SOMA:hasPreference <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality>)
+InverseObjectProperties(SOMA:hasPreference SOMA:isPreferenceOf)
+ObjectPropertyDomain(SOMA:hasPreference <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>)
+ObjectPropertyRange(SOMA:hasPreference SOMA:Preference)
 
 # Object Property: SOMA:isOrderedBy (is ordered by)
 
@@ -37,8 +58,16 @@ AnnotationAssertion(rdfs:comment SOMA:isOrderedBy "The relation between an 'Orde
 AnnotationAssertion(rdfs:label SOMA:isOrderedBy "is ordered by"@en)
 SubObjectPropertyOf(SOMA:isOrderedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith>)
 InverseObjectProperties(SOMA:isOrderedBy SOMA:orders)
-ObjectPropertyDomain(SOMA:isOrderedBy SOMA:OrderItem)
+ObjectPropertyDomain(SOMA:isOrderedBy SOMA:OrderedElement)
 ObjectPropertyRange(SOMA:isOrderedBy SOMA:Order)
+
+# Object Property: SOMA:isPreferenceOf (is preference of)
+
+AnnotationAssertion(rdfs:comment SOMA:isPreferenceOf "Relates a preference quality to the agent the preference belongs to."@en)
+AnnotationAssertion(rdfs:label SOMA:isPreferenceOf "is preference of"@en)
+SubObjectPropertyOf(SOMA:isPreferenceOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf>)
+ObjectPropertyDomain(SOMA:isPreferenceOf SOMA:Preference)
+ObjectPropertyRange(SOMA:isPreferenceOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>)
 
 # Object Property: SOMA:orders (orders)
 
@@ -46,7 +75,7 @@ AnnotationAssertion(rdfs:comment SOMA:orders "The relation between an 'Order' an
 AnnotationAssertion(rdfs:label SOMA:orders "orders"@en)
 SubObjectPropertyOf(SOMA:orders <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith>)
 ObjectPropertyDomain(SOMA:orders SOMA:Order)
-ObjectPropertyRange(SOMA:orders SOMA:OrderItem)
+ObjectPropertyRange(SOMA:orders SOMA:OrderedElement)
 
 
 
@@ -71,16 +100,16 @@ SubClassOf(SOMA:Option SOMA:ResourceRole)
 AnnotationAssertion(rdfs:comment SOMA:Order "An 'Order' sorts two or more 'Order item's via the relations 'precedes' and 'follows'."@en)
 AnnotationAssertion(rdfs:label SOMA:Order "Order"@en)
 SubClassOf(SOMA:Order <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#FormalEntity>)
-SubClassOf(SOMA:Order ObjectSomeValuesFrom(SOMA:orders SOMA:OrderItem))
+SubClassOf(SOMA:Order ObjectSomeValuesFrom(SOMA:orders SOMA:OrderedElement))
 
-# Class: SOMA:OrderItem (Order item)
+# Class: SOMA:OrderedElement (Ordered element)
 
-AnnotationAssertion(rdfs:comment SOMA:OrderItem "A 'Singleton' of an entity that 'is ordered by' some 'Order'. An 'Order item' can only 'precede' or 'follow' another 'Order item', encoding the sortation of the entities contained within the 'Order items'. Different 'Order's need to use different 'Order item's."@en)
-AnnotationAssertion(rdfs:label SOMA:OrderItem "Order item"@en)
-SubClassOf(SOMA:OrderItem SOMA:Singleton)
-SubClassOf(SOMA:OrderItem ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#follows> SOMA:OrderItem))
-SubClassOf(SOMA:OrderItem ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes> SOMA:OrderItem))
-SubClassOf(SOMA:OrderItem ObjectExactCardinality(1 SOMA:isOrderedBy SOMA:Order))
+AnnotationAssertion(rdfs:comment SOMA:OrderedElement "A 'Singleton' of an entity that 'is ordered by' some 'Order'. An 'Order item' can only 'precede' or 'follow' another 'Order item', encoding the sortation of the entities contained within the 'Order items'. Different 'Order's need to use different 'Order item's."@en)
+AnnotationAssertion(rdfs:label SOMA:OrderedElement "Ordered element"@en)
+SubClassOf(SOMA:OrderedElement SOMA:Singleton)
+SubClassOf(SOMA:OrderedElement ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#follows> SOMA:OrderedElement))
+SubClassOf(SOMA:OrderedElement ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes> SOMA:OrderedElement))
+SubClassOf(SOMA:OrderedElement ObjectExactCardinality(1 SOMA:isOrderedBy SOMA:Order))
 
 # Class: SOMA:Predilection (Predilection)
 
@@ -89,7 +118,7 @@ AnnotationAssertion(rdfs:label SOMA:Predilection "The relation between a 'Prefer
 
 For the complete model, see 'Preference'."@en)
 SubClassOf(SOMA:Predilection <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialRelation>)
-SubClassOf(SOMA:Predilection ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes> ObjectUnionOf(SOMA:Preference ObjectIntersectionOf(SOMA:Order ObjectAllValuesFrom(SOMA:orders ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasMember> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>))))))
+SubClassOf(SOMA:Predilection ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes> ObjectUnionOf(SOMA:Preference ObjectIntersectionOf(SOMA:Order ObjectAllValuesFrom(SOMA:orders ObjectAllValuesFrom(SOMA:encapsulates <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>))))))
 
 # Class: SOMA:Preference (Preference)
 
@@ -120,7 +149,16 @@ Situations are not restricted to Tasks; other event types are possible as well.
 For example, Peter might prefer the Containment State of a tiger being inside a cage vs. the Containment State of the tiger being outside of the cage."@en)
 AnnotationAssertion(rdfs:label SOMA:Preference "Preference"@en)
 SubClassOf(SOMA:Preference SOMA:SocialQuality)
-SubClassOf(SOMA:Preference ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isQualityOf> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>))
+SubClassOf(SOMA:Preference ObjectAllValuesFrom(SOMA:isPreferenceOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>))
+
+# Class: SOMA:PreferenceOrder (The relation between a 'Preference' and the 'Order' that the 'Preference' defines over Descriptions of Situations.)
+
+AnnotationAssertion(rdfs:label SOMA:PreferenceOrder "Preference order")
+AnnotationAssertion(rdfs:label SOMA:PreferenceOrder "The relation between a 'Preference' and the 'Order' that the 'Preference' defines over Descriptions of Situations."@en)
+SubClassOf(SOMA:PreferenceOrder <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialRelation>)
+SubClassOf(SOMA:PreferenceOrder ObjectSomeValuesFrom(SOMA:orders SOMA:OrderedElement))
+SubClassOf(SOMA:PreferenceOrder ObjectAllValuesFrom(SOMA:orders ObjectAllValuesFrom(SOMA:encapsulates <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description>)))
+SubClassOf(SOMA:PreferenceOrder ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes> SOMA:Preference))
 
 # Class: SOMA:PreferenceRegion (Preference region)
 
@@ -138,7 +176,7 @@ SubClassOf(SOMA:Selecting SOMA:Deciding)
 # Class: SOMA:Singleton (SOMA:Singleton)
 
 AnnotationAssertion(rdfs:comment SOMA:Singleton "A 'Set' that contains exactly one member.")
-EquivalentClasses(SOMA:Singleton ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Set> ObjectExactCardinality(1 <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasMember> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity>)))
+EquivalentClasses(SOMA:Singleton ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Set> ObjectExactCardinality(1 SOMA:encapsulates <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity>)))
 
 
 )
