@@ -1,7 +1,7 @@
 # Release Notes
 
-## 3.0.0
-### Breaking changes
+## 2.1.0
+### Braking changes
 *   Remove SOMA namespace inconsistencies
     <details>
         <summary>Details</summary>
