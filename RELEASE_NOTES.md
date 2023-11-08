@@ -8,8 +8,36 @@
         Some entities used namespaces other than DUL or SOMA, e.g. SOMA-OBJ or SOMA-ACT, which caused problems for some systems that always expect the SOMA namespace. All SOMA entities are now in the SOMA namespace instead of a sub-namespace.
     </details>
 
+### New Features
+*   Introduced concepts for introspection
+    <details>
+        <summary>Details</summary>
+        We added various concepts and roles in different SOMA-Files to support, e.g., tracing the metacognitive experiences of CRAM in NEEMs.
+        <ul>
+            <li>
+                Mental task taxonomy
+            </li>
+            <li>
+                Causality relationships
+            </li>
+            <li>
+                Model of Software
+            </li>
+            <li>
+                Small taxonomy of Communication tasks
+            </li>
+            <li>
+                Model of Capabilities
+            </li>
+        </ul>
+    </details>
+*   Introduced concepts for kitchen appliances and furniture in `SOMA-HOME`
+*   Introduced `Affordances`, `Depositions`, `Bearer` and `Trigger` in `SOMA-HOME`
+*   Moved different kitchen related action from `knowrob` to `SOMA-ACT`
+*   Introduced a more general version of `causes`: `affects` (and its inverse `isAffectedBy`)
+
 ## 2.0.0
-### Braking changes
+### Breaking changes
 *   Removal of `IOLite`
     <details>
         <summary>Details</summary>
@@ -50,7 +78,7 @@
 *   Introduced `Action`s modeling communication between `Agent`s
 *   Introduced concepts for kitchen, ovens and trash containers in `SOMA HOME`
 *   Introduced metadata for episodes, e.g., to represent a temporal context or a table setting
-*   Added mising labels to various concepts and roles
+*   Added missing labels to various concepts and roles
 *   To all SOMA ontology files, we added comments that explain their respective domain
 *   Protégé-setup for offline development
     <details>
