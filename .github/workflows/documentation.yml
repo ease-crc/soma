@@ -17,6 +17,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Create directories
+        run: |
+              mkdir -p $GITHUB_WORKSPACE/build/owl/current
+
       - name: Set Workflow A Run ID
         id: set_run_id
         run: echo "TRIGGER_RUN_ID=${{ github.event.workflow_run.id }}" >> $GITHUB_ENV
