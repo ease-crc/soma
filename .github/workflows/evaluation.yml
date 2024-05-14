@@ -52,10 +52,10 @@ jobs:
       - name: Upload OWL files for Documentation
         uses: actions/upload-artifact@v4
         with:
-          name: owl-files-for-documentation
+          name: SOMA Files for Documentation
           path: ./build/owl/current/
           retention-days: 2
-  
+
   pitfalls:
     name: OOPS
     runs-on: ubuntu-latest
@@ -76,10 +76,10 @@ jobs:
         with:
           name: SOMA OWL
           path: ./build/owl/current/
-      
+
       - name: Setup Python
         uses: actions/setup-python@v2
-      
+
       - name: Install python dependencies
         run: |
           sudo python -m pip install --upgrade pip
@@ -96,7 +96,7 @@ jobs:
         with:
           name: OOPS Results
           path: ./build/files/oops.xml
-  
+
   consistency:
     name: HermiT
     runs-on: ubuntu-latest
