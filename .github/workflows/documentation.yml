@@ -17,19 +17,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Create directories
-        run: |
-              mkdir -p $GITHUB_WORKSPACE/build/owl/current
-
-      - name: Set Workflow A Run ID
-        id: set_run_id
-        run: echo "TRIGGER_RUN_ID=${{ github.event.workflow_run.id }}" >> $GITHUB_ENV
-
       - name: Download OWL file
         uses: actions/download-artifact@v4
         with:
           path: ./build/owl/current
-          run-id: ${{ env.TRIGGER_RUN_ID }}
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: List Directory Contents
         run: ls -al ./build/owl/current
