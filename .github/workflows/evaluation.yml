@@ -43,7 +43,7 @@ jobs:
              -Dspring-boot.run.arguments="--versionInfo=current"
 
       - name: Upload OWL file
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: SOMA OWL
           path: ./build/owl/current/SOMA-HOME.owl
@@ -64,7 +64,7 @@ jobs:
               mkdir -p $GITHUB_WORKSPACE/build/owl/current &&
               mkdir mkdir -p $GITHUB_WORKSPACE/build/files
 
-      - uses: actions/download-artifact@v1
+      - uses: actions/download-artifact@v3
         with:
           name: SOMA OWL
           path: ./build/owl/current/
@@ -100,7 +100,7 @@ jobs:
         with:
           fetch-depth: 1
 
-      - uses: actions/download-artifact@v1
+      - uses: actions/download-artifact@v3
         with:
           name: SOMA OWL
           path: ./build/owl/current
