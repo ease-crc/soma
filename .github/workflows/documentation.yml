@@ -21,13 +21,9 @@ jobs:
         id: set_run_id
         run: echo "TRIGGER_RUN_ID=${{ github.event.workflow_run.id }}" >> $GITHUB_ENV
 
-      - name: Print Workflow A Run ID
-        run: echo "The run ID of Workflow A is $TRIGGER_RUN_ID"
-
       - name: Download OWL file
         uses: actions/download-artifact@v4
         with:
-          name: owl-files-for-documentation
           path: ./build/owl/current
           run-id: ${{ env.TRIGGER_RUN_ID }}
 
