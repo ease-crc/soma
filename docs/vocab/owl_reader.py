@@ -1,7 +1,6 @@
 """
 This file parses the owl ontologies to get the comments, label and superclass of entities.
 """
-
 import owlready2 as owl
 import sys
 from typing import NamedTuple
@@ -15,8 +14,7 @@ class OWLClassInfo(NamedTuple):
     comment: None
 
 
-def split_comment_into_sentences(text):
-    # text = " " + text + "  "
+def escape_latex(text):
     replacements = {
         '#': r'\#',
         '$': r'\$',
@@ -30,12 +28,16 @@ def split_comment_into_sentences(text):
         '\\': r'\textbackslash{}',
     }
 
-    # Replace each special character with its corresponding escaped version
     for original, replacement in replacements.items():
         text = text.replace(original, replacement)
-    
+
+    return text
+
+
+def split_comment_into_sentences(text):
     if not text.endswith("."):
-        text = text + "."
+        text += "."
+
     text = text.replace("\n", " ")
     if "e.g." in text:
         text = text.replace("e.g.", "e<prd>g<prd>")
@@ -47,6 +49,7 @@ def split_comment_into_sentences(text):
         text = text.replace("!\"", "\"!")
     if "?" in text:
         text = text.replace("?\"", "\"?")
+
     text = text.replace(".", ".<stop>")
     text = text.replace("?", "?<stop>")
     text = text.replace("!", "!<stop>")
@@ -77,10 +80,10 @@ def _printdict(class_obj):
     for obj in class_obj:
         if obj.comment:
             print(r'\appendixstyle{{{}}} {{$\sqsubseteq$ }} \textit{{{}}} {{--}} {{{}}}\\'.format(
-                obj.label.replace("_", "\\_"), str(obj.superclass).replace("_", "\\_"), str(obj.comment).replace("_", "\\_")))
+                obj.label, str(obj.superclass), obj.comment))
         else:
             print(r'\appendixstyle{{{}}} {{$\sqsubseteq$ }} \textit{{{}}}.\\'.format(
-                obj.label.replace("_", "\\_"), str(obj.superclass).replace("_", "\\_")))
+                obj.label, str(obj.superclass)))
 
 
 def _get_valid_string(temp_val):
@@ -95,7 +98,6 @@ def _get_valid_string(temp_val):
 
 
 class OWLReader:
-
     def __init__(self, iri_list):
         self.iri_list = iri_list
         self.class_objects = []
@@ -110,7 +112,6 @@ class OWLReader:
             self.class_objects = self._create_class_objects() + self.class_objects
         self.class_objects = sorted(self.class_objects, key=attrgetter('name'))
         _printdict(self.class_objects)
-        # return self.class_objects
 
     def _print(self):
         for obj in self.class_objects:
@@ -134,7 +135,6 @@ class OWLReader:
         return objects
 
     def set_class_info(self, target_class):
-        comment = None
         try:
             target_class_instance = getattr(self.namespace, target_class)
             comment = getattr(target_class_instance, "comment")
@@ -144,10 +144,11 @@ class OWLReader:
                     target_class)
             ) from e
         if comment:
-            comment = split_comment_into_sentences(comment[0])[0]
+            comment = escape_latex(comment[0])
+            comment = split_comment_into_sentences(comment)[0]
         label = getattr(
-            getattr(getattr(self.namespace, target_class), "label"), "en")
+            getattr(target_class_instance, "label"), "en")
         superclass = _get_valid_string(
-            getattr(getattr(self.namespace, target_class), "is_a")[0])
+            getattr(target_class_instance, "is_a")[0])
 
         return label, superclass, comment
