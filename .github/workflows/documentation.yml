@@ -19,7 +19,7 @@ jobs:
 
       - name: Set Workflow A Run ID
         id: set_run_id
-        run: echo "TRIGGER_RUN_ID=${{ github.event.workflow_run.id }}" >> $GITHUB_ENV
+        run: echo "TRIGGER_RUN_ID=${{ context.payload.workflow_run.id }}" >> $GITHUB_ENV
 
       - name: Print Workflow A Run ID
         run: echo "The run ID of Workflow A is $RUN_ID"
