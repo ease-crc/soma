@@ -60,10 +60,10 @@ def _printdict(class_obj):
     for obj in class_obj:
         if obj.comment:
             print(r'\appendixstyle{{{}}} {{$\sqsubseteq$ }} \textit{{{}}} {{--}} {{{}}}\\'.format(
-                obj.label, str(obj.superclass), str(obj.comment)))
+                obj.label.replace("_", "\\_"), str(obj.superclass).replace("_", "\\_"), str(obj.comment).replace("_", "\\_")))
         else:
             print(r'\appendixstyle{{{}}} {{$\sqsubseteq$ }} \textit{{{}}}.\\'.format(
-                obj.label, str(obj.superclass)))
+                obj.label.replace("_", "\\_"), str(obj.superclass).replace("_", "\\_")))
 
 
 def _get_valid_string(temp_val):
@@ -108,7 +108,7 @@ class OWLReader:
         objects = []
         for class_name in list(self.ontology.classes()):
             if str(class_name).startswith(self.prefix):
-                class_name = str(class_name).split(".")[1].replace("_", "\\_")
+                class_name = str(class_name).split(".")[1]
                 class_info = self.set_class_info(class_name)
                 objects.append(OWLClassInfo(name=class_name,
                                             label=class_info[0][0] if class_info[0] else class_name,
