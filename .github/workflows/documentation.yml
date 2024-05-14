@@ -14,17 +14,14 @@ jobs:
         working-directory: ./docs/vocab/
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Download OWL file
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
-          name: SOMA-OWL
-          path: ./build/owl/current/
+          name: SOMA OWL
+          path: ./build/owl/current
 
       - name: Copy
         run: |
@@ -38,7 +35,7 @@ jobs:
           args: make
 
       - name: Upload
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: SOMA Vocabulary
           path: ./SOMA-vocabulary.pdf
