@@ -44,16 +44,17 @@ jobs:
              -Dspring-boot.run.arguments="--versionInfo=current"
 
       - name: Upload OWL file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: SOMA OWL
           path: ./build/owl/current/SOMA-HOME.owl
 
-      - name: Upload OWL files
-        uses: actions/upload-artifact@v3
+      - name: Upload OWL files for Documentation
+        uses: actions/upload-artifact@v4
         with:
-          name: SOMA-OWL
+          name: owl-files-for-documentation
           path: ./build/owl/current/
+          retention-days: 2
   
   pitfalls:
     name: OOPS
