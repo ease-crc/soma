@@ -16,6 +16,7 @@ class OWLClassInfo(NamedTuple):
 
 def escape_latex(text):
     replacements = {
+        '\\': r'\textbackslash{}',
         '#': r'\#',
         '$': r'\$',
         '%': r'\%',
@@ -25,7 +26,6 @@ def escape_latex(text):
         '}': r'\}',
         '~': r'\textasciitilde{}',
         '^': r'\textasciicircum{}',
-        '\\': r'\textbackslash{}',
     }
 
     for original, replacement in replacements.items():
