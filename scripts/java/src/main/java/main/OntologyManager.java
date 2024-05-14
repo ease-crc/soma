@@ -44,8 +44,12 @@ public class OntologyManager {
 
 	@SuppressWarnings("OverlyBroadThrowsClause")
 	private void loadCatalog(final Path ontologyDirectory) throws IOException {
-		final OWLOntologyIRIMapper xmlCatalogIriMapper = new XMLCatalogIRIMapper(
+		// use this if you want to prohibit ontologies being loaded from online
+		final OWLOntologyIRIMapper xmlCatalogIriMapper = new GuardingXmlCatalogIriMapper(
 				ontologyDirectory.resolve(XML_CATALOG_PATH).toFile());
+		// use this if you want to allow to load ontologies from online
+		// final OWLOntologyIRIMapper xmlCatalogIriMapper = new XMLCatalogIRIMapper(
+		// 		ontologyDirectory.resolve(XML_CATALOG_PATH).toFile());
 		ontologyManager.getIRIMappers().add(xmlCatalogIriMapper);
 	}
 

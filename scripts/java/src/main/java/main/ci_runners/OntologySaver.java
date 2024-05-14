@@ -35,6 +35,7 @@ public class OntologySaver implements CIRunnable {
 			if (ontologyConfig.format() == null) {
 				ontology.saveOntology();
 			} else {
+				LOGGER.info("Using format {}", ontologyConfig.format());
 				ontology.saveOntology(ontologyConfig.format());
 			}
 		}

@@ -1,13 +1,14 @@
 name: Documentation
 on:
-  push:
-    paths:
-      - 'owl/**'
-      - 'docs/**'
-      - '.github/**'
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Evaluation"]
+    types: 
+      - completed
 
 jobs:
   vocabulary:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: SOMA Vocabulary
     runs-on: ubuntu-latest
     defaults:
@@ -36,6 +37,7 @@ jobs:
           path: ./SOMA-vocabulary.pdf
 
   handbook:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: NEEM Handbook
     runs-on: ubuntu-latest
 
