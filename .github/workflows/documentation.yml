@@ -17,11 +17,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Set Workflow A Run ID
+        id: set_run_id
+        run: echo "TRIGGER_RUN_ID=${{ github.event.workflow_run.id }}" >> $GITHUB_ENV
+
       - name: Download OWL file
         uses: actions/download-artifact@v4
         with:
           name: owl-files-for-documentation
           path: ./build/owl/current
+          run_id: ${{ env.TRIGGER_RUN_ID }}
 
       - name: Copy
         run: |
