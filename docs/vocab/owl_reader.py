@@ -21,7 +21,7 @@ class OWLReader:
 		self.class_objects = []
 
 	def get_classes(self):
-		''' 
+		'''
 		Gets the classes defined in the ontology their corresponding
 		superclass, label and comment
 		'''
@@ -45,7 +45,7 @@ class OWLReader:
 		objects = []
 		for class_name in list(self.ontology.classes()):
 			if str(class_name).startswith(self.prefix):
-				class_name = str(class_name).split(".")[1]
+				class_name = str(class_name).split(".")[1].replace("_", "\\_")
 				class_info = self.set_class_info(class_name)
 				objects.append(OWLClassInfo(name=class_name,
 									label=class_info[0][0] if class_info[0] else class_name,
