@@ -17,6 +17,23 @@ class OWLClassInfo(NamedTuple):
 
 def split_comment_into_sentences(text):
     # text = " " + text + "  "
+    replacements = {
+        '#': r'\#',
+        '$': r'\$',
+        '%': r'\%',
+        '&': r'\&',
+        '_': r'\_',
+        '{': r'\{',
+        '}': r'\}',
+        '~': r'\textasciitilde{}',
+        '^': r'\textasciicircum{}',
+        '\\': r'\textbackslash{}',
+    }
+
+    # Replace each special character with its corresponding escaped version
+    for original, replacement in replacements.items():
+        text = text.replace(original, replacement)
+    
     if not text.endswith("."):
         text = text + "."
     text = text.replace("\n", " ")
