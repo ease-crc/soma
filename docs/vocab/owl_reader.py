@@ -54,8 +54,14 @@ class OWLReader:
 		return objects
 
 	def set_class_info(self, target_class):
-
-		comment = getattr(getattr(self.namespace, target_class), "comment")
+	    comment = None
+		try:
+            target_class_instance = getattr(self.namespace, target_class)
+            comment = getattr(target_class_instance, "comment")
+        except AttributeError as e:
+            raise AttributeError(
+                "Error accessing 'comment' attribute. The target class '{}' might be incorrect or missing.".format(target_class)
+            ) from e
 		if(comment):
 			comment = self.split_comment_into_sentences(comment[0])[0]
 		label = getattr(
@@ -121,3 +127,5 @@ class OWLReader:
 			else:
 				print(r'\appendixstyle{{{}}} {{$\sqsubseteq$ }} \textit{{{}}}.\\'.format(
 				    obj.label, str(obj.superclass)))
+
+
