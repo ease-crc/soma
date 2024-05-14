@@ -80,10 +80,10 @@ def _printdict(class_obj):
     for obj in class_obj:
         if obj.comment:
             print(r'\appendixstyle{{{}}} {{$\sqsubseteq$ }} \textit{{{}}} {{--}} {{{}}}\\'.format(
-                obj.label, str(obj.superclass), obj.comment))
+                escape_latex(obj.label), escape_latex(str(obj.superclass)), escape_latex(obj.comment)))
         else:
             print(r'\appendixstyle{{{}}} {{$\sqsubseteq$ }} \textit{{{}}}.\\'.format(
-                obj.label, str(obj.superclass)))
+                escape_latex(obj.label), escape_latex(str(obj.superclass))))
 
 
 def _get_valid_string(temp_val):
@@ -144,8 +144,7 @@ class OWLReader:
                     target_class)
             ) from e
         if comment:
-            comment = escape_latex(comment[0])
-            comment = split_comment_into_sentences(comment)[0]
+            comment = split_comment_into_sentences(comment[0])[0]
         label = getattr(
             getattr(target_class_instance, "label"), "en")
         superclass = _get_valid_string(
