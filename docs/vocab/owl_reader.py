@@ -54,9 +54,6 @@ class OWLReader:
 		return objects
 
 	def set_class_info(self, target_class):
-	    class_obj = getattr(getattr(self.namespace, target_class)
-	    print "Class_obj {}".format(class_obj)
-
 		comment = getattr(getattr(self.namespace, target_class), "comment")
 		if(comment):
 			comment = self.split_comment_into_sentences(comment[0])[0]
