@@ -140,7 +140,8 @@
       <summary>Details</summary>
       Some SOMA entities, e.g., <code>KynoDinamicData</code>, have been decided to be too specific for the basic SOMA ontology. These have been moved to <code>SOMA NEEM</code>, which is of course part of the collapsed SOMA version
   </details>
-  ### New Features
+
+### New Features
 
 * Introduced causal relations between `Action`s (see the property `causes`)
 
