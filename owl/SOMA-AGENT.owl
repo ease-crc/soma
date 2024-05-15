@@ -113,10 +113,10 @@ SubClassOf(SOMA:OrderedElement ObjectExactCardinality(1 SOMA:isOrderedBy SOMA:Or
 
 # Class: SOMA:Predilection (Predilection)
 
-AnnotationAssertion(rdfs:label SOMA:Predilection "Predilection")
-AnnotationAssertion(rdfs:label SOMA:Predilection "The relation between a 'Preference' and the 'Order' that the 'Preference' defines over Situations.
+AnnotationAssertion(rdfs:comment SOMA:Predilection "The relation between a 'Preference' and the 'Order' that the 'Preference' defines over Situations.
 
 For the complete model, see 'Preference'."@en)
+AnnotationAssertion(rdfs:label SOMA:Predilection "Predilection")
 SubClassOf(SOMA:Predilection <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialRelation>)
 SubClassOf(SOMA:Predilection ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes> ObjectUnionOf(SOMA:Preference ObjectIntersectionOf(SOMA:Order ObjectAllValuesFrom(SOMA:orders ObjectAllValuesFrom(SOMA:encapsulates <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>))))))
 
@@ -151,10 +151,10 @@ AnnotationAssertion(rdfs:label SOMA:Preference "Preference"@en)
 SubClassOf(SOMA:Preference SOMA:SocialQuality)
 SubClassOf(SOMA:Preference ObjectAllValuesFrom(SOMA:isPreferenceOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>))
 
-# Class: SOMA:PreferenceOrder (The relation between a 'Preference' and the 'Order' that the 'Preference' defines over Descriptions of Situations.)
+# Class: SOMA:PreferenceOrder (Preference order)
 
+AnnotationAssertion(rdfs:comment SOMA:PreferenceOrder "The relation between a 'Preference' and the 'Order' that the 'Preference' defines over Descriptions of Situations."@en)
 AnnotationAssertion(rdfs:label SOMA:PreferenceOrder "Preference order")
-AnnotationAssertion(rdfs:label SOMA:PreferenceOrder "The relation between a 'Preference' and the 'Order' that the 'Preference' defines over Descriptions of Situations."@en)
 SubClassOf(SOMA:PreferenceOrder <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialRelation>)
 SubClassOf(SOMA:PreferenceOrder ObjectSomeValuesFrom(SOMA:orders SOMA:OrderedElement))
 SubClassOf(SOMA:PreferenceOrder ObjectAllValuesFrom(SOMA:orders ObjectAllValuesFrom(SOMA:encapsulates <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description>)))
