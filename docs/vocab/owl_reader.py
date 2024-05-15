@@ -38,7 +38,7 @@ def split_comment_into_sentences(text):
     if not text.endswith("."):
         text += "."
 
-    text = text.replace("\n", " ")
+    text = ' '.join(text.splitlines())
     if "e.g." in text:
         text = text.replace("e.g.", "e<prd>g<prd>")
     if "i.e." in text:
