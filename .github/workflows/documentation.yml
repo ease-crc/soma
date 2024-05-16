@@ -7,6 +7,7 @@ on:
 
 jobs:
   vocabulary:
+    if: ${{ github.event.workflow_run.event == 'push' }}
     name: SOMA Vocabulary
     runs-on: ubuntu-latest
     defaults:
@@ -43,6 +44,7 @@ jobs:
           path: ./SOMA-vocabulary.pdf
 
   handbook:
+    if: ${{ github.event.workflow_run.event == 'push' }}
     name: NEEM Handbook
     runs-on: ubuntu-latest
 
