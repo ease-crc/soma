@@ -176,7 +176,7 @@ The distinction to defines task is necessary to let Dispositions and Affordances
         <rdfs:label xml:lang="en">has initial situation</rdfs:label>
     </owl:ObjectProperty>
     <owl:Class rdf:nodeID="genid4">
-        <owl:complementOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation"/>
+        <owl:complementOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#NonmanifestedSituation"/>
     </owl:Class>
     <owl:Axiom>
         <owl:annotatedSource rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasInitialSituation"/>
@@ -203,7 +203,7 @@ The distinction to defines task is necessary to let Dispositions and Affordances
         <rdfs:label xml:lang="en">has terminal situation</rdfs:label>
     </owl:ObjectProperty>
     <owl:Class rdf:nodeID="genid6">
-        <owl:complementOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation"/>
+        <owl:complementOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#NonmanifestedSituation"/>
     </owl:Class>
     <owl:Axiom>
         <owl:annotatedSource rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#hasTerminalSituation"/>
@@ -1888,6 +1888,36 @@ Note that the Role Message classifies the Information Realization, not the conte
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#NonmanifestedSituation -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#NonmanifestedSituation">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
+        <rdfs:comment>A Situation which does not manifest in any event.
+
+The main use case for this is to represent expectations that are not met, e.g. unfulfilled post-conditions of an action. An action with unmet postconditions is then a failure.
+
+Because of open world semantics of DL, the default assumption for a Situation individual with no &quot;manifests in&quot; relations is simply that we don&apos;t know yet whether that Situation is manifested and if so by what Event.
+
+As such, an explicit assertion is needed to make a Situation a nonmanifested one: either declare that individual&apos;s type NonmanifestedSituation, or assert that it has 0 manifestsIn relations.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
+        <rdfs:label xml:lang="en">Nonmanifested situation</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#Opening -->
 
 
@@ -2709,36 +2739,6 @@ Simulation does not commit itself to state accuracy: the initial state of the si
     
 
 
-    <!-- http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation -->
-
-
-    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/manifestsIn"/>
-                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:qualifiedCardinality>
-                        <owl:onClass rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation"/>
-        <rdfs:comment>A Situation which does not manifest in any event.
-
-The main use case for this is to represent expectations that are not met, e.g. unfulfilled post-conditions of an action. An action with unmet postconditions is then a failure.
-
-Because of open world semantics of DL, the default assumption for a Situation individual with no &quot;manifests in&quot; relations is simply that we don&apos;t know yet whether that Situation is manifested and if so by what Event.
-
-As such, an explicit assertion is needed to make a Situation a nonmanifested one: either declare that individual&apos;s type NonmanifestedSituation, or assert that it has 0 manifestsIn relations.</rdfs:comment>
-        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-ACT.owl"/>
-        <rdfs:label xml:lang="en">Nonmanifested situation</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation -->
 
 
@@ -2949,7 +2949,7 @@ As such, an explicit assertion is needed to make a Situation a nonmanifested one
                         <owl:intersectionOf rdf:parseType="Collection">
                             <owl:Restriction>
                                 <owl:onProperty rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition"/>
-                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation"/>
+                                <owl:someValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#NonmanifestedSituation"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
                     </owl:Class>
