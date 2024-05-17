@@ -9,14 +9,11 @@ import org.semanticweb.owlapi.model.OWLOntologyIRIMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.util.Iterator;
 
 public class GuardingXmlCatalogIriMapper implements OWLOntologyIRIMapper {
-    private XMLCatalog catalog;
+    private final XMLCatalog catalog;
 
-    public GuardingXmlCatalogIriMapper(File f) throws MalformedURLException, IOException {
+    public GuardingXmlCatalogIriMapper(File f) throws IOException {
         this(CatalogUtilities.parseDocument(f.toURI().toURL()));
     }
 

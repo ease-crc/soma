@@ -1,13 +1,13 @@
 name: Documentation
 on:
-  push:
-    paths:
-      - 'owl/**'
-      - 'docs/**'
-      - '.github/**'
+  workflow_run:
+    workflows: ["Evaluation"]
+    types:
+      - completed
 
 jobs:
   vocabulary:
+    if: ${{ github.event.workflow_run.event == 'push' }}
     name: SOMA Vocabulary
     runs-on: ubuntu-latest
     defaults:
@@ -15,27 +15,36 @@ jobs:
         working-directory: ./docs/vocab/
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-        
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Download OWL file
+        uses: actions/download-artifact@v4
+        with:
+          path: ./build/owl/current
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          name: SOMA Files for Documentation
+
       - name: Copy
         run: |
           cp ./Makefile ../../
           cp ./SOMA-vocabulary.tex ../../
           cp ./owl_reader.py ../../
-        
+
       - name: Build
         uses: ./.github/actions/pythonlatex
-        with: 
+        with:
           args: make
-        
+
       - name: Upload
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: SOMA Vocabulary
           path: ./SOMA-vocabulary.pdf
 
   handbook:
+    if: ${{ github.event.workflow_run.event == 'push' }}
     name: NEEM Handbook
     runs-on: ubuntu-latest
 

@@ -1,5 +1,6 @@
 name: Evaluation
 on:
+  workflow_dispatch:
   push:
     paths:
       - '**'
@@ -43,11 +44,18 @@ jobs:
              -Dspring-boot.run.arguments="--versionInfo=current"
 
       - name: Upload OWL file
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: SOMA OWL
           path: ./build/owl/current/SOMA-HOME.owl
-  
+
+      - name: Upload OWL files for Documentation
+        uses: actions/upload-artifact@v4
+        with:
+          name: SOMA Files for Documentation
+          path: ./build/owl/current/
+          retention-days: 2
+
   pitfalls:
     name: OOPS
     runs-on: ubuntu-latest
@@ -55,7 +63,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           fetch-depth: 1
 
@@ -64,14 +72,14 @@ jobs:
               mkdir -p $GITHUB_WORKSPACE/build/owl/current &&
               mkdir mkdir -p $GITHUB_WORKSPACE/build/files
 
-      - uses: actions/download-artifact@v1
+      - uses: actions/download-artifact@v4
         with:
           name: SOMA OWL
           path: ./build/owl/current/
-      
+
       - name: Setup Python
         uses: actions/setup-python@v2
-      
+
       - name: Install python dependencies
         run: |
           sudo python -m pip install --upgrade pip
@@ -88,7 +96,7 @@ jobs:
         with:
           name: OOPS Results
           path: ./build/files/oops.xml
-  
+
   consistency:
     name: HermiT
     runs-on: ubuntu-latest
@@ -96,11 +104,11 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           fetch-depth: 1
 
-      - uses: actions/download-artifact@v1
+      - uses: actions/download-artifact@v4
         with:
           name: SOMA OWL
           path: ./build/owl/current

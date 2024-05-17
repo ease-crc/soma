@@ -100,6 +100,7 @@ Declaration(Class(SOMA:ModifyingPhysicalObject))
 Declaration(Class(SOMA:MonitoringJointState))
 Declaration(Class(SOMA:MovingTo))
 Declaration(Class(SOMA:Navigating))
+Declaration(Class(SOMA:NonmanifestedSituation))
 Declaration(Class(SOMA:Opening))
 Declaration(Class(SOMA:Orienting))
 Declaration(Class(SOMA:ParkingArms))
@@ -156,7 +157,6 @@ Declaration(Class(SOMA:ThinkAloudSceneKnowledgeTopic))
 Declaration(Class(SOMA:ThinkAloudTopic))
 Declaration(Class(SOMA:Throwing))
 Declaration(Class(SOMA:Transporting))
-Declaration(Class(<http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation>))
 Declaration(ObjectProperty(SOMA:affects))
 Declaration(ObjectProperty(SOMA:answers))
 Declaration(ObjectProperty(SOMA:causes))
@@ -1049,6 +1049,19 @@ SubClassOf(SOMA:MovingTo SOMA:Navigating)
 AnnotationAssertion(rdfs:comment SOMA:Navigating "A task in which an Agent moves through space so as to arrive at some location, follow some path, or increase its distance from some location or other entity. Often, navigation involves finding paths around obstacles and forbidden areas.")
 SubClassOf(SOMA:Navigating SOMA:PhysicalTask)
 
+# Class: SOMA:NonmanifestedSituation (Nonmanifested situation)
+
+AnnotationAssertion(rdfs:comment SOMA:NonmanifestedSituation "A Situation which does not manifest in any event.
+
+The main use case for this is to represent expectations that are not met, e.g. unfulfilled post-conditions of an action. An action with unmet postconditions is then a failure.
+
+Because of open world semantics of DL, the default assumption for a Situation individual with no \"manifests in\" relations is simply that we don't know yet whether that Situation is manifested and if so by what Event.
+
+As such, an explicit assertion is needed to make a Situation a nonmanifested one: either declare that individual's type NonmanifestedSituation, or assert that it has 0 manifestsIn relations.")
+AnnotationAssertion(rdfs:label SOMA:NonmanifestedSituation "Nonmanifested situation"@en)
+EquivalentClasses(SOMA:NonmanifestedSituation ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> ObjectExactCardinality(0 <http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)))
+SubClassOf(SOMA:NonmanifestedSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
+
 # Class: SOMA:Opening (SOMA:Opening)
 
 AnnotationAssertion(rdfs:comment SOMA:Opening "A task in which an Agent manipulates a container so as to expose its interior.")
@@ -1404,19 +1417,6 @@ SubClassOf(SOMA:Throwing SOMA:Manipulating)
 AnnotationAssertion(rdfs:comment SOMA:Transporting "A task by which an Agent carries an item from a source to a destination location.")
 SubClassOf(SOMA:Transporting SOMA:ModifyingPhysicalObject)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation> (Nonmanifested situation)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation> "A Situation which does not manifest in any event.
-
-The main use case for this is to represent expectations that are not met, e.g. unfulfilled post-conditions of an action. An action with unmet postconditions is then a failure.
-
-Because of open world semantics of DL, the default assumption for a Situation individual with no \"manifests in\" relations is simply that we don't know yet whether that Situation is manifested and if so by what Event.
-
-As such, an explicit assertion is needed to make a Situation a nonmanifested one: either declare that individual's type NonmanifestedSituation, or assert that it has 0 manifestsIn relations.")
-AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation> "Nonmanifested situation"@en)
-EquivalentClasses(<http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> ObjectExactCardinality(0 <http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)))
-SubClassOf(<http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
-
 
 ############################
 #   Named Individuals
@@ -1456,10 +1456,10 @@ ClassAssertion(SOMA:ExecutionStateRegion SOMA:ExecutionState_Succeeded)
 SubClassOf(Annotation(rdfs:comment "If a SituationTransition manifests in some Event, then it also has an initial Situation and a terminal one.") ObjectIntersectionOf(SOMA:SituationTransition ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)) ObjectIntersectionOf(ObjectSomeValuesFrom(SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>) ObjectSomeValuesFrom(SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)))
 SubClassOf(Annotation(rdfs:comment "A SituationTransition that manifests in some Event also includes an Action. (NOTE (MP): Typically, the Event manifesting it would be that included Action actually so perhaps we can just require that manifestations of SituationTransitions be Actions?)") ObjectIntersectionOf(SOMA:SituationTransition ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>))
 SubClassOf(Annotation(rdfs:comment "By definition, there can be no prevention relation between Situations that manifest in Events. If Situation X prevents Y, then either X manifests and Y does not, or Y manifests and X does not (interpret as: X would have prevented Y from manifesting if X had manifested), or none of X and Y manifests in any Event.") ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>) ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/prevents> ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>))) owl:Nothing)
-SubClassOf(Annotation(rdfs:comment "If a precondition is not met then a Situation cannot manifest.") ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition> <http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation>)) owl:Nothing)
-SubClassOf(Annotation(rdfs:comment "If something is an initial situation of some transition, then it must manifest.") ObjectSomeValuesFrom(SOMA:hasInitialSituation <http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation>) owl:Nothing)
+SubClassOf(Annotation(rdfs:comment "If a precondition is not met then a Situation cannot manifest.") ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition> SOMA:NonmanifestedSituation)) owl:Nothing)
+SubClassOf(Annotation(rdfs:comment "If something is an initial situation of some transition, then it must manifest.") ObjectSomeValuesFrom(SOMA:hasInitialSituation SOMA:NonmanifestedSituation) owl:Nothing)
 SubClassOf(Annotation(rdfs:comment "If a transition has an initial situation then it also has a manifestation.") ObjectSomeValuesFrom(SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>) ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>))
-SubClassOf(Annotation(rdfs:comment "If something is a terminal situation then it must be a manifested situation (regardless of whether it was expected or not).") ObjectSomeValuesFrom(SOMA:hasTerminalSituation <http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation>) owl:Nothing)
+SubClassOf(Annotation(rdfs:comment "If something is a terminal situation then it must be a manifested situation (regardless of whether it was expected or not).") ObjectSomeValuesFrom(SOMA:hasTerminalSituation SOMA:NonmanifestedSituation) owl:Nothing)
 SubClassOf(Annotation(rdfs:comment "If a transition has a terminal situation then it also has a manifestation.") ObjectSomeValuesFrom(SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>) ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>))
 SubObjectPropertyOf(ObjectPropertyChain(SOMA:causesTransition SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>) SOMA:terminates)
 SubObjectPropertyOf(ObjectPropertyChain(SOMA:causesTransition SOMA:hasTerminalScene <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>) SOMA:directlyCauses)
