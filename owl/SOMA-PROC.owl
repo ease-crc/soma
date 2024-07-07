@@ -25,6 +25,8 @@ Further, this also means that, at least according to the SOMA approach, to enact
 
 That is, in CRAM an upper level exists which contains an agent and objects with semantics, and with semantics for the changes in relationships between these. However, to make this layer effective in the world, there exists another layer at which the actual physical processes of movement and control are relevant.")
 
+Declaration(Class(:MotionPlan))
+Declaration(Class(:MotionProcess))
 Declaration(Class(SOMA:Agonist))
 Declaration(Class(SOMA:Alteration))
 Declaration(Class(SOMA:AlterativeInteraction))
@@ -90,6 +92,9 @@ Declaration(Class(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Process
 Declaration(Class(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>))
 Declaration(Class(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>))
 Declaration(Class(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance>))
+Declaration(ObjectProperty(:executesMotion))
+Declaration(ObjectProperty(:isExecutedMotionIn))
+Declaration(ObjectProperty(:isMotionPlanFor))
 Declaration(ObjectProperty(SOMA:definesProcess))
 Declaration(ObjectProperty(SOMA:hasProcessType))
 Declaration(ObjectProperty(SOMA:interactsWith))
@@ -110,6 +115,31 @@ Declaration(ObjectProperty(<http://www.ontologydesignpatterns.org/ont/dul/DUL.ow
 ############################
 #   Object Properties
 ############################
+
+# Object Property: :executesMotion (executes motion)
+
+AnnotationAssertion(rdfs:comment :executesMotion "A relation between an motion process and a motion event type, e.g. 'lifting an object' executes the motion process 'lifting'."@en)
+AnnotationAssertion(rdfs:label :executesMotion "executes motion"@en)
+SubObjectPropertyOf(:executesMotion SOMA:isOccurrenceOf)
+InverseObjectProperties(:executesMotion :isExecutedMotionIn)
+ObjectPropertyDomain(:executesMotion :MotionProcess)
+ObjectPropertyRange(:executesMotion SOMA:Motion)
+
+# Object Property: :isExecutedMotionIn (is executed motion in)
+
+AnnotationAssertion(rdfs:comment :isExecutedMotionIn "A relation between an motion process and a motion event type, e.g. 'lifting an object' executes the motion process 'lifting'."@en)
+AnnotationAssertion(rdfs:label :isExecutedMotionIn "is executed motion in"@en)
+SubObjectPropertyOf(:isExecutedMotionIn SOMA:isOccurringIn)
+ObjectPropertyDomain(:isExecutedMotionIn SOMA:Motion)
+ObjectPropertyRange(:isExecutedMotionIn :MotionProcess)
+
+# Object Property: :isMotionPlanFor (is motion plan for)
+
+AnnotationAssertion(rdfs:comment :isMotionPlanFor "A special relation between a Motion Plan and a Motion, to indicate that the Motion Plan describes a way to achieve the Motion."@en)
+AnnotationAssertion(rdfs:label :isMotionPlanFor "is motion plan for"@en)
+SubObjectPropertyOf(:isMotionPlanFor <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes>)
+ObjectPropertyDomain(:isMotionPlanFor :MotionPlan)
+ObjectPropertyRange(:isMotionPlanFor SOMA:Motion)
 
 # Object Property: SOMA:definesProcess (defines process)
 
@@ -170,6 +200,18 @@ SubObjectPropertyOf(SOMA:supports SOMA:interactsWith)
 ############################
 #   Classes
 ############################
+
+# Class: :MotionPlan (Motion Plan)
+
+AnnotationAssertion(rdfs:comment :MotionPlan "A Description of a Motion having an explicit Goal, to be achieved by executing the motion plan"@en)
+AnnotationAssertion(rdfs:label :MotionPlan "Motion Plan"@en)
+SubClassOf(:MotionPlan <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description>)
+
+# Class: :MotionProcess (Motion process)
+
+AnnotationAssertion(rdfs:comment :MotionProcess "A class that classifies motion processes. This class is used to represent any process involving motion, encompassing a wide range of activities such as walking, running, jumping, and any other form of physical movement."@en)
+AnnotationAssertion(rdfs:label :MotionProcess "Motion process"@en)
+SubClassOf(:MotionProcess SOMA:PhysicsProcess)
 
 # Class: SOMA:Agonist (SOMA:Agonist)
 
@@ -352,6 +394,7 @@ DisjointClasses(SOMA:Locomotion SOMA:PrehensileMotion)
 AnnotationAssertion(rdfs:comment SOMA:Motion "An EventType that classifies motion Processes.")
 AnnotationAssertion(rdfs:comment SOMA:Motion "Motion type")
 SubClassOf(SOMA:Motion SOMA:ProcessType)
+SubClassOf(SOMA:Motion ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExecutedIn> :MotionProcess))
 
 # Class: SOMA:MovingAway (SOMA:MovingAway)
 
