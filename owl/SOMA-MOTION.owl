@@ -14,18 +14,18 @@ Import(<http://www.ease-crc.org/ont/SOMA-ALL.owl>)
 Import(<http://www.ease-crc.org/ont/SOMA-HOME.owl>)
 Annotation(rdfs:comment "SOMA-MOTION defines the concepts that are specific to motion plans for librarys similiar to Giskard. Concepts include e.g. constraints, motion plans.")
 
-Declaration(Class(:AlignmentConstraint))
-Declaration(Class(:AngleConstraint))
-Declaration(Class(:DistanceConstraint))
-Declaration(Class(:FillLevelConstraint))
-Declaration(Class(:HeightConstraint))
-Declaration(Class(:MonitorableMotionConstraint))
-Declaration(Class(:MotionConstraint))
-Declaration(Class(:PerpendicularConstraint))
-Declaration(Class(:PointingConstraint))
+Declaration(Class(SOMA:AlignmentConstraint))
+Declaration(Class(SOMA:AngleConstraint))
+Declaration(Class(SOMA:DistanceConstraint))
+Declaration(Class(SOMA:FillLevelConstraint))
+Declaration(Class(SOMA:HeightConstraint))
+Declaration(Class(SOMA:MonitorableMotionConstraint))
+Declaration(Class(SOMA:MotionConstraint))
+Declaration(Class(SOMA:PerpendicularConstraint))
+Declaration(Class(SOMA:PointingConstraint))
 Declaration(ObjectProperty(SOMA:hasMonitorableConstraint))
-Declaration(DataProperty(:hasLowerLimit))
-Declaration(DataProperty(:hasUpperLimit))
+Declaration(DataProperty(SOMA:hasLowerLimit))
+Declaration(DataProperty(SOMA:hasUpperLimit))
 
 ############################
 #   Object Properties
@@ -40,14 +40,14 @@ SubObjectPropertyOf(SOMA:hasMonitorableConstraint <http://www.ontologydesignpatt
 #   Data Properties
 ############################
 
-# Data Property: :hasLowerLimit (:hasLowerLimit)
+# Data Property: SOMA:hasLowerLimit (SOMA:hasLowerLimit)
 
-SubDataPropertyOf(:hasLowerLimit <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameterDataValue>)
+SubDataPropertyOf(SOMA:hasLowerLimit <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameterDataValue>)
 
-# Data Property: :hasUpperLimit (hass upper limit)
+# Data Property: SOMA:hasUpperLimit (hass upper limit)
 
-AnnotationAssertion(rdfs:label :hasUpperLimit "hass upper limit"@en)
-SubDataPropertyOf(:hasUpperLimit <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameterDataValue>)
+AnnotationAssertion(rdfs:label SOMA:hasUpperLimit "hass upper limit"@en)
+SubDataPropertyOf(SOMA:hasUpperLimit <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameterDataValue>)
 
 
 
@@ -55,71 +55,71 @@ SubDataPropertyOf(:hasUpperLimit <http://www.ontologydesignpatterns.org/ont/dul/
 #   Classes
 ############################
 
-# Class: :AlignmentConstraint (Alignment constraint)
+# Class: SOMA:AlignmentConstraint (Alignment constraint)
 
-AnnotationAssertion(rdfs:comment :AlignmentConstraint "A type of motion constraint that ensures two vectors, such as those representing the orientation of an end-effector and a target direction, remain aligned during the motion of the mobile manipulator."@en)
-AnnotationAssertion(rdfs:label :AlignmentConstraint "Alignment constraint"@en)
-SubClassOf(:AlignmentConstraint :MotionConstraint)
+AnnotationAssertion(rdfs:comment SOMA:AlignmentConstraint "A type of motion constraint that ensures two vectors, such as those representing the orientation of an end-effector and a target direction, remain aligned during the motion of the mobile manipulator."@en)
+AnnotationAssertion(rdfs:label SOMA:AlignmentConstraint "Alignment constraint"@en)
+SubClassOf(SOMA:AlignmentConstraint SOMA:MotionConstraint)
 
-# Class: :AngleConstraint (Angle constraint)
+# Class: SOMA:AngleConstraint (Angle constraint)
 
-AnnotationAssertion(rdfs:comment :AngleConstraint "A motion constraint that enforces a specific angular relationship between components of the mobile manipulator or between the manipulator and its environment, such as maintaining a particular angle between a robot arm and an object it is manipulating."@en)
-AnnotationAssertion(rdfs:label :AngleConstraint "Angle constraint"^^xsd:string)
-SubClassOf(:AngleConstraint :MotionConstraint)
-SubClassOf(:AngleConstraint DataSomeValuesFrom(:hasLowerLimit xsd:double))
-SubClassOf(:AngleConstraint DataSomeValuesFrom(:hasUpperLimit xsd:double))
+AnnotationAssertion(rdfs:comment SOMA:AngleConstraint "A motion constraint that enforces a specific angular relationship between components of the mobile manipulator or between the manipulator and its environment, such as maintaining a particular angle between a robot arm and an object it is manipulating."@en)
+AnnotationAssertion(rdfs:label SOMA:AngleConstraint "Angle constraint"^^xsd:string)
+SubClassOf(SOMA:AngleConstraint SOMA:MotionConstraint)
+SubClassOf(SOMA:AngleConstraint DataSomeValuesFrom(SOMA:hasLowerLimit xsd:double))
+SubClassOf(SOMA:AngleConstraint DataSomeValuesFrom(SOMA:hasUpperLimit xsd:double))
 
-# Class: :DistanceConstraint (Distance constraint)
+# Class: SOMA:DistanceConstraint (Distance constraint)
 
-AnnotationAssertion(rdfs:comment :DistanceConstraint "A motion constraint that maintains a specific distance between components of the mobile manipulator or between the manipulator and objects in its environment, ensuring tasks such as keeping an object at a fixed distance from a sensor or avoiding collisions."@en)
-AnnotationAssertion(rdfs:label :DistanceConstraint "Distance constraint"@en)
-SubClassOf(:DistanceConstraint :MotionConstraint)
-SubClassOf(:DistanceConstraint DataSomeValuesFrom(:hasLowerLimit xsd:double))
-SubClassOf(:DistanceConstraint DataSomeValuesFrom(:hasUpperLimit xsd:double))
+AnnotationAssertion(rdfs:comment SOMA:DistanceConstraint "A motion constraint that maintains a specific distance between components of the mobile manipulator or between the manipulator and objects in its environment, ensuring tasks such as keeping an object at a fixed distance from a sensor or avoiding collisions."@en)
+AnnotationAssertion(rdfs:label SOMA:DistanceConstraint "Distance constraint"@en)
+SubClassOf(SOMA:DistanceConstraint SOMA:MotionConstraint)
+SubClassOf(SOMA:DistanceConstraint DataSomeValuesFrom(SOMA:hasLowerLimit xsd:double))
+SubClassOf(SOMA:DistanceConstraint DataSomeValuesFrom(SOMA:hasUpperLimit xsd:double))
 
-# Class: :FillLevelConstraint (Fill level constraint)
+# Class: SOMA:FillLevelConstraint (Fill level constraint)
 
-AnnotationAssertion(rdfs:comment :FillLevelConstraint "A subclass of monitorable motion constraints that ensures the mobile manipulator adjusts its actions based on the detected fill level of a container, such as maintaining or changing the amount of liquid or material within a specified range during a task."@en)
-AnnotationAssertion(rdfs:label :FillLevelConstraint "Fill level constraint"@en)
-SubClassOf(:FillLevelConstraint :MonitorableMotionConstraint)
-SubClassOf(:FillLevelConstraint DataSomeValuesFrom(:hasLowerLimit xsd:double))
-SubClassOf(:FillLevelConstraint DataSomeValuesFrom(:hasUpperLimit xsd:double))
+AnnotationAssertion(rdfs:comment SOMA:FillLevelConstraint "A subclass of monitorable motion constraints that ensures the mobile manipulator adjusts its actions based on the detected fill level of a container, such as maintaining or changing the amount of liquid or material within a specified range during a task."@en)
+AnnotationAssertion(rdfs:label SOMA:FillLevelConstraint "Fill level constraint"@en)
+SubClassOf(SOMA:FillLevelConstraint SOMA:MonitorableMotionConstraint)
+SubClassOf(SOMA:FillLevelConstraint DataSomeValuesFrom(SOMA:hasLowerLimit xsd:double))
+SubClassOf(SOMA:FillLevelConstraint DataSomeValuesFrom(SOMA:hasUpperLimit xsd:double))
 
-# Class: :HeightConstraint (Height constraint)
+# Class: SOMA:HeightConstraint (Height constraint)
 
-AnnotationAssertion(rdfs:comment :HeightConstraint "A motion constraint that ensures the mobile manipulator or its components operate within specified vertical limits, maintaining a particular height for tasks such as lifting or placing objects at a consistent level."@en)
-AnnotationAssertion(rdfs:label :HeightConstraint "Height constraint"@en)
-SubClassOf(:HeightConstraint :MotionConstraint)
-SubClassOf(:HeightConstraint DataSomeValuesFrom(:hasLowerLimit xsd:double))
-SubClassOf(:HeightConstraint DataSomeValuesFrom(:hasUpperLimit xsd:double))
+AnnotationAssertion(rdfs:comment SOMA:HeightConstraint "A motion constraint that ensures the mobile manipulator or its components operate within specified vertical limits, maintaining a particular height for tasks such as lifting or placing objects at a consistent level."@en)
+AnnotationAssertion(rdfs:label SOMA:HeightConstraint "Height constraint"@en)
+SubClassOf(SOMA:HeightConstraint SOMA:MotionConstraint)
+SubClassOf(SOMA:HeightConstraint DataSomeValuesFrom(SOMA:hasLowerLimit xsd:double))
+SubClassOf(SOMA:HeightConstraint DataSomeValuesFrom(SOMA:hasUpperLimit xsd:double))
 
-# Class: :MonitorableMotionConstraint (Monitorable motion constraint)
+# Class: SOMA:MonitorableMotionConstraint (Monitorable motion constraint)
 
-AnnotationAssertion(rdfs:comment :MonitorableMotionConstraint "A motion constraint that utilizes external information, such as sensory perception or environmental data, to dynamically adjust and ensure the mobile manipulator adheres to specific task requirements in real-time."@en)
-AnnotationAssertion(rdfs:label :MonitorableMotionConstraint "Monitorable motion constraint"@en)
-SubClassOf(:MonitorableMotionConstraint :MotionConstraint)
+AnnotationAssertion(rdfs:comment SOMA:MonitorableMotionConstraint "A motion constraint that utilizes external information, such as sensory perception or environmental data, to dynamically adjust and ensure the mobile manipulator adheres to specific task requirements in real-time."@en)
+AnnotationAssertion(rdfs:label SOMA:MonitorableMotionConstraint "Monitorable motion constraint"@en)
+SubClassOf(SOMA:MonitorableMotionConstraint SOMA:MotionConstraint)
 
-# Class: :MotionConstraint (Motion constraint)
+# Class: SOMA:MotionConstraint (Motion constraint)
 
-AnnotationAssertion(rdfs:comment :MotionConstraint "A parameter in the motion planning framework that defines limitations or requirements on the motion of a mobile manipulator, ensuring it adheres to specific tasks or environmental interactions, such as maintaining a level object while moving or avoiding collisions."@en)
-AnnotationAssertion(rdfs:label :MotionConstraint "Motion constraint"@en)
-SubClassOf(:MotionConstraint <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter>)
+AnnotationAssertion(rdfs:comment SOMA:MotionConstraint "A parameter in the motion planning framework that defines limitations or requirements on the motion of a mobile manipulator, ensuring it adheres to specific tasks or environmental interactions, such as maintaining a level object while moving or avoiding collisions."@en)
+AnnotationAssertion(rdfs:label SOMA:MotionConstraint "Motion constraint"@en)
+SubClassOf(SOMA:MotionConstraint <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter>)
 
-# Class: :PerpendicularConstraint (Perpendicular constraint)
+# Class: SOMA:PerpendicularConstraint (Perpendicular constraint)
 
-AnnotationAssertion(rdfs:comment :PerpendicularConstraint "A motion constraint that ensures two vectors or surfaces maintain a perpendicular relationship to each other during the motion of the mobile manipulator, such as keeping an end-effector perpendicular to a surface it is interacting with."^^xsd:string)
-AnnotationAssertion(rdfs:label :PerpendicularConstraint "Perpendicular constraint"@en)
-SubClassOf(:PerpendicularConstraint :MotionConstraint)
+AnnotationAssertion(rdfs:comment SOMA:PerpendicularConstraint "A motion constraint that ensures two vectors or surfaces maintain a perpendicular relationship to each other during the motion of the mobile manipulator, such as keeping an end-effector perpendicular to a surface it is interacting with."^^xsd:string)
+AnnotationAssertion(rdfs:label SOMA:PerpendicularConstraint "Perpendicular constraint"@en)
+SubClassOf(SOMA:PerpendicularConstraint SOMA:MotionConstraint)
 
-# Class: :PointingConstraint (Pointing constraint)
+# Class: SOMA:PointingConstraint (Pointing constraint)
 
-AnnotationAssertion(rdfs:comment :PointingConstraint "A motion constraint that ensures a specific part of the mobile manipulator, such as a camera or tool, remains oriented towards a particular point or target throughout the motion."@en)
-AnnotationAssertion(rdfs:label :PointingConstraint "Pointing constraint"@en)
-SubClassOf(:PointingConstraint :MotionConstraint)
+AnnotationAssertion(rdfs:comment SOMA:PointingConstraint "A motion constraint that ensures a specific part of the mobile manipulator, such as a camera or tool, remains oriented towards a particular point or target throughout the motion."@en)
+AnnotationAssertion(rdfs:label SOMA:PointingConstraint "Pointing constraint"@en)
+SubClassOf(SOMA:PointingConstraint SOMA:MotionConstraint)
 
 # Class: SOMA:Crockery (SOMA:Crockery)
 
-SubClassOf(SOMA:Crockery ObjectSomeValuesFrom(SOMA:hasMonitorableConstraint :FillLevelConstraint))
+SubClassOf(SOMA:Crockery ObjectSomeValuesFrom(SOMA:hasMonitorableConstraint SOMA:FillLevelConstraint))
 
 
 )
