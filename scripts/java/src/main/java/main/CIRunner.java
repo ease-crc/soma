@@ -24,6 +24,9 @@ public class CIRunner implements CommandLineRunner {
 	private SubclassNothingRewriter gciRewriter;
 
 	@Autowired
+	private ElanCVGenerator elanCVGenerator;
+
+	@Autowired
 	private IRINamespaceChecker iriNamespaceChecker;
 
 	// only use if needed
@@ -32,7 +35,7 @@ public class CIRunner implements CommandLineRunner {
 
 	@Override
 	public void run(final String... args) throws Exception {
-		final CIRunnable[] toRun = {iriNamespaceChecker, gciRewriter, isDefinedInAdder, versionInfoAdder, collapser, ontologySaver};
+		final CIRunnable[] toRun = {iriNamespaceChecker, elanCVGenerator, gciRewriter, isDefinedInAdder, versionInfoAdder, collapser, ontologySaver};
 		for (final var next : toRun) {
 			next.run();
 		}
