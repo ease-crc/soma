@@ -56,6 +56,21 @@ That is, in CRAM an upper level exists which contains an agent and objects with 
     
 
 
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#executesMotion -->
+
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#executesMotion">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isOccurrenceOf"/>
+        <owl:inverseOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isExecutedMotionIn"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#MotionProcess"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Motion"/>
+        <rdfs:comment xml:lang="en">A relation between an motion process and a motion event type, e.g. &apos;lifting an object&apos; executes the motion process &apos;lifting&apos;.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+        <rdfs:label xml:lang="en">executes motion</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.ease-crc.org/ont/SOMA.owl#hasProcessType -->
 
 
@@ -82,6 +97,34 @@ That is, in CRAM an upper level exists which contains an agent and objects with 
         <rdfs:comment>A relation between objects that interact with each other.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
         <rdfs:label>interacts with</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isExecutedMotionIn -->
+
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isExecutedMotionIn">
+        <rdfs:subPropertyOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isOccurringIn"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Motion"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#MotionProcess"/>
+        <rdfs:comment xml:lang="en">A relation between an motion process and a motion event type, e.g. &apos;lifting an object&apos; executes the motion process &apos;lifting&apos;.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+        <rdfs:label xml:lang="en">is executed motion in</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#isMotionPlanFor -->
+
+
+    <owl:ObjectProperty rdf:about="http://www.ease-crc.org/ont/SOMA.owl#isMotionPlanFor">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes"/>
+        <rdfs:domain rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#MotionPlan"/>
+        <rdfs:range rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#Motion"/>
+        <rdfs:comment xml:lang="en">A special relation between a Motion Plan and a Motion, to indicate that the Motion Plan describes a way to achieve the Motion.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+        <rdfs:label xml:lang="en">is motion plan for</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -689,9 +732,39 @@ Locomotion is concerned more with the actual motion.</rdfs:comment>
 
     <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#Motion">
         <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#ProcessType"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#isExecutedMotionIn"/>
+                <owl:allValuesFrom rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#MotionProcess"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment>An EventType that classifies motion Processes.</rdfs:comment>
         <rdfs:comment>Motion type</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#MotionPlan -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MotionPlan">
+        <rdfs:subClassOf rdf:resource="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description"/>
+        <rdfs:comment xml:lang="en">A Description of a Motion having an explicit Goal, to be achieved by executing the motion plan</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+        <rdfs:label xml:lang="en">Motion Plan</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.ease-crc.org/ont/SOMA.owl#MotionProcess -->
+
+
+    <owl:Class rdf:about="http://www.ease-crc.org/ont/SOMA.owl#MotionProcess">
+        <rdfs:subClassOf rdf:resource="http://www.ease-crc.org/ont/SOMA.owl#PhysicsProcess"/>
+        <rdfs:comment xml:lang="en">A class that classifies motion processes. This class is used to represent any process involving motion, encompassing a wide range of activities such as walking, running, jumping, and any other form of physical movement.</rdfs:comment>
+        <rdfs:isDefinedBy rdf:resource="http://www.ease-crc.org/ont/SOMA-PROC.owl"/>
+        <rdfs:label xml:lang="en">Motion process</rdfs:label>
     </owl:Class>
     
 
