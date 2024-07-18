@@ -2,7 +2,7 @@
 
 ## 2.2.0
 
-### Braking Changes
+### Breaking Changes
 
 * [http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation](http://www.ease-crc.org/ont/SOMA.owl/NonmanifestedSituation) was renamed to [http://www.ease-crc.org/ont/SOMA.owl#NonmanifestedSituation](http://www.ease-crc.org/ont/SOMA.owl#NonmanifestedSituation)
   
@@ -18,6 +18,13 @@
   <details>
       <summary>Details</summary>
       The ontology maps the USD format to a knoweldge graph representation. <a href="https://ar5iv.labs.arxiv.org/html/2310.16737">Here, you can find the the original publication on <code>USD.owl</code></a>. Note that the version in this repository, as all the ontologies in here do, uses our self-hosted version of <a href="http://www.ease-crc.org/ont/DUL.owl">DUL.owl</a>.
+  </details>
+
+* We added new Concepts and Properties for Motion Processes and Motion Plans
+
+  <details>
+      <summary>Details</summary>
+      We introduce two new classes and relating properties to handle motion processes and motion plans within the ontology.
   </details>
 
 ### Bugfixes
@@ -53,7 +60,7 @@
 
 ## 2.1.0
 
-### Braking changes
+### Breaking changes
 
 * Remove SOMA namespace inconsistencies
   
