@@ -42,9 +42,10 @@ public final class OntologyManager {
                 throw new IllegalArgumentException("Catalog target is not a top-level OWL input: " + mapping);
             aliases.put(mapping.getKey(), filename);
         }
-        for (var ontology : documents.values()) {
+        for (var entry : documents.entrySet()) {
+            var name = entry.getKey();
+            var ontology = entry.getValue();
             var iri = ontology.getOntologyID().getOntologyIRI().orElseThrow();
-            String name = documents.entrySet().stream().filter(e -> e.getValue() == ontology).findFirst().orElseThrow().getKey();
             String existing = aliases.putIfAbsent(iri, name);
             if (existing != null && !existing.equals(name)) throw new IllegalArgumentException("Catalog maps ontology IRI to wrong document: " + iri);
             for (var declaration : ontology.getImportsDeclarations()) {

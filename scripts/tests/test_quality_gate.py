@@ -130,6 +130,19 @@ class QualityGate(unittest.TestCase):
         write(self.hermit / "coverage.json", {})
         self.assertEqual(2, self.run_gate()[0])
 
+    def test_invalid_result_types_and_contradictory_status_fail_closed(self):
+        path = self.hermit / "sources/SOMA-ALL.owl/report.json"
+        original = gate.read_json(path)
+        for changes in ({"complete": 1}, {"consistent": 1}, {"consistent": None},
+                        {"emptyDataProperties": "urn:broken"}, {"toolErrors": [None]},
+                        {"consistent": False, "unsatisfiableClasses": ["urn:broken"]},
+                        {"unsatisfiableClasses": ["urn:broken"]}):
+            with self.subTest(changes=changes):
+                document = copy.deepcopy(original)
+                document["result"].update(changes)
+                write(path, document)
+                self.assertEqual(2, self.run_gate()[0])
+
     def test_skipped_failed_and_cancelled_jobs_cannot_pass(self):
         for jobs in ({"compile": "failure"}, {"consistency": "failure"}, {"pitfalls": "skipped"},
                      {"konclude": "cancelled"}, {"artifact-download": "failure"}):

@@ -16,6 +16,7 @@ OOPS_ERRORS = {5, 6, 19, 25, 26, 27, 28, 29}
 OOPS_WARNINGS = set(RULES) - OOPS_ERRORS
 ENTITY_CHECKS = ("unsatisfiableClasses", "emptyObjectProperties", "emptyDataProperties", "qualityFindings")
 BASELINE = Path(__file__).parent / "oops/warning-baseline.json"
+EXIT_CODES = {"pass": 0, "findings": 1, "tool_error": 2}
 
 
 def read_json(path):
@@ -36,6 +37,22 @@ def unique_file(directory, name):
     paths = list(Path(directory).rglob(name))
     require(len(paths) == 1, f"Expected one {name} in {directory}, found {len(paths)}")
     return paths[0]
+
+
+def reasoner_status(result):
+    require(result["schemaVersion"] == 1 and type(result["complete"]) is bool,
+            "Invalid reasoner protocol")
+    require(result["consistent"] is None or type(result["consistent"]) is bool,
+            "Invalid consistency result")
+    require(all(strings(result[k]) for k in (*ENTITY_CHECKS, "toolErrors")), "Invalid finding lists")
+    if not result["complete"] or result["consistent"] is None or result["toolErrors"]:
+        return "TOOL_ERROR", "tool_error"
+    if result["consistent"] is False:
+        require(not any(result[k] for k in ENTITY_CHECKS), "Entity findings on inconsistent input")
+        return "INCONSISTENT", "findings"
+    if any(result[k] for k in ENTITY_CHECKS):
+        return "FINDINGS", "findings"
+    return "PASS", "pass"
 
 
 def reasoner_results(directory, engine):
@@ -71,26 +88,12 @@ def reasoner_results(directory, engine):
         document = read_json(expected[key])
         result = document["result"]
         require(document["metadata"]["reasoner"] == engine, "Wrong reasoner identity")
-        require(result["schemaVersion"] == 1 and type(result["complete"]) is bool,
-                "Invalid reasoner protocol")
-        require(result["consistent"] is None or type(result["consistent"]) is bool,
-                "Invalid consistency result")
-        require(all(strings(result[k]) for k in (*ENTITY_CHECKS, "toolErrors")), "Invalid finding lists")
-        if not result["complete"] or result["consistent"] is None or result["toolErrors"]:
-            status = "tool_error"
-        elif result["consistent"] is False:
-            status = "findings"
-            require(not any(result[k] for k in ENTITY_CHECKS), "Entity findings on inconsistent input")
-        else:
-            status = "findings" if any(result[k] for k in ENTITY_CHECKS) else "pass"
-        native = {"tool_error": "TOOL_ERROR", "pass": "PASS", "findings":
-                  "INCONSISTENT" if result["consistent"] is False else "FINDINGS"}[status]
+        native, status = reasoner_status(result)
         require(document["status"] == entry["status"] == native, "Contradictory reasoner status")
         results.append({"engine": engine, "input": "/".join(key), "status": status,
                         "consistent": result["consistent"], "errors": result["toolErrors"],
                         "findings": {k: result[k] for k in ENTITY_CHECKS}})
-    exit_code = max(2 if r["status"] == "tool_error" else 1 if r["status"] == "findings" else 0
-                    for r in results)
+    exit_code = max(EXIT_CODES[r["status"]] for r in results)
     require(summary["exitCode"] == exit_code, "Contradictory suite exit code")
     return results
 
@@ -178,7 +181,7 @@ def run(hermit, konclude, oops, output, jobs=None, baseline=BASELINE):
         if status != "success" and not (status == "failure" and explained):
             checks.append({"engine": name, "input": "CI job", "status": "tool_error",
                            "errors": [f"Required job ended with {status}"], "findings": {}})
-    code = max(2 if c["status"] == "tool_error" else 1 if c["status"] == "findings" else 0 for c in checks)
+    code = max(EXIT_CODES[c["status"]] for c in checks)
     report = {"schema_version": 1, "status": ("pass", "findings", "tool_error")[code],
               "exit_code": code, "checks": checks}
     output = Path(output)

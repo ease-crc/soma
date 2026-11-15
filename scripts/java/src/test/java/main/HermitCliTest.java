@@ -15,6 +15,23 @@ class HermitCliTest {
         return Path.of(getClass().getResource("/reasoning/" + name + ".ofn").toURI());
     }
 
+    @Test void invalidOptionsAreRejectedBeforeCreatingOutput() {
+        var output = temp.resolve("reports");
+        for (String[] arguments : new String[][]{
+                {}, {"--input=missing.owl", "--suite=."}, {"--suite=.", "--catalog=catalog.xml"},
+                {"--input=missing.owl", "--scope=roots"}, {"--suite=.", "--scope=unknown"},
+                {"--suite=.", "--reasoner=unknown"}, {"--suite=.", "--reasoner=konclude"},
+                {"--suite=.", "--binary=Konclude"}, {"--suite=.", "--timeout-seconds=0"},
+                {"--suite=.", "--memory-mb=63"}, {"--suite=.", "--suite=."},
+                {"--suite=.", "--unknown=value"}, {"--suite="}, {"--suite"}}) {
+            var options = new java.util.ArrayList<>(java.util.List.of(arguments));
+            options.add("--output=" + output);
+            assertThrows(IllegalArgumentException.class, () -> HermitCli.execute(options.toArray(String[]::new)),
+                    options.toString());
+            assertFalse(Files.exists(output));
+        }
+    }
+
     @Test void subprocessPreservesSemanticResultsAndRecordsIdentity() throws Exception {
         var input = fixture("empty-data-property");
         var output = temp.resolve("report");
