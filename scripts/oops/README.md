@@ -1,4 +1,4 @@
-# Local OOPS (B4)
+# Local OOPS
 
 OOPS is built from [oeg-upm/OOPS](https://github.com/oeg-upm/OOPS), the source
 repository maintained by the Ontology Engineering Group at UPM. Its README and
@@ -38,7 +38,7 @@ and `--rules 8,12` for a nonempty subset of the supported rules.
 Installation downloads the fixed source commit and Maven dependencies. It uses
 SOMA's checksum-pinned Maven Wrapper, compiles upstream, copies runtime JARs,
 and compiles the adapter, a versioned P06 correction, and the existing strict local ontology/catalog loader
-against upstream's isolated OWLAPI 5.5.1 classpath. SOMA's OWLAPI 4 application
+against upstream's isolated OWLAPI 5.5.1 classpath. SOMA's application
 JAR is not mixed into that classpath. No server, healthcheck, port, Docker image
 or public OOPS endpoint is involved. At runtime no download is needed.
 
@@ -93,7 +93,7 @@ There are no random report IDs or elapsed times in the normalized report.
 Exit 0 means the selected checks completed, including runs with quality findings;
 exit 2 means a technical/incomplete run. Escaping exceptions, missing output,
 malformed output and unmet checker preconditions cannot pass. GitHub annotations
-use the explicit B5 [error/warning policy](../QUALITY-GATE.md), independent of
+use the explicit [error/warning policy](../QUALITY-GATE.md), independent of
 upstream importance; the aggregate quality gate blocks on error findings.
 Annotation/report errors exit 2 instead
 of being swallowed. Logs and reports are uploaded even on failure.
@@ -105,7 +105,7 @@ fail closed on exposed warnings/exceptions, but cannot reconstruct swallowed
 upstream exceptions. P22 reports a first example for a naming inconsistency,
 not an exhaustive list. No semantic changes to those rules are bundled here.
 
-## Dependencies and security review (2026-11-15)
+## Dependencies and build patches
 
 Direct runtime dependencies include Jena core/arq 5.3.0, OWLAPI API/apibinding
 5.5.1, commons-text 1.13.0, SLF4J 2.0.17/reload4j 1.2.26, Jersey 3.1.10,
@@ -115,11 +115,8 @@ even though no web server is started. The POM pins build plugins, including
 compiler 3.13.0 and dependency-plugin 3.8.1. The runner needs only Python stdlib;
 the old `requests` dependency is no longer needed for OOPS.
 
-The baseline scan in `dependency-audit-upstream.json` found advisories affecting
-Jackson core 2.18.3/databind 2.18.0, Guava 33.0.0-jre and commons-lang3 3.17.0.
-For example [Guava GHSA-xxph-c9ww-hj94](https://github.com/advisories/GHSA-xxph-c9ww-hj94)
-and [Lang GHSA-j288-q9x7-2f5v](https://github.com/advisories/GHSA-j288-q9x7-2f5v)
-cover memory allocation during deserialization and uncontrolled recursion.
+Dependency overrides replace older Jackson, Guava and commons-lang3 versions
+from the pinned upstream POM.
 The installer generates `source/soma-pom.xml` beside the original POM, updating
 direct Jackson dependencies and importing Jackson BOM 2.23.0, and managing
 Guava 33.8.0-jre and commons-lang3 3.22.0. Rule sources and upstream POM stay
@@ -138,13 +135,6 @@ the original checkout stays unchanged. `source_patches` is checked in installati
 manifests and recorded in reports. This is a traversal bugfix, not a replacement
 pitfall definition; three-level acyclic and cyclic hierarchies are regression-tested.
 
-`dependency-audit.json` records the final OSV batch query over 113 Maven
-coordinates/versions extracted from runtime JAR `META-INF/maven/*/*/pom.properties`,
-including embedded components: no known advisory was returned. This dated scan
-does not cover Maven plugin internals, the JDK, or components lacking embedded
-coordinates, and is not proof of vulnerability absence. Both JSON files retain
-the queried versions and advisory IDs; resolve IDs through `https://osv.dev/`.
-
 ## Validation
 
 Tests cover a clean annotated class, P08 on an unannotated class, findings from
@@ -155,11 +145,3 @@ force Java HTTP/HTTPS through unreachable localhost port 9, so the public websit
 cannot provide results. This is an HTTP/HTTPS reachability test, not an OS-level
 network sandbox. Synthetic fixtures test technical behavior; SOMA findings are
 not suppressed. Hosted CI execution is still separate from local validation.
-
-Local acceptance on 2026-11-15 with JDK 25.0.4.1: all six unittest cases passed,
-including real upstream API calls, P06 regression fixtures, local imports,
-property-pair stability, timeout and failure handling. Two complete exported
-SOMA-HOME runs with unreachable HTTP/HTTPS proxies each completed all 20 rules,
-returned 465 findings and produced identical normalized JSON. Local evidence is
-in ignored `build/b4-tests.log`, `build/b4-install.log`, `build/b4-soma/` and
-`build/b4-soma-repeat/`. Workflow lint (`actionlint`) and `git diff --check` passed.

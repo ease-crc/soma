@@ -1,16 +1,15 @@
-# Ontology quality gate (B5)
+# Ontology quality gate
 
 `Ontology quality gate` is the aggregate Evaluation check. It runs after workflow
 lint, compilation, HermiT and local OOPS, including when dependencies
 fail or are skipped. Configure this check as **required** in the repository's
 branch rules to prevent merging a broken PR. Local workflow changes do not edit
-GitHub branch protection. Publication gating remains phase C.
+GitHub branch protection. Deployment currently runs independently of Evaluation.
 
 HermiT is the sole required reasoner. Konclude is excluded from CI and the gate;
 its adapter remains available for local experiments. See
-[the measured limitations](java/KONCLUDE.md). The current HermiT/OOPS findings
-intentionally keep Evaluation red; this change contains no ontology repair or
-exception for known unsatisfiable classes.
+[the supported-input limits](java/KONCLUDE.md). Known semantic findings and tool
+errors remain blocking; there are no exceptions for known unsatisfiable classes.
 
 ## Contract and outputs
 
@@ -42,7 +41,7 @@ does not rerun expensive reasoning.
 ## OOPS policy
 
 OOPS checks exported `SOMA-HOME.owl` with its complete local import closure,
-retaining B4's scope and all 20 selected rules. It is a complementary heuristic
+using all 20 selected rules. It is a complementary heuristic
 check; reasoner checks cover all source/export roots. The project severity policy
 is explicit and independent of upstream importance labels:
 
@@ -86,14 +85,3 @@ missing coverage, every policy rule, warnings, technical step failures despite
 semantic findings and the executable CI command. The HermiT CI job always enables
 this integration test. A hosted PR run can validate the full GitHub orchestration
 after pushing; local checks do not represent a hosted run.
-
-Historical B5 acceptance before Konclude's removal from CI
-(2026-11-15, Windows/JDK 25.0.4.1): all 12 gate tests passed,
-including all six real ontology cases. B4's local OOPS integration test also
-passed with the public services unreachable. `actionlint` and `git diff --check`
-passed. Aggregating the preserved B2/B3/B4 SOMA evidence yielded the expected
-exit 2: HermiT 2 pass / 5 findings / 3 tool errors, Konclude 10 tool errors,
-and OOPS 24 errors / 441 known warnings. This is evidence from the existing
-full SOMA runs, not a new full reasoning run. The new report is locally available
-at `build/b5-evidence/`. A subagent reviewed all added/changed code and CI; its
-technical-step-classification finding was fixed and re-reviewed.

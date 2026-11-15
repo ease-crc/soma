@@ -1,19 +1,19 @@
-B1 reasoning contract
-=====================
+Reasoning contract
+==================
 
 Scope
 ReasoningReport, ReasoningProtocol and ReasoningProcess define the common local
-adapter boundary. HermitEvaluator implements B2 through OWLAPI with the pinned
+adapter boundary. HermitEvaluator uses OWLAPI with the pinned
 application dependency HermiT 1.4.5.519. HermitCli supervises HermitWorker with
 per-input heap and wall-time limits and records metadata separately from the
 strict protocol v1 result. ReasoningContractTest uses the production evaluator.
-The legacy CLI/Python parser is removed. KoncludeWorker implements B3 with a
+KoncludeWorker uses a
 checksum-pinned native release, OWL/XML classification and direct object/data
 existential queries. It shares the local loader and supervised CLI; see
-KONCLUDE.md for installation, supported-input limits and comparison evidence.
+KONCLUDE.md for installation and supported-input limits.
 Konclude is local-only and excluded from CI tests and the quality gate; HermiT
 is the sole CI reasoner.
-Local OOPS is B4 and the mandatory integrated CI gate is B5. Maven verify passing tests
+The CI quality gate combines HermiT and local OOPS reports. Passing Maven tests
 does not assert that SOMA is consistent/coherent; run HermitCli --suite as well.
 The default suite validates every file and reasons over the main roots plus
 uncovered theories. Coverage requires one selected root to contain all logical
@@ -34,7 +34,7 @@ Report and status
 - emptyDataProperties: named data properties for which
   DataSomeValuesFrom(property, rdfs:Literal) is unsatisfiable.
 - qualityFindings: additional quality findings, kept separate from the above.
-  In version 1 these are blocking findings; warning severity/rule policy is B5.
+  In version 1 these are blocking findings; see scripts/QUALITY-GATE.md for the policy.
 
 Both property checks are REQUIRED for complete=true on a consistent ontology.
 DataProperty coverage includes datatype-induced emptiness, not only an
@@ -100,33 +100,3 @@ Run from the repository root:
   ./mvnw -B -ntp verify -f scripts/java/pom.xml
   Windows: .\mvnw.cmd -B -ntp verify -f scripts/java/pom.xml
 The contract tests run in the normal Maven test phase; no optional profile.
-
-B2 acceptance evidence (reviewed 2026-11-15)
-Implementation: 4ce53be (Implement B2 HermiT OWLAPI checks with root coverage).
-An independent subagent reviewed all reasoning code, tests, dependency packaging,
-CI entry points and existing full-suite evidence; no open findings were reported.
-Fresh offline Maven verify with JDK 25.0.4.1 and Maven 3.9.16 passed on
-2026-11-15: 32 tests, zero failures/errors/skips, packaging and full ontology
-export/reload successful. Log: build/b2-recheck-verify.log (ignored).
-Workflow actionlint and git diff --check also passed. No production code or
-ontology changes were needed during this review.
-
-The completed local SOMA measurement on 2026-11-14 checked five covering roots
-in each of sources and exports, with 600 seconds and 2048 MiB heap per worker.
-Its summary reports 2 PASS, 5 FINDINGS and 3 TOOL_ERROR, complete=true, gate exit 2.
-Complete here means every selected root was attempted; individual TOOL_ERROR
-reports remain incomplete and block the gate. The successful semantic checks
-found eight distinct unsatisfiable named classes and three empty object
-properties; no empty data properties or global inconsistency were reported.
-Source and exported SOMA-Allen fail because non-simple finishedBy occurs in an
-asymmetric property axiom. Exported SOMA-HOME times out after 600 seconds.
-These explicit failures satisfy the B2 acceptance contract; SOMA is not green.
-
-Local raw evidence (ignored build artifacts):
-- build/ci/reports/hermit-roots-2026-11-14/summary.json
-- coverage.json, input-snapshot.json and timing-validation.json alongside it
-- sources/ and exports/ per-root report.json and worker stdout/stderr logs
-All 34 input-snapshot SHA-256 hashes matched the current files on 2026-11-15
-before the verification rebuild. The existing full semantic measurement was
-reviewed, not rerun. To reproduce it after building exports, run the documented
-HermitCli --suite command. Ontology repairs and B3/B4/B5 remain separate work.

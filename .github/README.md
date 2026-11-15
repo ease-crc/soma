@@ -23,7 +23,7 @@ reports and worker logs are uploaded even when findings or tool errors fail the
 job. HermiT is the sole CI reasoner. Konclude is available only for local
 experiments; CI does not install or invoke it, collect its artifacts or require
 its reports. CI Maven commands exclude its native and unit tests with
-`-Dtest=!Konclude*`. See [the measured limitations](../scripts/java/KONCLUDE.md).
+`-Dtest=!Konclude*`. See [the supported-input limits](../scripts/java/KONCLUDE.md).
 Python packages are installed without sudo. Sudo installs TeX packages on
 documentation runners.
 
@@ -44,16 +44,11 @@ than a personal access token. Release tags pass through environment variables an
 are restricted to a single safe path component before reaching any output path.
 Publication preserves existing files and version archives (`clean: false`).
 
-This is the A4 infrastructure foundation. B2 replaces the reasoner CLI parser
-and covers source/export entry points. B3's native Konclude adapter remains
-local-only because of its coverage limits. B4 builds pinned OOPS locally, without the public service;
-B5 adds the always-running `Ontology quality gate` check, normalized JSON/CI
-summary and explicit OOPS error/warning policy. Make that check required in branch
-rules; existing semantic findings and technical failures remain blocking. See
-[the gate contract, warning baseline and verification](../scripts/QUALITY-GATE.md).
-Documentation build validation and
-publication gating on *all* semantic checks, release trust rules, archive/URL
-inventory and replacement of legacy external OntoMetrics belong to phase C.
-Deployment still builds independently of Evaluation; do not treat A4 as the
-completed publication gate. A test PR must never be merged or published merely
-to validate this foundation.
+The always-running `Ontology quality gate` combines HermiT and local OOPS
+reports with an explicit error/warning policy. Make that check required in branch
+rules; semantic findings and technical failures remain blocking. See
+[the gate contract and verification](../scripts/QUALITY-GATE.md).
+
+Deployment still builds independently of Evaluation. Publication gating on all
+semantic checks, release trust rules and replacement of legacy external
+OntoMetrics remain outstanding.

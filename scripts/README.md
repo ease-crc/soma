@@ -1,6 +1,6 @@
 This folder includes several utility scripts for working with the SOMA ontology.
 
-**Local ontology pitfalls (B4)**
+**Local ontology pitfalls**
 
 OOPS now builds from a fixed upstream source commit and runs locally without the
 public service. See [installation, rule selection, dependency review and tests](oops/README.md).
@@ -78,7 +78,7 @@ Windows: use `mvnw.cmd`, set `KONCLUDE_BINARY` to the installer's printed `.exe`
 path, and quote it in `--binary`. Maven runs the native tests when that variable
 is present. Konclude is local-only; CI excludes its tests and uses HermiT as
 the sole reasoner. See
-[Konclude installation, limits and reasoner comparison](java/KONCLUDE.md).
+[Konclude installation and supported-input limits](java/KONCLUDE.md).
 HermiT remains the default backend.
 
 Exit codes: 0 = complete and no findings, 1 = inconsistency or semantic findings,
@@ -92,7 +92,7 @@ not a cap on total process RSS. Empty, invalid or missing worker output cannot
 pass. Maven tests use synthetic fixtures; only running the suite checks SOMA.
 
 
-**Java ontology CLI (A3 processing)**
+**Java ontology CLI**
 
 Install JDK 25 and set `JAVA_HOME`. From the repository root:
 
@@ -161,7 +161,8 @@ bytes on success and failure, exact synthetic axiom differences, complete SOMA
 aggregation and reload of all exports using only their local catalog. HermiT
 contract and subprocess tests run during Maven testing; the full semantic suite
 is a separate command and CI step.
-See [the dependency review](java/DEPENDENCIES.md) for the A2 toolchain and scan.
+Dependency versions and overrides are defined in [pom.xml](java/pom.xml);
+the Maven distribution is pinned in [the wrapper configuration](../.mvn/wrapper/maven-wrapper.properties).
 
 Use Maven with JDK 25 for verification. An IDE configured with JDK 21 cannot
 compile this project until its project/module SDK is updated to JDK 25.
