@@ -1,5 +1,9 @@
 # Native Konclude integration (B3)
 
+Konclude is a local experimental backend only. It is excluded from CI jobs,
+CI Maven tests and the quality gate because the pinned release cannot completely
+check the current SOMA theories. HermiT is the sole CI reasoner.
+
 The shared reasoning CLI supports `--reasoner=konclude --binary=PATH`; HermiT
 remains the default. Both adapters use the same strict local loader, corpus
 snapshot, coverage planner, report schema and exit codes. Konclude directly checks
@@ -22,9 +26,9 @@ On Windows, run `python scripts/install-konclude.py` and set `KONCLUDE_BINARY`
 to the printed `Binaries/Konclude.exe` path; use `mvnw.cmd` and quote paths.
 Pass that environment variable to Maven to enable the real native integration
 tests. Without it, the six native tests are explicitly skipped; parser and
-process unit tests still run. The Konclude CI job always installs the pinned
-release and supplies the variable. It preserves reports, logs and installation
-identity even when semantic findings or tool failures block the job.
+process unit tests still run locally. CI excludes both Konclude test classes
+with `-Dtest=!Konclude*` and does not install or invoke Konclude. Local runs
+preserve reports, logs and installation identity on failure.
 
 ## Provenance
 

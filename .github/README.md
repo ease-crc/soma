@@ -20,15 +20,12 @@ reasons over the main roots plus automatically detected uncovered ontologies.
 The current corpus needs five roots per set, with a 600-second timeout and
 2048 MiB heap per worker. `coverage.json` makes the module assignment explicit. All per-input JSON
 reports and worker logs are uploaded even when findings or tool errors fail the
-job. `Konclude native` uses the same coverage/report contract with the official
-checksum-pinned 0.7.0-1138 release, local OWL/XML closure and direct object/data
-property queries. Its native tests run with `KONCLUDE_BINARY` set; installation
-identity, native logs and reports are retained on failure. Current SOMA datatype
-definitions/keys exceed that release's coverage, so its full gate reports tool
-errors. HermiT remains the default; see
-[the comparison and supported-input limits](../scripts/java/KONCLUDE.md).
-Python packages are installed without sudo. Sudo installs libpcre3 for Konclude
-on disposable evaluation runners and TeX packages on documentation runners.
+job. HermiT is the sole CI reasoner. Konclude is available only for local
+experiments; CI does not install or invoke it, collect its artifacts or require
+its reports. CI Maven commands exclude its native and unit tests with
+`-Dtest=!Konclude*`. See [the measured limitations](../scripts/java/KONCLUDE.md).
+Python packages are installed without sudo. Sudo installs TeX packages on
+documentation runners.
 
 Workflow permissions default to `contents: read`. PR jobs receive no secrets,
 use `pull_request`, and never use `pull_request_target`. Every checkout disables
@@ -48,8 +45,8 @@ are restricted to a single safe path component before reaching any output path.
 Publication preserves existing files and version archives (`clean: false`).
 
 This is the A4 infrastructure foundation. B2 replaces the reasoner CLI parser
-and covers source/export entry points. B3 adds native Konclude with explicit
-coverage limits. B4 builds pinned OOPS locally, without the public service;
+and covers source/export entry points. B3's native Konclude adapter remains
+local-only because of its coverage limits. B4 builds pinned OOPS locally, without the public service;
 B5 adds the always-running `Ontology quality gate` check, normalized JSON/CI
 summary and explicit OOPS error/warning policy. Make that check required in branch
 rules; existing semantic findings and technical failures remain blocking. See

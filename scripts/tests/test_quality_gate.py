@@ -24,13 +24,11 @@ class QualityGate(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.hermit = self.root / "HermiT Results"
-        self.konclude = self.root / "Konclude Results"
         self.oops = self.root / "OOPS Results"
         self.output = self.root / "output"
         self.result = {"schemaVersion": 1, "complete": True, "consistent": True, "toolErrors": [],
                        **{key: [] for key in gate.ENTITY_CHECKS}}
         self.make_reasoner(self.hermit, "HermiT")
-        self.make_reasoner(self.konclude, "Konclude")
         self.oops_report = {"schema_version": 1, "engine": "OOPS", "commit": gate.COMMIT,
                             "complete": True, "status": "clean", "selected_rules": list(gate.RULES),
                             "completed_rules": list(gate.RULES), "warnings": [], "findings": []}
@@ -53,7 +51,7 @@ class QualityGate(unittest.TestCase):
 
     def run_gate(self, jobs=None):
         with redirect_stdout(io.StringIO()):
-            code = gate.run(self.hermit, self.konclude, self.oops, self.output, jobs)
+            code = gate.run(self.hermit, self.oops, self.output, jobs)
         report = gate.read_json(self.output / "quality-gate.json")
         self.assertEqual(code, report["exit_code"])
         self.assertTrue((self.output / "summary.md").is_file())
@@ -80,14 +78,32 @@ class QualityGate(unittest.TestCase):
         self.make_reasoner(self.hermit, "HermiT", result, "INCONSISTENT")
         self.assertEqual(1, self.run_gate()[0])
 
+    def test_cli_passes_with_only_hermit_and_oops_artifacts(self):
+        result = subprocess.run([sys.executable, gate.__file__, "--artifacts", str(self.root),
+                                 "--output", str(self.output)], capture_output=True, text=True)
+        self.assertEqual(0, result.returncode, result.stdout + result.stderr)
+        report = gate.read_json(self.output / "quality-gate.json")
+        self.assertEqual({"HermiT", "OOPS"}, {c["engine"] for c in report["checks"]})
+        (self.oops / "oops.json").unlink()
+        self.assertEqual(2, self.run_gate()[0])
+
     def test_technical_errors_are_distinct_and_take_precedence(self):
         result = copy.deepcopy(self.result)
         result.update(complete=False, consistent=None, toolErrors=["Worker timed out"])
-        self.make_reasoner(self.konclude, "Konclude", result, "TOOL_ERROR")
+        self.make_reasoner(self.hermit, "HermiT", result, "TOOL_ERROR")
         self.assertEqual(2, self.run_gate()[0])
+        # Keep one failed root while another produces semantic findings.
+        failed_path = self.hermit / "sources/SOMA-ALL.owl/report.json"
+        failed_report = gate.read_json(failed_path)
         result = copy.deepcopy(self.result)
         result["unsatisfiableClasses"] = ["urn:broken"]
         self.make_reasoner(self.hermit, "HermiT", result, "FINDINGS")
+        write(failed_path, failed_report)
+        summary_path = self.hermit / "summary.json"
+        summary = gate.read_json(summary_path)
+        summary["entries"][0]["status"] = "TOOL_ERROR"
+        summary["exitCode"] = 2
+        write(summary_path, summary)
         code, report = self.run_gate()
         self.assertEqual(2, code)
         self.assertEqual({"findings", "tool_error", "pass"}, {c["status"] for c in report["checks"]})
@@ -145,7 +161,7 @@ class QualityGate(unittest.TestCase):
 
     def test_skipped_failed_and_cancelled_jobs_cannot_pass(self):
         for jobs in ({"compile": "failure"}, {"consistency": "failure"}, {"pitfalls": "skipped"},
-                     {"konclude": "cancelled"}, {"artifact-download": "failure"}):
+                     {"consistency": "cancelled"}, {"artifact-download": "failure"}):
             self.assertEqual(2, self.run_gate(jobs)[0])
 
     def finding(self, code):

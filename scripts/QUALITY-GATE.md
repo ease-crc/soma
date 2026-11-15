@@ -1,15 +1,14 @@
 # Ontology quality gate (B5)
 
 `Ontology quality gate` is the aggregate Evaluation check. It runs after workflow
-lint, compilation, HermiT, Konclude and local OOPS, including when dependencies
+lint, compilation, HermiT and local OOPS, including when dependencies
 fail or are skipped. Configure this check as **required** in the repository's
 branch rules to prevent merging a broken PR. Local workflow changes do not edit
 GitHub branch protection. Publication gating remains phase C.
 
-Both reasoner jobs remain mandatory, matching the existing Evaluation checks.
-HermiT remains the default adapter; requiring the existing Konclude job does not
-claim that its current version supports all SOMA axioms. See
-[the measured limitations](java/KONCLUDE.md). The current ontology/tool findings
+HermiT is the sole required reasoner. Konclude is excluded from CI and the gate;
+its adapter remains available for local experiments. See
+[the measured limitations](java/KONCLUDE.md). The current HermiT/OOPS findings
 intentionally keep Evaluation red; this change contains no ontology repair or
 exception for known unsatisfiable classes.
 
@@ -88,7 +87,8 @@ semantic findings and the executable CI command. The HermiT CI job always enable
 this integration test. A hosted PR run can validate the full GitHub orchestration
 after pushing; local checks do not represent a hosted run.
 
-Local acceptance (2026-11-15, Windows/JDK 25.0.4.1): all 12 gate tests passed,
+Historical B5 acceptance before Konclude's removal from CI
+(2026-11-15, Windows/JDK 25.0.4.1): all 12 gate tests passed,
 including all six real ontology cases. B4's local OOPS integration test also
 passed with the public services unreachable. `actionlint` and `git diff --check`
 passed. Aggregating the preserved B2/B3/B4 SOMA evidence yielded the expected

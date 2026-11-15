@@ -163,10 +163,9 @@ def markdown(report):
     return "\n".join(lines)
 
 
-def run(hermit, konclude, oops, output, jobs=None, baseline=BASELINE):
+def run(hermit, oops, output, jobs=None, baseline=BASELINE):
     checks = []
     for engine, loader in (("HermiT", lambda: reasoner_results(hermit, "HermiT")),
-                           ("Konclude", lambda: reasoner_results(konclude, "Konclude")),
                            ("OOPS", lambda: oops_results(oops, baseline))):
         try:
             checks.extend(loader())
@@ -174,7 +173,7 @@ def run(hermit, konclude, oops, output, jobs=None, baseline=BASELINE):
             checks.append({"engine": engine, "input": "suite", "status": "tool_error",
                            "errors": [str(error)], "findings": {}})
     for name, status in (jobs or {}).items():
-        engine = {"consistency": "HermiT", "konclude": "Konclude", "pitfalls": "OOPS"}.get(name)
+        engine = {"consistency": "HermiT", "pitfalls": "OOPS"}.get(name)
         # A semantic failure is an expected failed producer job. A failure with
         # clean reports still means installation/tests/annotations/upload failed.
         explained = engine and any(c["engine"] == engine and c["status"] != "pass" for c in checks)
@@ -202,5 +201,5 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--jobs", default="{}", help="JSON map of required CI job conclusions")
     options = parser.parse_args()
-    sys.exit(run(options.artifacts / "HermiT Results", options.artifacts / "Konclude Results",
-                 options.artifacts / "OOPS Results", options.output, json.loads(options.jobs)))
+    sys.exit(run(options.artifacts / "HermiT Results", options.artifacts / "OOPS Results",
+                 options.output, json.loads(options.jobs)))

@@ -47,7 +47,7 @@ jobs:
       - name: Compile
         env:
           SOMA_VERSION: ${{ steps.version.outputs.version }}
-        run: bash ./mvnw -B -ntp verify -f scripts/java/pom.xml "-Dsoma.version=$SOMA_VERSION"
+        run: bash ./mvnw -B -ntp verify -f scripts/java/pom.xml "-Dsoma.version=$SOMA_VERSION" '-Dtest=!Konclude*'
       - name: Install TeX
         run: |
           sudo apt-get update

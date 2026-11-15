@@ -76,7 +76,8 @@ java -cp scripts/java/target/IsDefinedInAdder-1.0-SNAPSHOT.jar main.reasoning.He
 
 Windows: use `mvnw.cmd`, set `KONCLUDE_BINARY` to the installer's printed `.exe`
 path, and quote it in `--binary`. Maven runs the native tests when that variable
-is present; the Konclude CI job always supplies it. See
+is present. Konclude is local-only; CI excludes its tests and uses HermiT as
+the sole reasoner. See
 [Konclude installation, limits and reasoner comparison](java/KONCLUDE.md).
 HermiT remains the default backend.
 
