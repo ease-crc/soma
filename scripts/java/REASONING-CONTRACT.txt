@@ -95,3 +95,33 @@ Run from the repository root:
   ./mvnw -B -ntp verify -f scripts/java/pom.xml
   Windows: .\mvnw.cmd -B -ntp verify -f scripts/java/pom.xml
 The contract tests run in the normal Maven test phase; no optional profile.
+
+B2 acceptance evidence (reviewed 2026-11-15)
+Implementation: 4ce53be (Implement B2 HermiT OWLAPI checks with root coverage).
+An independent subagent reviewed all reasoning code, tests, dependency packaging,
+CI entry points and existing full-suite evidence; no open findings were reported.
+Fresh offline Maven verify with JDK 25.0.4.1 and Maven 3.9.16 passed on
+2026-11-15: 32 tests, zero failures/errors/skips, packaging and full ontology
+export/reload successful. Log: build/b2-recheck-verify.log (ignored).
+Workflow actionlint and git diff --check also passed. No production code or
+ontology changes were needed during this review.
+
+The completed local SOMA measurement on 2026-11-14 checked five covering roots
+in each of sources and exports, with 600 seconds and 2048 MiB heap per worker.
+Its summary reports 2 PASS, 5 FINDINGS and 3 TOOL_ERROR, complete=true, gate exit 2.
+Complete here means every selected root was attempted; individual TOOL_ERROR
+reports remain incomplete and block the gate. The successful semantic checks
+found eight distinct unsatisfiable named classes and three empty object
+properties; no empty data properties or global inconsistency were reported.
+Source and exported SOMA-Allen fail because non-simple finishedBy occurs in an
+asymmetric property axiom. Exported SOMA-HOME times out after 600 seconds.
+These explicit failures satisfy the B2 acceptance contract; SOMA is not green.
+
+Local raw evidence (ignored build artifacts):
+- build/ci/reports/hermit-roots-2026-11-14/summary.json
+- coverage.json, input-snapshot.json and timing-validation.json alongside it
+- sources/ and exports/ per-root report.json and worker stdout/stderr logs
+All 34 input-snapshot SHA-256 hashes matched the current files on 2026-11-15
+before the verification rebuild. The existing full semantic measurement was
+reviewed, not rerun. To reproduce it after building exports, run the documented
+HermitCli --suite command. Ontology repairs and B3/B4/B5 remain separate work.
