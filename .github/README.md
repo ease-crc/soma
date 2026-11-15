@@ -49,8 +49,8 @@ Publication preserves existing files and version archives (`clean: false`).
 
 This is the A4 infrastructure foundation. B2 replaces the reasoner CLI parser
 and covers source/export entry points. B3 adds native Konclude with explicit
-coverage limits. External OOPS replacement and the integrated gate remain in
-phase B. Documentation build validation and
+coverage limits. B4 builds pinned OOPS locally, without the public service;
+the integrated quality gate remains B5. Documentation build validation and
 publication gating on *all* semantic checks, release trust rules, archive/URL
 inventory and replacement of legacy external OntoMetrics belong to phase C.
 Deployment still builds independently of Evaluation; do not treat A4 as the

@@ -1,5 +1,14 @@
 This folder includes several utility scripts for working with the SOMA ontology.
 
+**Local ontology pitfalls (B4)**
+
+OOPS now builds from a fixed upstream source commit and runs locally without the
+public service. See [installation, rule selection, dependency review and tests](oops/README.md).
+Build with `python scripts/install-oops.py` (`JAVA_HOME` required), then run
+`python scripts/oops.py build/ci/dist/owl/SOMA-HOME.owl build/ci/reports`.
+The normalized report is `oops.json`; technical failures exit 2, findings remain
+visible warnings pending B5's quality-gate policy.
+
 **Controlled vocabulary generation**
 
 Run ecv.sh to get an ELAN controlled vocabulary, constructed from concepts in the ontology. The script already configures which ontologies, and which parts of the taxonomy, are relevant for the generation. The output file will be called EASE.ecv, and will appear in the same folder as the script.

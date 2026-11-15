@@ -106,22 +106,37 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install python dependencies
-        run: |
-          python -m pip install -r .github/requirements-ci.txt
+      - name: Setup Java for local OOPS
+        uses: actions/setup-java@77dd5b2ce225ea11469928ac317850245a74ae78 # v6.2.0
+        with:
+          distribution: temurin
+          java-version: '25'
+
+      - name: Build pinned OOPS from source
+        run: python scripts/install-oops.py
+
+      - name: Test local OOPS and failure handling
+        env:
+          OOPS_INTEGRATION: '1'
+        run: python -m unittest discover -s scripts/tests -v
 
       - name: Find pitfalls
         run: python ./scripts/oops.py build/ci/dist/owl/SOMA-HOME.owl build/ci/reports
 
       - name: Generate annotations
-        run: python ./scripts/oops-github.py build/ci/reports/oops.xml
+        if: always()
+        run: python ./scripts/oops-github.py build/ci/reports/oops.json
 
       - name: Upload pitfalls
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: OOPS Results
-          path: ./build/ci/reports/oops.xml
+          path: |
+            ./build/ci/reports/oops.json
+            ./build/ci/reports/stdout.log
+            ./build/ci/reports/stderr.log
+            ./build/tools/oops/installation.json
           retention-days: 7
 
   consistency:

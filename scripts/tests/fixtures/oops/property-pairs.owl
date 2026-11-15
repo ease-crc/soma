@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:owl="http://www.w3.org/2002/07/owl#">
+ <owl:Ontology rdf:about="urn:test:pairs"/>
+ <owl:Class rdf:about="urn:test:A"/><owl:Class rdf:about="urn:test:B"/>
+ <owl:ObjectProperty rdf:about="urn:test:first">
+  <rdfs:domain rdf:resource="urn:test:A"/><rdfs:range rdf:resource="urn:test:A"/>
+  <owl:inverseOf rdf:resource="urn:test:second"/>
+  <owl:equivalentProperty rdf:resource="urn:test:second"/>
+ </owl:ObjectProperty>
+ <owl:ObjectProperty rdf:about="urn:test:second">
+  <rdfs:domain rdf:resource="urn:test:B"/><rdfs:range rdf:resource="urn:test:B"/>
+ </owl:ObjectProperty>
+ <owl:ObjectProperty rdf:about="https://example.invalid/one#sameName"/>
+ <owl:ObjectProperty rdf:about="https://example.invalid/two#sameName"/>
+</rdf:RDF>
