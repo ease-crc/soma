@@ -3,11 +3,6 @@ package main;
 import main.reasoning.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import org.semanticweb.HermiT.ReasonerFactory;
-import org.semanticweb.owlapi.apibinding.OWLManager;
-import org.semanticweb.owlapi.model.MissingImportHandlingStrategy;
-import org.semanticweb.owlapi.model.OWLOntologyLoaderConfiguration;
-import org.semanticweb.owlapi.model.parameters.Imports;
 import java.nio.file.*;
 import java.time.Duration;
 import java.util.List;
@@ -21,30 +16,11 @@ class ReasoningContractTest {
          "unsatisfiableClasses":[],"emptyObjectProperties":[],"emptyDataProperties":[],"qualityFindings":[]}
         """;
 
-    // Test oracle only: B2 will provide the production adapter and its execution metadata.
     ReasoningReport evaluate(String fixture) {
         try {
             var path = Path.of(getClass().getResource("/reasoning/" + fixture + ".ofn").toURI());
-            var manager = OWLManager.createOWLOntologyManager();
-            manager.getIRIMappers().add(new GuardingXmlCatalogIriMapper(path.resolveSibling("catalog-v001.xml").toFile()));
-            manager.setOntologyLoaderConfiguration(new OWLOntologyLoaderConfiguration()
-                    .setMissingImportHandlingStrategy(MissingImportHandlingStrategy.THROW_EXCEPTION));
-            var ontology = manager.loadOntologyFromOntologyDocument(path.toFile());
-            var reasoner = new ReasonerFactory().createReasoner(ontology);
-            try {
-                if (!reasoner.isConsistent()) return new ReasoningReport(true, false,
-                        List.of(), List.of(), List.of(), List.of(), List.of());
-                var df = manager.getOWLDataFactory();
-                return new ReasoningReport(true, true, List.of(),
-                        reasoner.getUnsatisfiableClasses().entities().map(c -> c.getIRI().toString()).toList(),
-                        ontology.objectPropertiesInSignature(Imports.INCLUDED)
-                                .filter(p -> !reasoner.isSatisfiable(df.getOWLObjectSomeValuesFrom(p, df.getOWLThing())))
-                                .map(p -> p.getIRI().toString()).toList(),
-                        ontology.dataPropertiesInSignature(Imports.INCLUDED)
-                                .filter(p -> !reasoner.isSatisfiable(df.getOWLDataSomeValuesFrom(p, df.getTopDatatype())))
-                                .map(p -> p.getIRI().toString()).toList(), List.of());
-            } finally { reasoner.dispose(); }
-        } catch (Exception e) { return ReasoningReport.toolError("Load/reasoner failure: " + e); }
+            return HermitEvaluator.evaluate(path, path.resolveSibling("catalog-v001.xml"));
+        } catch (Exception e) { throw new RuntimeException(e); }
     }
 
     @Test void ontologyFixturesHaveExactExpectedResults() {

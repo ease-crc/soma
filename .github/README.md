@@ -14,8 +14,13 @@ checksum together in `evaluation.yml`. Run actionlint locally before committing
 workflow changes. The hosted lint job also uses the runner's ShellCheck.
 
 Jobs use Ubuntu 24.04, JDK 25 and Python 3.12 directly, with explicit timeouts.
-HermiT uses the test dependencies managed by `scripts/java/pom.xml` instead of
-building an obsolete Docker image. Python packages are installed without sudo;
+HermiT uses the pinned application dependency in `scripts/java/pom.xml` through
+the OWLAPI adapter. The HermiT job validates all source/export documents and
+reasons over the main roots plus automatically detected uncovered ontologies.
+The current corpus needs five roots per set, with a 600-second timeout and
+2048 MiB heap per worker. `coverage.json` makes the module assignment explicit. All per-input JSON
+reports and worker logs are uploaded even when findings or tool errors fail the
+job. Python packages are installed without sudo;
 sudo is used only to install TeX packages on disposable documentation runners.
 
 Workflow permissions default to `contents: read`. PR jobs receive no secrets,
@@ -35,8 +40,9 @@ than a personal access token. Release tags pass through environment variables an
 are restricted to a single safe path component before reaching any output path.
 Publication preserves existing files and version archives (`clean: false`).
 
-This is the A4 infrastructure foundation. Full reasoner coverage, parser and
-external OOPS behavior belong to phase B. Documentation build validation and
+This is the A4 infrastructure foundation. B2 replaces the reasoner CLI parser
+and covers source/export entry points. Konclude, external OOPS replacement and
+the integrated gate remain in phase B. Documentation build validation and
 publication gating on *all* semantic checks, release trust rules, archive/URL
 inventory and replacement of legacy external OntoMetrics belong to phase C.
 Deployment still builds independently of Evaluation; do not treat A4 as the

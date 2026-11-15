@@ -3,12 +3,19 @@ B1 reasoning contract
 
 Scope
 ReasoningReport, ReasoningProtocol and ReasoningProcess define the common local
-adapter boundary. The Maven tests exercise it and small ontologies with the
-already pinned test dependency HermiT 1.4.5.519. The evaluator in
-ReasoningContractTest is a test oracle, not the B2 production adapter.
-The existing HermiT CLI/Python workflow is unchanged; its replacement is B2,
-Konclude integration is B3, local OOPS is B4 and the mandatory CI gate is B5.
-Maven verify passing B1 tests does not assert that SOMA is consistent/coherent.
+adapter boundary. HermitEvaluator implements B2 through OWLAPI with the pinned
+application dependency HermiT 1.4.5.519. HermitCli supervises HermitWorker with
+per-input heap and wall-time limits and records metadata separately from the
+strict protocol v1 result. ReasoningContractTest uses the production evaluator.
+The legacy CLI/Python parser is removed. Konclude integration is B3, local OOPS
+is B4 and the mandatory integrated CI gate is B5. Maven verify passing tests
+does not assert that SOMA is consistent/coherent; run HermitCli --suite as well.
+The default suite validates every file and reasons over the main roots plus
+uncovered theories. Coverage requires one selected root to contain all logical
+axioms (ignoring annotations) and the relevant named signature of a module;
+separate selected theories are never unioned to claim coverage. Public roots
+remain separate even when one imports another. --scope=modules enables optional
+isolated diagnostics. See scripts/README.md for commands and coverage details.
 
 Report and status
 - toolErrors: load/import, process, protocol or reasoner failures. These are

@@ -38,6 +38,14 @@ class RepositoryExportTest {
         var reload = new OntologyManager();
         reload.load(new OntologyConfig(config.owlDirectory(), List.of(), config.format(), temp.resolve("unused"), baseline.transformations()));
         assertEquals(16, reload.documents().size());
+        var sourcePlan = main.reasoning.ReasoningSuitePlan.select(result.sources().documents(), List.of("SOMA-ALL.owl", "SOMA-HOME.owl"));
+        var exportPlan = main.reasoning.ReasoningSuitePlan.select(reload.documents(), List.of("SOMA.owl", "SOMA-HOME.owl"));
+        assertEquals(Set.of("SOMA-ALL.owl", "SOMA-HOME.owl", "SOMA-ELAN.owl", "SOMA-Allen.owl", "USD.owl"), Set.copyOf(sourcePlan.roots()));
+        assertEquals(Set.of("SOMA.owl", "SOMA-HOME.owl", "SOMA-ELAN.owl", "SOMA-Allen.owl", "USD.owl"), Set.copyOf(exportPlan.roots()));
+        assertEquals("SOMA-ALL.owl", sourcePlan.coveredBy().get("SOMA-ACT.owl"));
+        assertEquals("SOMA.owl", exportPlan.coveredBy().get("SOMA-ACT.owl"));
+        assertEquals(16, sourcePlan.coveredBy().size());
+        assertEquals(16, exportPlan.coveredBy().size());
         var home = reload.resolve("http://www.ease-crc.org/ont/SOMA-HOME.owl");
         var soma = reload.resolve("http://www.ease-crc.org/ont/SOMA.owl");
         assertTrue(home.getImportsClosure().contains(soma));

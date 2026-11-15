@@ -15,17 +15,53 @@ Dependencies:
 
 **Testing consistency**
 
-Run the hermit.py script to verify an OWL file with the HermiT reasoner. Verification here means checking whether some concepts are subsumed by owl:Nothing, ie. they are unsatisfiable.
+Build with JDK 25 and the pinned Maven Wrapper, then use the OWLAPI adapter:
 
-Syntax to run the script is:
+```sh
+bash ./mvnw -B -ntp verify -f scripts/java/pom.xml
+java -cp scripts/java/target/IsDefinedInAdder-1.0-SNAPSHOT.jar main.reasoning.HermitCli --suite=. --output=build/ci/reports/hermit --timeout-seconds=600 --memory-mb=2048
+# Single document (catalog defaults to sibling catalog-v001.xml if present):
+java -cp scripts/java/target/IsDefinedInAdder-1.0-SNAPSHOT.jar main.reasoning.HermitCli --input=owl/SOMA-HOME.owl --catalog=owl/catalog-v001.xml --output=build/hermit-home
+```
 
-./hermit_test.py [options] inputfile
+`--suite` loads and validates all `.owl` files and local catalogs in `owl/` and
+`build/ci/dist/owl/`. Expensive reasoning runs cover the public roots: source
+SOMA-ALL/HOME and exported SOMA/HOME. Further ontologies are selected automatically
+when their logical axioms and named class/ObjectProperty/DataProperty signatures
+are not contained in any single selected root's import closure. Axiom annotations
+do not affect this logical coverage. Independent root theories are never unioned
+to claim coverage of another input.
 
-where inputfile is a path to an OWL file. The following options are available:
-* -r, --reasoner: path to HermiT.jar, the executable for the HermiT reasoner. If not provided, it is assumed the jar is in the same folder as where the script is called from
-* -o, --output: path to a file where to store the results of the HermiT reasoner. If not provided, results are not stored
+Currently this selects five roots per set: the two main roots plus ELAN, Allen
+and USD. `coverage.json` records the assignment of every loaded file to a root.
+`input-snapshot.json` binds planning and results to the same file contents and
+inventory; changes during the suite make it incomplete and fail the gate.
+Each selected root gets a fresh manager/reasoner in a separate Java process.
+Use `--scope=modules` for optional isolated diagnostics of every module, or
+`--input=FILE` for one document. Isolated checks help localize findings; they are
+not needed in the normal aggregate quality check.
 
-Classification and subsumption reasoning will be performed on the input owl file. In case of non-satisfiable concepts, messages will be produced on stdout (ie. the console) by the script. A successful run of the script, that is, if no errors happen and no non-satisfiable concepts are found, produces no console output.
+Build exports first with `verify`. The suite continues after reasoner findings
+and tool failures and writes `summary.json`, `coverage.json`, per-root
+`report.json` and unique worker stdout/stderr logs. Invalid files/catalogs during
+planning fail with an incomplete summary. Imports resolve strictly through local
+catalogs with no network fallback. Standalone import-free files need no catalog.
+
+HermiT 1.4.5.519 is a pinned application dependency, packaged in the Java CLI.
+Consistency is checked before unsatisfiable classes and empty ObjectProperties
+and DataProperties over the entire import closure. Results come from OWLAPI,
+including datatype-induced emptiness. See [the reasoning contract](java/REASONING-CONTRACT.txt).
+The former HermiT CLI text parser `hermit_test.py` has been removed.
+
+Exit codes: 0 = complete and no findings, 1 = inconsistency or semantic findings,
+2 = tool failure/incomplete check. Reports record the dependency version,
+Java/OWLAPI versions, wall time, timeout, worker heap limit, root path and SHA-256
+hashes of the root, local catalog and all allowed import targets (a conservative
+superset of the closure). Inputs are hashed before and after execution; a change
+is a tool error. Defaults are 600 seconds per input and 2048 MiB Java heap per
+worker; `--timeout-seconds` and `--memory-mb` override them. The heap cap is `-Xmx`,
+not a cap on total process RSS. Empty, invalid or missing worker output cannot
+pass. Maven tests use synthetic fixtures; only running the suite checks SOMA.
 
 
 **Java ontology CLI (A3 processing)**
@@ -94,8 +130,9 @@ or owl_xml. Configuration mistakes and ambiguous ontology references fail early.
 
 Tests cover invalid configuration, missing/ambiguous imports, unchanged source
 bytes on success and failure, exact synthetic axiom differences, complete SOMA
-aggregation and reload of all exports using only their local catalog. HermiT is
-currently exercised on a synthetic ontology; full semantic checks belong to B.
+aggregation and reload of all exports using only their local catalog. HermiT
+contract and subprocess tests run during Maven testing; the full semantic suite
+is a separate command and CI step.
 See [the dependency review](java/DEPENDENCIES.md) for the A2 toolchain and scan.
 
 Use Maven with JDK 25 for verification. An IDE configured with JDK 21 cannot

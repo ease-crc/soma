@@ -127,7 +127,7 @@ jobs:
   consistency:
     name: HermiT
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 120
     needs: compile
 
     steps:
@@ -138,11 +138,8 @@ jobs:
 
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
-          name: SOMA Reasoner Inputs
-          path: ./build/ci/work
-
-      - name: Create report directory
-        run: mkdir -p ./build/ci/reports
+          name: SOMA OWL
+          path: ./build/ci/dist/owl/
 
       - name: Setup Java
         uses: actions/setup-java@77dd5b2ce225ea11469928ac317850245a74ae78 # v6.2.0
@@ -150,23 +147,13 @@ jobs:
           distribution: temurin
           java-version: '25'
 
-      - name: Setup Python
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
-        with:
-          python-version: '3.12'
+      - name: Build OWLAPI adapter and run contract tests
+        run: bash ./mvnw -B -ntp -f scripts/java/pom.xml package
 
-      - name: Resolve HermiT and its managed dependencies
+      - name: HermiT on covering source and exported roots
         run: >-
-          bash ./mvnw -B -ntp -f scripts/java/pom.xml
-          org.apache.maven.plugins:maven-dependency-plugin:3.8.1:copy-dependencies
-          -DincludeScope=test -DoutputDirectory="$GITHUB_WORKSPACE/build/ci/tools"
-
-      - name: HermiT
-        run: |
-          java -Xmx2g -cp 'build/ci/tools/*' org.semanticweb.HermiT.cli.CommandLine \
-            --output=build/ci/reports/hermit.output --classify --classifyOPs \
-            "file://$GITHUB_WORKSPACE/build/ci/work/SOMA-HOME.owl"
-          python scripts/hermit_test.py -o build/ci/reports/hermit.html build/ci/reports/hermit.output
+          java -cp scripts/java/target/IsDefinedInAdder-1.0-SNAPSHOT.jar main.reasoning.HermitCli
+          --suite=. --scope=roots --output=build/ci/reports/hermit --timeout-seconds=600 --memory-mb=2048
 
       - name: Upload HermiT results
         if: always()

@@ -20,7 +20,7 @@ Current stable Maven Central versions were checked during this change:
 | SnakeYAML | 2.7 | Safe, plain-data YAML configuration |
 | SLF4J API/provider/bridges | 2.0.20 | Logging; 2.1 alpha intentionally excluded |
 | JUnit Jupiter | 6.1.3 | Test only |
-| HermiT | 1.4.5.519 | Test only, latest published version |
+| HermiT | 1.4.5.519 | Application dependency for the B2 OWLAPI adapter |
 
 Spring Boot, its parent/plugin, Spring DI, Logback and direct JetBrains annotations
 were removed. Guava is needed transitively by OWLAPI, managed at 33.8.0-jre
@@ -42,9 +42,10 @@ excludes Maven plugin internals, the JDK and external CLI reasoners.
 
 Other transitives follow the selected OWLAPI/HermiT releases; wholesale major
 upgrades of their internal APIs are not implied by the direct dependency update.
-HermiT's older Axiom dependencies remain test-only. Their compatibility is
-covered by a synthetic consistency and unsatisfiable-class probe, not a full SOMA
-classification. No outstanding OSV finding is suppressed.
+B2 promotes HermiT and its Axiom transitives from test to application scope,
+without changing their reviewed versions. Compatibility is checked by the B1
+semantic fixtures and the B2 subprocess tests; full SOMA classification is a
+separate suite run with per-input reports. No outstanding OSV finding is suppressed.
 
 Local evidence (intentionally ignored): `build/local-plans/a2-before.txt`,
 `a2-after.txt`, `a2-osv.json`, `a2-build.log`, `a2-final-build.log`.
