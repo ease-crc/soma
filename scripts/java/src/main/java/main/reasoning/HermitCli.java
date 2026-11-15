@@ -14,7 +14,7 @@ public final class HermitCli {
 
     public static void main(String[] args) {
         try { System.exit(execute(args)); }
-        catch (Exception e) { System.err.println("HermiT tool error: " + e); System.exit(2); }
+        catch (Exception e) { System.err.println("Reasoning tool error: " + e); System.exit(2); }
     }
 
     public static int execute(String[] args) throws Exception {
@@ -25,11 +25,16 @@ public final class HermitCli {
                     || options.putIfAbsent(arg.substring(2, separator), arg.substring(separator + 1)) != null)
                 throw new IllegalArgumentException("Expected unique --name=value options");
         }
-        if (!Set.of("input", "suite", "catalog", "output", "timeout-seconds", "memory-mb", "scope").containsAll(options.keySet())
+        if (!Set.of("input", "suite", "catalog", "output", "timeout-seconds", "memory-mb", "scope", "reasoner", "binary").containsAll(options.keySet())
                 || options.containsKey("input") == options.containsKey("suite") || !options.containsKey("output")
                 || (options.containsKey("suite") && options.containsKey("catalog"))
                 || (options.containsKey("input") && options.containsKey("scope")))
             throw new IllegalArgumentException("Use --input=FILE [--catalog=FILE] or --suite=REPOSITORY, plus --output=DIRECTORY");
+        String backend = options.getOrDefault("reasoner", "hermit");
+        if (!Set.of("hermit", "konclude").contains(backend)
+                || backend.equals("konclude") != options.containsKey("binary"))
+            throw new IllegalArgumentException("Use --reasoner=konclude --binary=PATH, or default hermit without --binary");
+        Path binary = options.containsKey("binary") ? Path.of(options.get("binary")).toAbsolutePath().normalize() : null;
         String scope = options.getOrDefault("scope", "roots");
         if (!Set.of("roots", "modules").contains(scope)) throw new IllegalArgumentException("Scope must be roots or modules");
         long timeout = Long.parseLong(options.getOrDefault("timeout-seconds", "600"));
@@ -42,7 +47,7 @@ public final class HermitCli {
         if (options.containsKey("input")) {
             var input = Path.of(options.get("input")).toAbsolutePath().normalize();
             var catalog = options.containsKey("catalog") ? Path.of(options.get("catalog")) : siblingCatalog(input);
-            exit = run(input, catalog, output.resolve("input"), Duration.ofSeconds(timeout), memory).exitCode();
+            exit = run(input, catalog, output.resolve("input"), Duration.ofSeconds(timeout), memory, binary).exitCode();
         } else {
             // Replace any previous success before discovery or execution can fail.
             writeSummary(output, entries, false, 2);
@@ -76,7 +81,7 @@ public final class HermitCli {
                     snapshot.verify();
                     var input = directory.resolve(name);
                     var reportDirectory = output.resolve(group).resolve(input.getFileName().toString());
-                    var report = run(input, directory.resolve("catalog-v001.xml"), reportDirectory, Duration.ofSeconds(timeout), memory);
+                    var report = run(input, directory.resolve("catalog-v001.xml"), reportDirectory, Duration.ofSeconds(timeout), memory, binary);
                     entries.add(Map.of("input", input.toString(), "status", report.status().name(),
                             "report", reportDirectory.resolve("report.json").toString()));
                     exit = Math.max(exit, report.exitCode());
@@ -101,6 +106,10 @@ public final class HermitCli {
     }
 
     public static ReasoningReport run(Path input, Path catalog, Path output, Duration timeout, int memoryMb) throws Exception {
+        return run(input, catalog, output, timeout, memoryMb, null);
+    }
+
+    public static ReasoningReport run(Path input, Path catalog, Path output, Duration timeout, int memoryMb, Path binary) throws Exception {
         if (timeout.isZero() || timeout.isNegative() || memoryMb < 64) throw new IllegalArgumentException("Invalid resource limits");
         Files.createDirectories(output);
         Files.deleteIfExists(output.resolve("report.json"));
@@ -109,25 +118,39 @@ public final class HermitCli {
         var metadata = new LinkedHashMap<String, Object>();
         metadata.put("startedAt", started.toString());
         metadata.put("input", input.toAbsolutePath().normalize().toString());
-        metadata.put("reasoner", "HermiT");
+        metadata.put("reasoner", binary == null ? "HermiT" : "Konclude");
         var version = new Properties();
         try (var stream = HermitCli.class.getResourceAsStream("/META-INF/maven/net.sourceforge.owlapi/org.semanticweb.hermit/pom.properties")) {
             if (stream == null) throw new IllegalStateException("Missing HermiT dependency version");
             version.load(stream);
         }
-        metadata.put("reasonerVersion", version.getProperty("version"));
+        metadata.put("reasonerVersion", binary == null ? version.getProperty("version") : KoncludeInstallation.VERSION);
+        metadata.put("nativeThreads", binary == null ? 0 : 2);
         metadata.put("owlapiVersion", org.semanticweb.owlapi.util.VersionInfo.getVersionInfo().getVersion());
         metadata.put("javaVersion", System.getProperty("java.version"));
         metadata.put("memoryLimitMiB", memoryMb);
+        metadata.put("memoryLimitScope", "Java worker heap only; native Konclude RSS is not capped");
         metadata.put("timeoutMillis", timeout.toMillis());
         ReasoningReport report;
         try {
+            if (binary != null) {
+                metadata.put("binary", binary.toAbsolutePath().toString());
+                metadata.put("binarySha256", KoncludeInstallation.verify(binary));
+            }
             var hashes = identity(input, catalog);
             metadata.put("inputFilesSha256", hashes);
             var command = new ArrayList<>(List.of(Path.of(System.getProperty("java.home"), "bin", "java").toString(),
-                    "-Xmx" + memoryMb + "m", "-cp", System.getProperty("java.class.path"), HermitWorker.class.getName(),
+                    "-Xmx" + memoryMb + "m", "-cp", System.getProperty("java.class.path"), binary == null ? HermitWorker.class.getName() : KoncludeWorker.class.getName(),
                     input.toAbsolutePath().toString()));
-            if (catalog != null) command.add(catalog.toAbsolutePath().toString());
+            if (binary == null) {
+                if (catalog != null) command.add(catalog.toAbsolutePath().toString());
+            } else {
+                command.add(catalog == null ? "-" : catalog.toAbsolutePath().toString());
+                command.add(binary.toAbsolutePath().toString());
+                command.add(output.toAbsolutePath().toString());
+                command.add(Long.toString(timeout.toMillis()));
+            }
+            metadata.put("command", command);
             report = ReasoningProcess.run(command, timeout, output);
             if (!hashes.equals(identity(input, catalog))) report = ReasoningReport.toolError("Input changed during reasoning");
         } catch (InterruptedException e) {

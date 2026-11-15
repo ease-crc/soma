@@ -7,8 +7,11 @@ adapter boundary. HermitEvaluator implements B2 through OWLAPI with the pinned
 application dependency HermiT 1.4.5.519. HermitCli supervises HermitWorker with
 per-input heap and wall-time limits and records metadata separately from the
 strict protocol v1 result. ReasoningContractTest uses the production evaluator.
-The legacy CLI/Python parser is removed. Konclude integration is B3, local OOPS
-is B4 and the mandatory integrated CI gate is B5. Maven verify passing tests
+The legacy CLI/Python parser is removed. KoncludeWorker implements B3 with a
+checksum-pinned native release, OWL/XML classification and direct object/data
+existential queries. It shares the local loader and supervised CLI; see
+KONCLUDE.md for installation, supported-input limits and comparison evidence.
+Local OOPS is B4 and the mandatory integrated CI gate is B5. Maven verify passing tests
 does not assert that SOMA is consistent/coherent; run HermitCli --suite as well.
 The default suite validates every file and reasons over the main roots plus
 uncovered theories. Coverage requires one selected root to contain all logical

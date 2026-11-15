@@ -163,3 +163,47 @@ jobs:
           path: build/ci/reports/
           retention-days: 7
 
+  konclude:
+    name: Konclude native
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    needs: compile
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: SOMA OWL
+          path: ./build/ci/dist/owl/
+      - uses: actions/setup-java@77dd5b2ce225ea11469928ac317850245a74ae78 # v6.2.0
+        with:
+          distribution: temurin
+          java-version: '25'
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Install verified native Konclude
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes libpcre3
+          binary=$(python scripts/install-konclude.py)
+          echo "KONCLUDE_BINARY=$binary" >> "$GITHUB_ENV"
+      - name: Build and test both reasoners including native B1 contract
+        run: bash ./mvnw -B -ntp -f scripts/java/pom.xml package
+      - name: Konclude on covering source and exported roots
+        run: >-
+          java -cp scripts/java/target/IsDefinedInAdder-1.0-SNAPSHOT.jar main.reasoning.HermitCli
+          --reasoner=konclude --binary="$KONCLUDE_BINARY"
+          --suite=. --scope=roots --output=build/ci/reports/konclude --timeout-seconds=600 --memory-mb=2048
+      - name: Upload Konclude results and installation identity
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: Konclude Results
+          path: |
+            build/ci/reports/konclude/
+            build/tools/konclude/installation.json
+            scripts/java/target/surefire-reports/
+          retention-days: 7
+

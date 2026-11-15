@@ -53,6 +53,23 @@ and DataProperties over the entire import closure. Results come from OWLAPI,
 including datatype-induced emptiness. See [the reasoning contract](java/REASONING-CONTRACT.txt).
 The former HermiT CLI text parser `hermit_test.py` has been removed.
 
+Konclude is also available as a native, checksum-pinned backend, with direct
+ObjectProperty and DataProperty queries over the same importclosure:
+
+```sh
+# Ubuntu 24.04 runtime dependency:
+sudo apt-get update && sudo apt-get install --yes libpcre3
+export KONCLUDE_BINARY="$(python scripts/install-konclude.py)"
+bash ./mvnw -B -ntp -f scripts/java/pom.xml verify
+java -cp scripts/java/target/IsDefinedInAdder-1.0-SNAPSHOT.jar main.reasoning.HermitCli --reasoner=konclude --binary="$KONCLUDE_BINARY" --suite=. --output=build/ci/reports/konclude
+```
+
+Windows: use `mvnw.cmd`, set `KONCLUDE_BINARY` to the installer's printed `.exe`
+path, and quote it in `--binary`. Maven runs the native tests when that variable
+is present; the Konclude CI job always supplies it. See
+[Konclude installation, limits and reasoner comparison](java/KONCLUDE.md).
+HermiT remains the default backend.
+
 Exit codes: 0 = complete and no findings, 1 = inconsistency or semantic findings,
 2 = tool failure/incomplete check. Reports record the dependency version,
 Java/OWLAPI versions, wall time, timeout, worker heap limit, root path and SHA-256

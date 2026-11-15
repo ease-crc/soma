@@ -1,0 +1,801 @@
+Konclude PR review snapshot, retrieved 2026-11-15 via GitHub REST API
+Repository: https://github.com/ease-crc/soma
+API lists requested with per_page=100; #231: 6 files, 37 issue comments, no inline comments/reviews;
+#247: 1 changed file, no issue comments. Readable patches and discussions follow (tabs expanded and trailing whitespace removed; not for git apply).
+
+PR #231: https://github.com/ease-crc/soma/pull/231
+State: open; merged: False; updated: 2022-10-27T15:01:19Z
+Base: b9613c9ef989bc2eeb9b936cdee0c283b71e7041; head: 1446cc6ecda76b9bf48bea7fb6d0e34c36f5104c
+Merge commit: 1a1ec1e21ea4068589d0d653e1b45a557623bfbb
+(Work in progress)
+
+
+
+Part of addressing #219
+
+
+
+After the konclude_test.py script is accepted, the evaluation.yml file needs to be changed, and the docker configuration file too.
+
+
+
+What else should be changed to update the CI?
+
+.github/workflows/evaluation.yml
+@@ -90,36 +90,38 @@ jobs:
+           path: ./build/files/oops.xml
+
+   consistency:
+-    name: HermiT
++    name: Konclude
+     runs-on: ubuntu-latest
+-    needs: compile
+
+     steps:
+       - name: Checkout
+         uses: actions/checkout@v1
+         with:
+           fetch-depth: 1
+
+-      - uses: actions/download-artifact@v1
++      - name: Setup Java
++        uses: actions/setup-java@v3
+         with:
+-          name: SOMA OWL
+-          path: ./build/owl/current
++          distribution: 'temurin'
++          java-version: '18'
++          cache: 'maven'
+
+-      - name: Download DUL
+-        run: wget http://www.ease-crc.org/ont/DUL.owl -O ./build/DUL.owl
++      - name: Compile
++        run: |
++          mvn spring-boot:run -f scripts/java/pom.xml \
++             -Dspring-boot.run.arguments="--versionInfo=current \
++             --propertyListPath=$PWD/properties"
+
+-      - name: HermiT
+-        uses: ./.github/actions/hermit
+-        with:
+-          args: ./build/DUL.owl ./build/SOMA-HOME.owl
++      - name: Konclude
++        run: docker run -v $PWD/build:/data --rm konclude/konclude classify -i /data/SOMA-HOME.owl -o /data/konclude.output
+
+-      - name: Print HermiT output
+-        run: cat ./hermit.output
++      - name: Print Konclude output
++        run: cat ./build/konclude.output
+         if: always()
+
+-      - name: Evaluate HermiT output
++      - name: Evaluate Konclude output
+         if: success()
+         uses: docker://python:3.7.6-slim
+         with:
+-          args: python ./scripts/hermit_test.py -o ./owl/hermit.html ./hermit.output
++          args: python ./scripts/konclude_test.py -p $PWD/properties/SOMA-HOM_objectProperties -k ./.github/actions/Konclude -s ./build/SOMA-HOME.owl -o ./owl/konclude.html ./build/konclude.output
+
+
+scripts/java/pom.xml
+@@ -61,6 +61,12 @@
+             <artifactId>guava</artifactId>
+             <version>31.1-jre</version>
+         </dependency>
++        <!-- JGraphT -->
++        <dependency>
++            <groupId>org.jgrapht</groupId>
++            <artifactId>jgrapht-core</artifactId>
++            <version>1.5.1</version>
++        </dependency>
+
+     </dependencies>
+
+
+scripts/java/src/main/java/main/CIRunner.java
+@@ -23,10 +23,14 @@ public class CIRunner implements CommandLineRunner {
+    @Autowired
+    private SubclassNothingRewriter gciRewriter;
+
++   @Autowired
++   private PropertyListExporter propertyListExporter;
++
+
+    @Override
+    public void run(final String... args) throws Exception {
+-       final CIRunnable[] toRun = {gciRewriter, isDefinedInAdder, versionInfoAdder, collapser, ontologySaver};
++       final CIRunnable[] toRun = {gciRewriter, isDefinedInAdder, versionInfoAdder, collapser, propertyListExporter,
++                                   ontologySaver};
+        for (final var next : toRun) {
+            next.run();
+        }
+
+scripts/java/src/main/java/main/OntologyManager.java
+@@ -1,6 +1,10 @@
+ package main;
+
+ import main.config.OntologyConfig;
++import org.jgrapht.Graph;
++import org.jgrapht.alg.connectivity.GabowStrongConnectivityInspector;
++import org.jgrapht.graph.DefaultDirectedGraph;
++import org.jgrapht.graph.DefaultEdge;
+ import org.protege.xmlcatalog.owlapi.XMLCatalogIRIMapper;
+ import org.semanticweb.owlapi.apibinding.OWLManager;
+ import org.semanticweb.owlapi.model.*;
+@@ -16,6 +20,7 @@
+ import java.nio.file.DirectoryStream;
+ import java.nio.file.Files;
+ import java.nio.file.Path;
++import java.util.stream.Stream;
+
+ /**
+  * Class to manage the resources that are associated with an {@link OWLOntology}.
+@@ -75,4 +80,29 @@ private void loadOntology(final File ontologyFile) throws OWLOntologyCreationExc
+    public OWLOntologyManager getOntologyManager() {
+        return ontologyManager;
+    }
++
++   /**
++    * @return A {@link Stream} of a subset of the managed {@link OWLOntology}s such that their imports include all
++    * managed ontologies
++    */
++   public Stream<OWLOntology> mainOntologies() {
++       // condensate import structure to strongly connected components
++       final var condensation = new GabowStrongConnectivityInspector<>(graphOfImportStructure()).getCondensation();
++
++       // get roots of condensation
++       //noinspection OptionalGetWithoutIsPresent
++       return condensation.vertexSet().stream().filter(key -> condensation.incomingEdgesOf(key).isEmpty())
++                          .map(next -> next.vertexSet().stream().findAny().get());
++   }
++
++   /**
++    * @return A {@link Graph} with all managed {@link OWLOntology}s as vertices and edges from o1 to o2 if o1 imports
++    * o2
++    */
++   public Graph<OWLOntology, DefaultEdge> graphOfImportStructure() {
++       final DefaultDirectedGraph<OWLOntology, DefaultEdge> graph = new DefaultDirectedGraph<>(DefaultEdge.class);
++       ontologyManager.ontologies().forEach(graph::addVertex);
++       ontologyManager.ontologies().forEach(next -> next.getDirectImports().forEach(imp -> graph.addEdge(next, imp)));
++       return graph;
++   }
+ }
+
+scripts/java/src/main/java/main/ci_runners/PropertyListExporter.java
+@@ -0,0 +1,63 @@
++package main.ci_runners;
++
++import main.OntologyManager;
++import org.semanticweb.owlapi.model.OWLOntology;
++import org.semanticweb.owlapi.model.parameters.Imports;
++import org.slf4j.Logger;
++import org.slf4j.LoggerFactory;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.beans.factory.annotation.Value;
++import org.springframework.context.annotation.Lazy;
++import org.springframework.stereotype.Component;
++
++import java.io.IOException;
++import java.nio.file.Files;
++import java.nio.file.Path;
++import java.nio.file.StandardOpenOption;
++import java.util.stream.Collectors;
++
++@Component
++@Lazy
++public class PropertyListExporter implements CIRunnable {
++
++   private static final Logger logger = LoggerFactory.getLogger(PropertyListExporter.class);
++
++   private final Path path;
++   private final OntologyManager ontologyManager;
++
++   @Autowired
++   public PropertyListExporter(final OntologyManager ontologyManager,
++                               @Value("${propertyListPath:#{null}}") final Path path) {
++       this.path = path;
++       this.ontologyManager = ontologyManager;
++   }
++
++   @Override
++   public void run() throws IOException {
++       if (path == null) {
++           logger.info("CL argument 'propertyListPath' not given. Skipping export of properties.");
++           return;
++       }
++       for (final OWLOntology owlOntology : ontologyManager.mainOntologies().collect(Collectors.toSet())) {
++           exportProperties(owlOntology);
++       }
++   }
++
++   private void exportProperties(final OWLOntology ontology) throws IOException {
++       @SuppressWarnings("OptionalGetWithoutIsPresent") String fileName = ontology.getOntologyID().getOntologyIRI()
++                                                                                  .get().getShortForm();
++       fileName = fileName.substring(0, fileName.length() - 5);
++       if (!path.toFile().exists() && !path.toFile().mkdirs()) {
++           throw new IOException("Could not create dir " + path.toAbsolutePath());
++       }
++       logger.info("Writing object- and dataProperties of {} to {}_[object,data]Properties", fileName,
++                   path.resolve(fileName).toAbsolutePath());
++       Files.write(path.resolve(fileName + "_objectProperties"),
++                   ontology.objectPropertiesInSignature(Imports.INCLUDED)
++                                                                         .map(next -> (CharSequence) next.toString())::iterator,
++                   StandardOpenOption.CREATE);
++       Files.write(path.resolve(fileName + "_dataProperties"), ontology.dataPropertiesInSignature(Imports.INCLUDED)
++                                                                       .map(next -> (CharSequence) next.toString())::iterator,
++                   StandardOpenOption.CREATE);
++   }
++}
+
+scripts/konclude_test.py
+@@ -0,0 +1,162 @@
++#!/usr/bin/env python
++import argparse
++import re
++import os
++import sys
++from pathlib import Path
++
++
++OWL_NOTHING = 'http://www.w3.org/2002/07/owl#Nothing'
++BOTTOM_OBJECT_PROPERTY = 'http://www.w3.org/2002/07/owl#bottomObjectProperty'
++
++## IRI = '<(.*?)>'
++
++## EQUIVALENT_CLASSES = r'^EquivalentClasses\( (.*) \)$'
++## OBJECT_INVERSE_OF = r'ObjectInverseOf\( ' + IRI + r' \)'
++## EQUIVALENT_OBJECT_PROPERTIES = r'^EquivalentObjectProperties\( (.*) \)$'
++
++def _parseHomebrew(fileText):
++    inEq = False
++    nullClasses = []
++    aux = []
++    iriPLen = len("<Class IRI=\"")
++    for l in fileText.splitlines():
++        l = l.strip()
++        if inEq:
++            if "</EquivalentClasses>" == l:
++                inEq = False
++                if OWL_NOTHING in aux:
++                    nullClasses = nullClasses + aux
++                aux = []
++            else:
++                if l.startswith("<Class IRI=\""):
++                    aux.append(l[iriPLen:-3])
++        else:
++            if "<EquivalentClasses>" == l:
++                inEq = True
++    nullClasses = list(set(nullClasses))
++    if OWL_NOTHING in nullClasses:
++        nullClasses.remove(OWL_NOTHING)
++    return nullClasses
++
++def makeObjectPropertyQueryFile(objProps, somaPath):
++    queryMap = {}
++    queryOwl = './SOMA_QUERY.owl'
++    with open(queryOwl, 'w') as outfile:
++        outfile.write('Prefix(:=<http://www.ease-crc.org/ont/SOMA_QUERY.owl#>)\n')
++        outfile.write('Prefix(dul:=<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>)\n')
++        outfile.write('Prefix(owl:=<http://www.w3.org/2002/07/owl#>)\n')
++        outfile.write('Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)\n')
++        outfile.write('Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)\n')
++        outfile.write('Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)\n')
++        outfile.write('Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)\n')
++        outfile.write('Prefix(soma:=<http://www.ease-crc.org/ont/SOMA.owl#>)\n\n\n')
++        outfile.write('Ontology(<http://www.ease-crc.org/ont/SOMA_QUERY.owl>\n')
++        outfile.write('Import(<file://%s>)\n' % somaPath)
++        for k,op in enumerate(objProps):
++            cName = 'http://www.ease-crc.org/ont/SOMA_QUERY.owl#QUERY%d' % k
++            queryMap[cName] = op
++            outfile.write('EquivalentClasses(<%s> ObjectSomeValuesFrom(<%s> owl:Thing))\n' % (cName, op))
++        outfile.write(')\n')
++    return queryMap, queryOwl
++
++def runKonclude(queryOwl, koncludePath):
++    outName = queryOwl[:queryOwl.rfind('.')] + '_OUT.html'
++    os.system("%s classification -i %s -o %s >/dev/null 2>&1" % (koncludePath, queryOwl, outName))
++    return _parseHomebrew(open(outName).read())
++
++def main():
++    parser = argparse.ArgumentParser()
++    parser.add_argument('konclude_output', help='Konclude output file', type=str)
++    parser.add_argument('-k', '--koncludePath', help='path to Konclude executable', default='./.github/actions/Konclude', type=str)
++    parser.add_argument('-s', '--somaPath', help='path to merged SOMA owl', default='./build/SOMA-HOME.owl', type=str)
++    parser.add_argument('-p', '--propertyListPath', help='object property list file', default='', type=str)
++    parser.add_argument('-o', '--output', help='output file', default='konclude.html', type=str)
++    args = parser.parse_args()
++
++    nullClasses = _parseHomebrew(open(args.konclude_output).read())
++    results = {
++        'EquivalentClasses': [nullClasses],
++        'SubClassOf': [],
++        'EquivalentObjectProperties': [],
++        'SubObjectPropertyOf': [],
++        'Error': [],
++    }
++
++    objProps = []
++    if '' != args.propertyListPath:
++        objProps = [x.strip().strip('<>') for x in open(args.propertyListPath).read().splitlines() if x.strip()]
++    if objProps:
++        query2objectProperty, queryOwl = makeObjectPropertyQueryFile(objProps, args.somaPath)
++        nullQueries = runKonclude(queryOwl, args.koncludePath)
++        for n in nullQueries:
++            if n in query2objectProperty:
++                results['EquivalentObjectProperties'].append(query2objectProperty[n])
++
++    output = format_output(results, format=args.output[args.output.rfind('.'):])
++    with open(args.output, 'w') as outfile:
++        _ = outfile.write(output)
++    print(format_output(results))
++
++    # check if there are problems, return non-zero exit code if so
++    if len(nullClasses) != 0:
++        sys.exit(1)
++
++
++def as_html(titles, results):
++    template = '<h2>{title}</h2>\n{issues}'
++    outer = '<section>\n<p><h3>Set</h3>{}</p>\n</section>\n'
++    outeritem = '</p><p><h3>Set</h3>'
++    inner = '<ul>\n<li>{}</li>\n</ul>\n'
++    inneritem = '</li>\n<li>'
++    sections = []
++    for k in sorted(results.keys()):
++        sets = results[k]
++        if (not sets) or (not sets[0]):
++            issues = '<p>No issues detected.</p>'
++        else:
++            inners = list(inner.format(inneritem.join(sorted(s))) for s in sets)
++            issues = outer.format(outeritem.join(inners))
++        section = template.format(title=titles[k], issues=issues)
++        sections.append(section)
++    sections = '\n'.join(sections)
++    return "<!DOCTYPE html>\n<html>\n\t<head>\n\t\t<title>Konclude results</title>\n\t\t<meta charset='utf-8' />\n\t</head>\n\t<body>\n\t\t<h1>Konclude results</h1>\n\t\t\t" + sections + "\n\t</body>\n</html>"
++
++
++def as_text(titles, results):
++    template = '\n## {title}\n\n{issues}'
++    outer = '* {}'
++    outeritem = '\n* '
++    inner = '- {}\n'
++    inneritem = '\n  - '
++    sections = []
++    for k in sorted(results.keys()):
++        sets = results[k]
++        if (not sets) or (not sets[0]):
++            issues = 'No issues detected.\n'
++        else:
++            inners = list(inner.format(inneritem.join(sorted(s))) for s in sets)
++            issues = outer.format(outeritem.join(inners))
++        section = template.format(title=titles[k], issues=issues)
++        sections.append(section)
++    sections = '\n'.join(sections)
++    return '# Konclude results\n\n' + sections
++
++
++def format_output(results, format='.md'):
++    titles = {
++        'EquivalentClasses': 'Classes equivalent to ' + OWL_NOTHING,
++        'SubClassOf': 'Subclasses of ' + OWL_NOTHING,
++        'EquivalentObjectProperties': 'Object properties equivalent to ' + BOTTOM_OBJECT_PROPERTY,
++        'SubObjectPropertyOf': 'Subproperties of ' + BOTTOM_OBJECT_PROPERTY,
++        'Error': 'Unhandled subsumptions',
++    }
++
++    if format == '.html':
++        return as_html(titles, results)
++    return as_text(titles, results)
++
++
++if __name__ == '__main__':
++    main()
++
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1142290121
+mpomarlan
+I've also updated the evaluation.yml file.
+
+
+
+@sasjonge do you know how to write Docker files so that Konclude is also available?
+
+
+
+Another couple of things to fix:
+
+
+
+a) format. Konclude supports only OWL/XML and OWL functional syntax, not the RDF/XML that SOMA is written in. This needs an intermediate conversion step.
+
+b) imports. These can be URIs to some web address and Konclude will find them just fine, however the same as above applies about the format. I would suggest here that we host DUL, and that we host an OWL functional syntax version of it. IOLite will be removed as an import if it hasn't been already so that's not important.
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1152186656
+sasjonge
+I can have a look. I saw that konclude already has an existing docker image:
+
+
+
+https://hub.docker.com/r/konclude/konclude
+
+
+
+Maybe we can use that, or atleast their Dockerfile to create our own image.
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1175133524
+sasjonge
+I tested using the konclude container and it seems to generally work:
+
+
+
+https://github.com/sasjonge/soma/blob/cf97673dd1122b616906d0f05331018e0a7cccc4/.github/workflows/evaluation.yml#L79
+
+
+
+But if fails on this step, because a action is missing:
+
+
+
+https://github.com/sasjonge/soma/blob/cf97673dd1122b616906d0f05331018e0a7cccc4/.github/workflows/evaluation.yml#L99
+
+
+
+Did you forget to push it?
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1175168412
+mpomarlan
+Not so much forgot, as asking for assistance :) As far as I understand, the Konclude exec should be placed at the appropriate place by some kind of container setup. Don"t know how to do that.
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1175170014
+mpomarlan
+Actually wait, now looking at your previous message I don't understand what the problem is. Line 99 seems to just call Konclude, and if that is already there then where is the problem?
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1175230424
+sasjonge
+I think I got it to work. Here is how i call the classification:
+
+
+
+https://github.com/sasjonge/soma/blob/7fac7d9634bfc22cef0c391aa6dd72687800c77d/.github/workflows/evaluation.yml#L96
+
+
+
+Here is the CI run:
+
+
+
+https://github.com/sasjonge/soma/runs/7199936734?check_suite_focus=true
+
+
+
+The "## Classes equivalent to http://www.w3.org/2002/07/owl#Nothing" of the evaluate step has a weird output: Is this normal:
+
+
+
+https://github.com/sasjonge/soma/runs/7199936734?check_suite_focus=true#step:8:11
+
+
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1175245920
+mpomarlan
+So the the problem is this:
+
+
+
+2022-07-05T16:01:22.3350599Z ## Classes equivalent to http://www.w3.org/2002/07/owl#Nothing
+
+2022-07-05T16:01:22.3350791Z
+
+2022-07-05T16:01:22.3351106Z * -
+
+2022-07-05T16:01:22.3351223Z
+
+2022-07-05T16:01:22.3351228Z
+
+
+
+? I will have a look on my side.
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1175247754
+sasjonge
+The other outputs are always:
+
+
+
+No issues detected.
+
+
+
+For  "## Classes equivalent to http://www.w3.org/2002/07/owl#Nothing" it is:
+
+
+
+`* -`
+
+
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1175263578
+sasjonge
+Can I merge my changes to the konclude-ci branch to extends this PR/Draft?
+
+https://github.com/ease-crc/soma/pull/247
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1175264262
+mpomarlan
+Pushed a commit that should fix this. The output will now be no issues detected if no classes are Nothing, and if there are unsatisfiable classes these will appear in a list.
+
+
+
+NOTE: Konclude cannot test emptiness of properties. I may have mentioned this before, but just to make sure we're all reminded of this, here it is again. This shouldn't affect us too much as the typical way for a property to be empty is for either its domain or range to be empty. As long as we don't use intersections when specifying domains/ranges, we should be fine. If we use named concepts, or unions of named concepts, to specify domains/ranges, then the emptiness of the property would be caught by emptiness of the domain/range concepts.
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1175272838
+sasjonge
+I merged my code into this branch wirh this PR https://github.com/ease-crc/soma/pull/247
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1175385753
+mpomarlan
+Good. If the ci now works, this is ready for review.
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1177773084
+mrnolte
+> NOTE: Konclude cannot test emptiness of properties. I may have mentioned this before, but just to make sure we're all reminded of this, here it is again. This shouldn't affect us too much as the typical way for a property to be empty is for either its domain or range to be empty. As long as we don't use intersections when specifying domains/ranges, we should be fine. If we use named concepts, or unions of named concepts, to specify domains/ranges, then the emptiness of the property would be caught by emptiness of the domain/range concepts.
+
+
+
+Actually, it can via OWL link (I checked using my Server). Another option might be be to check for every ObjectProperty  r whether `r . some owl:Thing` is empty, as that is only empty if either `owl:Thing` is empty (in which case something has gone terribly wrong already) or `r` is empty. @mpomarlan, is that possible using the Command Line?
+
+
+
+Edit: The latter is not possible with OWL Link unfortunately - Konclude crashes 😅
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1177868246
+mpomarlan
+"Yes". As long as I have a list of object properties r, then one thing to do is to create a "query owl file" containing concepts of the form "r some Thing" for each r, then do a classification.
+
+
+
+The one thing I'm not sure how to do right now is to get that list of properties. One option would be to check the list of declarations in the SOMA ugly file, assuming that all used object properties are also declared.
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1178720874
+mrnolte
+> The one thing I'm not sure how to do right now is to get that list of properties. One option would be to check the list of declarations in the SOMA ugly file, assuming that all used object properties are also declared.
+
+
+
+It would not be a problem to generate such a list with the OWL API.
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1192329485
+sasjonge
+> > The one thing I'm not sure how to do right now is to get that list of properties. One option would be to check the list of declarations in the SOMA ugly file, assuming that all used object properties are also declared.
+
+>
+
+> It would not be a problem to generate such a list with the OWL API.
+
+
+
+Is this necessary to approve this PR?
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1195338217
+mpomarlan
+"Your" call -- for some value of "your".
+
+
+
+As I said, what this means is the code as-is right now will not detect impossible properties unless they have impossible domains. This is maybe sufficient given that most of the domains we define are not intersections. On the other hand, we may have intersection domains, indeed the new versions of some of the GCIs were rewritten as such.
+
+
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1195421194
+mrnolte
+If you tell me where to put such a list of properties, I will gladly export it so that you can then read it :)
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1195436605
+mpomarlan
+Would the same folder housing the merged SOMA be ok? (I know I can access that one for Konclude input :) )
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1195749691
+sasjonge
+I would rather recommend to have the path as an passed argument, so that we don't have to change the file if we change the locations in the pipeline later.
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1195823351
+mpomarlan
+Sure, that also works.
+
+
+
+So then something like script.py --propertyList path_to_property_list
+
+
+
+?
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1196406596
+sasjonge
+Yes, that looks okay.
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1196781626
+mrnolte
+I now implemented exporting the properties. Just add a runtime argument propertyListPath to the java-ci stuff, e.g., as follows:
+
+```cmd
+
+spring-boot:run "-Dspring-boot.run.arguments=--versionInfo=current --propertyListPath=<path X>"
+
+```
+
+This will create 2 files for each of the "main" ontologies (with that I mean the minimal set of ontologies, so that all ontologies from within the owl directory are imported - currently, these are Allen, Home and Elan. Interesting path problem to identify those btw). For example, `<path X>/SOMA-HOME_objectProperties` and `<path X>/SOMA-HOME_dataProperties`
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1202333117
+sasjonge
+@mrnolte I have a problem using the flag. I get a ¨Could not create dir" error in CI and also locally: https://github.com/sasjonge/soma/runs/7629898757?check_suite_focus=true#step:5:376
+
+
+
+Also would it be possible to make the propertyExporter optional, so that the other CI steps don't need to execute it (and get the argument)?
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1202361838
+mrnolte
+@sasjonge this should have fixed it, can you check? Also, if propertyListPath is not given, the CI will now skip it.
+
+Maybe a dumb question, but do we really have to call the java CI twice? Is there no option to generate the list in the first run and use it in the second?
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1289034267
+mpomarlan
+Updated the script. It will now optionally take an argument that gives a path to a file containing a list of object properties, each with its full IRI, one property per line.
+
+
+
+The current line in the evaluation workflow reads:
+
+
+
+
+
+python ./scripts/konclude_test.py -k ./.github/actions/Konclude -s ./build/SOMA-HOME.owl -o ./owl/konclude.html ./build/konclude.output
+
+
+
+it should be
+
+
+
+python ./scripts/konclude_test.py -p <PATH TO PROPS LIST FILE> -k ./.github/actions/Konclude -s ./build/SOMA-HOME.owl -o ./owl/konclude.html ./build/konclude.output
+
+
+
+Also please check if the paths to the Konclude binary (the -k arg) and the merged soma (-s) are correct.
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1293301349
+sasjonge
+@mpomarlan I tried to change it in the CI, but if you now want to use the konclude binary from inside of your script it will make the setup more difficult, because I can't just use the konclude docker file. I'm wondering if we could change the system call in your script to a docker run call?
+
+
+
+https://github.com/sasjonge/soma/blob/621354d12cd88cb4ec6a11e675e4e026932dd95f/scripts/konclude_test.py#L65
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1293470593
+mpomarlan
+I don't know how to do that, but I suppose it should be fine. Can you implement it?
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1293472584
+sasjonge
+I tried to call the docker image from the python script on my fork (still a bit hacky with the pathes):
+
+
+
+https://github.com/sasjonge/soma/blob/3d78aa40077784f0d8da824ebf997dfe2a099749/scripts/konclude_test.py#L66
+
+
+
+This did run through:
+
+
+
+https://github.com/sasjonge/soma/actions/runs/3337441052/jobs/5523785507
+
+
+
+I printed out the SOMA_QUERY.owl in that CI. Should there only be ObjectSomeValuesFrom axioms in that file? Also the runtime is 0ms.
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1293477780
+mpomarlan
+The 0ms likely comes from this:
+
+
+
+ File '/data/SOMA-HOME.owl' not found.
+
+
+
+When called, the Konclude binary needs to have access to both the SOMA_QUERY and SOMA_HOME.
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1293481796
+mpomarlan
+About SOMA_QUERY, the structure seems ok (I didn't notice Konclude complaining about parsing errors) and the content is intentional: when querying for properties, I only care about concepts of the form hasProperty some Thing (if hasProperty is equivalent to Bottom, then its domain is Nothing).
+
+
+
+More interesting is that some properties have IRIs containing something else than SOMA or DUL, e.g. http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasChildLink.
+
+
+
+This is coming from the property list file I imagine.
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1293627856
+sasjonge
+> About SOMA_QUERY, the structure seems ok (I didn't notice Konclude complaining about parsing errors) and the content is intentional: when querying for properties, I only care about concepts of the form hasProperty some Thing (if hasProperty is equivalent to Bottom, then its domain is Nothing).
+
+>
+
+> More interesting is that some properties have IRIs containing something else than SOMA or DUL, e.g. http://www.ease-crc.org/ont/SOMA-OBJ.owl#hasChildLink.
+
+>
+
+> This is coming from the property list file I imagine.
+
+
+
+@mrnolte Is that with this different IRI's a problem with the script?
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1293631050
+sasjonge
+@mpomarlan
+
+I get an parsing error:
+
+
+
+`XML parsing error at 1:1: 'Start tag expected.'.`
+
+
+
+My newest run is this:
+
+
+
+https://github.com/sasjonge/soma/actions/runs/3338066719/jobs/5525234865
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1293632806
+mrnolte
+It is a problem that @daniel86 explained to me: Someone who worked on SOMA-OBJ did not configure protege correctly and created all kinds wrong iris. His old script renamed these. I wondered whether old neems use the SOMA-OBJ IRI and did not change my script to also rename those IRIs, but that should be no problem after my vacation.
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1293649709
+mpomarlan
+The xml parsing error is not important as this is not an xml format, but the OWL functional syntax parsing error is. I think this is because the property list file has property IRIs with <> around the names whereas I assumed they would be without. If this is it then the fix is simple I'll have it done in a minute.
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1293655818
+mpomarlan
+Should be done now.
+
+https://github.com/ease-crc/soma/pull/231#issuecomment-1293657765
+mpomarlan
+Seems like a command line arg is wrong now, SOMA_HOM_objectProperties not found.
+
+PR #247: https://github.com/ease-crc/soma/pull/247
+State: closed; merged: True; updated: 2022-07-05T16:45:48Z
+Base: 5fe71ce1b49180e7ed756cc43786f741ca2641a6; head: 7fac7d9634bfc22cef0c391aa6dd72687800c77d
+Merge commit: bb9256c9ebc66f941ac4dae710feed4781e048a5
+(no description)
+
+.github/workflows/evaluation.yml
+@@ -93,17 +93,15 @@ jobs:
+         run: wget http://www.ease-crc.org/ont/DUL.owl -O ./build/DUL.owl
+
+       - name: Konclude
+-        uses: ./.github/actions/Konclude
+-        with:
+-          args: classification -i ./build/SOMA-HOME.owl -o ./konclude.output
++        run: docker run -v $PWD/build:/data --rm konclude/konclude classify -i /data/SOMA-HOME.owl -o /data/konclude.output
+
+       - name: Print Konclude output
+-        run: cat ./konclude.output
++        run: cat ./build/konclude.output
+         if: always()
+
+       - name: Evaluate Konclude output
+         if: success()
+         uses: docker://python:3.7.6-slim
+         with:
+-          args: python ./scripts/konclude_test.py -o ./owl/konclude.html ./konclude.output
++          args: python ./scripts/konclude_test.py -o ./owl/konclude.html ./build/konclude.output

@@ -20,8 +20,15 @@ reasons over the main roots plus automatically detected uncovered ontologies.
 The current corpus needs five roots per set, with a 600-second timeout and
 2048 MiB heap per worker. `coverage.json` makes the module assignment explicit. All per-input JSON
 reports and worker logs are uploaded even when findings or tool errors fail the
-job. Python packages are installed without sudo;
-sudo is used only to install TeX packages on disposable documentation runners.
+job. `Konclude native` uses the same coverage/report contract with the official
+checksum-pinned 0.7.0-1138 release, local OWL/XML closure and direct object/data
+property queries. Its native tests run with `KONCLUDE_BINARY` set; installation
+identity, native logs and reports are retained on failure. Current SOMA datatype
+definitions/keys exceed that release's coverage, so its full gate reports tool
+errors. HermiT remains the default; see
+[the comparison and supported-input limits](../scripts/java/KONCLUDE.md).
+Python packages are installed without sudo. Sudo installs libpcre3 for Konclude
+on disposable evaluation runners and TeX packages on documentation runners.
 
 Workflow permissions default to `contents: read`. PR jobs receive no secrets,
 use `pull_request`, and never use `pull_request_target`. Every checkout disables
@@ -41,8 +48,9 @@ are restricted to a single safe path component before reaching any output path.
 Publication preserves existing files and version archives (`clean: false`).
 
 This is the A4 infrastructure foundation. B2 replaces the reasoner CLI parser
-and covers source/export entry points. Konclude, external OOPS replacement and
-the integrated gate remain in phase B. Documentation build validation and
+and covers source/export entry points. B3 adds native Konclude with explicit
+coverage limits. External OOPS replacement and the integrated gate remain in
+phase B. Documentation build validation and
 publication gating on *all* semantic checks, release trust rules, archive/URL
 inventory and replacement of legacy external OntoMetrics belong to phase C.
 Deployment still builds independently of Evaluation; do not treat A4 as the
