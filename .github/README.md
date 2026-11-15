@@ -50,7 +50,11 @@ Publication preserves existing files and version archives (`clean: false`).
 This is the A4 infrastructure foundation. B2 replaces the reasoner CLI parser
 and covers source/export entry points. B3 adds native Konclude with explicit
 coverage limits. B4 builds pinned OOPS locally, without the public service;
-the integrated quality gate remains B5. Documentation build validation and
+B5 adds the always-running `Ontology quality gate` check, normalized JSON/CI
+summary and explicit OOPS error/warning policy. Make that check required in branch
+rules; existing semantic findings and technical failures remain blocking. See
+[the gate contract, warning baseline and verification](../scripts/QUALITY-GATE.md).
+Documentation build validation and
 publication gating on *all* semantic checks, release trust rules, archive/URL
 inventory and replacement of legacy external OntoMetrics belong to phase C.
 Deployment still builds independently of Evaluation; do not treat A4 as the

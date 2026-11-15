@@ -93,8 +93,9 @@ There are no random report IDs or elapsed times in the normalized report.
 Exit 0 means the selected checks completed, including runs with quality findings;
 exit 2 means a technical/incomplete run. Escaping exceptions, missing output,
 malformed output and unmet checker preconditions cannot pass. GitHub annotations
-show all findings as warnings, including Critical upstream importance. B5 owns
-the eventual error/warning gate policy. Annotation/report errors exit 2 instead
+use the explicit B5 [error/warning policy](../QUALITY-GATE.md), independent of
+upstream importance; the aggregate quality gate blocks on error findings.
+Annotation/report errors exit 2 instead
 of being swallowed. Logs and reports are uploaded even on failure.
 
 These are heuristic upstream checks, not correctness proofs. Several upstream

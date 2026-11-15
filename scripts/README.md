@@ -6,8 +6,9 @@ OOPS now builds from a fixed upstream source commit and runs locally without the
 public service. See [installation, rule selection, dependency review and tests](oops/README.md).
 Build with `python scripts/install-oops.py` (`JAVA_HOME` required), then run
 `python scripts/oops.py build/ci/dist/owl/SOMA-HOME.owl build/ci/reports`.
-The normalized report is `oops.json`; technical failures exit 2, findings remain
-visible warnings pending B5's quality-gate policy.
+The normalized report is `oops.json`; technical failures exit 2. The aggregate
+[quality gate](QUALITY-GATE.md) classifies OOPS findings as errors or warnings,
+records existing warnings, and combines them with mandatory reasoner checks.
 
 **Controlled vocabulary generation**
 

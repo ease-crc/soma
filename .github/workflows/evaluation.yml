@@ -86,6 +86,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     needs: compile
+    outputs:
+      technical-status: ${{ steps.oops-tests.outcome == 'success' && steps.oops-run.outcome == 'success' && steps.annotations.outcome == 'success' && steps.upload.outcome == 'success' && 'success' || 'failure' }}
 
     steps:
       - name: Checkout
@@ -116,18 +118,22 @@ jobs:
         run: python scripts/install-oops.py
 
       - name: Test local OOPS and failure handling
+        id: oops-tests
         env:
           OOPS_INTEGRATION: '1'
         run: python -m unittest discover -s scripts/tests -v
 
       - name: Find pitfalls
+        id: oops-run
         run: python ./scripts/oops.py build/ci/dist/owl/SOMA-HOME.owl build/ci/reports
 
       - name: Generate annotations
+        id: annotations
         if: always()
         run: python ./scripts/oops-github.py build/ci/reports/oops.json
 
       - name: Upload pitfalls
+        id: upload
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
@@ -144,6 +150,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 120
     needs: compile
+    outputs:
+      technical-status: ${{ steps.adapter.outcome == 'success' && steps.gate-tests.outcome == 'success' && steps.upload.outcome == 'success' && 'success' || 'failure' }}
 
     steps:
       - name: Checkout
@@ -163,6 +171,7 @@ jobs:
           java-version: '25'
 
       - name: Build OWLAPI adapter and run contract tests
+        id: adapter
         run: bash ./mvnw -B -ntp -f scripts/java/pom.xml package
 
       - name: HermiT on covering source and exported roots
@@ -170,7 +179,15 @@ jobs:
           java -cp scripts/java/target/IsDefinedInAdder-1.0-SNAPSHOT.jar main.reasoning.HermitCli
           --suite=. --scope=roots --output=build/ci/reports/hermit --timeout-seconds=600 --memory-mb=2048
 
+      - name: Test quality gate with deliberately broken ontologies
+        id: gate-tests
+        if: ${{ !cancelled() }}
+        env:
+          QUALITY_GATE_JAR: scripts/java/target/IsDefinedInAdder-1.0-SNAPSHOT.jar
+        run: python3 -m unittest discover -s scripts/tests -p test_quality_gate.py -v
+
       - name: Upload HermiT results
+        id: upload
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
@@ -183,6 +200,8 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 120
     needs: compile
+    outputs:
+      technical-status: ${{ steps.adapter.outcome == 'success' && steps.upload.outcome == 'success' && 'success' || 'failure' }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -205,6 +224,7 @@ jobs:
           binary=$(python scripts/install-konclude.py)
           echo "KONCLUDE_BINARY=$binary" >> "$GITHUB_ENV"
       - name: Build and test both reasoners including native B1 contract
+        id: adapter
         run: bash ./mvnw -B -ntp -f scripts/java/pom.xml package
       - name: Konclude on covering source and exported roots
         run: >-
@@ -212,6 +232,7 @@ jobs:
           --reasoner=konclude --binary="$KONCLUDE_BINARY"
           --suite=. --scope=roots --output=build/ci/reports/konclude --timeout-seconds=600 --memory-mb=2048
       - name: Upload Konclude results and installation identity
+        id: upload
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
@@ -221,4 +242,47 @@ jobs:
             build/tools/konclude/installation.json
             scripts/java/target/surefire-reports/
           retention-days: 7
+
+  quality-gate:
+    name: Ontology quality gate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    needs: [workflow-lint, compile, consistency, konclude, pitfalls]
+    if: ${{ always() }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+      - name: Download diagnostic artifacts from this run
+        id: diagnostics
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          path: build/quality-input
+      - name: Evaluate mandatory checks and write CI summary
+        if: ${{ always() }}
+        env:
+          REQUIRED_JOBS: >-
+            {"workflow-lint":"${{ needs.workflow-lint.result }}",
+             "compile":"${{ needs.compile.result }}",
+             "consistency":"${{ needs.consistency.result }}",
+             "konclude":"${{ needs.konclude.result }}",
+             "pitfalls":"${{ needs.pitfalls.result }}",
+             "HermiT infrastructure":"${{ needs.consistency.outputs.technical-status }}",
+             "Konclude infrastructure":"${{ needs.konclude.outputs.technical-status }}",
+             "OOPS infrastructure":"${{ needs.pitfalls.outputs.technical-status }}",
+             "artifact-download":"${{ steps.diagnostics.outcome }}"}
+        run: >-
+          python scripts/quality_gate.py --artifacts=build/quality-input
+          --output=build/quality-gate --jobs="$REQUIRED_JOBS"
+      - name: Preserve normalized quality gate report
+        if: ${{ always() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: Ontology Quality Gate
+          path: build/quality-gate/
+          retention-days: 7
+          if-no-files-found: error
 
