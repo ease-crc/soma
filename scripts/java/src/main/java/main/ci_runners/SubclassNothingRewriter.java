@@ -5,14 +5,9 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@Component
-@Lazy
 public class SubclassNothingRewriter implements CIRunnable {
 
 	/**
@@ -22,7 +17,6 @@ public class SubclassNothingRewriter implements CIRunnable {
 	private static final OWLDataFactory df = OWLManager.getOWLDataFactory();
 	private final OntologyManager ontologyManager;
 
-	@Autowired
 	public SubclassNothingRewriter(final OntologyManager ontologyManager) {
 		this.ontologyManager = ontologyManager;
 	}

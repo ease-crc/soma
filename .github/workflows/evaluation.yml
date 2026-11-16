@@ -59,7 +59,8 @@ jobs:
           VERSION: ${{ steps.version.outputs.version }}
         run: |
           mkdir -p build/owl/current
-          mvn -B -ntp spring-boot:run -f scripts/java/pom.xml -Dspring-boot.run.arguments="--versionInfo=$VERSION"
+          mvn -B -ntp package -f scripts/java/pom.xml
+          (cd scripts/java && java -jar target/IsDefinedInAdder-1.0-SNAPSHOT.jar --versionInfo="$VERSION")
           # The tool rewrites the modules in owl/ in place; publish them next to the collapsed files.
           cp --update=none owl/*.owl build/owl/current/
 

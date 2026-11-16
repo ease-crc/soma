@@ -6,13 +6,7 @@ import org.semanticweb.owlapi.model.AddOntologyAnnotation;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
 
-@Component
-@Lazy
 public class VersionInfoAdder implements CIRunnable {
 
 	/**
@@ -24,8 +18,7 @@ public class VersionInfoAdder implements CIRunnable {
 
 	private final String versionInfo;
 
-	@Autowired
-	public VersionInfoAdder(final OntologyManager ontologyManager, @Value("${versionInfo}") final String versionInfo) {
+	public VersionInfoAdder(final OntologyManager ontologyManager, final String versionInfo) {
 		this.ontologyManager = ontologyManager;
 		this.versionInfo = versionInfo;
 	}
