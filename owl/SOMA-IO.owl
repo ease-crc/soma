@@ -493,7 +493,7 @@ SubClassOf(SOMA:Simulation_Reasoner SOMA:Reasoner)
 # Class: SOMA:Software (Software)
 
 AnnotationAssertion(rdfs:label SOMA:Software "Software"@en)
-AnnotationAssertion(rdfs:label SOMA:Software "We see Software as the Design of a DesignedTool: the running instance of said Software. Software as a design also follows the Function-Behaviour-Structure model:
+AnnotationAssertion(rdfs:comment SOMA:Software "We see Software as the Design of a DesignedTool: the running instance of said Software. Software as a design also follows the Function-Behaviour-Structure model:
 
 The Function is the purpose or problem solving embodied by the Software Instance, e.g., sorting a list.
 
@@ -521,15 +521,15 @@ SubClassOf(SOMA:SoftwareLibrary SOMA:Software)
 
 # Class: SOMA:SoftwareRole (Software role)
 
-AnnotationAssertion(rdfs:comment SOMA:SoftwareRole "A Software Role is a Role applying to only Software and encoding the purpose of the Software: Its Role within Interface Patterns (e.g. Client vs. Server), its functionality (e.g. Database vs. Comnputer Game), and so on."@en)
+AnnotationAssertion(rdfs:comment SOMA:SoftwareRole "A role classifying a software design or a running software instance in a particular context, such as a client, server, database, or reasoner role. Runtime roles classify SoftwareInstance; roles of software designs classify Software."@en)
 AnnotationAssertion(rdfs:label SOMA:SoftwareRole "Software role"@en)
 SubClassOf(SOMA:SoftwareRole <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>)
-SubClassOf(SOMA:SoftwareRole ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> SOMA:Software))
+SubClassOf(SOMA:SoftwareRole ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectUnionOf(SOMA:Software SOMA:SoftwareInstance)))
 
 # Class: SOMA:Software_Configuration (Software Configuration)
 
 AnnotationAssertion(rdfs:label SOMA:Software_Configuration "Software Configuration"@en)
-AnnotationAssertion(rdfs:label SOMA:Software_Configuration "The part-whole relationship of Software and its components. Every Software has (at least 1) such configuration that exactly describes all Resources that make up the software (i.e., that are needed for the Software to function).
+AnnotationAssertion(rdfs:comment SOMA:Software_Configuration "The part-whole relationship of Software and its components. Every Software has (at least 1) such configuration that exactly describes all Resources that make up the software (i.e., that are needed for the Software to function).
 We support seperate views:
 1. The Software Configuration describes all the necessary files, in which it should also be a File Configuration
 2. It describes a Software Suit, e.g., 'Open Office' consists of Writer, Calc, Impress etc. Note that thus. Software can consist of other Software - this pattern may also be useful when describing Software Components, e.g., that some Software relies on a Database Software.
@@ -546,7 +546,7 @@ SubClassOf(SOMA:Source_Code SOMA:Computer_Program)
 
 # Class: SOMA:StatisticalReasoner (Statistical reasoner)
 
-AnnotationAssertion(rdfs:label SOMA:StatisticalReasoner "A Statistical Reasoner is a Reasoner that uses statistical or stochastical data to infer implicit information from explicit information. Examples are Hidden Markov Models and Neural Networks."@en)
+AnnotationAssertion(rdfs:comment SOMA:StatisticalReasoner "A Statistical Reasoner is a Reasoner that uses statistical or stochastical data to infer implicit information from explicit information. Examples are Hidden Markov Models and Neural Networks."@en)
 AnnotationAssertion(rdfs:label SOMA:StatisticalReasoner "Statistical reasoner"@en)
 SubClassOf(SOMA:StatisticalReasoner SOMA:Reasoner)
 
