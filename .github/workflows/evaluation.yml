@@ -95,16 +95,17 @@ jobs:
       - name: Find pitfalls
         run: |
           mkdir -p build/files
-          python scripts/oops.py build/owl/current/SOMA-HOME.owl build/files
+          # SOMA.owl and SOMA-HOME.owl contain all modules imported by SOMA-ALL and SOMA-HOME, without DUL.
+          python scripts/oops.py build/files build/owl/current/SOMA.owl build/owl/current/SOMA-HOME.owl
 
       - name: Generate annotations
-        run: python scripts/oops-github.py build/files/oops.xml
+        run: python scripts/oops-github.py build/files/oops-*.xml
 
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: ${{ !cancelled() }}
         with:
           name: OOPS Results
-          path: build/files/oops.xml
+          path: build/files/oops-*.xml
 
   consistency:
     name: HermiT
