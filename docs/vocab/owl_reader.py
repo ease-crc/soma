@@ -1,6 +1,7 @@
 """
 This file parses the owl ontologies to get the comments, label and superclass of entities.
 """
+import os
 import owlready2 as owl
 import sys
 from typing import NamedTuple
@@ -118,6 +119,8 @@ class OWLReader:
             print(obj.label, str(obj.superclass), str(obj.comment))
 
     def _load_ontology(self, iri):
+        # Resolve imports such as DUL from local copies next to the file, not from the web.
+        owl.onto_path.append(os.path.dirname(os.path.abspath(iri)))
         self.ontology = owl.get_ontology(iri).load()
         self.namespace = self.ontology.get_namespace(iri + "#")
         self.prefix = _parse_string(iri, "/", -1)[:-3]
