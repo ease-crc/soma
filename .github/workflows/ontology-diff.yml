@@ -1,0 +1,65 @@
+name: Ontology diff
+on:
+  pull_request:
+    paths: ['owl/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  diff:
+    name: Ontology diff
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-java@d1374f8ac74474200d16ef8ecee22c7ae7a51880 # v6.3.0
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Download ROBOT
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/robot.jar" https://github.com/ontodev/robot/releases/download/v1.9.11/robot.jar
+          echo "53cd275c8e4c0dad1fc2c1c34174876795cd7d6b6926e1444adcbb0cb3c7ab26  $RUNNER_TEMP/robot.jar" | sha256sum -c
+
+      - name: Diff against the base branch
+        env:
+          BASE: ${{ github.event.pull_request.base.sha || format('origin/{0}', github.event.repository.default_branch) }}
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/base" "$BASE"
+          # Merge all modules of each side into one ontology, so the diff covers every file in owl/.
+          for side in base head; do
+            dir=owl
+            if [ "$side" = base ]; then dir="$RUNNER_TEMP/base/owl"; fi
+            java -jar "$RUNNER_TEMP/robot.jar" --catalog "$dir/catalog-v001.xml" \
+              merge --inputs "$dir/*.owl" --output "$RUNNER_TEMP/$side.ofn"
+          done
+          java -jar "$RUNNER_TEMP/robot.jar" diff --left "$RUNNER_TEMP/base.ofn" --right "$RUNNER_TEMP/head.ofn" \
+            --format markdown --output ontology-diff.md
+          {
+            echo "## Ontology changes"
+            echo
+            echo "Axioms of all modules in owl/, merged. Ontology annotations, imports and the module an axiom lives in are not compared."
+            echo
+            # The step summary is limited to 1 MiB; the full diff is in the artifact.
+            head -c 900000 ontology-diff.md
+            if [ "$(stat -c %s ontology-diff.md)" -gt 900000 ]; then
+              echo
+              echo "**Truncated.** The full diff is in the \`Ontology diff\` artifact."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: Ontology diff
+          path: ontology-diff.md
