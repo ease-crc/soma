@@ -130,9 +130,9 @@
 							<h3>metrics</h3>
 							Metrics quantify certain characteristics of an ontology such as its readability, adapatability, or reusability.
 							This is useful to compare different ontologies with each other, but it may also serve as quality control during development.
-							SOMA metrics are automatically computed by <a href="https://ontometrics.informatik.uni-rostock.de/ontologymetrics/">OntoMetrics</a>, a webservice for ontology evaluation that supports several different metrics.
-							For more information about the computed metrics, please visit the <a href="https://ontometrics.informatik.uni-rostock.de/wiki/index.php/OntoMetrics">OntoMetrics wiki</a>.
-							The results of this computation for the latest SOMA version is displayed below.
+							SOMA metrics are computed automatically on every deployment with the <a href="https://github.com/owlcs/owlapi">OWL API</a>.
+							They follow the definitions of <a href="https://ontometrics.informatik.uni-rostock.de/wiki/index.php/OntoMetrics">OntoMetrics</a>, which computed them for earlier versions.
+							The results for the latest SOMA version are displayed below.
 							<br><br>
 							<div class="panel-group accordion" id="accordion" role="tablist" aria-multiselectable="true">
 								<div class="panel panel-default">
@@ -153,23 +153,6 @@
 									</div>
 								</div>
 								<div class="panel panel-default">
-									<!-- Graph Metrics -->
-									<div class="panel-heading" role="tab" id="heading-metrics1">
-										<div class="panel-title font-weight-normal">
-											<a data-toggle="collapse" data-parent="#accordion" href="#collapse-metric1"
-												aria-expanded="false" aria-controls="collapse-metric1">
-												graph metrics
-											</a>
-										</div>
-									</div>
-									<div id="collapse-metric1" class="panel-collapse collapse"
-											role="tabpanel" aria-labelledby="heading-metrics1">
-										<table id="table-metrics1" class="table table-condensed table-striped">
-											<thead class="hidden"><tr><th data-field="key">Key</th><th data-field="value">Value</th></tr></thead>
-										</table>
-									</div>
-								</div> 
-								<div class="panel panel-default">
 									<!-- Schema Metrics -->
 									<div class="panel-heading" role="tab" id="heading-metrics2">
 										<div class="panel-title font-weight-normal">
@@ -185,7 +168,7 @@
 											<thead class="hidden"><tr><th data-field="key">Key</th><th data-field="value">Value</th></tr></thead>
 										</table>
 									</div>
-								</div> 
+								</div>
 							</div>
 						</div>
           </div>
@@ -418,32 +401,14 @@ $(document).ready(function() {
 		"Individualcount":            "Number of individuals",
 		"Totalindividualscount":      "Total number of individuals",
 		"DLexpressivity":             "DL expressivity",
-		"Absoluterootcardinality":    "Absolute root cardinality",
-		"Absoluteleafcardinality":    "Absolute leaf cardinality",
-		"Absolutesiblingcardinality": "Absolute sibling cardinality",
-		"Absolutedepth":              "Absolute depth",
-		"Averagedepth":               "Average depth",
-		"Maximaldepth":               "Maximal depth",
-		"Absolutebreadth":            "Absolute breadth",
-		"Averagebreadth":             "Average breadth",
-		"Maximalbreadth":             "Maximal breadth",
-		"Ratioofleaffanoutness":      "Ratio of leaf fan-outness",
-		"Ratioofsiblingfanoutness":   "Ratio of sibling fan-outness",
-		"Totalnumberofpaths":         "Total number of paths",
-		"Averagenumberofpaths":       "Average number of paths",
 		"Attributerichness":          "Attribute richness",
 		"Inheritancerichness":        "Inheritance richness",
-		"Relationshiprichness":       "Relation shiprichness",
-		"Attributeclassratio":        "Attribute-class ratio",
 		"Equivalenceratio":           "Equivalence ratio",
 		"Axiomclassratio":            "Axiom-class ratio",
-		"Inverserelationsratio":      "Inverse relations ratio",
-		"Classrelationratio":         "Class relation ratio"
+		"Inverserelationsratio":      "Inverse relations ratio"
 	};
 	$('#table-metrics0').bootstrapTable(
 		{data: getMetricsData(keyMap,metrics['Basemetrics'])});
-	$('#table-metrics1').bootstrapTable(
-		{data: getMetricsData(keyMap,metrics['Graphmetrics'])});
 	$('#table-metrics2').bootstrapTable(
 		{data: getMetricsData(keyMap,metrics['Schemametrics'])});
 	//$('#table-metricsx').bootstrapTable(
@@ -451,7 +416,6 @@ $(document).ready(function() {
 });
 
 $('document').ready(function(e) {
-  $('#collapse-metric1').collapse({toggle: false});
   $('#collapse-metric2').collapse({toggle: false});
 });
 </script>
