@@ -87,9 +87,10 @@ Declaration(ObjectProperty(SOMA:isGivenMeaningBy))
 #   Object Properties
 ############################
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#encodes> (<http://www.ease-crc.org/ont/SOMA.owl#encodes>)
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#encodes> (encodes)
 
 AnnotationAssertion(rdfs:comment SOMA:encodes "The relation between two Information Objects that have the same meaning, but are formatted differently. E.g., a text written in UTF-8 encodes a text in a natural writing system (letters) and vice versa."@en)
+AnnotationAssertion(rdfs:label SOMA:encodes "encodes"@en)
 SubObjectPropertyOf(SOMA:encodes <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith>)
 SymmetricObjectProperty(SOMA:encodes)
 ObjectPropertyDomain(SOMA:encodes <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject>)
@@ -238,11 +239,12 @@ AnnotationAssertion(rdfs:label SOMA:Computer_Program "Computer program"@en)
 EquivalentClasses(SOMA:Computer_Program ObjectIntersectionOf(SOMA:Structured_Text ObjectSomeValuesFrom(SOMA:isGivenMeaningBy SOMA:Programming_Language)))
 EquivalentClasses(SOMA:Computer_Program ObjectIntersectionOf(SOMA:Structured_Text ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses> SOMA:Algorithm)))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Database> (<http://www.ease-crc.org/ont/SOMA.owl#Database>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Database> (Database)
 
 AnnotationAssertion(rdfs:comment SOMA:Database "A Database is a Software that organizes a collection of data stored and and allows for access, usually via some query engine.
 
 Source: https://en.wikipedia.org/wiki/Database"@en)
+AnnotationAssertion(rdfs:label SOMA:Database "Database"@en)
 SubClassOf(SOMA:Database SOMA:SoftwareRole)
 
 # Class: <http://www.ease-crc.org/ont/SOMA.owl#Digital_File> (Computer File)
@@ -397,11 +399,12 @@ AnnotationAssertion(rdfs:comment SOMA:Natural_Language_Text "A Text in a Natural
 AnnotationAssertion(rdfs:label SOMA:Natural_Language_Text "Natural language text"@en)
 EquivalentClasses(SOMA:Natural_Language_Text ObjectIntersectionOf(SOMA:Text ObjectSomeValuesFrom(SOMA:isGivenMeaningBy SOMA:Natural_Language)))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Ontology> (<http://www.ease-crc.org/ont/SOMA.owl#Ontology>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Ontology> (Ontology)
 
 AnnotationAssertion(rdfs:comment SOMA:Ontology "An ontology encompasses a representation, formal naming, and definition of the categories, properties, and relations between the concepts, data, and entities that substantiate one, many, or all domains of discourse. More simply, an ontology is a way of showing the properties of a subject area and how they are related, by defining a set of concepts and categories that represent the subject.
 
 From Wikipedia: https://en.wikipedia.org/wiki/Ontology_(information_science)"@en)
+AnnotationAssertion(rdfs:label SOMA:Ontology "Ontology"@en)
 EquivalentClasses(SOMA:Ontology ObjectIntersectionOf(SOMA:Structured_Text ObjectSomeValuesFrom(SOMA:isGivenMeaningBy SOMA:Ontology_Language)))
 SubClassOf(SOMA:Ontology SOMA:Structured_Text)
 
@@ -451,7 +454,7 @@ Note that despite their name, Query languages typically come with syntax and sem
 AnnotationAssertion(rdfs:label SOMA:QueryLanguage "Query language"@en)
 SubClassOf(SOMA:QueryLanguage SOMA:Computer_Language)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Reasoner> (<http://www.ease-crc.org/ont/SOMA.owl#Reasoner>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Reasoner> (Reasoner)
 
 AnnotationAssertion(rdfs:comment SOMA:Reasoner "A Reasoner is some Software that can infer new, implicit knowlegde from explicitly stated knowledge.
 
@@ -459,6 +462,7 @@ This definition is broad and we consider any System fitting the above descriptio
 * A simulation, where the explicit knowledge corresponds to the initial situation, and the implicit knowlegde corresponds to the situation that is derived from that by simulating some unfolding processes.
 * A machine learning algorithm, e.g., an image classifier: The explicit knowledge is the visual content of a picture (even down to the pixel), the implicit knowledge is the derived classification.
 * A logic based rule engine, where initial facts are the explicit knowledge, and derived facts are the implicit knowledge."@en)
+AnnotationAssertion(rdfs:label SOMA:Reasoner "Reasoner"@en)
 SubClassOf(SOMA:Reasoner SOMA:SoftwareRole)
 
 # Class: <http://www.ease-crc.org/ont/SOMA.owl#RelationalDatabase> (Relational database)

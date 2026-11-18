@@ -138,19 +138,22 @@ Declaration(Datatype(SOMA:array_uint))
 #   Annotation Properties
 ############################
 
-# Annotation Property: <http://www.ease-crc.org/ont/SOMA.owl#UsageGuideline> (<http://www.ease-crc.org/ont/SOMA.owl#UsageGuideline>)
+# Annotation Property: <http://www.ease-crc.org/ont/SOMA.owl#UsageGuideline> (Usage guideline)
 
 AnnotationAssertion(rdfs:comment SOMA:UsageGuideline "Provides a definition, or usage guideline, aimed at a particular community of the ontology's users. The community is identified by the subproperty of UsageGuideline.
 
 A style recommendation for usage guidelines is that they should be brief. In contrast to usual concept annotations that can, and should be detailed about the reasons behind modelling decisions, usage guidelines are simply meant to answer questions about when it is appropriate to use a concept, and they must be a practical, easy to query and understand resource.")
+AnnotationAssertion(rdfs:label SOMA:UsageGuideline "Usage guideline"@en)
 
-# Annotation Property: <http://www.ease-crc.org/ont/SOMA.owl#nickname> (<http://www.ease-crc.org/ont/SOMA.owl#nickname>)
+# Annotation Property: <http://www.ease-crc.org/ont/SOMA.owl#nickname> (nickname)
 
 AnnotationAssertion(rdfs:comment SOMA:nickname "Similar to rdfs:label, but without GUI or reasoner impact in Protege; avoiding Protege problems is why this is not a label subproperty. Nicknames are used by particular software working with the ontology as a way to give community-specific names to concepts. Communities are identified by the subproperty of nickname.")
+AnnotationAssertion(rdfs:label SOMA:nickname "nickname"@en)
 
-# Annotation Property: <http://www.ease-crc.org/ont/SOMA.owl#symbol> (<http://www.ease-crc.org/ont/SOMA.owl#symbol>)
+# Annotation Property: <http://www.ease-crc.org/ont/SOMA.owl#symbol> (symbol)
 
 AnnotationAssertion(rdfs:comment SOMA:symbol "An annotation property which should be used to record by what symbols or abbreviations, if any, some relation or entity is known in scientific literature.")
+AnnotationAssertion(rdfs:label SOMA:symbol "symbol"@en)
 AnnotationPropertyRange(SOMA:symbol xsd:string)
 
 
@@ -158,20 +161,22 @@ AnnotationPropertyRange(SOMA:symbol xsd:string)
 #   Object Properties
 ############################
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#after> (<http://www.ease-crc.org/ont/SOMA.owl#after>)
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#after> (after)
 
 AnnotationAssertion(SOMA:symbol SOMA:after ">")
 AnnotationAssertion(rdfs:comment SOMA:after "A relation between entities, expressing a 'sequence' schema where one of the entities strictly ends before the other one.")
+AnnotationAssertion(rdfs:label SOMA:after "after"@en)
 SubObjectPropertyOf(SOMA:after <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#follows>)
 InverseObjectProperties(SOMA:after SOMA:before)
 TransitiveObjectProperty(SOMA:after)
 ObjectPropertyDomain(SOMA:after <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity>)
 ObjectPropertyRange(SOMA:after <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#before> (<http://www.ease-crc.org/ont/SOMA.owl#before>)
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#before> (before)
 
 AnnotationAssertion(SOMA:symbol SOMA:before "<")
 AnnotationAssertion(rdfs:comment SOMA:before "A relation between entities, expressing a 'sequence' schema where one of the entities strictly ends before the other one.")
+AnnotationAssertion(rdfs:label SOMA:before "before"@en)
 SubObjectPropertyOf(SOMA:before <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#precedes>)
 TransitiveObjectProperty(SOMA:before)
 ObjectPropertyDomain(SOMA:before <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity>)
@@ -197,9 +202,10 @@ SymmetricObjectProperty(SOMA:coOccurs)
 ObjectPropertyDomain(SOMA:coOccurs <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 ObjectPropertyRange(SOMA:coOccurs <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#contains> (<http://www.ease-crc.org/ont/SOMA.owl#contains>)
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#contains> (contains)
 
 AnnotationAssertion(rdfs:comment SOMA:contains "A schematic relation asserting containment, understood in a very broad sense, by one Entity of another. The relation is defined with domain and range of maximum generality, as it is possible to construe containment to apply between Events, between Objects, between Qualities and so on. Care should be taken when using it that the construal of containment makes sense and is useful. If a clearer relation expresses the connection between two Entities, use that relation instead. For example, rather than saying an Event contains an Object, it is probably better to say the Event has that Object as a participant. More specific versions of this relation exist, e.g. containsEvent, so it is likely that there will be few situations where it should be used itself. However, by acting as a superproperty to several relations, it captures a core similarity between these and enables taxonomy-based similarity metrics.")
+AnnotationAssertion(rdfs:label SOMA:contains "contains"@en)
 SubObjectPropertyOf(SOMA:contains <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#overlaps>)
 InverseObjectProperties(SOMA:contains SOMA:isContainedIn)
 ObjectPropertyDomain(SOMA:contains <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity>)
@@ -234,10 +240,11 @@ AnnotationAssertion(rdfs:label SOMA:directlyDerivedFrom "directly derived from")
 SubObjectPropertyOf(SOMA:directlyDerivedFrom SOMA:derivedFrom)
 InverseObjectProperties(SOMA:directlyDerivedFrom SOMA:isDirectSourceFor)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#during> (<http://www.ease-crc.org/ont/SOMA.owl#during>)
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#during> (during)
 
 AnnotationAssertion(SOMA:symbol SOMA:during "d")
 AnnotationAssertion(rdfs:comment SOMA:during "`A during B` means that B strictly starts before, and ends after A, i.e. A is wholly contained in B.")
+AnnotationAssertion(rdfs:label SOMA:during "during"@en)
 SubObjectPropertyOf(SOMA:during SOMA:coOccurs)
 SubObjectPropertyOf(SOMA:during SOMA:isContainedIn)
 TransitiveObjectProperty(SOMA:during)
@@ -255,10 +262,11 @@ TransitiveObjectProperty(SOMA:finishedBy)
 ObjectPropertyDomain(SOMA:finishedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 ObjectPropertyRange(SOMA:finishedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#finishes> (<http://www.ease-crc.org/ont/SOMA.owl#finishes>)
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#finishes> (finishes)
 
 AnnotationAssertion(SOMA:symbol SOMA:finishes "f")
 AnnotationAssertion(rdfs:comment SOMA:finishes "`A finishes B` means that A ends exactly where B ends, and that B strictly starts before A.  As in \"I finish my day by taking a shower\".")
+AnnotationAssertion(rdfs:label SOMA:finishes "finishes"@en)
 SubObjectPropertyOf(SOMA:finishes SOMA:coOccurs)
 TransitiveObjectProperty(SOMA:finishes)
 ObjectPropertyDomain(SOMA:finishes <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
@@ -378,9 +386,10 @@ InverseObjectProperties(SOMA:includesConcept SOMA:isConceptIncludedIn)
 ObjectPropertyDomain(SOMA:includesConcept <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 ObjectPropertyRange(SOMA:includesConcept <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#includesRecord> (<http://www.ease-crc.org/ont/SOMA.owl#includesRecord>)
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#includesRecord> (includes record)
 
 AnnotationAssertion(rdfs:comment SOMA:includesRecord "A relationship indicating that an Event has been recorded by an InformationObject")
+AnnotationAssertion(rdfs:label SOMA:includesRecord "includes record"@en)
 SubObjectPropertyOf(SOMA:includesRecord <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isReferenceOf>)
 InverseObjectProperties(SOMA:includesRecord SOMA:isRecordIncludedBy)
 ObjectPropertyDomain(SOMA:includesRecord <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
@@ -537,9 +546,10 @@ SubObjectPropertyOf(SOMA:isPlanFor <http://www.ontologydesignpatterns.org/ont/du
 ObjectPropertyDomain(SOMA:isPlanFor <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan>)
 ObjectPropertyRange(SOMA:isPlanFor <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#isRecordIncludedBy> (<http://www.ease-crc.org/ont/SOMA.owl#isRecordIncludedBy>)
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#isRecordIncludedBy> (is record included by)
 
 AnnotationAssertion(rdfs:comment SOMA:isRecordIncludedBy "A relationship indicating that an InformationObject is a recording of an Event.")
+AnnotationAssertion(rdfs:label SOMA:isRecordIncludedBy "is record included by"@en)
 SubObjectPropertyOf(SOMA:isRecordIncludedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isAbout>)
 ObjectPropertyDomain(SOMA:isRecordIncludedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject>)
 ObjectPropertyRange(SOMA:isRecordIncludedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
@@ -593,10 +603,11 @@ SubObjectPropertyOf(SOMA:isTerminalStateOf SOMA:isSituationIncludedIn)
 ObjectPropertyDomain(SOMA:isTerminalStateOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 ObjectPropertyRange(SOMA:isTerminalStateOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#meets> (<http://www.ease-crc.org/ont/SOMA.owl#meets>)
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#meets> (meets)
 
 AnnotationAssertion(SOMA:symbol SOMA:meets "m")
 AnnotationAssertion(rdfs:comment SOMA:meets "A relation between entities, expressing a 'sequence' schema where one of the entities exactly ends where the other entity starts.")
+AnnotationAssertion(rdfs:label SOMA:meets "meets"@en)
 SubObjectPropertyOf(SOMA:meets <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#directlyPrecedes>)
 InverseObjectProperties(SOMA:meets SOMA:metBy)
 AsymmetricObjectProperty(SOMA:meets)
@@ -638,10 +649,11 @@ IrreflexiveObjectProperty(SOMA:overlappedOn)
 ObjectPropertyDomain(SOMA:overlappedOn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity>)
 ObjectPropertyRange(SOMA:overlappedOn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#simultaneous> (<http://www.ease-crc.org/ont/SOMA.owl#simultaneous>)
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#simultaneous> (simultaneous)
 
 AnnotationAssertion(SOMA:symbol SOMA:simultaneous "=")
 AnnotationAssertion(rdfs:comment SOMA:simultaneous "`A simultaneous B` means that A strictly starts and ends at the same time instant as B, i.e. their temporal extend is equal.")
+AnnotationAssertion(rdfs:label SOMA:simultaneous "simultaneous"@en)
 SubObjectPropertyOf(SOMA:simultaneous SOMA:coOccurs)
 SymmetricObjectProperty(SOMA:simultaneous)
 TransitiveObjectProperty(SOMA:simultaneous)
@@ -659,10 +671,11 @@ TransitiveObjectProperty(SOMA:startedBy)
 ObjectPropertyDomain(SOMA:startedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 ObjectPropertyRange(SOMA:startedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#starts> (<http://www.ease-crc.org/ont/SOMA.owl#starts>)
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#starts> (starts)
 
 AnnotationAssertion(SOMA:symbol SOMA:starts "s")
 AnnotationAssertion(rdfs:comment SOMA:starts "`A starts B` means that A starts exactly where B starts, and that A strictly ends before B. As in \"I start my day with a coffee\".")
+AnnotationAssertion(rdfs:label SOMA:starts "starts"@en)
 SubObjectPropertyOf(SOMA:starts SOMA:coOccurs)
 TransitiveObjectProperty(SOMA:starts)
 ObjectPropertyDomain(SOMA:starts <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
@@ -681,9 +694,10 @@ SubObjectPropertyOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExe
 #   Data Properties
 ############################
 
-# Data Property: <http://www.ease-crc.org/ont/SOMA.owl#hasDataFormat> (<http://www.ease-crc.org/ont/SOMA.owl#hasDataFormat>)
+# Data Property: <http://www.ease-crc.org/ont/SOMA.owl#hasDataFormat> (has data format)
 
 AnnotationAssertion(rdfs:comment SOMA:hasDataFormat "A property linking an InformationRealization to a string specifying a format name, e.g. URDF or STL.")
+AnnotationAssertion(rdfs:label SOMA:hasDataFormat "has data format"@en)
 SubDataPropertyOf(SOMA:hasDataFormat <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue>)
 DataPropertyDomain(SOMA:hasDataFormat <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationRealization>)
 DataPropertyRange(SOMA:hasDataFormat xsd:string)
@@ -744,9 +758,10 @@ SubDataPropertyOf(SOMA:hasNameString <http://www.ontologydesignpatterns.org/ont/
 DataPropertyDomain(SOMA:hasNameString <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity>)
 DataPropertyRange(SOMA:hasNameString xsd:string)
 
-# Data Property: <http://www.ease-crc.org/ont/SOMA.owl#hasPersistentIdentifier> (<http://www.ease-crc.org/ont/SOMA.owl#hasPersistentIdentifier>)
+# Data Property: <http://www.ease-crc.org/ont/SOMA.owl#hasPersistentIdentifier> (has persistent identifier)
 
 AnnotationAssertion(rdfs:comment SOMA:hasPersistentIdentifier "A property linking an InformationRealization to a persistent identifier such as a DOI, which can then be used to obtain an address at which the realization (i.e. digital file) can be retrieved.")
+AnnotationAssertion(rdfs:label SOMA:hasPersistentIdentifier "has persistent identifier"@en)
 SubDataPropertyOf(SOMA:hasPersistentIdentifier <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasDataValue>)
 DataPropertyDomain(SOMA:hasPersistentIdentifier <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationRealization>)
 DataPropertyRange(SOMA:hasPersistentIdentifier xsd:string)
@@ -764,28 +779,34 @@ DataPropertyRange(SOMA:isReificationOf xsd:anyURI)
 #   Datatypes
 ############################
 
-# Datatype: <http://www.ease-crc.org/ont/SOMA.owl#array_boolean> (<http://www.ease-crc.org/ont/SOMA.owl#array_boolean>)
+# Datatype: <http://www.ease-crc.org/ont/SOMA.owl#array_boolean> (Boolean array)
 
+AnnotationAssertion(rdfs:label SOMA:array_boolean "Boolean array"@en)
 DatatypeDefinition(SOMA:array_boolean xsd:string)
 
-# Datatype: <http://www.ease-crc.org/ont/SOMA.owl#array_double> (<http://www.ease-crc.org/ont/SOMA.owl#array_double>)
+# Datatype: <http://www.ease-crc.org/ont/SOMA.owl#array_double> (Double array)
 
+AnnotationAssertion(rdfs:label SOMA:array_double "Double array"@en)
 DatatypeDefinition(SOMA:array_double xsd:string)
 
-# Datatype: <http://www.ease-crc.org/ont/SOMA.owl#array_float> (<http://www.ease-crc.org/ont/SOMA.owl#array_float>)
+# Datatype: <http://www.ease-crc.org/ont/SOMA.owl#array_float> (Float array)
 
+AnnotationAssertion(rdfs:label SOMA:array_float "Float array"@en)
 DatatypeDefinition(SOMA:array_float xsd:string)
 
-# Datatype: <http://www.ease-crc.org/ont/SOMA.owl#array_int> (<http://www.ease-crc.org/ont/SOMA.owl#array_int>)
+# Datatype: <http://www.ease-crc.org/ont/SOMA.owl#array_int> (Integer array)
 
+AnnotationAssertion(rdfs:label SOMA:array_int "Integer array"@en)
 DatatypeDefinition(SOMA:array_int xsd:string)
 
-# Datatype: <http://www.ease-crc.org/ont/SOMA.owl#array_string> (<http://www.ease-crc.org/ont/SOMA.owl#array_string>)
+# Datatype: <http://www.ease-crc.org/ont/SOMA.owl#array_string> (String array)
 
+AnnotationAssertion(rdfs:label SOMA:array_string "String array"@en)
 DatatypeDefinition(SOMA:array_string xsd:string)
 
-# Datatype: <http://www.ease-crc.org/ont/SOMA.owl#array_uint> (<http://www.ease-crc.org/ont/SOMA.owl#array_uint>)
+# Datatype: <http://www.ease-crc.org/ont/SOMA.owl#array_uint> (Unsigned integer array)
 
+AnnotationAssertion(rdfs:label SOMA:array_uint "Unsigned integer array"@en)
 DatatypeDefinition(SOMA:array_uint xsd:string)
 
 
@@ -793,7 +814,7 @@ DatatypeDefinition(SOMA:array_uint xsd:string)
 #   Classes
 ############################
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Accident> (<http://www.ease-crc.org/ont/SOMA.owl#Accident>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Accident> (Accident)
 
 AnnotationAssertion(rdfs:comment SOMA:Accident "An Event for which causes are unknown and/or considered irrelevant. This is true also for \"final causes\" (that is, intentions) of Agents participating in the Accident: it is not the intentions of these Agents to bring about the Accident.
 
@@ -801,6 +822,7 @@ Note a distinction between this definition and some informal, everyday uses of \
 
 Such an event does NOT fall under the definition of Accident here. An example of Accident would be a fair coin landing Heads: the causal chain for why this exact face landed is not important, all that matters is the brute fact that the coin landed Heads.")
 AnnotationAssertion(rdfs:comment SOMA:Accident "also think about \"mistakes\": (Mihai:) yes, but consider whether those might qualify as Situations. Likewise for Accidents, actually.")
+AnnotationAssertion(rdfs:label SOMA:Accident "Accident"@en)
 SubClassOf(SOMA:Accident <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 DisjointClasses(SOMA:Accident <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>)
 
@@ -812,9 +834,10 @@ AnnotationAssertion(rdfs:label SOMA:ActionExecutionPlan "Action execution plan"@
 SubClassOf(SOMA:ActionExecutionPlan <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan>)
 SubClassOf(SOMA:ActionExecutionPlan ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParameter> SOMA:Status)))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Amateurish> (<http://www.ease-crc.org/ont/SOMA.owl#Amateurish>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Amateurish> (Amateurish)
 
 AnnotationAssertion(rdfs:comment SOMA:Amateurish "A description of amateurish behavior.")
+AnnotationAssertion(rdfs:label SOMA:Amateurish "Amateurish"@en)
 SubClassOf(SOMA:Amateurish SOMA:DexterityDiagnosis)
 DisjointClasses(SOMA:Amateurish SOMA:Masterful)
 
@@ -825,9 +848,10 @@ AnnotationAssertion(rdfs:label SOMA:BehavioralDiagnosis "Behavioral diagnosis")
 SubClassOf(SOMA:BehavioralDiagnosis <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Diagnosis>)
 SubClassOf(SOMA:BehavioralDiagnosis ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Goal>))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Clumsiness> (<http://www.ease-crc.org/ont/SOMA.owl#Clumsiness>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Clumsiness> (Clumsiness)
 
 AnnotationAssertion(rdfs:comment SOMA:Clumsiness "A description of clumsy behavior.")
+AnnotationAssertion(rdfs:label SOMA:Clumsiness "Clumsiness"@en)
 SubClassOf(SOMA:Clumsiness SOMA:Amateurish)
 
 # Class: <http://www.ease-crc.org/ont/SOMA.owl#DexterityDiagnosis> (Dexterity diagnosis)
@@ -836,9 +860,10 @@ AnnotationAssertion(rdfs:comment SOMA:DexterityDiagnosis "A description of the d
 AnnotationAssertion(rdfs:label SOMA:DexterityDiagnosis "Dexterity diagnosis")
 SubClassOf(SOMA:DexterityDiagnosis SOMA:BehavioralDiagnosis)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Episode> (<http://www.ease-crc.org/ont/SOMA.owl#Episode>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Episode> (Episode)
 
 AnnotationAssertion(rdfs:comment SOMA:Episode "")
+AnnotationAssertion(rdfs:label SOMA:Episode "Episode"@en)
 SubClassOf(SOMA:Episode <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 
 # Class: <http://www.ease-crc.org/ont/SOMA.owl#FailedAttempt> (Failed attempt)
@@ -852,9 +877,10 @@ SubClassOf(SOMA:FailedAttempt SOMA:Unsuccessfulness)
 AnnotationAssertion(rdfs:comment SOMA:Fluid "A substance with a consistency such that it can flow or diffuse.")
 SubClassOf(SOMA:Fluid <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Substance>)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Foolishness> (<http://www.ease-crc.org/ont/SOMA.owl#Foolishness>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Foolishness> (Foolishness)
 
 AnnotationAssertion(rdfs:comment SOMA:Foolishness "A description of foolish behavior.")
+AnnotationAssertion(rdfs:label SOMA:Foolishness "Foolishness"@en)
 SubClassOf(SOMA:Foolishness SOMA:Amateurish)
 
 # Class: <http://www.ease-crc.org/ont/SOMA.owl#FunctionalDiagnosis> (Functional diagnosis)
@@ -869,24 +895,28 @@ AnnotationAssertion(rdfs:comment SOMA:HardwareDiagnosis "A diagnosis of the hard
 AnnotationAssertion(rdfs:label SOMA:HardwareDiagnosis "Hardware diagnosis")
 SubClassOf(SOMA:HardwareDiagnosis SOMA:TechnicalDiagnosis)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#HumanActivityRecording> (<http://www.ease-crc.org/ont/SOMA.owl#HumanActivityRecording>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#HumanActivityRecording> (Human activity recording)
 
 AnnotationAssertion(rdfs:comment SOMA:HumanActivityRecording "An episode in which one or more human beings perform an activity and are recorded doing so.")
+AnnotationAssertion(rdfs:label SOMA:HumanActivityRecording "Human activity recording"@en)
 SubClassOf(SOMA:HumanActivityRecording SOMA:RecordedEpisode)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Inability> (<http://www.ease-crc.org/ont/SOMA.owl#Inability>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Inability> (Inability)
 
 AnnotationAssertion(rdfs:comment SOMA:Inability "A description of a situation with a goal that some system is unable to achieve.")
+AnnotationAssertion(rdfs:label SOMA:Inability "Inability"@en)
 SubClassOf(SOMA:Inability SOMA:Unsuccessfulness)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Infeasibility> (<http://www.ease-crc.org/ont/SOMA.owl#Infeasibility>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Infeasibility> (Infeasibility)
 
 AnnotationAssertion(rdfs:comment SOMA:Infeasibility "A description of a situation with a goal that is impossible to achieve in some situational context.")
+AnnotationAssertion(rdfs:label SOMA:Infeasibility "Infeasibility"@en)
 SubClassOf(SOMA:Infeasibility SOMA:Unsuccessfulness)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Masterful> (<http://www.ease-crc.org/ont/SOMA.owl#Masterful>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Masterful> (Masterful)
 
 AnnotationAssertion(rdfs:comment SOMA:Masterful "A description of masterful behavior.")
+AnnotationAssertion(rdfs:label SOMA:Masterful "Masterful"@en)
 SubClassOf(SOMA:Masterful SOMA:DexterityDiagnosis)
 
 # Class: <http://www.ease-crc.org/ont/SOMA.owl#MedicalDiagnosis> (Medical diagnosis)
@@ -897,21 +927,28 @@ SubClassOf(SOMA:MedicalDiagnosis SOMA:FunctionalDiagnosis)
 SubClassOf(SOMA:MedicalDiagnosis ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Organism>))
 DisjointClasses(SOMA:MedicalDiagnosis SOMA:TechnicalDiagnosis)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#RecordedEpisode> (<http://www.ease-crc.org/ont/SOMA.owl#RecordedEpisode>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#RecordedEpisode> (Recorded episode)
 
 AnnotationAssertion(rdfs:comment SOMA:RecordedEpisode "An episode which has been recorded.")
+AnnotationAssertion(rdfs:label SOMA:RecordedEpisode "Recorded episode"@en)
 SubClassOf(SOMA:RecordedEpisode SOMA:Episode)
 SubClassOf(SOMA:RecordedEpisode ObjectSomeValuesFrom(SOMA:includesRecord <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject>))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Reification> (<http://www.ease-crc.org/ont/SOMA.owl#Reification>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Reification> (Reification)
 
 AnnotationAssertion(rdfs:comment SOMA:Reification "A description that *describes* a formal entity.")
+AnnotationAssertion(rdfs:label SOMA:Reification "Reification"@en)
 SubClassOf(SOMA:Reification <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description>)
 SubClassOf(SOMA:Reification DataExactCardinality(1 SOMA:isReificationOf xsd:anyURI))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Sluggishness> (<http://www.ease-crc.org/ont/SOMA.owl#Sluggishness>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Scene> (Scene)
+
+AnnotationAssertion(rdfs:label SOMA:Scene "Scene"@en)
+
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Sluggishness> (Sluggishness)
 
 AnnotationAssertion(rdfs:comment SOMA:Sluggishness "A description of sluggish behavior.")
+AnnotationAssertion(rdfs:label SOMA:Sluggishness "Sluggishness"@en)
 SubClassOf(SOMA:Sluggishness SOMA:Amateurish)
 
 # Class: <http://www.ease-crc.org/ont/SOMA.owl#SoftwareDiagnosis> (Software diagnosis)
@@ -920,13 +957,14 @@ AnnotationAssertion(rdfs:comment SOMA:SoftwareDiagnosis "A diagnosis of the soft
 AnnotationAssertion(rdfs:label SOMA:SoftwareDiagnosis "Software diagnosis")
 SubClassOf(SOMA:SoftwareDiagnosis SOMA:TechnicalDiagnosis)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#State> (<http://www.ease-crc.org/ont/SOMA.owl#State>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#State> (State)
 
 AnnotationAssertion(rdfs:comment SOMA:State "States are stative and homeomeric events.
 
 For stative events, the mereological sum of two instances has the same type as both instances. This is, for example, the state of sitting on a chair, or the process of a pendulum swinging around.
 
 The difference between states and processes is that states are, in addition, homeomeric, and processes are not.  This means that, when considering time slices  of an event, for states, these time slices always have the same type as the state, but for processes this is not the case.")
+AnnotationAssertion(rdfs:label SOMA:State "State"@en)
 SubClassOf(SOMA:State <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 
 # Class: <http://www.ease-crc.org/ont/SOMA.owl#StateTransition> (<http://www.ease-crc.org/ont/SOMA.owl#StateTransition>)
@@ -934,9 +972,10 @@ SubClassOf(SOMA:State <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Eve
 SubClassOf(SOMA:StateTransition ObjectSomeValuesFrom(SOMA:hasInitialScene SOMA:Scene))
 SubClassOf(SOMA:StateTransition ObjectSomeValuesFrom(SOMA:hasTerminalScene SOMA:Scene))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Status> (<http://www.ease-crc.org/ont/SOMA.owl#Status>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Status> (Status)
 
 AnnotationAssertion(rdfs:comment SOMA:Status "A role that can be played by some parameter which indicates the state of affairs of some entity, e.g. a flag describing the outcome of an action in terms of success or failure, or an indicator of whether a device is turned on or off.")
+AnnotationAssertion(rdfs:label SOMA:Status "Status"@en)
 SubClassOf(SOMA:Status <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter>)
 
 # Class: <http://www.ease-crc.org/ont/SOMA.owl#SuccessDiagnosis> (Success diagnosis)
@@ -945,9 +984,10 @@ AnnotationAssertion(rdfs:comment SOMA:SuccessDiagnosis "A diagnosis of the fullf
 AnnotationAssertion(rdfs:label SOMA:SuccessDiagnosis "Success diagnosis")
 SubClassOf(SOMA:SuccessDiagnosis SOMA:BehavioralDiagnosis)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Successfulness> (<http://www.ease-crc.org/ont/SOMA.owl#Successfulness>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Successfulness> (Successfulness)
 
 AnnotationAssertion(rdfs:comment SOMA:Successfulness "A description of a situation with a goal that was achieved by some system.")
+AnnotationAssertion(rdfs:label SOMA:Successfulness "Successfulness"@en)
 SubClassOf(SOMA:Successfulness SOMA:SuccessDiagnosis)
 DisjointClasses(SOMA:Successfulness SOMA:Unsuccessfulness)
 
@@ -958,14 +998,16 @@ AnnotationAssertion(rdfs:label SOMA:TechnicalDiagnosis "Technical diagnosis")
 SubClassOf(SOMA:TechnicalDiagnosis SOMA:FunctionalDiagnosis)
 SubClassOf(SOMA:TechnicalDiagnosis ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasConstituent> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#DesignedArtifact>))
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Threshold> (<http://www.ease-crc.org/ont/SOMA.owl#Threshold>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Threshold> (Threshold)
 
 AnnotationAssertion(rdfs:comment SOMA:Threshold "A role played by a parameter which indicates some value that, when crossed, triggers some condition.")
+AnnotationAssertion(rdfs:label SOMA:Threshold "Threshold"@en)
 SubClassOf(SOMA:Threshold <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Parameter>)
 
-# Class: <http://www.ease-crc.org/ont/SOMA.owl#Unsuccessfulness> (<http://www.ease-crc.org/ont/SOMA.owl#Unsuccessfulness>)
+# Class: <http://www.ease-crc.org/ont/SOMA.owl#Unsuccessfulness> (Unsuccessfulness)
 
 AnnotationAssertion(rdfs:comment SOMA:Unsuccessfulness "A description of a situation with a goal that was not or not fully achieved by some system.")
+AnnotationAssertion(rdfs:label SOMA:Unsuccessfulness "Unsuccessfulness"@en)
 SubClassOf(SOMA:Unsuccessfulness SOMA:SuccessDiagnosis)
 
 # Class: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action> (Action)
@@ -1014,8 +1056,9 @@ SubClassOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan> ObjectSo
 #   Named Individuals
 ############################
 
-# Individual: <http://www.ease-crc.org/ont/SOMA.owl#RDFType> (<http://www.ease-crc.org/ont/SOMA.owl#RDFType>)
+# Individual: <http://www.ease-crc.org/ont/SOMA.owl#RDFType> (RDF type)
 
+AnnotationAssertion(rdfs:label SOMA:RDFType "RDF type"@en)
 ClassAssertion(SOMA:Reification SOMA:RDFType)
 DataPropertyAssertion(SOMA:isReificationOf SOMA:RDFType "http://www.w3.org/2001/XMLSchema#type"^^xsd:anyURI)
 
