@@ -8,11 +8,6 @@ import org.semanticweb.owlapi.model.*;
 import org.semanticweb.owlapi.model.parameters.Imports;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -21,8 +16,6 @@ import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-@Component
-@Lazy
 public class Collapser implements CIRunnable {
 
 	/**
@@ -34,9 +27,8 @@ public class Collapser implements CIRunnable {
 	private final OWLOntologyManager collapseManager;
 	private final String versionInfo;
 
-	@Autowired
 	public Collapser(final OntologyManager ontologyManager, final OntologyConfig ontologyConfig,
-	                 @Value("${versionInfo}") final String versionInfo) {
+	                 final String versionInfo) {
 		this.ontologyManager = ontologyManager;
 		this.ontologyConfig = ontologyConfig;
 		collapseManager = OWLManager.createOWLOntologyManager();
@@ -72,7 +64,7 @@ public class Collapser implements CIRunnable {
 
 	private static void addAxioms(final OWLOntology collapsed, final OWLOntology toCollapse,
 	                              final Collection<String> except) {
-		if (CollectionUtils.isEmpty(except)) {
+		if (except == null || except.isEmpty()) {
 			LOGGER.info("No exceptions that should be imported instead of being merged");
 			// easy way, might also be faster
 			collapsed.addAxioms(toCollapse.axioms(Imports.INCLUDED));

@@ -6,12 +6,7 @@ import org.semanticweb.owlapi.model.parameters.ChangeApplied;
 import org.semanticweb.owlapi.util.OWLEntityRenamer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
 
-@Component
-@Lazy
 public class IRINamespaceRewriter implements CIRunnable {
     /**
      * {@link Logger} of this class.
@@ -20,7 +15,6 @@ public class IRINamespaceRewriter implements CIRunnable {
 
     private final OntologyManager ontologyManager;
 
-    @Autowired
     public IRINamespaceRewriter(final OntologyManager ontologyManager) {
         this.ontologyManager = ontologyManager;
     }

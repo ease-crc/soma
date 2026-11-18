@@ -9,15 +9,10 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.parameters.ChangeApplied;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.HashSet;
 
-@Component
-@Lazy
 public class IsDefinedInAdder implements CIRunnable {
 
 	/**
@@ -27,7 +22,6 @@ public class IsDefinedInAdder implements CIRunnable {
 
 	private final OntologyManager ontologyManager;
 
-	@Autowired
 	public IsDefinedInAdder(final OntologyManager ontologyManager) {
 		this.ontologyManager = ontologyManager;
 	}

@@ -6,9 +6,6 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,8 +17,6 @@ import java.nio.file.Path;
 /**
  * Class to manage the resources that are associated with an {@link OWLOntology}.
  */
-@Component
-@Lazy
 public class OntologyManager {
 
 	private static final Path XML_CATALOG_PATH = Path.of("catalog-v001.xml");
@@ -36,7 +31,6 @@ public class OntologyManager {
 	 */
 	private final OWLOntologyManager ontologyManager = OWLManager.createConcurrentOWLOntologyManager();
 
-	@Autowired
 	public OntologyManager(final OntologyConfig config) throws OWLOntologyCreationException, IOException {
 		loadCatalog(config.directory());
 		loadOntologies(config.directory());
