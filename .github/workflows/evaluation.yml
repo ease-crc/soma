@@ -58,11 +58,8 @@ jobs:
         env:
           VERSION: ${{ steps.version.outputs.version }}
         run: |
-          mkdir -p build/owl/current
           ./mvnw -B -ntp package -f scripts/java/pom.xml
           (cd scripts/java && java -jar target/IsDefinedInAdder-1.0-SNAPSHOT.jar --versionInfo="$VERSION")
-          # The tool rewrites the modules in owl/ in place; publish them next to the collapsed files.
-          cp --update=none owl/*.owl build/owl/current/
 
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:

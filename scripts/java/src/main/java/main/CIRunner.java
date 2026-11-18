@@ -22,8 +22,9 @@ public class CIRunner {
 				new SubclassNothingRewriter(ontologyManager),
 				new IsDefinedInAdder(ontologyManager),
 				new VersionInfoAdder(ontologyManager, versionInfo),
-				new Collapser(ontologyManager, config, versionInfo),
-				new OntologySaver(ontologyManager, config)
+				// Saved before collapsing, so a collapsed ontology replaces a module with the same file name.
+				new OntologySaver(ontologyManager, config),
+				new Collapser(ontologyManager, config, versionInfo)
 		};
 		for (final var next : toRun) {
 			next.run();

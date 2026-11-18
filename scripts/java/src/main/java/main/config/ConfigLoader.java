@@ -41,6 +41,7 @@ public final class ConfigLoader {
 		final var format = ontology.get("format");
 		return new OntologyConfig(
 				Path.of(required(ontology, "directory")),
+				Path.of(required(ontology, "output-directory")),
 				toCollapse,
 				format == null ? null : new OWLDocumentFormatConverter().convert(format.toString()));
 	}
