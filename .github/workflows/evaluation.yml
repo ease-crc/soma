@@ -112,34 +112,23 @@ jobs:
     name: HermiT
     runs-on: ubuntu-24.04
     timeout-minutes: 30
-    needs: compile
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
-      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+      - uses: actions/setup-java@d1374f8ac74474200d16ef8ecee22c7ae7a51880 # v6.3.0
         with:
-          name: SOMA OWL
-          path: ./build/owl/current
+          distribution: temurin
+          java-version: '25'
+          cache: maven
 
-      - name: Download DUL
-        run: wget http://www.ease-crc.org/ont/DUL.owl -O ./build/DUL.owl
+      - name: Build
+        run: ./mvnw -B -ntp package -f scripts/java/pom.xml
 
+      # SOMA-HOME imports SOMA-ALL, so this covers all modules that are part of SOMA.
       - name: HermiT
-        uses: ./.github/actions/hermit
-        with:
-          args: ./build/DUL.owl ./build/SOMA-HOME.owl
-
-      - name: Print HermiT output
-        run: cat ./hermit.output
-        if: always()
-
-      - name: Evaluate HermiT output
-        if: success()
-        uses: docker://python:3.7.6-slim
-        with:
-          args: python ./scripts/hermit_test.py -o ./owl/hermit.html ./hermit.output
+        run: java -cp scripts/java/target/IsDefinedInAdder-1.0-SNAPSHOT.jar main.HermitCheck owl/SOMA-HOME.owl
 
   vocabulary:
     name: SOMA Vocabulary
