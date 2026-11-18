@@ -1,114 +1,123 @@
 name: Evaluation
 on:
-  workflow_dispatch:
   push:
-    paths:
-      - '**'
-      - '!docs/**'
+    branches: [master]
   pull_request:
-    paths:
-      - '**'
-      - '!docs/**'
   release:
-    types: [created]
-    paths:
-      - '**'
-      - '!docs/**'
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
+  lint:
+    name: Workflow lint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: actionlint
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/actionlint.tar.gz" \
+            https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz
+          echo "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8  $RUNNER_TEMP/actionlint.tar.gz" | sha256sum -c
+          tar -xzf "$RUNNER_TEMP/actionlint.tar.gz" -C "$RUNNER_TEMP" actionlint
+          "$RUNNER_TEMP/actionlint" -color
+
   compile:
     name: Compile SOMA
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          fetch-depth: 1
+          persist-credentials: false
 
-      - name: Setup Java
-        uses: actions/setup-java@v3
+      - uses: actions/setup-java@d1374f8ac74474200d16ef8ecee22c7ae7a51880 # v6.3.0
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: '18'
-          cache: 'maven'
+          cache: maven
 
-      - name: Create directories
-        run: |
-              mkdir -p $GITHUB_WORKSPACE/build/owl/current &&
-              mkdir mkdir -p $GITHUB_WORKSPACE/build/files
+      - name: Determine version
+        id: version
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: echo "version=${TAG:-current}" >> "$GITHUB_OUTPUT"
 
       - name: Compile
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
         run: |
-          mvn --no-transfer-progress spring-boot:run -f scripts/java/pom.xml \
-             -Dspring-boot.run.arguments="--versionInfo=current"
+          mkdir -p build/owl/current
+          mvn -B -ntp spring-boot:run -f scripts/java/pom.xml -Dspring-boot.run.arguments="--versionInfo=$VERSION"
+          # The tool rewrites the modules in owl/ in place; publish them next to the collapsed files.
+          cp --update=none owl/*.owl build/owl/current/
 
-      - name: Upload OWL file
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: SOMA OWL
-          path: ./build/owl/current/SOMA-HOME.owl
-
-      - name: Upload OWL files for Documentation
-        uses: actions/upload-artifact@v4
-        with:
-          name: SOMA Files for Documentation
-          path: ./build/owl/current/
-          retention-days: 2
+          path: build/owl/current/
+          if-no-files-found: error
 
   pitfalls:
     name: OOPS
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
     needs: compile
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          fetch-depth: 1
+          persist-credentials: false
 
-      - name: Create directories
-        run: |
-              mkdir -p $GITHUB_WORKSPACE/build/owl/current &&
-              mkdir mkdir -p $GITHUB_WORKSPACE/build/files
-
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: SOMA OWL
-          path: ./build/owl/current/
+          path: build/owl/current/
 
-      - name: Setup Python
-        uses: actions/setup-python@v2
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
 
-      - name: Install python dependencies
-        run: |
-          sudo python -m pip install --upgrade pip
-          sudo pip install requests
+      - run: pip install -r scripts/requirements.txt
 
       - name: Find pitfalls
-        run: sudo python ./scripts/oops.py $GITHUB_WORKSPACE/build/owl/current/SOMA-HOME.owl $GITHUB_WORKSPACE/build/files
+        run: |
+          mkdir -p build/files
+          # SOMA.owl and SOMA-HOME.owl contain all modules imported by SOMA-ALL and SOMA-HOME, without DUL.
+          python scripts/oops.py build/files build/owl/current/SOMA.owl build/owl/current/SOMA-HOME.owl
 
       - name: Generate annotations
-        run: sudo python ./scripts/oops-github.py $GITHUB_WORKSPACE/build/files/oops.xml
+        run: python scripts/oops-github.py build/files/oops-*.xml
 
-      - name: Upload pitfalls
-        uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: ${{ !cancelled() }}
         with:
           name: OOPS Results
-          path: ./build/files/oops.xml
+          path: build/files/oops-*.xml
 
   consistency:
     name: HermiT
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
     needs: compile
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          fetch-depth: 1
+          persist-credentials: false
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: SOMA OWL
           path: ./build/owl/current
@@ -131,3 +140,107 @@ jobs:
         with:
           args: python ./scripts/hermit_test.py -o ./owl/hermit.html ./hermit.output
 
+  vocabulary:
+    name: SOMA Vocabulary
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    needs: compile
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: SOMA OWL
+          path: build/owl/current/
+
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: docs/vocab/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends texlive-latex-extra texlive-extra-utils
+          pip install -r docs/vocab/requirements.txt
+
+      - name: Build
+        run: |
+          cp docs/vocab/Makefile docs/vocab/SOMA-vocabulary.tex docs/vocab/owl_reader.py .
+          make
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: SOMA Vocabulary
+          path: SOMA-vocabulary.pdf
+          if-no-files-found: error
+
+  handbook:
+    name: NEEM Handbook
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install TeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends latexmk texlive-latex-extra texlive-fonts-recommended
+
+      - name: Build
+        run: make -f docs/NEEM-handbook/Makefile
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: NEEM Handbook
+          path: docs/NEEM-handbook/main.pdf
+          if-no-files-found: error
+
+  deploy:
+    name: Deployment
+    if: github.event_name == 'release' || (github.event_name == 'push' && github.ref == 'refs/heads/master')
+    needs: [compile, handbook]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    concurrency:
+      group: gh-pages-${{ needs.compile.outputs.version }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: SOMA OWL
+          path: build/owl/current/
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: NEEM Handbook
+          path: build/files/
+
+      - run: mv build/files/main.pdf build/files/NEEM-Handbook.pdf
+
+      - name: Deploy OWL files
+        uses: JamesIves/github-pages-deploy-action@fa24774553152dd7873cd16ebd8d959b010c5445 # v4.9.0
+        with:
+          branch: gh-pages
+          folder: build/owl/current
+          target-folder: owl/${{ needs.compile.outputs.version }}
+          clean: false
+
+      - name: Deploy files
+        uses: JamesIves/github-pages-deploy-action@fa24774553152dd7873cd16ebd8d959b010c5445 # v4.9.0
+        with:
+          branch: gh-pages
+          folder: build/files
+          target-folder: files/${{ needs.compile.outputs.version }}
+          clean: false
