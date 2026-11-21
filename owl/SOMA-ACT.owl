@@ -300,10 +300,10 @@ SubObjectPropertyOf(SOMA:isAffectedBy <http://www.ontologydesignpatterns.org/ont
 
 # Object Property: SOMA:isAskedBy (is asked by)
 
-AnnotationAssertion(rdfs:comment SOMA:isAskedBy "A relation from a Query to the Agent who asks it.")
+AnnotationAssertion(rdfs:comment SOMA:isAskedBy "A relation from a communication action that executes a QueryingTask to the Agent who asks the query.")
 AnnotationAssertion(rdfs:label SOMA:isAskedBy "is asked by")
 SubObjectPropertyOf(SOMA:isAskedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent>)
-ObjectPropertyDomain(SOMA:isAskedBy SOMA:QueryingTask)
+ObjectPropertyDomain(SOMA:isAskedBy ObjectIntersectionOf(SOMA:CommunicationAction ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#executesTask> SOMA:QueryingTask)))
 ObjectPropertyRange(SOMA:isAskedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>)
 
 # Object Property: SOMA:isCreatedOutputOf (is created output of)
