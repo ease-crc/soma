@@ -1,4 +1,4 @@
-Prefix(:=<http://www.ease-crc.org/ont/SOMA-ACT.owl#>)
+Prefix(:=<http://www.ease-crc.org/ont/SOMA.owl#>)
 Prefix(dc:=<http://purl.org/dc/elements/1.1/>)
 Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
 Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
@@ -84,6 +84,7 @@ Declaration(Class(SOMA:LinguisticObject))
 Declaration(Class(SOMA:LookingAt))
 Declaration(Class(SOMA:LookingFor))
 Declaration(Class(SOMA:Lowering))
+Declaration(Class(SOMA:ManifestedSituation))
 Declaration(Class(SOMA:Manipulating))
 Declaration(Class(SOMA:Memorizing))
 Declaration(Class(SOMA:MentalAction))
@@ -165,7 +166,9 @@ Declaration(ObjectProperty(SOMA:directlyCauses))
 Declaration(ObjectProperty(SOMA:hasAction))
 Declaration(ObjectProperty(SOMA:hasAnswer))
 Declaration(ObjectProperty(SOMA:hasExecutionState))
+Declaration(ObjectProperty(SOMA:hasExpectedTerminalSituation))
 Declaration(ObjectProperty(SOMA:hasInitialSituation))
+Declaration(ObjectProperty(SOMA:hasRequiredInitialSituation))
 Declaration(ObjectProperty(SOMA:hasTerminalSituation))
 Declaration(ObjectProperty(SOMA:isAffectedBy))
 Declaration(ObjectProperty(SOMA:isAskedBy))
@@ -179,14 +182,12 @@ Declaration(ObjectProperty(SOMA:isReplacedBy))
 Declaration(ObjectProperty(SOMA:isTaskOfCreatedRole))
 Declaration(ObjectProperty(SOMA:isTerminalSituationOf))
 Declaration(ObjectProperty(SOMA:isTerminatedBy))
+Declaration(ObjectProperty(SOMA:manifestsIn))
+Declaration(ObjectProperty(SOMA:preventedBy))
+Declaration(ObjectProperty(SOMA:prevents))
 Declaration(ObjectProperty(SOMA:relatesToAnotherRole))
 Declaration(ObjectProperty(SOMA:replaces))
 Declaration(ObjectProperty(SOMA:terminates))
-Declaration(ObjectProperty(<http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation>))
-Declaration(ObjectProperty(<http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation>))
-Declaration(ObjectProperty(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn>))
-Declaration(ObjectProperty(<http://www.ease-crc.org/ont/SOMA.owl/preventedBy>))
-Declaration(ObjectProperty(<http://www.ease-crc.org/ont/SOMA.owl/prevents>))
 Declaration(NamedIndividual(SOMA:ExecutionState_Active))
 Declaration(NamedIndividual(SOMA:ExecutionState_Cancelled))
 Declaration(NamedIndividual(SOMA:ExecutionState_Failed))
@@ -207,7 +208,7 @@ InverseObjectProperties(SOMA:affects SOMA:isAffectedBy)
 
 # Object Property: SOMA:answers (answers)
 
-AnnotationAssertion(rdfs:label SOMA:answers "The relation between an answering message and the message it answers.")
+AnnotationAssertion(rdfs:comment SOMA:answers "The relation between an answering message and the message it answers.")
 AnnotationAssertion(rdfs:label SOMA:answers "answers")
 SubObjectPropertyOf(SOMA:answers SOMA:relatesToAnotherRole)
 InverseObjectProperties(SOMA:answers SOMA:hasAnswer)
@@ -228,7 +229,7 @@ TransitiveObjectProperty(SOMA:causes)
 
 # Object Property: SOMA:definesEventType (defines event type)
 
-AnnotationAssertion(rdfs:label SOMA:definesEventType "A relation between a description and an event type, e.g. an Affordance of an object to be cut with a knife describes that event.
+AnnotationAssertion(rdfs:comment SOMA:definesEventType "A relation between a description and an event type, e.g. an Affordance of an object to be cut with a knife describes that event.
 
 The distinction to defines task is necessary to let Dispositions and Affordances not only describe which tasks might be afforded by objects, but also whihc processes (where there is no agent). For example, the fall of a knife from a shelf slicing a loaf of bread on impact is , in the absence of an executing agent, not a task but merely a process, the possibility of which is nevertheless described by the dispositions of the knife and the loaf."@en)
 AnnotationAssertion(rdfs:label SOMA:definesEventType "defines event type"@en)
@@ -270,6 +271,15 @@ SubObjectPropertyOf(SOMA:hasExecutionState <http://www.ontologydesignpatterns.or
 ObjectPropertyDomain(SOMA:hasExecutionState <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>)
 ObjectPropertyRange(SOMA:hasExecutionState SOMA:ExecutionStateRegion)
 
+# Object Property: SOMA:hasExpectedTerminalSituation (has expected terminal situation)
+
+AnnotationAssertion(rdfs:comment SOMA:hasExpectedTerminalSituation "A relation between a Transition and the Situation it is expected to, and does actually, end at. You can assert this relationship when the observed outcome of a transition matches expectations.")
+AnnotationAssertion(rdfs:label SOMA:hasExpectedTerminalSituation "has expected terminal situation"@en)
+SubObjectPropertyOf(SOMA:hasExpectedTerminalSituation SOMA:hasTerminalSituation)
+SubObjectPropertyOf(SOMA:hasExpectedTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPostcondition>)
+ObjectPropertyDomain(SOMA:hasExpectedTerminalSituation SOMA:SituationTransition)
+ObjectPropertyRange(SOMA:hasExpectedTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
+
 # Object Property: SOMA:hasInitialSituation (has initial situation)
 
 AnnotationAssertion(rdfs:comment SOMA:hasInitialSituation "A relation between SituationTransitions and Situations, which identifies the Situation the transition starts from.")
@@ -279,7 +289,16 @@ InverseObjectProperties(SOMA:hasInitialSituation SOMA:isInitialSituationOf)
 AsymmetricObjectProperty(SOMA:hasInitialSituation)
 IrreflexiveObjectProperty(SOMA:hasInitialSituation)
 ObjectPropertyDomain(SOMA:hasInitialSituation SOMA:SituationTransition)
-ObjectPropertyRange(SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
+ObjectPropertyRange(Annotation(rdfs:comment "If something is an initial situation of some transition, then it must manifest.") SOMA:hasInitialSituation SOMA:ManifestedSituation)
+
+# Object Property: SOMA:hasRequiredInitialSituation (has required initial situation)
+
+AnnotationAssertion(rdfs:comment SOMA:hasRequiredInitialSituation "A relationship between a Situation x and another Situation y that precedes it, such that without y manifesting, it would be impossible for x to manifest.")
+AnnotationAssertion(rdfs:label SOMA:hasRequiredInitialSituation "has required initial situation"@en)
+SubObjectPropertyOf(SOMA:hasRequiredInitialSituation SOMA:hasInitialSituation)
+SubObjectPropertyOf(SOMA:hasRequiredInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition>)
+ObjectPropertyDomain(SOMA:hasRequiredInitialSituation SOMA:SituationTransition)
+ObjectPropertyRange(SOMA:hasRequiredInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 
 # Object Property: SOMA:hasTerminalSituation (has terminal situation)
 
@@ -290,7 +309,7 @@ InverseObjectProperties(SOMA:hasTerminalSituation SOMA:isTerminalSituationOf)
 AsymmetricObjectProperty(SOMA:hasTerminalSituation)
 IrreflexiveObjectProperty(SOMA:hasTerminalSituation)
 ObjectPropertyDomain(SOMA:hasTerminalSituation SOMA:SituationTransition)
-ObjectPropertyRange(SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
+ObjectPropertyRange(Annotation(rdfs:comment "If something is a terminal situation then it must be a manifested situation (regardless of whether it was expected or not).") SOMA:hasTerminalSituation SOMA:ManifestedSituation)
 
 # Object Property: SOMA:isAffectedBy (is affected by)
 
@@ -300,10 +319,10 @@ SubObjectPropertyOf(SOMA:isAffectedBy <http://www.ontologydesignpatterns.org/ont
 
 # Object Property: SOMA:isAskedBy (is asked by)
 
-AnnotationAssertion(rdfs:comment SOMA:isAskedBy "A relation from a Query to the Agent who asks it.")
+AnnotationAssertion(rdfs:comment SOMA:isAskedBy "A relation from a communication action that executes a QueryingTask to the Agent who asks the query.")
 AnnotationAssertion(rdfs:label SOMA:isAskedBy "is asked by")
 SubObjectPropertyOf(SOMA:isAskedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent>)
-ObjectPropertyDomain(SOMA:isAskedBy SOMA:QueryingTask)
+ObjectPropertyDomain(SOMA:isAskedBy ObjectIntersectionOf(SOMA:CommunicationAction ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#executesTask> SOMA:QueryingTask)))
 ObjectPropertyRange(SOMA:isAskedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>)
 
 # Object Property: SOMA:isCreatedOutputOf (is created output of)
@@ -338,7 +357,7 @@ ObjectPropertyRange(SOMA:isEventTypeDefinedIn <http://www.ontologydesignpatterns
 AnnotationAssertion(rdfs:comment SOMA:isInitialSituationOf "A relation between SituationTransitions and Situations, which identifies the Situation the transition starts from.")
 AnnotationAssertion(rdfs:label SOMA:isInitialSituationOf "is initial situation of"@en)
 SubObjectPropertyOf(SOMA:isInitialSituationOf SOMA:isInitialStateOf)
-ObjectPropertyDomain(SOMA:isInitialSituationOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
+ObjectPropertyDomain(SOMA:isInitialSituationOf SOMA:ManifestedSituation)
 ObjectPropertyRange(SOMA:isInitialSituationOf SOMA:SituationTransition)
 
 # Object Property: SOMA:isPerformedBy (is performed by)
@@ -384,7 +403,7 @@ ObjectPropertyRange(SOMA:isTaskOfCreatedRole <http://www.ontologydesignpatterns.
 AnnotationAssertion(rdfs:comment SOMA:isTerminalSituationOf "A relation between SituationTransitions and Situations, which identifies the Situation the transition ends at.")
 AnnotationAssertion(rdfs:label SOMA:isTerminalSituationOf "is terminal situation of"@en)
 SubObjectPropertyOf(SOMA:isTerminalSituationOf SOMA:isTerminalStateOf)
-ObjectPropertyDomain(SOMA:isTerminalSituationOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
+ObjectPropertyDomain(SOMA:isTerminalSituationOf SOMA:ManifestedSituation)
 ObjectPropertyRange(SOMA:isTerminalSituationOf SOMA:SituationTransition)
 
 # Object Property: SOMA:isTerminatedBy (is terminated by)
@@ -395,6 +414,29 @@ SubObjectPropertyOf(SOMA:isTerminatedBy <http://www.ontologydesignpatterns.org/o
 InverseObjectProperties(SOMA:isTerminatedBy SOMA:terminates)
 ObjectPropertyDomain(SOMA:isTerminatedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 ObjectPropertyRange(SOMA:isTerminatedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
+
+# Object Property: SOMA:manifestsIn (manifests in)
+
+AnnotationAssertion(rdfs:comment SOMA:manifestsIn "A relationship indicating that a Situation is realized in an Event that actually happened.")
+AnnotationAssertion(rdfs:label SOMA:manifestsIn "manifests in")
+SubObjectPropertyOf(SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>)
+
+# Object Property: SOMA:preventedBy (prevented by)
+
+AnnotationAssertion(rdfs:comment SOMA:preventedBy "A relationship indicating a Situation is prevented by another from manifesting.")
+AnnotationAssertion(rdfs:label SOMA:preventedBy "prevented by")
+SubObjectPropertyOf(SOMA:preventedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasSetting>)
+InverseObjectProperties(SOMA:preventedBy SOMA:prevents)
+ObjectPropertyDomain(SOMA:preventedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
+ObjectPropertyRange(SOMA:preventedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
+
+# Object Property: SOMA:prevents (prevents)
+
+AnnotationAssertion(rdfs:comment SOMA:prevents "A relationship indicating that a situation does or would prevent another from manifesting. Useful for reasoning about planning (what to do to avoid some bad outcome) and failure recovery (what aspects of the world state prevent continuing the plan?).")
+AnnotationAssertion(rdfs:label SOMA:prevents "prevents")
+SubObjectPropertyOf(SOMA:prevents <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isSettingFor>)
+ObjectPropertyDomain(SOMA:prevents <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
+ObjectPropertyRange(SOMA:prevents <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 
 # Object Property: SOMA:relatesToAnotherRole (relates to another role)
 
@@ -420,47 +462,6 @@ AnnotationAssertion(rdfs:label SOMA:terminates "terminates"@en)
 SubObjectPropertyOf(SOMA:terminates <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith>)
 ObjectPropertyDomain(SOMA:terminates <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 ObjectPropertyRange(SOMA:terminates <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
-
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> (has expected terminal situation)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> "A relation between a Transition and the Situation it is expected to, and does actually, end at. You can assert this relationship when the observed outcome of a transition matches expectations.")
-AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> "has expected terminal situation"@en)
-SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> SOMA:hasTerminalSituation)
-SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPostcondition>)
-ObjectPropertyDomain(<http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> SOMA:SituationTransition)
-ObjectPropertyRange(<http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
-
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> (has required initial situation)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> "A relationship between a Situation x and another Situation y that precedes it, such that without y manifesting, it would be impossible for x to manifest.")
-AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> "has required initial situation"@en)
-SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> SOMA:hasInitialSituation)
-SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition>)
-ObjectPropertyDomain(<http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> SOMA:SituationTransition)
-ObjectPropertyRange(<http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
-
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> (manifests in)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> "A relationship indicating that a Situation is realized in an Event that actually happened.")
-AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> "manifests in")
-SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>)
-
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl/preventedBy> (prevented by)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA.owl/preventedBy> "A relationship indicating a Situation is prevented by another from manifesting.")
-AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA.owl/preventedBy> "prevented by")
-SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/preventedBy> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasSetting>)
-InverseObjectProperties(<http://www.ease-crc.org/ont/SOMA.owl/preventedBy> <http://www.ease-crc.org/ont/SOMA.owl/prevents>)
-ObjectPropertyDomain(<http://www.ease-crc.org/ont/SOMA.owl/preventedBy> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
-ObjectPropertyRange(<http://www.ease-crc.org/ont/SOMA.owl/preventedBy> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
-
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl/prevents> (prevents)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA.owl/prevents> "A relationship indicating that a situation does or would prevent another from manifesting. Useful for reasoning about planning (what to do to avoid some bad outcome) and failure recovery (what aspects of the world state prevent continuing the plan?).")
-AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA.owl/prevents> "prevents")
-SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/prevents> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isSettingFor>)
-ObjectPropertyDomain(<http://www.ease-crc.org/ont/SOMA.owl/prevents> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
-ObjectPropertyRange(<http://www.ease-crc.org/ont/SOMA.owl/prevents> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 
 # Object Property: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask> (defines task)
 
@@ -564,10 +565,10 @@ SubClassOf(SOMA:AttentionShift SOMA:MentalTask)
 AnnotationAssertion(rdfs:comment SOMA:Avoiding "A task in which an Agent moves so as to not enter or pass through a location.")
 SubClassOf(SOMA:Avoiding SOMA:Navigating)
 
-# Class: SOMA:Capability (SOMA:Capability)
+# Class: SOMA:Capability (Capability)
 
-AnnotationAssertion(rdfs:comment SOMA:Capability "Capability")
 AnnotationAssertion(rdfs:comment SOMA:Capability "The tendency of an object (the bearer) to be able to perform certain tasks together with others (the triggers) and in which the Bearer is the executor of the associated Task and will therefore usually be an Agent.")
+AnnotationAssertion(rdfs:label SOMA:Capability "Capability")
 SubClassOf(SOMA:Capability SOMA:Disposition)
 SubClassOf(SOMA:Capability ObjectExactCardinality(1 <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy> ObjectIntersectionOf(SOMA:Affordance ObjectExactCardinality(1 SOMA:definesBearer <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>) ObjectExactCardinality(1 SOMA:definesTrigger <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>) ObjectExactCardinality(1 <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>))))
 
@@ -890,7 +891,7 @@ SubClassOf(SOMA:Knowledge SOMA:Item)
 
 # Class: SOMA:Labeling (Labeling)
 
-AnnotationAssertion(rdfs:label SOMA:Labeling "A task in which an agent annotates some objects with names, e.g., labeling the feeling of a tip-of-the-tongue event as such.")
+AnnotationAssertion(rdfs:comment SOMA:Labeling "A task in which an agent annotates some objects with names, e.g., labeling the feeling of a tip-of-the-tongue event as such.")
 AnnotationAssertion(rdfs:label SOMA:Labeling "Labeling")
 SubClassOf(SOMA:Labeling SOMA:Interpreting)
 
@@ -932,6 +933,12 @@ SubClassOf(SOMA:LookingFor SOMA:Perceiving)
 
 AnnotationAssertion(rdfs:comment SOMA:Lowering "A task in which an Agent reduces the elevation at which they hold an item.")
 SubClassOf(SOMA:Lowering SOMA:Actuating)
+
+# Class: SOMA:ManifestedSituation (Manifested situation)
+
+AnnotationAssertion(rdfs:comment SOMA:ManifestedSituation "A Situation which manifests in at least one event.")
+AnnotationAssertion(rdfs:label SOMA:ManifestedSituation "Manifested situation"@en)
+EquivalentClasses(SOMA:ManifestedSituation ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> ObjectComplementOf(SOMA:NonmanifestedSituation)))
 
 # Class: SOMA:Manipulating (SOMA:Manipulating)
 
@@ -1059,7 +1066,7 @@ Because of open world semantics of DL, the default assumption for a Situation in
 
 As such, an explicit assertion is needed to make a Situation a nonmanifested one: either declare that individual's type NonmanifestedSituation, or assert that it has 0 manifestsIn relations.")
 AnnotationAssertion(rdfs:label SOMA:NonmanifestedSituation "Nonmanifested situation"@en)
-EquivalentClasses(SOMA:NonmanifestedSituation ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> ObjectExactCardinality(0 <http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)))
+EquivalentClasses(SOMA:NonmanifestedSituation ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> ObjectExactCardinality(0 SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)))
 SubClassOf(SOMA:NonmanifestedSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 
 # Class: SOMA:Opening (SOMA:Opening)
@@ -1294,8 +1301,8 @@ SubClassOf(SOMA:SelectingItem ObjectSomeValuesFrom(SOMA:isTaskOfOutputRole Objec
 
 # Class: SOMA:SelfReflection (Self-reflection)
 
+AnnotationAssertion(rdfs:comment SOMA:SelfReflection "The task of evaluating the personal cognitive processes.")
 AnnotationAssertion(rdfs:label SOMA:SelfReflection "Self-reflection")
-AnnotationAssertion(rdfs:label SOMA:SelfReflection "The task of evaluating the personal cognitive processes.")
 SubClassOf(SOMA:SelfReflection SOMA:MetacognitiveControlling)
 
 # Class: SOMA:Sender (Sender)
@@ -1453,14 +1460,12 @@ AnnotationAssertion(rdfs:comment SOMA:ExecutionState_Succeeded "The execution st
 ClassAssertion(SOMA:ExecutionStateRegion SOMA:ExecutionState_Succeeded)
 
 
-SubClassOf(Annotation(rdfs:comment "If a SituationTransition manifests in some Event, then it also has an initial Situation and a terminal one.") ObjectIntersectionOf(SOMA:SituationTransition ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)) ObjectIntersectionOf(ObjectSomeValuesFrom(SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>) ObjectSomeValuesFrom(SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)))
-SubClassOf(Annotation(rdfs:comment "A SituationTransition that manifests in some Event also includes an Action. (NOTE (MP): Typically, the Event manifesting it would be that included Action actually so perhaps we can just require that manifestations of SituationTransitions be Actions?)") ObjectIntersectionOf(SOMA:SituationTransition ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>))
-SubClassOf(Annotation(rdfs:comment "By definition, there can be no prevention relation between Situations that manifest in Events. If Situation X prevents Y, then either X manifests and Y does not, or Y manifests and X does not (interpret as: X would have prevented Y from manifesting if X had manifested), or none of X and Y manifests in any Event.") ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>) ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/prevents> ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>))) owl:Nothing)
-SubClassOf(Annotation(rdfs:comment "If a precondition is not met then a Situation cannot manifest.") ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition> SOMA:NonmanifestedSituation)) owl:Nothing)
-SubClassOf(Annotation(rdfs:comment "If something is an initial situation of some transition, then it must manifest.") ObjectSomeValuesFrom(SOMA:hasInitialSituation SOMA:NonmanifestedSituation) owl:Nothing)
-SubClassOf(Annotation(rdfs:comment "If a transition has an initial situation then it also has a manifestation.") ObjectSomeValuesFrom(SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>) ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>))
-SubClassOf(Annotation(rdfs:comment "If something is a terminal situation then it must be a manifested situation (regardless of whether it was expected or not).") ObjectSomeValuesFrom(SOMA:hasTerminalSituation SOMA:NonmanifestedSituation) owl:Nothing)
-SubClassOf(Annotation(rdfs:comment "If a transition has a terminal situation then it also has a manifestation.") ObjectSomeValuesFrom(SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>) ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>))
+SubClassOf(Annotation(rdfs:comment "If a SituationTransition manifests in some Event, then it also has an initial Situation and a terminal one.") ObjectIntersectionOf(SOMA:SituationTransition ObjectSomeValuesFrom(SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)) ObjectIntersectionOf(ObjectSomeValuesFrom(SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>) ObjectSomeValuesFrom(SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)))
+SubClassOf(Annotation(rdfs:comment "A SituationTransition that manifests in some Event also includes an Action. (NOTE (MP): Typically, the Event manifesting it would be that included Action actually so perhaps we can just require that manifestations of SituationTransitions be Actions?)") ObjectIntersectionOf(SOMA:SituationTransition ObjectSomeValuesFrom(SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>))
+SubClassOf(Annotation(rdfs:comment "By definition, there can be no prevention relation between Situations that manifest in Events. If Situation X prevents Y, then either X manifests and Y does not, or Y manifests and X does not (interpret as: X would have prevented Y from manifesting if X had manifested), or none of X and Y manifests in any Event.") ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> ObjectSomeValuesFrom(SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>) ObjectSomeValuesFrom(SOMA:prevents ObjectSomeValuesFrom(SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>))) owl:Nothing)
+SubClassOf(Annotation(rdfs:comment "If a precondition is not met then a Situation cannot manifest.") ObjectIntersectionOf(ObjectSomeValuesFrom(SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition> SOMA:NonmanifestedSituation)) owl:Nothing)
+SubClassOf(Annotation(rdfs:comment "If a transition has an initial situation then it also has a manifestation.") ObjectSomeValuesFrom(SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>) ObjectSomeValuesFrom(SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>))
+SubClassOf(Annotation(rdfs:comment "If a transition has a terminal situation then it also has a manifestation.") ObjectSomeValuesFrom(SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>) ObjectSomeValuesFrom(SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>))
 SubObjectPropertyOf(ObjectPropertyChain(SOMA:causesTransition SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>) SOMA:terminates)
 SubObjectPropertyOf(ObjectPropertyChain(SOMA:causesTransition SOMA:hasTerminalScene <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>) SOMA:directlyCauses)
 SubObjectPropertyOf(ObjectPropertyChain(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isEventIncludedIn> SOMA:isInitialSituationOf SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>) SOMA:isReplacedBy)

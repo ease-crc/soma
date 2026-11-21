@@ -1,4 +1,4 @@
-Prefix(:=<http://www.ease-crc.org/ont/SOMA-OBJ.owl#>)
+Prefix(:=<http://www.ease-crc.org/ont/SOMA.owl#>)
 Prefix(dc:=<http://purl.org/dc/elements/1.1/>)
 Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
 Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
@@ -57,7 +57,7 @@ Declaration(Class(SOMA:Cleanliness))
 Declaration(Class(SOMA:CleanlinessRegion))
 Declaration(Class(SOMA:Color))
 Declaration(Class(SOMA:ColorRegion))
-Declaration(Class(SOMA:CommitedObject))
+Declaration(Class(SOMA:CommittedObject))
 Declaration(Class(SOMA:Composing))
 Declaration(Class(SOMA:ConnectedObject))
 Declaration(Class(SOMA:Connectivity))
@@ -818,7 +818,7 @@ ObjectPropertyRange(SOMA:isParentLinkOf SOMA:Joint)
 
 # Object Property: SOMA:isPerformerAffordedBy (is performer afforded by)
 
-AnnotationAssertion(rdfs:label SOMA:isPerformerAffordedBy "Relates a disposition to the performer role defined by the affordance describing the disposition."@en)
+AnnotationAssertion(rdfs:comment SOMA:isPerformerAffordedBy "Relates a disposition to the performer role defined by the affordance describing the disposition."@en)
 AnnotationAssertion(rdfs:label SOMA:isPerformerAffordedBy "is performer afforded by"@en)
 SubObjectPropertyOf(SOMA:isPerformerAffordedBy SOMA:isConceptAffordedBy)
 ObjectPropertyDomain(SOMA:isPerformerAffordedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>)
@@ -830,7 +830,7 @@ AnnotationAssertion(rdfs:comment SOMA:isPerformerDefinedIn "Relates an affordanc
 AnnotationAssertion(rdfs:label SOMA:isPerformerDefinedIn "is performer defined in"@en)
 SubObjectPropertyOf(SOMA:isPerformerDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRoleDefinedIn>)
 ObjectPropertyDomain(SOMA:isPerformerDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>)
-ObjectPropertyRange(SOMA:isPerformerDefinedIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description>)
+ObjectPropertyRange(SOMA:isPerformerDefinedIn SOMA:Affordance)
 
 # Object Property: SOMA:isPhysicallyContainedIn (is physically contained in)
 
@@ -902,7 +902,7 @@ AnnotationAssertion(rdfs:comment SOMA:isSpaceRegionFor "Relates a space region t
 AnnotationAssertion(rdfs:label SOMA:isSpaceRegionFor "is space region for")
 SubObjectPropertyOf(SOMA:isSpaceRegionFor <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor>)
 ObjectPropertyDomain(SOMA:isSpaceRegionFor <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SpaceRegion>)
-ObjectPropertyRange(SOMA:isSpaceRegionFor ObjectUnionOf(SOMA:Localization <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>))
+ObjectPropertyRange(SOMA:isSpaceRegionFor ObjectUnionOf(SOMA:Localization SOMA:ShapeRegion <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>))
 
 # Object Property: SOMA:isSupportedBy (is supported by)
 
@@ -1355,14 +1355,14 @@ SubClassOf(SOMA:Color ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org
 
 AnnotationAssertion(rdfs:comment SOMA:ColorRegion "Encodes the color of an object.")
 AnnotationAssertion(rdfs:label SOMA:ColorRegion "Color region")
-SubClassOf(SOMA:ColorRegion <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAttribute>)
+SubClassOf(SOMA:ColorRegion <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region>)
 SubClassOf(SOMA:ColorRegion ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor> SOMA:Color))
 
-# Class: SOMA:CommitedObject (Commited object)
+# Class: SOMA:CommittedObject (Commited object)
 
-AnnotationAssertion(rdfs:comment SOMA:CommitedObject "An object committed to a bigger whole. After being committed, the object does not exist anymore in its old form.")
-AnnotationAssertion(rdfs:label SOMA:CommitedObject "Commited object"@en)
-SubClassOf(SOMA:CommitedObject SOMA:ConnectedObject)
+AnnotationAssertion(rdfs:comment SOMA:CommittedObject "An object committed to a bigger whole. After being committed, the object does not exist anymore in its old form.")
+AnnotationAssertion(rdfs:label SOMA:CommittedObject "Commited object"@en)
+SubClassOf(SOMA:CommittedObject SOMA:ConnectedObject)
 
 # Class: SOMA:Composing (SOMA:Composing)
 
@@ -1700,7 +1700,7 @@ SubClassOf(SOMA:Gripper SOMA:PrehensileEffector)
 AnnotationAssertion(rdfs:comment SOMA:Hand "A prehensile effector including palm, fingers, and thumb.")
 SubClassOf(SOMA:Hand SOMA:PrehensileEffector)
 
-# Class: SOMA:HasQualityRegion (Has quality region)
+# Class: SOMA:HasQualityRegion (SOMA:HasQualityRegion)
 
 AnnotationAssertion(rdfs:comment SOMA:HasQualityRegion "The relation between an individual quality and a region.")
 AnnotationAssertion(rdfs:comment SOMA:HasQualityRegion "todo(DB): added for NEEMs (quale change), but not sure yet about it...")
@@ -1749,10 +1749,10 @@ SubClassOf(SOMA:Insertion ObjectAllValuesFrom(SOMA:affordsTrigger SOMA:InsertedO
 AnnotationAssertion(rdfs:comment SOMA:Instrument "An object used to carry out the event.")
 SubClassOf(SOMA:Instrument SOMA:ResourceRole)
 
-# Class: SOMA:Intrinsic (SOMA:Intrinsic)
+# Class: SOMA:Intrinsic (intrinsic)
 
 AnnotationAssertion(rdfs:comment SOMA:Intrinsic "A physical quality that is independent of context.")
-AnnotationAssertion(rdfs:comment SOMA:Intrinsic "intrinsic")
+AnnotationAssertion(rdfs:label SOMA:Intrinsic "intrinsic")
 SubClassOf(SOMA:Intrinsic SOMA:PhysicalQuality)
 
 # Class: SOMA:Item (SOMA:Item)

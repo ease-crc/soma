@@ -1,4 +1,4 @@
-Prefix(:=<http://www.ease-crc.org/ont/SOMA-IO.owl#>)
+Prefix(:=<http://www.ease-crc.org/ont/SOMA.owl#>)
 Prefix(dc:=<http://purl.org/dc/elements/1.1/>)
 Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
 Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
@@ -492,14 +492,14 @@ SubClassOf(SOMA:Simulation_Reasoner SOMA:Reasoner)
 
 # Class: SOMA:Software (Software)
 
-AnnotationAssertion(rdfs:label SOMA:Software "Software"@en)
-AnnotationAssertion(rdfs:label SOMA:Software "We see Software as the Design of a DesignedTool: the running instance of said Software. Software as a design also follows the Function-Behaviour-Structure model:
+AnnotationAssertion(rdfs:comment SOMA:Software "We see Software as the Design of a DesignedTool: the running instance of said Software. Software as a design also follows the Function-Behaviour-Structure model:
 
 The Function is the purpose or problem solving embodied by the Software Instance, e.g., sorting a list.
 
 The Behaviour are the algoirthms used by the Software Instance, e.g., Bubble Sort.
 
 The Structure is the organization of files, classes, objects and method calls of the program code."@en)
+AnnotationAssertion(rdfs:label SOMA:Software "Software"@en)
 SubClassOf(SOMA:Software <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Design>)
 SubClassOf(SOMA:Software ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes> SOMA:Software_Configuration))
 SubClassOf(SOMA:Software ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes> ObjectUnionOf(SOMA:SoftwareInstance SOMA:Software_Configuration)))
@@ -528,12 +528,12 @@ SubClassOf(SOMA:SoftwareRole ObjectAllValuesFrom(<http://www.ontologydesignpatte
 
 # Class: SOMA:Software_Configuration (Software Configuration)
 
-AnnotationAssertion(rdfs:label SOMA:Software_Configuration "Software Configuration"@en)
-AnnotationAssertion(rdfs:label SOMA:Software_Configuration "The part-whole relationship of Software and its components. Every Software has (at least 1) such configuration that exactly describes all Resources that make up the software (i.e., that are needed for the Software to function).
+AnnotationAssertion(rdfs:comment SOMA:Software_Configuration "The part-whole relationship of Software and its components. Every Software has (at least 1) such configuration that exactly describes all Resources that make up the software (i.e., that are needed for the Software to function).
 We support seperate views:
 1. The Software Configuration describes all the necessary files, in which it should also be a File Configuration
 2. It describes a Software Suit, e.g., 'Open Office' consists of Writer, Calc, Impress etc. Note that thus. Software can consist of other Software - this pattern may also be useful when describing Software Components, e.g., that some Software relies on a Database Software.
 3. It describes not the files, but their content (the program code), which can also be seen as the part-whole relationship if one abstracts away from the files."@en)
+AnnotationAssertion(rdfs:label SOMA:Software_Configuration "Software Configuration"@en)
 SubClassOf(SOMA:Software_Configuration <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Configuration>)
 SubClassOf(SOMA:Software_Configuration ObjectExactCardinality(1 <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy> SOMA:Software))
 
@@ -546,7 +546,7 @@ SubClassOf(SOMA:Source_Code SOMA:Computer_Program)
 
 # Class: SOMA:StatisticalReasoner (Statistical reasoner)
 
-AnnotationAssertion(rdfs:label SOMA:StatisticalReasoner "A Statistical Reasoner is a Reasoner that uses statistical or stochastical data to infer implicit information from explicit information. Examples are Hidden Markov Models and Neural Networks."@en)
+AnnotationAssertion(rdfs:comment SOMA:StatisticalReasoner "A Statistical Reasoner is a Reasoner that uses statistical or stochastical data to infer implicit information from explicit information. Examples are Hidden Markov Models and Neural Networks."@en)
 AnnotationAssertion(rdfs:label SOMA:StatisticalReasoner "Statistical reasoner"@en)
 SubClassOf(SOMA:StatisticalReasoner SOMA:Reasoner)
 
