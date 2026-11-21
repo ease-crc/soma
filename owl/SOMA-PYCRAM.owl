@@ -1,0 +1,176 @@
+Prefix(:=<http://www.ease-crc.org/ont/SOMA-IO.owl#>)
+Prefix(dc:=<http://purl.org/dc/elements/1.1/>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(SOMA:=<http://www.ease-crc.org/ont/SOMA.owl#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+
+Ontology(<http://www.ease-crc.org/ont/SOMA-PYCRAM.owl>
+Import(<http://www.ease-crc.org/ont/SOMA-ALL.owl>)
+
+Declaration(Class(<http://www.ease-crc.org/ont/SOMA.owl#PyCramActionDesignator>))
+Declaration(Class(<http://www.ease-crc.org/ont/SOMA.owl#PyCramDesignator>))
+Declaration(Class(<http://www.ease-crc.org/ont/SOMA.owl#PyCramMotionDesignator>))
+Declaration(Class(<http://www.ease-crc.org/ont/SOMA.owl#PyCramObjectDesignator>))
+Declaration(Class(<http://www.ease-crc.org/ont/SOMA.owl#Resolving_of_PyCRAM_Designators>))
+Declaration(ObjectProperty(<http://www.ease-crc.org/ont/SOMA.owl#isMethodFor>))
+############################
+#   Annotation Properties
+############################
+
+# Annotation Property: rdfs:label (rdfs:label)
+
+AnnotationAssertion(rdfs:comment rdfs:label "A special relation between a Method and a Task, to indicate that the Method describes a way to achieve the Task.")
+
+
+############################
+#   Object Properties
+############################
+
+# Object Property: <http://www.ease-crc.org/ont/SOMA.owl#isMethodFor> (is method for)
+
+AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA.owl#isMethodFor> "is method for")
+SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl#isMethodFor> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes>)
+ObjectPropertyDomain(<http://www.ease-crc.org/ont/SOMA.owl#isMethodFor> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Method>)
+ObjectPropertyRange(<http://www.ease-crc.org/ont/SOMA.owl#isMethodFor> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
+Declaration(Class(SOMA:PyCramActionDesignator))
+Declaration(Class(SOMA:PyCramActionDesignatorDescription))
+Declaration(Class(SOMA:PyCramActionDesignatorReferent))
+Declaration(Class(SOMA:PyCramDesignator))
+Declaration(Class(SOMA:PyCramDesignatorDescription))
+Declaration(Class(SOMA:PyCramDesignatorReferent))
+Declaration(Class(SOMA:PyCramLocationDesignator))
+Declaration(Class(SOMA:PyCramLocationDesignatorDescription))
+Declaration(Class(SOMA:PyCramLocationDesignatorReferent))
+Declaration(Class(SOMA:PyCramMotionDesignator))
+Declaration(Class(SOMA:PyCramMotionDesignatorDescription))
+Declaration(Class(SOMA:PyCramMotionDesignatorReferent))
+Declaration(Class(SOMA:PyCramObjectDesignator))
+Declaration(Class(SOMA:PyCramObjectDesignatorDescription))
+Declaration(Class(SOMA:PyCramObjectDesignatorReferent))
+Declaration(Class(SOMA:Resolving_of_PyCRAM_Designators))
+
+
+
+############################
+#   Classes
+############################
+
+# Class: SOMA:PyCramActionDesignator (PyCRAM Action Designator)
+
+AnnotationAssertion(rdfs:comment SOMA:PyCramActionDesignator "A 'PyCram Designator' that has the components of a 'PyCRAM Action Designator Description' that expresses a 'Method' describing how to perform some complex 'Task' and, possibly if it is the output of a' PyCRAM Designator Resolving' task, a 'PyCRAM Action Designator Referent' that expands the first expressed description to a more concrete 'Plan'.")
+AnnotationAssertion(rdfs:label SOMA:PyCramActionDesignator "PyCRAM Action Designator")
+SubClassOf(SOMA:PyCramActionDesignator SOMA:PyCramDesignator)
+SubClassOf(SOMA:PyCramActionDesignator ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasProperPart> SOMA:PyCramActionDesignatorDescription))
+
+# Class: SOMA:PyCramActionDesignatorDescription (PyCRAM Action Designator Description)
+
+AnnotationAssertion(rdfs:comment SOMA:PyCramActionDesignatorDescription "Expresses an (underspecified) description (dul:Description) used by the CRAM framework to resolve actions at runtime.")
+AnnotationAssertion(rdfs:label SOMA:PyCramActionDesignatorDescription "PyCRAM Action Designator Description")
+SubClassOf(SOMA:PyCramActionDesignatorDescription SOMA:PyCramDesignatorDescription)
+SubClassOf(SOMA:PyCramActionDesignatorDescription ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Method>))
+
+# Class: SOMA:PyCramActionDesignatorReferent (PyCRAM Action Designator Referent)
+
+AnnotationAssertion(rdfs:comment SOMA:PyCramActionDesignatorReferent "Represents a specific description that always expands the description expressed by the 'PyCRAM Action Designator Description' of the 'PyCRAM Designator' of which this Referent is part of. This referent does not exist on all PyCRAM designators, but instead typically only on those that are the result of a 'PyCRAM Designator Resolving' task, in which a PyCRAM designator without a referent plays the role of the input and another PyCRAM designator with such a referent plays the role of the output.")
+AnnotationAssertion(rdfs:label SOMA:PyCramActionDesignatorReferent "PyCRAM Action Designator Referent")
+SubClassOf(SOMA:PyCramActionDesignatorReferent SOMA:PyCramDesignatorReferent)
+SubClassOf(SOMA:PyCramActionDesignatorReferent ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expands> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Method> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExpressedBy> SOMA:PyCramActionDesignatorDescription))))))
+
+# Class: SOMA:PyCramDesignator (PyCRAM Designator)
+
+AnnotationAssertion(rdfs:comment SOMA:PyCramDesignator "A PyCRAM designator is a structured data object (possibly existing as a file or in memory only) with two parts:
+1. The 'PyCRAM Designator Description' expresses an (underspecified) description (dul:Description) used by the CRAM framework to resolve objects, actions, motions, and locations at runtime.
+
+2. Possibly, a 'PyCRAM Designator Referent', representing another more specific description that always expands the description expressed by the 'PyCRAM Designator Description'. This referent does not exist on all PyCRAM designators, but instead typically only on those that are the result of a 'PyCRAM Designator Resolving' task, in which a PyCRAM designator without a referent plays the role of the input and another PyCRAM designator with such a referent plays the role of the output.")
+AnnotationAssertion(rdfs:label SOMA:PyCramDesignator "PyCRAM Designator")
+SubClassOf(SOMA:PyCramDesignator SOMA:Structured_Text)
+SubClassOf(SOMA:PyCramDesignator ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description>))
+
+# Class: SOMA:PyCramDesignatorDescription (PyCRAM Designator Description)
+
+AnnotationAssertion(rdfs:comment SOMA:PyCramDesignatorDescription "The 'PyCRAM Designator Description' expresses an (underspecified) description (dul:Description) used by the CRAM framework to resolve objects, actions, motions, and locations at runtime.")
+AnnotationAssertion(rdfs:label SOMA:PyCramDesignatorDescription "PyCRAM Designator Description")
+SubClassOf(SOMA:PyCramDesignatorDescription SOMA:Structured_Text)
+
+# Class: SOMA:PyCramDesignatorReferent (PyCRAM Designator Referent)
+
+AnnotationAssertion(rdfs:comment SOMA:PyCramDesignatorReferent "Represents a specific description that always expands the description expressed by the 'PyCRAM Designator Description' of the 'PyCRAM Designator' of which this Referent is part of. This referent does not exist on all PyCRAM designators, but instead typically only on those that are the result of a 'PyCRAM Designator Resolving' task, in which a PyCRAM designator without a referent plays the role of the input and another PyCRAM designator with such a referent plays the role of the output.")
+AnnotationAssertion(rdfs:label SOMA:PyCramDesignatorReferent "PyCRAM Designator Referent")
+SubClassOf(SOMA:PyCramDesignatorReferent SOMA:Structured_Text)
+
+# Class: SOMA:PyCramLocationDesignator (PyCRAM Location Designator)
+
+AnnotationAssertion(rdfs:comment SOMA:PyCramLocationDesignator "A 'PyCram Designator' that has the components of a 'PyCRAM Location Designator Description' that expresses a 'Description' of a 'Physical Place' and, possibly if it is the output of a' PyCRAM Designator Resolving' task, a 'PyCRAM Location Designator Referent' that expands the first expressed description to a more concrete Description of a 'Physical place'.")
+AnnotationAssertion(rdfs:label SOMA:PyCramLocationDesignator "PyCRAM Location Designator")
+SubClassOf(SOMA:PyCramLocationDesignator SOMA:PyCramDesignator)
+SubClassOf(SOMA:PyCramLocationDesignator ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasProperPart> SOMA:PyCramLocationDesignatorDescription))
+
+# Class: SOMA:PyCramLocationDesignatorDescription (PyCRAM Location Designator Description)
+
+AnnotationAssertion(rdfs:comment SOMA:PyCramLocationDesignatorDescription "Expresses an (underspecified) description (dul:Description) used by the CRAM framework to resolve locations at runtime.")
+AnnotationAssertion(rdfs:label SOMA:PyCramLocationDesignatorDescription "PyCRAM Location Designator Description")
+SubClassOf(SOMA:PyCramLocationDesignatorDescription SOMA:PyCramDesignatorDescription)
+SubClassOf(SOMA:PyCramLocationDesignatorDescription ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalPlace>))))
+
+# Class: SOMA:PyCramLocationDesignatorReferent (PyCRAM Location Designator Referent)
+
+AnnotationAssertion(rdfs:comment SOMA:PyCramLocationDesignatorReferent "Represents a specific description that always expands the description expressed by the 'PyCRAM Location Designator Description' of the 'PyCRAM Designator' of which this Referent is part of. This referent does not exist on all PyCRAM designators, but instead typically only on those that are the result of a 'PyCRAM Designator Resolving' task, in which a PyCRAM designator without a referent plays the role of the input and another PyCRAM designator with such a referent plays the role of the output.")
+AnnotationAssertion(rdfs:label SOMA:PyCramLocationDesignatorReferent "PyCRAM Location Designator Referent")
+SubClassOf(SOMA:PyCramLocationDesignatorReferent SOMA:PyCramDesignatorReferent)
+SubClassOf(SOMA:PyCramLocationDesignatorReferent ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalPlace>) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expands> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExpressedBy> SOMA:PyCramActionDesignatorDescription))))))
+
+# Class: SOMA:PyCramMotionDesignator (PyCRAM Motion Designator)
+
+AnnotationAssertion(rdfs:comment SOMA:PyCramMotionDesignator "A 'PyCram Designator' that has the components of a 'PyCRAM Motion Designator Description' that expresses a 'Motion Description' and, possibly if it is the output of a' PyCRAM Designator Resolving' task, a 'PyCRAM Motion Designator Referent' that expands the first expressed description to a more concrete 'Motion Description'.")
+AnnotationAssertion(rdfs:label SOMA:PyCramMotionDesignator "PyCRAM Motion Designator")
+SubClassOf(SOMA:PyCramMotionDesignator SOMA:PyCramDesignator)
+SubClassOf(SOMA:PyCramMotionDesignator ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasProperPart> SOMA:PyCramMotionDesignatorDescription))
+
+# Class: SOMA:PyCramMotionDesignatorDescription (PyCRAM Motion Designator Description)
+
+AnnotationAssertion(rdfs:comment SOMA:PyCramMotionDesignatorDescription "Expresses an (underspecified) description (dul:Description) used by the CRAM framework to resolve motions at runtime.")
+AnnotationAssertion(rdfs:label SOMA:PyCramMotionDesignatorDescription "PyCRAM Motion Designator Description")
+SubClassOf(SOMA:PyCramMotionDesignatorDescription SOMA:PyCramDesignatorDescription)
+SubClassOf(SOMA:PyCramMotionDesignatorDescription ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses> SOMA:MotionDescription))
+
+# Class: SOMA:PyCramMotionDesignatorReferent (PyCRAM Motion Designator Referent)
+
+AnnotationAssertion(rdfs:comment SOMA:PyCramMotionDesignatorReferent "Represents a specific description that always expands the description expressed by the 'PyCRAM Motion Designator Description' of the 'PyCRAM Designator' of which this Referent is part of. This referent does not exist on all PyCRAM designators, but instead typically only on those that are the result of a 'PyCRAM Designator Resolving' task, in which a PyCRAM designator without a referent plays the role of the input and another PyCRAM designator with such a referent plays the role of the output.")
+AnnotationAssertion(rdfs:label SOMA:PyCramMotionDesignatorReferent "PyCRAM Motion Designator Referent")
+SubClassOf(SOMA:PyCramMotionDesignatorReferent SOMA:PyCramDesignatorReferent)
+SubClassOf(SOMA:PyCramMotionDesignatorReferent ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses> ObjectIntersectionOf(SOMA:MotionDescription ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expands> ObjectIntersectionOf(SOMA:MotionDescription ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExpressedBy> SOMA:PyCramMotionDesignatorDescription))))))
+
+# Class: SOMA:PyCramObjectDesignator (PyCRAM Object Designator)
+
+AnnotationAssertion(rdfs:comment SOMA:PyCramObjectDesignator "A 'PyCram Designator' that has the components of a 'PyCRAM Object Designator Description' that expresses a 'Description' of a 'Physical artifact' and, possibly if it is the output of a' PyCRAM Designator Resolving' task, a 'PyCRAM Object Designator Referent' that expands the first expressed description to a more concrete Description of a 'Physical artifact'.")
+AnnotationAssertion(rdfs:label SOMA:PyCramObjectDesignator "PyCRAM Object Designator")
+SubClassOf(SOMA:PyCramObjectDesignator SOMA:PyCramDesignator)
+SubClassOf(SOMA:PyCramObjectDesignator ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasProperPart> SOMA:PyCramObjectDesignatorDescription))
+
+# Class: SOMA:PyCramObjectDesignatorDescription (PyCRAM Object Designator Description)
+
+AnnotationAssertion(rdfs:comment SOMA:PyCramObjectDesignatorDescription "Expresses an (underspecified) description (dul:Description) used by the CRAM framework to resolve physical artifacts at runtime.")
+AnnotationAssertion(rdfs:label SOMA:PyCramObjectDesignatorDescription "PyCRAM Object Designator Description")
+SubClassOf(SOMA:PyCramObjectDesignatorDescription SOMA:PyCramDesignatorDescription)
+SubClassOf(SOMA:PyCramObjectDesignatorDescription ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact>))))
+
+# Class: SOMA:PyCramObjectDesignatorReferent (PyCRAM Object Designator Referent)
+
+AnnotationAssertion(rdfs:comment SOMA:PyCramObjectDesignatorReferent "Represents a specific description that always expands the description expressed by the 'PyCRAM Object Designator Description' of the 'PyCRAM Designator' of which this Referent is part of. This referent does not exist on all PyCRAM designators, but instead typically only on those that are the result of a 'PyCRAM Designator Resolving' task, in which a PyCRAM designator without a referent plays the role of the input and another PyCRAM designator with such a referent plays the role of the output.")
+AnnotationAssertion(rdfs:label SOMA:PyCramObjectDesignatorReferent "PyCRAM Object Designator Referent")
+SubClassOf(SOMA:PyCramObjectDesignatorReferent SOMA:PyCramDesignatorReferent)
+SubClassOf(SOMA:PyCramObjectDesignatorReferent ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expresses> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalArtifact>) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#expands> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isExpressedBy> SOMA:PyCramObjectDesignatorDescription))))))
+
+# Class: SOMA:Resolving_of_PyCRAM_Designators (Resolving a PyCRAM Designator)
+
+AnnotationAssertion(rdfs:label SOMA:Resolving_of_PyCRAM_Designators "Resolving a PyCRAM Designator")
+SubClassOf(SOMA:Resolving_of_PyCRAM_Designators SOMA:DerivingInformation)
+SubClassOf(SOMA:Resolving_of_PyCRAM_Designators ObjectSomeValuesFrom(SOMA:isTaskOfInputRole ObjectIntersectionOf(SOMA:Premise ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRoleOf> SOMA:PyCramDesignator))))
+SubClassOf(SOMA:Resolving_of_PyCRAM_Designators ObjectSomeValuesFrom(SOMA:isTaskOfOutputRole ObjectIntersectionOf(SOMA:Conclusion ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRoleOf> SOMA:PyCramDesignator))))
+
+
+)
