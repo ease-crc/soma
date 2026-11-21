@@ -1,4 +1,4 @@
-Prefix(:=<http://www.ease-crc.org/ont/SOMA-SAY.owl#>)
+Prefix(:=<http://www.ease-crc.org/ont/SOMA.owl#>)
 Prefix(dc:=<http://purl.org/dc/elements/1.1/>)
 Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
 Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
@@ -53,9 +53,10 @@ Declaration(ObjectProperty(SOMA:movesObject))
 #   Object Properties
 ############################
 
-# Object Property: SOMA:coversObject (SOMA:coversObject)
+# Object Property: SOMA:coversObject (covers object)
 
 AnnotationAssertion(rdfs:comment SOMA:coversObject "A relationship from an object (the coverer) that blocks access to another or its interior (the coveree).")
+AnnotationAssertion(rdfs:label SOMA:coversObject "covers object"@en)
 SubObjectPropertyOf(SOMA:coversObject SOMA:interactsWith)
 InverseObjectProperties(SOMA:coversObject SOMA:isCoveredByObject)
 AsymmetricObjectProperty(SOMA:coversObject)
@@ -71,26 +72,29 @@ SubObjectPropertyOf(SOMA:isAnsweredBy <http://www.ontologydesignpatterns.org/ont
 ObjectPropertyDomain(SOMA:isAnsweredBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 ObjectPropertyRange(SOMA:isAnsweredBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>)
 
-# Object Property: SOMA:isCoveredByObject (SOMA:isCoveredByObject)
+# Object Property: SOMA:isCoveredByObject (is covered by object)
 
 AnnotationAssertion(rdfs:comment SOMA:isCoveredByObject "A relation from an object (the coveree) which is itself, or has its interior, prevented from being accessed from outside by a coverer.")
+AnnotationAssertion(rdfs:label SOMA:isCoveredByObject "is covered by object"@en)
 SubObjectPropertyOf(SOMA:isCoveredByObject SOMA:interactsWith)
 AsymmetricObjectProperty(SOMA:isCoveredByObject)
 IrreflexiveObjectProperty(SOMA:isCoveredByObject)
 ObjectPropertyDomain(SOMA:isCoveredByObject <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 ObjectPropertyRange(SOMA:isCoveredByObject <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 
-# Object Property: SOMA:isMovedByAgent (SOMA:isMovedByAgent)
+# Object Property: SOMA:isMovedByAgent (is moved by agent)
 
 AnnotationAssertion(rdfs:comment SOMA:isMovedByAgent "A relation from an object to an agent who causes it to move.")
+AnnotationAssertion(rdfs:label SOMA:isMovedByAgent "is moved by agent"@en)
 SubObjectPropertyOf(SOMA:isMovedByAgent SOMA:interactsWith)
 InverseObjectProperties(SOMA:isMovedByAgent SOMA:movesObject)
 ObjectPropertyDomain(SOMA:isMovedByAgent <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
 ObjectPropertyRange(SOMA:isMovedByAgent <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>)
 
-# Object Property: SOMA:movesObject (SOMA:movesObject)
+# Object Property: SOMA:movesObject (moves object)
 
 AnnotationAssertion(rdfs:comment SOMA:movesObject "A relation from an agent to an object that the agent causes to move.")
+AnnotationAssertion(rdfs:label SOMA:movesObject "moves object"@en)
 SubObjectPropertyOf(SOMA:movesObject SOMA:interactsWith)
 ObjectPropertyDomain(SOMA:movesObject <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>)
 ObjectPropertyRange(SOMA:movesObject <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)
@@ -146,11 +150,12 @@ Adopted from GUM-4-space (Bateman et al. 2010).")
 AnnotationAssertion(rdfs:label SOMA:ControlTheory "Control theory"@en)
 SubClassOf(SOMA:ControlTheory SOMA:FunctionalSpatialSchemaTheory)
 
-# Class: SOMA:CoverageTheory (SOMA:CoverageTheory)
+# Class: SOMA:CoverageTheory (Coverage theory)
 
 AnnotationAssertion(rdfs:comment SOMA:CoverageTheory "A schematic theory of a functional relation between two objects such that one of them, the locatum, blocks access to the interior of the relatum.
 
 Let xL, xR be objects filling the locatum, relatum roles of this schema. Then one can infer that xL coversObject xR.")
+AnnotationAssertion(rdfs:label SOMA:CoverageTheory "Coverage theory"@en)
 SubClassOf(SOMA:CoverageTheory SOMA:FunctionalSpatialSchemaTheory)
 
 # Class: SOMA:CoveringTheory (Covering theory)
@@ -259,9 +264,10 @@ SubClassOf(SOMA:MixingTheory SOMA:ExecutableSchematicTheory)
 SubClassOf(SOMA:MixingTheory ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines> SOMA:Instrument))
 SubClassOf(SOMA:MixingTheory ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#defines> SOMA:Patient))
 
-# Class: SOMA:Phrase (SOMA:Phrase)
+# Class: SOMA:Phrase (Phrase)
 
 AnnotationAssertion(rdfs:isDefinedBy SOMA:Phrase <http://www.ontologydesignpatterns.org/ont/dul/IOLite.owl>)
+AnnotationAssertion(rdfs:label SOMA:Phrase "Phrase"@en)
 SubClassOf(SOMA:Phrase SOMA:LinguisticObject)
 
 # Class: SOMA:PlacingTheory (Placing theory)
@@ -292,7 +298,7 @@ SubClassOf(SOMA:ProximalTheory ObjectSomeValuesFrom(<http://www.ontologydesignpa
 
 SubClassOf(SOMA:QueryingTask ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> SOMA:InterrogativeClause)))
 
-# Class: SOMA:Scene (SOMA:Scene)
+# Class: SOMA:Scene (Scene)
 
 AnnotationAssertion(rdfs:comment SOMA:Scene "Scenes are Situations which interpret a State in terms of its conformance to some qualitative, image schematic description. I.e., the scene is described in terms of qualitative functional and spatial relations existing between participating objects.")
 SubClassOf(SOMA:Scene <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)

@@ -1,4 +1,4 @@
-Prefix(:=<http://www.ease-crc.org/ont/SOMA-AGENT.owl#>)
+Prefix(:=<http://www.ease-crc.org/ont/SOMA.owl#>)
 Prefix(dc:=<http://purl.org/dc/elements/1.1/>)
 Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
 Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
@@ -45,7 +45,7 @@ ObjectPropertyRange(SOMA:encapsulates <http://www.ontologydesignpatterns.org/ont
 
 # Object Property: SOMA:hasPreference (has preference)
 
-AnnotationAssertion(rdfs:label SOMA:hasPreference "Relates an agent to its preference quality."@en)
+AnnotationAssertion(rdfs:comment SOMA:hasPreference "Relates an agent to its preference quality."@en)
 AnnotationAssertion(rdfs:label SOMA:hasPreference "has preference"@en)
 SubObjectPropertyOf(SOMA:hasPreference <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasQuality>)
 InverseObjectProperties(SOMA:hasPreference SOMA:isPreferenceOf)
@@ -99,7 +99,7 @@ SubClassOf(SOMA:Option SOMA:ResourceRole)
 
 AnnotationAssertion(rdfs:comment SOMA:Order "An 'Order' sorts two or more 'Order item's via the relations 'precedes' and 'follows'."@en)
 AnnotationAssertion(rdfs:label SOMA:Order "Order"@en)
-SubClassOf(SOMA:Order <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#FormalEntity>)
+SubClassOf(SOMA:Order <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Relation>)
 SubClassOf(SOMA:Order ObjectSomeValuesFrom(SOMA:orders SOMA:OrderedElement))
 
 # Class: SOMA:OrderedElement (Ordered element)
@@ -164,7 +164,7 @@ SubClassOf(SOMA:PreferenceOrder ObjectAllValuesFrom(<http://www.ontologydesignpa
 
 AnnotationAssertion(rdfs:comment SOMA:PreferenceRegion "The 'Region' of 'Preference's, containing all possible 'Order's between all possible 'Situation's."@en)
 AnnotationAssertion(rdfs:label SOMA:PreferenceRegion "Preference region"@en)
-SubClassOf(SOMA:PreferenceRegion <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObjectAttribute>)
+SubClassOf(SOMA:PreferenceRegion <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region>)
 SubClassOf(SOMA:PreferenceRegion ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isRegionFor> SOMA:Preference))
 
 # Class: SOMA:Selecting (Selecting)
@@ -173,9 +173,10 @@ AnnotationAssertion(rdfs:comment SOMA:Selecting "A Task where an Agent decides b
 AnnotationAssertion(rdfs:label SOMA:Selecting "Selecting"@en)
 SubClassOf(SOMA:Selecting SOMA:Deciding)
 
-# Class: SOMA:Singleton (SOMA:Singleton)
+# Class: SOMA:Singleton (Singleton)
 
 AnnotationAssertion(rdfs:comment SOMA:Singleton "A 'Set' that contains exactly one member.")
+AnnotationAssertion(rdfs:label SOMA:Singleton "Singleton"@en)
 EquivalentClasses(SOMA:Singleton ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Set> ObjectExactCardinality(1 SOMA:encapsulates <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Entity>)))
 
 

@@ -1,4 +1,4 @@
-Prefix(:=<http://www.ease-crc.org/ont/SOMA-ACT.owl#>)
+Prefix(:=<http://www.ease-crc.org/ont/SOMA.owl#>)
 Prefix(dc:=<http://purl.org/dc/elements/1.1/>)
 Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
 Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
@@ -84,6 +84,7 @@ Declaration(Class(SOMA:LinguisticObject))
 Declaration(Class(SOMA:LookingAt))
 Declaration(Class(SOMA:LookingFor))
 Declaration(Class(SOMA:Lowering))
+Declaration(Class(SOMA:ManifestedSituation))
 Declaration(Class(SOMA:Manipulating))
 Declaration(Class(SOMA:Memorizing))
 Declaration(Class(SOMA:MentalAction))
@@ -165,7 +166,9 @@ Declaration(ObjectProperty(SOMA:directlyCauses))
 Declaration(ObjectProperty(SOMA:hasAction))
 Declaration(ObjectProperty(SOMA:hasAnswer))
 Declaration(ObjectProperty(SOMA:hasExecutionState))
+Declaration(ObjectProperty(SOMA:hasExpectedTerminalSituation))
 Declaration(ObjectProperty(SOMA:hasInitialSituation))
+Declaration(ObjectProperty(SOMA:hasRequiredInitialSituation))
 Declaration(ObjectProperty(SOMA:hasTerminalSituation))
 Declaration(ObjectProperty(SOMA:isAffectedBy))
 Declaration(ObjectProperty(SOMA:isAskedBy))
@@ -179,14 +182,12 @@ Declaration(ObjectProperty(SOMA:isReplacedBy))
 Declaration(ObjectProperty(SOMA:isTaskOfCreatedRole))
 Declaration(ObjectProperty(SOMA:isTerminalSituationOf))
 Declaration(ObjectProperty(SOMA:isTerminatedBy))
+Declaration(ObjectProperty(SOMA:manifestsIn))
+Declaration(ObjectProperty(SOMA:preventedBy))
+Declaration(ObjectProperty(SOMA:prevents))
 Declaration(ObjectProperty(SOMA:relatesToAnotherRole))
 Declaration(ObjectProperty(SOMA:replaces))
 Declaration(ObjectProperty(SOMA:terminates))
-Declaration(ObjectProperty(<http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation>))
-Declaration(ObjectProperty(<http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation>))
-Declaration(ObjectProperty(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn>))
-Declaration(ObjectProperty(<http://www.ease-crc.org/ont/SOMA.owl/preventedBy>))
-Declaration(ObjectProperty(<http://www.ease-crc.org/ont/SOMA.owl/prevents>))
 Declaration(NamedIndividual(SOMA:ExecutionState_Active))
 Declaration(NamedIndividual(SOMA:ExecutionState_Cancelled))
 Declaration(NamedIndividual(SOMA:ExecutionState_Failed))
@@ -207,7 +208,7 @@ InverseObjectProperties(SOMA:affects SOMA:isAffectedBy)
 
 # Object Property: SOMA:answers (answers)
 
-AnnotationAssertion(rdfs:label SOMA:answers "The relation between an answering message and the message it answers.")
+AnnotationAssertion(rdfs:comment SOMA:answers "The relation between an answering message and the message it answers.")
 AnnotationAssertion(rdfs:label SOMA:answers "answers")
 SubObjectPropertyOf(SOMA:answers SOMA:relatesToAnotherRole)
 InverseObjectProperties(SOMA:answers SOMA:hasAnswer)
@@ -228,7 +229,7 @@ TransitiveObjectProperty(SOMA:causes)
 
 # Object Property: SOMA:definesEventType (defines event type)
 
-AnnotationAssertion(rdfs:label SOMA:definesEventType "A relation between a description and an event type, e.g. an Affordance of an object to be cut with a knife describes that event.
+AnnotationAssertion(rdfs:comment SOMA:definesEventType "A relation between a description and an event type, e.g. an Affordance of an object to be cut with a knife describes that event.
 
 The distinction to defines task is necessary to let Dispositions and Affordances not only describe which tasks might be afforded by objects, but also whihc processes (where there is no agent). For example, the fall of a knife from a shelf slicing a loaf of bread on impact is , in the absence of an executing agent, not a task but merely a process, the possibility of which is nevertheless described by the dispositions of the knife and the loaf."@en)
 AnnotationAssertion(rdfs:label SOMA:definesEventType "defines event type"@en)
@@ -270,6 +271,15 @@ SubObjectPropertyOf(SOMA:hasExecutionState <http://www.ontologydesignpatterns.or
 ObjectPropertyDomain(SOMA:hasExecutionState <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>)
 ObjectPropertyRange(SOMA:hasExecutionState SOMA:ExecutionStateRegion)
 
+# Object Property: SOMA:hasExpectedTerminalSituation (has expected terminal situation)
+
+AnnotationAssertion(rdfs:comment SOMA:hasExpectedTerminalSituation "A relation between a Transition and the Situation it is expected to, and does actually, end at. You can assert this relationship when the observed outcome of a transition matches expectations.")
+AnnotationAssertion(rdfs:label SOMA:hasExpectedTerminalSituation "has expected terminal situation"@en)
+SubObjectPropertyOf(SOMA:hasExpectedTerminalSituation SOMA:hasTerminalSituation)
+SubObjectPropertyOf(SOMA:hasExpectedTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPostcondition>)
+ObjectPropertyDomain(SOMA:hasExpectedTerminalSituation SOMA:SituationTransition)
+ObjectPropertyRange(SOMA:hasExpectedTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
+
 # Object Property: SOMA:hasInitialSituation (has initial situation)
 
 AnnotationAssertion(rdfs:comment SOMA:hasInitialSituation "A relation between SituationTransitions and Situations, which identifies the Situation the transition starts from.")
@@ -279,7 +289,16 @@ InverseObjectProperties(SOMA:hasInitialSituation SOMA:isInitialSituationOf)
 AsymmetricObjectProperty(SOMA:hasInitialSituation)
 IrreflexiveObjectProperty(SOMA:hasInitialSituation)
 ObjectPropertyDomain(SOMA:hasInitialSituation SOMA:SituationTransition)
-ObjectPropertyRange(SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
+ObjectPropertyRange(Annotation(rdfs:comment "If something is an initial situation of some transition, then it must manifest.") SOMA:hasInitialSituation SOMA:ManifestedSituation)
+
+# Object Property: SOMA:hasRequiredInitialSituation (has required initial situation)
+
+AnnotationAssertion(rdfs:comment SOMA:hasRequiredInitialSituation "A relationship between a Situation x and another Situation y that precedes it, such that without y manifesting, it would be impossible for x to manifest.")
+AnnotationAssertion(rdfs:label SOMA:hasRequiredInitialSituation "has required initial situation"@en)
+SubObjectPropertyOf(SOMA:hasRequiredInitialSituation SOMA:hasInitialSituation)
+SubObjectPropertyOf(SOMA:hasRequiredInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition>)
+ObjectPropertyDomain(SOMA:hasRequiredInitialSituation SOMA:SituationTransition)
+ObjectPropertyRange(SOMA:hasRequiredInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 
 # Object Property: SOMA:hasTerminalSituation (has terminal situation)
 
@@ -290,7 +309,7 @@ InverseObjectProperties(SOMA:hasTerminalSituation SOMA:isTerminalSituationOf)
 AsymmetricObjectProperty(SOMA:hasTerminalSituation)
 IrreflexiveObjectProperty(SOMA:hasTerminalSituation)
 ObjectPropertyDomain(SOMA:hasTerminalSituation SOMA:SituationTransition)
-ObjectPropertyRange(SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
+ObjectPropertyRange(Annotation(rdfs:comment "If something is a terminal situation then it must be a manifested situation (regardless of whether it was expected or not).") SOMA:hasTerminalSituation SOMA:ManifestedSituation)
 
 # Object Property: SOMA:isAffectedBy (is affected by)
 
@@ -300,10 +319,10 @@ SubObjectPropertyOf(SOMA:isAffectedBy <http://www.ontologydesignpatterns.org/ont
 
 # Object Property: SOMA:isAskedBy (is asked by)
 
-AnnotationAssertion(rdfs:comment SOMA:isAskedBy "A relation from a Query to the Agent who asks it.")
+AnnotationAssertion(rdfs:comment SOMA:isAskedBy "A relation from a communication action that executes a QueryingTask to the Agent who asks the query.")
 AnnotationAssertion(rdfs:label SOMA:isAskedBy "is asked by")
 SubObjectPropertyOf(SOMA:isAskedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#involvesAgent>)
-ObjectPropertyDomain(SOMA:isAskedBy SOMA:QueryingTask)
+ObjectPropertyDomain(SOMA:isAskedBy ObjectIntersectionOf(SOMA:CommunicationAction ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#executesTask> SOMA:QueryingTask)))
 ObjectPropertyRange(SOMA:isAskedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent>)
 
 # Object Property: SOMA:isCreatedOutputOf (is created output of)
@@ -338,7 +357,7 @@ ObjectPropertyRange(SOMA:isEventTypeDefinedIn <http://www.ontologydesignpatterns
 AnnotationAssertion(rdfs:comment SOMA:isInitialSituationOf "A relation between SituationTransitions and Situations, which identifies the Situation the transition starts from.")
 AnnotationAssertion(rdfs:label SOMA:isInitialSituationOf "is initial situation of"@en)
 SubObjectPropertyOf(SOMA:isInitialSituationOf SOMA:isInitialStateOf)
-ObjectPropertyDomain(SOMA:isInitialSituationOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
+ObjectPropertyDomain(SOMA:isInitialSituationOf SOMA:ManifestedSituation)
 ObjectPropertyRange(SOMA:isInitialSituationOf SOMA:SituationTransition)
 
 # Object Property: SOMA:isPerformedBy (is performed by)
@@ -384,7 +403,7 @@ ObjectPropertyRange(SOMA:isTaskOfCreatedRole <http://www.ontologydesignpatterns.
 AnnotationAssertion(rdfs:comment SOMA:isTerminalSituationOf "A relation between SituationTransitions and Situations, which identifies the Situation the transition ends at.")
 AnnotationAssertion(rdfs:label SOMA:isTerminalSituationOf "is terminal situation of"@en)
 SubObjectPropertyOf(SOMA:isTerminalSituationOf SOMA:isTerminalStateOf)
-ObjectPropertyDomain(SOMA:isTerminalSituationOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
+ObjectPropertyDomain(SOMA:isTerminalSituationOf SOMA:ManifestedSituation)
 ObjectPropertyRange(SOMA:isTerminalSituationOf SOMA:SituationTransition)
 
 # Object Property: SOMA:isTerminatedBy (is terminated by)
@@ -395,6 +414,29 @@ SubObjectPropertyOf(SOMA:isTerminatedBy <http://www.ontologydesignpatterns.org/o
 InverseObjectProperties(SOMA:isTerminatedBy SOMA:terminates)
 ObjectPropertyDomain(SOMA:isTerminatedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 ObjectPropertyRange(SOMA:isTerminatedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
+
+# Object Property: SOMA:manifestsIn (manifests in)
+
+AnnotationAssertion(rdfs:comment SOMA:manifestsIn "A relationship indicating that a Situation is realized in an Event that actually happened.")
+AnnotationAssertion(rdfs:label SOMA:manifestsIn "manifests in")
+SubObjectPropertyOf(SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>)
+
+# Object Property: SOMA:preventedBy (prevented by)
+
+AnnotationAssertion(rdfs:comment SOMA:preventedBy "A relationship indicating a Situation is prevented by another from manifesting.")
+AnnotationAssertion(rdfs:label SOMA:preventedBy "prevented by")
+SubObjectPropertyOf(SOMA:preventedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasSetting>)
+InverseObjectProperties(SOMA:preventedBy SOMA:prevents)
+ObjectPropertyDomain(SOMA:preventedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
+ObjectPropertyRange(SOMA:preventedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
+
+# Object Property: SOMA:prevents (prevents)
+
+AnnotationAssertion(rdfs:comment SOMA:prevents "A relationship indicating that a situation does or would prevent another from manifesting. Useful for reasoning about planning (what to do to avoid some bad outcome) and failure recovery (what aspects of the world state prevent continuing the plan?).")
+AnnotationAssertion(rdfs:label SOMA:prevents "prevents")
+SubObjectPropertyOf(SOMA:prevents <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isSettingFor>)
+ObjectPropertyDomain(SOMA:prevents <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
+ObjectPropertyRange(SOMA:prevents <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 
 # Object Property: SOMA:relatesToAnotherRole (relates to another role)
 
@@ -420,47 +462,6 @@ AnnotationAssertion(rdfs:label SOMA:terminates "terminates"@en)
 SubObjectPropertyOf(SOMA:terminates <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#associatedWith>)
 ObjectPropertyDomain(SOMA:terminates <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
 ObjectPropertyRange(SOMA:terminates <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)
-
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> (has expected terminal situation)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> "A relation between a Transition and the Situation it is expected to, and does actually, end at. You can assert this relationship when the observed outcome of a transition matches expectations.")
-AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> "has expected terminal situation"@en)
-SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> SOMA:hasTerminalSituation)
-SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPostcondition>)
-ObjectPropertyDomain(<http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> SOMA:SituationTransition)
-ObjectPropertyRange(<http://www.ease-crc.org/ont/SOMA.owl/hasExpectedTerminalSituation> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
-
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> (has required initial situation)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> "A relationship between a Situation x and another Situation y that precedes it, such that without y manifesting, it would be impossible for x to manifest.")
-AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> "has required initial situation"@en)
-SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> SOMA:hasInitialSituation)
-SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition>)
-ObjectPropertyDomain(<http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> SOMA:SituationTransition)
-ObjectPropertyRange(<http://www.ease-crc.org/ont/SOMA.owl/hasRequiredInitialSituation> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
-
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> (manifests in)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> "A relationship indicating that a Situation is realized in an Event that actually happened.")
-AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> "manifests in")
-SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>)
-
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl/preventedBy> (prevented by)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA.owl/preventedBy> "A relationship indicating a Situation is prevented by another from manifesting.")
-AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA.owl/preventedBy> "prevented by")
-SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/preventedBy> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasSetting>)
-InverseObjectProperties(<http://www.ease-crc.org/ont/SOMA.owl/preventedBy> <http://www.ease-crc.org/ont/SOMA.owl/prevents>)
-ObjectPropertyDomain(<http://www.ease-crc.org/ont/SOMA.owl/preventedBy> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
-ObjectPropertyRange(<http://www.ease-crc.org/ont/SOMA.owl/preventedBy> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
-
-# Object Property: <http://www.ease-crc.org/ont/SOMA.owl/prevents> (prevents)
-
-AnnotationAssertion(rdfs:comment <http://www.ease-crc.org/ont/SOMA.owl/prevents> "A relationship indicating that a situation does or would prevent another from manifesting. Useful for reasoning about planning (what to do to avoid some bad outcome) and failure recovery (what aspects of the world state prevent continuing the plan?).")
-AnnotationAssertion(rdfs:label <http://www.ease-crc.org/ont/SOMA.owl/prevents> "prevents")
-SubObjectPropertyOf(<http://www.ease-crc.org/ont/SOMA.owl/prevents> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isSettingFor>)
-ObjectPropertyDomain(<http://www.ease-crc.org/ont/SOMA.owl/prevents> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
-ObjectPropertyRange(<http://www.ease-crc.org/ont/SOMA.owl/prevents> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 
 # Object Property: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask> (defines task)
 
@@ -490,7 +491,7 @@ AnnotationAssertion(rdfs:comment SOMA:AbductiveReasoning "A task in which the Ag
 AnnotationAssertion(rdfs:label SOMA:AbductiveReasoning "Abductive reasoning"@en)
 SubClassOf(SOMA:AbductiveReasoning SOMA:Reasoning)
 
-# Class: SOMA:Actuating (SOMA:Actuating)
+# Class: SOMA:Actuating (Actuating)
 
 AnnotationAssertion(rdfs:comment SOMA:Actuating "Tasks where the goal is to move an object.
 
@@ -504,6 +505,7 @@ For Actuating, it is the object's motion that is paramount.
 
 For Manipulating, it is the movement of the hand(s) and the change in functional relationships (such as kinematic control) between the hand(s) and the manipulated object(s).")
 AnnotationAssertion(rdfs:comment SOMA:Actuating "todo: think about use of tools. force events are generated between artifacts then. also not only the tool would be the 'salient artifact' here.")
+AnnotationAssertion(rdfs:label SOMA:Actuating "Actuating"@en)
 SubClassOf(SOMA:Actuating SOMA:PhysicalTask)
 
 # Class: SOMA:Answer (Answer)
@@ -525,14 +527,16 @@ AnnotationAssertion(rdfs:comment SOMA:AreaSurveying "A task in which an Agent us
 AnnotationAssertion(rdfs:label SOMA:AreaSurveying "Area surveying"@en)
 SubClassOf(SOMA:AreaSurveying SOMA:Perceiving)
 
-# Class: SOMA:Arranging (SOMA:Arranging)
+# Class: SOMA:Arranging (Arranging)
 
 AnnotationAssertion(rdfs:comment SOMA:Arranging "A task in which an Agent places a collection of objects at some set of relative poses to each other.")
+AnnotationAssertion(rdfs:label SOMA:Arranging "Arranging"@en)
 SubClassOf(SOMA:Arranging SOMA:Constructing)
 
-# Class: SOMA:Assembling (SOMA:Assembling)
+# Class: SOMA:Assembling (Assembling)
 
 AnnotationAssertion(rdfs:comment SOMA:Assembling "A task in which an Agent connects some objects such that they form a cohesive whole, and which also imposes constraints on the objects' relative motions. Often, the objects that make up an assemblage can also be separated again.")
+AnnotationAssertion(rdfs:label SOMA:Assembling "Assembling"@en)
 SubClassOf(SOMA:Assembling SOMA:Constructing)
 
 # Class: SOMA:AssertionTask (Assertion task)
@@ -559,21 +563,23 @@ AnnotationAssertion(rdfs:comment SOMA:AttentionShift "A mental task in which the
 AnnotationAssertion(rdfs:label SOMA:AttentionShift "Attention shifting"@en)
 SubClassOf(SOMA:AttentionShift SOMA:MentalTask)
 
-# Class: SOMA:Avoiding (SOMA:Avoiding)
+# Class: SOMA:Avoiding (Avoiding)
 
 AnnotationAssertion(rdfs:comment SOMA:Avoiding "A task in which an Agent moves so as to not enter or pass through a location.")
+AnnotationAssertion(rdfs:label SOMA:Avoiding "Avoiding"@en)
 SubClassOf(SOMA:Avoiding SOMA:Navigating)
 
-# Class: SOMA:Capability (SOMA:Capability)
+# Class: SOMA:Capability (Capability)
 
-AnnotationAssertion(rdfs:comment SOMA:Capability "Capability")
 AnnotationAssertion(rdfs:comment SOMA:Capability "The tendency of an object (the bearer) to be able to perform certain tasks together with others (the triggers) and in which the Bearer is the executor of the associated Task and will therefore usually be an Agent.")
+AnnotationAssertion(rdfs:label SOMA:Capability "Capability")
 SubClassOf(SOMA:Capability SOMA:Disposition)
 SubClassOf(SOMA:Capability ObjectExactCardinality(1 <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isDescribedBy> ObjectIntersectionOf(SOMA:Affordance ObjectExactCardinality(1 SOMA:definesBearer <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>) ObjectExactCardinality(1 SOMA:definesTrigger <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role>) ObjectExactCardinality(1 <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#definesTask> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>))))
 
-# Class: SOMA:Catching (SOMA:Catching)
+# Class: SOMA:Catching (Catching)
 
 AnnotationAssertion(rdfs:comment SOMA:Catching "A task by which an Agent stops a moving object and gains kinematic control over it, usually by grasping.")
+AnnotationAssertion(rdfs:label SOMA:Catching "Catching"@en)
 SubClassOf(SOMA:Catching SOMA:Actuating)
 DisjointClasses(SOMA:Catching SOMA:PickingUp)
 
@@ -590,15 +596,17 @@ AnnotationAssertion(rdfs:comment SOMA:CheckingObjectPresence "A task by which an
 AnnotationAssertion(rdfs:label SOMA:CheckingObjectPresence "Checking object presence"@en)
 SubClassOf(SOMA:CheckingObjectPresence SOMA:Perceiving)
 
-# Class: SOMA:Cleaning (SOMA:Cleaning)
+# Class: SOMA:Cleaning (Cleaning)
 
 AnnotationAssertion(rdfs:comment SOMA:Cleaning "This task in which an agent restores all the objects to their destined locations, wiping a specific object")
+AnnotationAssertion(rdfs:label SOMA:Cleaning "Cleaning"@en)
 SubClassOf(SOMA:Cleaning SOMA:ModifyingPhysicalObject)
 SubClassOf(SOMA:Cleaning ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Purification))
 
-# Class: SOMA:Closing (SOMA:Closing)
+# Class: SOMA:Closing (Closing)
 
 AnnotationAssertion(rdfs:comment SOMA:Closing "A task in which an Agent manipulates a container so as to block access to its interior.")
+AnnotationAssertion(rdfs:label SOMA:Closing "Closing"@en)
 SubClassOf(SOMA:Closing SOMA:Actuating)
 DisjointClasses(SOMA:Closing SOMA:Delivering)
 DisjointClasses(SOMA:Closing SOMA:Fetching)
@@ -614,10 +622,10 @@ AnnotationAssertion(rdfs:comment SOMA:CommandingTask "An Illocutionary act where
 AnnotationAssertion(rdfs:label SOMA:CommandingTask "Commanding task"@en)
 SubClassOf(SOMA:CommandingTask SOMA:IllocutionaryTask)
 
-# Class: SOMA:CommunicationAction (Locutionary action)
+# Class: SOMA:CommunicationAction (Communication action)
 
 AnnotationAssertion(rdfs:comment SOMA:CommunicationAction "An action in which an Agent uses some actuator for communication purposes."@en)
-AnnotationAssertion(rdfs:label SOMA:CommunicationAction "Locutionary action"@en)
+AnnotationAssertion(rdfs:label SOMA:CommunicationAction "Communication action"@en)
 SubClassOf(SOMA:CommunicationAction <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>)
 SubClassOf(SOMA:CommunicationAction ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> SOMA:LinguisticObject))
 
@@ -657,15 +665,17 @@ AnnotationAssertion(rdfs:label SOMA:Conclusion "Conclusions")
 SubClassOf(SOMA:Conclusion SOMA:CreatedObject)
 SubClassOf(SOMA:Conclusion SOMA:Knowledge)
 
-# Class: SOMA:Constructing (SOMA:Constructing)
+# Class: SOMA:Constructing (Constructing)
 
 AnnotationAssertion(rdfs:comment SOMA:Constructing "A task in which an Agent creates a new physical object."@en)
+AnnotationAssertion(rdfs:label SOMA:Constructing "Constructing"@en)
 SubClassOf(SOMA:Constructing SOMA:PhysicalTask)
 DisjointClasses(SOMA:Constructing SOMA:ModifyingPhysicalObject)
 
-# Class: SOMA:Cutting (SOMA:Cutting)
+# Class: SOMA:Cutting (Cutting)
 
 AnnotationAssertion(rdfs:comment SOMA:Cutting "The goal of this task is to separate one or more pieces from some target object by means of cutting into its constituent material. Unlike a disassembly, a cut is usually not easily reversible.")
+AnnotationAssertion(rdfs:label SOMA:Cutting "Cutting"@en)
 SubClassOf(SOMA:Cutting SOMA:ModifyingPhysicalObject)
 
 # Class: SOMA:Deciding (Deciding)
@@ -682,9 +692,10 @@ Deduction is often explained as starting from the \"general\" (some property X i
 AnnotationAssertion(rdfs:label SOMA:DeductiveReasoning "Deductive reasoning"@en)
 SubClassOf(SOMA:DeductiveReasoning SOMA:Reasoning)
 
-# Class: SOMA:Delivering (SOMA:Delivering)
+# Class: SOMA:Delivering (Delivering)
 
 AnnotationAssertion(rdfs:comment SOMA:Delivering "A task in which an Agent brings an item that the Agent already carries to a specified target.")
+AnnotationAssertion(rdfs:label SOMA:Delivering "Delivering"@en)
 SubClassOf(SOMA:Delivering SOMA:Actuating)
 SubClassOf(SOMA:Delivering ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Shifting))
 DisjointClasses(SOMA:Delivering SOMA:Fetching)
@@ -700,9 +711,10 @@ AnnotationAssertion(rdfs:label SOMA:DerivingInformation "Deriving information")
 SubClassOf(SOMA:DerivingInformation SOMA:InformationAcquisition)
 SubClassOf(SOMA:DerivingInformation ObjectIntersectionOf(ObjectSomeValuesFrom(SOMA:isTaskOfInputRole SOMA:Premise) ObjectSomeValuesFrom(SOMA:isTaskOfOutputRole SOMA:Conclusion)))
 
-# Class: SOMA:Dicing (SOMA:Dicing)
+# Class: SOMA:Dicing (Dicing)
 
 AnnotationAssertion(rdfs:comment SOMA:Dicing "A particular kind of cutting where the goal is to produce small pieces out of some object or material. Unlike slices, the pieces to be obtained do not have one or two dimensions being more prominent than others. \"Dice\", the pieces dicing results in, are approximately cubic.")
+AnnotationAssertion(rdfs:label SOMA:Dicing "Dicing"@en)
 SubClassOf(SOMA:Dicing SOMA:Cutting)
 
 # Class: SOMA:Discourse (Discourse)
@@ -711,21 +723,24 @@ AnnotationAssertion(rdfs:comment SOMA:Discourse "A mental task, in which two or 
 AnnotationAssertion(rdfs:label SOMA:Discourse "Discourse"@en)
 SubClassOf(SOMA:Discourse SOMA:CommunicationTask)
 
-# Class: SOMA:Distancing (SOMA:Distancing)
+# Class: SOMA:Distancing (Distancing)
 
 AnnotationAssertion(rdfs:comment SOMA:Distancing "A task in which an Agent increases its distance from some location.")
+AnnotationAssertion(rdfs:label SOMA:Distancing "Distancing"@en)
 SubClassOf(SOMA:Distancing SOMA:Navigating)
 
-# Class: SOMA:Dreaming (SOMA:Dreaming)
+# Class: SOMA:Dreaming (Dreaming)
 
 AnnotationAssertion(rdfs:comment SOMA:Dreaming "Any form of re-processing episodic memories for long-term memory by natural or aritifical agents.")
+AnnotationAssertion(rdfs:label SOMA:Dreaming "Dreaming"@en)
 SubClassOf(SOMA:Dreaming SOMA:DerivingInformation)
 
-# Class: SOMA:Dropping (SOMA:Dropping)
+# Class: SOMA:Dropping (Dropping)
 
 AnnotationAssertion(rdfs:comment SOMA:Dropping "The dropped object falls mainly under the influence of gravity. However, an agent may also drop something during navigation. The difference to 'Throwing' is that there is no 'Limb motion' which is a constitiuent of the action.
 
 'Dropping' is intentional. Dropping by accident may not has a phase to release the grasp. It could be that the grasp was not strong enough and the objects \"slips\" away.")
+AnnotationAssertion(rdfs:label SOMA:Dropping "Dropping"@en)
 SubClassOf(SOMA:Dropping SOMA:Actuating)
 DisjointClasses(SOMA:Dropping SOMA:Placing)
 
@@ -742,9 +757,10 @@ AnnotationAssertion(rdfs:label SOMA:ExecutionStateRegion "Execution state region
 EquivalentClasses(SOMA:ExecutionStateRegion ObjectOneOf(SOMA:ExecutionState_Active SOMA:ExecutionState_Cancelled SOMA:ExecutionState_Failed SOMA:ExecutionState_Paused SOMA:ExecutionState_Pending SOMA:ExecutionState_Succeeded))
 SubClassOf(SOMA:ExecutionStateRegion <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Region>)
 
-# Class: SOMA:Fetching (SOMA:Fetching)
+# Class: SOMA:Fetching (Fetching)
 
 AnnotationAssertion(rdfs:comment SOMA:Fetching "A task in which an Agent retrieves an object from a particular location, which puts the object under the Agent's control, who can now e.g. transport the object somewhere else; this task may include repositioning the Agent to better reach the object. Note that while in normal linguistic use fetch can mean transport, we use it here to refer only to (a part of) the first stage of transport.")
+AnnotationAssertion(rdfs:label SOMA:Fetching "Fetching"@en)
 SubClassOf(SOMA:Fetching SOMA:PhysicalAcquiring)
 DisjointClasses(SOMA:Fetching SOMA:Lifting)
 DisjointClasses(SOMA:Fetching SOMA:Opening)
@@ -752,9 +768,10 @@ DisjointClasses(SOMA:Fetching SOMA:Pulling)
 DisjointClasses(SOMA:Fetching SOMA:Pushing)
 DisjointClasses(SOMA:Fetching SOMA:Squeezing)
 
-# Class: SOMA:Flipping (SOMA:Flipping)
+# Class: SOMA:Flipping (Flipping)
 
 AnnotationAssertion(rdfs:comment SOMA:Flipping "The task in which the agent turns an object over by using a tool or by manipulating")
+AnnotationAssertion(rdfs:label SOMA:Flipping "Flipping"@en)
 SubClassOf(SOMA:Flipping SOMA:Actuating)
 SubClassOf(SOMA:Flipping ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Shifting))
 
@@ -788,38 +805,41 @@ AnnotationAssertion(rdfs:comment SOMA:GraspTransfer "A task in which an Agent sw
 AnnotationAssertion(rdfs:label SOMA:GraspTransfer "Grasp transfer"@en)
 SubClassOf(SOMA:GraspTransfer SOMA:Grasping)
 
-# Class: SOMA:Grasping (SOMA:Grasping)
+# Class: SOMA:Grasping (Grasping)
 
 AnnotationAssertion(rdfs:comment SOMA:Grasping "A task in which an Agent uses its end effectors to grasp an object, thus gaining kinematic control over it.")
+AnnotationAssertion(rdfs:label SOMA:Grasping "Grasping"@en)
 SubClassOf(SOMA:Grasping SOMA:Manipulating)
 DisjointClasses(SOMA:Grasping SOMA:Releasing)
 
-# Class: SOMA:Holding (SOMA:Holding)
+# Class: SOMA:Holding (Holding)
 
 AnnotationAssertion(rdfs:comment SOMA:Holding "A task by which an Agent keeps an object over which it has kinematic control, typically via grasping, at some specified pose.")
+AnnotationAssertion(rdfs:label SOMA:Holding "Holding"@en)
 SubClassOf(SOMA:Holding SOMA:Manipulating)
 
-# Class: SOMA:IllocutionaryTask (Illocutionary act)
+# Class: SOMA:IllocutionaryTask (Illocutionary task)
 
 AnnotationAssertion(rdfs:comment SOMA:IllocutionaryTask "A task which is executed by a Locution action: A Locution is what was said and meant, Illocution is what was done.
 
 When somebody says \"Is there any salt?\" at the dinner table, the illocutionary act is a request: \"please give me some salt\" even though the locutionary act (the literal sentence) was to ask a question about the presence of salt.
 
 Source: https://en.wikipedia.org/wiki/Illocutionary_act"@en)
-AnnotationAssertion(rdfs:label SOMA:IllocutionaryTask "Illocutionary act"@en)
+AnnotationAssertion(rdfs:label SOMA:IllocutionaryTask "Illocutionary task"@en)
 SubClassOf(SOMA:IllocutionaryTask ObjectIntersectionOf(SOMA:CommunicationTask ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> ObjectUnionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Agent> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#SocialObject>)))))
 
-# Class: SOMA:Imagining (SOMA:Imagining)
+# Class: SOMA:Imagining (Imagining)
 
 AnnotationAssertion(rdfs:comment SOMA:Imagining "A Mental task in which the Agent constructs a mental representation of a possible world. An Agent performing an Imagining activity does not aim to construct a representation that aspires to be faithful to some past, present, or future state of affairs of the actual world it is embodied in.")
+AnnotationAssertion(rdfs:label SOMA:Imagining "Imagining"@en)
 SubClassOf(SOMA:Imagining SOMA:InformationAcquisition)
 
-# Class: SOMA:InductiveReasoning (Inductive resoning)
+# Class: SOMA:InductiveReasoning (Inductive reasoning)
 
 AnnotationAssertion(rdfs:comment SOMA:InductiveReasoning "A task in which the Agent endeavors to accumulate confidence in some general statement about the world, by gathering instances in which this general statement appears to apply. Note that perfect confidence can never be guaranteed by induction.
 
 Induction is often described as a move from many \"specifics\" (swan A is white, swan B is white, swan C is white, ...) to the \"general\" (all swans are white).")
-AnnotationAssertion(rdfs:label SOMA:InductiveReasoning "Inductive resoning"@en)
+AnnotationAssertion(rdfs:label SOMA:InductiveReasoning "Inductive reasoning"@en)
 SubClassOf(SOMA:InductiveReasoning SOMA:Reasoning)
 
 # Class: SOMA:InferenceRules (Inference rules)
@@ -884,13 +904,14 @@ AnnotationAssertion(rdfs:comment SOMA:Introspecting "A mentalk task in which an 
 AnnotationAssertion(rdfs:label SOMA:Introspecting "Introspecting"@en)
 SubClassOf(SOMA:Introspecting SOMA:InformationAcquisition)
 
-# Class: SOMA:Knowledge (SOMA:Knowledge)
+# Class: SOMA:Knowledge (Knowledge)
 
+AnnotationAssertion(rdfs:label SOMA:Knowledge "Knowledge"@en)
 SubClassOf(SOMA:Knowledge SOMA:Item)
 
 # Class: SOMA:Labeling (Labeling)
 
-AnnotationAssertion(rdfs:label SOMA:Labeling "A task in which an agent annotates some objects with names, e.g., labeling the feeling of a tip-of-the-tongue event as such.")
+AnnotationAssertion(rdfs:comment SOMA:Labeling "A task in which an agent annotates some objects with names, e.g., labeling the feeling of a tip-of-the-tongue event as such.")
 AnnotationAssertion(rdfs:label SOMA:Labeling "Labeling")
 SubClassOf(SOMA:Labeling SOMA:Interpreting)
 
@@ -902,9 +923,10 @@ This is more general than memorizing, as the later only captures declarative kno
 AnnotationAssertion(rdfs:label SOMA:Learning "Learning")
 SubClassOf(SOMA:Learning SOMA:InformationStorage)
 
-# Class: SOMA:Lifting (SOMA:Lifting)
+# Class: SOMA:Lifting (Lifting)
 
 AnnotationAssertion(rdfs:comment SOMA:Lifting "todo: how to distinguish from e.g. 'pushing from the table'")
+AnnotationAssertion(rdfs:label SOMA:Lifting "Lifting"@en)
 SubClassOf(SOMA:Lifting SOMA:Actuating)
 DisjointClasses(SOMA:Lifting SOMA:Opening)
 DisjointClasses(SOMA:Lifting SOMA:Pulling)
@@ -917,9 +939,10 @@ AnnotationAssertion(rdfs:isDefinedBy SOMA:LinguisticObject <http://www.ontologyd
 AnnotationAssertion(rdfs:label SOMA:LinguisticObject "Linguistic object"@en)
 SubClassOf(SOMA:LinguisticObject <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject>)
 
-# Class: SOMA:LookingAt (SOMA:LookingAt)
+# Class: SOMA:LookingAt (Looking at)
 
 AnnotationAssertion(rdfs:comment SOMA:LookingAt "better: Gazing")
+AnnotationAssertion(rdfs:label SOMA:LookingAt "Looking at"@en)
 SubClassOf(SOMA:LookingAt SOMA:PhysicalTask)
 
 # Class: SOMA:LookingFor (Looking for)
@@ -928,12 +951,19 @@ AnnotationAssertion(rdfs:comment SOMA:LookingFor "A task by which an Agent uses 
 AnnotationAssertion(rdfs:label SOMA:LookingFor "Looking for"@en)
 SubClassOf(SOMA:LookingFor SOMA:Perceiving)
 
-# Class: SOMA:Lowering (SOMA:Lowering)
+# Class: SOMA:Lowering (Lowering)
 
 AnnotationAssertion(rdfs:comment SOMA:Lowering "A task in which an Agent reduces the elevation at which they hold an item.")
+AnnotationAssertion(rdfs:label SOMA:Lowering "Lowering"@en)
 SubClassOf(SOMA:Lowering SOMA:Actuating)
 
-# Class: SOMA:Manipulating (SOMA:Manipulating)
+# Class: SOMA:ManifestedSituation (Manifested situation)
+
+AnnotationAssertion(rdfs:comment SOMA:ManifestedSituation "A Situation which manifests in at least one event.")
+AnnotationAssertion(rdfs:label SOMA:ManifestedSituation "Manifested situation"@en)
+EquivalentClasses(SOMA:ManifestedSituation ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> ObjectComplementOf(SOMA:NonmanifestedSituation)))
+
+# Class: SOMA:Manipulating (Manipulating)
 
 AnnotationAssertion(rdfs:comment SOMA:Manipulating "Tasks where the goal is to move the prehensile effectors, ie. hands, of an agent so as to achieve some spatial or functional relation with some manipulated object. 
 
@@ -950,6 +980,7 @@ Actuating profiles the movement of the object itself.
 Manipulating profiles the movement of the hands and the functional relations, such as kinematic control, they establish with the manipulated object.
 
 Note: we employ Manipulating here in its literal, original sense, of using hands for some purpose, and not in the metaphorical sense of exerting psychological pressure on someone.")
+AnnotationAssertion(rdfs:label SOMA:Manipulating "Manipulating"@en)
 SubClassOf(SOMA:Manipulating SOMA:PhysicalTask)
 SubClassOf(SOMA:Manipulating ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> SOMA:PhysicalAction))
 
@@ -1005,9 +1036,10 @@ AnnotationAssertion(rdfs:comment SOMA:MetaCognitionPlanningTopic "A topic used w
 AnnotationAssertion(rdfs:label SOMA:MetaCognitionPlanningTopic "Meta cognition planning topic")
 SubClassOf(SOMA:MetaCognitionPlanningTopic SOMA:MetaCognitionTopic)
 
-# Class: SOMA:MetaCognitionTopic (SOMA:MetaCognitionTopic)
+# Class: SOMA:MetaCognitionTopic (Metacognition topic)
 
 AnnotationAssertion(rdfs:comment SOMA:MetaCognitionTopic "A topic for a description that an Agent might make of its own cognitive processes and actions.")
+AnnotationAssertion(rdfs:label SOMA:MetaCognitionTopic "Metacognition topic"@en)
 SubClassOf(SOMA:MetaCognitionTopic SOMA:ThinkAloudTopic)
 
 # Class: SOMA:MetacognitiveControlling (Metacognitive controlling)
@@ -1022,9 +1054,10 @@ AnnotationAssertion(rdfs:comment SOMA:MetacognitiveMonitoring "The task to label
 AnnotationAssertion(rdfs:label SOMA:MetacognitiveMonitoring "Metacognitive monitoring")
 SubClassOf(SOMA:MetacognitiveMonitoring SOMA:Introspecting)
 
-# Class: SOMA:Mixing (SOMA:Mixing)
+# Class: SOMA:Mixing (Mixing)
 
 AnnotationAssertion(rdfs:comment SOMA:Mixing "A task by which an Agent combines several entities, such that the combination is difficult or in practice impossible to reverse.")
+AnnotationAssertion(rdfs:label SOMA:Mixing "Mixing"@en)
 SubClassOf(SOMA:Mixing SOMA:Constructing)
 
 # Class: SOMA:ModifyingPhysicalObject (Modifying physical object)
@@ -1039,14 +1072,16 @@ AnnotationAssertion(rdfs:comment SOMA:MonitoringJointState "A task in which the 
 AnnotationAssertion(rdfs:label SOMA:MonitoringJointState "Monitoring joint state"@en)
 SubClassOf(SOMA:MonitoringJointState SOMA:Proprioceiving)
 
-# Class: SOMA:MovingTo (SOMA:MovingTo)
+# Class: SOMA:MovingTo (Moving to)
 
 AnnotationAssertion(rdfs:comment SOMA:MovingTo "A task in which an Agent moves towards a location.")
+AnnotationAssertion(rdfs:label SOMA:MovingTo "Moving to"@en)
 SubClassOf(SOMA:MovingTo SOMA:Navigating)
 
-# Class: SOMA:Navigating (SOMA:Navigating)
+# Class: SOMA:Navigating (Navigating)
 
 AnnotationAssertion(rdfs:comment SOMA:Navigating "A task in which an Agent moves through space so as to arrive at some location, follow some path, or increase its distance from some location or other entity. Often, navigation involves finding paths around obstacles and forbidden areas.")
+AnnotationAssertion(rdfs:label SOMA:Navigating "Navigating"@en)
 SubClassOf(SOMA:Navigating SOMA:PhysicalTask)
 
 # Class: SOMA:NonmanifestedSituation (Nonmanifested situation)
@@ -1059,20 +1094,22 @@ Because of open world semantics of DL, the default assumption for a Situation in
 
 As such, an explicit assertion is needed to make a Situation a nonmanifested one: either declare that individual's type NonmanifestedSituation, or assert that it has 0 manifestsIn relations.")
 AnnotationAssertion(rdfs:label SOMA:NonmanifestedSituation "Nonmanifested situation"@en)
-EquivalentClasses(SOMA:NonmanifestedSituation ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> ObjectExactCardinality(0 <http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)))
+EquivalentClasses(SOMA:NonmanifestedSituation ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> ObjectExactCardinality(0 SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)))
 SubClassOf(SOMA:NonmanifestedSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)
 
-# Class: SOMA:Opening (SOMA:Opening)
+# Class: SOMA:Opening (Opening)
 
 AnnotationAssertion(rdfs:comment SOMA:Opening "A task in which an Agent manipulates a container so as to expose its interior.")
+AnnotationAssertion(rdfs:label SOMA:Opening "Opening"@en)
 SubClassOf(SOMA:Opening SOMA:Actuating)
 DisjointClasses(SOMA:Opening SOMA:Pulling)
 DisjointClasses(SOMA:Opening SOMA:Pushing)
 DisjointClasses(SOMA:Opening SOMA:Squeezing)
 
-# Class: SOMA:Orienting (SOMA:Orienting)
+# Class: SOMA:Orienting (Orienting)
 
 AnnotationAssertion(rdfs:comment SOMA:Orienting "A task in which an Agent adjusts the orientation of an object.")
+AnnotationAssertion(rdfs:label SOMA:Orienting "Orienting"@en)
 SubClassOf(SOMA:Orienting SOMA:Positioning)
 
 # Class: SOMA:ParkingArms (Parking arms)
@@ -1081,9 +1118,10 @@ AnnotationAssertion(rdfs:comment SOMA:ParkingArms "A task by which an Agent arra
 AnnotationAssertion(rdfs:label SOMA:ParkingArms "Parking arms"@en)
 SubClassOf(SOMA:ParkingArms SOMA:AssumingArmPose)
 
-# Class: SOMA:Perceiving (SOMA:Perceiving)
+# Class: SOMA:Perceiving (Perceiving)
 
 AnnotationAssertion(rdfs:comment SOMA:Perceiving "A task in which the Agent gathers and interprets sensor information about its surroundings.")
+AnnotationAssertion(rdfs:label SOMA:Perceiving "Perceiving"@en)
 SubClassOf(SOMA:Perceiving ObjectIntersectionOf(SOMA:InformationAcquisition SOMA:PhysicalTask))
 
 # Class: SOMA:PhysicalAcquiring (Physical acquiring)
@@ -1109,30 +1147,35 @@ AnnotationAssertion(rdfs:label SOMA:PhysicalTask "Physical task"@en)
 SubClassOf(SOMA:PhysicalTask <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Task>)
 SubClassOf(SOMA:PhysicalTask ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action> ObjectUnionOf(ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent>) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)))))
 
-# Class: SOMA:PickingUp (SOMA:PickingUp)
+# Class: SOMA:PickingUp (Picking up)
 
 AnnotationAssertion(rdfs:comment SOMA:PickingUp "A task in which the Agent uses one or more of its grippers to grasp a usually stationary object.")
+AnnotationAssertion(rdfs:label SOMA:PickingUp "Picking up"@en)
 SubClassOf(SOMA:PickingUp SOMA:Manipulating)
 
-# Class: SOMA:Placing (SOMA:Placing)
+# Class: SOMA:Placing (Placing)
 
 AnnotationAssertion(rdfs:comment SOMA:Placing "Distinguished from Positioning in that this task is more about placing an object at a functionally specified location (e.g., place the cup on the table) as opposed to positioning an object at a location defined by coordinates or a region of coordinates (position the cup at xyz).")
+AnnotationAssertion(rdfs:label SOMA:Placing "Placing"@en)
 SubClassOf(SOMA:Placing SOMA:PhysicalTask)
 
-# Class: SOMA:Planning (SOMA:Planning)
+# Class: SOMA:Planning (Planning)
 
 AnnotationAssertion(rdfs:comment SOMA:Planning "A Mental task in which the Agent endeavours to create a sequence of actions for itself which, if followed, will bring about a particular state of affairs in the world. This particular state of affairs is known to the agent and is often called the goal state of the planning action. Planning commits itself to feasibility: the Agent attempts to find a sequence of actions that it believes it will actually be able to perform.")
+AnnotationAssertion(rdfs:label SOMA:Planning "Planning"@en)
 SubClassOf(SOMA:Planning SOMA:Deciding)
 SubClassOf(SOMA:Planning ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf> ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan>)))
 
-# Class: SOMA:Positioning (SOMA:Positioning)
+# Class: SOMA:Positioning (Positioning)
 
 AnnotationAssertion(rdfs:comment SOMA:Positioning "A task in which an Agent places an object at a particular position.")
+AnnotationAssertion(rdfs:label SOMA:Positioning "Positioning"@en)
 SubClassOf(SOMA:Positioning SOMA:Actuating)
 
-# Class: SOMA:Pouring (SOMA:Pouring)
+# Class: SOMA:Pouring (Pouring)
 
 AnnotationAssertion(rdfs:comment SOMA:Pouring "A task in which an agent lets liquid substance to flow out of an object. The agent has a kinematic control over the object.")
+AnnotationAssertion(rdfs:label SOMA:Pouring "Pouring"@en)
 SubClassOf(SOMA:Pouring SOMA:Actuating)
 SubClassOf(SOMA:Pouring ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Pourable))
 
@@ -1160,26 +1203,30 @@ AnnotationAssertion(rdfs:comment SOMA:Premise "The role of an object that is use
 AnnotationAssertion(rdfs:label SOMA:Premise "Premises")
 SubClassOf(SOMA:Premise SOMA:Knowledge)
 
-# Class: SOMA:Proprioceiving (SOMA:Proprioceiving)
+# Class: SOMA:Proprioceiving (Proprioceiving)
 
 AnnotationAssertion(rdfs:comment SOMA:Proprioceiving "A task in which the Agent gathers and interprets sensor information about itself.")
+AnnotationAssertion(rdfs:label SOMA:Proprioceiving "Proprioceiving"@en)
 SubClassOf(SOMA:Proprioceiving SOMA:PhysicalTask)
 
-# Class: SOMA:Prospecting (SOMA:Prospecting)
+# Class: SOMA:Prospecting (Prospecting)
 
 AnnotationAssertion(rdfs:comment SOMA:Prospecting "A Mental task in which an Agent endeavours to construct a representation of a future state of affairs of the world it is embodied in.")
+AnnotationAssertion(rdfs:label SOMA:Prospecting "Prospecting"@en)
 SubClassOf(SOMA:Prospecting SOMA:DerivingInformation)
 
-# Class: SOMA:Pulling (SOMA:Pulling)
+# Class: SOMA:Pulling (Pulling)
 
 AnnotationAssertion(rdfs:comment SOMA:Pulling "A task in which an Agent moves an object in a direction loosely from the object's center of mass towards the contact point between agent and object.")
+AnnotationAssertion(rdfs:label SOMA:Pulling "Pulling"@en)
 SubClassOf(SOMA:Pulling SOMA:Actuating)
 DisjointClasses(SOMA:Pulling SOMA:Pushing)
 DisjointClasses(SOMA:Pulling SOMA:Squeezing)
 
-# Class: SOMA:Pushing (SOMA:Pushing)
+# Class: SOMA:Pushing (Pushing)
 
 AnnotationAssertion(rdfs:comment SOMA:Pushing "A task in which an Agent moves an object in a direction loosely from the the contact point between agent and object towards object's center of mass. todo: define subclass 'PushingOver'? Would we expect two distinct contacts with the same surface then?")
+AnnotationAssertion(rdfs:label SOMA:Pushing "Pushing"@en)
 SubClassOf(SOMA:Pushing SOMA:Actuating)
 DisjointClasses(SOMA:Pushing SOMA:Squeezing)
 
@@ -1196,9 +1243,10 @@ AnnotationAssertion(rdfs:comment SOMA:PushingDown "A task in which an Agent push
 AnnotationAssertion(rdfs:label SOMA:PushingDown "Pushing down"@en)
 SubClassOf(SOMA:PushingDown SOMA:Pushing)
 
-# Class: SOMA:PuttingDown (SOMA:PuttingDown)
+# Class: SOMA:PuttingDown (Putting down)
 
 AnnotationAssertion(rdfs:comment SOMA:PuttingDown "A task in which an Agent puts down an object they have kinematic control over, e.g. a grasped object.")
+AnnotationAssertion(rdfs:label SOMA:PuttingDown "Putting down"@en)
 SubClassOf(SOMA:PuttingDown SOMA:Manipulating)
 
 # Class: SOMA:Query (Query)
@@ -1227,13 +1275,14 @@ AnnotationAssertion(rdfs:label SOMA:QueryingTask "Querying task"@en)
 SubClassOf(SOMA:QueryingTask SOMA:IllocutionaryTask)
 SubClassOf(SOMA:QueryingTask ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isTaskOf> SOMA:Query))
 
-# Class: SOMA:Reaching (SOMA:Reaching)
+# Class: SOMA:Reaching (Reaching)
 
 AnnotationAssertion(rdfs:comment SOMA:Reaching "A task in which an Agent moves one or more of its arms towards a location or object.")
+AnnotationAssertion(rdfs:label SOMA:Reaching "Reaching"@en)
 SubClassOf(SOMA:Reaching SOMA:EndEffectorPositioning)
 DisjointClasses(SOMA:Reaching SOMA:Retracting)
 
-# Class: SOMA:Reasoning (SOMA:Reasoning)
+# Class: SOMA:Reasoning (Reasoning)
 
 AnnotationAssertion(rdfs:comment SOMA:Reasoning "A Mental task in which an Agent endeavours to obtain new knowledge from knowledge it already possesses.")
 AnnotationAssertion(rdfs:comment SOMA:Reasoning "todo: a taxonomy of reasoning is not trivial. Classical theory distinguishes Deductive, Inductive, and with a stretch Abductive reasoning. However, modern practice distinguishes other categories that overlap with these, e.g. Probabilistic and Non-monotonic.
@@ -1243,6 +1292,7 @@ Both Abductive and Inductive inference may, and often do, use Probabilistic meth
 Any of the Abductive/Deductive/Inductive triad can be further affected by the Monotone/Non-monotone distinction. There are preferences (Inductive and Abductive reasoning is probably most often non-monotonic; most of Deductive reasoning is probably done in monotonic formalisms), but it is certainly the case that, e.g., non-monotone Deduction is possible.
 
 Note, this classification has nothing to do with reasoning domain (e.g. SpatialReasoning, TemporalReasoning, ...) and merely with techniques/logical-mathematical underpinnings.")
+AnnotationAssertion(rdfs:label SOMA:Reasoning "Reasoning"@en)
 SubClassOf(SOMA:Reasoning SOMA:DerivingInformation)
 
 # Class: SOMA:Receiver (Receiver)
@@ -1252,18 +1302,20 @@ AnnotationAssertion(rdfs:label SOMA:Receiver "Receiver"@en)
 SubClassOf(SOMA:Receiver SOMA:ExperiencerRole)
 SubClassOf(SOMA:Receiver ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask> SOMA:CommunicationTask))
 
-# Class: SOMA:Releasing (SOMA:Releasing)
+# Class: SOMA:Releasing (Releasing)
 
 AnnotationAssertion(rdfs:comment SOMA:Releasing "A task in which an agent relinquishes its kinematic control over an object, typically by releasing it from its grasp.")
+AnnotationAssertion(rdfs:label SOMA:Releasing "Releasing"@en)
 SubClassOf(SOMA:Releasing SOMA:Manipulating)
 
-# Class: SOMA:Remembering (SOMA:Remembering)
+# Class: SOMA:Remembering (Remembering)
 
 AnnotationAssertion(rdfs:comment SOMA:Remembering "A Mental task in which the Agent recalls a record of a previous state of affairs in the world.
 
 The Agent must have witnessed and memorized this state of affairs in order to record it. Remembering commits itself to accuracy: the Agent attempts to reconstruct as accurate a record as it can. Note, this does not mean the Agent will communicate the recollection accurately.
 
 The difference to Memory retrieval is that for this Task, we are concerned with knowledge about a previous world state. Memory Retrieval is more general in the sense that it also includes the retrieval of learned facts and rules."@en)
+AnnotationAssertion(rdfs:label SOMA:Remembering "Remembering"@en)
 SubClassOf(SOMA:Remembering ObjectIntersectionOf(SOMA:InformationRetrieval SOMA:Retrospecting))
 
 # Class: SOMA:Replanning (Replanning)
@@ -1272,17 +1324,19 @@ AnnotationAssertion(rdfs:comment SOMA:Replanning "A mental task, in which an age
 AnnotationAssertion(rdfs:label SOMA:Replanning "Replanning"@en)
 SubClassOf(SOMA:Replanning SOMA:Planning)
 
-# Class: SOMA:Retracting (SOMA:Retracting)
+# Class: SOMA:Retracting (Retracting)
 
 AnnotationAssertion(rdfs:comment SOMA:Retracting "A task in which an Agent moves its arms away from a location.")
+AnnotationAssertion(rdfs:label SOMA:Retracting "Retracting"@en)
 SubClassOf(SOMA:Retracting SOMA:EndEffectorPositioning)
 
-# Class: SOMA:Retrospecting (SOMA:Retrospecting)
+# Class: SOMA:Retrospecting (Retrospecting)
 
 AnnotationAssertion(rdfs:comment SOMA:Retrospecting "A Mental task in which an Agent endeavors to construct a representation of a past state of affairs of the world it is embodied in.")
 AnnotationAssertion(rdfs:comment SOMA:Retrospecting "Done by analogy with Prospecting. Currently mono-subcategory, but perhaps we might find more.
 
 As an example, a kind of Abductive reasoning would fit here: reconstruction, in which the agent attempts to create a representation of a past state of affairs which the agent has not actually observed, based on traces and clues surviving to the present.")
+AnnotationAssertion(rdfs:label SOMA:Retrospecting "Retrospecting"@en)
 SubClassOf(SOMA:Retrospecting SOMA:InformationAcquisition)
 
 # Class: SOMA:SelectingItem (Selecting item)
@@ -1294,8 +1348,8 @@ SubClassOf(SOMA:SelectingItem ObjectSomeValuesFrom(SOMA:isTaskOfOutputRole Objec
 
 # Class: SOMA:SelfReflection (Self-reflection)
 
+AnnotationAssertion(rdfs:comment SOMA:SelfReflection "The task of evaluating the personal cognitive processes.")
 AnnotationAssertion(rdfs:label SOMA:SelfReflection "Self-reflection")
-AnnotationAssertion(rdfs:label SOMA:SelfReflection "The task of evaluating the personal cognitive processes.")
 SubClassOf(SOMA:SelfReflection SOMA:MetacognitiveControlling)
 
 # Class: SOMA:Sender (Sender)
@@ -1305,9 +1359,10 @@ AnnotationAssertion(rdfs:label SOMA:Sender "Sender"@en)
 SubClassOf(SOMA:Sender SOMA:PerformerRole)
 SubClassOf(SOMA:Sender ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasTask> SOMA:CommunicationTask))
 
-# Class: SOMA:Serving (SOMA:Serving)
+# Class: SOMA:Serving (Serving)
 
 AnnotationAssertion(rdfs:comment SOMA:Serving "The task in which the agent delivers an object to a physical agent")
+AnnotationAssertion(rdfs:label SOMA:Serving "Serving"@en)
 SubClassOf(SOMA:Serving SOMA:Delivering)
 SubClassOf(SOMA:Serving ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action> ObjectUnionOf(ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalAgent>) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)))))
 
@@ -1317,11 +1372,12 @@ AnnotationAssertion(rdfs:comment SOMA:SettingGripper "A task by which an Agent a
 AnnotationAssertion(rdfs:label SOMA:SettingGripper "Setting gripper"@en)
 SubClassOf(SOMA:SettingGripper SOMA:AssumingPose)
 
-# Class: SOMA:Simulating (SOMA:Simulating)
+# Class: SOMA:Simulating (Simulating)
 
 AnnotationAssertion(rdfs:comment SOMA:Simulating "A Mental task in which the Agent endeavours to create representations of a sequence of states of affairs in the world. Simulation commits itself to some degree of transition accuracy: supposing the actual state of the world was the initial state of the simulation, the world state and simulation state should evolve to some degree similarly.
 
 Simulation does not commit itself to state accuracy: the initial state of the simulation is not constrained to be faithful to the actual state of the world in which the Agent is embodied. Counterfactual simulation (\"what would happen if--?\") is possible.")
+AnnotationAssertion(rdfs:label SOMA:Simulating "Simulating"@en)
 SubClassOf(SOMA:Simulating SOMA:Prospecting)
 
 # Class: SOMA:SituationTransition (Situation transition)
@@ -1330,19 +1386,22 @@ AnnotationAssertion(rdfs:comment SOMA:SituationTransition "A transition between 
 AnnotationAssertion(rdfs:label SOMA:SituationTransition "Situation transition"@en)
 SubClassOf(SOMA:SituationTransition <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Transition>)
 
-# Class: SOMA:Slicing (SOMA:Slicing)
+# Class: SOMA:Slicing (Slicing)
 
 AnnotationAssertion(rdfs:comment SOMA:Slicing "A particular kind of cutting where the goal is to produce slices from some solid object.")
+AnnotationAssertion(rdfs:label SOMA:Slicing "Slicing"@en)
 SubClassOf(SOMA:Slicing SOMA:Cutting)
 
-# Class: SOMA:Squeezing (SOMA:Squeezing)
+# Class: SOMA:Squeezing (Squeezing)
 
 AnnotationAssertion(rdfs:comment SOMA:Squeezing "A task in which an Agent applies pressure to an object they have in their grasp.")
+AnnotationAssertion(rdfs:label SOMA:Squeezing "Squeezing"@en)
 SubClassOf(SOMA:Squeezing SOMA:Actuating)
 
-# Class: SOMA:Stirring (SOMA:Stirring)
+# Class: SOMA:Stirring (Stirring)
 
 AnnotationAssertion(rdfs:comment SOMA:Stirring "A task in which an agent dissolves small particles like sugar or salt in fluid")
+AnnotationAssertion(rdfs:label SOMA:Stirring "Stirring"@en)
 SubClassOf(SOMA:Stirring SOMA:Mixing)
 SubClassOf(SOMA:Stirring ObjectSomeValuesFrom(SOMA:isTaskAffordedBy SOMA:Composing))
 
@@ -1406,15 +1465,17 @@ AnnotationAssertion(rdfs:comment SOMA:ThinkAloudTopic "A topic relevant for a th
 AnnotationAssertion(rdfs:label SOMA:ThinkAloudTopic "Think aloud topic"@en)
 SubClassOf(SOMA:ThinkAloudTopic SOMA:CommunicationTopic)
 
-# Class: SOMA:Throwing (SOMA:Throwing)
+# Class: SOMA:Throwing (Throwing)
 
 AnnotationAssertion(rdfs:comment SOMA:Throwing "A task in which an Agent imparts momentum to an object before releasing it so that it flies for some distance unsupported.")
+AnnotationAssertion(rdfs:label SOMA:Throwing "Throwing"@en)
 SubClassOf(SOMA:Throwing SOMA:Actuating)
 SubClassOf(SOMA:Throwing SOMA:Manipulating)
 
-# Class: SOMA:Transporting (SOMA:Transporting)
+# Class: SOMA:Transporting (Transporting)
 
 AnnotationAssertion(rdfs:comment SOMA:Transporting "A task by which an Agent carries an item from a source to a destination location.")
+AnnotationAssertion(rdfs:label SOMA:Transporting "Transporting"@en)
 SubClassOf(SOMA:Transporting SOMA:ModifyingPhysicalObject)
 
 
@@ -1422,45 +1483,49 @@ SubClassOf(SOMA:Transporting SOMA:ModifyingPhysicalObject)
 #   Named Individuals
 ############################
 
-# Individual: SOMA:ExecutionState_Active (SOMA:ExecutionState_Active)
+# Individual: SOMA:ExecutionState_Active (Execution state: active)
 
 AnnotationAssertion(rdfs:comment SOMA:ExecutionState_Active "The execution state of an ongoing activity.")
+AnnotationAssertion(rdfs:label SOMA:ExecutionState_Active "Execution state: active"@en)
 ClassAssertion(SOMA:ExecutionStateRegion SOMA:ExecutionState_Active)
 
-# Individual: SOMA:ExecutionState_Cancelled (SOMA:ExecutionState_Cancelled)
+# Individual: SOMA:ExecutionState_Cancelled (Execution state: cancelled)
 
 AnnotationAssertion(rdfs:comment SOMA:ExecutionState_Cancelled "The execution state of a cancelled activity.")
+AnnotationAssertion(rdfs:label SOMA:ExecutionState_Cancelled "Execution state: cancelled"@en)
 ClassAssertion(SOMA:ExecutionStateRegion SOMA:ExecutionState_Cancelled)
 
-# Individual: SOMA:ExecutionState_Failed (SOMA:ExecutionState_Failed)
+# Individual: SOMA:ExecutionState_Failed (Execution state: failed)
 
 AnnotationAssertion(rdfs:comment SOMA:ExecutionState_Failed "The execution state of a failed activity.")
+AnnotationAssertion(rdfs:label SOMA:ExecutionState_Failed "Execution state: failed"@en)
 ClassAssertion(SOMA:ExecutionStateRegion SOMA:ExecutionState_Failed)
 
-# Individual: SOMA:ExecutionState_Paused (SOMA:ExecutionState_Paused)
+# Individual: SOMA:ExecutionState_Paused (Execution state: paused)
 
 AnnotationAssertion(rdfs:comment SOMA:ExecutionState_Paused "The execution state of a paused activity.")
+AnnotationAssertion(rdfs:label SOMA:ExecutionState_Paused "Execution state: paused"@en)
 ClassAssertion(SOMA:ExecutionStateRegion SOMA:ExecutionState_Paused)
 
-# Individual: SOMA:ExecutionState_Pending (SOMA:ExecutionState_Pending)
+# Individual: SOMA:ExecutionState_Pending (Execution state: pending)
 
 AnnotationAssertion(rdfs:comment SOMA:ExecutionState_Pending "The execution state of a pending activity.")
+AnnotationAssertion(rdfs:label SOMA:ExecutionState_Pending "Execution state: pending"@en)
 ClassAssertion(SOMA:ExecutionStateRegion SOMA:ExecutionState_Pending)
 
-# Individual: SOMA:ExecutionState_Succeeded (SOMA:ExecutionState_Succeeded)
+# Individual: SOMA:ExecutionState_Succeeded (Execution state: succeeded)
 
 AnnotationAssertion(rdfs:comment SOMA:ExecutionState_Succeeded "The execution state of a succeeded activity.")
+AnnotationAssertion(rdfs:label SOMA:ExecutionState_Succeeded "Execution state: succeeded"@en)
 ClassAssertion(SOMA:ExecutionStateRegion SOMA:ExecutionState_Succeeded)
 
 
-SubClassOf(Annotation(rdfs:comment "If a SituationTransition manifests in some Event, then it also has an initial Situation and a terminal one.") ObjectIntersectionOf(SOMA:SituationTransition ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)) ObjectIntersectionOf(ObjectSomeValuesFrom(SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>) ObjectSomeValuesFrom(SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)))
-SubClassOf(Annotation(rdfs:comment "A SituationTransition that manifests in some Event also includes an Action. (NOTE (MP): Typically, the Event manifesting it would be that included Action actually so perhaps we can just require that manifestations of SituationTransitions be Actions?)") ObjectIntersectionOf(SOMA:SituationTransition ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>))
-SubClassOf(Annotation(rdfs:comment "By definition, there can be no prevention relation between Situations that manifest in Events. If Situation X prevents Y, then either X manifests and Y does not, or Y manifests and X does not (interpret as: X would have prevented Y from manifesting if X had manifested), or none of X and Y manifests in any Event.") ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>) ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/prevents> ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>))) owl:Nothing)
-SubClassOf(Annotation(rdfs:comment "If a precondition is not met then a Situation cannot manifest.") ObjectIntersectionOf(ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition> SOMA:NonmanifestedSituation)) owl:Nothing)
-SubClassOf(Annotation(rdfs:comment "If something is an initial situation of some transition, then it must manifest.") ObjectSomeValuesFrom(SOMA:hasInitialSituation SOMA:NonmanifestedSituation) owl:Nothing)
-SubClassOf(Annotation(rdfs:comment "If a transition has an initial situation then it also has a manifestation.") ObjectSomeValuesFrom(SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>) ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>))
-SubClassOf(Annotation(rdfs:comment "If something is a terminal situation then it must be a manifested situation (regardless of whether it was expected or not).") ObjectSomeValuesFrom(SOMA:hasTerminalSituation SOMA:NonmanifestedSituation) owl:Nothing)
-SubClassOf(Annotation(rdfs:comment "If a transition has a terminal situation then it also has a manifestation.") ObjectSomeValuesFrom(SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>) ObjectSomeValuesFrom(<http://www.ease-crc.org/ont/SOMA.owl/manifestsIn> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>))
+SubClassOf(Annotation(rdfs:comment "If a SituationTransition manifests in some Event, then it also has an initial Situation and a terminal one.") ObjectIntersectionOf(SOMA:SituationTransition ObjectSomeValuesFrom(SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)) ObjectIntersectionOf(ObjectSomeValuesFrom(SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>) ObjectSomeValuesFrom(SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>)))
+SubClassOf(Annotation(rdfs:comment "A SituationTransition that manifests in some Event also includes an Action. (NOTE (MP): Typically, the Event manifesting it would be that included Action actually so perhaps we can just require that manifestations of SituationTransitions be Actions?)") ObjectIntersectionOf(SOMA:SituationTransition ObjectSomeValuesFrom(SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>)) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Action>))
+SubClassOf(Annotation(rdfs:comment "By definition, there can be no prevention relation between Situations that manifest in Events. If Situation X prevents Y, then either X manifests and Y does not, or Y manifests and X does not (interpret as: X would have prevented Y from manifesting if X had manifested), or none of X and Y manifests in any Event.") ObjectIntersectionOf(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> ObjectSomeValuesFrom(SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>) ObjectSomeValuesFrom(SOMA:prevents ObjectSomeValuesFrom(SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>))) owl:Nothing)
+SubClassOf(Annotation(rdfs:comment "If a precondition is not met then a Situation cannot manifest.") ObjectIntersectionOf(ObjectSomeValuesFrom(SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>) ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasPrecondition> SOMA:NonmanifestedSituation)) owl:Nothing)
+SubClassOf(Annotation(rdfs:comment "If a transition has an initial situation then it also has a manifestation.") ObjectSomeValuesFrom(SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>) ObjectSomeValuesFrom(SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>))
+SubClassOf(Annotation(rdfs:comment "If a transition has a terminal situation then it also has a manifestation.") ObjectSomeValuesFrom(SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation>) ObjectSomeValuesFrom(SOMA:manifestsIn <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event>))
 SubObjectPropertyOf(ObjectPropertyChain(SOMA:causesTransition SOMA:hasInitialSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>) SOMA:terminates)
 SubObjectPropertyOf(ObjectPropertyChain(SOMA:causesTransition SOMA:hasTerminalScene <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>) SOMA:directlyCauses)
 SubObjectPropertyOf(ObjectPropertyChain(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isEventIncludedIn> SOMA:isInitialSituationOf SOMA:hasTerminalSituation <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#includesEvent>) SOMA:isReplacedBy)

@@ -1,4 +1,4 @@
-Prefix(:=<http://www.ease-crc.org/ont/SOMA-STATE.owl#>)
+Prefix(:=<http://www.ease-crc.org/ont/SOMA.owl#>)
 Prefix(dc:=<http://purl.org/dc/elements/1.1/>)
 Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
 Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
@@ -85,7 +85,7 @@ ObjectPropertyRange(SOMA:isStateTypeOf <http://www.ontologydesignpatterns.org/on
 #   Classes
 ############################
 
-# Class: SOMA:Configuration (SOMA:Configuration)
+# Class: SOMA:Configuration (Configuration)
 
 AnnotationAssertion(rdfs:comment SOMA:Configuration "A description of a State. This includes e.g. what acceptable regions for participant objects of the State might look like.
 A configuration of the world is construed to be stable on its own. Outside disturbances may cause state transitions, and the settling into some other, self-stable configuration.
@@ -95,6 +95,7 @@ Several other Description subclasses may function as Configurations. For example
 Note a couple of issues here. First one relates to what \"configuration\" means; in particular, this doesn't mean a configuration that is unchanging according to any viewpoint. The analogy here is the \"macrostate\" from thermodynamics: a macrostate with two gases mixed does not mean all gas particles are motionless, but rather that the locations and movements of gas particles are such that any particle is likely to have as many neighbors of one type as the other.
 
 The second issue relates to what is \"outside\". The state is a configuration of some, but not necessarily all, Entities in the world. Entities not in this configuration are outside of it.")
+AnnotationAssertion(rdfs:label SOMA:Configuration "Configuration"@en)
 SubClassOf(SOMA:Configuration <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Description>)
 SubClassOf(SOMA:Configuration ObjectSomeValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#describes> SOMA:StateType))
 
@@ -105,7 +106,7 @@ AnnotationAssertion(rdfs:label SOMA:ContactState "Contact state"@en)
 SubClassOf(SOMA:ContactState SOMA:StateType)
 SubClassOf(SOMA:ContactState ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectMinCardinality(2 <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#PhysicalObject>)))
 
-# Class: SOMA:Containment (SOMA:Containment)
+# Class: SOMA:Containment (Containment)
 
 AnnotationAssertion(rdfs:comment SOMA:Containment "Classifies States in which an object is placed inside another.")
 
@@ -116,12 +117,12 @@ AnnotationAssertion(rdfs:label SOMA:ContainmentState "Containment state"@en)
 SubClassOf(SOMA:ContainmentState SOMA:FunctionalControl)
 SubClassOf(SOMA:ContainmentState ObjectSomeValuesFrom(SOMA:isStateTypeOf ObjectIntersectionOf(SOMA:Container ObjectAllValuesFrom(<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#classifies> ObjectSomeValuesFrom(SOMA:hasDisposition SOMA:Containment)))))
 
-# Class: SOMA:FunctionalControl (Functional state)
+# Class: SOMA:FunctionalControl (Functional control)
 
 AnnotationAssertion(rdfs:comment SOMA:FunctionalControl "Classifies States in which an object restricts the movement of another, at least partially. Usually neither object is construed to be an agent.
 
 Note that this State focuses on how the interaction of, usually non-agentive, objects restricts their motion. This is in contrast to Blockage/Accessibility states where the placement of some objects influences the access to some of them by a third, usually agentive party.")
-AnnotationAssertion(rdfs:label SOMA:FunctionalControl "Functional state"@en)
+AnnotationAssertion(rdfs:label SOMA:FunctionalControl "Functional control"@en)
 SubClassOf(SOMA:FunctionalControl SOMA:StateType)
 SubClassOf(SOMA:FunctionalControl ObjectSomeValuesFrom(SOMA:isStateTypeOf SOMA:Item))
 SubClassOf(SOMA:FunctionalControl ObjectSomeValuesFrom(SOMA:isStateTypeOf SOMA:Restrictor))
@@ -149,10 +150,10 @@ SubClassOf(SOMA:PhysicalBlockage SOMA:StateType)
 SubClassOf(SOMA:PhysicalBlockage ObjectSomeValuesFrom(SOMA:isStateTypeOf SOMA:Item))
 SubClassOf(SOMA:PhysicalBlockage ObjectSomeValuesFrom(SOMA:isStateTypeOf SOMA:Restrictor))
 
-# Class: SOMA:PhysicalExistence (Physical Existince)
+# Class: SOMA:PhysicalExistence (Physical existence)
 
 AnnotationAssertion(rdfs:comment SOMA:PhysicalExistence "A State in which an Entity is said to exist in the physical world.")
-AnnotationAssertion(rdfs:label SOMA:PhysicalExistence "Physical Existince"@en)
+AnnotationAssertion(rdfs:label SOMA:PhysicalExistence "Physical existence"@en)
 SubClassOf(SOMA:PhysicalExistence SOMA:PhysicalState)
 
 # Class: SOMA:PhysicalState (Physical state)
